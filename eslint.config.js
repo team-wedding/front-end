@@ -1,14 +1,34 @@
-import globals from "globals";
-import pluginJs from "@eslint/js";
-import tseslint from "typescript-eslint";
-import pluginReact from "eslint-plugin-react";
+import ts from '@typescript-eslint/eslint-plugin';
+import tsParser from '@typescript-eslint/parser';
+import react from 'eslint-plugin-react';
+import prettier from 'eslint-config-prettier';
 
-
-/** @type {import('eslint').Linter.Config[]} */
+/** @type {import("eslint").Linter.FlatConfig[]} */
 export default [
-  {files: ["**/*.{js,mjs,cjs,ts,jsx,tsx}"]},
-  {languageOptions: { globals: globals.browser }},
-  pluginJs.configs.recommended,
-  ...tseslint.configs.recommended,
-  pluginReact.configs.flat.recommended,
+  {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    languageOptions: {
+      parser: tsParser,
+      parserOptions: {
+        ecmaVersion: 2020,
+        sourceType: 'module',
+      },
+    },
+    plugins: {
+      '@typescript-eslint': ts,
+      react,
+    },
+    rules: {
+      ...ts.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      'react/react-in-jsx-scope': 'off', // JSX Transform 설정
+      'react/prop-types': 'off',
+    },
+    settings: {
+      react: {
+        version: 'detect', // React 버전 자동 감지
+      },
+    },
+  },
+  prettier,
 ];

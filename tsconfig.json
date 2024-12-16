@@ -3,5 +3,10 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+    "compilerOptions": {
+      // "jsx": "react-jsx", // React 17+ 방식
+      "types": ["react", "react-dom"], // React와 관련된 타입 추가
+      "moduleResolution": "node"
+    }
 }

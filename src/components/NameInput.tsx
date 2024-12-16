@@ -9,7 +9,7 @@ const NameInput = () => {
   const updateFamily = useBrideGroomStore((state) => state.updateFamily);
 
   const handleSubmit = () => {
-    alert('저장 로직 작성하기 ~~');
+    alert('저장 완료');
   };
 
   return (
@@ -17,17 +17,7 @@ const NameInput = () => {
       {brideGroom.map((person, index) => (
         <div key={index}>
           <div>
-            <label>
-              <select
-                value={person.role}
-                onChange={(e) =>
-                  updateBrideGroom(index, 'role', e.target.value)
-                }
-              >
-                <option value="신랑">🤵 신랑</option>
-                <option value="신부">👰 신부</option>
-              </select>
-            </label>
+            <label>{person.role}:</label>
             <label>
               <input
                 type="text"

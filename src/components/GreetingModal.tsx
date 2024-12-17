@@ -16,83 +16,72 @@ const GreetingModal = ({
 
   return (
     <div
-      style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
+      id="select-modal"
+      tabIndex={-1}
+      aria-hidden="false"
+      className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50"
     >
-      <div
-        style={{
-          background: 'white',
-          padding: '20px',
-          borderRadius: '10px',
-          maxWidth: '400px',
-          width: '100%',
-        }}
-      >
-        <h2>샘플 문구 선택</h2>
-        <ul>
-          {greetingSample.map((text, index) => (
-            <li
-              key={index}
-              style={{
-                marginBottom: '10px',
-                cursor: 'pointer',
-                border:
-                  text === selectedSample
-                    ? '1px solid black'
-                    : '1px solid #ddd',
-                borderRadius: '5px',
-                padding: '10px',
-              }}
-              onClick={() => setSelectedSample(text)}
+      <div className="relative w-full max-w-md p-4">
+        <div className="bg-white rounded-lg shadow-md">
+          <div className="flex items-center justify-between p-4 border-b rounded-t">
+            <h3 className="text-lg font-semibold text-gray-900">
+              샘플 문구 선택
+            </h3>
+            <button
+              type="button"
+              onClick={onClose}
+              className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-2"
             >
-              {text}
-            </li>
-          ))}
-        </ul>
-        <button
-          onClick={() => {
-            if (selectedSample) {
-              setGreeting(selectedSample);
-              onClose();
-            }
-          }}
-          style={{
-            marginTop: '10px',
-            padding: '10px 20px',
-            backgroundColor: '#007bff',
-            color: 'white',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
-          disabled={!selectedSample}
-        >
-          적용하기
-        </button>
-        <button
-          onClick={onClose}
-          style={{
-            marginTop: '10px',
-            marginLeft: '10px',
-            padding: '10px 20px',
-            backgroundColor: '#ccc',
-            color: 'black',
-            border: 'none',
-            borderRadius: '5px',
-            cursor: 'pointer',
-          }}
-        >
-          닫기
-        </button>
+              <svg
+                className="w-4 h-4"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 14 14"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
+                />
+              </svg>
+              <span className="sr-only">닫기</span>
+            </button>
+          </div>
+          <div className="p-4 space-y-4">
+            <ul className="space-y-4">
+              {greetingSample.map((text, index) => (
+                <li
+                  key={index}
+                  className={`cursor-pointer p-5 rounded-lg border ${
+                    text === selectedSample
+                      ? 'border-black bg-gray-100'
+                      : 'border-gray-200 hover:bg-gray-100'
+                  }`}
+                  onClick={() => setSelectedSample(text)}
+                >
+                  {text}
+                </li>
+              ))}
+            </ul>
+            <div className="mt-4">
+              <button
+                onClick={() => {
+                  if (selectedSample) {
+                    setGreeting(selectedSample);
+                    onClose();
+                  }
+                }}
+                className="bg-blue-700 text-white py-2 rounded-lg hover:bg-blue-800"
+                disabled={!selectedSample}
+              >
+                적용하기
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   );

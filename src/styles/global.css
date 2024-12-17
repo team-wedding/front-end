@@ -11,24 +11,23 @@
 
   html,
   body,
-  .app {
-    font-family: 'Pretendard', sans-serif;
+  #root {
+    @apply font-Pretendard bg-gray-100;
   }
 }
 
 @layer components {
-  .header {
-    @apply fixed top-0 left-0 z-50 w-full bg-white shadow-sm text-sm;
-    height: var(--header-height);
-    @apply flex items-center justify-between px-4;
-  }
-
   .container {
     @apply mx-auto max-w-screen-md;
   }
 
+  .header {
+    @apply fixed top-0 left-0 z-50 w-full bg-white text-sm;
+    height: var(--header-height);
+  }
+
   .content {
-    @apply bg-slate-100 p-4;
+    @apply p-4 bg-gray-200 h-screen;
     padding-top: var(--header-height);
   }
 

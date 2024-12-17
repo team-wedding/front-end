@@ -1,10 +1,10 @@
 import React from 'react';
-import PageLayout from '../components/common/PageLayout';
-import HeaderButton from '../components/common/HeaderButton';
-import InvitationTitleInput from '../components/common/InvitationTitleInput';
-import WeddingDateInput from '../components/wedding/WeddingDateInput';
-import { useInvitationStore } from '../store/store';
 import { useNavigate } from 'react-router-dom';
+import { useInvitationStore } from '../store/useInvitaionStore';
+import PageLayout from '../components/layout/PageLayout';
+import HeaderButton from '../components/common/Header/HeaderButton';
+import InvitationTitleInput from '../components/common/CreateInvitation/InvitationTitleInput';
+import WeddingDateInput from '../components/form/WeddingDateInput/WeddingDateInput';
 
 const CreateInvitationPage3: React.FC = () => {
   const { title, setTitle } = useInvitationStore();
@@ -40,4 +40,4 @@ const CreateInvitationPage3: React.FC = () => {
   );
 };
 
-export default CreateInvitationPage;
+export default CreateInvitationPage3;

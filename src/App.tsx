@@ -3,11 +3,11 @@ import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import SignUpPage from './pages/SignUpPage';
-import StartPage from './pages/StartPage';
 import CreateInvitationPage1 from './pages/CreateInvitationPage1';
 import CreateInvitationPage2 from './pages/CreateInvitationPage2';
 import CreateInvitationPage3 from './pages/CreateInvitationPage3';
 import LoginPage from './pages/LoginPage';
+import SplashPage from './pages/SplashPage';
 
 function App() {
   return (
@@ -18,7 +18,7 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       {/* 랜딩페이지? */}
-      <Route path="/start" element={<StartPage />} />
+      <Route path="/start" element={<SplashPage />} />
       {/* 만들기 페이지 */}
       <Route path="/edit1" element={< CreateInvitationPage1 />} />
       <Route path="/edit2" element={< CreateInvitationPage2 />} />

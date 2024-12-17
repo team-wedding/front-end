@@ -1,13 +1,8 @@
-import React from 'react';
 import './App.css';
-import ImageUpload from './components/ImageUpload';
+import React from 'react';
 
 function App() {
-  return (
-    <div className="App">
-      <ImageUpload />
-    </div>
-  );
+  return <></>;
 }
 
 export default App;

@@ -25,40 +25,81 @@ const ImageUpload = () => {
     }
   };
 
-  const handleSubmit = () => {
-    alert('저장 완료');
+  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    const file = event.dataTransfer.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.result && typeof reader.result === 'string') {
+          setUploadedImage(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
+    event.preventDefault();
   };
 
   return (
     <div>
       {!uploadedImage ? (
-        <div>
-          <input
-            type="file"
-            accept="image/*"
-            onChange={handleImageUpload}
-            ref={fileInputRef}
-            style={{ marginBottom: '10px' }}
-          />
+        <div
+          className="flex items-center justify-center w-full"
+          onDrop={handleDrop}
+          onDragOver={handleDragOver}
+        >
+          <label
+            htmlFor="dropzone-file"
+            className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
+          >
+            <div className="flex flex-col items-center justify-center pt-5 pb-6">
+              <svg
+                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 16"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
+                />
+              </svg>
+              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
+                <span className="font-semibold">Click to upload</span> or drag
+                and drop
+              </p>
+              <p className="text-xs text-gray-500 dark:text-gray-400">
+                SVG, PNG, JPG or GIF (MAX. 800x400px)
+              </p>
+            </div>
+            <input
+              id="dropzone-file"
+              type="file"
+              className="hidden"
+              onChange={handleImageUpload}
+              ref={fileInputRef}
+            />
+          </label>
         </div>
       ) : (
         <div>
-          <div style={{ marginBottom: '10px' }}>
+          <div>
             <img
               src={uploadedImage}
               alt="Uploaded"
-              style={{
-                maxWidth: '100%',
-                height: 'auto',
-                border: '1px solid #ddd',
-                borderRadius: '10px',
-              }}
+              className="h-auto max-w-sm"
             />
           </div>
           <button onClick={handleImageDelete}>삭제</button>
         </div>
       )}
-      <button onClick={handleSubmit}>저장</button>
     </div>
   );
 };

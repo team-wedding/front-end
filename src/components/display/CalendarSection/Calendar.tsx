@@ -1,5 +1,4 @@
 import React from 'react';
-import { useWeddingStore } from '../../store/store';
 import {
   eachDayOfInterval,
   endOfMonth,
@@ -10,6 +9,7 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
+import { useWeddingStore } from '../../../store/useWeddingStore';
 
 const Calendar: React.FC = () => {
   const { weddingDate } = useWeddingStore();

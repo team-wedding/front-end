@@ -1,7 +1,7 @@
 import React from 'react';
-import PageLayout from '../components/common/PageLayout';
-import HeaderButton from '../components/common/HeaderButton';
-import InvitationTitleInput from '../components/common/InvitationTitleInput';
+import PageLayout from '../components/layout/PageLayout';
+import HeaderButton from '../components/common/Header/HeaderButton';
+import InvitationTitleInput from '../components/common/CreateInvitation/InvitationTitleInput';
 
 const EditInvitationPage: React.FC = () => {
   const handleCancel = () => console.log('취소 버튼 클릭');

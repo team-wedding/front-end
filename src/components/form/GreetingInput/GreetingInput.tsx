@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import useGreetingStore from './useGreetingStore';
 import GreetingModal from './GreetingModal';
+import useGreetingStore from '../../../store/useGreetingStore';
 
 const GreetingInput = () => {
   const { title, greeting, setTitle } = useGreetingStore();

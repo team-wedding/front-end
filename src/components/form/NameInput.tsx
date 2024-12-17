@@ -1,5 +1,5 @@
 import React from 'react';
-import useBrideGroomStore from './useBrideGroomStore';
+import useBrideGroomStore from '../../store/useBrideGroomStore';
 
 const NameInput = () => {
   const brideGroom = useBrideGroomStore((state) => state.brideGroom);
@@ -31,7 +31,9 @@ const NameInput = () => {
             <label>
               <select
                 value={person.relation}
-                onChange={() => updateBrideGroom(index, 'relation', '아들')}
+                onChange={(e) =>
+                  updateBrideGroom(index, 'relation', e.target.value)
+                }
               >
                 <option value="아들">아들</option>
                 <option value="딸">딸</option>

@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
-import useImageStore from './useImageStore';
+import useImageStore from '../../store/useImageStore';
 
-const ImageUpload = () => {
+const ImageInput = () => {
   const { uploadedImage, setUploadedImage } = useImageStore();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
@@ -104,4 +104,4 @@ const ImageUpload = () => {
   );
 };
 
-export default ImageUpload;
+export default ImageInput;

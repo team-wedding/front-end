@@ -1,7 +1,7 @@
 import React from 'react';
-import Calendar from './Calendar';
 import DDay from './DDay';
-import { useWeddingStore } from '../../store/store';
+import { useWeddingStore } from '../../../store/useWeddingStore';
+import Calendar from './Calendar';
 
 const CalendarSection = () => {
   const { weddingDate, weddingTime } = useWeddingStore();

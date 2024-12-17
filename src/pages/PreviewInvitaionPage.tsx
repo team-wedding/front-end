@@ -3,8 +3,8 @@ import EditIcon from '../components/icons/EditIcon';
 import BackIcon from '../components/icons/BackIcon';
 import ShareIcon from '../components/icons/ShareIcon';
 import TrashIcon from '../components/icons/TrashIcon';
-import PageLayout from '../components/common/PageLayout';
-import HeaderButton from '../components/common/HeaderButton';
+import PageLayout from '../components/layout/PageLayout';
+import HeaderButton from '../components/common/Header/HeaderButton';
 
 const PreviewInvitaionPage = () => {
   const handleBack = () => {

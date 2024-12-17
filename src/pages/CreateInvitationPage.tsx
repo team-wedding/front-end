@@ -4,13 +4,13 @@ import HeaderButton from '../components/common/HeaderButton';
 import InvitationTitleInput from '../components/common/InvitationTitleInput';
 import WeddingDateInput from '../components/wedding/WeddingDateInput';
 import { useInvitationStore } from '../store/store';
+import { useNavigate } from 'react-router-dom';
 
 const CreateInvitationPage: React.FC = () => {
   const { title, setTitle } = useInvitationStore();
-
-  const handleCancel = () => console.log('취소 버튼 클릭');
-  const handleSave = () => console.log('저장 버튼 클릭, 제목: ', title);
-
+  const navigate = useNavigate();
+  const handleCancel = () => navigate("/home")
+  const handleSave = () => navigate("/edit2")
   return (
     <PageLayout
       title="새로운 청첩장"

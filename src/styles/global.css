@@ -1,0 +1,45 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --header-height: 3rem;
+  }
+
+  html,
+  body,
+  .app {
+    font-family: 'Pretendard', sans-serif;
+  }
+}
+
+@layer components {
+  .header {
+    @apply fixed top-0 left-0 z-50 w-full bg-white shadow-sm text-sm;
+    height: var(--header-height);
+    @apply flex items-center justify-between px-4;
+  }
+
+  .container {
+    @apply mx-auto max-w-screen-md;
+  }
+
+  .content {
+    @apply bg-slate-100 p-4;
+    padding-top: var(--header-height);
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-lg transition-all duration-300;
+  }
+
+  .label {
+    @apply block text-xs font-medium w-1/4;
+  }
+}
+
+@layer utilities {
+}

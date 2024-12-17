@@ -31,7 +31,9 @@ const NameInput = () => {
             <label>
               <select
                 value={person.relation}
-                onChange={() => updateBrideGroom(index, 'relation', '아들')}
+                onChange={(e) =>
+                  updateBrideGroom(index, 'relation', e.target.value)
+                }
               >
                 <option value="아들">아들</option>
                 <option value="딸">딸</option>

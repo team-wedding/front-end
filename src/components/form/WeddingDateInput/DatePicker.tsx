@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import { ko } from 'date-fns/locale/ko';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useWeddingStore } from '../../store/store';
+import { useWeddingStore } from '../../../store/useWeddingStore';
 
 const DatePicker: React.FC = () => {
   const { weddingDate, setWeddingDate } = useWeddingStore();
@@ -26,9 +26,6 @@ const DatePicker: React.FC = () => {
         todayButton="오늘"
         className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-300 focus:border-blue-300 block w-full"
       />
-      {!weddingDate && (
-        <div className="mt-2 text-sm text-red-400">날짜를 선택해주세요</div>
-      )}
     </div>
   );
 };

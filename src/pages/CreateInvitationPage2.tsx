@@ -1,9 +1,9 @@
 import React from 'react';
-import PageLayout from '../components/common/PageLayout';
-import HeaderButton from '../components/common/HeaderButton';
-import InvitationTitleInput from '../components/common/InvitationTitleInput';
-import WeddingDateInput from '../components/wedding/WeddingDateInput';
-import { useInvitationStore } from '../store/store';
+import PageLayout from '../components/layout/PageLayout';
+import HeaderButton from '../components/common/Header/HeaderButton';
+import InvitationTitleInput from '../components/common/CreateInvitation/InvitationTitleInput';
+import WeddingDateInput from '../components/form/WeddingDateInput/WeddingDateInput';
+import { useInvitationStore } from '../store/useInvitaionStore';
 import { useNavigate } from 'react-router-dom';
 
 const CreateInvitationPage: React.FC = () => {
@@ -31,11 +31,16 @@ const CreateInvitationPage: React.FC = () => {
         </HeaderButton>
       }
     >
-      <InvitationTitleInput
-        value={title}
-        onChange={(e) => setTitle(e.target.value)}
-      />
-      <WeddingDateInput />
+      <div>
+        {/* 청첩장 제목 입력 */}
+        <InvitationTitleInput
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        />
+
+        {/* 웨딩 일시 입력 */}
+        <WeddingDateInput />
+      </div>
     </PageLayout>
   );
 };

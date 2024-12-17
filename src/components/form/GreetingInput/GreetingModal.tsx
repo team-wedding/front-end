@@ -1,5 +1,5 @@
 import React from 'react';
-import useGreetingStore from './useGreetingStore';
+import useGreetingStore from '../../../store/useGreetingStore';
 
 const greetingSample = ['샘플 1', '샘플 2'];
 

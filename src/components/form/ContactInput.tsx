@@ -1,5 +1,5 @@
 import React from 'react';
-import useContactStore from './useContactStore';
+import useContactStore from '../../store/useContactStore';
 
 const ContactInput = () => {
   const contacts = useContactStore((state) => state.contacts);
@@ -40,9 +40,9 @@ const ContactInput = () => {
             <input
               type="tel"
               placeholder="010-0000-0000"
-              value={person.fatherContact}
+              value={person.motherContact}
               onChange={(e) =>
-                updateContact(index, 'fatherContact', e.target.value)
+                updateContact(index, 'motherContact', e.target.value)
               }
               pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg block w-full ps-5 p-2"

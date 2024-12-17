@@ -1,7 +1,7 @@
 import React from 'react';
 import BackIcon from '../components/icons/BackIcon';
-import PageLayout from '../components/common/PageLayout';
-import HeaderButton from '../components/common/HeaderButton';
+import PageLayout from '../components/layout/PageLayout';
+import HeaderButton from '../components/common/Header/HeaderButton';
 
 const EditMyPage = () => {
   const handleBack = () => {

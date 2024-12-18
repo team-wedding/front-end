@@ -27,7 +27,7 @@
   }
 
   .content {
-    @apply p-4 bg-gray-200 h-screen;
+    @apply p-4 bg-gray-200 min-h-screen;
     padding-top: var(--header-height);
   }
 

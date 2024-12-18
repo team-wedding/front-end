@@ -20,9 +20,9 @@ function App() {
       {/* 랜딩페이지? */}
       <Route path="/start" element={<SplashPage />} />
       {/* 만들기 페이지 */}
-      <Route path="/edit1" element={< CreateInvitationPage1 />} />
-      <Route path="/edit2" element={< CreateInvitationPage2 />} />
-      <Route path="/edit3" element={< CreateInvitationPage3 />} />
+      <Route path="/create/1" element={< CreateInvitationPage1 />} />
+      <Route path="/create/2" element={< CreateInvitationPage2 />} />
+      <Route path="/create/3" element={< CreateInvitationPage3 />} />
       {/* TODO:Preview page */}
     </Routes>
   )

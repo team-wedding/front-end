@@ -8,10 +8,10 @@ const BrideGroomName = () => {
     <div>
       <div className="flex justify-center">
         {brideGroom.map((person, index) => (
-          <label key={index} className="text-lg">
-            <label className="m-1">{person.name}</label>
+          <div key={index} className="text-lg">
+            <div className="m-1">{person.name}</div>
             {index < brideGroom.length - 1 && '♥️'}
-          </label>
+          </div>
         ))}
       </div>
     </div>

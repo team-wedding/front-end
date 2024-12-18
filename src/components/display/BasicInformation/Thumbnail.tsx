@@ -13,7 +13,7 @@ const Thumbnail = () => {
           className="w-10/12 h-auto rounded-lg"
         />
       ) : (
-        <label className="text-gray-500">이미지가 없습니다.</label>
+        <div className="text-gray-500">이미지가 없습니다.</div>
       )}
     </div>
   );

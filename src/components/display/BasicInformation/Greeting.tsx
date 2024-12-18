@@ -6,12 +6,12 @@ const Greeting = () => {
 
   return (
     <div>
-      <label className="flex justify-center whitespace-pre-wrap text-xl font-semibold mb-4">
+      <div className="flex justify-center whitespace-pre-wrap text-xl font-semibold mb-4">
         {title}
-      </label>
-      <label className="flex justify-center text-center whitespace-pre-wrap text-base font-normal">
+      </div>
+      <div className="flex justify-center text-center whitespace-pre-wrap text-base font-normal">
         {greeting}
-      </label>
+      </div>
     </div>
   );
 };

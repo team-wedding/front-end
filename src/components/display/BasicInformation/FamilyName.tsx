@@ -9,26 +9,26 @@ const FamilyName = () => {
     <div className="flex justify-center">
       <div className="flex flex-col items-center">
         {brideGroom.map((person, index) => (
-          <label key={index} className="flex items-center">
-            <label className="flex items-center">
+          <div key={index} className="flex items-center">
+            <div className="flex items-center">
               {person.family.father.isDeceased && (
                 <img src={deceasedImage} alt="故" className="w-4 h-4 mr-1" />
               )}
               {person.family.father.name}
-            </label>
+            </div>
             {person.family.mother.name && (
               <span className="mx-1.5">&#183;</span>
             )}
-            <label className="flex items-center">
+            <div className="flex items-center">
               {person.family.mother.isDeceased && (
                 <img src={deceasedImage} alt="故" className="w-4 h-4 mr-1" />
               )}
               {person.family.mother.name}
-            </label>
-            <label>
+            </div>
+            <div>
               의 {person.relation} {person.name}
-            </label>
-          </label>
+            </div>
+          </div>
         ))}
       </div>
     </div>

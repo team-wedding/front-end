@@ -22,17 +22,17 @@ export const Accordion: React.FC<AccordionProps> = ({
           {items.map((item) => (
             <div
               key={item.id}
-              className={`bg-white rounded-3xl overflow-hidden transition-all duration-300 ${
-                expandedIds.includes(item.id) ? "max-h-96" : "max-h-16"
+              className={`bg-white rounded-2xl overflow-hidden transition-all duration-300 ${
+                expandedIds.includes(item.id) ? "max-h-160" : "max-h-12"
               }`}
             >
               <div
-                className="flex justify-between max-h-16 items-center p-6 cursor-pointer"
+                className="flex justify-between max-h-12 items-center p-6 cursor-pointer"
                 onClick={() => toggleExpand(item.id)}
               >
-                <div className="text-lg font-bold">{item.title}</div>
+                <div className="text-base font-bold">{item.title}</div>
                 <i
-                  className={`bx bx-chevron-down text-2xl transition-all duration-300 ${
+                  className={`bx bx-chevron-down text-xl transition-all duration-300 ${
                     expandedIds.includes(item.id) ? "rotate-180" : ""
                   }`}
                 ></i>

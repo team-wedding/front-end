@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PageLayout from '../components/layout/PageLayout';
 import HeaderButton from '../components/common/Header/HeaderButton';
 import InvitationTitleInput from '../components/common/CreateInvitation/InvitationTitleInput';
-import WeddingDateInput from '../components/form/WeddingDateInput/WeddingDateInput';
 import { useInvitationStore } from '../store/useInvitaionStore';
 import { useNavigate } from 'react-router';
+import { Accordion } from '../components/common/CreateInvitation/Accordion';
+import { accordionData } from '../constants/accordionData';
+
 
 const CreateInvitationPage1: React.FC = () => {
   const { title, setTitle } = useInvitationStore();
@@ -12,6 +14,27 @@ const CreateInvitationPage1: React.FC = () => {
 
   const handleCancel = () => navigate('/home');
   const handleSave = () => console.log('저장 버튼 클릭, 제목: ', title);
+
+
+  const [expandedIds, setExpandedIds] = useState<number[]>([]);
+
+  const toggleExpand = (id: number) => {
+    setExpandedIds((prev) =>
+      prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id]
+    );
+  };
+
+  // const steps = ["기본 정보 입력", "기능 선택", "테마 선택"];
+
+  // const [currentStep, setCurrentStep] = useState<number>(1);
+
+  // const handleNext = () => {
+  //   setCurrentStep((prev) => Math.min(prev + 1, steps.length));
+  // };
+
+  // const handlePrev = () => {
+  //   setCurrentStep((prev) => Math.max(prev - 1, 1));
+  // };
 
   return (
     <PageLayout
@@ -40,8 +63,8 @@ const CreateInvitationPage1: React.FC = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
 
-        {/* 웨딩 일시 입력 */}
-        <WeddingDateInput />
+        <Accordion items={accordionData.slice(0, 4)} expandedIds={expandedIds} toggleExpand={toggleExpand} />
+
       </div>
     </PageLayout>
   );

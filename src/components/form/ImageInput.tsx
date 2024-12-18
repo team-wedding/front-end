@@ -1,21 +1,70 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
+import { toast, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import useImageStore from '../../store/useImageStore';
 
 const ImageInput = () => {
   const { uploadedImage, setUploadedImage } = useImageStore();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const handleImageUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const MAX_WIDTH = 300;
+  const MAX_HEIGHT = 600;
+
+  const [isDragging, setIsDragging] = useState(false);
+
+  const validateImageSize = (file: File): Promise<boolean> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.src = URL.createObjectURL(file);
+      img.onload = () => {
+        const isValid = img.width <= MAX_WIDTH && img.height <= MAX_HEIGHT;
+        resolve(isValid);
+      };
+    });
+  };
+
+  const handleImageUpload = async (file: File) => {
+    const isValid = await validateImageSize(file);
+    if (!isValid) {
+      toast.error(`이미지 크기는 최대 ${MAX_WIDTH}x${MAX_HEIGHT}px 입니다.`, {
+        toastId: 'image-size-error',
+      });
+      return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.result && typeof reader.result === 'string') {
+        setUploadedImage(reader.result);
+      }
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleFileInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.result && typeof reader.result === 'string') {
-          setUploadedImage(reader.result);
-        }
-      };
-      reader.readAsDataURL(file);
+      await handleImageUpload(file);
     }
+  };
+
+  const handleDrop = async (event: React.DragEvent<HTMLLabelElement>) => {
+    event.preventDefault();
+    setIsDragging(false);
+
+    const file = event.dataTransfer.files?.[0];
+    if (file) {
+      await handleImageUpload(file);
+    }
+  };
+
+  const handleDragOver = (event: React.DragEvent<HTMLLabelElement>) => {
+    event.preventDefault();
+    setIsDragging(true);
+  };
+
+  const handleDragLeave = () => {
+    setIsDragging(false);
   };
 
   const handleImageDelete = () => {
@@ -25,79 +74,46 @@ const ImageInput = () => {
     }
   };
 
-  const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-    const file = event.dataTransfer.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.result && typeof reader.result === 'string') {
-          setUploadedImage(reader.result);
-        }
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
-    event.preventDefault();
-  };
-
   return (
-    <div>
+    <div className="flex items-center justify-center max-w-lg mx-auto p-4">
+      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       {!uploadedImage ? (
-        <div
-          className="flex items-center justify-center w-full"
-          onDrop={handleDrop}
+        <label
+          htmlFor="dropzone-file"
+          className={`flex flex-col items-center justify-center w-80 h-80 border-2 ${
+            isDragging ? 'border-primary bg-pink-100' : 'border-gray-300 bg-gray-100'
+          } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
           onDragOver={handleDragOver}
+          onDragLeave={handleDragLeave}
+          onDrop={handleDrop}
         >
-          <label
-            htmlFor="dropzone-file"
-            className="flex flex-col items-center justify-center w-full h-64 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100"
-          >
-            <div className="flex flex-col items-center justify-center pt-5 pb-6">
-              <svg
-                className="w-8 h-8 mb-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 20 16"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M13 13h3a3 3 0 0 0 0-6h-.025A5.56 5.56 0 0 0 16 6.5 5.5 5.5 0 0 0 5.207 5.021C5.137 5.017 5.071 5 5 5a4 4 0 0 0 0 8h2.167M10 15V6m0 0L8 8m2-2 2 2"
-                />
-              </svg>
-              <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                <span className="font-semibold">Click to upload</span> or drag
-                and drop
-              </p>
-              <p className="text-xs text-gray-500 dark:text-gray-400">
-                SVG, PNG, JPG or GIF (MAX. 800x400px)
-              </p>
-            </div>
-            <input
-              id="dropzone-file"
-              type="file"
-              className="hidden"
-              onChange={handleImageUpload}
-              ref={fileInputRef}
-            />
-          </label>
-        </div>
-      ) : (
-        <div>
-          <div>
-            <img
-              src={uploadedImage}
-              alt="Uploaded"
-              className="h-auto max-w-sm"
-            />
+          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+            <p className="mb-2 text-sm text-gray-500">
+              <span className="font-semibold">Click to upload</span> or drag and drop
+            </p>
+            <p className="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 300x600px)</p>
           </div>
-          <button onClick={handleImageDelete}>삭제</button>
+          <input
+            id="dropzone-file"
+            type="file"
+            className="hidden"
+            onChange={handleFileInputChange}
+            ref={fileInputRef}
+          />
+        </label>
+      ) : (
+        <div className="flex flex-col items-center">
+          <img
+            src={uploadedImage}
+            alt="Uploaded"
+            className="h-auto max-w-sm"
+          />
+          <button
+            onClick={handleImageDelete}
+            className="mt-4 px-4 py-2 text-white bg-primary rounded-xl hover:bg-pink-600"
+          >
+            삭제
+          </button>
         </div>
       )}
     </div>

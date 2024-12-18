@@ -39,6 +39,9 @@
     @apply block text-sm font-medium w-1/4;
   }
 
+  .formInput {
+    @apply bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1;
+
   .flex-center {
     @apply flex justify-center items-center;
   }
@@ -65,6 +68,7 @@
 
   .result-layout {
     @apply max-w-[480px] mx-auto flex flex-col gap-32 pt-10 pb-40 bg-background rounded-2xl;
+
   }
 }
 

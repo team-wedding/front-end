@@ -4,11 +4,13 @@ import HeaderButton from '../components/common/Header/HeaderButton';
 import InvitationTitleInput from '../components/common/CreateInvitation/InvitationTitleInput';
 import WeddingDateInput from '../components/form/WeddingDateInput/WeddingDateInput';
 import { useInvitationStore } from '../store/useInvitaionStore';
+import { useNavigate } from 'react-router';
 
-const CreateInvitationPage: React.FC = () => {
+const CreateInvitationPage1: React.FC = () => {
   const { title, setTitle } = useInvitationStore();
+  const navigate = useNavigate()
 
-  const handleCancel = () => console.log('취소 버튼 클릭');
+  const handleCancel = () => navigate('/home');
   const handleSave = () => console.log('저장 버튼 클릭, 제목: ', title);
 
   return (
@@ -45,4 +47,4 @@ const CreateInvitationPage: React.FC = () => {
   );
 };
 
-export default CreateInvitationPage;
+export default CreateInvitationPage1;

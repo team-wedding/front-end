@@ -23,16 +23,16 @@ const Calendar: React.FC = () => {
   const allDays = eachDayOfInterval({ start: startDay, end: endDay });
 
   return (
-    <div className="flex flex-col items-center justify-center text-sm">
+    <div className="flex flex-col items-center justify-center text-xs max-w-60 font-light">
       <div>
-        <div className="grid grid-cols-7 p-2 gap-2 text-center">
+        <div className="grid grid-cols-7 p-2 gap-4 text-center">
           {dayOfWeeks.map((day) => (
             <div key={day} className={`${day === '일' && 'text-rose-400'}`}>
               {day}
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-7 gap-2 text-center">
+        <div className="grid grid-cols-7 gap-1 text-center">
           {allDays.map((day, index) => {
             const isCurrentMonth = isSameMonth(day, currentDate);
             const isSelectedDay = isSameDay(day, weddingDate || new Date());

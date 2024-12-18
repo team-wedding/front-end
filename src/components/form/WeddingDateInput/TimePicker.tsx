@@ -27,7 +27,7 @@ const TimePicker: React.FC = () => {
   };
 
   return (
-    <div className="flex justify-center items-center gap-5">
+    <div className="flex items-center gap-2">
       <label htmlFor="timepicker" className="label">
         예식 시간
       </label>
@@ -45,7 +45,8 @@ const TimePicker: React.FC = () => {
         locale={ko}
         minTime={minTime}
         maxTime={maxTime}
-        className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-300 focus:border-blue-300 block w-full"
+        className="formInput w-full"
+        //  className="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary <flex-1></flex-1> !important"
       />
       {!weddingTime && (
         <div className="mt-2 text-sm text-red-600">시간을 선택해주세요</div>

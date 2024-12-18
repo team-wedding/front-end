@@ -40,17 +40,15 @@ const DDay: React.FC<WeddingDDayProps> = ({ targetDate, targetTime }) => {
       {timeUnits.map((dday, index) => (
         <div key={index} className="flex items-center">
           <div className="flex flex-col items-center justify-center leading-none">
-            <div className="text-xs text-gray-400 -tracking-wide">
+            <div className="text-[10px] text-gray-400 -tracking-wide font-light">
               {dday.label}
             </div>
-            <div className="text-xl font-medium my-3 tracking-widest">
+            <div className="text-lg my-3 tracking-wider">
               {dday.value !== undefined ? dday.value : '00'}
             </div>
           </div>
           {index < timeUnits.length - 1 && (
-            <div className="text-xs leading-none mx-1 text-gray-400 font-bold">
-              :
-            </div>
+            <div className="text-xs leading-none mx-1 text-gray-400">:</div>
           )}
         </div>
       ))}

@@ -27,7 +27,7 @@
   }
 
   .content {
-    @apply p-4 bg-gray-200 min-h-screen;
+    @apply p-4 bg-gray-300 min-h-screen;
     padding-top: var(--header-height);
   }
 
@@ -41,6 +41,34 @@
 
   .formInput {
     @apply bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1;
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .column-center {
+    @apply flex flex-col justify-center items-center;
+  }
+
+  .contact-group {
+    @apply flex flex-col items-center justify-center gap-5;
+  }
+
+  .title {
+    @apply text-xl text-higtlight tracking-wider mb-5;
+  }
+
+  .sub-title {
+    @apply text-xs text-higtlight;
+  }
+
+  .preview-layout {
+    @apply max-w-[480px] mx-auto rounded-2xl m-10 shadow-md;
+  }
+
+  .result-layout {
+    @apply max-w-[480px] mx-auto flex flex-col gap-32 pt-10 pb-40 bg-background rounded-2xl;
+
   }
 }
 

@@ -6,8 +6,7 @@ import { useInvitationStore } from '../store/useInvitaionStore';
 import { useNavigate } from 'react-router';
 import { Accordion } from '../components/common/CreateInvitation/Accordion';
 import { accordionData } from '../constants/accordionData';
-// import { Stepper } from '../components/common/CreateInvitation/Stepper';
-// import { StepNavigation } from '../components/common/CreateInvitation/StepNavigation';
+
 
 const CreateInvitationPage1: React.FC = () => {
   const { title, setTitle } = useInvitationStore();
@@ -15,6 +14,7 @@ const CreateInvitationPage1: React.FC = () => {
 
   const handleCancel = () => navigate('/home');
   const handleSave = () => console.log('저장 버튼 클릭, 제목: ', title);
+
 
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
 
@@ -62,14 +62,9 @@ const CreateInvitationPage1: React.FC = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-        {/* <Stepper steps={steps} currentStep={currentStep} /> */}
+
         <Accordion items={accordionData.slice(0, 4)} expandedIds={expandedIds} toggleExpand={toggleExpand} />
-        {/* <StepNavigation
-          currentStep={currentStep}
-          totalSteps={steps.length}
-          onPrev={handlePrev}
-          onNext={handleNext}
-        /> */}
+
       </div>
     </PageLayout>
   );

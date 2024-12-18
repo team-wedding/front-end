@@ -11,6 +11,8 @@ export default {
     extend: {
       colors: {
         primary: '#FF668B',
+        background: '#f2ece6',
+        higtlight: '#964b00',
       },
       fontFamily: {
         Pretendard: ['Pretendard'],

@@ -1,19 +1,10 @@
 import React, { useState } from 'react';
 import DaumPost from './DaumPost';
+import useAddressStore from '../../../store/useAddressStore';
 
-interface PostCode {
-  address: string;
-  zonecode: string | number; // zonecode는 문자열 초기값을 위해 설정
-}
-
-const InputAddress: React.FC = () => {
+const AddressInput: React.FC = () => {
   const [popup, setPopup] = useState<boolean>(false);
-
-  // 상태값 설정
-  const [form, setForm] = useState<PostCode>({
-    address: '',
-    zonecode: '',
-  });
+  const { address, zonecode } = useAddressStore();
 
   // 팝업 열고 닫기
   const handleComplete = () => {
@@ -27,21 +18,21 @@ const InputAddress: React.FC = () => {
         <div className="flex items-center gap-2">
           <input
             type="text"
-            value={form.zonecode}
+            value={zonecode}
             placeholder="우편번호"
             className="border p-2 rounded"
             readOnly
           />
           <button
             onClick={handleComplete}
-            className="bg-pinkCustom hover:bg-pink-600 text-white px-4 py-2 rounded"
+            className="bg-primary hover:bg-pink-600 text-white px-4 py-2 rounded"
           >
             검색
           </button>
         </div>
         <input
           type="text"
-          value={form.address}
+          value={address}
           placeholder="기본 주소"
           className="border p-2 rounded w-full"
           readOnly
@@ -70,15 +61,9 @@ const InputAddress: React.FC = () => {
         </div>
       </div>
       {/* DaumPost 팝업 */}
-      {popup && (
-        <DaumPost
-          address={form}
-          setAddress={setForm}
-          handleComplete={handleComplete}
-        />
-      )}
+      {popup && <DaumPost handleComplete={handleComplete} />}
     </div>
   );
 };
 
-export default InputAddress;
+export default AddressInput;

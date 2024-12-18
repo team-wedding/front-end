@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import DaumPost from './DaumPost';
+import useAddressStore from '../../../store/useAddressStore';
 
 interface PostCode {
   address: string;
@@ -8,12 +9,7 @@ interface PostCode {
 
 const AddressInput: React.FC = () => {
   const [popup, setPopup] = useState<boolean>(false);
-
-  // 상태값 설정
-  const [form, setForm] = useState<PostCode>({
-    address: '',
-    zonecode: '',
-  });
+  const { address, zonecode } = useAddressStore();
 
   // 팝업 열고 닫기
   const handleComplete = () => {
@@ -27,7 +23,7 @@ const AddressInput: React.FC = () => {
         <div className="flex items-center gap-2">
           <input
             type="text"
-            value={form.zonecode}
+            value={zonecode}
             placeholder="우편번호"
             className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1"
             readOnly
@@ -72,13 +68,7 @@ const AddressInput: React.FC = () => {
         </div>
       </div>
       {/* DaumPost 팝업 */}
-      {popup && (
-        <DaumPost
-          address={form}
-          setAddress={setForm}
-          handleComplete={handleComplete}
-        />
-      )}
+      {popup && <DaumPost handleComplete={handleComplete} />}
     </div>
   );
 };

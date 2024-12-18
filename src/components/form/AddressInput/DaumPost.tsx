@@ -1,10 +1,6 @@
 import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
-
-interface PostCode {
-  address: string;
-  zonecode: string | number;
-}
+import useAddressStore from '../../../store/useAddressStore';
 
 interface PostcodeData {
   address: string;
@@ -15,12 +11,12 @@ interface PostcodeData {
 }
 
 interface DaumPostProps {
-  address: PostCode; // 부모로부터 받은 주소 상태
-  setAddress: React.Dispatch<React.SetStateAction<PostCode>>; // 상태 업데이트 함수
   handleComplete: () => void; // 팝업 닫기 함수
 }
 
-const DaumPost: React.FC<DaumPostProps> = ({ setAddress, handleComplete }) => {
+const DaumPost: React.FC<DaumPostProps> = ({ handleComplete }) => {
+  const setAddress = useAddressStore((state) => state.setAddress);
+
   // DaumPostcode API 완료 시 실행되는 함수
   const complete = (data: PostcodeData) => {
     let fullAddress = data.address;
@@ -28,14 +24,15 @@ const DaumPost: React.FC<DaumPostProps> = ({ setAddress, handleComplete }) => {
     let extraAddress = '';
 
     if (data.addressType === 'R') {
-      if (data.bname !== '') {
+      if (data.bname) {
         extraAddress += data.bname;
       }
-      if (data.buildingName !== '') {
-        extraAddress +=
-          extraAddress !== '' ? `, ${data.buildingName}` : data.buildingName;
+      if (data.buildingName) {
+        extraAddress += extraAddress
+          ? `, ${data.buildingName}`
+          : data.buildingName;
       }
-      fullAddress += extraAddress !== '' ? ` (${extraAddress})` : '';
+      fullAddress += extraAddress ? ` (${extraAddress})` : '';
     }
 
     console.log('Selected Data:', data);
@@ -43,10 +40,7 @@ const DaumPost: React.FC<DaumPostProps> = ({ setAddress, handleComplete }) => {
     console.log('Zonecode:', data.zonecode);
 
     // 부모 상태 업데이트
-    setAddress({
-      address: fullAddress,
-      zonecode: zonecode,
-    });
+    setAddress(fullAddress, zonecode);
 
     // 팝업 닫기
     handleComplete();

@@ -6,7 +6,7 @@ interface PostCode {
   zonecode: string | number; // zonecode는 문자열 초기값을 위해 설정
 }
 
-const InputAddress: React.FC = () => {
+const AddressInput: React.FC = () => {
   const [popup, setPopup] = useState<boolean>(false);
 
   // 상태값 설정
@@ -29,41 +29,43 @@ const InputAddress: React.FC = () => {
             type="text"
             value={form.zonecode}
             placeholder="우편번호"
-            className="border p-2 rounded"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1"
             readOnly
           />
           <button
             onClick={handleComplete}
-            className="bg-pinkCustom hover:bg-pink-600 text-white px-4 py-2 rounded"
+            className="bg-primary hover:bg-pink-600 text-white px-4 py-2 rounded-xl shrink-0"
           >
             검색
           </button>
         </div>
-        <input
-          type="text"
-          value={form.address}
-          placeholder="기본 주소"
-          className="border p-2 rounded w-full"
-          readOnly
-        />
-        {/* 예식장명 */}
         <div className="flex items-center">
-          <label className="w-1/4 font-semibold text-gray-700">예식장명</label>
+          <label className="label">기본 주소</label>
           <input
             type="text"
-            placeholder="예식장 이름 입력"
-            className="border p-2 rounded w-3/4"
-            minLength={2}
+            value={form.address}
+            placeholder="기본 주소"
+            className="formInput"
+            readOnly
+          />
+        </div>
+        {/* 예식장명 */}
+        <div className="flex items-center">
+          <label className="label">예식장명</label>
+          <input
+            type="text"
+            placeholder="예식장 이름"
+            className="formInput"
             maxLength={36}
           />
         </div>
         {/* 층과 홀 */}
         <div className="flex items-center">
-          <label className="w-1/4 font-semibold text-gray-700">층과 홀</label>
+          <label className="label">층과 홀</label>
           <input
             type="text"
-            placeholder="층과 웨딩홀 이름 입력"
-            className="border p-2 rounded w-3/4"
+            placeholder="층과 웨딩홀 이름"
+            className="formInput"
             minLength={2}
             maxLength={36}
           />
@@ -81,4 +83,4 @@ const InputAddress: React.FC = () => {
   );
 };
 
-export default InputAddress;
+export default AddressInput;

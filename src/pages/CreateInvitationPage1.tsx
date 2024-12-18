@@ -63,7 +63,7 @@ const CreateInvitationPage1: React.FC = () => {
           onChange={(e) => setTitle(e.target.value)}
         />
         {/* <Stepper steps={steps} currentStep={currentStep} /> */}
-        <Accordion items={accordionData.slice(0, 6)} expandedIds={expandedIds} toggleExpand={toggleExpand} />
+        <Accordion items={accordionData.slice(0, 4)} expandedIds={expandedIds} toggleExpand={toggleExpand} />
         {/* <StepNavigation
           currentStep={currentStep}
           totalSteps={steps.length}

@@ -34,22 +34,22 @@ const SignUpPage = () => {
   //TODO: Password validation && btn disable
   return (
     <PageLayout>
-      <div className='flex flex-col w-full h-full justify-center items-center gap-4'>
-        <div className='flex flex-col w-full  items-center mt-40 text-5xl font-semibold gap-3'>
-          <span>회원가입</span>
+      <div className="flex flex-col items-center justify-center w-full gap-8 p-4 sm:gap-8 sm:p-8">
+
+        <img
+          className="mt-10 sm:mt-30 w-60 h-45 sm:w-80 sm:h-60"
+          src="/src/assets/image20.png"
+          alt="Title"
+        />
+
+        <div className="flex flex-col w-full max-w-md gap-3">
+          <input name="name" onChange={handleChange} className="h-12 px-4 text-base rounded-lg border border-gray-300 focus-visible:ring-1 focus:ring-primary focus:border-primary" type="text" placeholder="이름" />
+          <input name="email" onChange={handleChange} className="h-12 px-4 text-base rounded-lg border border-gray-300 focus-visible:ring-1 focus:ring-primary focus:border-primary" type="text" placeholder="이메일" />
+          <input name="password" onChange={handleChange} className="h-12 px-4 text-base rounded-lg border border-gray-300 focus-visible:ring-1 focus:ring-primary focus:border-primary" type="password" placeholder="비밀번호" />
+          <input name="confirmPassword" onChange={handleChange} className="h-12 px-4 text-base rounded-lg border border-gray-300 focus-visible:ring-1 focus:ring-primary focus:border-primary" type="password" placeholder="비밀번호 확인" />
+          <button className="h-12 bg-primary rounded-lg font-medium text-white text-lg shadow-md" onClick={() => { navigate("/login") }}>회원가입</button>
         </div>
-        <div className="flex flex-col w-3/6 gap-3">
-          <div>이름</div>
-          <input name="name" onChange={handleChange} className="rounded-lg" type="text" placeholder="이름을 입력해주세요" />
-          <div>이메일</div>
-          <input name="email" onChange={handleChange} className="rounded-lg" type="text" placeholder="이메일을 입력해주세요" />
-          <div>비밀번호</div>
-          <input name="password" onChange={handleChange} className="rounded-lg" type="password" placeholder="이름을 입력해주세요" />
-          <div>비밀번호 확인</div>
-          <input name="confirmPassword" onChange={handleChange} className="rounded-lg" type="password" placeholder="이름을 입력해주세요" />
-        </div>
-        <button className='h-12 bg-primary w-3/6 rounded-md font-medium text-white text-xl' onClick={() => { navigate("/login") }}>회원가입</button>
-        <div >이미 계정이 있나요? <Link to="/login" className='text-primary'>로그인</Link></div>
+        <div className='text-gray-600'>이미 계정이 있나요? <Link to="/login" className='text-primary'>로그인</Link></div>
       </div>
     </PageLayout>)
 };

@@ -11,7 +11,7 @@ const SplashPage = () => {
 
         {/* Title Section */}
         <img 
-          className="mt-10 sm:mt-30 w-60 h-45 sm:w-80 sm:h-60" 
+          className="mt-10 sm:mt-30 w-60 h-45" 
           src="/src/assets/image20.png" 
           alt="Title" 
         />

@@ -7,8 +7,8 @@ const ImageInput = () => {
   const { uploadedImage, setUploadedImage } = useImageStore();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const MAX_WIDTH = 300;
-  const MAX_HEIGHT = 600;
+  const MAX_WIDTH = 2000;
+  const MAX_HEIGHT = 2000;
 
   const [isDragging, setIsDragging] = useState(false);
 
@@ -80,9 +80,8 @@ const ImageInput = () => {
       {!uploadedImage ? (
         <label
           htmlFor="dropzone-file"
-          className={`flex flex-col items-center justify-center w-80 h-80 border-2 ${
-            isDragging ? 'border-primary bg-pink-100' : 'border-gray-300 bg-gray-100'
-          } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
+          className={`flex flex-col items-center justify-center w-80 h-60 border-2 ${isDragging ? 'border-primary bg-pink-100' : 'border-gray-300 bg-gray-50'
+            } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
@@ -91,7 +90,7 @@ const ImageInput = () => {
             <p className="mb-2 text-sm text-gray-500">
               <span className="font-semibold">Click to upload</span> or drag and drop
             </p>
-            <p className="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 300x600px)</p>
+            <p className="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 2000x2000px)</p>
           </div>
           <input
             id="dropzone-file"
@@ -106,7 +105,7 @@ const ImageInput = () => {
           <img
             src={uploadedImage}
             alt="Uploaded"
-            className="h-auto max-w-sm"
+            className="h-auto max-w-full"
           />
           <button
             onClick={handleImageDelete}

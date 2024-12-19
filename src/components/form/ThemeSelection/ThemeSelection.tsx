@@ -22,12 +22,13 @@ const ThemeSelection = () => {
   const theme = useThemeStore();
 
   return (
-    <div className="flex flex-col gap-8  p-2  h-36">
-      <div className="flex flex-row items-center gap-14">
-        <div className="font-medium text-sm  ">글꼴</div>
+    <div className="max-w-lg mx-auto p-4">
+    <div className="flex flex-col gap-8 h-36">
+      <div className="flex flex-row items-center gap-10">
+        <div className="font-medium text-sm">글꼴</div>
         <div className="flex gap-1">
           <button
-            className={`relative w-24 text-gray-700 border rounded-md text-xs py-2  text-center items-center ${font}  formInput ${fontDrop && "rounded-b-none"}`}
+            className={`relative w-24 text-gray-700 border rounded-md text-xs py-2 text-center items-center ${font}  formInput ${fontDrop && "rounded-b-none"}`}
             onClick={handleFontDropDown}
             onBlur={() => setFontDrop(false)}
           >{font}
@@ -51,7 +52,7 @@ const ThemeSelection = () => {
           </button>
         </div>
       </div >
-      <div className="flex flex-row w-full items-center gap-10">
+      <div className="flex flex-row w-full items-center gap-8">
         <div className="text-sm font-medium">배경색상</div>
         <div className="flex flex-row gap-4">
           {
@@ -62,6 +63,7 @@ const ThemeSelection = () => {
         </div>
       </div>
     </div >
+    </div>
   )
 }
 export default ThemeSelection

@@ -34,7 +34,7 @@ const GreetingInput = () => {
             onChange={(e) =>
               useGreetingStore.getState().setGreeting(e.target.value)
             }
-            rows={6}
+            rows={8}
             className="formInput"
           />
 

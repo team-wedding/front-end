@@ -23,7 +23,7 @@ export const StepNavigation: React.FC<StepNavigationProps> = ({
         className={`px-4 py-2 rounded border ${
           currentStep === 1
             ? "text-gray-300 border-gray-300 cursor-not-allowed"
-            : "text-gray-700 border-gray-400 hover:bg-gray-200"
+            : "text-gray-700 border-gray-400"
         }`}
         disabled={currentStep === 1}
       >
@@ -35,7 +35,7 @@ export const StepNavigation: React.FC<StepNavigationProps> = ({
         // 미리보기 버튼만 활성화
         <button
           onClick={onPreview}
-          className="px-4 py-2 rounded text-white bg-pinkCustom hover:bg-pink-500"
+          className="px-4 py-2 rounded text-white bg-primary"
         >
           미리보기
         </button>
@@ -46,7 +46,7 @@ export const StepNavigation: React.FC<StepNavigationProps> = ({
           className={`px-4 py-2 rounded text-white ${
             currentStep === totalSteps
               ? "bg-gray-300 cursor-not-allowed"
-              : "bg-pinkCustom hover:bg-pink-500"
+              : "bg-primary"
           }`}
           disabled={currentStep === totalSteps}
         >

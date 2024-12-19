@@ -2,11 +2,6 @@ import React, { useState } from 'react';
 import DaumPost from './DaumPost';
 import useAddressStore from '../../../store/useAddressStore';
 
-interface PostCode {
-  address: string;
-  zonecode: string | number; // zonecode는 문자열 초기값을 위해 설정
-}
-
 const AddressInput: React.FC = () => {
   const [popup, setPopup] = useState<boolean>(false);
   const { address, zonecode } = useAddressStore();
@@ -39,7 +34,7 @@ const AddressInput: React.FC = () => {
           <label className="label">기본 주소</label>
           <input
             type="text"
-            value={form.address}
+            value={address}
             placeholder="기본 주소"
             className="formInput"
             readOnly

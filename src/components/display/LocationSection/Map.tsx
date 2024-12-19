@@ -32,7 +32,7 @@ const Map: React.FC = () => {
         lng: coords.lng,
       }}
       style={{
-        width: '100%',
+        width: '90%',
         height: '300px',
       }}
       level={4}

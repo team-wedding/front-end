@@ -1,10 +1,10 @@
 import React from 'react';
 import useGreetingStore from '../../../store/useGreetingStore';
 
-const greetingSample =
-  [
-    '저희 두 사람의 작은 만남이 사랑의 결실을 이루어 소중한 결혼식을 올리게 되었습니다. 평생 서로 귀하게 여기며 첫 마음 그대로 존중하고 배려하며 살겠습니다. 오로지 믿음과 사랑을 약속하는 날오셔서 축복해 주시면 더없는 기쁨으로 간직하겠습니다.',
-    '서로에게 행복을 주는 사람을 만났습니다. 웃는 모습이 너무나 예쁜 그 사람을 만났습니다. 배려하는 마음이 따뜻한 그 사람을 만났습니다. 운명처럼 만나게 된 우리의 인연 그 인연에 이끌려 이제 영원을 함께 약속하려 합니다. 저희의 하나 됨을 지켜보아 주시고 격려해 주시면 더없는 기쁨으로  간직하겠습니다.'];
+const greetingSample = [
+  `저희 두 사람의 작은 만남이\n 사랑의 결실을 이루어\n소중한 결혼식을 올리게 되었습니다.\n\n평생 서로 귀하게 여기며\n첫 마음 그대로 존중하고 배려하며 살겠습니다.\n\n오로지 믿음과 사랑을 약속하는 날\n오셔서 축복해 주시면 더없는 기쁨으로\n간직하겠습니다.`,
+  `서로에게 행복을 주는 사람을 만났습니다.\n웃는 모습이 너무나 예쁜 그 사람을 만났습니다.\n배려하는 마음이 따뜻한 그 사람을 만났습니다.\n\n운명처럼 만나게 된 우리의 인연\n그 인연에 이끌려 이제 영원을\n함께 약속하려 합니다.\n\n저희의 하나 됨을 지켜보아 주시고\n격려해 주시면 더없는 기쁨으로\n간직하겠습니다.`,
+];
 
 const GreetingModal = ({
   isOpen,
@@ -26,7 +26,6 @@ const GreetingModal = ({
     >
       <div className="relative w-full max-w-md p-4">
         <div className="bg-white rounded-lg shadow-md">
-
           <div className="flex items-center justify-between p-4 border-b rounded-t">
             <h3 className="text-base font-semibold text-gray-900">
               샘플 문구 선택
@@ -59,10 +58,11 @@ const GreetingModal = ({
             {greetingSample.map((text, index) => (
               <button
                 key={index}
-                className={`text-left cursor-pointer p-5 rounded-lg border w-full ${text === selectedSample
+                className={`text-left cursor-pointer p-5 rounded-lg border w-full ${
+                  text === selectedSample
                     ? 'border-black bg-gray-100'
                     : 'border-gray-200 hover:bg-gray-100'
-                  }`}
+                }`}
                 onClick={() => setSelectedSample(text)}
               >
                 {text}
@@ -81,7 +81,6 @@ const GreetingModal = ({
               적용하기
             </button>
           </div>
-
         </div>
       </div>
     </div>

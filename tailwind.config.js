@@ -1,4 +1,5 @@
 import flowbitePlugin from 'flowbite/plugin';
+import defaultTheme from 'tailwindcss/defaultTheme';
 
 /** @type {import('tailwindcss').Config} */
 export default {
@@ -13,9 +14,11 @@ export default {
         primary: '#FF668B',
         background: '#f2ece6',
         higtlight: '#964b00',
+        result: '#49413a',
       },
       fontFamily: {
         Pretendard: ['Pretendard'],
+        Crimson: ['Crimson Pro', ...defaultTheme.fontFamily.sans],
       },
     },
   },

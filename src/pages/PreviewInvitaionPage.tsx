@@ -6,9 +6,6 @@ import TrashIcon from '../components/icons/TrashIcon';
 import PageLayout from '../components/layout/PageLayout';
 import HeaderButton from '../components/common/Header/HeaderButton';
 import ResultDisplay from '../components/display/ResultDisplay';
-import WeddingDateInput from '../components/form/WeddingDateInput/WeddingDateInput';
-import ContactInput from '../components/form/ContactInput';
-import AddressInput from '../components/form/AddressInput/AddressInput';
 
 const PreviewInvitaionPage = () => {
   const handleBack = () => {
@@ -39,10 +36,6 @@ const PreviewInvitaionPage = () => {
       <div className="preview-layout">
         <ResultDisplay />
       </div>
-
-      <WeddingDateInput />
-      <ContactInput />
-      <AddressInput />
     </PageLayout>
   );
 };

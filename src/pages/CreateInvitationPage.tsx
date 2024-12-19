@@ -6,13 +6,16 @@ import { useInvitationStore } from '../store/useInvitaionStore';
 import { useNavigate } from 'react-router';
 import { Accordion } from '../components/common/CreateInvitation/Accordion';
 import { accordionData } from '../constants/accordionData';
+import { Stepper } from '../components/common/CreateInvitation/Stepper';
+import { StepNavigation } from '../components/common/CreateInvitation/StepNavigation';
 
 
-const CreateInvitationPage1: React.FC = () => {
+const CreateInvitationPage: React.FC = () => {
   const { title, setTitle } = useInvitationStore();
   const navigate = useNavigate()
 
-  const handleCancel = () => navigate('/home');
+
+  const handleCancel = () => navigate('/');
   const handleSave = () => console.log('저장 버튼 클릭, 제목: ', title);
 
 
@@ -24,17 +27,19 @@ const CreateInvitationPage1: React.FC = () => {
     );
   };
 
-  // const steps = ["기본 정보 입력", "기능 선택", "테마 선택"];
+  const [steps, setSteps] = useState(1)
 
-  // const [currentStep, setCurrentStep] = useState<number>(1);
+  let sliceRanges = [[0, 4], [4, 7], [7]];
+  let [start, end] = sliceRanges[steps - 1] || sliceRanges[2];
+  let item = accordionData.slice(start, end);
 
-  // const handleNext = () => {
-  //   setCurrentStep((prev) => Math.min(prev + 1, steps.length));
-  // };
+  const handleNext = () => {
+    setSteps(steps + 1)
+  }
 
-  // const handlePrev = () => {
-  //   setCurrentStep((prev) => Math.max(prev - 1, 1));
-  // };
+  const handlePrev = () => {
+    setSteps(steps - 1)
+  }
 
   return (
     <PageLayout
@@ -62,12 +67,12 @@ const CreateInvitationPage1: React.FC = () => {
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
-
-        <Accordion items={accordionData.slice(0, 4)} expandedIds={expandedIds} toggleExpand={toggleExpand} />
-
+        <Stepper steps={["기본 정보 입력", "기능 선택", "테마 선택"]} currentStep={steps} />
+        <Accordion items={item} expandedIds={expandedIds} toggleExpand={toggleExpand} />
       </div>
+      <StepNavigation currentStep={steps} totalSteps={3} onPrev={handlePrev} onNext={handleNext} onPreview={() => navigate('/preview')} />
     </PageLayout>
   );
 };
 
-export default CreateInvitationPage1;
+export default CreateInvitationPage;

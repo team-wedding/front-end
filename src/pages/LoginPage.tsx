@@ -10,7 +10,7 @@ const LoginPage = () => {
       <div className="flex flex-col items-center justify-center w-full gap-8 p-4 sm:gap-8 sm:p-8">
 
         <img 
-          className="mt-10 sm:mt-30 w-60 h-45 sm:w-80 sm:h-60" 
+          className="mt-10 sm:mt-30 w-60 h-45" 
           src="/src/assets/image20.png" 
           alt="Title" 
         />

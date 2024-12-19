@@ -23,7 +23,7 @@ const Calendar: React.FC = () => {
   const allDays = eachDayOfInterval({ start: startDay, end: endDay });
 
   return (
-    <div className="flex flex-col items-center justify-center text-xs max-w-60 font-light">
+    <div className="flex flex-col items-center justify-center text-xs max-w-72">
       <div>
         <div className="grid grid-cols-7 p-2 gap-4 text-center">
           {dayOfWeeks.map((day) => (

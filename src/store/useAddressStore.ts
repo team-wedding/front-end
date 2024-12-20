@@ -18,7 +18,7 @@ const useAddressStore = create<AddressState>((set) => ({
   zonecode: '',
   weddingHallName: '',
   weddingHallDetail: '',
-  coords: { lat: 37.5665, lng: 126.978 },
+  coords: { lat: 37.5086, lng: 127.0397 },
   setAddress: (address, zonecode) => set(() => ({ address, zonecode })),
   setJibunAddress: (jibunAddress) => set(() => ({ jibunAddress })),
   setCoords: (lat, lng) => set(() => ({ coords: { lat, lng } })),

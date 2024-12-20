@@ -47,17 +47,9 @@ const Modal: React.FC<ModalProp> = ({ bride, groom, date, time, location, modal,
       {step == 0 ?
         <div className="flex flex-col items-center gap-12">
           <div className="text-2xl font-semibold">참석 의사 전달</div>
-          <div className="text-center text-base">서로에게 행복을 주는 사람을 만났습니다.
-            웃는 모습이 너무나 예쁜 그 사람을 만났습니다.
-            배려하는 마음이 따뜻한 그 사람을 만났습니다.
-
-            운명처럼 만나게 된 우리의 인연
-            그 인연에 이끌려 이제 영원을
-            함께 약속하려 합니다.
-
-            저희의 하나 됨을 지켜보아 주시고
-            격려해 주시면 더없는 기쁨으로
-            간직하겠습니다.</div>
+          <div className="text-center text-base">
+            축하의 마음으로  참석해주시는<br /> 모든 분들을  귀하게 모실 수 있도록<br /> 참석 의사를 전달 부탁 드립니다
+          </div>
           <div className="flex flex-col gap-3">
             <div className="flex flex-row gap-2 items-center">
               <HeartIcon /> {`${groom} & ${bride}`}

@@ -3,7 +3,7 @@ import ResultDisplay from '../components/display/ResultDisplay';
 
 const ResultPage = () => {
   return (
-    <div className="rounded-none result-layout">
+    <div>
       <ResultDisplay />
     </div>
   );

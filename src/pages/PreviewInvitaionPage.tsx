@@ -6,10 +6,13 @@ import TrashIcon from '../components/icons/TrashIcon';
 import PageLayout from '../components/layout/PageLayout';
 import HeaderButton from '../components/common/Header/HeaderButton';
 import ResultDisplay from '../components/display/ResultDisplay';
+import { useNavigate } from 'react-router';
 
 const PreviewInvitaionPage = () => {
+  const navigate = useNavigate();
+
   const handleBack = () => {
-    console.log('전으로 돌아가기');
+    navigate('/create');
   };
 
   return (

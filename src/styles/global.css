@@ -8,29 +8,47 @@
 @layer base {
   :root {
     --header-height: 3rem;
+    --footer-height: 3rem;
   }
 
   html,
   body,
   #root {
     @apply font-Pretendard bg-white;
+    @apply w-full flex justify-center items-center;
   }
 }
 
 @layer components {
-  .container {
-    @apply mx-auto max-w-sm;
+  .layout {
+    @apply flex flex-col max-w-sm mx-auto h-full w-full;
   }
 
-  .header {
-    /* @apply flex items-center justify-between mx-auto h-[var(--header-height)] w-full; */
-    @apply fixed top-0 left-0 z-50 bg-white h-12 flex justify-between items-center w-full max-w-sm px-8;
+  .layout-header {
+    @apply fixed top-0 left-0 w-full bg-white z-50 h-[var(--header-height)] flex items-center justify-center text-gray-800;
   }
 
-  .content {
-    @apply p-4 bg-[#F6F5F2] min-h-screen;
+  .layout-footer {
+    @apply fixed bottom-0 left-0 w-full bg-white z-50 h-[var(--footer-height)] flex items-center justify-center text-gray-700;
+  }
+
+  .layout-content {
+    @apply flex-1 bg-secondary min-h-screen p-5;
     padding-top: var(--header-height);
-    padding-bottom: var(--header-height);
+    padding-bottom: var(--footer-height);
+  }
+
+  .splash-layout,
+  .auth-layout {
+    @apply flex items-center justify-center w-full h-screen max-w-sm bg-secondary;
+  }
+
+  .preview-layout {
+    @apply max-w-sm mx-auto m-10;
+  }
+
+  .result-layout {
+    @apply flex flex-col max-w-sm min-h-screen mx-auto pt-10 pb-40 gap-28 bg-background shadow-md rounded-md text-result tracking-wide opacity-95;
   }
 
   .btn {
@@ -38,11 +56,19 @@
   }
 
   .label {
-    @apply block text-sm font-medium w-1/4;
+    @apply block text-xs font-medium w-1/4;
+  }
+
+  .splash-btn {
+    @apply py-3 text-sm bg-primary rounded-lg text-white shadow-sm transition duration-100 ease-out hover:ease-in;
+  }
+
+  .splash-input {
+    @apply px-5 py-3 rounded-lg text-xs border border-gray-300 focus-visible:ring-1 focus:ring-primary focus:border-none placeholder:text-gray-400;
   }
 
   .formInput {
-    @apply bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1 min-w-0;
+    @apply bg-gray-50 border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1 min-w-0 placeholder:opacity-50;
   }
 
   .flex-center {
@@ -64,16 +90,7 @@
   .sub-title {
     @apply text-xs text-higtlight tracking-[.4em] font-Crimson font-light opacity-60;
   }
-
-  .preview-layout {
-    @apply max-w-sm mx-auto rounded-2xl m-10 shadow-md;
-  }
-
-  .result-layout {
-    @apply flex flex-col max-w-md mx-auto gap-28 pt-10 pb-60 bg-background rounded-2xl text-result tracking-wide opacity-95;
-  }
 }
 
 @layer utilities {
 }
-

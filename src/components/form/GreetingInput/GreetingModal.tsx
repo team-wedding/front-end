@@ -22,9 +22,9 @@ const GreetingModal = ({
       id="select-modal"
       tabIndex={-1}
       aria-hidden="false"
-      className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50"
+      className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50 overflow-auto min-h-screen"
     >
-      <div className="relative w-full max-w-md p-4">
+      <div className="relative w-full h-full max-w-md p-10 text-sm">
         <div className="bg-white rounded-lg shadow-md">
           <div className="flex items-center justify-between p-4 border-b rounded-t">
             <h3 className="text-base font-semibold text-gray-900">
@@ -36,7 +36,7 @@ const GreetingModal = ({
               className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-2"
             >
               <svg
-                className="w-4 h-4"
+                className="w-3 h-3"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -58,7 +58,7 @@ const GreetingModal = ({
             {greetingSample.map((text, index) => (
               <button
                 key={index}
-                className={`text-left cursor-pointer p-5 rounded-lg border w-full ${
+                className={`whitespace-pre-wrap cursor-pointer p-5 rounded-lg border w-full ${
                   text === selectedSample
                     ? 'border-black bg-gray-100'
                     : 'border-gray-200 hover:bg-gray-100'
@@ -75,7 +75,7 @@ const GreetingModal = ({
                   onClose();
                 }
               }}
-              className="px-4 py-2 text-white bg-primary rounded-xl hover:bg-pink-600"
+              className="px-4 py-2 text-base text-white bg-primary rounded-xl hover:bg-pink-600"
               disabled={!selectedSample}
             >
               적용하기

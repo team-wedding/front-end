@@ -11,8 +11,8 @@ const Footer: React.FC = () => {
       <button onClick={() => navigate('/splash')}>
         <HomeIcon active={location.pathname == '/splash'} />
       </button>
-      <button onClick={() => navigate('/')}>
-        <PlusIcon active={location.pathname == '/'} />
+      <button onClick={() => navigate('/create')}>
+        <PlusIcon active={location.pathname == '/create'} />
       </button>
       <button onClick={() => navigate('/splash')}>
         <UserIcon active={location.pathname == '/mypage'} />

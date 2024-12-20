@@ -18,7 +18,7 @@ const LoginPage = () => {
             placeholder="비밀번호"
           />
           <button
-            className="splash-btn mt-4 mb-3 hover:bg-logo transition duration-100 ease-out hover:ease-in"
+            className="splash-btn mt-4 mb-3 hover:bg-logo"
             onClick={() => navigate('/')}
           >
             로그인

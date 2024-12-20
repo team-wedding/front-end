@@ -67,7 +67,7 @@ const SignUpPage = () => {
             placeholder="비밀번호 확인"
           />
           <button
-            className="h-12 mt-4 mb-4 text-sm bg-logo rounded-lg text-white shadow-sm hover:bg-primary"
+            className="h-12 mt-4 mb-4 text-sm bg-logo rounded-lg text-white shadow-sm hover:bg-primary transition duration-100 ease-out hover:ease-in"
             onClick={() => {
               navigate('/login');
             }}

@@ -6,7 +6,7 @@ import WeddingInformation from './WeddingInformation';
 
 const ThumbnailSection = () => {
   return (
-    <div className="column-center gap-8">
+    <div className="column-center gap-6">
       <DateTitle />
       <Image />
       <BrideGroomName />

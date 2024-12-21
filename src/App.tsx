@@ -7,6 +7,7 @@ import SplashPage from './pages/SplashPage';
 import { Route, Routes } from 'react-router';
 import CreateInvitationPage from './pages/CreateInvitationPage';
 import PreviewInvitaionPage from './pages/PreviewInvitaionPage';
+import ResultPage from './pages/ResultPage';
 
 function App() {
   return (
@@ -15,10 +16,11 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/splash" element={<SplashPage />} />
-      <Route path="/create" element={< CreateInvitationPage />} />
+      <Route path="/create" element={<CreateInvitationPage />} />
       <Route path="/preview" element={<PreviewInvitaionPage />} />
+      <Route path="/result" element={<ResultPage />} />
     </Routes>
-  )
+  );
 }
 
 export default App;

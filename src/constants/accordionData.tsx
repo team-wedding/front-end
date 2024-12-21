@@ -3,10 +3,10 @@ import AddressInput from '../components/form/AddressInput/AddressInput';
 import ContactInput from '../components/form/ContactInput';
 import GreetingInput from '../components/form/GreetingInput/GreetingInput';
 import ImageInput from '../components/form/ImageInput';
-import ModalExample from '../components/form/ModalExample';
 import NameInput from '../components/form/NameInput';
 import ThemeSelection from '../components/form/ThemeSelection/ThemeSelection';
 import WeddingDateInput from '../components/form/WeddingDateInput/WeddingDateInput';
+import RsvpExample from '../components/form/RsvpExample';
 
 export const accordionData: AccordionItemData[] = [
   {
@@ -17,12 +17,12 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 2,
     title: '연락처',
-    content: <ContactInput />
+    content: <ContactInput />,
   },
   {
     id: 3,
     title: '예식 일시',
-    content: <WeddingDateInput />
+    content: <WeddingDateInput />,
   },
   {
     id: 4,
@@ -42,12 +42,11 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 7,
     title: '참석 여부',
-    content: <ModalExample />,
+    content: <RsvpExample />,
   },
   {
     id: 8,
     title: '테마 및 글꼴',
     content: <ThemeSelection />,
   },
-  
 ];

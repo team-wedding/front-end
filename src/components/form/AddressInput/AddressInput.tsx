@@ -20,12 +20,12 @@ const AddressInput: React.FC = () => {
             type="text"
             value={zonecode}
             placeholder="우편번호"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1 placeholder:opacity-50"
             readOnly
           />
           <button
             onClick={handleComplete}
-            className="bg-primary hover:bg-pink-600 text-white px-4 py-2 rounded-xl shrink-0"
+            className="bg-primary hover:bg-pink-600 text-white px-4 py-2 rounded-xl shrink-0 text-xs"
           >
             검색
           </button>

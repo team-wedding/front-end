@@ -9,7 +9,7 @@ const CalendarTitle = () => {
   const dayOfWeek = dayOfWeeks[currentDate.getDay()];
 
   return (
-    <div className="flex flex-col items-center justify-center gap-2 tracking-wider font-light">
+    <div className="flex flex-col items-center justify-center gap-2 tracking-wide font-light">
       {weddingDate && (
         <div className="text-xl">{`${formattedDate.year}. ${formattedDate.month}. ${formattedDate.day}`}</div>
       )}

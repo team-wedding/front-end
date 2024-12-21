@@ -1,8 +1,10 @@
 import React from 'react';
 import { useWeddingStore } from '../../../store/useWeddingStore';
+import useAddressStore from '../../../store/useAddressStore';
 
 const WeddingInformation = () => {
   const { formattedDate, weddingDate, weddingTime } = useWeddingStore();
+  const { jibunAddress } = useAddressStore();
 
   const currentDate = weddingDate || new Date();
   const dayOfWeeks = ['월', '화', '수', '목', '금', '토', '일'];
@@ -10,12 +12,12 @@ const WeddingInformation = () => {
 
   const date = `${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일 ${dayOfWeek}요일, ${weddingTime}`;
 
-  const address = ``;
-
   return (
-    <div>
-      <div className="text-sm font-light">{date}</div>
-      <div>{address}</div>
+    <div className="column-center text-sm font-light gap-2">
+      <div>{date}</div>
+      <div className="opacity-60">
+        {jibunAddress || '서울 강남구 언주로 564'}
+      </div>
     </div>
   );
 };

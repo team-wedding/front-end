@@ -12,8 +12,10 @@ export default {
     extend: {
       colors: {
         primary: '#FF668B',
+        secondary: '#F6F5F2',
         background: '#f2ece6',
         higtlight: '#964b00',
+        logo: '#0C0C0C',
         result: '#49413a',
       },
       fontFamily: {

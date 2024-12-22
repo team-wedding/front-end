@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
+import { API } from '../utils/config';
 
 interface AccountInfo {
   email: string;
@@ -8,6 +9,7 @@ interface AccountInfo {
   confirmPassword: string;
 }
 
+//비번확인
 const SignUpPage = () => {
   const navigate = useNavigate();
   const [accountInfo, setAccountInfo] = useState<AccountInfo>({
@@ -24,14 +26,34 @@ const SignUpPage = () => {
       ...accountInfo,
       [name]: value,
     });
-    // if (accountInfo.confirmPassword.length !== 0 && accountInfo.password == accountInfo.confirmPassword) {
-    //   setPasswordValid(true)
-    // }else{
+  }
 
-    // }
-  };
+  const handleSignUp = () => {
+    fetch(`${API.SIGNUP}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name: accountInfo.name,
+          email: accountInfo.email,
+          password: accountInfo.password,
+          provider: ""
+        }),
+      }
+    ).then((response) => {
+      if (response.status == 201) {
+        return response.json()
+      } else throw new Error(`${response.status}에러`)
+    }).then(() => {
+      navigate("/login")
+    })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
 
-  //TODO: Password validation && btn disable
   return (
     <div className="splash-layout">
       <div className="column-center w-full p-8">
@@ -85,5 +107,6 @@ const SignUpPage = () => {
     </div>
   );
 };
+
 
 export default SignUpPage;

@@ -58,7 +58,6 @@ const LoginPage = () => {
 
         {/* Input Fields */}
         <div className="flex flex-col w-full gap-3">
-          <input className="splash-input" type="email" placeholder="이메일" />
           <input
             className="splash-input"
             type="email"
@@ -67,7 +66,7 @@ const LoginPage = () => {
             onChange={handleChange}
           />
           <input
-            className="h-12 px-4 text-base rounded-lg border border-gray-300 focus-visible:ring-1 focus:ring-primary focus:border-primary"
+            className="splash-input"
             type="password"
             placeholder="비밀번호"
           />

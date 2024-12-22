@@ -41,7 +41,9 @@ const ImageInput = () => {
     reader.readAsDataURL(file);
   };
 
-  const handleFileInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleFileInputChange = async (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
     const file = event.target.files?.[0];
     if (file) {
       await handleImageUpload(file);
@@ -80,17 +82,23 @@ const ImageInput = () => {
       {!uploadedImage ? (
         <label
           htmlFor="dropzone-file"
-          className={`flex flex-col items-center justify-center w-80 h-60 border-2 ${isDragging ? 'border-primary bg-pink-100' : 'border-gray-300 bg-gray-50'
-            } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
+          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${
+            isDragging
+              ? 'border-primary bg-pink-100'
+              : 'border-gray-300 bg-gray-50'
+          } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
-            <p className="mb-2 text-sm text-gray-500">
-              <span className="font-semibold">Click to upload</span> or drag and drop
+            <p className="mb-2 text-xs text-gray-500">
+              <span className="font-semibold">Click to upload</span> or drag and
+              drop
             </p>
-            <p className="text-xs text-gray-500">SVG, PNG, JPG or GIF (MAX. 2000x2000px)</p>
+            <p className="text-xs text-gray-500">
+              SVG, PNG, JPG or GIF (MAX. 2000x2000px)
+            </p>
           </div>
           <input
             id="dropzone-file"
@@ -109,7 +117,7 @@ const ImageInput = () => {
           />
           <button
             onClick={handleImageDelete}
-            className="mt-4 px-4 py-2 text-white bg-primary rounded-xl hover:bg-pink-600"
+            className="mt-4 px-3 py-2 text-[10px] text-white bg-primary rounded-xl hover:opacity-70"
           >
             삭제
           </button>

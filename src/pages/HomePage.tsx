@@ -21,7 +21,8 @@ const HomePage = () => {
       });
   }, [])
   return (
-    <PageLayout title="우리 결혼해요">
+    <PageLayout title="우리, 결혼해요">
+      <p></p>
     </PageLayout>
   );
 };

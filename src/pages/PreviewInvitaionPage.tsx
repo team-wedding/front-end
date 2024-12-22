@@ -9,10 +9,13 @@ import { API } from '../utils/config';
 import { getInvitationDetail } from "../constants/invitaionDetailData";
 import { useUserStore } from '../store/useUserStore';
 
+import { useNavigate } from 'react-router';
 
 const PreviewInvitaionPage = () => {
+  const navigate = useNavigate();
+
   const handleBack = () => {
-    console.log('전으로 돌아가기');
+    navigate('/create');
   };
   const invitationDetail = getInvitationDetail();
   const { token } = useUserStore();

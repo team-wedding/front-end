@@ -9,11 +9,10 @@ const GreetingInput = () => {
   return (
     <div className="max-w-lg mx-auto p-4">
       <div className="flex flex-col gap-3">
-
-      <button
+        <button
           data-modal-target="select-modal"
           data-modal-toggle="select-modal"
-          className="text-sm text-primary hover:text-pink-600 underline underline-offset-2 text-left"
+          className="text-xs text-primary hover:text-pink-600 underline underline-offset-2 text-left"
           type="button"
           onClick={() => setModalOpen(true)}
         >
@@ -28,17 +27,20 @@ const GreetingInput = () => {
           className="formInput"
         />
 
-          <textarea
-            placeholder="인사말"
-            value={greeting}
-            onChange={(e) =>
-              useGreetingStore.getState().setGreeting(e.target.value)
-            }
-            rows={8}
-            className="formInput"
-          />
+        <textarea
+          placeholder="인사말"
+          value={greeting}
+          onChange={(e) =>
+            useGreetingStore.getState().setGreeting(e.target.value)
+          }
+          rows={8}
+          className="formInput"
+        />
 
-        <GreetingModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+        <GreetingModal
+          isOpen={isModalOpen}
+          onClose={() => setModalOpen(false)}
+        />
       </div>
     </div>
   );

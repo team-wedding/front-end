@@ -22,6 +22,15 @@ export default {
         Pretendard: ['Pretendard'],
         Crimson: ['Crimson Pro', ...defaultTheme.fontFamily.sans],
       },
+      keyframes: {
+        fadeOutDown: {
+          '0%': { opacity: '0', transform: 'translateY(0)' },
+          '100%': { opacity: '1', transform: 'translateY(20px)' },
+        },
+      },
+      animation: {
+        fadeOutDown: 'fadeOutDown 0.5s ease forwards', // 딜레이 0.3초
+      },
     },
   },
   plugins: [flowbitePlugin],

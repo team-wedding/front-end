@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 
 /**
  * @param ref - DOM 요소를 참조하는 리액트 객체, 어떤 요소를 관찰할지 정한다
@@ -6,28 +6,30 @@ import React, { RefObject, useEffect, useState } from 'react';
  * @returns inView - boolean 값
  */
 
-const useScrollAnimation = (ref: RefObject<HTMLElement>, threshold = 0.5) => {
+const useScrollAnimation = (ref: RefObject<HTMLElement>, threshold = 1) => {
   const [inView, setInView] = useState(false);
 
   useEffect(() => {
+    if (!ref.current) {
+      return;
+    }
+
     const observer = new IntersectionObserver(
-      // 콜백, 요소가 뷰포트와 교차 상태인지
+      // 콜백, 요소가 뷰포트와 교차 상태인지 확인
       ([entry]) => {
         setInView(entry.isIntersecting);
+        console.log(entry);
       },
       { threshold },
     );
 
-    // ref.current가 유효하면 관찰 시작
-    if (ref.current) {
-      observer.observe(ref.current);
-    }
+    observer.observe(ref.current);
 
     // 클린업 함수, 관찰 중지
     return () => {
-      if (ref.current) observer.unobserve(ref.current);
+      observer.disconnect();
     };
-  }, [ref, threshold]);
+  }, [ref]);
 
   return inView;
 };

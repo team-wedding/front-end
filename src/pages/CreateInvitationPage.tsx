@@ -44,7 +44,7 @@ const CreateInvitationPage: React.FC = () => {
       leftButton={
         <HeaderButton
           onClick={handleCancel}
-          className="text-sm hover:text-rose-400 active:text-rose-600"
+          className="text-sm text-gray-600 hover:text-black active:text-rose-400"
         >
           취소
         </HeaderButton>
@@ -52,7 +52,7 @@ const CreateInvitationPage: React.FC = () => {
       rightButton={
         <HeaderButton
           onClick={handleSave}
-          className="text-sm hover:text-rose-400 active:text-rose-600"
+          className="text-sm text-gray-600 hover:text-black active:text-rose-400"
         >
           저장
         </HeaderButton>
@@ -68,20 +68,22 @@ const CreateInvitationPage: React.FC = () => {
       }
     >
       <div>
-        {/* 청첩장 제목 입력 */}
-        <InvitationTitleInput
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
         <Stepper
           steps={['기본 정보 입력', '기능 선택', '테마 선택']}
           currentStep={steps}
         />
-        <Accordion
-          items={item}
-          expandedIds={expandedIds}
-          toggleExpand={toggleExpand}
-        />
+        <div className="bg-background bg-opacity-10 min-h-screen p-5">
+          {/* 청첩장 제목 입력 */}
+          {/* <InvitationTitleInput
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+        /> */}
+          <Accordion
+            items={item}
+            expandedIds={expandedIds}
+            toggleExpand={toggleExpand}
+          />
+        </div>
       </div>
     </PageLayout>
   );

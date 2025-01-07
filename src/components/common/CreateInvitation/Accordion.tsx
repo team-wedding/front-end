@@ -18,11 +18,11 @@ export const Accordion: React.FC<AccordionProps> = ({
   toggleExpand,
 }) => {
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-2">
       {items.map((item) => (
         <div
           key={item.id}
-          className={`bg-white rounded-2xl overflow-hidden transition-all duration-300 text-gray-800 ${
+          className={`bg-white rounded-2xl overflow-hidden transition-all duration-300 text-gray-800 shadow-md ${
             expandedIds.includes(item.id) ? 'max-h-160' : 'max-h-12'
           }`}
         >

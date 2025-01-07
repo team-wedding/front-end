@@ -7,15 +7,59 @@
 
 @layer base {
   :root {
-    --header-height: 3rem;
-    --footer-height: 3rem;
+    --header-height: 3.5rem;
+    --footer-height: 3.5rem;
   }
 
   html,
   body,
   #root {
-    @apply font-Pretendard bg-white;
+    @apply font-Pretendard bg-black;
     @apply w-full flex justify-center items-center;
+  }
+
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-2ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-3Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-4Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-5Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-6SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-7Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-8ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
   }
 }
 
@@ -25,22 +69,22 @@
   }
 
   .layout-header {
-    @apply fixed top-0 left-0 w-full bg-white z-50 h-[var(--header-height)] flex items-center justify-center text-gray-800;
+    @apply fixed top-0 left-0 w-full bg-white z-50 h-[var(--header-height)] flex items-center justify-center shadow-sm font-Paperlogy text-sm;
   }
 
   .layout-footer {
-    @apply fixed bottom-0 left-0 w-full bg-white z-50 h-[var(--footer-height)] flex items-center justify-center text-gray-700;
+    @apply fixed bottom-0 left-0 w-full bg-footer z-50 h-[var(--footer-height)] flex items-center justify-center;
   }
 
   .layout-content {
-    @apply flex-1 bg-secondary min-h-screen p-5;
+    @apply flex-1 bg-white min-h-screen;
     padding-top: var(--header-height);
     padding-bottom: var(--footer-height);
   }
 
   .splash-layout,
   .auth-layout {
-    @apply flex items-center justify-center w-full h-screen max-w-sm bg-secondary;
+    @apply flex items-center justify-center w-full h-screen max-w-sm bg-white;
   }
 
   .preview-layout {
@@ -84,11 +128,11 @@
   }
 
   .title {
-    @apply text-lg text-higtlight tracking-wider mb-5;
+    @apply text-lg text-highlight tracking-wider mb-5;
   }
 
   .sub-title {
-    @apply text-xs text-higtlight tracking-[.4em] font-Crimson font-light opacity-60;
+    @apply text-xs text-highlight tracking-[.4em] font-Crimson font-light opacity-60;
   }
 }
 

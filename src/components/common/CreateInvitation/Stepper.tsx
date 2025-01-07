@@ -7,7 +7,7 @@ interface StepperProps {
 
 export const Stepper: React.FC<StepperProps> = ({ steps, currentStep }) => {
   return (
-    <div className="flex items-center justify-center bg-white px-5 py-3 rounded-2xl mt-5 mb-4 bg-opacity-50 shadow-sm">
+    <div className="flex items-center justify-center bg-white px-10 py-4 shadow-md font-Paperlogy">
       {steps.map((step, index) => {
         const isActive = index + 1 === currentStep;
         const isCompleted = index + 1 < currentStep;
@@ -16,19 +16,21 @@ export const Stepper: React.FC<StepperProps> = ({ steps, currentStep }) => {
             {/* Step Indicator */}
             <div className="flex items-center">
               <div
-                className={`w-4 h-4 flex items-center justify-center rounded-full text-xs font-bold ${
+                className={`w-3 h-3 flex items-center justify-center rounded-full text-[8px] font-bold border ${
                   isActive
-                    ? 'text-primary border border-primary'
+                    ? 'text-primary border-primary'
                     : isCompleted
-                      ? 'bg-gray-200 text-gray-400'
-                      : 'bg-gray-100 text-gray-400'
+                      ? 'bg-gray-100 text-gray-400'
+                      : 'bg-white text-gray-300'
                 }`}
               >
                 {index + 1}
               </div>
               <div
-                className={`ml-2 font-medium text-xs leading-tight ${
-                  isActive ? 'text-primary' : 'text-gray-400'
+                className={`ml-2 text-xs ${
+                  isActive
+                    ? 'text-primary font-medium'
+                    : 'text-gray-300 font-light'
                 }`}
               >
                 {step}

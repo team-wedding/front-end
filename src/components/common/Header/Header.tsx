@@ -16,7 +16,7 @@ const Header: React.FC<HeaderProps> = ({ text, leftButton, rightButton }) => {
 
       {/* Text */}
       <div
-        className={`text-base font-medium flex-1 text-center ${
+        className={`flex-1 text-center ${
           leftButton || rightButton ? '' : 'justify-center'
         }`}
       >

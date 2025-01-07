@@ -92,7 +92,7 @@
   }
 
   .result-layout {
-    @apply flex flex-col max-w-sm min-h-screen mx-auto pt-10 pb-40 gap-28 bg-background shadow-md rounded-md text-result tracking-wide opacity-95;
+    @apply flex flex-col max-w-sm min-h-screen mx-auto pt-10 pb-40 gap-28 bg-white shadow-md rounded-md text-result tracking-wide opacity-95;
   }
 
   .btn {

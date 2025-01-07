@@ -6,13 +6,13 @@ import WeddingDateInput from '../components/form/WeddingDateInput/WeddingDateInp
 import RsvpExample from '../components/form/RsvpSelection/RsvpExample';
 import ImageInput from '../components/form/ThumbnailSelection/ImageInput';
 import NameInput from '../components/form/NameInput/NameInput';
-import ContactInput from '../components/form/ContactInput/ContactInput';
 import CalendarSelection from '../components/form/CalendarSelection/CalendarSelection';
 import MessageSelection from '../components/form/MessageSelection/MessageSelection';
-import AccountInput from '../components/form/AccountInput/AccountInput';
 import InformSection from '../components/display/InformSection/InformSection';
 import GallerySelection from '../components/form/GallerySelection/GallerySelection';
 import LocationSelection from '../components/form/LocationSelection/LocationSelection';
+import AccountSelection from '../components/form/AccountSelection/AccountSelection';
+import ContactSelection from '../components/form/ContactSelection/ContactSelection';
 
 export const accordionData: AccordionItemData[] = [
   {
@@ -68,12 +68,12 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 11,
     title: '축의금',
-    content: <AccountInput />,
+    content: <AccountSelection />,
   },
   {
     id: 12,
     title: '연락하기',
-    content: <ContactInput />,
+    content: <ContactSelection />,
   },
   {
     id: 13,

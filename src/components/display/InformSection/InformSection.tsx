@@ -1,7 +1,9 @@
 import React from 'react';
 
 const InformSection = () => {
-  return <div className="column-center">InformSection</div>;
+
+  return <div>InformSection</div>;
+
 };
 
 export default InformSection;

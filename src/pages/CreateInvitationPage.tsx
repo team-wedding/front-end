@@ -26,7 +26,7 @@ const CreateInvitationPage: React.FC = () => {
 
   const [steps, setSteps] = useState(1);
 
-  let sliceRanges = [[0, 4], [4, 7], [7]];
+  let sliceRanges = [[0, 3], [3, 14], [14]];
   let [start, end] = sliceRanges[steps - 1] || sliceRanges[2];
   let item = accordionData.slice(start, end);
 

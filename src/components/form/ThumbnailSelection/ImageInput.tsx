@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import useImageStore from '../../store/useImageStore';
+import useImageStore from '../../../store/useImageStore';
 
 const ImageInput = () => {
   const { uploadedImage, setUploadedImage } = useImageStore();

@@ -1,9 +1,7 @@
 import React from 'react';
 
 const RsvpSection = () => {
-  return (
-    <div className="flex flex-col justify-center items-center">RsvpSection</div>
-  );
+  return <div className="column-center">RsvpSection</div>;
 };
 
 export default RsvpSection;

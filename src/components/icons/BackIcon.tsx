@@ -2,7 +2,7 @@ import React from 'react';
 
 const BackIcon: React.FC = () => (
   <svg
-    className="size-5 text-gray-800 dark:text-white hover:text-blue-600"
+    className="size-5 text-gray-800 dark:text-white"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
@@ -13,7 +13,7 @@ const BackIcon: React.FC = () => (
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="1.5"
+      strokeWidth="2"
       d="m15 19-7-7 7-7"
     />
   </svg>

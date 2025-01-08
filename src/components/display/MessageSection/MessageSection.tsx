@@ -1,11 +1,7 @@
 import React from 'react';
 
 const MessageSection = () => {
-  return (
-    <div className="flex flex-col justify-center items-center">
-      MessageSection
-    </div>
-  );
+  return <div className="column-center">MessageSection</div>;
 };
 
 export default MessageSection;

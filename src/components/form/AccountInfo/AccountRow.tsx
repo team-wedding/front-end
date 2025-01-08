@@ -1,3 +1,5 @@
+import BankSelector from "./BankSelector";
+
 const AccountRow = ({
     label,
     accountInfo,
@@ -17,12 +19,9 @@ const AccountRow = ({
             {/*은행 선택 드롭다운 / 예금주 입력 */}
             <div className="flex items-center gap-2">
                 <label className="label">{label}</label>
-                <input
-                    type="text"
-                    placeholder="은행 선택"
-                    value={accountInfo.bankName}
-                    onChange={(e) => onUpdate("bankName", e.target.value)}
-                    className="formInput"
+                <BankSelector
+                    selectedBank={accountInfo.bankName}
+                    onSelect={(bankName) => onUpdate("bankName", bankName)}
                 />
                 <input
                     type="text"

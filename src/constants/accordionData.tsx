@@ -13,6 +13,7 @@ import GallerySelection from '../components/form/GallerySelection/GallerySelecti
 import LocationSelection from '../components/form/LocationSelection/LocationSelection';
 import AccountSelection from '../components/form/AccountSelection/AccountSelection';
 import ContactSelection from '../components/form/ContactSelection/ContactSelection';
+import GalleryForm from '../components/form/GalleryForm';
 
 export const accordionData: AccordionItemData[] = [
   {
@@ -106,7 +107,7 @@ export const accordionData: AccordionItemData[] = [
     content: <ThemeSelection />,
   },
   {
-    id: 9,
+    id: 19,
     title: '갤러리',
     content: <GalleryForm />
   },

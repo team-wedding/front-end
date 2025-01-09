@@ -4,7 +4,11 @@ import LocationSection from './LocationSection/LocationSection';
 import ContactSection from './ContactSection/ContactSection';
 import ThumbnailSection from './ThumbnailSection.tsx/ThumbnailSection';
 import GreetingSection from './GreetingSection.tsx/GreetingSection';
-import GallarySection from './GallarySection/Gallary';
+import GallerySection from './GallerySection/GallerySection';
+import MoneySection from './MoneySection/MoneySection';
+import MessageSection from './MessageSection/MessageSection';
+import InformSection from './InformSection/InformSection';
+import RealTimePhotoSection from './RealTimePhotoSection/RealTimePhotoSection';
 
 const ResultDisplay = () => {
   return (
@@ -14,7 +18,11 @@ const ResultDisplay = () => {
       <CalendarSection />
       <LocationSection />
       <ContactSection />
-      <GallarySection />
+      <GallerySection />
+      <MoneySection />
+      <MessageSection />
+      <InformSection />
+      <RealTimePhotoSection />
     </div>
   );
 };

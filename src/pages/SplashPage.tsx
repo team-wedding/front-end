@@ -8,7 +8,7 @@ const SplashPage = () => {
     <div className="splash-layout">
       <div className="column-center justify-between w-full p-8 gap-10">
         <img className="w-52" src="/src/assets/logo2.png" alt="Title" />
-        <div className="opacity-60 text-gray-600 text-sm mb-10 tracking-wide">
+        <div className="opacity-60 text-gray-600 text-xs mb-10 tracking-wide font-Paperlogy">
           나만의 청첩장을 만들어 보세요!
         </div>
         <div className="flex flex-col w-full max-w-sm gap-2">

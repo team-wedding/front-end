@@ -1,5 +1,5 @@
 import React from 'react';
-import useContactStore from '../../store/useContactStore';
+import useContactStore from '../../../store/useContactStore';
 
 const ContactInput = () => {
   const contacts = useContactStore((state) => state.contacts);
@@ -11,19 +11,17 @@ const ContactInput = () => {
         <div key={index} className="max-w-lg mx-auto p-4">
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
-
-              <label className="label">
-                {person.role}
-              </label>
+              <label className="label">{person.role}</label>
               <input
                 type="tel"
                 placeholder="010-0000-0000"
                 value={person.contact}
-                onChange={(e) => updateContact(index, 'contact', e.target.value)}
+                onChange={(e) =>
+                  updateContact(index, 'contact', e.target.value)
+                }
                 pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
                 className="formInput"
               />
-
             </div>
 
             <div className="flex items-center gap-2">

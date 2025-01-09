@@ -13,14 +13,20 @@ export default {
       colors: {
         primary: '#FF668B',
         secondary: '#F6F5F2',
-        background: '#f2ece6',
-        higtlight: '#964b00',
+        background: '#B78181', // 10 opacity
+        information: '#E7ABAB', // 80 opacity
+        highlight: '#964b00',
+        button: '#FD9797', // 20 opacity
+        border: '#DDDDDD',
+        footer: '#F9EDED',
+        image: '#F8FAFB',
         logo: '#0C0C0C',
         result: '#49413a',
       },
       fontFamily: {
         Pretendard: ['Pretendard'],
         Crimson: ['Crimson Pro', ...defaultTheme.fontFamily.sans],
+        Paperlogy: ['Paperlogy', ...defaultTheme.fontFamily.sans],
       },
     },
   },

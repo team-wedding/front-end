@@ -7,6 +7,7 @@ import NameInput from '../components/form/NameInput';
 import ThemeSelection from '../components/form/ThemeSelection/ThemeSelection';
 import WeddingDateInput from '../components/form/WeddingDateInput/WeddingDateInput';
 import RsvpExample from '../components/form/RsvpExample';
+import GalleryForm from '../components/form/GalleryForm';
 
 export const accordionData: AccordionItemData[] = [
   {
@@ -48,5 +49,10 @@ export const accordionData: AccordionItemData[] = [
     id: 8,
     title: '테마 및 글꼴',
     content: <ThemeSelection />,
+  },
+  {
+    id: 9,
+    title: '갤러리',
+    content: <GalleryForm />
   },
 ];

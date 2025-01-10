@@ -112,7 +112,7 @@
   }
 
   .formInput {
-    @apply bg-gray-50 border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1 min-w-0 placeholder:opacity-50;
+    @apply bg-white border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50;
   }
 
   .flex-center {

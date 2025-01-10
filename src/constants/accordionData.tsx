@@ -11,8 +11,9 @@ import MessageSelection from '../components/form/MessageSelection/MessageSelecti
 import InformSection from '../components/display/InformSection/InformSection';
 import GallerySelection from '../components/form/GallerySelection/GallerySelection';
 import LocationSelection from '../components/form/LocationSelection/LocationSelection';
-import AccountSelection from '../components/form/AccountSelection/AccountSelection';
 import ContactSelection from '../components/form/ContactSelection/ContactSelection';
+import AccountInput from '../components/form/AccountSelection/AccountInput';
+
 
 export const accordionData: AccordionItemData[] = [
   {
@@ -82,7 +83,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 11,
     title: '축의금',
-    content: <AccountSelection />,
+    content: <AccountInput />,
     hasToggle: true,
     hasDrag: true,
   },

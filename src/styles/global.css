@@ -14,8 +14,8 @@
   html,
   body,
   #root {
-    @apply font-Pretendard bg-black;
-    @apply w-full flex justify-center items-center;
+    @apply font-Paperlogy bg-black;
+    @apply w-full h-full flex justify-center items-center;
   }
 
   @font-face {
@@ -69,15 +69,15 @@
   }
 
   .layout-header {
-    @apply fixed top-0 left-0 w-full bg-white z-50 h-[var(--header-height)] flex items-center justify-center shadow-sm font-Paperlogy text-sm;
+    @apply fixed top-0 left-0 w-full bg-white z-50 h-[var(--header-height)] flex items-center justify-center shadow-sm text-sm;
   }
 
   .layout-footer {
-    @apply fixed bottom-0 left-0 w-full bg-footer z-50 h-[var(--footer-height)] flex items-center justify-center;
+    @apply fixed bottom-0 left-0 w-full bg-footer z-50 h-[var(--footer-height)] flex items-center justify-center text-[10px] font-light;
   }
 
   .layout-content {
-    @apply flex-1 bg-white min-h-screen;
+    @apply flex-1 bg-white overflow-auto max-h-screen;
     padding-top: var(--header-height);
     padding-bottom: var(--footer-height);
   }
@@ -112,7 +112,7 @@
   }
 
   .formInput {
-    @apply bg-gray-50 border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1 min-w-0 placeholder:opacity-50;
+    @apply bg-white border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50;
   }
 
   .flex-center {

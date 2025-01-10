@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import PageLayout from '../components/layout/PageLayout';
 import HeaderButton from '../components/common/Header/HeaderButton';
-import InvitationTitleInput from '../components/common/CreateInvitation/InvitationTitleInput';
+
 import { useInvitationStore } from '../store/useInvitaionStore';
 import { useNavigate } from 'react-router';
-import { Accordion } from '../components/common/CreateInvitation/Accordion';
+import {
+  Accordion,
+  AccordionItemData,
+} from '../components/common/CreateInvitation/Accordion';
 import { accordionData } from '../constants/accordionData';
 import { Stepper } from '../components/common/CreateInvitation/Stepper';
 import { StepNavigation } from '../components/common/CreateInvitation/StepNavigation';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 const CreateInvitationPage: React.FC = () => {
   const { title, setTitle } = useInvitationStore();
@@ -17,6 +22,12 @@ const CreateInvitationPage: React.FC = () => {
   const handleSave = () => console.log('저장 버튼 클릭, 제목: ', title);
 
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
+  const [steps, setSteps] = useState(1);
+
+  let sliceRanges = [[0, 3], [3, 14], [14]];
+  const [items, setItems] = useState<AccordionItemData[]>(
+    accordionData.slice(sliceRanges[0][0], sliceRanges[0][1]),
+  );
 
   const toggleExpand = (id: number) => {
     setExpandedIds((prev) =>
@@ -24,18 +35,31 @@ const CreateInvitationPage: React.FC = () => {
     );
   };
 
-  const [steps, setSteps] = useState(1);
+  const moveItem = (dragIndex: number, hoverIndex: number) => {
+    const updatedItems = [...items];
+    const [draggedItem] = updatedItems.splice(dragIndex, 1);
+    updatedItems.splice(hoverIndex, 0, draggedItem);
+    setItems(updatedItems);
+  };
 
-  let sliceRanges = [[0, 3], [3, 14], [14]];
-  let [start, end] = sliceRanges[steps - 1] || sliceRanges[2];
-  let item = accordionData.slice(start, end);
+  const handleStepClick = (step: number) => {
+    if (step > 0 && step <= sliceRanges.length) {
+      setSteps(step);
+      const [start, end] = sliceRanges[step - 1];
+      setItems(accordionData.slice(start, end));
+    }
+  };
 
   const handleNext = () => {
-    setSteps(steps + 1);
+    if (steps < sliceRanges.length) {
+      handleStepClick(steps + 1);
+    }
   };
 
   const handlePrev = () => {
-    setSteps(steps - 1);
+    if (steps > 1) {
+      handleStepClick(steps - 1);
+    }
   };
 
   return (
@@ -60,10 +84,9 @@ const CreateInvitationPage: React.FC = () => {
       customFooter={
         <StepNavigation
           currentStep={steps}
-          totalSteps={3}
+          totalSteps={sliceRanges.length}
           onPrev={handlePrev}
           onNext={handleNext}
-          onPreview={() => navigate('/preview')}
         />
       }
     >
@@ -71,18 +94,17 @@ const CreateInvitationPage: React.FC = () => {
         <Stepper
           steps={['기본 정보 입력', '기능 선택', '테마 선택']}
           currentStep={steps}
+          onStepClick={handleStepClick}
         />
-        <div className="bg-background bg-opacity-10 min-h-screen p-5">
-          {/* 청첩장 제목 입력 */}
-          {/* <InvitationTitleInput
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        /> */}
-          <Accordion
-            items={item}
-            expandedIds={expandedIds}
-            toggleExpand={toggleExpand}
-          />
+        <div className="bg-background bg-opacity-10 min-h-screen p-5 pt-16 pb-20 font-Pretendard">
+          <DndProvider backend={HTML5Backend}>
+            <Accordion
+              items={items}
+              expandedIds={expandedIds}
+              toggleExpand={toggleExpand}
+              moveItem={moveItem}
+            />
+          </DndProvider>
         </div>
       </div>
     </PageLayout>

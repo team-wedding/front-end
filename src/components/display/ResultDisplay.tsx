@@ -1,4 +1,3 @@
-import React from 'react';
 import CalendarSection from './CalendarSection/CalendarSection';
 import LocationSection from './LocationSection/LocationSection';
 import ContactSection from './ContactSection/ContactSection';
@@ -9,6 +8,7 @@ import MoneySection from './MoneySection/MoneySection';
 import MessageSection from './MessageSection/MessageSection';
 import InformSection from './InformSection/InformSection';
 import RealTimePhotoSection from './RealTimePhotoSection/RealTimePhotoSection';
+import AttendanceSection from './AttendanceSection/AttendanceSection';
 
 const ResultDisplay = () => {
   return (
@@ -23,6 +23,7 @@ const ResultDisplay = () => {
       <MessageSection />
       <InformSection />
       <RealTimePhotoSection />
+      <AttendanceSection />
     </div>
   );
 };

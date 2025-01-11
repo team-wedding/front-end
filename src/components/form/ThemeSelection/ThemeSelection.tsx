@@ -24,17 +24,17 @@ const ThemeSelection = () => {
   return (
     <div className="max-w-lg mx-auto p-4">
       <div className="flex flex-col gap-6 h-36">
-        <div className="flex flex-row items-center gap-10">
+        <div className="flex flex-row items-center justify-between">
           <div className="font-medium text-xs">글꼴</div>
-          <div className="flex gap-2">
+          <div className="flex  gap-2">
             <button
-              className={`relative w-20 text-gray-700 border rounded-md text-xs py-2 text-center items-center ${font}  formInput ${fontDrop && 'rounded-b-none'}`}
+              className={`relative w-24 text-gray-700 border rounded-md text-xs py-2 text-center items-center ${font}  bg-white  ${fontDrop && 'rounded-b-none'}`}
               onClick={handleFontDropDown}
               onBlur={() => setFontDrop(false)}
             >
               {font}
               <div
-                className={`absolute flex flex-col top-full w-29  -left-[1px] rounded-b-md text-gray-800 bg-white   border border-primary ${fontDrop ? 'visible' : 'hidden'}`}
+                className={`absolute flex flex-col top-full w-full -left-[1px]  box-content rounded-b-md text-gray-800 bg-white  border ${fontDrop ? 'visible' : 'hidden'}`}
               >
                 {fonts.map((value, index) => {
                   return (
@@ -52,18 +52,18 @@ const ThemeSelection = () => {
               </div>
             </button>
             <button
-              className={`relative w-24 text-gray-700 border  rounded-md text-xs text-center formInput ${weight} ${weightDrop && 'rounded-b-none'}`}
+              className={`relative w-24 text-gray-700 border  rounded-md text-xs text-center  ${weight} ${weightDrop && 'rounded-b-none'}`}
               onClick={handleWeightDropDown}
               onBlur={() => setWeightDrop(false)}
             >
               {weight}
               <div
-                className={`absolute flex flex-col top-full -left-[1px] w-24 rounded-b-md text-gray-800 bg-white  border border-primary ${weightDrop ? 'visible' : 'hidden'} `}
+                className={`absolute flex flex-col top-full -left-[1px]  w-full box-content rounded-b-md text-gray-800 bg-white  border ${weightDrop ? 'visible' : 'hidden'} `}
               >
                 {weights.map((value, index) => {
                   return (
                     <div
-                      className={`${index !== 2 ? 'border-b' : 'rounded-b-md'} px-1 py-2 hover:bg-gray-200 ${font} ${value}`}
+                      className={`${index !== 2 ? 'border-b' : 'rounded-b-md'}  px-1 py-2 hover:bg-gray-200 ${font} ${value}`}
                       key={index}
                       onClick={() => {
                         return setWeight(value), theme.updateWeight(weight);
@@ -87,7 +87,7 @@ const ThemeSelection = () => {
                     setColor(value), theme.updateBackgroundColor(value)
                   )}
                   key={index}
-                  className={`size-6 ${value} rounded-full border ${color == value && `ring-offset-0 ring-2 ring-black/30`} `}
+                  className={`size-6 ${value} rounded-full border ${color == value && `ring-offset-2 ring-1 ring-black/30`} `}
                 ></button>
               );
             })}

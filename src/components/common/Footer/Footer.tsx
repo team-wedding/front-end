@@ -1,22 +1,34 @@
 import { useLocation, useNavigate } from 'react-router';
 import HomeIcon from '../../icons/HomeIcon';
-import PlusIcon from '../../icons/PlusIcon';
 import UserIcon from '../../icons/UserIcon';
+import GridIcon from '../../icons/GridIcon';
 
 const Footer: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
+
+  const navItems = [
+    { label: '홈', path: '/', Icon: HomeIcon },
+    { label: '대시보드', path: '/create', Icon: GridIcon },
+    { label: '마이페이지', path: '/mypage', Icon: UserIcon },
+  ];
+
   return (
-    <div className="flex items-center w-full max-w-sm justify-between px-8">
-      <button onClick={() => navigate('/splash')}>
-        <HomeIcon active={location.pathname == '/splash'} />
-      </button>
-      <button onClick={() => navigate('/create')}>
-        <PlusIcon active={location.pathname == '/create'} />
-      </button>
-      <button onClick={() => navigate('/splash')}>
-        <UserIcon active={location.pathname == '/mypage'} />
-      </button>
+    <div className="flex items-center w-full max-w-sm justify-between gap-10">
+      {navItems.map((item) => {
+        const isActive = location.pathname === item.path;
+
+        return (
+          <button
+            key={item.label}
+            onClick={() => navigate(item.path)}
+            className={`w-full column-center hover:text-primary ${isActive ? 'text-primary font-medium' : 'text-gray-400'}`}
+          >
+            <item.Icon />
+            {item.label}
+          </button>
+        );
+      })}
     </div>
   );
 };

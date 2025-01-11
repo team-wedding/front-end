@@ -8,13 +8,15 @@ import { Route, Routes } from 'react-router';
 import CreateInvitationPage from './pages/CreateInvitationPage';
 import PreviewInvitaionPage from './pages/PreviewInvitaionPage';
 import ResultPage from './pages/ResultPage';
+import DashBoardPage from './pages/DashBoardPage';
 import EditMyPage from './pages/EditMyPage';
 import RsvpStatsPage from './pages/RsvpStatsPage';
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      {/* <Route path="/" element={<HomePage />} /> */}
+      <Route path="/" element={<DashBoardPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/splash" element={<SplashPage />} />

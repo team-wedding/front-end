@@ -3,18 +3,26 @@ import React from 'react';
 interface StepperProps {
   steps: string[];
   currentStep: number;
+  onStepClick: (step: number) => void;
 }
 
-export const Stepper: React.FC<StepperProps> = ({ steps, currentStep }) => {
+export const Stepper: React.FC<StepperProps> = ({
+  steps,
+  currentStep,
+  onStepClick,
+}) => {
   return (
-    <div className="flex items-center justify-center bg-white px-10 py-4 shadow-md font-Paperlogy">
+    <div className="fixed top-[3.5rem] z-10 max-w-sm w-full flex items-center justify-center bg-white px-10 py-2 shadow-sm">
       {steps.map((step, index) => {
         const isActive = index + 1 === currentStep;
         const isCompleted = index + 1 < currentStep;
         return (
           <React.Fragment key={index}>
             {/* Step Indicator */}
-            <div className="flex items-center">
+            <button
+              className="flex items-center rounded-xl px-1 py-2 hover:bg-gray-100 transition-all ease-in-out duration-300"
+              onClick={() => onStepClick(index + 1)}
+            >
               <div
                 className={`w-3 h-3 flex items-center justify-center rounded-full text-[8px] font-bold border ${
                   isActive
@@ -35,7 +43,7 @@ export const Stepper: React.FC<StepperProps> = ({ steps, currentStep }) => {
               >
                 {step}
               </div>
-            </div>
+            </button>
 
             {/* Divider */}
             {index < steps.length - 1 && (

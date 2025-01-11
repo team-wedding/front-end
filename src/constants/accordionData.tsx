@@ -14,7 +14,6 @@ import LocationSelection from '../components/form/LocationSelection/LocationSele
 import ContactSelection from '../components/form/ContactSelection/ContactSelection';
 import AccountInput from '../components/form/AccountSelection/AccountInput';
 
-
 export const accordionData: AccordionItemData[] = [
   {
     id: 1,
@@ -131,5 +130,10 @@ export const accordionData: AccordionItemData[] = [
     title: '배경 음악',
     content: <ThemeSelection />,
     hasToggle: true,
+  },
+  {
+    id: 19,
+    title: '갤러리',
+    content: <GallerySelecetion />
   },
 ];

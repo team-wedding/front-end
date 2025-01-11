@@ -3,9 +3,7 @@ import ResultDisplay from '../components/display/ResultDisplay';
 
 const ResultPage = () => {
   return (
-    <div>
-      <ResultDisplay />
-    </div>
+    <ResultDisplay />
   );
 };
 

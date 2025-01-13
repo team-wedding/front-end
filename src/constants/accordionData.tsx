@@ -134,6 +134,6 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 19,
     title: '갤러리',
-    content: <GallerySelecetion />
+    content: <GallerySelection />
   },
 ];

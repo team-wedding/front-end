@@ -1,7 +1,7 @@
 import React from 'react';
 
-const RealTimePhotoSection = () => {
+const PhotoTalkSection = () => {
   return <div className="column-center">RealTimePhotoSection</div>;
 };
 
-export default RealTimePhotoSection;
+export default PhotoTalkSection;

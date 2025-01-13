@@ -14,6 +14,7 @@ const RsvpExample = () => {
   })
   const [meal, setMeal] = useState(false)
   const [population, setPopulation] = useState(false)
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
     setRsvpDetail({
@@ -22,23 +23,9 @@ const RsvpExample = () => {
     });
   };
 
+
   return (
     <div className="max-w-lg mx-auto px-4 flex flex-col text-xs">
-      {/* <div className="flex flex-col items-center gap-5">
-        <div className=" text-xs font-medium">
-          아래의 예시처럼 참석 여부 팝업이 제공됩니다.
-        </div>
-        <img
-          className="w-48 border-2 border-gray-400 rounded-lg"
-          src="/src/assets/ModalExample1.png"
-          alt=""
-        />
-        <img
-          className="w-48 border-2 border-gray-400 rounded-lg"
-          src="/src/assets/ModalExample2.png"
-          alt=""
-        />
-      </div> */}
       <section className="text-[10px] text-gray-500">
         <div className="flex items-start gap-1 mb-1">
           <span className="text-gray-600">ⓘ</span>

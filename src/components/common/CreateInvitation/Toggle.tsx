@@ -1,12 +1,19 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 
-const Toggle = () => {
-  const [on, setOn] = useState(false);
 
+interface Props {
+  state?: boolean
+  setState?: Dispatch<SetStateAction<boolean>>
+}
+
+const Toggle = ({ state, setState }: Props) => {
+  const [on, setOn] = useState(state || false);
   const toggleHandler = () => {
     setOn(!on);
+    if (setState) {
+      setState(on)
+    }
   };
-
   return (
     <button
       onClick={toggleHandler}

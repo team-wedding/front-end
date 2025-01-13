@@ -50,18 +50,17 @@ const RsvpModal: React.FC<ModalProp> = ({
 
   //TODO : 동적으로 색 바꿀수있게 props로 받아서 차리
   //TODO : 재사용할수있는 코드 리팩토링 특히 인풋
-  console.log(modal)
   return (
-    <div className={`fixed  top-0 left-0 size-full flex justify-center ${modal ? 'visible' : 'hidden'} pt-10 `}>
+    <div className={`fixed  z-50 top-0 left-0 size-full flex justify-center ${modal ? 'visible' : 'hidden'} pt-10`}>
       <div className='absolute top-0 left-0 w-screen h-screen bg-black/60 z-10'></div>
       <div
-        className={`absolute z-30 flex flex-col p-10 bg-white  w-[370px] rounded-xl  border `}
+        className={`absolute z-30 flex flex-col py-6 px-5 bg-white  w-[350px] rounded-xl  border`}
       >
         <button
           className="absolute top-5 right-8"
           onClick={() => setModal(false)}
         >
-          <CloseIcon />
+          <CloseIcon className={''} />
         </button>
         {step == 0 ? (
           <div className="flex flex-col items-center gap-12">
@@ -87,7 +86,7 @@ const RsvpModal: React.FC<ModalProp> = ({
               </div>
             </div>
             <button
-              className="bg-primary rounded-md py-2 w-full text-white"
+              className="bg-button rounded-md py-2 w-full text-white"
               onClick={() => setStep(1)}
             >
               참석의사 전달하기
@@ -97,10 +96,10 @@ const RsvpModal: React.FC<ModalProp> = ({
           <div className="flex flex-col items-center gap-8">
             <div className="text-2xl font-semibold">참석 의사 전달</div>
             <div className="flex flex-row w-full gap-8 items-center justify-between">
-              구분 :
+              구분:
               <div className="flex gap-1 w-48 justify-between">
                 <button
-                  className={`rounded-md px-2 py-2 w-1/2  ${info.brideMember ? 'text-gray-700 bg-gray-200 ' : 'text-white  bg-primary'} `}
+                  className={`rounded-md px-2 py-2 w-1/2  ${info.brideMember ? 'text-gray-700 bg-gray-200 ' : 'text-white  bg-button'} `}
                   onClick={() =>
                     setInfo((prev) => ({ ...prev, brideMember: false }))
                   }
@@ -108,7 +107,7 @@ const RsvpModal: React.FC<ModalProp> = ({
                   신랑측
                 </button>
                 <button
-                  className={`rounded-md px-2 py-2 w-1/2 ${info.brideMember ? 'text-white bg-primary' : 'text-gray-700 bg-gray-200'} `}
+                  className={`rounded-md px-2 py-2 w-1/2 ${info.brideMember ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'} `}
                   onClick={() =>
                     setInfo((prev) => ({ ...prev, brideMember: true }))
                   }
@@ -117,66 +116,66 @@ const RsvpModal: React.FC<ModalProp> = ({
                 </button>
               </div>
             </div>
-            <div className='flex flex-row w-full gap-6 items-center justify-between'>
-              <div>참석여부 : </div>
+            <div className='flex flex-row w-full gap-2 items-center justify-between'>
+              <div>참석여부: </div>
               <div className={`flex flex-row justify-between gap-1 w-48`}>
                 <button
-                  className={`rounded-md p-1 w-1/2  ${info.attend ? 'text-white bg-primary' : 'text-gray-700 bg-gray-200'}`}
+                  className={`rounded-md p-1 w-1/2  ${info.attend ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'}`}
                   onClick={() =>
                     setInfo((prev) => ({ ...prev, attend: true }))
                   }>참석할께요</button>
                 <button
-                  className={`rounded-md p-1  w-1/2 ${!info.attend ? 'text-white bg-primary' : 'text-gray-700 bg-gray-200'}`}
+                  className={`rounded-md p-1  w-1/2 ${!info.attend ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'}`}
                   onClick={() =>
                     setInfo((prev) => ({ ...prev, attend: false }))
                   }>참석이<br /> 어려워요</button>
               </div>
             </div>
-            <div className="flex flex-row w-full justify-between items-center text-lg  ">
-              성함 :{' '}
+            <div className="flex flex-row w-full justify-between items-center text-lg ">
+              성함:{' '}
               <input
-                className=" w-48 h-8 bg-gray-100 rounded-md"
+                className=" w-48 h-8 bg-gray-100 rounded-md splash-input text-base"
                 type="text"
                 onChange={handleChange}
                 name="name"
               />
             </div>
-            <div className="flex flex-row w-full justify-between items-center text-lg  ">
-              연락처 :{' '}
+            <div className="flex flex-row w-full justify-between items-center text-base  ">
+              연락처:{' '}
               <input
-                className=" w-48 h-8 bg-gray-100 rounded-md"
+                className=" w-48 h-8 bg-gray-100 rounded-md splash-input"
                 type="text"
                 onChange={handleChange}
                 name="phone"
               />
             </div>
             <div className="flex flex-row w-full justify-between items-center text-lg  ">
-              참석인원 :{' '}
+              참석인원:{' '}
               <input
-                className=" w-48 h-8 bg-gray-100 rounded-md"
+                className=" w-48 h-8 bg-gray-100 rounded-md splash-input text-base"
                 type="text"
                 onChange={handleChange}
                 name="member"
               />
             </div>
-            <div className="flex flex-row w-full justify-between items-center text-lg  ">
-              식사 여부 :
+            <div className="flex flex-row w-full justify-between items-center text-lg">
+              식사여부:{' '}
               <div className="flex gap-1 w-48 justify-between">
                 {/* map으로 refact */}
                 <button
-                  className={`rounded-md  py-2 px-3  ${info.dine == '예정' ? 'text-white bg-primary' : 'text-gray-700  bg-gray-200'}`}
+                  className={`rounded-md  py-2 px-3  ${info.dine == '예정' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'}`}
                   onClick={() => setInfo((prev) => ({ ...prev, dine: '예정' }))}
                 >
                   예정
                 </button>
                 <button
-                  className={`rounded-md  py-2 px-3  ${info.dine == '안함' ? 'text-white bg-primary' : 'text-gray-700  bg-gray-200'}`}
+                  className={`rounded-md  py-2 px-3  ${info.dine == '안함' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'}`}
                   onClick={() => setInfo((prev) => ({ ...prev, dine: '안함' }))}
                 >
                   안함
                 </button>
                 <button
-                  className={`rounded-md  py-2 px-3  ${info.dine == '미정' ? 'text-white bg-primary' : 'text-gray-700  bg-gray-200'} `}
+                  className={`rounded-md  py-2 px-3  ${info.dine == '미정' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'} `}
                   onClick={() => setInfo((prev) => ({ ...prev, dine: '미정' }))}
                 >
                   미정
@@ -184,7 +183,7 @@ const RsvpModal: React.FC<ModalProp> = ({
               </div>
             </div>
             <button
-              className="bg-primary rounded-md py-3 w-full text-white text-lg"
+              className="bg-button rounded-md py-3 w-full text-white text-lg"
               onClick={() => setStep(1)}
             >
               참석의사 전달하기

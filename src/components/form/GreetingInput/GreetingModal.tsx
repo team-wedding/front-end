@@ -1,5 +1,4 @@
 import useGreetingStore from '../../../store/useGreetingStore';
-import CloseIcon from '../../icons/CloseIcon';
 
 const greetingSample = [
   `저희 두 사람의 작은 만남이\n 사랑의 결실을 이루어\n소중한 결혼식을 올리게 되었습니다.\n\n평생 서로 귀하게 여기며\n첫 마음 그대로 존중하고 배려하며 살겠습니다.\n\n오로지 믿음과 사랑을 약속하는 날\n오셔서 축복해 주시면 더없는 기쁨으로\n간직하겠습니다.`,
@@ -32,13 +31,6 @@ const GreetingModal = ({
               <h3 className="text-base font-semibold text-gray-900">
                 샘플 문구 선택
               </h3>
-              <button
-                type="button"
-                onClick={onClose}
-                className="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-2"
-              >
-                <CloseIcon className="size-[26px]" />
-              </button>
             </div>
             <div className="flex flex-col gap-4 p-4 overflow-y-auto">
               {greetingSample.map((text, index) => (

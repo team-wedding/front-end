@@ -17,14 +17,54 @@
     @apply font-Paperlogy bg-black;
     @apply w-full h-full flex justify-center items-center;
   }
-
+  @font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2')
+      format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'NanumGothic';
+    src: url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'MapoFlowerIsland';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoFlowerIslandA.woff')
+      format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'NanumSquareNeo';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot);
+    src:
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot?#iefix)
+        format('embedded-opentype'),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.woff)
+        format('woff'),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.ttf)
+        format('truetype');
+  }
+  @font-face {
+    font-family: 'NanumSquareNeoVariable';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot);
+    src:
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot?#iefix)
+        format('embedded-opentype'),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.woff)
+        format('woff'),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.ttf)
+        format('truetype');
+  }
   @font-face {
     font-family: 'Paperlogy';
     src: url('/src/assets/fonts/Paperlogy-2ExtraLight.ttf') format('truetype');
     font-weight: 200;
     font-style: normal;
   }
-
   @font-face {
     font-family: 'Paperlogy';
     src: url('/src/assets/fonts/Paperlogy-3Light.ttf') format('truetype');

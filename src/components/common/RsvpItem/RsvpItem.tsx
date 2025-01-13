@@ -1,7 +1,6 @@
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
-import { Pie } from 'react-chartjs-2';
 
-ChartJS.register(ArcElement, Tooltip, Legend);
+
+
 
 interface RsvpDetail {
   title: string;
@@ -15,24 +14,24 @@ interface RsvpDetail {
 
 export default function RsvpItem({ total, title, description, attend, unattend, bride }: RsvpDetail) {
 
-  const data = {
-    labels: [
-      '신부참석',
-      '신랑참석',
-      '신부불참',
-      '신랑불참'
-    ],
-    datasets: [{
-      data: [10, 10, 3, 2],
-      backgroundColor: [
-        'rgb(255, 99, 132)',
-        'rgb(54, 162, 235)',
-        '#CCCCCC',
-        '#8b8989'
-      ],
-      hoverOffset: 10,
-    }]
-  }
+  // const data = {
+  //   labels: [
+  //     '신부참석',
+  //     '신랑참석',
+  //     '신부불참',
+  //     '신랑불참'
+  //   ],
+  //   datasets: [{
+  //     data: [10, 10, 3, 2],
+  //     backgroundColor: [
+  //       'rgb(255, 99, 132)',
+  //       'rgb(54, 162, 235)',
+  //       '#CCCCCC',
+  //       '#8b8989'
+  //     ],
+  //     hoverOffset: 10,
+  //   }]
+  // }
 
 
   return (

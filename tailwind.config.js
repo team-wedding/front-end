@@ -27,6 +27,10 @@ export default {
         Pretendard: ['Pretendard'],
         Crimson: ['Crimson Pro', ...defaultTheme.fontFamily.sans],
         Paperlogy: ['Paperlogy', ...defaultTheme.fontFamily.sans],
+        Suit: ['SUIT-Regular'],
+        NanumSquareNeo: ['NanumSquareNeo', 'NanumSquareNeoVariable'],
+        Mapo: ['MapoFlowerIsland'],
+        NanumGothic: ['NanumGothic'],
       },
       animation: {
         bounceX: 'bounceX 1s ease-in-out infinite',

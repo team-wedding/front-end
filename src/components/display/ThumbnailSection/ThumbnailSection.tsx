@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from './Image';
 import BrideGroomName from './BrideGroomName';
 import DateTitle from './DateTitle';

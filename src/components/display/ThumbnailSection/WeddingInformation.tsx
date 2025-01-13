@@ -1,4 +1,3 @@
-import React from 'react';
 import { useWeddingStore } from '../../../store/useWeddingStore';
 import useAddressStore from '../../../store/useAddressStore';
 

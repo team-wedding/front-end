@@ -22,10 +22,10 @@ const DashBoardPage = () => {
 
   return (
     <PageLayout title="우리, 결혼해요">
-      <div className="flex-center px-4 pb-3 border-b border-background opacity-40 text-background text-[10px] m-5 tracking-wider">
+      {/* <div className="flex-center px-4 pb-3 border-b border-background opacity-40 text-background text-[10px] m-5 tracking-wider">
         우리만의 청첩장을 꾸미고 관리해보세요
-      </div>
-      <div className="grid grid-cols-2 gap-6 place-items-center pt-3 px-6 pb-10">
+      </div> */}
+      <div className="grid grid-cols-2 gap-6 place-items-center pt-10 px-6 pb-10">
         <div>
           <CreateCard onClick={handleCreateCard} />
         </div>

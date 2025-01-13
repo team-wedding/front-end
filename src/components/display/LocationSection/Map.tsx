@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { Map as KakaoMap, MapMarker } from 'react-kakao-maps-sdk';
 import useKaKaoLoader from '../../../hooks/useKaKaoLoader';
 import useAddressStore from '../../../store/useAddressStore';
 
-const Map: React.FC = () => {
+const Map = () => {
   const { address, coords, setCoords } = useAddressStore();
 
   useEffect(() => {
@@ -32,7 +32,7 @@ const Map: React.FC = () => {
         lng: coords.lng,
       }}
       style={{
-        width: '90%',
+        width: '384px',
         height: '300px',
       }}
       level={4}

@@ -23,7 +23,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   moveItem,
 }) => {
   return (
-    <div className="flex flex-col gap-2">
+    <div className="flex flex-col gap-2 p-10 pt-20">
       {items.map((item, index) => (
         <DraggableAccordionItem
           key={item.id}

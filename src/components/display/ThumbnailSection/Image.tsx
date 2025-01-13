@@ -1,4 +1,3 @@
-import React from 'react';
 import useImageStore from '../../../store/useImageStore';
 import thumbnail from '../../../assets/image/wedding1.png';
 

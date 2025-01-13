@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PageLayout from '../components/layout/PageLayout';
 import HeaderButton from '../components/common/Header/HeaderButton';
 
@@ -13,13 +13,14 @@ import { Stepper } from '../components/common/CreateInvitation/Stepper';
 import { StepNavigation } from '../components/common/CreateInvitation/StepNavigation';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
+import ResultDisplay from '../components/display/ResultDisplay';
 
-const CreateInvitationPage: React.FC = () => {
+const CreateInvitationPage = () => {
   const { title, setTitle } = useInvitationStore();
   const navigate = useNavigate();
 
-  const handleCancel = () => navigate('/');
-  const handleSave = () => console.log('저장 버튼 클릭, 제목: ', title);
+  const handleCancel = () => navigate('/dashboard');
+  const handleSave = () => navigate('/dashboard');
 
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const [steps, setSteps] = useState(1);
@@ -63,51 +64,58 @@ const CreateInvitationPage: React.FC = () => {
   };
 
   return (
-    <PageLayout
-      title="새로운 청첩장"
-      leftButton={
-        <HeaderButton
-          onClick={handleCancel}
-          className="text-sm text-gray-600 hover:text-black active:text-rose-400"
-        >
-          취소
-        </HeaderButton>
-      }
-      rightButton={
-        <HeaderButton
-          onClick={handleSave}
-          className="text-sm text-gray-600 hover:text-black active:text-rose-400"
-        >
-          저장
-        </HeaderButton>
-      }
-      customFooter={
-        <StepNavigation
-          currentStep={steps}
-          totalSteps={sliceRanges.length}
-          onPrev={handlePrev}
-          onNext={handleNext}
-        />
-      }
-    >
-      <div>
-        <Stepper
-          steps={['기본 정보 입력', '기능 선택', '테마 선택']}
-          currentStep={steps}
-          onStepClick={handleStepClick}
-        />
-        <div className="bg-background bg-opacity-10 min-h-screen p-5 pt-16 pb-20 font-Pretendard">
-          <DndProvider backend={HTML5Backend}>
-            <Accordion
-              items={items}
-              expandedIds={expandedIds}
-              toggleExpand={toggleExpand}
-              moveItem={moveItem}
+    <div className="page-container">
+      <div className="create-section">
+        <PageLayout
+          title="새로운 청첩장"
+          leftButton={
+            <HeaderButton
+              onClick={handleCancel}
+              className="text-sm text-gray-600 hover:text-black active:text-rose-400"
+            >
+              취소
+            </HeaderButton>
+          }
+          rightButton={
+            <HeaderButton
+              onClick={handleSave}
+              className="text-sm text-gray-600 hover:text-black active:text-rose-400"
+            >
+              저장
+            </HeaderButton>
+          }
+          customFooter={
+            <StepNavigation
+              currentStep={steps}
+              totalSteps={sliceRanges.length}
+              onPrev={handlePrev}
+              onNext={handleNext}
             />
-          </DndProvider>
-        </div>
+          }
+        >
+          <Stepper
+            steps={['기본 정보 입력', '기능 선택', '테마 선택']}
+            currentStep={steps}
+            onStepClick={handleStepClick}
+          />
+          <div className="bg-background bg-opacity-10 min-h-screen  font-Pretendard">
+            <DndProvider backend={HTML5Backend}>
+              <Accordion
+                items={items}
+                expandedIds={expandedIds}
+                toggleExpand={toggleExpand}
+                moveItem={moveItem}
+              />
+            </DndProvider>
+          </div>
+        </PageLayout>
       </div>
-    </PageLayout>
+
+      <div className="preview-section">
+        <ResultDisplay />
+        {/* <ResultPage /> */}
+      </div>
+    </div>
   );
 };
 

@@ -1,13 +1,12 @@
 import CalendarSection from './CalendarSection/CalendarSection';
 import LocationSection from './LocationSection/LocationSection';
 import ContactSection from './ContactSection/ContactSection';
-import ThumbnailSection from './ThumbnailSection.tsx/ThumbnailSection';
-import GreetingSection from './GreetingSection.tsx/GreetingSection';
+import ThumbnailSection from './ThumbnailSection/ThumbnailSection';
+import GreetingSection from './GreetingSection/GreetingSection';
 import GallerySection from './GallerySection/GallerySection';
 import MoneySection from './MoneySection/MoneySection';
-import MessageSection from './MessageSection/MessageSection';
 import InformSection from './InformSection/InformSection';
-import RealTimePhotoSection from './RealTimePhotoSection/RealTimePhotoSection';
+import PhotoTalkSection from './PhotoTalkSection/PhotoTalkSection';
 import AttendanceSection from './AttendanceSection/AttendanceSection';
 
 const ResultDisplay = () => {
@@ -20,9 +19,8 @@ const ResultDisplay = () => {
       <ContactSection />
       <GallerySection />
       <MoneySection />
-      <MessageSection />
       <InformSection />
-      <RealTimePhotoSection />
+      <PhotoTalkSection />
       <AttendanceSection />
     </div>
   );

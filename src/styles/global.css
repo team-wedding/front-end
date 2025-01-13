@@ -14,8 +14,7 @@
   html,
   body,
   #root {
-    @apply font-Paperlogy bg-black;
-    @apply w-full h-full flex justify-center items-center;
+    @apply bg-black bg-opacity-80;
   }
   @font-face {
     font-family: 'SUIT-Regular';
@@ -105,38 +104,85 @@
 
 @layer components {
   .layout {
-    @apply flex flex-col max-w-sm mx-auto h-full w-full;
+    @apply flex flex-col h-full w-full m-auto bg-white font-Paperlogy overflow-auto;
+    @apply md:max-w-sm;
+    max-width: var(--max-content-width, 448px);
+  }
+
+  .layout-header,
+  .layout-footer {
+    @apply fixed w-full z-50 flex-center;
+    @apply md:max-w-md;
+    max-width: var(--max-content-width, 448px);
   }
 
   .layout-header {
-    @apply fixed top-0 left-0 w-full bg-white z-50 h-[var(--header-height)] flex items-center justify-center shadow-sm text-sm;
+    @apply border-b border-gray-200 text-sm bg-white;
+    top: 0;
+    height: var(--header-height);
   }
 
   .layout-footer {
-    @apply fixed bottom-0 left-0 w-full bg-footer z-50 h-[var(--footer-height)] flex items-center justify-center text-[10px] font-light;
+    @apply border-t border-gray-200 text-[10px] bg-footer;
+    bottom: 0;
+    height: var(--footer-height);
   }
 
   .layout-content {
-    @apply flex-1 bg-white overflow-auto max-h-screen;
-    padding-top: var(--header-height);
-    padding-bottom: var(--footer-height);
+    @apply bg-white w-full z-10 overflow-auto;
+    margin-top: var(--header-height);
+    margin-bottom: var(--footer-height);
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+  }
+
+  .stepper-layout {
+    @apply fixed w-full bg-white z-50 flex-center text-sm px-12 py-2 shadow-sm;
+    @apply md:max-w-md;
+    max-width: var(--max-content-width, 448px);
   }
 
   .splash-layout,
   .auth-layout {
-    @apply flex items-center justify-center w-full h-screen max-w-sm bg-white;
+    @apply flex items-center justify-center w-full h-screen m-auto bg-white;
+    @apply md:max-w-md;
+    max-width: var(--max-content-width, 448px);
   }
 
   .preview-layout {
-    @apply max-w-sm mx-auto m-10;
+    @apply mx-auto h-full w-full;
   }
 
   .result-layout {
-    @apply flex flex-col max-w-sm min-h-screen mx-auto pt-10 pb-40 gap-28 bg-white shadow-md rounded-md text-result tracking-wide opacity-95;
+    @apply column-center max-w-md bg-white gap-28 text-result tracking-wide shadow-xl pt-10 pb-28 mx-auto relative;
+    @apply md:rounded-3xl md:my-12 lg:max-w-sm;
+    transition: all 0.3s ease;
+  }
+
+  .page-container {
+    @apply flex w-full h-full relative;
+  }
+
+  .create-section {
+    @apply flex flex-col h-full w-full max-w-md overflow-auto mx-auto z-10;
+    @apply lg:fixed lg:left-1/4;
+    /* @apply md:fixed md:left-10; */
+    /* max-width: var(--max-content-width, 448px); */
+    transition: all 0.3s ease;
+  }
+
+  .preview-section {
+    @apply hidden overflow-auto bg-black bg-opacity-50 absolute top-0 right-0;
+    @apply lg:flex lg:w-[40%] lg:justify-center;
+    /* @apply md:flex md:w-[40%] md:justify-center; */
+    transition: all 0.3s ease;
   }
 
   .btn {
     @apply px-4 py-2 rounded-lg transition-all duration-300;
+  }
+
+  .select-btn {
+    @apply border rounded-xl px-4 py-2 hover:bg-button hover:bg-opacity-20;
   }
 
   .label {

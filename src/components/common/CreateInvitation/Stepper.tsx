@@ -12,7 +12,7 @@ export const Stepper: React.FC<StepperProps> = ({
   onStepClick,
 }) => {
   return (
-    <div className="fixed top-[3.5rem] z-10 max-w-sm w-full flex items-center justify-center bg-white px-10 py-2 shadow-sm">
+    <div className="stepper-layout">
       {steps.map((step, index) => {
         const isActive = index + 1 === currentStep;
         const isCompleted = index + 1 < currentStep;

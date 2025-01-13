@@ -1,4 +1,3 @@
-import React from 'react';
 import { useWeddingStore } from '../../../store/useWeddingStore';
 
 const DateTitle = () => {

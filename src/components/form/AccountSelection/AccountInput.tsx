@@ -1,6 +1,6 @@
 import React from "react";
 import useAccountStore from "../../../store/useAccountStore";
-import AccountRow from "./\bAccountRow";
+import AccountRow from "./AccountRow";
 
 const AccountInput = () => {
     const accounts = useAccountStore((state) => state.accounts);

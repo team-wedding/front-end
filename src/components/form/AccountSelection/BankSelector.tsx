@@ -44,7 +44,7 @@ const BankSelector: React.FC<{
     };
 
     return (
-        <div className="w-28">
+        <div className="relative w-28">
 
             <div onClick={toggleDropDown}
                 className="flex justify-between items-center px-3 py-2 border border-gray-300 rounded-xl bg-white cursor-pointer text-xs hover:bg-gray-100 gap-1">
@@ -55,7 +55,7 @@ const BankSelector: React.FC<{
                 ></i>
             </div>
             {isOpen && (
-                <ul className="absolute z-10 w-28 mt-2 bg-white border border-gray-300 rounded-xl max-h-48 overflow-y-auto">
+                <ul className="absolute z-10 w-28 mt-2 bg-white border border-gray-300 rounded-xl max-h-36 overflow-y-auto">
                     {banks.map((bank) => (
                         <li
                             key={bank.id}

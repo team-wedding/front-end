@@ -3,10 +3,7 @@ import useGallaryStore from "../../../store/useGallaryStore";
 import CloseIcon from "../../icons/CloseIcon";
 import GridIcon from "../../icons/GridIcon";
 
-
-
-
-export default function GallerySelecetion() {
+export default function GallerySelection() {
 
   const fileRef = useRef<HTMLInputElement>(null);
   const [images, setImages] = useState<string[]>([])

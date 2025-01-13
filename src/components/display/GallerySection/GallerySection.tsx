@@ -8,9 +8,7 @@ export default function GallarySection() {
   const store = useGallaryStore()
   const images = store.images
   const grid = store.grid
-
   const [imageIndex, setImageIndex] = useState(0);
-
   const handlePrev = () => {
     if (imageIndex == 0) {
       setImageIndex(images.length - 1)
@@ -24,8 +22,6 @@ export default function GallarySection() {
     else
       setImageIndex((prev: number) => prev + 1)
   }
-
-
   return (
     <div className="bg-white w-full h-fit p-2">
       {

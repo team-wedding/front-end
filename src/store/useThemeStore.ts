@@ -9,7 +9,7 @@ interface ThemeState {
   updateBackgroundColor: (backgroundColor: string) => void;
 }
 
-const usePersonStore = create<ThemeState>((set) => ({
+const useThemeStore = create<ThemeState>((set) => ({
   font: '',
   weight: '',
   backgroundColor: '',
@@ -19,4 +19,4 @@ const usePersonStore = create<ThemeState>((set) => ({
     set(() => ({ backgroundColor: backgroundColor })),
 }));
 
-export default usePersonStore;
+export default useThemeStore;

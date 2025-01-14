@@ -2,8 +2,8 @@ import React from 'react';
 
 interface NoticeItemData {
   id: number;
-  title: string;
-  content: React.ReactNode;
+  title: JSX.Element;
+  content: JSX.Element;
 }
 
 interface NoticeProps {

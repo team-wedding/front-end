@@ -9,12 +9,12 @@ const Footer: React.FC = () => {
 
   const navItems = [
     { label: '홈', path: '/', Icon: HomeIcon },
-    { label: '대시보드', path: '/create', Icon: GridIcon },
+    { label: '대시보드', path: '/dashboard', Icon: GridIcon },
     { label: '마이페이지', path: '/mypage', Icon: UserIcon },
   ];
 
   return (
-    <div className="flex items-center w-full max-w-sm justify-between gap-10">
+    <div className="flex items-center w-full max-w-md justify-between">
       {navItems.map((item) => {
         const isActive = location.pathname === item.path;
 

@@ -1,9 +1,10 @@
-import React from 'react';
 import ResultDisplay from '../components/display/ResultDisplay';
 
 const ResultPage = () => {
   return (
-    <ResultDisplay />
+    <div className="bg-slate-300 w-full min-h-screen flex-center">
+      <ResultDisplay />
+    </div>
   );
 };
 

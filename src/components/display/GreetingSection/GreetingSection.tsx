@@ -1,4 +1,3 @@
-import React from 'react';
 import FamilyName from './FamilyName';
 import Greeting from './Greeting';
 

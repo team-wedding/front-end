@@ -1,4 +1,3 @@
-import React from 'react';
 import useGreetingStore from '../../../store/useGreetingStore';
 
 const Greeting = () => {

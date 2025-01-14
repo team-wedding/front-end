@@ -50,8 +50,8 @@ const NoticeInput: React.FC = () => {
           </div>
         ),
         content: (
-          <div>
-            <div className="mb-2">
+          <div className="m-2 flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
               <label className="label w-full">제목</label>
               <input
                 type="text"
@@ -60,11 +60,11 @@ const NoticeInput: React.FC = () => {
                 onChange={(e) =>
                   updateNotice(notice.id, 'title', e.target.value)
                 }
-                className="formInput w-full my-4 h-10"
+                className="formInput w-full"
               />
             </div>
 
-            <div className="mb-2">
+            <div className="flex flex-col gap-2">
               <label className="label w-full">내용</label>
               <textarea
                 placeholder="내용을 입력해주세요"
@@ -72,11 +72,12 @@ const NoticeInput: React.FC = () => {
                 onChange={(e) =>
                   updateNotice(notice.id, 'content', e.target.value)
                 }
-                className="formInput w-full my-4 h-24"
+                rows={4}
+                className="formInput w-full"
               />
             </div>
 
-            <div className="mb-2">
+            <div className="flex flex-col gap-2">
               <label className="label w-full">이미지 업로드</label>
               {notice.image ? (
                 <div className="mb-2">
@@ -89,7 +90,7 @@ const NoticeInput: React.FC = () => {
                     onClick={() => updateNotice(notice.id, 'image', null)}
                     className="text-sm text-red-500"
                   >
-                    삭제
+                    x
                   </button>
                 </div>
               ) : (

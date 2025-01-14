@@ -5,7 +5,7 @@ import ThumbnailSection from './ThumbnailSection/ThumbnailSection';
 import GreetingSection from './GreetingSection/GreetingSection';
 import GallerySection from './GallerySection/GallerySection';
 import MoneySection from './MoneySection/MoneySection';
-import InformSection from './InformSection/InformSection';
+import NoticeSection from './NoticeSection/NoticeSection';
 import PhotoTalkSection from './PhotoTalkSection/PhotoTalkSection';
 
 const ResultDisplay = () => {
@@ -18,7 +18,7 @@ const ResultDisplay = () => {
       <ContactSection />
       <GallerySection />
       <MoneySection />
-      <InformSection />
+      <NoticeSection />
       <PhotoTalkSection />
     </div>
   );

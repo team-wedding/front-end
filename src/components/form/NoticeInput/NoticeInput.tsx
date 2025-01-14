@@ -88,9 +88,8 @@ const NoticeInput: React.FC = () => {
                   />
                   <button
                     onClick={() => updateNotice(notice.id, 'image', null)}
-                    className="text-sm text-red-500"
                   >
-                    x
+                    삭제
                   </button>
                 </div>
               ) : (
@@ -128,7 +127,7 @@ const NoticeInput: React.FC = () => {
       {notices.length < maxNotices && (
         <button
           onClick={addNotice}
-          className="w-full p-2 mt-4 border rounded-md text-sm hover:bg-rose-200"
+          className="w-full p-2 mt-4 border rounded-md text-sm text-gray-500 hover:bg-gray-100"
         >
           + 공지 추가 ({notices.length}/{maxNotices})
         </button>

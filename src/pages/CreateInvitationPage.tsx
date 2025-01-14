@@ -1,22 +1,34 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PageLayout from '../components/layout/PageLayout';
 import HeaderButton from '../components/common/Header/HeaderButton';
-import InvitationTitleInput from '../components/common/CreateInvitation/InvitationTitleInput';
+
 import { useInvitationStore } from '../store/useInvitaionStore';
 import { useNavigate } from 'react-router';
-import { Accordion } from '../components/common/CreateInvitation/Accordion';
+import {
+  Accordion,
+  AccordionItemData,
+} from '../components/common/CreateInvitation/Accordion';
 import { accordionData } from '../constants/accordionData';
 import { Stepper } from '../components/common/CreateInvitation/Stepper';
 import { StepNavigation } from '../components/common/CreateInvitation/StepNavigation';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
+import ResultDisplay from '../components/display/ResultDisplay';
 
-const CreateInvitationPage: React.FC = () => {
+const CreateInvitationPage = () => {
   const { title, setTitle } = useInvitationStore();
   const navigate = useNavigate();
 
-  const handleCancel = () => navigate('/');
-  const handleSave = () => console.log('저장 버튼 클릭, 제목: ', title);
+  const handleCancel = () => navigate('/dashboard');
+  const handleSave = () => navigate('/dashboard');
 
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
+  const [steps, setSteps] = useState(1);
+
+  let sliceRanges = [[0, 3], [3, 14], [14]];
+  const [items, setItems] = useState<AccordionItemData[]>(
+    accordionData.slice(sliceRanges[0][0], sliceRanges[0][1]),
+  );
 
   const toggleExpand = (id: number) => {
     setExpandedIds((prev) =>
@@ -24,66 +36,86 @@ const CreateInvitationPage: React.FC = () => {
     );
   };
 
-  const [steps, setSteps] = useState(1);
+  const moveItem = (dragIndex: number, hoverIndex: number) => {
+    const updatedItems = [...items];
+    const [draggedItem] = updatedItems.splice(dragIndex, 1);
+    updatedItems.splice(hoverIndex, 0, draggedItem);
+    setItems(updatedItems);
+  };
 
-  let sliceRanges = [[0, 4], [4, 7], [7]];
-  let [start, end] = sliceRanges[steps - 1] || sliceRanges[2];
-  let item = accordionData.slice(start, end);
+  const handleStepClick = (step: number) => {
+    if (step > 0 && step <= sliceRanges.length) {
+      setSteps(step);
+      const [start, end] = sliceRanges[step - 1];
+      setItems(accordionData.slice(start, end));
+    }
+  };
 
   const handleNext = () => {
-    setSteps(steps + 1);
+    if (steps < sliceRanges.length) {
+      handleStepClick(steps + 1);
+    }
   };
 
   const handlePrev = () => {
-    setSteps(steps - 1);
+    if (steps > 1) {
+      handleStepClick(steps - 1);
+    }
   };
 
   return (
-    <PageLayout
-      title="새로운 청첩장"
-      leftButton={
-        <HeaderButton
-          onClick={handleCancel}
-          className="text-sm hover:text-rose-400 active:text-rose-600"
+    <div className="page-container">
+      <div className="create-section">
+        <PageLayout
+          title="새로운 청첩장"
+          leftButton={
+            <HeaderButton
+              onClick={handleCancel}
+              className="text-sm text-gray-600 hover:text-black active:text-rose-400"
+            >
+              취소
+            </HeaderButton>
+          }
+          rightButton={
+            <HeaderButton
+              onClick={handleSave}
+              className="text-sm text-gray-600 hover:text-black active:text-rose-400"
+            >
+              저장
+            </HeaderButton>
+          }
+          customFooter={
+            <StepNavigation
+              currentStep={steps}
+              totalSteps={sliceRanges.length}
+              onPrev={handlePrev}
+              onNext={handleNext}
+            />
+          }
         >
-          취소
-        </HeaderButton>
-      }
-      rightButton={
-        <HeaderButton
-          onClick={handleSave}
-          className="text-sm hover:text-rose-400 active:text-rose-600"
-        >
-          저장
-        </HeaderButton>
-      }
-      customFooter={
-        <StepNavigation
-          currentStep={steps}
-          totalSteps={3}
-          onPrev={handlePrev}
-          onNext={handleNext}
-          onPreview={() => navigate('/preview')}
-        />
-      }
-    >
-      <div>
-        {/* 청첩장 제목 입력 */}
-        <InvitationTitleInput
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-        />
-        <Stepper
-          steps={['기본 정보 입력', '기능 선택', '테마 선택']}
-          currentStep={steps}
-        />
-        <Accordion
-          items={item}
-          expandedIds={expandedIds}
-          toggleExpand={toggleExpand}
-        />
+          <Stepper
+            steps={['기본 정보 입력', '기능 선택', '테마 선택']}
+            currentStep={steps}
+            onStepClick={handleStepClick}
+          />
+          <div className="bg-background bg-opacity-10 min-h-screen  font-Pretendard">
+            <DndProvider backend={HTML5Backend}>
+              <Accordion
+                items={items}
+                expandedIds={expandedIds}
+                toggleExpand={toggleExpand}
+                moveItem={moveItem}
+              />
+            </DndProvider>
+          </div>
+        </PageLayout>
       </div>
-    </PageLayout>
+
+      <div className="preview-section">
+        <ResultDisplay />
+        {/* <ResultPage /> */}
+      </div>
+    </div>
   );
 };
 

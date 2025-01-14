@@ -1,50 +1,38 @@
 import React from 'react';
+import DraggableAccordionItem from './DraggableAccordionItem';
 
 export interface AccordionItemData {
   id: number;
   title: string;
   content: React.ReactNode;
+  hasToggle?: boolean;
+  hasDrag?: boolean;
 }
 
 interface AccordionProps {
   items: AccordionItemData[];
   expandedIds: number[];
   toggleExpand: (id: number) => void;
+  moveItem: (dragIndex: number, hoverIndex: number) => void;
 }
 
 export const Accordion: React.FC<AccordionProps> = ({
   items,
   expandedIds,
   toggleExpand,
+  moveItem,
 }) => {
   return (
-    <div className="flex flex-col gap-3">
-      {items.map((item) => (
-        <div
+    <div className="flex flex-col gap-2 p-10 pt-20">
+      {items.map((item, index) => (
+        <DraggableAccordionItem
           key={item.id}
-          className={`bg-white rounded-2xl overflow-hidden transition-all duration-300 text-gray-800 ${
-            expandedIds.includes(item.id) ? 'max-h-160' : 'max-h-12'
-          }`}
-        >
-          <div
-            className="flex justify-between max-h-12 items-center p-6 cursor-pointer"
-            onClick={() => toggleExpand(item.id)}
-          >
-            <div className="text-xs font-semibold">{item.title}</div>
-            <i
-              className={`bx bx-chevron-down text-xl transition-all duration-300 ${
-                expandedIds.includes(item.id) ? 'rotate-180' : ''
-              }`}
-            ></i>
-          </div>
-          <div
-            className={`px-5 pb-5 overflow-hidden transition-all duration-300 ${
-              expandedIds.includes(item.id) ? 'opacity-100' : 'opacity-0'
-            }`}
-          >
-            <div>{item.content}</div>
-          </div>
-        </div>
+          item={item}
+          index={index}
+          expandedIds={expandedIds}
+          toggleExpand={toggleExpand}
+          moveItem={moveItem}
+        />
       ))}
     </div>
   );

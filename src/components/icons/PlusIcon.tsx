@@ -1,10 +1,8 @@
 import React from 'react';
-interface IconActive {
-  active: boolean;
-}
-const PlusIcon: React.FC<IconActive> = ({ active }) => (
+
+const PlusIcon = () => (
   <svg
-    className={`size-6 text-gray-800 dark:text-white hover:text-primary  ${active && 'text-primary'}`}
+    className={`size-6 dark:text-white`}
     aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
     width="24"

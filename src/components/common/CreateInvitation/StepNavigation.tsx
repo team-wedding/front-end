@@ -1,11 +1,13 @@
 import React from 'react';
+import BackIcon from '../../icons/BackIcon';
+import NextIcon from '../../icons/NextIcon';
 
 interface StepNavigationProps {
   currentStep: number;
   totalSteps: number;
   onPrev: () => void;
   onNext: () => void;
-  onPreview?: () => void; // 미리보기 버튼 핸들러
+  // onPreview?: () => void; // 미리보기 버튼 핸들러
 }
 
 export const StepNavigation: React.FC<StepNavigationProps> = ({
@@ -13,46 +15,29 @@ export const StepNavigation: React.FC<StepNavigationProps> = ({
   totalSteps,
   onPrev,
   onNext,
-  onPreview,
+  // onPreview,
 }) => {
   return (
-    <div className="flex w-full justify-center gap-56 text-xs">
+    <div className="flex w-full justify-center gap-64">
       {/* Previous Button */}
       <button
         onClick={onPrev}
-        className={`px-4 rounded border ${
-          currentStep === 1
-            ? 'text-gray-300 border-gray-200 cursor-not-allowed'
-            : 'text-gray-700 border-gray-300 hover:bg-gray-100'
+        className={`px-2 py-1 rounded bg-rose-300 ${
+          currentStep === 1 ? 'opacity-0' : 'hover:bg-rose-200'
         }`}
         disabled={currentStep === 1}
       >
-        이전
+        <BackIcon />
       </button>
-
-      {/* Conditional Next/Preview Button */}
-      {currentStep === totalSteps ? (
-        // 미리보기 버튼만 활성화
-        <button
-          onClick={onPreview}
-          className="px-4 py-2 rounded text-white bg-primary hover:bg-opacity-80"
-        >
-          미리보기
-        </button>
-      ) : (
-        // Next Button
-        <button
-          onClick={onNext}
-          className={`px-4 py-2 rounded text-white ${
-            currentStep === totalSteps
-              ? 'bg-gray-300 cursor-not-allowed'
-              : 'bg-primary hover:bg-opacity-80'
-          }`}
-          disabled={currentStep === totalSteps}
-        >
-          다음
-        </button>
-      )}
+      <button
+        onClick={onNext}
+        className={`px-2 py-1 rounded bg-rose-300 ${
+          currentStep === totalSteps ? 'opacity-0' : 'hover:bg-rose-200'
+        }`}
+        disabled={currentStep === totalSteps}
+      >
+        <NextIcon />
+      </button>
     </div>
   );
 };

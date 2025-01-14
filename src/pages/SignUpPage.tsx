@@ -21,7 +21,6 @@ const SignUpPage = () => {
   // const [passwordValid, setPasswordValid] = useState(false)
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-
     setAccountInfo({
       ...accountInfo,
       [name]: value,
@@ -58,7 +57,6 @@ const SignUpPage = () => {
     <div className="splash-layout">
       <div className="column-center w-full p-8">
         <img className="w-52 mb-10" src="/src/assets/logo2.png" alt="Title" />
-
         <div className="flex flex-col w-full gap-3">
           <input
             name="name"
@@ -90,9 +88,7 @@ const SignUpPage = () => {
           />
           <button
             className="h-12 mt-4 mb-4 text-sm bg-logo rounded-lg text-white shadow-sm hover:bg-primary transition duration-100 ease-out hover:ease-in"
-            onClick={() => {
-              navigate('/login');
-            }}
+            onClick={handleSignUp}
           >
             회원가입
           </button>

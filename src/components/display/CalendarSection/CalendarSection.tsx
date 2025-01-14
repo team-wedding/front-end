@@ -8,7 +8,7 @@ const CalendarSection = () => {
   const { weddingDate, weddingTime } = useWeddingStore();
 
   return (
-    <div className="flex flex-col justify-center items-center gap-10">
+    <div className="column-center gap-10">
       <CalendarTitle />
       <Calendar />
       <DDay targetDate={weddingDate} targetTime={weddingTime} />

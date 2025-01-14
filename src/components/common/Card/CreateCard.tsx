@@ -6,12 +6,6 @@ const CreateCard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const handleModal = () => setIsModalOpen((prev) => !prev);
 
-  let modal = null;
-
-  if (isModalOpen) {
-    modal = <InputTitleModal isOpen={isModalOpen} onClose={handleModal} />;
-  }
-
   return (
     <>
       <div
@@ -23,7 +17,7 @@ const CreateCard = () => {
         </button>
         <div>청첩장 만들기</div>
       </div>
-      {modal}
+      {isModalOpen && <InputTitleModal onClose={handleModal} />}
     </>
   );
 };

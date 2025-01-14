@@ -5,18 +5,15 @@ import { useInvitationStore } from "../../../store/useInvitaionStore";
 import CloseIcon from "../../icons/CloseIcon";
 
 interface ModalProps {
-    isOpen: boolean;
     onClose: () => void;
 }
 
-const InputTitleModal = ({ isOpen, onClose }: ModalProps) => {
+const InputTitleModal = ({ onClose }: ModalProps) => {
     const [titleInput, setTitleInput] = useState("");
     const { setTitle } = useInvitationStore();
     const navigate = useNavigate();
 
     const maxLength = 8;
-
-    if (!isOpen) return null; // 모달이 닫힌 경우 렌더링하지 않음
 
     const handleTitleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const input = e.target.value;

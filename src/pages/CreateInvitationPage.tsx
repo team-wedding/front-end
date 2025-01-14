@@ -16,7 +16,7 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import ResultDisplay from '../components/display/ResultDisplay';
 
 const CreateInvitationPage = () => {
-  const { title, setTitle } = useInvitationStore();
+  const { title } = useInvitationStore();
   const navigate = useNavigate();
 
   const handleCancel = () => navigate('/dashboard');
@@ -67,7 +67,7 @@ const CreateInvitationPage = () => {
     <div className="page-container">
       <div className="create-section">
         <PageLayout
-          title="새로운 청첩장"
+          title={title}
           leftButton={
             <HeaderButton
               onClick={handleCancel}

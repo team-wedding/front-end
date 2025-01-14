@@ -9,7 +9,6 @@ interface ModalProp {
   groom: string;
   date: string;
   time: string;
-  modal: boolean;
   location: string;
   setModal: Dispatch<SetStateAction<boolean>>;
 }
@@ -28,7 +27,6 @@ const RsvpModal: React.FC<ModalProp> = ({
   date,
   time,
   location,
-  modal,
   setModal,
 }) => {
   const [step, setStep] = useState(0);
@@ -51,7 +49,7 @@ const RsvpModal: React.FC<ModalProp> = ({
   //TODO : 동적으로 색 바꿀수있게 props로 받아서 차리
   //TODO : 재사용할수있는 코드 리팩토링 특히 인풋
   return (
-    <div className={`fixed  z-50 top-0 left-0 size-full flex justify-center ${modal ? 'visible' : 'hidden'} pt-10`}>
+    <div className={`fixed  z-50 top-0 left-0 size-full flex justify-center pt-10`}>
       <div className='absolute top-0 left-0 w-screen h-screen bg-black/60 z-10'></div>
       <div
         className={`absolute z-30 flex flex-col py-6 px-5 bg-white  w-[350px] rounded-xl  border`}

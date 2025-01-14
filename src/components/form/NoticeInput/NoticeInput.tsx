@@ -117,6 +117,7 @@ const NoticeInput: React.FC = () => {
           <span>공지는 최대 5개까지 입력할 수 있습니다.</span>
         </div>
       </div>
+      <hr className="mb-5 border-gray-300" />
 
       <Notice
         items={accordionItems}

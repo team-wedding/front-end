@@ -3,7 +3,7 @@ import { calculateDday } from '../../../utils/dateUtils';
 
 type CountDownProps = {
   targetDate: Date | null;
-  targetTime: string | null;
+  targetTime: { hour: number | null; minute: number | null };
 };
 
 const CountDown: React.FC<CountDownProps> = ({ targetDate, targetTime }) => {
@@ -36,20 +36,24 @@ const CountDown: React.FC<CountDownProps> = ({ targetDate, targetTime }) => {
   ];
 
   return (
-    <div className="flex justify-center items-center gap-2">
+    <div className="flex-center gap-2">
       {timeUnits.map((dday, index) => (
-        <div key={index} className="flex items-center">
-          <div className="flex flex-col items-center justify-center leading-none">
-            <div className="text-[8px] text-gray-400 -tracking-wide font-normal">
-              {dday.label}
-            </div>
-            <div className="my-3 tracking-wide font-normal">
-              {dday.value !== undefined ? dday.value : '00'}
+        <div key={index} className="column-center gap-3">
+          {/* <div className="column-center leading-none"> */}
+          <div className="text-[10px] text-gray-300 tracking-wide font-light mr-2">
+            {dday.label}
+          </div>
+          <div>
+            <div className="flex-center">
+              <div className="flex-center w-12 h-14 text-sm tracking-wide rounded-md shadow-md">
+                {dday.value !== undefined ? dday.value : '00'}
+              </div>
+              {index < timeUnits.length - 1 && (
+                <div className="ml-2 text-xs leading-none text-gray-400">:</div>
+              )}
             </div>
           </div>
-          {index < timeUnits.length - 1 && (
-            <div className="text-xs leading-none mx-1 text-gray-400">:</div>
-          )}
+          {/* </div> */}
         </div>
       ))}
     </div>

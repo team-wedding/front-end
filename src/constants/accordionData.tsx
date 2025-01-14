@@ -8,7 +8,7 @@ import ImageInput from '../components/form/ThumbnailSelection/ImageInput';
 import NameInput from '../components/form/NameInput/NameInput';
 import CalendarSelection from '../components/form/CalendarSelection/CalendarSelection';
 import MessageSelection from '../components/form/MessageSelection/MessageSelection';
-import InformSection from '../components/display/InformSection/InformSection';
+import NoticeInput from '../components/form/NoticeInput/NoticeInput';
 import GallerySelection from '../components/form/GallerySelection/GallerySelection';
 import LocationSelection from '../components/form/LocationSelection/LocationSelection';
 import ContactSelection from '../components/form/ContactSelection/ContactSelection';
@@ -96,7 +96,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 13,
     title: '공지사항',
-    content: <InformSection />,
+    content: <NoticeInput />,
     hasToggle: true,
     hasDrag: true,
   },
@@ -134,6 +134,6 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 19,
     title: '갤러리',
-    content: <GallerySelection />
+    content: <GallerySelection />,
   },
 ];

@@ -6,7 +6,6 @@ import GreetingSection from './GreetingSection/GreetingSection';
 import GallerySection from './GallerySection/GallerySection';
 import MoneySection from './MoneySection/MoneySection';
 import NoticeSection from './NoticeSection/NoticeSection';
-import NoticeSection from './NoticeSection/NoticeSection';
 import PhotoTalkSection from './PhotoTalkSection/PhotoTalkSection';
 import NoticeSection from './NoticeSection/NoticeSection';
 
@@ -20,6 +19,7 @@ const ResultDisplay = () => {
       <ContactSection />
       <GallerySection />
       <MoneySection />
+      <NoticeSection />
       <NoticeSection />
       <PhotoTalkSection />
     </div>

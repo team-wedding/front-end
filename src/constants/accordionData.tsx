@@ -7,11 +7,11 @@ import CalendarFeature from '../components/form/Feature/CalendarFeature/Calendar
 import ContactFeature from '../components/form/Feature/ContactFeature/ContactFeature';
 import GalleryFeature from '../components/form/Feature/GalleryFeature/GalleryFeature';
 import GreetingFeature from '../components/form/Feature/GreetingFeature/GreetingFeature';
-import InformationFeature from '../components/form/Feature/InformationFeature/InformationInput';
 import LocationFeature from '../components/form/Feature/LocationFeature/LocationFeature';
 import RsvpExample from '../components/form/Feature/RsvpFeature/RsvpExample';
 import ImageInput from '../components/form/Feature/ThumbnailFeature/ImageInput';
 import ThemeFeature from '../components/form/Theme/ThemeFeature/ThemeFeature';
+import NoticeFeature from '../components/form/Feature/NoticeFeature/NoticeFeature';
 
 export const accordionData: AccordionItemData[] = [
   {
@@ -113,8 +113,8 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 13,
     title: '공지사항',
-    feature: 'mainInformation',
-    content: <InformationFeature />,
+    feature: 'mainNotice',
+    content: <NoticeFeature />,
     hasToggle: true,
     hasDrag: true,
   },

@@ -35,7 +35,7 @@ const NoticeSection = () => {
                   <img
                     src={notice.image}
                     alt={notice.title}
-                    className="w-full object-cover h-48 rounded-md"
+                    className="w-full object-cover h-52 rounded-md"
                   />
                 )}
                 <h3 className="text-center title text-base my-4">

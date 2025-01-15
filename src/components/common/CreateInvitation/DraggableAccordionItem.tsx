@@ -50,7 +50,6 @@ const DraggableAccordionItem: React.FC<DraggableAccordionItemProps> = ({
           expandedIds.includes(item.id) ? 'max-h-160' : 'max-h-12'
         } ${isDragging ? 'transition-transform ease-out' : ''}`}
         style={{
-          zIndex: isDragging ? 100 : 1, // 드래그 중일 때 z-index를 높게 설정
           position: isDragging ? 'relative' : 'static', // 드래그 중인 항목은 상대적 위치
           opacity: isDragging ? 50 : '', // 드래그 중 투명도 조정
         }}

@@ -4,12 +4,13 @@ import useAddressStore from '../../../store/useAddressStore';
 
 const AddressInput: React.FC = () => {
   const [popup, setPopup] = useState<boolean>(false);
-  const { address, zonecode } = useAddressStore();
+  const { address, zonecode, weddingHallName, weddingHallDetail, setWeddingHallName, setWeddingHallDetail } = useAddressStore();
 
   // 팝업 열고 닫기
   const handleComplete = () => {
     setPopup(!popup);
   };
+
 
   return (
     <div className="max-w-lg mx-auto p-4">
@@ -45,9 +46,11 @@ const AddressInput: React.FC = () => {
           <label className="label">예식장명</label>
           <input
             type="text"
+            value={weddingHallName}
             placeholder="예식장 이름"
             className="formInput"
             maxLength={36}
+            onChange={(e) => setWeddingHallName(e.target.value)}
           />
         </div>
         {/* 층과 홀 */}
@@ -55,10 +58,12 @@ const AddressInput: React.FC = () => {
           <label className="label">층과 홀</label>
           <input
             type="text"
+            value={weddingHallDetail}
             placeholder="층과 웨딩홀 이름"
             className="formInput"
             minLength={2}
             maxLength={36}
+            onChange={(e) => setWeddingHallDetail(e.target.value)}
           />
         </div>
       </div>

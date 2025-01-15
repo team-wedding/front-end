@@ -1,4 +1,5 @@
 import useGreetingStore from '../../../store/useGreetingStore';
+import CloseIcon from '../../icons/CloseIcon';
 
 const greetingSample = [
   `저희 두 사람의 작은 만남이\n 사랑의 결실을 이루어\n소중한 결혼식을 올리게 되었습니다.\n\n평생 서로 귀하게 여기며\n첫 마음 그대로 존중하고 배려하며 살겠습니다.\n\n오로지 믿음과 사랑을 약속하는 날\n오셔서 축복해 주시면 더없는 기쁨으로\n간직하겠습니다.`,
@@ -18,25 +19,28 @@ const GreetingModal = ({
 
   return (
     <div
-      id="select-modal"
-      tabIndex={-1}
-      aria-hidden="false"
-      className="fixed inset-0 z-50 flex justify-center items-center bg-black bg-opacity-50 overflow-auto min-h-screen"
+      className="page-container fixed inset-0 z-50 bg-black bg-opacity-50 pt-20 min-h-screen"
       onClick={onClose}
     >
-      <div className="relative w-full h-full max-w-md p-10 text-sm">
-        <div className="bg-white rounded-lg shadow-md h-3/4">
+      <div className="create-section p-10">
+        <div
+          className="bg-white rounded-lg shadow-md h-3/4"
+          onClick={(e) => e.stopPropagation()}
+        >
           <div className="flex flex-col h-full">
             <div className="flex items-center justify-between p-4 border-b rounded-t">
-              <h3 className="text-base font-semibold text-gray-900">
+              <div className="text-base font-semibold text-gray-900">
                 샘플 문구 선택
-              </h3>
+              </div>
+              <button onClick={onClose}>
+                <CloseIcon className="size=[20px]" />
+              </button>
             </div>
             <div className="flex flex-col gap-4 p-4 overflow-y-auto">
               {greetingSample.map((text, index) => (
                 <button
                   key={index}
-                  className={`whitespace-pre-wrap cursor-pointer p-5 rounded-lg border w-full ${
+                  className={`whitespace-pre-wrap text-sm cursor-pointer p-5 rounded-lg border w-full ${
                     text === selectedSample
                       ? 'border-black bg-gray-100'
                       : 'border-gray-200 hover:bg-gray-100'

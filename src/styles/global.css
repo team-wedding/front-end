@@ -71,7 +71,7 @@
 
   .layout-header,
   .layout-footer {
-    @apply fixed w-full z-50 flex-center;
+    @apply fixed w-full flex-center;
     @apply md:max-w-md;
     max-width: var(--max-content-width, 448px);
   }
@@ -89,14 +89,14 @@
   }
 
   .layout-content {
-    @apply bg-white w-full z-10 overflow-auto;
+    @apply bg-white w-full overflow-auto;
     margin-top: var(--header-height);
     margin-bottom: var(--footer-height);
     height: calc(100vh - var(--header-height) - var(--footer-height));
   }
 
   .stepper-layout {
-    @apply fixed w-full bg-white z-50 flex-center text-sm px-12 py-2 shadow-sm;
+    @apply fixed w-full bg-white z-10 flex-center text-sm px-12 py-2 shadow-sm;
     @apply md:max-w-md;
     max-width: var(--max-content-width, 448px);
   }

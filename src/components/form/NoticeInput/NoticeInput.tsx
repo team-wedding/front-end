@@ -82,12 +82,13 @@ const NoticeInput = () => {
                   <img
                     src={notice.image}
                     alt={`Uploaded ${index}`}
-                    className="object-cover w-full h-52 rounded-md border"
+                    className="object-cover rounded-md border"
                   />
                   <button
-                    onClick={() => updateNotice(index, 'image', null)}
+                    onClick={() => updateNotice(notice.id, 'image', null)}
                     className="absolute top-1 right-1 bg-gray-800 text-white rounded-full p-1"
                   >
+                    <CloseIcon className="size-[12px]" />
                     <CloseIcon className="size-[12px]" />
                   </button>
                 </div>
@@ -105,7 +106,10 @@ const NoticeInput = () => {
                       type="file"
                       accept="image/*"
                       onChange={(e) =>
-                        handleImageUpload(index, e.target.files?.[0] || null)
+                        handleImageUpload(
+                          notice.id,
+                          e.target.files?.[0] || null,
+                        )
                       }
                       className="hidden"
                     />

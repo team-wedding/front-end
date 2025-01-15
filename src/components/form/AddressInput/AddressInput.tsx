@@ -26,7 +26,7 @@ const AddressInput: React.FC = () => {
           />
           <button
             onClick={handleComplete}
-            className="bg-primary hover:bg-pink-600 text-white px-4 py-2 rounded-xl shrink-0 text-xs"
+            className="bg-rose-300 hover:bg-rose-200 text-gray-800 px-4 py-2 rounded-xl shrink-0 text-xs"
           >
             검색
           </button>
@@ -37,7 +37,7 @@ const AddressInput: React.FC = () => {
             type="text"
             value={address}
             placeholder="기본 주소"
-            className="formInput"
+            className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1 placeholder:opacity-50"
             readOnly
           />
         </div>

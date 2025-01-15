@@ -89,7 +89,6 @@ const NoticeInput = () => {
                     className="absolute top-1 right-1 bg-gray-800 text-white rounded-full p-1"
                   >
                     <CloseIcon className="size-[12px]" />
-                    <CloseIcon className="size-[12px]" />
                   </button>
                 </div>
               ) : (
@@ -131,6 +130,7 @@ const NoticeInput = () => {
           <span>공지는 최대 5개까지 입력할 수 있습니다.</span>
         </div>
       </div>
+      <hr className="mb-5 border-gray-300" />
       <hr className="mb-5 border-gray-300" />
 
       <Notice

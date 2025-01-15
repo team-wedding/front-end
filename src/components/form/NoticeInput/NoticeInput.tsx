@@ -86,7 +86,7 @@ const NoticeInput: React.FC = () => {
                   <img
                     src={notice.image}
                     alt={`Uploaded ${index}`}
-                    className="object-cover rounded-md border"
+                    className="object-cover w-full h-52 rounded-md border"
                   />
                   <button
                     onClick={() => updateNotice(notice.id, 'image', null)}

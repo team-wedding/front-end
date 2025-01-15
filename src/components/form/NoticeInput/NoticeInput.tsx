@@ -2,6 +2,8 @@ import React, { useMemo } from 'react';
 import useNoticeStore from '../../../store/useNoticeStore';
 import TrashBinIcon from '../../icons/TrashBinIcon';
 import { Notice } from './NoticeItem';
+import CloudArrow from '../../icons/CloudArrow';
+import CloseIcon from '../../icons/CloseIcon';
 
 const NoticeInput: React.FC = () => {
   const {
@@ -80,27 +82,42 @@ const NoticeInput: React.FC = () => {
             <div className="flex flex-col gap-2">
               <label className="label w-full">이미지 업로드</label>
               {notice.image ? (
-                <div className="mb-2">
+                <div key={index} className="relative">
                   <img
                     src={notice.image}
-                    alt="Uploaded"
-                    className="w-32 h-32 object-cover mb-2 border rounded-md"
+                    alt={`Uploaded ${index}`}
+                    className="object-cover rounded-md border"
                   />
                   <button
                     onClick={() => updateNotice(notice.id, 'image', null)}
+                    className="absolute top-1 right-1 bg-gray-800 text-white rounded-full p-1"
                   >
-                    삭제
+                    <CloseIcon className="size-[12px]" />
                   </button>
                 </div>
               ) : (
-                <input
-                  type="file"
-                  accept="image/*"
-                  onChange={(e) =>
-                    handleImageUpload(notice.id, e.target.files?.[0] || null)
-                  }
-                  className="block w-full text-sm border rounded-md px-3 py-2"
-                />
+                <div className="flex items-center justify-center w-full">
+                  <label className="flex flex-col items-center justify-center w-full py-8 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
+                    <div className="flex flex-col items-center justify-center">
+                      <CloudArrow />
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        <span className="font-semibold">Click to upload</span>{' '}
+                        or drag and drop
+                      </p>
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      onChange={(e) =>
+                        handleImageUpload(
+                          notice.id,
+                          e.target.files?.[0] || null,
+                        )
+                      }
+                      className="hidden"
+                    />
+                  </label>
+                </div>
               )}
             </div>
           </div>

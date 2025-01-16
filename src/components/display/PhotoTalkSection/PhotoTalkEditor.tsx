@@ -80,9 +80,9 @@ const PhotoTalkEditor = () => {
   return (
     <div
       onClick={closeEditor}
-      className="page-container fixed inset-0 z-50 bg-black bg-opacity-50 pt-20"
+      className="page-container fixed inset-0 z-50 bg-black bg-opacity-50"
     >
-      <div className="create-section p-10">
+      <div className="preview-section p-20">
         <div
           onClick={(e) => e.stopPropagation()}
           className="bg-white rounded-lg shadow-md h-3/4 min-h-fit"

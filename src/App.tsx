@@ -11,6 +11,7 @@ import ResultPage from './pages/ResultPage';
 import DashBoardPage from './pages/DashBoardPage';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import EditInvitationPage from './pages/EditInvitationPage';
 
 
 function App() {
@@ -23,10 +24,10 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
         <Route path="/splash" element={<SplashPage />} />
-        <Route path="/create/:id" element={<CreateInvitationPage />} />
-        <Route path="/edit/:id" element={<CreateInvitationPage />} />
+        <Route path="/create" element={<CreateInvitationPage />} />
+        <Route path="/edit/:id" element={<EditInvitationPage />} />
         <Route path="/preview" element={<PreviewInvitaionPage />} />
-        <Route path="/result" element={<ResultPage />} />
+        <Route path="/result/:id" element={<ResultPage />} />
       </Routes>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

@@ -28,3 +28,9 @@ export interface InvitationDetiail {
   weight: string;
   backgroundColor: string;
 }
+
+interface ContactInfo {
+  name: string;
+  contact: string;
+  alive?: boolean;
+}

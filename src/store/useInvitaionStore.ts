@@ -4,9 +4,14 @@ import { create } from 'zustand';
 type InvitationStore = {
   title: string;
   setTitle: (newTitle: string) => void;
+  reset: () => void;
 };
 
 export const useInvitationStore = create<InvitationStore>((set) => ({
   title: '',
   setTitle: (newTitle) => set({ title: newTitle }),
+  reset: () =>
+    set({
+      title: '',
+    }),
 }));

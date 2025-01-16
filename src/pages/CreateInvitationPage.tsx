@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import PageLayout from '../components/layout/PageLayout';
 import HeaderButton from '../components/common/Header/HeaderButton';
-
-import { useInvitationStore } from '../store/useInvitaionStore';
 import { useNavigate } from 'react-router';
 import {
   Accordion,
@@ -14,13 +12,29 @@ import { StepNavigation } from '../components/common/CreateInvitation/StepNaviga
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import ResultDisplay from '../components/display/ResultDisplay';
+import { useCreateInvitation } from '../hooks/useInvitation';
+
+import { resetAllStores } from '../store/resetStore';
+
 
 const CreateInvitationPage = () => {
-  const { title, setTitle } = useInvitationStore();
+  // const { title, setTitle } = useInvitationStore();
   const navigate = useNavigate();
 
-  const handleCancel = () => navigate('/dashboard');
-  const handleSave = () => navigate('/dashboard');
+
+  const handleCancel = () => {
+    navigate('/dashboard');
+    resetAllStores();
+  }
+  const { mutate: createInvitation } = useCreateInvitation()
+
+  const handleSave = async () => {
+    await createInvitation()
+    resetAllStores()
+    navigate('/dashboard');
+
+  }
+
 
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const [steps, setSteps] = useState(1);

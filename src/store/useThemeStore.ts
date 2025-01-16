@@ -4,19 +4,25 @@ interface ThemeState {
   font: string;
   weight: string;
   backgroundColor: string;
-  updateFont: (font: string) => void;
-  updateWeight: (weight: string) => void;
-  updateBackgroundColor: (backgroundColor: string) => void;
+  setFont: (font: string) => void;
+  setWeight: (weight: string) => void;
+  setBackgroundColor: (backgroundColor: string) => void;
+  reset: () => void;
 }
 
-const usePersonStore = create<ThemeState>((set) => ({
+const initialState = {
   font: '',
   weight: '',
   backgroundColor: '',
-  updateFont: (font: string) => set(() => ({ font: font })),
-  updateWeight: (weight) => set(() => ({ weight: weight })),
-  updateBackgroundColor: (backgroundColor) =>
+};
+
+const usePersonStore = create<ThemeState>((set) => ({
+  ...initialState,
+  setFont: (font: string) => set(() => ({ font: font })),
+  setWeight: (weight) => set(() => ({ weight: weight })),
+  setBackgroundColor: (backgroundColor) =>
     set(() => ({ backgroundColor: backgroundColor })),
+  reset: () => set(() => initialState),
 }));
 
 export default usePersonStore;

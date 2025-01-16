@@ -15,8 +15,7 @@ export const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const accessToken =
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6InRlc3RSIiwiZW1haWwiOiJ0ZXN0UkB0ZXN0LmNvbSIsImlhdCI6MTczNjkyMTE1NywiZXhwIjoxNzM3MDA3NTU3fQ.FWd9BbP5HzZsM7EOy5x5UmyQ0bkHvUjhPtn78DTudBM';
+    const accessToken = import.meta.env.VITE_TOKEN;
     if (accessToken) {
       config.headers.Authorization = `Bearer ${accessToken}`;
     }
@@ -65,6 +64,6 @@ export const API = {
   LOGOUT: () => `${BASE_URL}/users/logout`,
   REFRESH: () => `${BASE_URL}/users/refresh`,
   ACCOUNT: () => `${BASE_URL}/users/account`,
-  INVITATIONS: (id?: string) => `${BASE_URL}/invitations${id ? id : ''}`,
+  INVITATIONS: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
   ATTENDANCE: () => `${BASE_URL}/attendances`,
 };

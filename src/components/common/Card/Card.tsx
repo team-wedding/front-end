@@ -4,9 +4,10 @@ import CardFooter from './CardFooter';
 
 interface CardProps {
   image?: string;
+  id: number
 }
 
-const Card: React.FC<CardProps> = ({ image }) => {
+const Card: React.FC<CardProps> = ({ image, id }) => {
   return (
     <div className="relative flex flex-col items-center border border-gray-200 rounded-lg shadow-xl w-[150px] h-[225px] bg-gray-200">
       <div className="relative h-full w-full rounded-lg overflow-hidden">
@@ -15,10 +16,9 @@ const Card: React.FC<CardProps> = ({ image }) => {
           className="object-cover h-full w-[188px] rounded-lg"
         ></img>
         <div className="absolute inset-0 bg-white opacity-10"></div>
-        <CardHeader />
+        <CardHeader id={id} />
       </div>
-
-      <CardFooter />
+      <CardFooter id={id} />
     </div>
   );
 };

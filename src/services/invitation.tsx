@@ -8,14 +8,14 @@ export const getInvitations = async () => {
 };
 
 //청첩장 단일 조회
-export const getInvitaion = async (id: number) => {
+export const getInvitation = async (id: number) => {
   const { data } = await axiosInstance.get(API.INVITATIONS(id.toString()));
   return data;
 }
 
 
 //청첩장 생성
-export const postInvitation = async (details: InvitationDetiail) => {
+export const postInvitation = async (details: Omit<InvitationDetiail, 'id'>) => {
   const { data } = await axiosInstance.post(API.INVITATIONS(), details);
   return data
 }

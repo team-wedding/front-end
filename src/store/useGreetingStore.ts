@@ -7,15 +7,21 @@ type StoreState = {
   setGreeting: (greeting: string) => void;
   selectedSample: string | null;
   setSelectedSample: (sample: string) => void;
+  reset: () => void;
+};
+
+const initialState = {
+  title: '',
+  greeting: '',
 };
 
 const useGreetingStore = create<StoreState>((set) => ({
-  title: '',
-  greeting: '',
+  ...initialState,
   setTitle: (title) => set({ title }),
   setGreeting: (greeting) => set({ greeting }),
   selectedSample: null,
   setSelectedSample: (sample) => set({ selectedSample: sample }),
+  reset: () => set(() => initialState),
 }));
 
 export default useGreetingStore;

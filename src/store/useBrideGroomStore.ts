@@ -30,29 +30,33 @@ type StoreState = {
     field: keyof Person,
     value: string | boolean,
   ) => void;
+  reset: () => void; // Reset 메서드 추가
 };
 
+// 초기 상태 정의
+const initialBrideGroom: BrideGroomInformation[] = [
+  {
+    role: '신랑',
+    name: '',
+    relation: '아들',
+    family: {
+      father: { name: '', isDeceased: false },
+      mother: { name: '', isDeceased: false },
+    },
+  },
+  {
+    role: '신부',
+    name: '',
+    relation: '딸',
+    family: {
+      father: { name: '', isDeceased: false },
+      mother: { name: '', isDeceased: false },
+    },
+  },
+];
+
 const useBrideGroomStore = create<StoreState>((set) => ({
-  brideGroom: [
-    {
-      role: '신랑',
-      name: '',
-      relation: '아들',
-      family: {
-        father: { name: '', isDeceased: false },
-        mother: { name: '', isDeceased: false },
-      },
-    },
-    {
-      role: '신부',
-      name: '',
-      relation: '딸',
-      family: {
-        father: { name: '', isDeceased: false },
-        mother: { name: '', isDeceased: false },
-      },
-    },
-  ],
+  brideGroom: initialBrideGroom,
   updateBrideGroom: (index, field, value) =>
     set((state) => {
       const updatedBrideGroom = [...state.brideGroom];
@@ -71,6 +75,7 @@ const useBrideGroomStore = create<StoreState>((set) => ({
       };
       return { brideGroom: updatedBrideGroom };
     }),
+  reset: () => set({ brideGroom: initialBrideGroom }),
 }));
 
 export default useBrideGroomStore;

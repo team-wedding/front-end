@@ -18,7 +18,7 @@ import { resetAllStores } from '../store/resetStore';
 
 
 const CreateInvitationPage = () => {
-  // const { title, setTitle } = useInvitationStore();
+  const { title } = useInvitationStore();
   const navigate = useNavigate();
 
 
@@ -81,7 +81,7 @@ const CreateInvitationPage = () => {
     <div className="page-container">
       <div className="create-section">
         <PageLayout
-          title="새로운 청첩장"
+          title={title}
           leftButton={
             <HeaderButton
               onClick={handleCancel}

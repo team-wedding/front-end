@@ -35,7 +35,7 @@ const DashBoardPage = () => {
       </div>
       <div className="grid grid-cols-2 gap-6 place-items-center  px-6 pb-10">
         <div>
-          <CreateCard onClick={handleCreateCard} />
+          <CreateCard />
         </div>
         {
           isPending || isRefetching ? <>Loading....</> : data ? data.map((card: InvitationDetiail) => (

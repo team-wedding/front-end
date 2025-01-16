@@ -7,7 +7,7 @@ import RsvpExample from '../components/form/RsvpSelection/RsvpExample';
 import ImageInput from '../components/form/ThumbnailSelection/ImageInput';
 import NameInput from '../components/form/NameInput/NameInput';
 import CalendarSelection from '../components/form/CalendarSelection/CalendarSelection';
-import MessageSelection from '../components/form/MessageSelection/MessageSelection';
+import MessageSelection from '../components/form/PhotoTalkFeature/PhotoTalkFeature';
 import InformSection from '../components/display/InformSection/InformSection';
 import GallerySelection from '../components/form/GallerySelection/GallerySelection';
 import LocationSelection from '../components/form/LocationSelection/LocationSelection';
@@ -74,7 +74,7 @@ export const accordionData: AccordionItemData[] = [
   },
   {
     id: 10,
-    title: '축하 메시지',
+    title: '포토톡',
     content: <MessageSelection />,
     hasToggle: true,
     hasDrag: true,
@@ -134,6 +134,6 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 19,
     title: '갤러리',
-    content: <GallerySelection />
+    content: <GallerySelection />,
   },
 ];

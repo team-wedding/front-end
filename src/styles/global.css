@@ -131,7 +131,7 @@
   }
 
   .preview-section {
-    @apply hidden overflow-auto bg-black bg-opacity-50 absolute top-0 right-0;
+    @apply hidden overflow-auto absolute top-0 right-0;
     @apply lg:flex lg:w-[40%] lg:justify-center;
     /* @apply md:flex md:w-[40%] md:justify-center; */
     transition: all 0.3s ease;

@@ -1,4 +1,3 @@
-import React from 'react';
 import DraggableAccordionItem from './DraggableAccordionItem';
 
 export interface AccordionItemData {
@@ -16,12 +15,12 @@ interface AccordionProps {
   moveItem: (dragIndex: number, hoverIndex: number) => void;
 }
 
-export const Accordion: React.FC<AccordionProps> = ({
+export const Accordion = ({
   items,
   expandedIds,
   toggleExpand,
   moveItem,
-}) => {
+}: AccordionProps) => {
   return (
     <div className="flex flex-col gap-2 p-10 pt-20">
       {items.map((item, index) => (

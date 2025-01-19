@@ -1,10 +1,9 @@
-import React from 'react';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/locale/ko';
 import { useWeddingStore } from '../../../store/useWeddingStore';
 
-const TimePicker: React.FC = () => {
+const TimePicker = () => {
   const { weddingTime, setWeddingTime } = useWeddingStore();
   const time = new Date(`2023-01-01T${weddingTime}`);
 
@@ -46,7 +45,7 @@ const TimePicker: React.FC = () => {
         minTime={minTime}
         maxTime={maxTime}
         className="formInput w-full"
-        //  className="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary <flex-1></flex-1> !important"
+      //  className="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary <flex-1></flex-1> !important"
       />
       {!weddingTime && (
         <div className="mt-2 text-sm text-red-600">시간을 선택해주세요</div>

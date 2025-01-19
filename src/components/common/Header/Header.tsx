@@ -1,4 +1,4 @@
-import React from 'react';
+
 
 type HeaderProps = {
   text?: string | React.ReactNode;
@@ -8,7 +8,7 @@ type HeaderProps = {
   height?: string;
 };
 
-const Header: React.FC<HeaderProps> = ({ text, leftButton, rightButton }) => {
+const Header = ({ text, leftButton, rightButton }: HeaderProps) => {
   return (
     <header className="flex items-center w-full max-w-sm justify-between px-8">
       {/* Left Button */}
@@ -16,9 +16,8 @@ const Header: React.FC<HeaderProps> = ({ text, leftButton, rightButton }) => {
 
       {/* Text */}
       <div
-        className={`flex-1 text-center ${
-          leftButton || rightButton ? '' : 'justify-center'
-        }`}
+        className={`flex-1 text-center ${leftButton || rightButton ? '' : 'justify-center'
+          }`}
       >
         {text}
       </div>

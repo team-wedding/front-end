@@ -1,4 +1,4 @@
-import React from 'react';
+
 import {
   eachDayOfInterval,
   endOfMonth,
@@ -11,7 +11,7 @@ import {
 } from 'date-fns';
 import { useWeddingStore } from '../../../store/useWeddingStore';
 
-const Calendar: React.FC = () => {
+const Calendar = () => {
   const { weddingDate } = useWeddingStore();
   const currentDate = weddingDate || new Date();
 

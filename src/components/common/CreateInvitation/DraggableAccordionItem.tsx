@@ -1,8 +1,9 @@
-import React from 'react';
+
 import { useDrag, useDrop } from 'react-dnd';
 import { AccordionItemData } from './Accordion';
 import Toggle from './Toggle';
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
+import { useRef } from 'react';
 
 interface DraggableAccordionItemProps {
   item: AccordionItemData;
@@ -12,14 +13,14 @@ interface DraggableAccordionItemProps {
   moveItem: (dragIndex: number, hoverIndex: number) => void;
 }
 
-const DraggableAccordionItem: React.FC<DraggableAccordionItemProps> = ({
+const DraggableAccordionItem = ({
   item,
   index,
   expandedIds,
   toggleExpand,
   moveItem,
-}) => {
-  const ref = React.useRef<HTMLDivElement>(null);
+}: DraggableAccordionItemProps) => {
+  const ref = useRef<HTMLDivElement>(null);
 
   const [, drop] = useDrop({
     accept: 'accordion-item',
@@ -46,9 +47,8 @@ const DraggableAccordionItem: React.FC<DraggableAccordionItemProps> = ({
       {isDragging && <div className="h-3"></div>}
       <div
         ref={preview}
-        className={`bg-white rounded-2xl overflow-hidden transition-all duration-100 text-gray-800 shadow-md ${
-          expandedIds.includes(item.id) ? 'max-h-160' : 'max-h-12'
-        } ${isDragging ? 'transition-transform ease-out' : ''}`}
+        className={`bg-white rounded-2xl overflow-hidden transition-all duration-100 text-gray-800 shadow-md ${expandedIds.includes(item.id) ? 'max-h-160' : 'max-h-12'
+          } ${isDragging ? 'transition-transform ease-out' : ''}`}
         style={{
           zIndex: isDragging ? 100 : 1, // 드래그 중일 때 z-index를 높게 설정
           position: isDragging ? 'relative' : 'static', // 드래그 중인 항목은 상대적 위치
@@ -82,9 +82,8 @@ const DraggableAccordionItem: React.FC<DraggableAccordionItemProps> = ({
           <div className="flex items-center gap-4">
             {item.hasToggle && <Toggle />}
             <i
-              className={`bx bx-chevron-down text-xl transition-all duration-300 ${
-                expandedIds.includes(item.id) ? 'rotate-180' : ''
-              }`}
+              className={`bx bx-chevron-down text-xl transition-all duration-300 ${expandedIds.includes(item.id) ? 'rotate-180' : ''
+                }`}
             ></i>
           </div>
         </div>
@@ -92,9 +91,8 @@ const DraggableAccordionItem: React.FC<DraggableAccordionItemProps> = ({
         {/* 콘텐츠 */}
         <div
           id={`accordion-content-${item.id}`} // 제목이랑 연결
-          className={`px-5 pb-5 overflow-hidden transition-all duration-300 ease-in-out ${
-            expandedIds.includes(item.id) ? 'opacity-100' : 'opacity-0'
-          }`}
+          className={`px-5 pb-5 overflow-hidden transition-all duration-300 ease-in-out ${expandedIds.includes(item.id) ? 'opacity-100' : 'opacity-0'
+            }`}
         >
           <div>{item.content}</div>
         </div>

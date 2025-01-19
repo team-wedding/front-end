@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 interface StepperProps {
   steps: string[];
@@ -24,22 +24,20 @@ export const Stepper: React.FC<StepperProps> = ({
               onClick={() => onStepClick(index + 1)}
             >
               <div
-                className={`w-3 h-3 flex items-center justify-center rounded-full text-[8px] font-bold border ${
-                  isActive
+                className={`w-3 h-3 flex items-center justify-center rounded-full text-[8px] font-bold border ${isActive
                     ? 'text-primary border-primary'
                     : isCompleted
                       ? 'bg-gray-100 text-gray-400'
                       : 'bg-white text-gray-300'
-                }`}
+                  }`}
               >
                 {index + 1}
               </div>
               <div
-                className={`ml-2 text-xs ${
-                  isActive
+                className={`ml-2 text-xs ${isActive
                     ? 'text-primary font-medium'
                     : 'text-gray-300 font-light'
-                }`}
+                  }`}
               >
                 {step}
               </div>

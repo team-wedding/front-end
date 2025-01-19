@@ -1,8 +1,9 @@
-import { useState } from 'react';
-import usePhotoTalkStore from '../../../store/usePhotoTalkStore';
-import { PhotoTalk } from '../../../store/usePhotoTalkStore';
+import { useEffect, useRef, useState } from 'react';
+import usePhotoTalkStore, { PhotoTalk } from '../../../store/usePhotoTalkStore';
 import PhotoTalkEditor from './PhotoTalkEditor';
 import PhotoTalkCard from './PhotoTalkCard';
+import PhotoTalkGallery from './PhotoTalkGallery';
+import ImageIcon from '../../icons/ImageIcon';
 
 const PhotoTalkSection = () => {
   const { openEditor, setEditingPhotoTalk } = usePhotoTalkStore();
@@ -10,6 +11,14 @@ const PhotoTalkSection = () => {
   const [selectedPhotoTalk, setSelectedPhotoTalk] = useState<null | PhotoTalk>(
     null,
   );
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [isGalleryOpen, setGalleryOpen] = useState(false);
+
+  useEffect(() => {
+    if (selectedPhotoTalk) {
+      inputRef.current?.focus();
+    }
+  }, [selectedPhotoTalk]);
 
   const confirmPassword = () => {
     if (selectedPhotoTalk?.password === passwordInput) {
@@ -22,9 +31,43 @@ const PhotoTalkSection = () => {
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter') confirmPassword();
+  };
+
   return (
     <div className="w-full">
-      <button onClick={openEditor}>방명록 작성하기</button>
+      <div className="flex justify-center">
+        <div>방명록 소개글</div>
+        <button
+          onClick={openEditor}
+          className="px-4 py-2 bg-gray-500 text-white rounded-md"
+        >
+          방명록 작성하기
+        </button>
+      </div>
+      <div>
+        <button
+          onClick={() => setGalleryOpen(!isGalleryOpen)}
+          className="w-full flex justify-end px-8"
+        >
+          {isGalleryOpen ? (
+            <div className="border border-gray-300 hover:bg-gray-300 hover:text-white focus:ring-4 rounded-lg p-2.5 text-center inline-flex items-center">
+              <ImageIcon />
+            </div>
+          ) : (
+            <div className="border border-gray-300 hover:bg-gray-300 hover:text-white focus:ring-4 rounded-lg p-2.5 text-center inline-flex items-center">
+              <ImageIcon />
+            </div>
+          )}
+        </button>
+        {isGalleryOpen && (
+          <div className="w-full p-4">
+            <h2 className="text-lg font-semibold mb-4">이미지 갤러리</h2>
+            <PhotoTalkGallery />
+          </div>
+        )}
+      </div>
       <PhotoTalkEditor />
       <PhotoTalkCard onEdit={setSelectedPhotoTalk} />
       {selectedPhotoTalk && (
@@ -33,10 +76,12 @@ const PhotoTalkSection = () => {
             <h2 className="text-lg font-semibold mb-4">비밀번호 확인</h2>
             <input
               type="password"
+              ref={inputRef}
               value={passwordInput}
               onChange={(e) => setPasswordInput(e.target.value)}
               placeholder="비밀번호를 입력하세요"
               className="formInput w-full mb-4"
+              onKeyDown={handleKeyDown}
             />
             <div className="flex justify-end gap-2">
               <button

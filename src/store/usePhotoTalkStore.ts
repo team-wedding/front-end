@@ -17,9 +17,10 @@ interface PhotoTalkState {
   addPhotoTalk: (photoTalk: PhotoTalk) => void;
   editPhotoTalk: (id: string, updatedPhotoTalk: PhotoTalk) => void;
   setEditingPhotoTalk: (photoTalk: PhotoTalk | null) => void;
+  getAllImages: () => string[];
 }
 
-const usePhotoTalkStore = create<PhotoTalkState>((set) => ({
+const usePhotoTalkStore = create<PhotoTalkState>((set, get) => ({
   isOpen: false,
   photoTalks: [],
   editingPhotoTalk: null,
@@ -35,8 +36,7 @@ const usePhotoTalkStore = create<PhotoTalkState>((set) => ({
     })),
   setEditingPhotoTalk: (photoTalk: PhotoTalk | null): void =>
     set({ editingPhotoTalk: photoTalk }),
-  startEditing: (photoTalk: PhotoTalk): void =>
-    set({ editingPhotoTalk: photoTalk, isOpen: true }),
+  getAllImages: (): string[] => get().photoTalks.flatMap((talk) => talk.images),
 }));
 
 export default usePhotoTalkStore;

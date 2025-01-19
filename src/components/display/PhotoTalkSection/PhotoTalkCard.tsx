@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import usePhotoTalkStore from '../../../store/usePhotoTalkStore';
 import { PhotoTalk } from '../../../store/usePhotoTalkStore';
 import MenuDotsIcon from '../../icons/MenuDotsIcon';
@@ -12,22 +12,19 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
     null,
   );
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = (index: number) => {
     setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setOpenDropdownIndex(null);
-      }
-    };
+  const handleClickOutside = (event: MouseEvent) => {
+    const target = event.target as HTMLElement;
+    if (!target.closest('.dropdown')) {
+      setOpenDropdownIndex(null);
+    }
+  };
 
+  useEffect(() => {
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -41,16 +38,14 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
           key={talk.id}
           className="flex flex-col gap-2 bg-white w-full p-4 rounded-md shadow-md border border-gray-200 relative"
         >
-          <div className="absolute top-2 right-3" ref={dropdownRef}>
+          <div className="absolute top-2 right-3 dropdown">
             <button
-              className="inline-block text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:ring-4 focus:outline-none focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm"
+              className="inline-block text-gray-500 hover:bg-gray-100 focus:ring-4 focus:outline-none rounded-lg text-sm"
               type="button"
               onClick={() => toggleDropdown(index)}
             >
-              <span className="sr-only">Open dropdown</span>
               <MenuDotsIcon />
             </button>
-
             {openDropdownIndex === index && (
               <div className="absolute top-6 right-0 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
                 <ul className="py-2">

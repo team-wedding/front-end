@@ -17,6 +17,15 @@ const PhotoTalkEditor = () => {
   const [password, setPassword] = useState('');
   const [images, setImages] = useState<UploadedImage[]>([]);
 
+  // 상태 초기화 함수
+  const closeAndReset = () => {
+    setName('');
+    setContent('');
+    setPassword('');
+    setImages([]);
+    closeEditor();
+  };
+
   useEffect(() => {
     if (editingPhotoTalk) {
       setName(editingPhotoTalk.name);
@@ -70,16 +79,12 @@ const PhotoTalkEditor = () => {
       addPhotoTalk(newPhotoTalk);
     }
 
-    setName('');
-    setContent('');
-    setPassword('');
-    setImages([]);
-    closeEditor();
+    closeAndReset();
   };
 
   return (
     <div
-      onClick={closeEditor}
+      onClick={closeAndReset}
       className="page-container fixed inset-0 z-50 bg-black bg-opacity-50"
     >
       <div className="preview-section p-20">
@@ -92,7 +97,7 @@ const PhotoTalkEditor = () => {
               <div className="text-base font-semibold text-gray-900">
                 {editingPhotoTalk ? '포토톡 편집하기' : '포토톡 작성하기'}
               </div>
-              <button onClick={closeEditor}>
+              <button onClick={closeAndReset}>
                 <CloseIcon className="size=[20px]" />
               </button>
             </div>
@@ -118,7 +123,7 @@ const PhotoTalkEditor = () => {
               <textarea
                 placeholder="내용을 입력해주세요"
                 value={content}
-                rows={8}
+                rows={4}
                 onChange={(e) => setContent(e.target.value)}
                 className="formInput w-full mb-2"
               />

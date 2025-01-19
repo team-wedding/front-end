@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import _ from 'lodash';
 
 type Person = {
   name: string;
@@ -75,7 +76,10 @@ const useBrideGroomStore = create<StoreState>((set) => ({
       };
       return { brideGroom: updatedBrideGroom };
     }),
-  reset: () => set({ brideGroom: initialBrideGroom }),
+  reset: () => {
+    // console.log('Resetting state to:', _.cloneDeep(initialBrideGroom));
+    set({ brideGroom: _.cloneDeep(initialBrideGroom) }); // 깊은 복사 적용
+  },
 }));
 
 export default useBrideGroomStore;

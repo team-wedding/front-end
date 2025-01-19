@@ -1,33 +1,25 @@
 import Card from '../components/common/Card/Card';
 import PageLayout from '../components/layout/PageLayout';
 import CreateCard from '../components/common/Card/CreateCard';
-
-import { useNavigate } from 'react-router';
-
 import { useQuery } from '@tanstack/react-query';
 import { getInvitations } from '../services/invitation';
 import { InvitationDetiail } from '../types/invitationType';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const DashBoardPage = () => {
-  const navigate = useNavigate();
 
-  const handleCreateCard = () => {
-    navigate(`/create `);
-  };
-
-  const { isSuccess, data, refetch, isPending, isRefetching } = useQuery({
+  const { data, isPending, isRefetching, status } = useQuery({
     queryKey: ['invitations'],
     queryFn: getInvitations,
-    refetchOnMount: true,
-    refetchOnWindowFocus: true,
   })
 
-  useEffect(() => {
-    refetch()
-  }, [data, isSuccess])
 
-  console.log("remd")
+
+  useEffect(() => {
+    // console.log("rendering")
+  }, [data, status])
+
+
   return (
     <PageLayout title="우리, 결혼해요">
       <div className="flex-center px-4 pb-3 border-b border-background opacity-40 text-background text-[10px] m-5 tracking-wider">
@@ -39,7 +31,7 @@ const DashBoardPage = () => {
         </div>
         {
           isPending || isRefetching ? <>Loading....</> : data ? data.map((card: InvitationDetiail) => (
-            <Card key={card.id} image={card.imgUrl} id={card.id as number} />)) : <>no data</>
+            <Card key={card.id} image={card.imgUrl} id={card.id as number} title={card.content} />)) : <>no data</>
         }
       </div>
     </PageLayout>

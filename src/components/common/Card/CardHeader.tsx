@@ -2,7 +2,7 @@ import CircleMinusIcon from '../../icons/CircleMinusIcon';
 import ShareIcon from '../../icons/ShareIcon';
 import { useDeleteInvitation } from '../../../hooks/useInvitation';
 
-const CardHeader = ({ id }: { id: number }) => {
+const CardHeader = ({ id, title }: { id: number, title: string }) => {
   const { mutate: deleteInvitaion } = useDeleteInvitation(id)
   const handleDelete = () => {
     deleteInvitaion()
@@ -13,7 +13,7 @@ const CardHeader = ({ id }: { id: number }) => {
         <CircleMinusIcon />
       </button>
       {/* 청첩장 제목 입력값 */}
-      <div className="text-xs font-medium px-2">제목</div>
+      <div className="text-xs font-medium px-2">{title}</div>
       <button>
         <ShareIcon />
       </button>

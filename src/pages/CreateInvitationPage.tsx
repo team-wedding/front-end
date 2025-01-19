@@ -15,6 +15,7 @@ import ResultDisplay from '../components/display/ResultDisplay';
 import { useCreateInvitation } from '../hooks/useInvitation';
 
 import { resetAllStores } from '../store/resetStore';
+import { useInvitationStore } from '../store/useInvitaionStore';
 
 
 const CreateInvitationPage = () => {
@@ -32,9 +33,7 @@ const CreateInvitationPage = () => {
     await createInvitation()
     resetAllStores()
     navigate('/dashboard');
-
   }
-
 
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const [steps, setSteps] = useState(1);

@@ -1,4 +1,3 @@
-import React from 'react';
 import useAddressStore from '../../../store/useAddressStore';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import FileCopyIcon from '../../icons/FileCopyIcon';

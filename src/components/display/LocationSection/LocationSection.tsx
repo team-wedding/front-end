@@ -1,4 +1,3 @@
-import React from 'react';
 import LocationTitle from './LocationTitle';
 import Map from './Map';
 

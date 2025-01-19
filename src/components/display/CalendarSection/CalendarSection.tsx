@@ -1,4 +1,3 @@
-import React from 'react';
 import DDay from './DDay';
 import { useWeddingStore } from '../../../store/useWeddingStore';
 import Calendar from './Calendar';

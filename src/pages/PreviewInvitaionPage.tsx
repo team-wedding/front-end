@@ -1,4 +1,3 @@
-import React from 'react';
 import EditIcon from '../components/icons/EditIcon';
 import BackIcon from '../components/icons/BackIcon';
 import ShareIcon from '../components/icons/ShareIcon';

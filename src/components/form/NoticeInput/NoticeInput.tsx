@@ -33,21 +33,21 @@ const NoticeInput = () => {
 
   const accordionItems = useMemo(
     () =>
-      notices.map((notice) => ({
-        id: notice.id,
+      notices.map((notice, index) => ({
+        id: index,
         title: (
           <div className="flex items-center gap-2">
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 if (confirm('이 공지를 정말 삭제하시겠습니까?'))
-                  deleteNotice(notice.id);
+                  deleteNotice(index);
               }}
             >
               <TrashBinIcon />
             </button>
             <span className="text-xs font-bold">
-              {notice.title || `공지 ${notice.id + 1}`}
+              {notice.title || `공지 ${index + 1}`}
             </span>
           </div>
         ),
@@ -59,9 +59,7 @@ const NoticeInput = () => {
                 type="text"
                 placeholder="제목을 입력해주세요"
                 value={notice.title}
-                onChange={(e) =>
-                  updateNotice(notice.id, 'title', e.target.value)
-                }
+                onChange={(e) => updateNotice(index, 'title', e.target.value)}
                 className="formInput w-full"
               />
             </div>
@@ -71,9 +69,7 @@ const NoticeInput = () => {
               <textarea
                 placeholder="내용을 입력해주세요"
                 value={notice.content}
-                onChange={(e) =>
-                  updateNotice(notice.id, 'content', e.target.value)
-                }
+                onChange={(e) => updateNotice(index, 'content', e.target.value)}
                 rows={4}
                 className="formInput w-full"
               />
@@ -82,14 +78,14 @@ const NoticeInput = () => {
             <div className="flex flex-col gap-2">
               <label className="label w-full">이미지 업로드</label>
               {notice.image ? (
-                <div key={notice.id} className="relative">
+                <div key={index} className="relative">
                   <img
                     src={notice.image}
-                    alt={`Uploaded ${notice.id}`}
+                    alt={`Uploaded ${index}`}
                     className="object-cover w-full h-52 rounded-md border"
                   />
                   <button
-                    onClick={() => updateNotice(notice.id, 'image', null)}
+                    onClick={() => updateNotice(index, 'image', null)}
                     className="absolute top-1 right-1 bg-gray-800 text-white rounded-full p-1"
                   >
                     <CloseIcon className="size-[12px]" />
@@ -109,10 +105,7 @@ const NoticeInput = () => {
                       type="file"
                       accept="image/*"
                       onChange={(e) =>
-                        handleImageUpload(
-                          notice.id,
-                          e.target.files?.[0] || null,
-                        )
+                        handleImageUpload(index, e.target.files?.[0] || null)
                       }
                       className="hidden"
                     />

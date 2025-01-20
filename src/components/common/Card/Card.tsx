@@ -1,4 +1,3 @@
-import React from 'react';
 import CardHeader from './CardHeader';
 import CardFooter from './CardFooter';
 
@@ -6,7 +5,7 @@ interface CardProps {
   image?: string;
 }
 
-const Card: React.FC<CardProps> = ({ image }) => {
+const Card = ({ image }: CardProps) => {
   return (
     <div className="relative flex flex-col items-center border border-gray-200 rounded-lg shadow-xl w-[150px] h-[225px] bg-gray-200">
       <div className="relative h-full w-full rounded-lg overflow-hidden">

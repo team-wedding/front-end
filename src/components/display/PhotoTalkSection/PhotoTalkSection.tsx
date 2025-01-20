@@ -37,13 +37,12 @@ const PhotoTalkSection = () => {
 
   return (
     <div className="w-full">
-      <div className="flex justify-center">
-        <div>방명록 소개글</div>
-        <button
-          onClick={openEditor}
-          className="px-4 py-2 bg-gray-500 text-white rounded-md"
-        >
-          방명록 작성하기
+      <div className="column-center w-full">
+        <div className="sub-title">PHOTO TALK</div>
+        <div className="title">포토톡</div>
+        <div className="text-sm font-light p-4 mb-4">어쩌고 설명</div>
+        <button onClick={openEditor} className="select-btn">
+          작성하기
         </button>
       </div>
       <div>

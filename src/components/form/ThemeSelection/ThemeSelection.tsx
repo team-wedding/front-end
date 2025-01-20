@@ -1,23 +1,11 @@
 
-import useThemeStore from '../../../store/useThemeStore';
 import fonts from '../../../constants/fonts'
 import { useState } from 'react';
+import { FontItem } from './FontItem';
 
 const ThemeSelection = () => {
-  const theme = useThemeStore();
-  const handleFonts = (index: number) => {
-    theme.updateFont(fonts[index].font)
-  }
+
   const [bigger, setBigger] = useState(false)
-  const FontContainer = ({ font, name, index, }: { font: string, name: string, index: number }) => {
-    return (
-      <div className={`font-${font} flex flex-col justify-center items-center border py-5 rounded-md  hover:shadow-lg hover:border-black ${theme.font === fonts[index].font && 'shadow-lg border-black '}`}
-        onClick={() => handleFonts(index)}>
-        <div className="text-xl ">Aa 가나다</div>
-        <div className="text-xs text-gray-500">{name}</div>
-      </div>
-    )
-  }
 
   const handleSize = () => {
     setBigger((prev) => !prev)
@@ -34,7 +22,7 @@ const ThemeSelection = () => {
       <div className="grid grid-cols-2 mt-4 gap-4">
         <div className='col-span-2'>글꼴</div>
         {fonts.map((value, index) => {
-          return <FontContainer key={index} font={value.font} name={value.name} index={index} />
+          return <FontItem key={index} font={value.font} name={value.name} index={index} />
         })}
       </div>
     </>

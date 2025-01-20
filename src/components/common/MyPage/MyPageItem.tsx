@@ -5,7 +5,7 @@ interface Props {
   detail: string;
 }
 
-export default function MyPageItems({ icon, title, detail }: Props) {
+export default function MyPageItem({ icon, title, detail }: Props) {
   return (
     <div className='flex flex-row border  border-black rounded-md px-2 py-4 items-center justify-around'>
       <img src={icon} alt="icon" />

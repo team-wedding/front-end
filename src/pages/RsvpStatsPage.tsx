@@ -3,22 +3,12 @@ import BackIcon from '../components/icons/BackIcon';
 import PageLayout from '../components/layout/PageLayout';
 import HeaderButton from '../components/common/Header/HeaderButton';
 import RsvpItem from '../components/common/RsvpItem/RsvpItem';
+import AttendanceItem from '../components/common/AttendanceItem/AttendanceItem';
 
 const RsvpStatsPage = () => {
   const handleBack = () => {
     console.log('전으로 돌아가기');
   };
-
-  const AttendanceItem = () => {
-    return (
-      <div className='flex flex-row justify-around gap-1 bg-white p-3 rounded-xl border-2 border-solid border-pink-500'>
-        <div className=''>누구누구 님 외 2명</div>
-        <div>000-0000-0000</div>
-        <div>O</div>
-        <div>O</div>
-      </div>
-    )
-  }
   return (
     <PageLayout
       title="참석여부 집계 요약"

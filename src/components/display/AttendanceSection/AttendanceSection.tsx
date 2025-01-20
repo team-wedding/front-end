@@ -1,7 +1,7 @@
 import { useState } from "react";
 import RsvpModal from "../RsvpSection/RsvpModal";
 
-export default function Attendance() {
+export default function AttendanceSection() {
   const [modal, setModal] = useState(false)
   //TODO: 시간이라 날짜 어떻게 받을지
   return (

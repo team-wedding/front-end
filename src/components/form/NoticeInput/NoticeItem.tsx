@@ -12,7 +12,7 @@ interface NoticeProps {
   toggleExpand: (id: number) => void;
 }
 
-export const NoticeItem: React.FC<{
+const NoticeItem: React.FC<{
   item: NoticeItemData;
   isExpanded: boolean;
   onToggleExpand: () => void;

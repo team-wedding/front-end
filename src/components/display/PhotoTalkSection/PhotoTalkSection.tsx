@@ -40,24 +40,26 @@ const PhotoTalkSection = () => {
           className="w-full flex justify-end px-8"
         >
           {isGalleryOpen ? (
-            <div className="border border-gray-300 hover:bg-gray-300 hover:text-white focus:ring-4 rounded-lg p-2.5 text-center inline-flex items-center">
+            <div className="select-btn bg-button bg-opacity-10">
               <ImageIcon />
             </div>
           ) : (
-            <div className="border border-gray-300 hover:bg-gray-300 hover:text-white focus:ring-4 rounded-lg p-2.5 text-center inline-flex items-center">
+            <div className="select-btn">
               <ImageIcon />
             </div>
           )}
         </button>
-        {isGalleryOpen && (
+        {isGalleryOpen ? (
           <div className="w-full p-4">
             <h2 className="text-lg font-semibold mb-4">이미지 갤러리</h2>
             <PhotoTalkGallery />
           </div>
+        ) : (
+          <PhotoTalkCard onEdit={setSelectedPhotoTalk} />
         )}
       </div>
       <PhotoTalkEditor />
-      <PhotoTalkCard onEdit={setSelectedPhotoTalk} />
+
       {selectedPhotoTalk && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
           <div className="bg-white p-6 rounded-md shadow-lg">

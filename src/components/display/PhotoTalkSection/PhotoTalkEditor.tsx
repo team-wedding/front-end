@@ -17,7 +17,6 @@ const PhotoTalkEditor = () => {
   const [password, setPassword] = useState('');
   const [images, setImages] = useState<UploadedImage[]>([]);
 
-  // 상태 초기화 함수
   const closeAndReset = () => {
     setName('');
     setContent('');

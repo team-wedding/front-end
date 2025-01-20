@@ -68,7 +68,7 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
                 key={imgIndex}
                 src={image}
                 alt={`Uploaded ${imgIndex}`}
-                className="w-20 h-20 object-cover rounded-md border"
+                className="h-20 object-cover rounded-md border"
               />
             ))}
           </div>

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useState } from 'react';
 import usePhotoTalkStore, { PhotoTalk } from '../../../store/usePhotoTalkStore';
 import PhotoTalkEditor from './PhotoTalkEditor';
 import PhotoTalkCard from './PhotoTalkCard';
@@ -11,14 +11,7 @@ const PhotoTalkSection = () => {
   const [selectedPhotoTalk, setSelectedPhotoTalk] = useState<null | PhotoTalk>(
     null,
   );
-  const inputRef = useRef<HTMLInputElement>(null);
   const [isGalleryOpen, setGalleryOpen] = useState(false);
-
-  useEffect(() => {
-    if (selectedPhotoTalk) {
-      inputRef.current?.focus();
-    }
-  }, [selectedPhotoTalk]);
 
   const confirmPassword = () => {
     if (selectedPhotoTalk?.password === passwordInput) {
@@ -29,10 +22,6 @@ const PhotoTalkSection = () => {
     } else {
       alert('비밀번호가 일치하지 않습니다.');
     }
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === 'Enter') confirmPassword();
   };
 
   return (
@@ -75,12 +64,11 @@ const PhotoTalkSection = () => {
             <h2 className="text-lg font-semibold mb-4">비밀번호 확인</h2>
             <input
               type="password"
-              ref={inputRef}
               value={passwordInput}
               onChange={(e) => setPasswordInput(e.target.value)}
               placeholder="비밀번호를 입력하세요"
               className="formInput w-full mb-4"
-              onKeyDown={handleKeyDown}
+              autoFocus
             />
             <div className="flex justify-end gap-2">
               <button

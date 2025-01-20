@@ -55,7 +55,7 @@ const RsvpModal: React.FC<ModalProp> = ({
         className="absolute top-5 right-8"
         onClick={() => setModal(false)}
       >
-        <CloseIcon className='size-[26px] text-gray-800 dark:text-white' />
+        <CloseIcon className="size-[26px] text-gray-800 dark:text-white" />
       </button>
       {step == 0 ? (
         <div className="flex flex-col items-center gap-12">

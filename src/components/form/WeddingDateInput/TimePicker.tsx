@@ -45,7 +45,7 @@ const TimePicker = () => {
         minTime={minTime}
         maxTime={maxTime}
         className="formInput w-full"
-      //  className="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary <flex-1></flex-1> !important"
+        //  className="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary <flex-1></flex-1> !important"
       />
       {!weddingTime && (
         <div className="mt-2 text-sm text-red-600">시간을 선택해주세요</div>

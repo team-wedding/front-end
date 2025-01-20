@@ -1,4 +1,3 @@
-
 const EditIcon = () => (
   <svg
     className="w-5 h-5 text-gray-800 dark:text-white hover:text-blue-600"

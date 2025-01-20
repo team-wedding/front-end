@@ -1,4 +1,3 @@
-
 import CallButton from './CallButton';
 
 interface ContactProps {

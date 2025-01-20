@@ -57,10 +57,11 @@ const GreetingModal = ({
             {greetingSample.map((text, index) => (
               <button
                 key={index}
-                className={`whitespace-pre-wrap cursor-pointer p-5 rounded-lg border w-full ${text === selectedSample
+                className={`whitespace-pre-wrap cursor-pointer p-5 rounded-lg border w-full ${
+                  text === selectedSample
                     ? 'border-black bg-gray-100'
                     : 'border-gray-200 hover:bg-gray-100'
-                  }`}
+                }`}
                 onClick={() => setSelectedSample(text)}
               >
                 {text}

@@ -1,4 +1,3 @@
-
 import PhoneIcon from '../../icons/PhoneIcon';
 
 interface CallButtonProps {

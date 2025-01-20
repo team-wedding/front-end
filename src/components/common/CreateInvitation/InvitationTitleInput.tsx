@@ -1,4 +1,3 @@
-
 type InvitationTitleInputProps = {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

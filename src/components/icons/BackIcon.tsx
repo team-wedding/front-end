@@ -1,5 +1,3 @@
-
-
 const BackIcon = () => (
   <svg
     className="size-5 text-gray-800 dark:text-white"

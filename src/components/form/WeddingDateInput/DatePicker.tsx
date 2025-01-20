@@ -9,9 +9,7 @@ const DatePicker = () => {
   registerLocale('ko', ko);
 
   return (
-
     <div className="flex items-center gap-2">
-
       <label htmlFor="datepicker" className="label">
         예식 일
       </label>
@@ -26,11 +24,9 @@ const DatePicker = () => {
         isClearable
         todayButton="오늘"
         className="formInput w-full"
-      // className="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1"
+        // className="bg-gray-50 border-gray-300 text-gray-900 text-sm rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1"
       />
-
     </div>
-
   );
 };
 

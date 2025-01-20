@@ -10,7 +10,6 @@ import CreateCard from '../components/common/Card/CreateCard';
 // import { useState } from 'react';
 
 const DashBoardPage = () => {
-
   // const [cards, setCards] = useState<string[]>([]);
 
   return (

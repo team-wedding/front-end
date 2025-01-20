@@ -1,5 +1,3 @@
-
-
 type HeaderButtonProps = {
   children: React.ReactNode;
   onClick?: () => void;

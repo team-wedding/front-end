@@ -1,5 +1,3 @@
-
-
 type HeaderProps = {
   text?: string | React.ReactNode;
   leftButton?: React.ReactNode;
@@ -16,8 +14,9 @@ const Header = ({ text, leftButton, rightButton }: HeaderProps) => {
 
       {/* Text */}
       <div
-        className={`flex-1 text-center ${leftButton || rightButton ? '' : 'justify-center'
-          }`}
+        className={`flex-1 text-center ${
+          leftButton || rightButton ? '' : 'justify-center'
+        }`}
       >
         {text}
       </div>

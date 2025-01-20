@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-import React from 'react';
 import { accordionData, AccordionItemData } from '../constants/accordionData';
 import { sectionData } from '../constants/sectionData';
 
@@ -23,16 +22,21 @@ export const useAccordionStore = create<AccordionState>((set, get) => ({
     set((state) => {
       const allItems = [...state.allItems];
 
-      // `items`에서의 dragIndex를 `allItems`에서의 index로 변환
-      const draggedItem = state.items[dragIndex];
-      const actualDragIndex = allItems.findIndex(
-        (item) => item.id === draggedItem.id,
+      // 매핑 객체 생성: id -> index
+      const itemIndexMap = allItems.reduce<Record<number, number>>(
+        (map, item, index) => {
+          map[item.id] = index;
+          return map;
+        },
+        {},
       );
 
+      // items에서의 dragIndex를 allItems에서의 index로 변환
+      const draggedItem = state.items[dragIndex];
       const hoveredItem = state.items[hoverIndex];
-      const actualHoverIndex = allItems.findIndex(
-        (item) => item.id === hoveredItem.id,
-      );
+
+      const actualDragIndex = itemIndexMap[draggedItem.id];
+      const actualHoverIndex = itemIndexMap[hoveredItem.id];
 
       // 순서 변경
       const [movedItem] = allItems.splice(actualDragIndex, 1);

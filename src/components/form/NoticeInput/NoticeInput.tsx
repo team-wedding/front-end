@@ -47,7 +47,7 @@ const NoticeInput = () => {
               <TrashBinIcon />
             </button>
             <span className="text-xs font-bold">
-              {notice.title || `공지 ${index + 1}`}
+              {notice.title || `공지 ${notice.id + 1}`}
             </span>
           </div>
         ),
@@ -78,10 +78,10 @@ const NoticeInput = () => {
             <div className="flex flex-col gap-2">
               <label className="label w-full">이미지 업로드</label>
               {notice.image ? (
-                <div key={index} className="relative">
+                <div key={notice.id} className="relative">
                   <img
                     src={notice.image}
-                    alt={`Uploaded ${index}`}
+                    alt={`Uploaded ${notice.id}`}
                     className="object-cover w-full h-52 rounded-md border"
                   />
                   <button

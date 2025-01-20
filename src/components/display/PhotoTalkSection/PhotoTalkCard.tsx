@@ -2,6 +2,9 @@ import { useState, useEffect } from 'react';
 import usePhotoTalkStore from '../../../store/usePhotoTalkStore';
 import { PhotoTalk } from '../../../store/usePhotoTalkStore';
 import MenuDotsIcon from '../../icons/MenuDotsIcon';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 interface PhotoTalkCardProps {
   onEdit: (photoTalk: PhotoTalk) => void;
@@ -30,6 +33,15 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+  const settings = {
+    arrows: true,
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+  };
 
   return (
     <div className="flex flex-col gap-4 w-full p-8">
@@ -61,16 +73,18 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
               </div>
             )}
           </div>
-
-          <div className="flex gap-2 my-4 overflow-x-auto">
-            {talk.images.map((image, imgIndex) => (
-              <img
-                key={imgIndex}
-                src={image}
-                alt={`Uploaded ${imgIndex}`}
-                className="h-20 object-cover rounded-md border"
-              />
-            ))}
+          <div className="my-5">
+            <Slider {...settings}>
+              {talk.images.map((image, imgIndex) => (
+                <div key={imgIndex}>
+                  <img
+                    src={image}
+                    alt={`Uploaded ${imgIndex}`}
+                    className="h-48 w-full object-cover rounded-md"
+                  />
+                </div>
+              ))}
+            </Slider>
           </div>
 
           <p className="text-gray-700">{talk.content}</p>

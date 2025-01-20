@@ -1,5 +1,5 @@
-import { useMainFeatureStore } from '../../../store/Feature/useMainFeatureStore';
-import { useCalendarFeatureStore } from '../../../store/Feature/useCalendarFeatureStore';
+import { useOptionalFeatureStore } from '../../../store/OptionalFeature/useOptionalFeatureStore';
+import { useCalendarFeatureStore } from '../../../store/OptionalFeature/useCalendarFeatureStore';
 import { useWeddingStore } from '../../../store/useWeddingStore';
 import Calendar from './Calendar';
 import CalendarTitle from './CalendarTitle';
@@ -8,11 +8,10 @@ import DDay from './DDay';
 
 const CalendarSection = () => {
   const { weddingDate, weddingTime } = useWeddingStore();
-  const { selectedMainFeatures } = useMainFeatureStore();
+  const { selectedOptionalFeatures } = useOptionalFeatureStore();
   const { subFeatures } = useCalendarFeatureStore();
 
-  const isMainCalendarActive = selectedMainFeatures.mainCalendar;
-
+  const isCalenderFeatureActive = selectedOptionalFeatures.calendar;
   const renderSubFeatures = [
     subFeatures.calendar && <Calendar key="calendar" />,
     subFeatures.countdown && (
@@ -26,7 +25,7 @@ const CalendarSection = () => {
   ].filter(Boolean);
 
   return (
-    isMainCalendarActive && (
+    isCalenderFeatureActive && (
       <div className="column-center gap-6">
         <div className="text-3xl font-thin tracking-widest">WEDDING DAY</div>
         <CalendarTitle />

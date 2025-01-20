@@ -1,4 +1,3 @@
-import { AccordionItemData } from '../components/common/CreateInvitation/Accordion';
 import AddressInput from '../components/form/BasicInformation/AddressInput/AddressInput';
 import NameInput from '../components/form/BasicInformation/NameInput/NameInput';
 import WeddingDateInput from '../components/form/BasicInformation/WeddingDateInput/WeddingDateInput';
@@ -12,6 +11,15 @@ import RsvpExample from '../components/form/Feature/RsvpFeature/RsvpExample';
 import ImageInput from '../components/form/Feature/ThumbnailFeature/ImageInput';
 import ThemeFeature from '../components/form/Theme/ThemeFeature/ThemeFeature';
 import NoticeFeature from '../components/form/Feature/NoticeFeature/NoticeFeature';
+
+export interface AccordionItemData {
+  id: number;
+  title: string;
+  feature: string;
+  content: React.ReactNode;
+  hasToggle?: boolean;
+  hasDrag?: boolean;
+}
 
 export const accordionData: AccordionItemData[] = [
   {
@@ -41,7 +49,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 4,
     title: '대표 이미지',
-    feature: '',
+    feature: 'thumbnail',
     content: <ImageInput />,
     hasToggle: false,
     hasDrag: false,
@@ -49,7 +57,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 5,
     title: '제목 / 인사말',
-    feature: '',
+    feature: 'greeting',
     content: <GreetingFeature />,
     hasToggle: false,
     hasDrag: false,
@@ -57,7 +65,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 6,
     title: '참석 여부',
-    feature: '',
+    feature: 'rsvp',
     content: <RsvpExample />,
     hasToggle: false,
     hasDrag: false,
@@ -65,7 +73,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 7,
     title: '실시간 포토월',
-    feature: '',
+    feature: 'phototalk',
     content: <RsvpExample />, // PhotoTalkFeature로 수정 필요
     hasToggle: false,
     hasDrag: false,
@@ -73,7 +81,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 8,
     title: '캘린더',
-    feature: 'mainCalendar',
+    feature: 'calendar',
     content: <CalendarFeature />,
     hasToggle: true,
     hasDrag: true,
@@ -81,7 +89,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 9,
     title: '지도 / 교통수단',
-    feature: 'mainLocation',
+    feature: 'location',
     content: <LocationFeature />,
     hasToggle: true,
     hasDrag: true,
@@ -89,7 +97,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 10,
     title: '갤러리',
-    feature: 'mainGallery',
+    feature: 'gallery',
     content: <GalleryFeature />,
     hasToggle: true,
     hasDrag: true,
@@ -97,7 +105,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 11,
     title: '축의금',
-    feature: 'mainAccount',
+    feature: 'account',
     content: <AccountFeature />,
     hasToggle: true,
     hasDrag: true,
@@ -105,7 +113,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 12,
     title: '연락하기',
-    feature: 'mainContact',
+    feature: 'contact',
     content: <ContactFeature />,
     hasToggle: true,
     hasDrag: true,
@@ -113,7 +121,7 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 13,
     title: '공지사항',
-    feature: 'mainNotice',
+    feature: 'notice',
     content: <NoticeFeature />,
     hasToggle: true,
     hasDrag: true,
@@ -146,9 +154,29 @@ export const accordionData: AccordionItemData[] = [
   {
     id: 17,
     title: '배경 음악',
-    feature: '',
+    feature: 'music',
     content: <ThemeFeature />,
     hasToggle: true,
     hasDrag: false,
   },
 ];
+
+// 드래그 가능한 기능 - 섹션과 연결
+// export const getSection = (feature: string): React.ReactNode | null => {
+//   switch (feature) {
+//     case 'calendar':
+//       return <CalendarSection />;
+//     case 'location':
+//       return <LocationSection />;
+//     case 'gallery':
+//       return <GallerySection />;
+//     case 'account':
+//       return <MoneySection />;
+//     case 'contact':
+//       return <ContactSection />;
+//     case 'notice':
+//       return <NoticeSection />;
+//     default:
+//       return null;
+//   }
+// };

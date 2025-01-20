@@ -96,7 +96,7 @@
   }
 
   .stepper-layout {
-    @apply fixed w-full bg-white z-10 flex-center text-sm px-12 py-2 shadow-sm;
+    @apply fixed w-full bg-white z-10 flex-center text-sm px-12 py-3;
     @apply md:max-w-md;
     max-width: var(--max-content-width, 448px);
   }
@@ -159,6 +159,10 @@
 
   .formInput {
     @apply bg-white border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50;
+  }
+
+  .accordion-item {
+    @apply bg-white rounded-2xl overflow-hidden transition-all duration-100 text-gray-800 shadow-sm;
   }
 
   .flex-center {

@@ -9,19 +9,29 @@ import CreateInvitationPage from './pages/CreateInvitationPage';
 import PreviewInvitaionPage from './pages/PreviewInvitaionPage';
 import ResultPage from './pages/ResultPage';
 import DashBoardPage from './pages/DashBoardPage';
+import EmailLoginPage from './pages/EmailLoginPage';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 function App() {
+
+  const queryClient = new QueryClient()
+
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/dashboard" element={<DashBoardPage />} />
-      <Route path="/login" element={<LoginPage />} />
-      <Route path="/signup" element={<SignUpPage />} />
-      <Route path="/splash" element={<SplashPage />} />
-      <Route path="/create" element={<CreateInvitationPage />} />
-      <Route path="/preview" element={<PreviewInvitaionPage />} />
-      <Route path="/result" element={<ResultPage />} />
-    </Routes>
+    <QueryClientProvider client={queryClient}>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/dashboard" element={<DashBoardPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/email-login" element={<EmailLoginPage />} />
+        <Route path="/signup" element={<SignUpPage />} />
+        <Route path="/splash" element={<SplashPage />} />
+        <Route path="/create" element={<CreateInvitationPage />} />
+        <Route path="/preview" element={<PreviewInvitaionPage />} />
+        <Route path="/result" element={<ResultPage />} />
+      </Routes>
+      <ReactQueryDevtools initialIsOpen={false} />
+    </QueryClientProvider>
   );
 }
 

@@ -9,7 +9,8 @@
     "preview": "vite preview",
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
-    "format": "npx prettier --write ."
+    "format": "npx prettier --write .",
+    "postinstall": "npm install rollup @rollup/plugin-node-resolve @rollup/plugin-commonjs"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

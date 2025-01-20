@@ -1,6 +1,5 @@
 import flowbitePlugin from 'flowbite/plugin';
 import defaultTheme from 'tailwindcss/defaultTheme';
-
 /** @type {import('tailwindcss').Config} */
 export default {
   content: [
@@ -16,7 +15,7 @@ export default {
         background: '#B78181', // 10 opacity
         information: '#E7ABAB', // 80 opacity
         highlight: '#964b00',
-        button: '#FD9797', // 20 opacity
+        button: 'rgba(253, 151, 151, 0.2)', // 20 opacity
         border: '#DDDDDD',
         footer: '#F9EDED',
         image: '#F8FAFB',

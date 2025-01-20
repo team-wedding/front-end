@@ -2,8 +2,8 @@ import React from 'react';
 import BackIcon from '../components/icons/BackIcon';
 import PageLayout from '../components/layout/PageLayout';
 import HeaderButton from '../components/common/Header/HeaderButton';
-import MyPageItems from '../components/common/MyPage/myPageItems';
 import logo from '../assets/logo_icon.svg'
+import MyPageItem from '../components/common/MyPage/MyPageItem';
 
 const EditMyPage = () => {
   const handleBack = () => {
@@ -27,8 +27,8 @@ const EditMyPage = () => {
       </section>
       <hr className='flex w-5/6 justify-self-center bg-black h-px' />
       <section className='flex flex-col px-8 gap-10 mt-10'>
-        <MyPageItems icon={logo} title={'참석여부 집계요약'} detail={'RSVP , 방면록등을 볼수있어요'} />
-        <MyPageItems icon={logo} title={'포토톡'} detail={'RSVP , 방면록등을 볼수있어요'} />
+        <MyPageItem icon={logo} title={'참석여부 집계요약'} detail={'RSVP , 방면록등을 볼수있어요'} />
+        <MyPageItem icon={logo} title={'포토톡'} detail={'RSVP , 방면록등을 볼수있어요'} />
       </section>
     </PageLayout>
   );

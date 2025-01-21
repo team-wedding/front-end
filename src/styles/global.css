@@ -72,6 +72,7 @@
   .layout-header,
   .layout-footer {
     @apply fixed w-full flex-center;
+    @apply fixed w-full flex-center;
     @apply md:max-w-md;
     max-width: var(--max-content-width, 448px);
   }
@@ -89,6 +90,7 @@
   }
 
   .layout-content {
+    @apply bg-white w-full overflow-auto;
     @apply bg-white w-full overflow-auto;
     margin-top: var(--header-height);
     margin-bottom: var(--footer-height);

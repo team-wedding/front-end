@@ -1,10 +1,10 @@
-import EditIcon from '../components/icons/EditIcon';
-import BackIcon from '../components/icons/BackIcon';
-import ShareIcon from '../components/icons/ShareIcon';
-import TrashIcon from '../components/icons/TrashIcon';
-import PageLayout from '../components/layout/PageLayout';
-import HeaderButton from '../components/common/Header/HeaderButton';
-import ResultDisplay from '../components/display/ResultDisplay';
+import EditIcon from '@icons/EditIcon';
+import BackIcon from '@icons/BackIcon';
+import ShareIcon from '@icons/ShareIcon';
+import TrashIcon from '@icons/TrashIcon';
+import PageLayout from '@layout/PageLayout';
+import HeaderButton from '@common/Header/HeaderButton';
+import ResultDisplay from '@display/ResultDisplay';
 import { useNavigate } from 'react-router';
 
 const PreviewInvitaionPage = () => {

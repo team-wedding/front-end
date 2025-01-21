@@ -1,4 +1,4 @@
-import PhoneIcon from '../../icons/PhoneIcon';
+import PhoneIcon from '@icons/PhoneIcon';
 
 interface CallButtonProps {
   phoneNumber: string;

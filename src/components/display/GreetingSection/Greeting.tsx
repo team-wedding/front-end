@@ -1,4 +1,4 @@
-import useGreetingStore from '../../../store/useGreetingStore';
+import useGreetingStore from '@store/useGreetingStore';
 
 const Greeting = () => {
   const { title, greeting } = useGreetingStore();

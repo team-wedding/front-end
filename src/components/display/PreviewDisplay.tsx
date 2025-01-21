@@ -1,4 +1,4 @@
-import { useAccordionStore } from '../../store/useAccordionStore';
+import { useAccordionStore } from '@store/useAccordionStore';
 
 const PreviewDisplay = () => {
   const { getSections } = useAccordionStore();

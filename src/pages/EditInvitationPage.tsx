@@ -1,6 +1,6 @@
-import PageLayout from '../components/layout/PageLayout';
-import HeaderButton from '../components/common/Header/HeaderButton';
-import InvitationTitleInput from '../components/common/CreateInvitation/InvitationTitleInput';
+import PageLayout from '@layout/PageLayout';
+import HeaderButton from '@common/Header/HeaderButton';
+import InvitationTitleInput from '@common/CreateInvitation/InvitationTitleInput';
 
 const EditInvitationPage = () => {
   const handleCancel = () => console.log('취소 버튼 클릭');
@@ -26,7 +26,7 @@ const EditInvitationPage = () => {
         </HeaderButton>
       }
     >
-      <InvitationTitleInput value="" onChange={() => {}} />
+      <InvitationTitleInput value="" onChange={() => { }} />
       <p>청첩장 수정하기 페이지</p>
     </PageLayout>
   );

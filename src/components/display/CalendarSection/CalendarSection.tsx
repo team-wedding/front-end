@@ -1,6 +1,6 @@
-import { useOptionalFeatureStore } from '../../../store/OptionalFeature/useOptionalFeatureStore';
-import { useCalendarFeatureStore } from '../../../store/OptionalFeature/useCalendarFeatureStore';
-import { useWeddingStore } from '../../../store/useWeddingStore';
+import { useOptionalFeatureStore } from '@store/OptionalFeature/useOptionalFeatureStore';
+import { useCalendarFeatureStore } from '@store/OptionalFeature/useCalendarFeatureStore';
+import { useWeddingStore } from '@store/useWeddingStore';
 import Calendar from './Calendar';
 import CalendarTitle from './CalendarTitle';
 import CountDown from './CountDown';

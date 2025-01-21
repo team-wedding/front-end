@@ -1,8 +1,8 @@
-import BackIcon from '../components/icons/BackIcon';
-import PageLayout from '../components/layout/PageLayout';
-import HeaderButton from '../components/common/Header/HeaderButton';
-import RsvpItem from '../components/common/RsvpItem/RsvpItem';
-import AttendanceItem from '../components/common/AttendanceItem/AttendanceItem';
+import HeaderButton from '@common/Header/HeaderButton';
+import BackIcon from '@icons/BackIcon';
+import PageLayout from '@layout/PageLayout';
+import RsvpItem from '@common/RsvpItem/RsvpItem';
+import AttendanceItem from '@common/AttendanceItem/AttendanceItem';
 
 const RsvpStatsPage = () => {
   const handleBack = () => {

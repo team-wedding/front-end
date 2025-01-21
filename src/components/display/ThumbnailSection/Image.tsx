@@ -1,5 +1,5 @@
-import useImageStore from '../../../store/useImageStore';
-import thumbnail from '../../../assets/image/wedding1.png';
+import useImageStore from '@store/useImageStore';
+import thumbnail from '@assets/image/wedding1.png';
 
 const Image = () => {
   const { uploadedImage } = useImageStore();

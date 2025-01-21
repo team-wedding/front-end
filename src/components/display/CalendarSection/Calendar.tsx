@@ -8,7 +8,7 @@ import {
   startOfMonth,
   startOfWeek,
 } from 'date-fns';
-import { useWeddingStore } from '../../../store/useWeddingStore';
+import { useWeddingStore } from '@store/useWeddingStore';
 
 const Calendar = () => {
   const { weddingDate } = useWeddingStore();

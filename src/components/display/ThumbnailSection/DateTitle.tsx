@@ -1,4 +1,4 @@
-import { useWeddingStore } from '../../../store/useWeddingStore';
+import { useWeddingStore } from '@store/useWeddingStore';
 
 const DateTitle = () => {
   const { formattedDate, weddingDate } = useWeddingStore();

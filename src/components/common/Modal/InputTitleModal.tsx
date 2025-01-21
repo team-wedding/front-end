@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router';
-import NextIcon from '../../icons/NextIcon';
-import { useInvitationStore } from '../../../store/useInvitaionStore';
-import CloseIcon from '../../icons/CloseIcon';
+import NextIcon from '@icons/NextIcon';
+import { useInvitationStore } from '@store/useInvitaionStore';
+import CloseIcon from '@icons/CloseIcon';
 
 interface ModalProps {
   onClose: () => void;
@@ -62,11 +62,10 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
           <button
             onClick={handleConfirm}
             disabled={titleInput.length === 0}
-            className={`rounded-full w-8 h-8 flex justify-center items-center ${
-              titleInput.length === 0
+            className={`rounded-full w-8 h-8 flex justify-center items-center ${titleInput.length === 0
                 ? 'bg-black bg-opacity-10 cursor-not-allowed'
                 : 'bg-rose-300 cursor-pointer'
-            }`}
+              }`}
           >
             <NextIcon />
           </button>

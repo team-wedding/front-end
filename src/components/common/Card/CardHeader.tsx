@@ -1,5 +1,5 @@
-import CircleMinusIcon from '../../icons/CircleMinusIcon';
-import ShareIcon from '../../icons/ShareIcon';
+import CircleMinusIcon from '@icons/CircleMinusIcon';
+import ShareIcon from '@icons/ShareIcon';
 
 const CardHeader = () => {
   return (

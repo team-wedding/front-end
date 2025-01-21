@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import CirclePlusIcon from '../../icons/CirclePlusIcon';
+import CirclePlusIcon from '@icons/CirclePlusIcon';
 import InputTitleModal from '../Modal/InputTitleModal';
 
 const CreateCard = () => {

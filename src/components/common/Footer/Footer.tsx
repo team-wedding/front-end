@@ -1,7 +1,7 @@
 import { useLocation, useNavigate } from 'react-router';
-import HomeIcon from '../../icons/HomeIcon';
-import UserIcon from '../../icons/UserIcon';
-import GridIcon from '../../icons/GridIcon';
+import HomeIcon from '@icons/HomeIcon';
+import UserIcon from '@icons/UserIcon';
+import GridIcon from '@icons/GridIcon';
 
 const Footer: React.FC = () => {
   const location = useLocation();

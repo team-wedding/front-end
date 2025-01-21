@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { calculateDday } from '../../../utils/dateUtils';
+import { calculateDday } from '@utils/dateUtils';
 
 type CountDownProps = {
   targetDate: Date | null;

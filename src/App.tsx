@@ -1,15 +1,15 @@
 import './App.css';
-import HomePage from './pages/HomePage';
-import LoginPage from './pages/LoginPage';
-import SignUpPage from './pages/SignUpPage';
-import SplashPage from './pages/SplashPage';
+import HomePage from '@pages/HomePage';
+import LoginPage from '@pages/LoginPage';
+import SignUpPage from '@pages/SignUpPage';
+import SplashPage from '@pages/SplashPage';
 import { Route, Routes } from 'react-router';
-import CreateInvitationPage from './pages/CreateInvitationPage';
-import PreviewInvitaionPage from './pages/PreviewInvitaionPage';
-import ResultPage from './pages/ResultPage';
-import DashBoardPage from './pages/DashBoardPage';
-import EditMyPage from './pages/EditMyPage';
-import RsvpStatsPage from './pages/RsvpStatsPage';
+import CreateInvitationPage from '@pages/CreateInvitationPage';
+import PreviewInvitaionPage from '@pages/PreviewInvitaionPage';
+import ResultPage from '@pages/ResultPage';
+import DashBoardPage from '@pages/DashBoardPage';
+import EditMyPage from '@pages/EditMyPage';
+import RsvpStatsPage from '@pages/RsvpStatsPage';
 
 function App() {
   return (

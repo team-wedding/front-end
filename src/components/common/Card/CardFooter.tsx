@@ -1,5 +1,5 @@
-import PenIcon from '../../icons/PenIcon';
-import SearchIcon from '../../icons/SearchIcon';
+import PenIcon from '@icons/PenIcon';
+import SearchIcon from '@icons/SearchIcon';
 
 const CardFooter = () => {
   return (

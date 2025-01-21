@@ -1,4 +1,4 @@
-import { AccordionItemData } from '../../../constants/accordionData';
+import { AccordionItemData } from '@constants/accordionData';
 import { AccordionItem } from './AccordionItem';
 import { DraggableAccordionItem } from './DraggableAccordionItem';
 

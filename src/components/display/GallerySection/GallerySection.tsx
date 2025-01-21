@@ -10,7 +10,6 @@ export default function GallerySection() {
   const grid = store.grid;
 
   const [imageIndex, setImageIndex] = useState(0);
-
   const handlePrev = () => {
     if (imageIndex == 0) {
       setImageIndex(images.length - 1);

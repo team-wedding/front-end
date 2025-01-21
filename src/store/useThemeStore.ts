@@ -2,26 +2,21 @@ import { create } from 'zustand';
 
 interface ThemeState {
   font: string;
-  weight: string;
-  backgroundColor: string;
+  size: string;
   setFont: (font: string) => void;
-  setWeight: (weight: string) => void;
-  setBackgroundColor: (backgroundColor: string) => void;
+  updateSize: (size: string) => void;
   reset: () => void;
 }
 
 const initialState = {
   font: '',
-  weight: '',
-  backgroundColor: '',
+  size: '',
 };
 
-const usePersonStore = create<ThemeState>((set) => ({
+const useThemeStore = create<ThemeState>((set) => ({
   ...initialState,
   setFont: (font: string) => set(() => ({ font: font })),
-  setWeight: (weight) => set(() => ({ weight: weight })),
-  setBackgroundColor: (backgroundColor) =>
-    set(() => ({ backgroundColor: backgroundColor })),
+  updateSize: (size: string) => set(() => ({ size: size })),
   reset: () => set(() => initialState),
 }));
 

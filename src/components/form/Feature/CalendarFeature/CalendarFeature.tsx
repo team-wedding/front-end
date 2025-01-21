@@ -1,4 +1,4 @@
-import { useCalendarFeatureStore } from '../../../../store/Feature/useCalendarFeatureStore';
+import { useCalendarFeatureStore } from '../../../../store/OptionalFeature/useCalendarFeatureStore';
 
 const CalendarFeature = () => {
   const { subFeatures, toggleSubFeature } = useCalendarFeatureStore();
@@ -17,19 +17,19 @@ const CalendarFeature = () => {
       {/* 서브 기능 - 캘린더, 카운트다운, 디데이 */}
       <div className="flex-center gap-3 text-gray-400 p-4 text-xs ">
         <button
-          className={`select-btn ${subFeatures.calendar ? 'text-black bg-button bg-opacity-20 shadow-md' : ''}`}
+          className={`select-btn ${subFeatures.calendar ? 'text-gray-800 bg-button bg-opacity-20 shadow-sm' : ''}`}
           onClick={() => toggleSubFeature('calendar', !subFeatures.calendar)}
         >
           캘린더
         </button>
         <button
-          className={`select-btn ${subFeatures.countdown ? 'text-black bg-button bg-opacity-20 shadow-md' : ''}`}
+          className={`select-btn ${subFeatures.countdown ? 'text-gray-800 bg-button bg-opacity-20 shadow-sm' : ''}`}
           onClick={() => toggleSubFeature('countdown', !subFeatures.countdown)}
         >
           카운트다운
         </button>
         <button
-          className={`select-btn ${subFeatures.dday ? 'text-black bg-button bg-opacity-20 shadow-md' : ''}`}
+          className={`select-btn ${subFeatures.dday ? 'text-gray-800 bg-button bg-opacity-20 shadow-sm' : ''}`}
           onClick={() => toggleSubFeature('dday', !subFeatures.dday)}
         >
           디데이

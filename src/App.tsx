@@ -13,6 +13,8 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import EditInvitationPage from './pages/EditInvitationPage';
 import NotFound404 from './pages/NotFound404';
 
+import EditMyPage from './pages/EditMyPage';
+import RsvpStatsPage from './pages/RsvpStatsPage';
 
 function App() {
   const queryClient = new QueryClient()
@@ -24,6 +26,8 @@ function App() {
         <Route path={"/login"} element={<LoginPage />} />
         <Route path={"/signup"} element={<SignUpPage />} />
         <Route path={"/splash"} element={<SplashPage />} />
+        <Route path={"/mypage"} element={<EditMyPage />} />
+        <Route path={"/rsvp"} element={<RsvpStatsPage />} />
         <Route path={"/create"} element={<CreateInvitationPage />} />
         <Route path={"/edit/:id"} element={<EditInvitationPage />} />
         <Route path={"/preview"} element={<PreviewInvitaionPage />} />

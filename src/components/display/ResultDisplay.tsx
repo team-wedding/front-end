@@ -5,8 +5,8 @@ import ThumbnailSection from './ThumbnailSection/ThumbnailSection';
 import GreetingSection from './GreetingSection/GreetingSection';
 import GallerySection from './GallerySection/GallerySection';
 import MoneySection from './MoneySection/MoneySection';
-import InformSection from './InformSection/InformSection';
-// import PhotoTalkSection from './PhotoTalkSection/PhotoTalkSection';
+import PhotoTalkSection from './PhotoTalkSection/PhotoTalkSection';
+import NoticeSection from './NoticeSection/NoticeSection';
 
 const ResultDisplay = () => {
   return (
@@ -18,8 +18,8 @@ const ResultDisplay = () => {
       <ContactSection />
       <GallerySection />
       <MoneySection />
-      <InformSection />
-      {/* <PhotoTalkSection /> */}
+      <NoticeSection />
+      <PhotoTalkSection />
     </div>
   );
 };

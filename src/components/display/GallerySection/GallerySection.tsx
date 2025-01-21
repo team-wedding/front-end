@@ -2,8 +2,9 @@ import { useState } from 'react';
 import ChevronLeft from '../../icons/Chevron_LeftIcon';
 import ChevronRight from '../../icons/Chevron_RightIcon';
 import useGallaryStore from '../../../store/useGallaryStore';
+import { useOptionalFeatureStore } from '../../../store/OptionalFeature/useOptionalFeatureStore';
 
-export default function GallarySection() {
+export default function GallerySection() {
   const store = useGallaryStore();
   const images = store.images;
   const grid = store.grid;
@@ -21,9 +22,12 @@ export default function GallarySection() {
     } else setImageIndex((prev: number) => prev + 1);
   };
 
+  const { selectedOptionalFeatures } = useOptionalFeatureStore();
+  const isMainGalleryActive = selectedOptionalFeatures.gallery;
+
   return (
     <div className="bg-white w-full h-fit p-2">
-      {images ? (
+      {isMainGalleryActive && images ? (
         grid ? (
           <section className="grid grid-cols-3 gap-2">
             {images.map((value, index) => {

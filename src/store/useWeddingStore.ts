@@ -2,20 +2,27 @@ import { create } from 'zustand';
 
 type WeddingStore = {
   weddingDate: Date | null;
-  weddingTime: string | null;
+  weddingTime: {
+    hour: number | null;
+    minute: number | null;
+  };
   formattedDate: {
     year: number | null;
     month: number | null;
     day: number | null;
   };
   setWeddingDate: (date: Date | null) => void;
-  setWeddingTime: (time: string) => void;
+  setWeddingTime: (hour: number, minute: number) => void;
 };
 
 // 예식 정보 - 날짜, 시간
 export const useWeddingStore = create<WeddingStore>((set) => ({
-  weddingDate: new Date(),
-  weddingTime: '12:00',
+  weddingDate: new Date(), // 초기값
+  weddingTime: {
+    hour: 12,
+    minute: 0,
+  }, // 초기값
+
   formattedDate: {
     year: new Date().getFullYear(),
     month: new Date().getMonth() + 1,
@@ -32,5 +39,8 @@ export const useWeddingStore = create<WeddingStore>((set) => ({
           }
         : { year: null, month: null, day: null },
     }),
-  setWeddingTime: (time) => set({ weddingTime: time }),
+  setWeddingTime: (hour, minute) =>
+    set({
+      weddingTime: { hour, minute },
+    }),
 }));

@@ -38,7 +38,7 @@ const CreateInvitationPage = () => {
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const [steps, setSteps] = useState(1);
 
-  let sliceRanges = [[0, 3], [3, 14], [14]];
+  let sliceRanges = [[0, 3], [3, 13], [13]];
   const [items, setItems] = useState<AccordionItemData[]>(
     accordionData.slice(sliceRanges[0][0], sliceRanges[0][1]),
   );

@@ -25,4 +25,4 @@ const usePersonStore = create<ThemeState>((set) => ({
   reset: () => set(() => initialState),
 }));
 
-export default usePersonStore;
+export default useThemeStore;

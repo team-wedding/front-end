@@ -3,6 +3,7 @@ import { useDrag, useDrop } from 'react-dnd';
 import { AccordionItemData } from './Accordion';
 import Toggle from './Toggle';
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
+import { useMainFeatureStore } from '../../../store/Feature/useMainFeatureStore';
 
 interface DraggableAccordionItemProps {
   item: AccordionItemData;
@@ -19,6 +20,7 @@ const DraggableAccordionItem: React.FC<DraggableAccordionItemProps> = ({
   toggleExpand,
   moveItem,
 }) => {
+  // 드래그앤드롭
   const ref = React.useRef<HTMLDivElement>(null);
 
   const [, drop] = useDrop({
@@ -40,6 +42,20 @@ const DraggableAccordionItem: React.FC<DraggableAccordionItemProps> = ({
   });
 
   drag(drop(ref));
+
+  // 기능 상태 가져오기
+  const { selectedMainFeatures, toggleMainFeature } = useMainFeatureStore();
+
+  const isMainFeatureActive =
+    selectedMainFeatures[item.feature as keyof typeof selectedMainFeatures] ??
+    false;
+
+  const handleToggle = (enabled: boolean) => {
+    toggleMainFeature(
+      item.feature as keyof typeof selectedMainFeatures,
+      enabled,
+    );
+  };
 
   return (
     <>
@@ -80,7 +96,9 @@ const DraggableAccordionItem: React.FC<DraggableAccordionItemProps> = ({
           </div>
 
           <div className="flex items-center gap-4">
-            {item.hasToggle && <Toggle />}
+            {item.hasToggle && (
+              <Toggle state={isMainFeatureActive} setState={handleToggle} />
+            )}
             <i
               className={`bx bx-chevron-down text-xl transition-all duration-300 ${
                 expandedIds.includes(item.id) ? 'rotate-180' : ''

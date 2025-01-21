@@ -4,6 +4,7 @@ import DraggableAccordionItem from './DraggableAccordionItem';
 export interface AccordionItemData {
   id: number;
   title: string;
+  feature?: string;
   content: React.ReactNode;
   hasToggle?: boolean;
   hasDrag?: boolean;

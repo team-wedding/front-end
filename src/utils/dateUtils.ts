@@ -1,29 +1,38 @@
 export const calculateDday = (
   targetDate: Date | null,
-  targetTime: string | null,
+  targetTime: { hour: number | null; minute: number | null },
 ): {
   days: number;
   hours: number;
   minutes: number;
   seconds: number;
 } | null => {
-  if (!targetDate || !targetTime) return null;
+  if (
+    !targetDate ||
+    !targetTime ||
+    targetTime.hour === null ||
+    targetTime.minute === null
+  )
+    return null;
 
-  const [targetHours, targetMinutes] = targetTime.split(':').map(Number);
+  const { hour, minute } = targetTime;
 
   const fullTargetDate = new Date(
     targetDate.getFullYear(),
     targetDate.getMonth(),
     targetDate.getDate(),
-    targetHours,
-    targetMinutes,
+    hour,
+    minute,
   );
 
+  // 현재 시간
   const now = new Date();
 
+  // 남은 시간 계산
   const diffTime = fullTargetDate.getTime() - now.getTime();
 
-  const totalSeconds = Math.floor(diffTime / 1000); // 밀리초?
+  // 초, 분, 시간, 일 단위 계산
+  const totalSeconds = Math.floor(diffTime / 1000);
   const seconds = totalSeconds % 60;
   const totalMinutes = Math.floor(totalSeconds / 60);
   const minutes = totalMinutes % 60;

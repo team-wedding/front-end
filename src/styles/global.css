@@ -182,7 +182,7 @@
   }
 
   .select-btn {
-    @apply border rounded-xl px-4 py-2 hover:bg-button hover:bg-opacity-20;
+    @apply border rounded-xl px-4 py-2;
   }
 
   .label {

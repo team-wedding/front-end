@@ -8,17 +8,10 @@ import wedding5 from '../assets/image/wedding5.png';
 import wedding6 from '../assets/image/wedding6.png';
 import CreateCard from '../components/common/Card/CreateCard';
 import { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router';
 
 const DashBoardPage = () => {
-  const navigate = useNavigate();
-  const location = useLocation();
 
   const [cards, setCards] = useState<string[]>([]);
-
-  const handleCreateCard = () => {
-    navigate('/create');
-  };
 
   return (
     <PageLayout title="우리, 결혼해요">
@@ -27,7 +20,7 @@ const DashBoardPage = () => {
       </div> */}
       <div className="grid grid-cols-2 gap-6 place-items-center pt-10 px-6 pb-10">
         <div>
-          <CreateCard onClick={handleCreateCard} />
+          <CreateCard />
         </div>
         {/* 테스트 */}
         <Card image={wedding1} />

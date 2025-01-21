@@ -29,19 +29,19 @@ const NoticeSection = () => {
             {notices.map((notice) => (
               <div
                 key={notice.id}
-                className="border rounded-lg shadow-sm bg-white p-8"
+                className="w-full border rounded-lg shadow-sm bg-white p-8"
               >
                 {notice.image && (
                   <img
                     src={notice.image}
                     alt={notice.title}
-                    className="w-full object-cover h-52 rounded-md"
+                    className="w-full object-cover h-48 rounded-md mb-4"
                   />
                 )}
-                <h3 className="text-center title text-base my-4">
+                <h3 className="text-center text-lg font-bold mb-2">
                   {notice.title}
                 </h3>
-                <div className="text-center whitespace-pre-wrap text-xs font-light">
+                <div className="text-center whitespace-pre-wrap text-sm font-light flex-grow">
                   {notice.content}
                 </div>
               </div>

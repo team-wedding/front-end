@@ -1,8 +1,9 @@
 import { useDrag, useDrop } from 'react-dnd';
 import { AccordionItemData } from './Accordion';
+import Toggle from './Toggle';
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
+import { useMainFeatureStore } from '../../../store/Feature/useMainFeatureStore';
 import { useRef } from 'react';
-import Toggle from '../Toggle';
 
 interface DraggableAccordionItemProps {
   item: AccordionItemData;
@@ -118,7 +119,3 @@ const DraggableAccordionItem = ({
 };
 
 export default DraggableAccordionItem;
-function useMainFeatureStore(): { selectedMainFeatures: any; toggleMainFeature: any; } {
-  throw new Error('Function not implemented.');
-}
-

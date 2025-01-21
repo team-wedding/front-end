@@ -8,6 +8,8 @@ import CreateInvitationPage from './pages/CreateInvitationPage';
 import PreviewInvitaionPage from './pages/PreviewInvitaionPage';
 import ResultPage from './pages/ResultPage';
 import DashBoardPage from './pages/DashBoardPage';
+import EditMyPage from './pages/EditMyPage';
+import RsvpStatsPage from './pages/RsvpStatsPage';
 
 function App() {
   return (
@@ -17,6 +19,8 @@ function App() {
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />
       <Route path="/splash" element={<SplashPage />} />
+      <Route path="/mypage" element={<EditMyPage />} />
+      <Route path="/rsvp" element={<RsvpStatsPage />} />
       <Route path="/create" element={<CreateInvitationPage />} />
       <Route path="/preview" element={<PreviewInvitaionPage />} />
       <Route path="/result" element={<ResultPage />} />

@@ -1,13 +1,6 @@
-import DraggableAccordionItem from './DraggableAccordionItem';
-
-export interface AccordionItemData {
-  id: number;
-  title: string;
-  feature?: string;
-  content: React.ReactNode;
-  hasToggle?: boolean;
-  hasDrag?: boolean;
-}
+import { AccordionItemData } from '../../../constants/accordionData';
+import { AccordionItem } from './AccordionItem';
+import { DraggableAccordionItem } from './DraggableAccordionItem';
 
 interface AccordionProps {
   items: AccordionItemData[];
@@ -24,16 +17,25 @@ export const Accordion = ({
 }: AccordionProps) => {
   return (
     <div className="flex flex-col gap-2 p-10 pt-20">
-      {items.map((item, index) => (
-        <DraggableAccordionItem
-          key={item.id}
-          item={item}
-          index={index}
-          expandedIds={expandedIds}
-          toggleExpand={toggleExpand}
-          moveItem={moveItem}
-        />
-      ))}
+      {items.map((item, index) =>
+        item.hasDrag ? (
+          <DraggableAccordionItem
+            key={item.id}
+            item={item}
+            index={index}
+            expandedIds={expandedIds}
+            toggleExpand={toggleExpand}
+            moveItem={moveItem}
+          />
+        ) : (
+          <AccordionItem
+            key={item.id}
+            item={item}
+            expandedIds={expandedIds}
+            toggleExpand={toggleExpand}
+          />
+        ),
+      )}
     </div>
   );
 };

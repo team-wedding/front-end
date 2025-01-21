@@ -14,7 +14,7 @@ export const Stepper = ({ steps, currentStep, onStepClick }: StepperProps) => {
           <>
             {/* Step Indicator */}
             <button
-              className="flex items-center rounded-xl px-1 py-2 hover:bg-gray-100 transition-all ease-in-out duration-300"
+              className="flex items-center rounded-xl px-1 py-2 hover:bg-gray-300 hover:bg-opacity-20 transition-all ease-in-out duration-100"
               onClick={() => onStepClick(index + 1)}
             >
               <div

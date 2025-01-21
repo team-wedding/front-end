@@ -13,11 +13,7 @@ interface NoticeStore {
   maxNotices: number;
   addNotice: () => void;
   deleteNotice: (id: number) => void;
-  updateNotice: (
-    id: number,
-    field: keyof Notice,
-    value: string | File | null,
-  ) => void;
+  updateNotice: (id: number, field: keyof Notice, value: string | null) => void;
   toggleExpand: (id: number) => void;
 }
 

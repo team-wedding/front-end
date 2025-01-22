@@ -1,4 +1,3 @@
-import React from 'react';
 import Toggle from '../Toggle';
 import { useToggleFeatureStore } from '../../../store/OptionalFeature/useToggleFeatureStore.';
 import { AccordionItemData } from '../../../constants/accordionData';
@@ -9,11 +8,11 @@ interface AccordionItemProps {
   toggleExpand: (id: number) => void;
 }
 
-export const AccordionItem: React.FC<AccordionItemProps> = ({
+export const AccordionItem = ({
   item,
   expandedIds,
   toggleExpand,
-}) => {
+}: AccordionItemProps) => {
   const isExpanded = expandedIds.includes(item.id);
 
   // 토글 기능 상태
@@ -32,7 +31,7 @@ export const AccordionItem: React.FC<AccordionItemProps> = ({
           aria-expanded={expandedIds.includes(item.id)} // 확장 상태 명시
           aria-controls={`accordion-content-${item.id}`}
         >
-          <div className="text-xs font-semibold">{item.title}</div>
+          <div className="font-semibold">{item.title}</div>
           <div className="flex items-center gap-4">
             {item.hasToggle && (
               <Toggle state={isFeatureActive} setState={handleToggle} />

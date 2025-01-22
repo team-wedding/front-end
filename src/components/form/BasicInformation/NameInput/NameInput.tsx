@@ -11,7 +11,7 @@ const NameInput = () => {
   return (
     <div>
       {brideGroom.map((person, index) => (
-        <div key={index} className="max-w-lg mx-auto p-4">
+        <div key={index} className="max-w-lg mx-auto px-4 py-2">
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
               <label className="label">{person.role} *</label>
@@ -25,7 +25,6 @@ const NameInput = () => {
                 className="formInput"
               />
             </div>
-
             <div className="flex items-center gap-2">
               <label className="label">아버지</label>
               <input

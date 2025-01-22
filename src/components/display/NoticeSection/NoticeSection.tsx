@@ -20,7 +20,7 @@ const NoticeSection = () => {
   );
 
   return (
-    <div className="column-center w-full h-full p-4">
+    <div className="column-center w-96 h-full p-4">
       <div className="sub-title">NOTICE</div>
       <div className="title">공지사항</div>
       <div className="w-11/12 h-full">
@@ -38,10 +38,8 @@ const NoticeSection = () => {
                     className="w-full object-cover h-52 rounded-md"
                   />
                 )}
-                <h3 className="text-center title text-base my-4">
-                  {notice.title}
-                </h3>
-                <div className="text-center whitespace-pre-wrap text-xs font-light">
+                <h3 className="text-center my-4">{notice.title}</h3>
+                <div className="text-center whitespace-pre-wrap text-sm font-light">
                   {notice.content}
                 </div>
               </div>

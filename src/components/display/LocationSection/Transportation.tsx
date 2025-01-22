@@ -18,7 +18,7 @@ export const transportationData: {
     inputKey: 'car',
     title: '자차',
     icon: (
-      <DirectionsCarRoundedIcon fontSize="small" className="text-neutral-400" />
+      <DirectionsCarRoundedIcon fontSize="small" className="text-neutral-500" />
     ),
   },
   {
@@ -28,7 +28,7 @@ export const transportationData: {
     icon: (
       <DirectionsSubwayFilledRoundedIcon
         fontSize="small"
-        className="text-neutral-400"
+        className="text-neutral-500"
       />
     ),
   },
@@ -39,7 +39,7 @@ export const transportationData: {
     icon: (
       <DirectionsBusFilledRoundedIcon
         fontSize="small"
-        className="text-neutral-400"
+        className="text-neutral-500"
       />
     ),
   },
@@ -58,7 +58,7 @@ const Transportation = () => {
   console.log(transportationInputs);
 
   return (
-    <div className="flex flex-col py-14 px-10 gap-6 bg-neutral-200 bg-opacity-50 text-xs">
+    <div className="flex flex-col py-14 px-10 gap-6 bg-neutral-100 bg-opacity-50 text-xs">
       <div className="flex flex-col gap-6">
         {transportationData.map(
           ({ key, inputKey, title, icon }) =>
@@ -73,7 +73,7 @@ const Transportation = () => {
                   dangerouslySetInnerHTML={{
                     __html: DOMPurify.sanitize(transportationInputs[inputKey]),
                   }}
-                  className="py-6 my-6 bg-neutral-50 rounded-md px-4"
+                  className="py-6 my-6 rounded-md px-4"
                 ></div>
                 <hr className="border-neutral-300" />
               </div>

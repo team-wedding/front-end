@@ -23,23 +23,24 @@ const Calendar: React.FC = () => {
   const allDays = eachDayOfInterval({ start: startDay, end: endDay });
 
   return (
-    <div className="flex flex-col items-center justify-center text-xs max-w-72">
+    <div className="flex flex-col items-center justify-center text-xs max-w-72 gap-6">
+      <div className="border-b opacity-80 w-full"></div>
       <div>
-        <div className="grid grid-cols-7 p-2 gap-4 text-center">
+        <div className="grid grid-cols-7 p-2 gap-4 text-center font-light">
           {dayOfWeeks.map((day) => (
             <div key={day} className={`${day === '일' && 'text-rose-400'}`}>
               {day}
             </div>
           ))}
         </div>
-        <div className="grid grid-cols-7 gap-1 text-center">
+        <div className="grid grid-cols-7 gap-1 text-center font-light">
           {allDays.map((day, index) => {
             const isCurrentMonth = isSameMonth(day, currentDate);
             const isSelectedDay = isSameDay(day, weddingDate || new Date());
             return (
               <div
                 key={index}
-                className={`p-2 ${isSelectedDay && 'bg-rose-400 text-white rounded-full'}  ${index % 7 === 0 && 'text-rose-400'} ${isCurrentMonth ? 'text-gray-900' : 'text-opacity-0 text-transparent'}`}
+                className={`p-[10px] ${isSelectedDay && 'bg-rose-300 text-white rounded-full'}  ${index % 7 === 0 && 'text-rose-500'} ${isCurrentMonth ? 'text-gray-900' : 'text-opacity-0 text-transparent'}`}
               >
                 {format(day, 'd')}
               </div>
@@ -47,6 +48,7 @@ const Calendar: React.FC = () => {
           })}
         </div>
       </div>
+      <div className="border-b opacity-80 w-full"></div>
     </div>
   );
 };

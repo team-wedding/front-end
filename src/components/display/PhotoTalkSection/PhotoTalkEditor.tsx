@@ -1,6 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 import usePhotoTalkStore from '../../../store/usePhotoTalkStore';
 import CloseIcon from '../../icons/CloseIcon';
+import CloudArrowIcon from '../../icons/CloudArrowIcon';
 
 interface UploadedImage {
   id: string;
@@ -132,30 +133,58 @@ const PhotoTalkEditor = () => {
                   사진은 최대 30장까지 추가할 수 있습니다.
                 </span>
               </label>
-              <input
-                type="file"
-                accept="image/*"
-                multiple
-                onChange={handleImageUpload}
-                className="w-full border rounded-lg px-3 py-2"
-              />
-              <div className="flex gap-2 overflow-x-auto py-2">
-                {images.map((image) => (
-                  <div key={image.id} className="relative flex-shrink-0">
-                    <img
-                      src={image.url}
-                      alt="uploaded"
-                      className="w-20 h-20 object-cover rounded-md border"
+              {images.length === 0 ? (
+                <div className="flex items-center justify-center w-full">
+                  <label className="flex flex-col items-center justify-center w-full py-8 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
+                    <div className="flex flex-col items-center justify-center">
+                      <CloudArrowIcon />
+                      <p className="text-sm text-gray-500 dark:text-gray-400">
+                        <span className="font-semibold">Click to upload</span>{' '}
+                        or drag and drop
+                      </p>
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      multiple
+                      onChange={handleImageUpload}
+                      className="hidden"
                     />
-                    <button
-                      onClick={() => handleRemoveImage(image.id)}
-                      className="absolute top-1 right-1 bg-gray-800 text-white rounded-full p-1"
-                    >
-                      <CloseIcon className="size-[12px]" />
-                    </button>
+                  </label>
+                </div>
+              ) : (
+                <div className="flex flex-nowrap gap-2 overflow-x-auto py-2">
+                  <div className="flex w-20 h-20 items-center justify-center border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 flex-shrink-0">
+                    <label className="size-[24px]">
+                      <CloudArrowIcon />
+                      <input
+                        type="file"
+                        accept="image/*"
+                        multiple
+                        onChange={handleImageUpload}
+                        className="hidden"
+                      />
+                    </label>
                   </div>
-                ))}
-              </div>
+
+                  {images.map((image, index) => (
+                    <div key={image.id} className="relative flex-shrink-0">
+                      <img
+                        src={image.url}
+                        alt={`Uploaded ${index}`}
+                        className="w-20 h-20 object-cover rounded-md border"
+                      />
+                      <button
+                        onClick={() => handleRemoveImage(image.id)}
+                        className="absolute top-1 right-1 bg-gray-800 text-white rounded-full p-1"
+                      >
+                        <CloseIcon className="size-[12px]" />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
               <button
                 onClick={handleSubmit}
                 className="border py-2 rounded-lg w-full border-gray-300 hover:bg-gray-100"

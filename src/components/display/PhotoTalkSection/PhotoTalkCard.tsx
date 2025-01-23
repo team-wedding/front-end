@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import usePhotoTalkStore from '../../../store/usePhotoTalkStore';
 import { PhotoTalk } from '../../../store/usePhotoTalkStore';
 import MenuDotsIcon from '../../icons/MenuDotsIcon';
@@ -15,19 +15,22 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
     null,
   );
+  const dropdownRef = useRef<HTMLDivElement | null>(null);
 
   const toggleDropdown = (index: number) => {
     setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    const target = event.target as HTMLElement;
-    if (!target.closest('.dropdown')) {
-      setOpenDropdownIndex(null);
-    }
-  };
-
   useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setOpenDropdownIndex(null);
+      }
+    };
+
     document.addEventListener('mousedown', handleClickOutside);
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
@@ -35,8 +38,7 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
   }, []);
 
   const settings = {
-    arrows: true,
-    dots: false,
+    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 1,
@@ -50,11 +52,12 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
           key={talk.id}
           className="flex flex-col gap-2 bg-white w-full p-4 rounded-md shadow-md border border-gray-200 relative"
         >
-          <div className="absolute top-2 right-3 dropdown">
+          <div className="absolute top-2 right-3" ref={dropdownRef}>
             <button
               className="inline-block text-gray-500 hover:bg-gray-100 focus:ring-4 focus:outline-none rounded-lg text-sm"
               type="button"
               onClick={() => toggleDropdown(index)}
+              aria-label="메뉴 열기"
             >
               <MenuDotsIcon />
             </button>
@@ -65,6 +68,7 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
                     <button
                       onClick={() => onEdit(talk)}
                       className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      aria-label="편집하기"
                     >
                       편집하기
                     </button>

@@ -15,7 +15,7 @@ export default function GalleryFeature() {
         URL.createObjectURL(value),
       );
       setImages((prev) => [...prev, ...fileArray]);
-    } else alert('9 images?');
+    } else alert('이미지 초과?');
   };
 
   const handleDelete = (index: number) => {
@@ -25,7 +25,7 @@ export default function GalleryFeature() {
   const handleDrag = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
   };
-  const handleDragpEnter = (e: React.DragEvent<HTMLLabelElement>) => {
+  const handleDragEnter = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
   };
   const handleLeave = (e: React.DragEvent<HTMLLabelElement>) => {
@@ -91,7 +91,7 @@ export default function GalleryFeature() {
         onDrop={handleDrop}
         onDragOver={handleDrag}
         onDragLeave={handleLeave}
-        onDragEnter={handleDragpEnter}
+        onDragEnter={handleDragEnter}
         onClick={(e) => e.preventDefault()}
       >
         {images.length == 0 ? (

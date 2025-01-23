@@ -29,13 +29,6 @@ const Navigation = () => {
   // 내비게이션 api 연결하기
   // const { address } = useAddressStore();
 
-  const enabledNavigation = navigationData.filter(
-    ({ key }) => subFeatures[key],
-  );
-  if (enabledNavigation.length === 0) {
-    return null;
-  }
-
   return (
     <div className="flex justify-evenly gap-4 py-10 px-10 ">
       {navigationData.map(

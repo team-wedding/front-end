@@ -48,15 +48,6 @@ export const transportationData: {
 const Transportation = () => {
   const { subFeatures, transportationInputs } = useLocationFeatureStore();
 
-  const enabledNavigation = transportationData.filter(
-    ({ key }) => subFeatures[key],
-  );
-  if (enabledNavigation.length === 0) {
-    return null;
-  }
-
-  console.log(transportationInputs);
-
   return (
     <div className="flex flex-col py-14 px-10 gap-6 bg-neutral-100 bg-opacity-50 text-xs">
       <div className="flex flex-col gap-6">

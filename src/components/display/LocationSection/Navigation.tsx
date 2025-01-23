@@ -7,14 +7,20 @@ import {
 } from '../../../store/OptionalFeature/useLocationFeatureStore';
 import useAddressStore from '../../../store/useAddressStore';
 
-const navigationData: {
+export const navigationData: {
   key: keyof StoreState['subFeatures'];
+  title: string;
   img: string;
   alt: string;
 }[] = [
-  { key: 'navigationTmap', img: tmap, alt: 'Tmap' },
-  { key: 'navigationNaver', img: naver, alt: 'Naver Map' },
-  { key: 'navigationKakao', img: kakao, alt: 'Kakao Navi' },
+  { key: 'navigationTmap', title: '티맵', img: tmap, alt: 'Tmap' },
+  { key: 'navigationNaver', title: '네이버지도', img: naver, alt: 'Naver Map' },
+  {
+    key: 'navigationKakao',
+    title: '카카오내비',
+    img: kakao,
+    alt: 'Kakao Navi',
+  },
 ];
 
 const Navigation = () => {

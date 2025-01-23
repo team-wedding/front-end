@@ -2,7 +2,7 @@ import CloseIcon from "../../icons/CloseIcon";
 
 interface ModalProps {
     isOpen: boolean;
-    title: string;
+    title: string | React.ReactNode;
     confirmText: string;
     onConfirm: () => void;
     onCancel: () => void;
@@ -25,7 +25,7 @@ const ReusableModal = ({ isOpen, title, confirmText, onConfirm, onCancel }: Moda
                     </button>
                 </div>
 
-                <div className="pt-2 pb-8 text-center text-base">
+                <div className="pt-2 pb-8 text-center text-base leading-relaxed">
                     <p>{title}</p>
                 </div>
 

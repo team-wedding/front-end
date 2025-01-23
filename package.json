@@ -21,6 +21,7 @@
     "date-fns": "^4.1.0",
     "flowbite": "^2.5.2",
     "flowbite-react": "^0.10.2",
+    "qrcode.react": "^4.2.0",
     "react": "^18.3.1",
     "react-copy-to-clipboard": "^5.1.0",
     "react-datepicker": "^7.5.0",

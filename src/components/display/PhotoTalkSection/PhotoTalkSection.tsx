@@ -90,6 +90,5 @@ const PhotoTalkSection = () => {
       )}
     </div>
   );
-};
 
 export default PhotoTalkSection;

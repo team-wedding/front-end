@@ -1,8 +1,8 @@
 import React from 'react';
 import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLocationFeatureStore';
-import { navigationData } from '../../../display/LocationSection/Navigation';
+import { navigationData } from '../../../../constants/navigationData';
 
-const NavigationInput = () => {
+const NavigationItem = () => {
   const { subFeatures, toggleSubFeature } = useLocationFeatureStore();
 
   return (
@@ -10,7 +10,7 @@ const NavigationInput = () => {
       {navigationData.map(({ key, title }) => (
         <button
           key={key}
-          className={`select-btn ${subFeatures[key] ? 'active-btn' : ''}`}
+          className={`select-btn ${subFeatures[key] && 'active-btn'}`}
           onClick={() => toggleSubFeature(key, !subFeatures[key])}
         >
           {title}
@@ -20,4 +20,4 @@ const NavigationInput = () => {
   );
 };
 
-export default NavigationInput;
+export default NavigationItem;

@@ -2,9 +2,9 @@ import { useState } from 'react';
 import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLocationFeatureStore';
 import OnOff from '../../../common/OnOff';
 import TextEditor from '../../../common/TextEditor';
-import { transportationData } from '../../../display/LocationSection/Transportation';
+import { transportationData } from '../../../../constants/transportationData';
 
-const TransportationInput = () => {
+const TransportationItem = () => {
   const {
     subFeatures,
     transportationInputs,
@@ -52,4 +52,4 @@ const TransportationInput = () => {
   );
 };
 
-export default TransportationInput;
+export default TransportationItem;

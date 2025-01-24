@@ -15,7 +15,7 @@ import RsvpStatsPage from './pages/RsvpStatsPage';
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      {/* <Route path="/" element={<HomePage />} /> */}
       <Route path="/dashboard" element={<DashBoardPage />} />
       <Route path="/login" element={<LoginPage />} />
       <Route path="/signup" element={<SignUpPage />} />

@@ -19,7 +19,7 @@ const LoginPage = () => {
           />
           <button
             className="splash-btn mt-4 mb-3 hover:bg-logo"
-            onClick={() => navigate('/')}
+            onClick={() => navigate('/dashboard')}
           >
             로그인
           </button>

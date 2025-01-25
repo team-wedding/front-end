@@ -13,13 +13,13 @@ export interface DraggableAccordionItemProps {
   moveItem: (dragIndex: number, hoverIndex: number) => void;
 }
 
-export const DraggableAccordionItem: React.FC<DraggableAccordionItemProps> = ({
+export const DraggableAccordionItem = ({
   item,
   index,
   expandedIds,
   toggleExpand,
   moveItem,
-}) => {
+}: DraggableAccordionItemProps) => {
   const dragHandleRef = React.useRef<HTMLDivElement>(null);
   const isExpanded = expandedIds.includes(item.id);
 
@@ -49,7 +49,7 @@ export const DraggableAccordionItem: React.FC<DraggableAccordionItemProps> = ({
                 className="text-gray-300 active:text-gray-500"
               />
             </div>
-            <div className="text-xs font-semibold">{item.title}</div>
+            <div className="font-semibold">{item.title}</div>
           </div>
 
           <div className="flex items-center gap-4">

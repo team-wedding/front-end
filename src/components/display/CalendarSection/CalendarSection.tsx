@@ -12,6 +12,7 @@ const CalendarSection = () => {
   const { subFeatures } = useCalendarFeatureStore();
 
   const isCalenderFeatureActive = selectedOptionalFeatures.calendar;
+
   const renderSubFeatures = [
     subFeatures.calendar && <Calendar key="calendar" />,
     subFeatures.countdown && (

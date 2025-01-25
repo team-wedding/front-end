@@ -11,6 +11,9 @@ type AddressState = {
   setJibunAddress: (jibunAddress: string) => void;
   setCoords: (lat: number, lng: number) => void;
   reset: () => void; // Reset 메서드 추가
+  setWeddingHallName: (weddingHallName: string) => void;
+  setWeddingHallDetail: (weddingHallDetail: string) => void;
+
 };
 
 // 초기 상태 정의
@@ -29,6 +32,8 @@ const useAddressStore = create<AddressState>((set) => ({
   setJibunAddress: (jibunAddress) => set(() => ({ jibunAddress })),
   setCoords: (lat, lng) => set(() => ({ coords: { lat, lng } })),
   reset: () => set(() => initialState), // Reset 메서드 구현
+  setWeddingHallName: (weddingHallName) => set(() => ({ weddingHallName })),
+  setWeddingHallDetail: (weddingHallDetail) => set(() => ({ weddingHallDetail })),
 }));
 
 export default useAddressStore;

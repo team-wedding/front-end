@@ -18,44 +18,58 @@ const MoneySection = () => {
         accounts.map((value, index) => {
           const { accountInfo, motherAccountInfo, fatherAccountInfo } = value
           const isOpen = value.role === "신랑님" ? accordionStates.groom : accordionStates.bride
+          const accountEmpty = Object.values(accountInfo).every((value) => value === "");
+          const mothreAccountEmpty = Object.values(motherAccountInfo).every((value) => value === "");
+          const fatherAccountEmpty = Object.values(fatherAccountInfo).every((value) => value === "");
+          const allEmpty = accountEmpty && mothreAccountEmpty && fatherAccountEmpty
           return (
             <section className="flex flex-col w-72" key={index}>
-              <div
-                className={`flex py-2 px-5 cursor-default justify-between items-center bg-secondary rounded-lg ${isOpen && "rounded-b-none"
-                  }`}
-                onClick={() => toggleAccordion(value.role === "신랑님" ? "groom" : "bride")}
-              >
-                <div className="font-medium">{`${value.role} 계좌번호`}</div>
-                <i
-                  className={`bx bx-chevron-down text-xl transition-all duration-300 ${isOpen ? "rotate-180" : ""
-                    }`}
-                ></i>
-              </div>
-              <div
-                className={`overflow-hidden transition-all ${isOpen ? "h-fit" : "h-0"
-                  }`}
-              >
-                <AccountNumberItem
-                  bank={accountInfo.bankName}
-                  accountNumber={accountInfo.accountNumber}
-                  name={accountInfo.accountHolder}
-                  kakaoLink={accountInfo.kakaoPayQRCode}
-                />
-                <AccountNumberItem
-                  bank={fatherAccountInfo.bankName}
-                  accountNumber={fatherAccountInfo.accountNumber}
-                  name={fatherAccountInfo.accountHolder}
+              {!allEmpty &&
+                <>
+                  <div
+                    className={`flex py-2 px-5 cursor-default justify-between items-center bg-secondary rounded-lg ${isOpen && "rounded-b-none"
+                      }`}
+                    onClick={() => toggleAccordion(value.role === "신랑님" ? "groom" : "bride")}
+                  >
+                    <div className="font-medium">{`${value.role} 계좌번호`}</div>
+                    <i
+                      className={`bx bx-chevron-down text-xl transition-all duration-300 ${isOpen ? "rotate-180" : ""
+                        }`}
+                    ></i>
+                  </div>
+                  <div
+                    className={`overflow-hidden transition-all ${isOpen ? "h-fit" : "h-0"
+                      }`}
+                  >
+                    {!accountEmpty &&
+                      <AccountNumberItem
+                        bank={accountInfo.bankName}
+                        accountNumber={accountInfo.accountNumber}
+                        name={accountInfo.accountHolder}
+                        kakaoLink={accountInfo.kakaoPayQRCode}
+                      />
+                    }
+                    {!fatherAccountEmpty &&
+                      <AccountNumberItem
+                        bank={fatherAccountInfo.bankName}
+                        accountNumber={fatherAccountInfo.accountNumber}
+                        name={fatherAccountInfo.accountHolder}
 
-                  kakaoLink={fatherAccountInfo.kakaoPayQRCode}
-                />
-                <AccountNumberItem
-                  bank={motherAccountInfo.bankName}
-                  accountNumber={motherAccountInfo.accountNumber}
-                  name={motherAccountInfo.accountHolder}
-                  kakaoLink={motherAccountInfo.kakaoPayQRCode}
-                  last={true}
-                />
-              </div>
+                        kakaoLink={fatherAccountInfo.kakaoPayQRCode}
+                      />
+                    }
+                    {!mothreAccountEmpty &&
+                      <AccountNumberItem
+                        bank={motherAccountInfo.bankName}
+                        accountNumber={motherAccountInfo.accountNumber}
+                        name={motherAccountInfo.accountHolder}
+                        kakaoLink={motherAccountInfo.kakaoPayQRCode}
+                        last={true}
+                      />
+                    }
+                  </div>
+                </>
+              }
             </section>
           )
         })

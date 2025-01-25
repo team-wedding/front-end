@@ -10,6 +10,8 @@ type AddressState = {
   setAddress: (address: string, zonecode: string | number) => void;
   setJibunAddress: (jibunAddress: string) => void;
   setCoords: (lat: number, lng: number) => void;
+  setWeddingHallName: (weddingHallName: string) => void;
+  setWeddingHallDetail: (weddingHallDetail: string) => void;
 };
 
 const useAddressStore = create<AddressState>((set) => ({
@@ -22,6 +24,8 @@ const useAddressStore = create<AddressState>((set) => ({
   setAddress: (address, zonecode) => set(() => ({ address, zonecode })),
   setJibunAddress: (jibunAddress) => set(() => ({ jibunAddress })),
   setCoords: (lat, lng) => set(() => ({ coords: { lat, lng } })),
+  setWeddingHallName: (weddingHallName) => set(() => ({ weddingHallName })),
+  setWeddingHallDetail: (weddingHallDetail) => set(() => ({ weddingHallDetail })),
 }));
 
 export default useAddressStore;

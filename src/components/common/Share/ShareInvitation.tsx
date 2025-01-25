@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
 import { toast, ToastContainer } from 'react-toastify';
-import LinkIcon from '../../icons/Link';
+import LinkIcon from '../../icons/LinkIcon';
 
 declare global {
   interface Window {

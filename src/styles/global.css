@@ -59,6 +59,26 @@
       url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.ttf)
         format('truetype');
   }
+
+  /* Autofill 스타일 추가 */
+  /* input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0 0px #e5e7eb inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  input:autofill,
+  input:autofill:hover,
+  input:autofill:focus,
+  input:autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0 0px #e5e7eb inset;
+    transition: background-color 5000s ease-in-out 0s;
+  } */
+
   @font-face {
     font-family: 'Paperlogy';
     src: url('/src/assets/fonts/Paperlogy-2ExtraLight.ttf') format('truetype');
@@ -113,13 +133,11 @@
   .layout-header,
   .layout-footer {
     @apply fixed w-full flex-center;
-    @apply fixed w-full flex-center;
     @apply md:max-w-md;
     max-width: var(--max-content-width, 448px);
   }
 
   .layout-header {
-    @apply border-b border-neutral-200 text-sm bg-white;
     @apply border-b border-neutral-200 text-sm bg-white;
     top: 0;
     height: var(--header-height);
@@ -127,21 +145,22 @@
 
   .layout-footer {
     @apply border-t border-neutral-200 text-[10px] bg-footer;
-    @apply border-t border-neutral-200 text-[10px] bg-footer;
     bottom: 0;
     height: var(--footer-height);
   }
 
   .layout-content {
     @apply bg-white w-full overflow-auto;
-    @apply bg-white w-full overflow-auto;
     margin-top: var(--header-height);
     margin-bottom: var(--footer-height);
     height: calc(100vh - var(--header-height) - var(--footer-height));
   }
 
+  .h-content {
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+  }
+
   .stepper-layout {
-    @apply fixed w-full bg-white z-10 flex-center text-xs px-12 py-2;
     @apply fixed w-full bg-white z-10 flex-center text-xs px-12 py-2;
     @apply md:max-w-md;
     max-width: var(--max-content-width, 448px);
@@ -149,7 +168,7 @@
 
   .splash-layout,
   .auth-layout {
-    @apply flex items-center justify-center w-full h-screen m-auto bg-white;
+    @apply w-full h-screen m-auto bg-white;
     @apply md:max-w-md;
     max-width: var(--max-content-width, 448px);
   }
@@ -204,7 +223,7 @@
   }
 
   .splash-input {
-    @apply px-5 py-3 rounded-lg text-xs border border-gray-300 focus-visible:ring-1 focus:ring-primary focus:border-none placeholder:text-gray-400;
+    @apply px-5 py-3 rounded-lg text-sm border border-gray-300 focus-visible:ring-1 focus:ring-primary focus:border-none placeholder:text-gray-400;
   }
 
   .formInput {

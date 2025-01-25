@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router";
 import PageLayout from '../components/layout/PageLayout';
 import BackIcon from '../components/icons/BackIcon';
-import EmailLogin from '../components/login/EmailLogin';
+import EmailLogin from '../components/login/EmailLogin/EmailLogin';
 
 const EmailLoginPage = () => {
     const navigate = useNavigate();

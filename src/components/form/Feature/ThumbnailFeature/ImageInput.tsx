@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import useImageStore from '../../../../store/useImageStore';
+import useImageStore from '@store/useImageStore';
 
 const ImageInput = () => {
   const { uploadedImage, setUploadedImage } = useImageStore();
@@ -70,7 +70,7 @@ const ImageInput = () => {
   };
 
   const handleImageDelete = () => {
-    setUploadedImage(null);
+    setUploadedImage('');
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -82,10 +82,11 @@ const ImageInput = () => {
       {!uploadedImage ? (
         <label
           htmlFor="dropzone-file"
-          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${isDragging
-            ? 'border-rose-300 bg-rose-50'
-            : 'border-gray-300 bg-gray-50'
-            } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
+          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${
+            isDragging
+              ? 'border-rose-300 bg-rose-50'
+              : 'border-gray-300 bg-gray-50'
+          } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}

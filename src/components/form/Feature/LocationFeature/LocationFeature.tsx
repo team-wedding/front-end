@@ -1,5 +1,5 @@
-import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLocationFeatureStore';
-import OnOff from '../../../common/OnOff';
+import { useLocationFeatureStore } from '@store/OptionalFeature/useLocationFeatureStore';
+import OnOff from '@common/OnOff';
 import NavigationItem from './NavigationItem';
 import TransportationItem from './TransportationItem';
 

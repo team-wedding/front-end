@@ -1,37 +1,34 @@
 import { useState } from 'react';
-import PageLayout from '../components/layout/PageLayout';
-import HeaderButton from '../components/common/Header/HeaderButton';
+import PageLayout from '@layout/PageLayout';
+import HeaderButton from '@common/Header/HeaderButton';
 import { useNavigate, useParams } from 'react-router';
-import {
-  Accordion,
-  AccordionItemData,
-} from '../components/common/CreateInvitation/Accordion';
-import { accordionData } from '../constants/accordionData';
-import { Stepper } from '../components/common/CreateInvitation/Stepper';
-import { StepNavigation } from '../components/common/CreateInvitation/StepNavigation';
+import { Accordion } from '@common/CreateInvitation/Accordion';
+import { AccordionItemData } from '@constants/accordionData';
+import { accordionData } from '@constants/accordionData';
+import { Stepper } from '@common/CreateInvitation/Stepper';
+import { StepNavigation } from '@common/CreateInvitation/StepNavigation';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import ResultDisplay from '../components/display/ResultDisplay';
-import { useGetInvitation, useUpdateInvitation } from '../hooks/useInvitation';
+import ResultDisplay from '@display/ResultDisplay';
+import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
 import { useUpdateInvitationStore } from '../actions/invitationAction';
 import { InvitationDetiail } from '../types/invitationType';
 
 const EditInvitationPage = () => {
-  // const { title, setTitle } = useInvitationStore();
   const navigate = useNavigate();
-  const { id } = useParams()
+  const { id } = useParams();
   const handleCancel = () => navigate('/dashboard');
-  const { mutate: editInvitation } = useUpdateInvitation(parseInt(id!))
-  const { invitations } = useGetInvitation(parseInt(id!))
+  const { mutate: editInvitation } = useUpdateInvitation(parseInt(id!));
+  const { invitations } = useGetInvitation(parseInt(id!));
 
-  useUpdateInvitationStore(invitations as InvitationDetiail)
+  useUpdateInvitationStore(invitations as InvitationDetiail);
 
   const handleSave = async () => {
     if (id) {
-      await editInvitation()
+      await editInvitation();
       navigate('/dashboard');
     }
-  }
+  };
 
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const [steps, setSteps] = useState(1);

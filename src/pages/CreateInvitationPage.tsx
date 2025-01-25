@@ -9,14 +9,9 @@ import PreviewDisplay from '@display/PreviewDisplay';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
-
+import { useCreateInvitation } from '@hooks/useInvitation';
+import { resetAllStores } from '@store/resetStore';
 const sliceRanges = [[0, 3], [3, 13], [13]];
-
-import { useCreateInvitation } from '../hooks/useInvitation';
-import { resetAllStores } from '../store/resetStore';
-import { useInvitationStore } from '../store/useInvitaionStore';
-
-
 const CreateInvitationPage = () => {
   const { items, initializeItems, moveItem } = useAccordionStore();
   const [steps, setSteps] = useState(1);
@@ -32,14 +27,14 @@ const CreateInvitationPage = () => {
   const handleCancel = () => {
     navigate('/dashboard');
     resetAllStores();
-  }
-  const { mutate: createInvitation } = useCreateInvitation()
+  };
+  const { mutate: createInvitation } = useCreateInvitation();
 
   const handleSave = async () => {
-    await createInvitation()
-    resetAllStores()
+    await createInvitation();
+    resetAllStores();
     navigate('/dashboard');
-  }
+  };
 
   const toggleExpand = (id: number) => {
     setExpandedIds((prev) =>

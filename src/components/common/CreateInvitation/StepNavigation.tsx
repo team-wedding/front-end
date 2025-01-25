@@ -1,5 +1,5 @@
-import BackIcon from '../../icons/BackIcon';
-import NextIcon from '../../icons/NextIcon';
+import BackIcon from '@icons/BackIcon';
+import NextIcon from '@icons/NextIcon';
 
 interface StepNavigationProps {
   currentStep: number;

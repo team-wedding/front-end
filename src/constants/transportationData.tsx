@@ -1,7 +1,7 @@
 import DirectionsCarRoundedIcon from '@mui/icons-material/DirectionsCarRounded';
 import DirectionsSubwayFilledRoundedIcon from '@mui/icons-material/DirectionsSubwayFilledRounded';
 import DirectionsBusFilledRoundedIcon from '@mui/icons-material/DirectionsBusFilledRounded';
-import { StoreState } from '../store/OptionalFeature/useLocationFeatureStore';
+import { StoreState } from '@store/OptionalFeature/useLocationFeatureStore';
 
 interface transportationItemData {
   key: keyof StoreState['subFeatures'];

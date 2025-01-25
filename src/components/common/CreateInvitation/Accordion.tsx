@@ -2,7 +2,7 @@ import { AccordionItemData } from '@constants/accordionData';
 import { AccordionItem } from './AccordionItem';
 import { DraggableAccordionItem } from './DraggableAccordionItem';
 
-interface AccordionProps {
+export interface AccordionProps {
   items: AccordionItemData[];
   expandedIds: number[];
   toggleExpand: (id: number) => void;

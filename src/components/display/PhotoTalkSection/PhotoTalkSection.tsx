@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import usePhotoTalkStore, { PhotoTalk } from '../../../store/usePhotoTalkStore';
+import usePhotoTalkStore, { PhotoTalk } from '@store/usePhotoTalkStore';
 import PhotoTalkEditor from './PhotoTalkEditor';
 import PhotoTalkCard from './PhotoTalkCard';
 import PhotoTalkGallery from './PhotoTalkGallery';
-import ImageIcon from '../../icons/ImageIcon';
+import ImageIcon from '@icons/ImageIcon';
 import PasswordConfirmModal from './PasswordConfirmModal';
 
 const PhotoTalkSection = () => {

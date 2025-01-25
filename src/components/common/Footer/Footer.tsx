@@ -1,5 +1,4 @@
 import { useLocation, useNavigate } from 'react-router';
-import HomeIcon from '@icons/HomeIcon';
 import UserIcon from '@icons/UserIcon';
 import GridIcon from '@icons/GridIcon';
 

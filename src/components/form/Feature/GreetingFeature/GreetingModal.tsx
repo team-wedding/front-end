@@ -1,5 +1,5 @@
-import useGreetingStore from '../../../../store/useGreetingStore';
-import CloseIcon from '../../../icons/CloseIcon';
+import useGreetingStore from '@store/useGreetingStore';
+import CloseIcon from '@icons/CloseIcon';
 
 const greetingSample = [
   `저희 두 사람의 작은 만남이\n사랑의 결실을 이루어\n소중한 결혼식을 올리게 되었습니다.\n\n평생 서로 귀하게 여기며\n첫 마음 그대로 존중하고 배려하며 살겠습니다.\n\n오로지 믿음과 사랑을 약속하는 날\n오셔서 축복해 주시면 더없는 기쁨으로\n간직하겠습니다.`,
@@ -40,10 +40,11 @@ const GreetingModal = ({
               {greetingSample.map((text, index) => (
                 <button
                   key={index}
-                  className={`whitespace-pre-wrap text-sm cursor-pointer p-5 rounded-lg border w-full ${text === selectedSample
+                  className={`whitespace-pre-wrap text-sm cursor-pointer p-5 rounded-lg border w-full ${
+                    text === selectedSample
                       ? 'border-black bg-gray-100'
                       : 'border-gray-200 hover:bg-gray-100'
-                    }`}
+                  }`}
                   onClick={() => {
                     setSelectedSample(text);
                     setGreeting(text);

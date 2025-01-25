@@ -11,7 +11,7 @@ export const Stepper = ({ steps, currentStep, onStepClick }: StepperProps) => {
         const isActive = index + 1 === currentStep;
         const isCompleted = index + 1 < currentStep;
         return (
-          <>
+          <div key={index}>
             {/* Step Indicator */}
             <button
               className="flex items-center rounded-xl px-1 py-2 hover:bg-gray-300 hover:bg-opacity-20 transition-all ease-in-out duration-100"
@@ -38,12 +38,11 @@ export const Stepper = ({ steps, currentStep, onStepClick }: StepperProps) => {
                 {step}
               </div>
             </button>
-
             {/* Divider */}
             {index < steps.length - 1 && (
               <div className="flex-grow h-px bg-gray-300 mx-2"></div>
             )}
-          </>
+          </div>
         );
       })}
     </div>

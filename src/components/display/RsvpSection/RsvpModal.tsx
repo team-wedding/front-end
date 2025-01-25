@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react';
-import CloseIcon from '../../icons/CloseIcon';
-import HeartIcon from '../../icons/HeartIcon';
-import CalendarIcon from '../../icons/CalendarIcon';
-import PinIcon from '../../icons/PinIcon';
+import CloseIcon from '@icons/CloseIcon';
+import HeartIcon from '@icons/HeartIcon';
+import CalendarIcon from '@icons/CalendarIcon';
+import PinIcon from '@icons/PinIcon';
 
 interface ModalProp {
   bride: string;
@@ -13,7 +13,7 @@ interface ModalProp {
   setModal: Dispatch<SetStateAction<boolean>>;
 }
 interface InfoDetail {
-  attend: boolean
+  attend: boolean;
   brideMember: boolean;
   name: string;
   phone: string;
@@ -49,8 +49,10 @@ const RsvpModal: React.FC<ModalProp> = ({
   //TODO : 동적으로 색 바꿀수있게 props로 받아서 차리
   //TODO : 재사용할수있는 코드 리팩토링 특히 인풋
   return (
-    <div className={`fixed  z-50 top-0 left-0 size-full flex justify-center pt-10`}>
-      <div className='absolute top-0 left-0 w-screen h-screen bg-black/60 z-10'></div>
+    <div
+      className={`fixed  z-50 top-0 left-0 size-full flex justify-center pt-10`}
+    >
+      <div className="absolute top-0 left-0 w-screen h-screen bg-black/60 z-10"></div>
       <div
         className={`absolute z-30 flex flex-col py-6 px-5 bg-white  w-[350px] rounded-xl  border`}
       >
@@ -114,19 +116,24 @@ const RsvpModal: React.FC<ModalProp> = ({
                 </button>
               </div>
             </div>
-            <div className='flex flex-row w-full gap-2 items-center justify-between'>
+            <div className="flex flex-row w-full gap-2 items-center justify-between">
               <div>참석여부: </div>
               <div className={`flex flex-row justify-between gap-1 w-48`}>
                 <button
                   className={`rounded-md p-1 w-1/2  ${info.attend ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'}`}
-                  onClick={() =>
-                    setInfo((prev) => ({ ...prev, attend: true }))
-                  }>참석할께요</button>
+                  onClick={() => setInfo((prev) => ({ ...prev, attend: true }))}
+                >
+                  참석할께요
+                </button>
                 <button
                   className={`rounded-md p-1  w-1/2 ${!info.attend ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'}`}
                   onClick={() =>
                     setInfo((prev) => ({ ...prev, attend: false }))
-                  }>참석이<br /> 어려워요</button>
+                  }
+                >
+                  참석이
+                  <br /> 어려워요
+                </button>
               </div>
             </div>
             <div className="flex flex-row w-full justify-between items-center text-lg ">

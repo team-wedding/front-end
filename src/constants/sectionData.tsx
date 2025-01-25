@@ -1,14 +1,14 @@
-import CalendarSection from '../components/display/CalendarSection/CalendarSection';
-import ContactSection from '../components/display/ContactSection/ContactSection';
-import GallerySection from '../components/display/GallerySection/GallerySection';
-import GreetingSection from '../components/display/GreetingSection/GreetingSection';
-import LocationSection from '../components/display/LocationSection/LocationSection';
-import MoneySection from '../components/display/MoneySection/MoneySection';
-import MusicSection from '../components/display/MusicSection/MusicSection';
-import NoticeSection from '../components/display/NoticeSection/NoticeSection';
-import PhotoTalkSection from '../components/display/PhotoTalkSection/PhotoTalkSection';
-import RsvpSection from '../components/display/RsvpSection/RsvpSection';
-import ThumbnailSection from '../components/display/ThumbnailSection/ThumbnailSection';
+import CalendarSection from '@display/CalendarSection/CalendarSection';
+import ContactSection from '@display/ContactSection/ContactSection';
+import GallerySection from '@display/GallerySection/GallerySection';
+import GreetingSection from '@display/GreetingSection/GreetingSection';
+import LocationSection from '@display/LocationSection/LocationSection';
+import MoneySection from '@display/MoneySection/MoneySection';
+import MusicSection from '@display/MusicSection/MusicSection';
+import NoticeSection from '@display/NoticeSection/NoticeSection';
+import PhotoTalkSection from '@display/PhotoTalkSection/PhotoTalkSection';
+import RsvpSection from '@display/RsvpSection/RsvpSection';
+import ThumbnailSection from '@display/ThumbnailSection/ThumbnailSection';
 
 export interface SectionItemData {
   section: React.ReactNode;

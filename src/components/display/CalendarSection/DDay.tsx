@@ -1,5 +1,5 @@
-import { calculateDday } from '../../../utils/dateUtils';
-import { useWeddingStore } from '../../../store/useWeddingStore';
+import { calculateDday } from '@utils/dateUtils';
+import { useWeddingStore } from '@store/useWeddingStore';
 
 const DDay = () => {
   const { weddingDate, weddingTime } = useWeddingStore();

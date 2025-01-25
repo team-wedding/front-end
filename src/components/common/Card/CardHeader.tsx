@@ -1,14 +1,14 @@
 import CircleMinusIcon from '@icons/CircleMinusIcon';
 import ShareIcon from '@icons/ShareIcon';
-import React, { useRef, useState } from 'react';;
+import React, { useRef, useState } from 'react';
 import ShareInvitation from '../Share/ShareInvitation';
 import { useDeleteInvitation } from '../../../hooks/useInvitation';
 
-const CardHeader = ({ id, title }: { id: number, title: string }) => {
-  const { mutate: deleteInvitaion } = useDeleteInvitation(id)
+const CardHeader = ({ id, title }: { id: number; title: string }) => {
+  const { mutate: deleteInvitaion } = useDeleteInvitation(id);
   const handleDelete = () => {
-    deleteInvitaion()
-  }
+    deleteInvitaion();
+  };
   const [isFocused, setIsFocused] = useState(false);
   const parentRef = useRef<HTMLButtonElement>(null);
 
@@ -29,7 +29,7 @@ const CardHeader = ({ id, title }: { id: number, title: string }) => {
         <CircleMinusIcon />
       </button>
       {/* 청첩장 제목 입력값 */}
-      <div className="text-xs font-medium px-2">제목</div>
+      <div className="text-xs font-medium px-2">{title}</div>
       <button
         ref={parentRef}
         tabIndex={-1}

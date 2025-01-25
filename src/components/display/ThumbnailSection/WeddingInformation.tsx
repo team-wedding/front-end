@@ -15,7 +15,7 @@ const WeddingInformation = () => {
     <div className="column-center text-sm font-light gap-2">
       <div>{date}</div>
       <div className="flex opacity-60">
-        <div className='px-1'>{weddingHallName}</div>
+        <div className="px-1">{weddingHallName}</div>
         <div>{weddingHallDetail}</div>
       </div>
     </div>

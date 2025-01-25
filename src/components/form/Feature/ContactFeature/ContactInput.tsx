@@ -1,5 +1,4 @@
-import useContactStore from "../../../../store/useContactStore";
-
+import useContactStore from '@store/useContactStore';
 
 const ContactInput = () => {
   const contacts = useContactStore((state) => state.contacts);

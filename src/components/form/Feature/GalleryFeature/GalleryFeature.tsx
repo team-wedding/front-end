@@ -1,9 +1,9 @@
 import { useRef, useState } from 'react';
-import useGallaryStore from '../../../../store/useGallaryStore';
-import CloseIcon from '../../../icons/CloseIcon';
-import GridIcon from '../../../../assets/GridIcon.svg'
-import ChevronRight from '../../../icons/Chevron_RightIcon';
-import ChevronLeft from '../../../icons/Chevron_LeftIcon';
+import useGallaryStore from '@store/useGallaryStore';
+import CloseIcon from '@icons/CloseIcon';
+import GridIcon from '@assets/GridIcon.svg';
+import ChevronRight from '@icons/Chevron_RightIcon';
+import ChevronLeft from '@icons/Chevron_LeftIcon';
 
 export default function GalleryFeature() {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -42,7 +42,7 @@ export default function GalleryFeature() {
         if (file) {
           reader.readAsDataURL(file);
           reader.onload = () => {
-            setImages([...images, reader.result as string])
+            setImages([...images, reader.result as string]);
           };
         }
       }
@@ -77,7 +77,6 @@ export default function GalleryFeature() {
   const handleSortDragEnd = () => {
     setHoveredIndex(null);
   };
-
 
   return (
     <div className="flex flex-col gap-4">
@@ -117,7 +116,11 @@ export default function GalleryFeature() {
                 >
                   <CloseIcon className="size-4 text-white " />
                 </div>
-                <img src={value} alt="" className="object-center  rounded-md size-full border border-gray-300" />
+                <img
+                  src={value}
+                  alt=""
+                  className="object-center  rounded-md size-full border border-gray-300"
+                />
               </div>
             );
           })
@@ -143,17 +146,17 @@ export default function GalleryFeature() {
           onClick={() => setGrid(true)}
           className={`flex-1 px-5 py-4 rounded-md flex flex-col items-center justify-between border ${grid ? 'border-transparent ring-1 ring-primary' : 'bg-transparent  '}`}
         >
-          <img src={GridIcon} alt="" className='size-12 text-gray-400' />
+          <img src={GridIcon} alt="" className="size-12 text-gray-400" />
           그리드
         </button>
         <button
           onClick={() => setGrid(false)}
           className={` flex-1 px-5 py-4 rounded-md flex flex-col items-center justify-between border  ${!grid ? 'border-transparent ring-1 ring-primary' : 'bg-transparent  '}`}
         >
-          <div className=' flex flex-row items-center'>
-            <ChevronLeft className='text-gray-400/70 size-6' />
-            <div className='size-12 bg-gray-400/70 rounded-lg' />
-            <ChevronRight className='text-gray-400/70 size-6' />
+          <div className=" flex flex-row items-center">
+            <ChevronLeft className="text-gray-400/70 size-6" />
+            <div className="size-12 bg-gray-400/70 rounded-lg" />
+            <ChevronRight className="text-gray-400/70 size-6" />
           </div>
           페이징
         </button>
@@ -164,6 +167,6 @@ export default function GalleryFeature() {
       >
         저장하기
       </button> */}
-    </div >
+    </div>
   );
 }

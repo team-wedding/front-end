@@ -1,7 +1,7 @@
 import { ChangeEvent, useEffect, useState } from 'react';
-import usePhotoTalkStore from '../../../store/usePhotoTalkStore';
-import CloseIcon from '../../icons/CloseIcon';
-import CloudArrowIcon from '../../icons/CloudArrowIcon';
+import usePhotoTalkStore from '@store/usePhotoTalkStore';
+import CloseIcon from '@icons/CloseIcon';
+import CloudArrowIcon from '@icons/CloudArrowIcon';
 
 interface UploadedImage {
   id: string;

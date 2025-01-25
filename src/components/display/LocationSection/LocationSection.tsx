@@ -1,9 +1,11 @@
 import LocationTitle from './LocationTitle';
 import Map from './Map';
 import { useOptionalFeatureStore } from '../../../store/OptionalFeature/useOptionalFeatureStore';
-import Navigation, { navigationData } from './Navigation';
-import Transportation, { transportationData } from './Transportation';
+import Navigation from './Navigation';
+import Transportation from './Transportation';
 import { useLocationFeatureStore } from '../../../store/OptionalFeature/useLocationFeatureStore';
+import { navigationData } from '../../../constants/navigationData';
+import { transportationData } from '../../../constants/transportationData';
 
 const LocationSection = () => {
   const { selectedOptionalFeatures } = useOptionalFeatureStore();

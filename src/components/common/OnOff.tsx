@@ -13,7 +13,7 @@ const OnOff = ({ state, setState }: Props) => {
     <div>
       <button
         onClick={onoffHandler}
-        className={`border px-2 py-[3px] rounded-xl text-gray-400 text-[10px] transition-all duration-300 ${state ? 'bg-button bg-opacity-80 text-white border-transparent shadow-sm' : 'bg-neutral-100  border-neutral-200'}`}
+        className={`border px-2 py-[3px] rounded-xl text-gray-400 text-[10px] transition-all duration-100 ${state ? 'bg-button bg-opacity-80 text-white border-transparent shadow-sm' : 'bg-neutral-100  border-neutral-200'}`}
       >
         {state ? 'ON' : 'OFF'}
       </button>

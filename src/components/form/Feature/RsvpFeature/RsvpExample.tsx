@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Toggle from "../../common/CreateInvitation/Toggle";
+import Toggle from "../../../common/Toggle";
 
 export interface RSVPDetails {
   title: string,

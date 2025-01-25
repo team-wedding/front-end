@@ -1,9 +1,7 @@
 import './App.css';
-import React from 'react';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
-import SplashPage from './pages/SplashPage';
 import { Route, Routes } from 'react-router';
 import CreateInvitationPage from './pages/CreateInvitationPage';
 import PreviewInvitaionPage from './pages/PreviewInvitaionPage';
@@ -12,6 +10,12 @@ import DashBoardPage from './pages/DashBoardPage';
 import EmailLoginPage from './pages/EmailLoginPage';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+// import ResetPasswordPage from './pages/ResetPasswordPage';
+// import ChangePasswordPage from './pages/ChangePasswordPage';
+// import EditMyPage from './pages/EditMyPage';
+import NaverRedirect from './components/login/SocialLogin/NaverRedirect';
+import KakaoRedirect from './components/login/SocialLogin/KakaoRedirect';
+
 
 function App() {
 
@@ -25,10 +29,14 @@ function App() {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/email-login" element={<EmailLoginPage />} />
         <Route path="/signup" element={<SignUpPage />} />
-        <Route path="/splash" element={<SplashPage />} />
+        {/* <Route path="/reset-password" element={<ResetPasswordPage />} />
+        <Route path="edit-profile" element={<EditMyPage />} />
+        <Route path="/change-password" element={<ChangePasswordPage />} /> */}
         <Route path="/create" element={<CreateInvitationPage />} />
         <Route path="/preview" element={<PreviewInvitaionPage />} />
         <Route path="/result" element={<ResultPage />} />
+        <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
+        <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
       </Routes>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>

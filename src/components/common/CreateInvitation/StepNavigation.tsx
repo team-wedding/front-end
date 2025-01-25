@@ -22,8 +22,8 @@ export const StepNavigation: React.FC<StepNavigationProps> = ({
       {/* Previous Button */}
       <button
         onClick={onPrev}
-        className={`px-2 py-1 rounded bg-rose-300 ${
-          currentStep === 1 ? 'opacity-0' : 'hover:bg-rose-200'
+        className={`px-2 py-1 rounded bg-rose-200 ${
+          currentStep === 1 ? 'opacity-0' : 'hover:bg-rose-100'
         }`}
         disabled={currentStep === 1}
       >
@@ -31,8 +31,8 @@ export const StepNavigation: React.FC<StepNavigationProps> = ({
       </button>
       <button
         onClick={onNext}
-        className={`px-2 py-1 rounded bg-rose-300 ${
-          currentStep === totalSteps ? 'opacity-0' : 'hover:bg-rose-200'
+        className={`px-2 py-1 rounded bg-rose-200 ${
+          currentStep === totalSteps ? 'opacity-0' : 'hover:bg-rose-100'
         }`}
         disabled={currentStep === totalSteps}
       >

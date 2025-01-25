@@ -1,4 +1,3 @@
-import React from 'react';
 import useAddressStore from '../../../store/useAddressStore';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import FileCopyIcon from '../../icons/FileCopyIcon';
@@ -6,6 +5,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 const LocationTitle = () => {
+  // 웨딩 이름, 층, 홀 추가하기
   const { jibunAddress } = useAddressStore();
 
   const addressToCopy = jibunAddress || '서울 강남구 언주로 564';
@@ -19,7 +19,7 @@ const LocationTitle = () => {
   };
 
   return (
-    <div className="column-center gap-2">
+    <div className="column-center gap-2 my-10">
       <div className="sub-title">LOCATION</div>
       <div className="title">오시는 길</div>
       <div className="font-normal"> 더라움 1층 1홀</div>

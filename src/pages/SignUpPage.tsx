@@ -108,7 +108,7 @@ const SignUpPage = () => {
   return (
 
     <PageLayout leftButton={<button onClick={() => navigate(-1)}><BackIcon /></button>} customFooter={null}>
-      <div className="flex flex-col w-full h-content p-8">
+      <div className="flex flex-col items-center w-full h-content p-8">
 
         <div className="flex flex-col w-full gap-3">
 

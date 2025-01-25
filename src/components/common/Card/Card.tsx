@@ -16,7 +16,6 @@ const Card = ({ image }: CardProps) => {
         <div className="absolute inset-0 bg-white opacity-10"></div>
         <CardHeader />
       </div>
-
       <CardFooter />
     </div>
   );

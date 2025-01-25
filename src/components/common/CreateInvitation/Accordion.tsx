@@ -16,7 +16,7 @@ export const Accordion = ({
   moveItem,
 }: AccordionProps) => {
   return (
-    <div className="flex flex-col gap-2 p-10 pt-20">
+    <div className="flex flex-col gap-2 px-10 py-[70px]">
       {items.map((item, index) =>
         item.hasDrag ? (
           <DraggableAccordionItem

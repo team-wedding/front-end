@@ -15,7 +15,7 @@ export default function GallerySection() {
       setImageIndex(images.length - 1);
     } else setImageIndex((prev: number) => prev - 1);
   };
-  const handlNext = () => {
+  const handleNext = () => {
     if (imageIndex == images.length - 1) {
       setImageIndex(0);
     } else setImageIndex((prev: number) => prev + 1);
@@ -45,7 +45,7 @@ export default function GallerySection() {
                 <ChevronLeft />
               </button>
               <div>{`${imageIndex + 1} / ${images.length}`}</div>
-              <button onClick={handlNext}>
+              <button onClick={handleNext}>
                 <ChevronRight />
               </button>
             </div>

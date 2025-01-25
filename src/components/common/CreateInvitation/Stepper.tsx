@@ -29,7 +29,7 @@ export const Stepper = ({ steps, currentStep, onStepClick }: StepperProps) => {
                 {index + 1}
               </div>
               <div
-                className={`ml-2 text-xs ${
+                className={`ml-2 ${
                   isActive
                     ? 'text-primary font-medium'
                     : 'text-gray-300 font-light'

@@ -4,6 +4,7 @@ import GallerySection from '../components/display/GallerySection/GallerySection'
 import GreetingSection from '../components/display/GreetingSection/GreetingSection';
 import LocationSection from '../components/display/LocationSection/LocationSection';
 import MoneySection from '../components/display/MoneySection/MoneySection';
+import MusicSection from '../components/display/MusicSection/MusicSection';
 import NoticeSection from '../components/display/NoticeSection/NoticeSection';
 import PhotoTalkSection from '../components/display/PhotoTalkSection/PhotoTalkSection';
 import RsvpSection from '../components/display/RsvpSection/RsvpSection';
@@ -65,5 +66,10 @@ export const sectionData: SectionItemData[] = [
     section: <NoticeSection />,
     feature: 'notice',
     hasDrag: true,
+  },
+  {
+    section: <MusicSection />,
+    feature: 'music',
+    hasDrag: false,
   },
 ];

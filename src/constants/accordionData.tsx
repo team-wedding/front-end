@@ -11,6 +11,7 @@ import RsvpExample from '../components/form/Feature/RsvpFeature/RsvpExample';
 import ImageInput from '../components/form/Feature/ThumbnailFeature/ImageInput';
 import ThemeFeature from '../components/form/Theme/ThemeFeature/ThemeFeature';
 import NoticeFeature from '../components/form/Feature/NoticeFeature/NoticeFeature';
+import MusicFeature from '../components/form/Theme/MusicFeature/MusicFeature';
 
 export interface AccordionItemData {
   id: number;
@@ -155,7 +156,7 @@ export const accordionData: AccordionItemData[] = [
     id: 17,
     title: '배경 음악',
     feature: 'music',
-    content: <ThemeFeature />,
+    content: <MusicFeature />,
     hasToggle: true,
     hasDrag: false,
   },

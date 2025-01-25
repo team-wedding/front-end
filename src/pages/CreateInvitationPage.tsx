@@ -12,6 +12,11 @@ import { useAccordionStore } from '@store/useAccordionStore';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 
+import { useCreateInvitation } from '../hooks/useInvitation';
+import { resetAllStores } from '../store/resetStore';
+import { useInvitationStore } from '../store/useInvitaionStore';
+
+
 const CreateInvitationPage = () => {
   const { items, initializeItems, moveItem } = useAccordionStore();
   const [steps, setSteps] = useState(1);
@@ -23,8 +28,18 @@ const CreateInvitationPage = () => {
   }, [steps, initializeItems]);
 
   const navigate = useNavigate();
-  const handleCancel = () => navigate('/dashboard');
-  const handleSave = () => navigate('/dashboard');
+
+  const handleCancel = () => {
+    navigate('/dashboard');
+    resetAllStores();
+  }
+  const { mutate: createInvitation } = useCreateInvitation()
+
+  const handleSave = async () => {
+    await createInvitation()
+    resetAllStores()
+    navigate('/dashboard');
+  }
 
   const toggleExpand = (id: number) => {
     setExpandedIds((prev) =>

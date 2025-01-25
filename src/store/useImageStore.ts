@@ -1,13 +1,15 @@
 import { create } from 'zustand';
 
 type StoreState = {
-  uploadedImage: string | null;
-  setUploadedImage: (image: string | null) => void;
+  uploadedImage: string;
+  setUploadedImage: (image: string) => void;
+  reset: () => void;
 };
 
 const useImageStore = create<StoreState>((set) => ({
-  uploadedImage: null,
+  uploadedImage: '',
   setUploadedImage: (image) => set({ uploadedImage: image }),
+  reset: () => set({ uploadedImage: '' }),
 }));
 
 export default useImageStore;

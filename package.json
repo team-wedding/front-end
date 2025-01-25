@@ -27,6 +27,7 @@
     "dompurify": "^3.2.3",
     "flowbite": "^2.5.2",
     "flowbite-react": "^0.10.2",
+    "lodash": "^4.17.21",
     "isomorphic-dompurify": "^2.20.0",
     "jsdom": "^26.0.0",
     "qrcode.react": "^4.2.0",
@@ -42,10 +43,12 @@
     "react-router": "^7.0.2",
     "react-slick": "^0.30.3",
     "react-toastify": "^11.0.0",
+    "uuid": "^11.0.5",
     "slick-carousel": "^1.8.1",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
+    "@types/lodash": "^4.17.14",
     "@types/node": "^22.10.7",
     "@types/react": "^18.3.12",
     "@types/react-copy-to-clipboard": "^5.0.7",

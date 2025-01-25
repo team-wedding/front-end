@@ -5,6 +5,7 @@ type StoreState = {
   setImages: (images: string[]) => void;
   grid: boolean;
   setGrid: (grid: boolean) => void;
+  reset: () => void;
 };
 
 const useGallaryStore = create<StoreState>((set) => ({
@@ -12,6 +13,7 @@ const useGallaryStore = create<StoreState>((set) => ({
   setImages: (images: string[]) => set(() => ({ images })),
   grid: true,
   setGrid: (grid: boolean) => set(() => ({ grid })),
+  reset: () => set({ images: [] }),
 }));
 
 export default useGallaryStore;

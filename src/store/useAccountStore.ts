@@ -21,53 +21,57 @@ type StoreState = {
     field: keyof RoleAccountInfo,
     value: AccountInfo,
   ) => void;
+  reset: () => void; // Reset 메서드 추가
 };
 
+// 초기 상태 정의
+const initialAccounts: RoleAccountInfo[] = [
+  {
+    role: '신랑님',
+    accountInfo: {
+      accountHolder: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoPayQRCode: '',
+    },
+    fatherAccountInfo: {
+      accountHolder: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoPayQRCode: '',
+    },
+    motherAccountInfo: {
+      accountHolder: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoPayQRCode: '',
+    },
+  },
+  {
+    role: '신부님',
+    accountInfo: {
+      accountHolder: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoPayQRCode: '',
+    },
+    fatherAccountInfo: {
+      accountHolder: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoPayQRCode: '',
+    },
+    motherAccountInfo: {
+      accountHolder: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoPayQRCode: '',
+    },
+  },
+];
+
 const useAccountStore = create<StoreState>((set) => ({
-  accounts: [
-    {
-      role: '신랑님',
-      accountInfo: {
-        accountHolder: '',
-        bankName: '',
-        accountNumber: '',
-        kakaoPayQRCode: '',
-      },
-      fatherAccountInfo: {
-        accountHolder: '',
-        bankName: '',
-        accountNumber: '',
-        kakaoPayQRCode: '',
-      },
-      motherAccountInfo: {
-        accountHolder: '',
-        bankName: '',
-        accountNumber: '',
-        kakaoPayQRCode: '',
-      },
-    },
-    {
-      role: '신부님',
-      accountInfo: {
-        accountHolder: '',
-        bankName: '',
-        accountNumber: '',
-        kakaoPayQRCode: '',
-      },
-      fatherAccountInfo: {
-        accountHolder: '',
-        bankName: '',
-        accountNumber: '',
-        kakaoPayQRCode: '',
-      },
-      motherAccountInfo: {
-        accountHolder: '',
-        bankName: '',
-        accountNumber: '',
-        kakaoPayQRCode: '',
-      },
-    },
-  ],
+  accounts: initialAccounts,
   updateAccountInfo: (index, field, value) =>
     set((state) => {
       const updateAccounts = [...state.accounts];
@@ -77,6 +81,7 @@ const useAccountStore = create<StoreState>((set) => ({
       };
       return { accounts: updateAccounts };
     }),
+  reset: () => set({ accounts: initialAccounts }), // Reset 메서드 구현
 }));
 
 export default useAccountStore;

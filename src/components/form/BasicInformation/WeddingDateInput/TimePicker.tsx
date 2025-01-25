@@ -1,10 +1,9 @@
-import React from 'react';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { ko } from 'date-fns/locale/ko';
 import { useWeddingStore } from '../../../../store/useWeddingStore';
 
-const TimePicker: React.FC = () => {
+const TimePicker = () => {
   const { weddingTime, setWeddingTime } = useWeddingStore();
   // const time = new Date(`2023-01-01T${weddingTime}`);
 

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import GreetingModal from './GreetingModal';
 import useGreetingStore from '../../../../store/useGreetingStore';
 

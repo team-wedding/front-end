@@ -1,4 +1,3 @@
-import React from 'react';
 import CallButton from './CallButton';
 
 interface ContactProps {
@@ -6,7 +5,7 @@ interface ContactProps {
   phoneNumber: string | undefined;
 }
 
-const Contact: React.FC<ContactProps> = ({ title, phoneNumber }) => {
+const Contact = ({ title, phoneNumber }: ContactProps) => {
   return (
     <div className="flex gap-2">
       <div>{title}</div>

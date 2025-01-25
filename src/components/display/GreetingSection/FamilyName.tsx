@@ -1,5 +1,5 @@
-import useBrideGroomStore from '../../../store/useBrideGroomStore';
-import deceasedImage from '../../../assets/deceased.png';
+import useBrideGroomStore from '@store/useBrideGroomStore';
+import deceasedImage from '@assets/deceased.png';
 
 const FamilyName = () => {
   const brideGroom = useBrideGroomStore((state) => state.brideGroom);

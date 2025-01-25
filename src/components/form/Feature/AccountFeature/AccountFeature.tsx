@@ -1,4 +1,3 @@
-import React from 'react';
 import AccountInput from './AccountInput';
 
 const AccountFeature = () => {

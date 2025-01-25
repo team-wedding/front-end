@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import ChevronLeft from '../../icons/Chevron_LeftIcon';
-import ChevronRight from '../../icons/Chevron_RightIcon';
-import useGallaryStore from '../../../store/useGallaryStore';
-import { useOptionalFeatureStore } from '../../../store/OptionalFeature/useOptionalFeatureStore';
+import ChevronLeft from '@icons/Chevron_LeftIcon';
+import ChevronRight from '@icons/Chevron_RightIcon';
+import useGallaryStore from '@store/useGallaryStore';
+import { useOptionalFeatureStore } from '@store/OptionalFeature/useOptionalFeatureStore';
 
 export default function GallerySection() {
   const store = useGallaryStore();

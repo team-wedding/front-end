@@ -1,6 +1,4 @@
-import React from 'react';
-
-const TrashIcon: React.FC = () => (
+const TrashIcon = () => (
   <svg
     className="size-5 text-gray-800 dark:text-white hover:text-red-600"
     aria-hidden="true"

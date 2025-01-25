@@ -1,9 +1,8 @@
-import React from 'react';
-import BackIcon from '../components/icons/BackIcon';
-import PageLayout from '../components/layout/PageLayout';
-import HeaderButton from '../components/common/Header/HeaderButton';
+import BackIcon from '@icons/BackIcon';
+import PageLayout from '@layout/PageLayout';
+import HeaderButton from '@common/Header/HeaderButton';
 import logo from '../assets/logo_icon.svg'
-import MyPageItem from '../components/common/MyPage/MyPageItem';
+import MyPageItem from '@common/MyPage/MyPageItem';
 
 const EditMyPage = () => {
   const handleBack = () => {

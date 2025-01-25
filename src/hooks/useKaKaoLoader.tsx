@@ -1,4 +1,3 @@
-import React from 'react';
 import { useKakaoLoader as useKakaoLoaderOrigin } from 'react-kakao-maps-sdk';
 
 const useKaKaoLoader = () => {

@@ -1,5 +1,5 @@
-import { useWeddingStore } from '../../../store/useWeddingStore';
-import useAddressStore from '../../../store/useAddressStore';
+import { useWeddingStore } from '@store/useWeddingStore';
+import useAddressStore from '@store/useAddressStore';
 
 const WeddingInformation = () => {
   const { formattedDate, weddingDate, weddingTime } = useWeddingStore();

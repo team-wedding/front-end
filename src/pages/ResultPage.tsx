@@ -1,4 +1,4 @@
-import ResultDisplay from '../components/display/ResultDisplay';
+import ResultDisplay from '@display/ResultDisplay';
 
 const ResultPage = () => {
   return (

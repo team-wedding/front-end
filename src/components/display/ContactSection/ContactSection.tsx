@@ -1,6 +1,5 @@
-import React from 'react';
 import Contact from './Contact';
-import useContactStore from '../../../store/useContactStore';
+import useContactStore from '@store/useContactStore';
 import ContactTitle from './ContactTitle';
 
 const ContactSection = () => {

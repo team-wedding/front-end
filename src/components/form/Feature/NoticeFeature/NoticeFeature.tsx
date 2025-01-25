@@ -4,7 +4,6 @@ import { Notice } from './NoticeItem';
 import TrashBinIcon from '../../../icons/TrashBinIcon';
 import CloudArrowIcon from '../../../icons/CloudArrowIcon';
 import CloseIcon from '../../../icons/CloseIcon';
-
 const NoticeFeature = () => {
   const {
     notices,

@@ -1,6 +1,4 @@
-import React from 'react';
-
-const BackIcon: React.FC = () => (
+const BackIcon = () => (
   <svg
     className="size-5 text-gray-800 dark:text-white"
     xmlns="http://www.w3.org/2000/svg"

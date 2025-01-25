@@ -1,5 +1,3 @@
-import React from 'react';
-
 type HeaderProps = {
   text?: string | React.ReactNode;
   leftButton?: React.ReactNode;
@@ -8,7 +6,7 @@ type HeaderProps = {
   height?: string;
 };
 
-const Header: React.FC<HeaderProps> = ({ text, leftButton, rightButton }) => {
+const Header = ({ text, leftButton, rightButton }: HeaderProps) => {
   return (
     <div className='flex items-center w-full max-w-md justify-between'>
       {/* Left Button */}

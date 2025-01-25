@@ -1,4 +1,3 @@
-import React from 'react';
 import Header from '../common/Header/Header';
 import Footer from '../common/Footer/Footer';
 
@@ -10,13 +9,13 @@ type PageLayoutProps = {
   customFooter?: React.ReactNode;
 };
 
-const PageLayout: React.FC<PageLayoutProps> = ({
+const PageLayout = ({
   title,
   leftButton,
   rightButton,
   children,
   customFooter,
-}) => {
+}: PageLayoutProps) => {
   return (
     <div className="layout">
       <div className="layout-header">

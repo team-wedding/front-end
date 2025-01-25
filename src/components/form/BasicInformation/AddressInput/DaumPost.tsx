@@ -1,4 +1,3 @@
-import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import useAddressStore from '../../../../store/useAddressStore';
 
@@ -15,7 +14,7 @@ interface DaumPostProps {
   handleComplete: () => void; // 팝업 닫기 함수
 }
 
-const DaumPost: React.FC<DaumPostProps> = ({ handleComplete }) => {
+const DaumPost = ({ handleComplete }: DaumPostProps) => {
   const setAddress = useAddressStore((state) => state.setAddress);
   const setJibunAddress = useAddressStore((state) => state.setJibunAddress);
 

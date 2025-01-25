@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ShareIcon = () => (
   <svg
     className={`size-6 dark:text-white`}

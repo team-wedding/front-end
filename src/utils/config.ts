@@ -10,8 +10,9 @@ const BASE_URL = import.meta.env.VITE_API_URL;
 export const axiosInstance = axios.create({
     baseURL: BASE_URL,
     headers: {
-        'Content-Type': 'application/json', withCredentials: true
+        'Content-Type': 'application/json',
     },
+    withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(
@@ -71,10 +72,13 @@ axiosInstance.interceptors.response.use(
 
 export const API = {
     LOGIN: () => `${BASE_URL}/users/login`,
+    KAKAOLOGIN: () => `${BASE_URL}/users/oauth/kakao`,
+    NAVERLOGIN: () => `${BASE_URL}/users/oauth/naver`,
     SIGNUP: () => `${BASE_URL}/users/signup`,
     LOGOUT: () => `${BASE_URL}/users/logout`,
     REFRESH: () => `${BASE_URL}/users/refresh`,
     ACCOUNT: () => `${BASE_URL}/users/account`,
     INVITATIONS: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
     ATTENDANCE: () => `${BASE_URL}/attendances`,
+    PASSWORD: () => `${BASE_URL}/users/account/password`,
 };

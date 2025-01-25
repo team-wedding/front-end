@@ -12,7 +12,6 @@
     "allowImportingTsExtensions": true,
     "isolatedModules": true,
     "moduleDetection": "force",
-    "noEmit": true,
     "jsx": "react-jsx",
 
     /* Linting */
@@ -20,7 +19,27 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    //    "noEmit": true,
+    //Absolute route include errror:
+    "composite": true,
+    "emitDeclarationOnly": true,
+    "baseUrl": "./src/",
+    "paths": {
+      "@/*": ["*"],
+      "@types/*": ["types/*"],
+      "@components/*": ["components/*"],
+      "@display/*": ["components/display/*"],
+      "@form/*": ["components/form/*"],
+      "@icons/*": ["components/icons/*"],
+      "@layout/*": ["components/layout/*"],
+      "@store/*": ["store/*"],
+      "@constants/*": ["constants/*"],
+      "@hooks/*": ["hooks/*"],
+      "@common/*": ["components/common/*"],
+      "@pages/*": ["pages/*"],
+      "@utils/*": ["utils/*"]
+    }
   },
   "include": ["src"]
 }

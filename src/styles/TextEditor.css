@@ -1,0 +1,24 @@
+.custom-quill-container {
+  @apply w-full overflow-hidden;
+}
+
+.custom-quill-editor {
+  @apply text-xs bg-white;
+}
+
+.ql-toolbar {
+  @apply bg-white rounded-md h-10;
+}
+
+.ql-container {
+  @apply rounded-md;
+}
+
+.ql-editor {
+  @apply leading-5 p-3 max-h-40 min-h-20;
+}
+
+.ql-editor::placeholder {
+  color: #d1d5db;
+  font-size: 8px;
+}

@@ -1,0 +1,261 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --header-height: 3.5rem;
+    --footer-height: 3.5rem;
+  }
+
+  html,
+  body,
+  #root {
+    @apply bg-black bg-opacity-80 text-gray-800;
+    @apply bg-black bg-opacity-80 text-gray-800;
+  }
+  @font-face {
+    font-family: 'SUIT-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2')
+      format('woff2');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'NanumGothic';
+    src: url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'MapoFlowerIsland';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/MapoFlowerIslandA.woff')
+      format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'NanumSquareNeo';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot);
+    src:
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot?#iefix)
+        format('embedded-opentype'),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.woff)
+        format('woff'),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.ttf)
+        format('truetype');
+  }
+  @font-face {
+    font-family: 'NanumSquareNeoVariable';
+    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot);
+    src:
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot?#iefix)
+        format('embedded-opentype'),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.woff)
+        format('woff'),
+      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.ttf)
+        format('truetype');
+  }
+
+  /* Autofill 스타일 추가 */
+  /* input:-webkit-autofill,
+  input:-webkit-autofill:hover,
+  input:-webkit-autofill:focus,
+  input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0 0px #e5e7eb inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+
+  input:autofill,
+  input:autofill:hover,
+  input:autofill:focus,
+  input:autofill:active {
+    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    box-shadow: 0 0 0 0px #e5e7eb inset;
+    transition: background-color 5000s ease-in-out 0s;
+  } */
+
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-2ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-3Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-4Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-5Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-6SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-7Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'Paperlogy';
+    src: url('/src/assets/fonts/Paperlogy-8ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+  }
+}
+
+@layer components {
+  .layout {
+    @apply flex flex-col h-full w-full m-auto bg-white font-Paperlogy overflow-auto;
+    @apply md:max-w-sm;
+    max-width: var(--max-content-width, 448px);
+  }
+
+  .layout-header,
+  .layout-footer {
+    @apply fixed w-full flex-center;
+    @apply md:max-w-md;
+    max-width: var(--max-content-width, 448px);
+  }
+
+  .layout-header {
+    @apply border-b border-neutral-200 text-sm bg-white;
+    top: 0;
+    height: var(--header-height);
+  }
+
+  .layout-footer {
+    @apply border-t border-neutral-200 text-[10px] bg-footer;
+    bottom: 0;
+    height: var(--footer-height);
+  }
+
+  .layout-content {
+    @apply bg-white w-full overflow-auto;
+    margin-top: var(--header-height);
+    margin-bottom: var(--footer-height);
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+  }
+
+  .h-content {
+    height: calc(100vh - var(--header-height) - var(--footer-height));
+  }
+
+  .stepper-layout {
+    @apply fixed w-full bg-white z-10 flex-center text-xs px-12 py-2;
+    @apply md:max-w-md;
+    max-width: var(--max-content-width, 448px);
+  }
+
+  .splash-layout,
+  .auth-layout {
+    @apply w-full h-screen m-auto bg-white;
+    @apply md:max-w-md;
+    max-width: var(--max-content-width, 448px);
+  }
+
+  .preview-layout {
+    @apply mx-auto h-full w-full;
+  }
+
+  .result-layout {
+    @apply column-center max-w-md bg-white gap-28 text-result tracking-wide shadow-xl pt-10 pb-28 mx-auto relative z-10;
+    @apply md:rounded-3xl md:my-12 lg:max-w-sm;
+    transition: all 0.3s ease;
+  }
+
+  .page-container {
+    @apply flex w-full h-full relative;
+  }
+
+  .create-section {
+    @apply flex flex-col h-full w-full max-w-md overflow-auto mx-auto z-20;
+    @apply lg:fixed lg:left-1/3;
+    /* @apply md:fixed md:left-10; */
+    /* max-width: var(--max-content-width, 448px); */
+    /* transition: all 0.3s ease; */
+  }
+
+  .preview-section {
+    @apply hidden overflow-auto bg-black bg-opacity-50 absolute top-0 right-0;
+    @apply lg:flex lg:w-[33%] lg:justify-center;
+    /* @apply md:flex md:w-[30%] md:justify-center; */
+    /* transition: all 0.3s ease; */
+  }
+
+  .btn {
+    @apply px-4 py-2 rounded-lg transition-all duration-300;
+  }
+
+  .select-btn {
+    @apply bg-neutral-50 bg-opacity-50  border border-neutral-200  rounded-xl px-3 py-2 transition-all duration-100;
+  }
+
+  .active-btn {
+    @apply text-neutral-500 bg-button bg-opacity-15 shadow-md font-medium border-transparent;
+  }
+
+  .label {
+    @apply block text-[11px] font-medium w-1/4;
+  }
+
+  .splash-btn {
+    @apply py-3 text-sm bg-primary rounded-lg text-white shadow-sm transition duration-100 ease-out hover:ease-in;
+  }
+
+  .splash-input {
+    @apply px-5 py-3 rounded-lg text-sm border border-gray-300 focus-visible:ring-1 focus:ring-primary focus:border-none placeholder:text-gray-400;
+  }
+
+  .formInput {
+    @apply bg-white border-neutral-300 text-neutral-900 text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50;
+    @apply bg-white border-neutral-300 text-neutral-900 text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50;
+  }
+
+  .accordion-item {
+    @apply bg-white rounded-2xl overflow-hidden transition-all duration-100 text-neutral-700 shadow-sm text-[11px];
+    @apply bg-white rounded-2xl overflow-hidden transition-all duration-100 text-neutral-700 shadow-sm text-[11px];
+  }
+
+  .flex-center {
+    @apply flex justify-center items-center;
+  }
+
+  .column-center {
+    @apply flex flex-col justify-center items-center;
+  }
+
+  .contact-group {
+    @apply flex flex-col items-center justify-center gap-5;
+  }
+
+  .title {
+    @apply text-lg text-highlight tracking-wider mb-5;
+  }
+
+  .sub-title {
+    @apply text-xs text-highlight tracking-[.4em] font-Crimson font-light opacity-60;
+  }
+}
+
+@layer utilities {
+}

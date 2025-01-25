@@ -1,16 +1,17 @@
-import AddressInput from '@form/BasicInformation/AddressInput/AddressInput';
-import NameInput from '@form/BasicInformation/NameInput/NameInput';
-import WeddingDateInput from '@form/BasicInformation/WeddingDateInput/WeddingDateInput';
-import AccountFeature from '@form/Feature/AccountFeature/AccountFeature';
-import CalendarFeature from '@form/Feature/CalendarFeature/CalendarFeature';
-import ContactFeature from '@form/Feature/ContactFeature/ContactFeature';
-import GalleryFeature from '@form/Feature/GalleryFeature/GalleryFeature';
-import GreetingFeature from '@form/Feature/GreetingFeature/GreetingFeature';
-import LocationFeature from '@form/Feature/LocationFeature/LocationFeature';
-import RsvpExample from '@form/Feature/RsvpFeature/RsvpExample';
-import ImageInput from '@form/Feature/ThumbnailFeature/ImageInput';
-import ThemeFeature from '@form/Theme/ThemeFeature/ThemeFeature';
-import NoticeFeature from '@form/Feature/NoticeFeature/NoticeFeature';
+import AddressInput from '../components/form/BasicInformation/AddressInput/AddressInput';
+import NameInput from '../components/form/BasicInformation/NameInput/NameInput';
+import WeddingDateInput from '../components/form/BasicInformation/WeddingDateInput/WeddingDateInput';
+import AccountFeature from '../components/form/Feature/AccountFeature/AccountFeature';
+import CalendarFeature from '../components/form/Feature/CalendarFeature/CalendarFeature';
+import ContactFeature from '../components/form/Feature/ContactFeature/ContactFeature';
+import GalleryFeature from '../components/form/Feature/GalleryFeature/GalleryFeature';
+import GreetingFeature from '../components/form/Feature/GreetingFeature/GreetingFeature';
+import LocationFeature from '../components/form/Feature/LocationFeature/LocationFeature';
+import RsvpExample from '../components/form/Feature/RsvpFeature/RsvpExample';
+import ImageInput from '../components/form/Feature/ThumbnailFeature/ImageInput';
+import ThemeFeature from '../components/form/Theme/ThemeFeature/ThemeFeature';
+import NoticeFeature from '../components/form/Feature/NoticeFeature/NoticeFeature';
+import MusicFeature from '../components/form/Theme/MusicFeature/MusicFeature';
 
 export interface AccordionItemData {
   id: number;
@@ -155,7 +156,7 @@ export const accordionData: AccordionItemData[] = [
     id: 17,
     title: '배경 음악',
     feature: 'music',
-    content: <ThemeFeature />,
+    content: <MusicFeature />,
     hasToggle: true,
     hasDrag: false,
   },

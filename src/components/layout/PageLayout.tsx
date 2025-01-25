@@ -27,9 +27,11 @@ const PageLayout = ({
       </div>
 
       <div className="layout-content">{children}</div>
-      <div className="layout-footer">
-        {customFooter ? customFooter : <Footer />}
-      </div>
+
+      {customFooter !== null && (
+        <div className="layout-footer">{customFooter || <Footer />}</div>
+      )}
+
     </div>
   );
 };

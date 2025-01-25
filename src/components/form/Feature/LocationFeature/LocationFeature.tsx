@@ -1,7 +1,7 @@
 import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLocationFeatureStore';
 import OnOff from '../../../common/OnOff';
-import NavigationInput from './NavigationInput';
-import TransportationInput from './TransportationInput';
+import NavigationItem from './NavigationItem';
+import TransportationItem from './TransportationItem';
 
 const LocationFeature = () => {
   const { subFeatures, toggleSubFeature } = useLocationFeatureStore();
@@ -34,14 +34,14 @@ const LocationFeature = () => {
 
       <div className="my-6">
         <div>내비게이션 안내</div>
-        <NavigationInput />
+        <NavigationItem />
       </div>
 
       <hr />
 
       <div className="my-6">
         <div>교통 수단 안내</div>
-        <TransportationInput />
+        <TransportationItem />
       </div>
     </div>
   );

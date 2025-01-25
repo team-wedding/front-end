@@ -9,7 +9,7 @@ const Image = () => {
       {uploadedImage ? (
         <img src={uploadedImage} alt="Thumbnail" />
       ) : (
-        <img src={thumbnail} alt="Thumbnail" />
+        <img src={thumbnail} alt="Default Thumbnail" />
       )}
     </div>
   );

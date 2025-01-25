@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react';
-import PageLayout from '../components/layout/PageLayout';
-import HeaderButton from '../components/common/Header/HeaderButton';
+import PageLayout from '@layout/PageLayout';
+import HeaderButton from '@common/Header/HeaderButton';
 import { useNavigate } from 'react-router';
-import { Accordion } from '../components/common/CreateInvitation/Accordion';
-import { Stepper } from '../components/common/CreateInvitation/Stepper';
-import { StepNavigation } from '../components/common/CreateInvitation/StepNavigation';
-import PreviewDisplay from '../components/display/PreviewDisplay';
+import { Accordion } from '@common/CreateInvitation/Accordion';
+import { Stepper } from '@common/CreateInvitation/Stepper';
+import { StepNavigation } from '@common/CreateInvitation/StepNavigation';
+import PreviewDisplay from '@display/PreviewDisplay';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
-import { useAccordionStore } from '../store/useAccordionStore';
+import { useAccordionStore } from '@store/useAccordionStore';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 

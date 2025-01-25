@@ -1,4 +1,3 @@
-import React from 'react';
 import DaumPostcode from 'react-daum-postcode';
 import useAddressStore from '../../../../store/useAddressStore';
 
@@ -15,7 +14,7 @@ interface DaumPostProps {
   handleComplete: () => void; // 팝업 닫기 함수
 }
 
-const DaumPost: React.FC<DaumPostProps> = ({ handleComplete }) => {
+const DaumPost = ({ handleComplete }: DaumPostProps) => {
   const setAddress = useAddressStore((state) => state.setAddress);
   const setJibunAddress = useAddressStore((state) => state.setJibunAddress);
 
@@ -52,9 +51,9 @@ const DaumPost: React.FC<DaumPostProps> = ({ handleComplete }) => {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-80 z-50">
+    <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
       {/* 팝업 컨테이너 */}
-      <div className="relative bg-white rounded-xl shadow-lg w-[500px]">
+      <div className="relative bg-white rounded-lg shadow-lg w-[400px] mx-6">
         {/* 헤더 */}
         <div className="flex justify-between items-center px-6 py-3 bg-gray-800 rounded-t-lg">
           <h1 className="text-white font-semibold opacity-90">
@@ -71,7 +70,7 @@ const DaumPost: React.FC<DaumPostProps> = ({ handleComplete }) => {
           <DaumPostcode
             autoClose
             onComplete={complete}
-            style={{ width: '100%', height: '400px' }}
+            style={{ height: '300px' }}
           />
         </div>
       </div>

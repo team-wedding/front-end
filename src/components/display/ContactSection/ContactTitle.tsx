@@ -1,5 +1,3 @@
-import React from 'react';
-
 const ContactTitle = () => {
   return (
     <div className="column-center gap-2">

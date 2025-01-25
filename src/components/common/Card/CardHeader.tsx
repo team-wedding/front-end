@@ -1,6 +1,6 @@
-import React, { useRef, useState } from 'react';
-import CircleMinusIcon from '../../icons/CircleMinusIcon';
-import ShareIcon from '../../icons/ShareIcon';
+import CircleMinusIcon from '@icons/CircleMinusIcon';
+import ShareIcon from '@icons/ShareIcon';
+import React, { useRef, useState } from 'react';;
 import ShareInvitation from '../Share/ShareInvitation';
 import { useDeleteInvitation } from '../../../hooks/useInvitation';
 

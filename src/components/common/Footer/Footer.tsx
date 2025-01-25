@@ -1,14 +1,13 @@
 import { useLocation, useNavigate } from 'react-router';
-import HomeIcon from '../../icons/HomeIcon';
-import UserIcon from '../../icons/UserIcon';
-import GridIcon from '../../icons/GridIcon';
+import HomeIcon from '@icons/HomeIcon';
+import UserIcon from '@icons/UserIcon';
+import GridIcon from '@icons/GridIcon';
 
 const Footer: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
   const navItems = [
-    { label: '홈', path: '/', Icon: HomeIcon },
     { label: '대시보드', path: '/dashboard', Icon: GridIcon },
     { label: '마이페이지', path: '/mypage', Icon: UserIcon },
   ];

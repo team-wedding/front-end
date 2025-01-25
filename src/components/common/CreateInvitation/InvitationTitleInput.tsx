@@ -1,14 +1,12 @@
-import React from 'react';
-
 type InvitationTitleInputProps = {
   value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
-const InvitationTitleInput: React.FC<InvitationTitleInputProps> = ({
+const InvitationTitleInput = ({
   value,
   onChange,
-}) => {
+}: InvitationTitleInputProps) => {
   return (
     <div className="flex justify-center m-5">
       <label htmlFor="title"></label>

@@ -3,6 +3,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig,
 } from 'axios';
+import useAuthStore from '../store/useAuthStore';
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -11,13 +12,15 @@ export const axiosInstance = axios.create({
   headers: {
     'Content-Type': 'application/json',
   },
+  withCredentials: true,
 });
 
 axiosInstance.interceptors.request.use(
   (config: InternalAxiosRequestConfig) => {
-    const accessToken = import.meta.env.VITE_TOKEN;
+    const accessToken = useAuthStore.getState().accessToken;
+
     if (accessToken) {
-      config.headers.Authorization = `Bearer ${accessToken}`;
+      config.headers.Authorization = `${accessToken}`; // *** 확인
     }
     return config;
   },
@@ -28,26 +31,33 @@ axiosInstance.interceptors.request.use(
 
 axiosInstance.interceptors.response.use(
   (res: AxiosResponse) => {
-    return res; // Simply return the response
+    return res;
   },
   async (error) => {
     const status = error.response ? error.response.status : null;
     console.log(status);
     if (status === 401) {
       try {
-        //Refresh Token
-        // const accessToken = '';
-        // // const refreshTokenFromStorage = localStorage.getItem(
-        // //   STORAGE_TOKEN.REFRESH_TOKEN,
-        // //   );
-        // // const { accessToken, refreshToken } = await AuthService.refresh(
-        // //   refreshTokenFromStorage,
-        // // );
-        // // LocalStorageService.setTokens(accessToken, refreshToken);
-        // axiosInstance.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
-        // return await axiosInstance(originalConfig);
-      } catch (error) {
-        return Promise.reject(error);
+        // Refresh Token으로 Access Token 갱신
+        const refreshResponse = await axios.post(API.REFRESH(), {});
+
+        const newAccessToken = refreshResponse.headers['authorization'];
+
+        if (newAccessToken) {
+          // Zustand 상태에 새로 발급받은 Access Token 저장
+          useAuthStore.getState().setAccessToken(newAccessToken);
+
+          // 실패했던 요청을 다시 실행
+          const retryConfig = error.config;
+          retryConfig.headers.Authorization = `${newAccessToken}`; // *** 확인
+          return axiosInstance.request(retryConfig);
+        }
+      } catch (refreshError) {
+        console.error('Refresh Token 갱신 실패:', refreshError);
+        // 로그인 페이지로 이동
+        useAuthStore.getState().clearAccessToken();
+        window.location.href = '/login';
+        return Promise.reject(refreshError);
       }
     }
 
@@ -60,10 +70,13 @@ axiosInstance.interceptors.response.use(
 
 export const API = {
   LOGIN: () => `${BASE_URL}/users/login`,
+  KAKAOLOGIN: () => `${BASE_URL}/users/oauth/kakao`,
+  NAVERLOGIN: () => `${BASE_URL}/users/oauth/naver`,
   SIGNUP: () => `${BASE_URL}/users/signup`,
   LOGOUT: () => `${BASE_URL}/users/logout`,
   REFRESH: () => `${BASE_URL}/users/refresh`,
   ACCOUNT: () => `${BASE_URL}/users/account`,
   INVITATIONS: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
   ATTENDANCE: () => `${BASE_URL}/attendances`,
+  PASSWORD: () => `${BASE_URL}/users/account/password`,
 };

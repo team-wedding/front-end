@@ -1,8 +1,8 @@
-import React from 'react';
-import PenIcon from '../../icons/PenIcon';
-import SearchIcon from '../../icons/SearchIcon';
+import PenIcon from '@icons/PenIcon';
+import SearchIcon from '@icons/SearchIcon';
 import { useNavigate } from 'react-router';
 // import { v4 as uuidv4 } from "uuid";
+
 
 const CardFooter = ({ id }: { id: number }) => {
   const navigate = useNavigate()

@@ -1,4 +1,3 @@
-import React from 'react';
 import BackIcon from '../../icons/BackIcon';
 import NextIcon from '../../icons/NextIcon';
 
@@ -10,13 +9,13 @@ interface StepNavigationProps {
   // onPreview?: () => void; // 미리보기 버튼 핸들러
 }
 
-export const StepNavigation: React.FC<StepNavigationProps> = ({
+export const StepNavigation = ({
   currentStep,
   totalSteps,
   onPrev,
   onNext,
   // onPreview,
-}) => {
+}: StepNavigationProps) => {
   return (
     <div className="flex w-full justify-center gap-64">
       {/* Previous Button */}

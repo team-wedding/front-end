@@ -1,5 +1,5 @@
-import useImageStore from '../../../store/useImageStore';
-import thumbnail from '../../../assets/image/wedding1.png';
+import useImageStore from '@store/useImageStore';
+import thumbnail from '@assets/image/wedding1.png';
 
 const Image = () => {
   const { uploadedImage } = useImageStore();
@@ -9,7 +9,7 @@ const Image = () => {
       {uploadedImage ? (
         <img src={uploadedImage} alt="Thumbnail" />
       ) : (
-        <img src={thumbnail} alt="Thumbnail" />
+        <img src={thumbnail} alt="Default Thumbnail" />
       )}
     </div>
   );

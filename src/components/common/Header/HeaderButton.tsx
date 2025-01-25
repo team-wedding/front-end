@@ -1,16 +1,14 @@
-import React from 'react';
-
 type HeaderButtonProps = {
   children: React.ReactNode;
   onClick?: () => void;
   className?: string;
 };
 
-const HeaderButton: React.FC<HeaderButtonProps> = ({
+const HeaderButton = ({
   children,
   onClick,
   className = '',
-}) => {
+}: HeaderButtonProps) => {
   return (
     <button className={className} onClick={onClick}>
       {children}

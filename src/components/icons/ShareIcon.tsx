@@ -1,6 +1,4 @@
-import React from 'react';
-
-const ShareIcon: React.FC = () => (
+const ShareIcon = () => (
   <svg
     className="size-3 dark:text-white"
     aria-hidden="true"

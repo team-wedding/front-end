@@ -1,4 +1,3 @@
-import React from 'react';
 import useBrideGroomStore from '../../../../store/useBrideGroomStore';
 
 const NameInput = () => {

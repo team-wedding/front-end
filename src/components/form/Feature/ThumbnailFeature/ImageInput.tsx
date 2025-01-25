@@ -7,8 +7,8 @@ const ImageInput = () => {
   const { uploadedImage, setUploadedImage } = useImageStore();
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
-  const MAX_WIDTH = 2000;
-  const MAX_HEIGHT = 2000;
+  const MAX_WIDTH = 5000;
+  const MAX_HEIGHT = 5000;
 
   const [isDragging, setIsDragging] = useState(false);
 
@@ -82,22 +82,20 @@ const ImageInput = () => {
       {!uploadedImage ? (
         <label
           htmlFor="dropzone-file"
-          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${
-            isDragging
-              ? 'border-primary bg-pink-100'
-              : 'border-gray-300 bg-gray-50'
-          } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
+          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${isDragging
+            ? 'border-rose-300 bg-rose-50'
+            : 'border-gray-300 bg-gray-50'
+            } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <div className="flex flex-col items-center justify-center pt-5 pb-6">
+          <div className="flex flex-col items-center justify-center text-center pt-5 pb-6">
             <p className="mb-2 text-xs text-gray-500">
-              <span className="font-semibold">Click to upload</span> or drag and
-              drop
+              Click to upload or drag and drop
             </p>
             <p className="text-xs text-gray-500">
-              SVG, PNG, JPG or GIF (MAX. 2000x2000px)
+              SVG, PNG, JPG (MAX. {MAX_WIDTH}x{MAX_HEIGHT}px)
             </p>
           </div>
           <input
@@ -117,7 +115,7 @@ const ImageInput = () => {
           />
           <button
             onClick={handleImageDelete}
-            className="mt-4 px-3 py-2 text-[10px] text-white bg-primary rounded-xl hover:opacity-70"
+            className="mt-4 px-3 py-2 text-[12px] text-gray-800 bg-rose-300 rounded-xl hover:bg-rose-200"
           >
             삭제
           </button>

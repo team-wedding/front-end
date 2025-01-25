@@ -20,7 +20,7 @@ export const Stepper: React.FC<StepperProps> = ({
           <React.Fragment key={index}>
             {/* Step Indicator */}
             <button
-              className="flex items-center rounded-xl px-1 py-2 hover:bg-gray-100 transition-all ease-in-out duration-300"
+              className="flex items-center rounded-xl px-1 py-2 hover:bg-gray-300 hover:bg-opacity-20 transition-all ease-in-out duration-100"
               onClick={() => onStepClick(index + 1)}
             >
               <div
@@ -35,7 +35,7 @@ export const Stepper: React.FC<StepperProps> = ({
                 {index + 1}
               </div>
               <div
-                className={`ml-2 text-xs ${
+                className={`ml-2 ${
                   isActive
                     ? 'text-primary font-medium'
                     : 'text-gray-300 font-light'

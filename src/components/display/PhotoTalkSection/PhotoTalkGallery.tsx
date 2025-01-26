@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import usePhotoTalkStore from '../../../store/usePhotoTalkStore';
-import ChevronLeft from '../../icons/Chevron_LeftIcon';
-import ChevronRight from '../../icons/Chevron_RightIcon';
+import usePhotoTalkStore from '@store/usePhotoTalkStore';
+import ChevronLeft from '@icons/Chevron_LeftIcon';
+import ChevronRight from '@icons/Chevron_RightIcon';
 
 const PhotoTalkGallery = () => {
   const getAllImages = usePhotoTalkStore((state) => state.getAllImages);

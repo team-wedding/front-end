@@ -36,7 +36,8 @@
       "@hooks/*": ["hooks/*"],
       "@common/*": ["components/common/*"],
       "@pages/*": ["pages/*"],
-      "@utils/*": ["utils/*"]
+      "@utils/*": ["utils/*"],
+      "@assets/*": ["assets/*"]
     }
   },
   "include": ["vite.config.ts", "src"]

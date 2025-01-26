@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import useNoticeStore from '../../../../store/useNoticeStore';
+import useNoticeStore from '@store/useNoticeStore';
 import { Notice } from './NoticeItem';
-import TrashBinIcon from '../../../icons/TrashBinIcon';
-import CloudArrowIcon from '../../../icons/CloudArrowIcon';
-import CloseIcon from '../../../icons/CloseIcon';
+import TrashBinIcon from '@icons/TrashBinIcon';
+import CloudArrowIcon from '@icons/CloudArrowIcon';
+import CloseIcon from '@icons/CloseIcon';
 const NoticeFeature = () => {
   const {
     notices,

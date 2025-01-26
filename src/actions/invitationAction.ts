@@ -1,32 +1,31 @@
-import useBrideGroomStore from '../store/useBrideGroomStore';
-import useGreetingStore from '../store/useGreetingStore';
-import useThemeStore from '../store/useThemeStore';
-import { useWeddingStore } from '../store/useWeddingStore';
-import useContactStore from '../store/useContactStore';
-import useAddressStore from '../store/useAddressStore';
-import useImageStore from '../store/useImageStore';
+import useBrideGroomStore from '@store/useBrideGroomStore';
+import useGreetingStore from '@store/useGreetingStore';
+import useThemeStore from '@store/useThemeStore';
+import { useWeddingStore } from '@store/useWeddingStore';
+import useContactStore from '@store/useContactStore';
+import useAddressStore from '@store/useAddressStore';
+import useImageStore from '@store/useImageStore';
 import { InvitationDetiail } from '../types/invitationType';
 import { useEffect } from 'react';
 
 export const getInvitationAction = (): InvitationDetiail => {
   const { address } = useAddressStore();
-  const { weddingDate, weddingTime } = useWeddingStore();
+  const { weddingDate } = useWeddingStore();
   const { greeting } = useGreetingStore();
-
   const { uploadedImage } = useImageStore();
   const contacts = useContactStore((state) => state.contacts);
   const { brideGroom } = useBrideGroomStore();
-
-  const { font, weight, backgroundColor } = useThemeStore();
+  const { font } = useThemeStore();
   const groom = contacts.find((person) => person.role === '신랑');
   const bride = contacts.find((person) => person.role === '신부');
+
   return {
     groomName: brideGroom[0].name,
     brideName: brideGroom[1].name,
     groomContact: groom?.contact as string,
     brideContact: bride?.contact as string,
     date: weddingDate?.toString() as string,
-    location: address as string,
+    location: [address as string],
     imgUrl: uploadedImage as string,
     contentType: '제목',
     content: greeting,
@@ -38,14 +37,17 @@ export const getInvitationAction = (): InvitationDetiail => {
     groomMotherContact: groom?.motherContact as string,
     brideFatherContact: bride?.fatherContact as string,
     brideMotherContact: bride?.motherContact as string,
-    weddingTime: weddingTime as string,
+    weddingTime: '',
     groomFatherAlive: !brideGroom[0].family.father.isDeceased,
     groomMotherAlive: !brideGroom[0].family.mother.isDeceased,
     brideFatherAlive: !brideGroom[1].family.father.isDeceased,
     brideMotherAlive: !brideGroom[1].family.mother.isDeceased,
     font: font,
-    weight: weight,
-    backgroundColor: backgroundColor,
+    backgroundColor: '',
+    title: '',
+    attendanceTitle: '참석 여부 제목',
+    attendanceContent: '참석 여부 설명',
+    attendanceIsDining: true,
   };
 };
 
@@ -56,7 +58,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
   const { setUploadedImage } = useImageStore();
   const contacts = useContactStore((state) => state.updateContact);
   const { updateBrideGroom, updateFamily } = useBrideGroomStore();
-  const { setFont, setBackgroundColor, setWeight } = useThemeStore();
+  const { setFont } = useThemeStore();
 
   useEffect(() => {
     if (details) {
@@ -67,8 +69,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
 
       // Wedding 정보 업데이트
       setWeddingDate(new Date(details.date));
-      setWeddingTime(details.weddingTime);
-
+      setWeddingTime(0, 0);
       // Greeting 업데이트
       setGreeting(details.content);
       setTitle(details.contentType);
@@ -101,8 +102,6 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
 
       // Theme 설정 업데이트
       setFont(details.font);
-      setBackgroundColor(details.backgroundColor);
-      setWeight(details.weight);
     }
   }, [details]); // details 변경 시 실행
 };

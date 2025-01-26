@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { Map as KakaoMap, MapMarker } from 'react-kakao-maps-sdk';
-import useKaKaoLoader from '../../../hooks/useKaKaoLoader';
-import useAddressStore from '../../../store/useAddressStore';
-import { useLocationFeatureStore } from '../../../store/OptionalFeature/useLocationFeatureStore';
+import useKaKaoLoader from '@hooks/useKaKaoLoader';
+import useAddressStore from '@store/useAddressStore';
+import { useLocationFeatureStore } from '@store/OptionalFeature/useLocationFeatureStore';
 
 const Map = () => {
   const { subFeatures } = useLocationFeatureStore();

@@ -1,5 +1,5 @@
 import DaumPostcode from 'react-daum-postcode';
-import useAddressStore from '../../../../store/useAddressStore';
+import useAddressStore from '@store/useAddressStore';
 
 interface PostcodeData {
   address: string;

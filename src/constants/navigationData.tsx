@@ -1,7 +1,7 @@
-import kakao from '../assets/kakaonavi.png';
-import naver from '../assets/navermap.png';
-import tmap from '../assets/tmap.png';
-import { StoreState } from '../store/OptionalFeature/useLocationFeatureStore';
+import kakao from '@assets/kakaonavi.png';
+import naver from '@assets/navermap.png';
+import tmap from '@assets/tmap.png';
+import { StoreState } from '@store/OptionalFeature/useLocationFeatureStore';
 
 interface navigationItemData {
   key: keyof StoreState['subFeatures'];

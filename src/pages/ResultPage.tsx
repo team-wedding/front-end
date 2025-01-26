@@ -21,7 +21,6 @@ const ResultPage = () => {
   // const path = useLocation().pathname.split('/')
   // const invitation = useGetInvitation(parseInt(path[2]))
 
-
   // useEffect(() => {
   //   if (invitation) {
   //     setAddress('주소', '짚코드');

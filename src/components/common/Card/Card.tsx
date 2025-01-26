@@ -1,10 +1,11 @@
 import CardHeader from './CardHeader';
 import CardFooter from './CardFooter';
-import logo from '../../../assets/logo2.png'
+import logo from '@assets/logo2.png';
+
 interface CardProps {
   image?: string;
-  id: number
-  title: string
+  id: number;
+  title: string;
 }
 
 const Card = ({ image, id, title }: CardProps) => {
@@ -18,7 +19,7 @@ const Card = ({ image, id, title }: CardProps) => {
         <div className="absolute inset-0 bg-white opacity-10"></div>
         <CardHeader id={id} title={title} />
       </div>
-      <CardFooter id={id} />
+      <CardFooter />
     </div>
   );
 };

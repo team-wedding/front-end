@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import DaumPost from './DaumPost';
-import useAddressStore from '../../../../store/useAddressStore';
+import useAddressStore from '@store/useAddressStore';
 
 const AddressInput: React.FC = () => {
   const [popup, setPopup] = useState<boolean>(false);
-  const { address, zonecode, weddingHallName, weddingHallDetail, setWeddingHallName, setWeddingHallDetail } = useAddressStore();
+  const {
+    address,
+    zonecode,
+    weddingHallName,
+    weddingHallDetail,
+    setWeddingHallName,
+    setWeddingHallDetail,
+  } = useAddressStore();
 
   // 팝업 열고 닫기
   const handleComplete = () => {
     setPopup(!popup);
   };
-
 
   return (
     <div className="max-w-lg mx-auto p-4">

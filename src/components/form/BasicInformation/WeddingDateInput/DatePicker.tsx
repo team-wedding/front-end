@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDatePicker, { registerLocale } from 'react-datepicker';
 import { ko } from 'date-fns/locale/ko';
 import 'react-datepicker/dist/react-datepicker.css';
-import { useWeddingStore } from '../../../../store/useWeddingStore';
+import { useWeddingStore } from '@store/useWeddingStore';
 
 const DatePicker: React.FC = () => {
   const { weddingDate, setWeddingDate } = useWeddingStore();

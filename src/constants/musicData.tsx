@@ -1,7 +1,7 @@
-import aBeautifulPlan from '../assets/music/aBeautifulPlan.mp3';
-import beautifulMoments from '../assets/music/beautifulMoments.mp3';
-import happyGoodMorning from '../assets/music/happyGoodMorning.mp3';
-import loveStory from '../assets/music/loveStory.mp3';
+import aBeautifulPlan from '@assets/music/aBeautifulPlan.mp3';
+import beautifulMoments from '@assets/music/beautifulMoments.mp3';
+import happyGoodMorning from '@assets/music/happyGoodMorning.mp3';
+import loveStory from '@assets/music/loveStory.mp3';
 
 export interface musicItemData {
   id: number;

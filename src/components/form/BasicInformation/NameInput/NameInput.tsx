@@ -1,4 +1,4 @@
-import useBrideGroomStore from '../../../../store/useBrideGroomStore';
+import useBrideGroomStore from '@store/useBrideGroomStore';
 
 const NameInput = () => {
   const brideGroom = useBrideGroomStore((state) => state.brideGroom);

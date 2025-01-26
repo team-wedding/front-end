@@ -1,6 +1,6 @@
-import { navigationData } from '../../../constants/navigationData';
-import { useLocationFeatureStore } from '../../../store/OptionalFeature/useLocationFeatureStore';
-import useAddressStore from '../../../store/useAddressStore';
+import { navigationData } from '@constants/navigationData';
+import { useLocationFeatureStore } from '@store/OptionalFeature/useLocationFeatureStore';
+// import useAddressStore from '@store/useAddressStore';
 
 const Navigation = () => {
   const { subFeatures } = useLocationFeatureStore();

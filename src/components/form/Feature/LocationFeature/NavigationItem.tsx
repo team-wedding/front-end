@@ -1,6 +1,5 @@
-import React from 'react';
-import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLocationFeatureStore';
-import { navigationData } from '../../../../constants/navigationData';
+import { useLocationFeatureStore } from '@store/OptionalFeature/useLocationFeatureStore';
+import { navigationData } from '@constants/navigationData';
 
 const NavigationItem = () => {
   const { subFeatures, toggleSubFeature } = useLocationFeatureStore();

@@ -8,17 +8,15 @@ type HeaderProps = {
 
 const Header = ({ text, leftButton, rightButton }: HeaderProps) => {
   return (
-    <div className='flex items-center w-full max-w-md justify-between'>
+    <div className="flex items-center w-full max-w-md justify-between">
       {/* Left Button */}
-      <div className='px-4'>{leftButton}</div>
+      <div className="px-4">{leftButton}</div>
 
       {/* Text */}
-      <div>
-        {text}
-      </div>
+      <div>{text}</div>
 
       {/* Right Button */}
-      <div className='px-4'>{rightButton}</div>
+      <div className="px-4">{rightButton}</div>
     </div>
   );
 };

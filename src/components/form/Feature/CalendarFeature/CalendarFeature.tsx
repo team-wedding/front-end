@@ -1,4 +1,4 @@
-import { useCalendarFeatureStore } from '../../../../store/OptionalFeature/useCalendarFeatureStore';
+import { useCalendarFeatureStore } from '@store/OptionalFeature/useCalendarFeatureStore';
 
 const CalendarFeature = () => {
   const { subFeatures, toggleSubFeature } = useCalendarFeatureStore();

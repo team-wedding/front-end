@@ -69,7 +69,7 @@ axiosInstance.interceptors.response.use(
 );
 
 export const API = {
-  LOGIN: () => `${BASE_URL}/users/login`,
+  EMAILLOGIN: () => `${BASE_URL}/users/login`,
   KAKAOLOGIN: () => `${BASE_URL}/users/oauth/kakao`,
   NAVERLOGIN: () => `${BASE_URL}/users/oauth/naver`,
   SIGNUP: () => `${BASE_URL}/users/signup`,

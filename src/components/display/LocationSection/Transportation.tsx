@@ -1,5 +1,5 @@
-import { transportationData } from '../../../constants/transportationData';
-import { useLocationFeatureStore } from '../../../store/OptionalFeature/useLocationFeatureStore';
+import { transportationData } from '@constants/transportationData';
+import { useLocationFeatureStore } from '@store/OptionalFeature/useLocationFeatureStore';
 import DOMPurify from 'dompurify';
 
 const Transportation = () => {

@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react';
-import usePhotoTalkStore from '../../../store/usePhotoTalkStore';
-import { PhotoTalk } from '../../../store/usePhotoTalkStore';
-import MenuDotsIcon from '../../icons/MenuDotsIcon';
+import usePhotoTalkStore from '@store/usePhotoTalkStore';
+import { PhotoTalk } from '@store/usePhotoTalkStore';
+import MenuDotsIcon from '@icons/MenuDotsIcon';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';

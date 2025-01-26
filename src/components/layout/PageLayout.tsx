@@ -31,7 +31,6 @@ const PageLayout = ({
       {customFooter !== null && (
         <div className="layout-footer">{customFooter || <Footer />}</div>
       )}
-
     </div>
   );
 };

@@ -1,24 +1,24 @@
 import { create } from 'zustand';
 
 type StoreState = {
-  title: string;
-  greeting: string;
-  setTitle: (title: string) => void;
-  setGreeting: (greeting: string) => void;
+  greetingTitle: string;
+  greetingContent: string;
+  setGreetingTitle: (greetingTitle: string) => void;
+  setGreeting: (greetingContent: string) => void;
   selectedSample: string | null;
   setSelectedSample: (sample: string) => void;
   reset: () => void;
 };
 
 const initialState = {
-  title: '',
-  greeting: '',
+  greetingTitle: '',
+  greetingContent: '',
 };
 
 const useGreetingStore = create<StoreState>((set) => ({
   ...initialState,
-  setTitle: (title) => set({ title }),
-  setGreeting: (greeting) => set({ greeting }),
+  setGreetingTitle: (greetingTitle) => set({ greetingTitle }),
+  setGreeting: (greetingContent) => set({ greetingContent }),
   selectedSample: null,
   setSelectedSample: (sample) => set({ selectedSample: sample }),
   reset: () => set(() => initialState),

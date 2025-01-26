@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 interface StoreState {
-  subFeatures: {
+  audioSubFeatures: {
     music: boolean;
   };
   selectedMusic: {
@@ -10,14 +10,14 @@ interface StoreState {
     src: string;
   };
   toggleSubFeature: (
-    feature: keyof StoreState['subFeatures'],
+    feature: keyof StoreState['audioSubFeatures'],
     enabled: boolean,
   ) => void;
   selectMusic: (music: { id: number; title: string; src: string }) => void;
 }
 
 export const useMusicFeatureStore = create<StoreState>((set) => ({
-  subFeatures: {
+  audioSubFeatures: {
     music: false,
   },
   selectedMusic: {
@@ -27,8 +27,8 @@ export const useMusicFeatureStore = create<StoreState>((set) => ({
   },
   toggleSubFeature: (feature, enabled) => {
     set((state) => ({
-      subFeatures: {
-        ...state.subFeatures,
+      audioSubFeatures: {
+        ...state.audioSubFeatures,
         [feature]: enabled,
       },
     }));

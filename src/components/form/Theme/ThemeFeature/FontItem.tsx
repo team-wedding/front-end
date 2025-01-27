@@ -1,5 +1,5 @@
-import fonts from '../../../constants/fonts';
-import useThemeStore from '../../../store/useThemeStore';
+import fonts from '@constants/fonts';
+import useThemeStore from '@store/useThemeStore';
 
 export const FontItem = ({
   font,
@@ -12,7 +12,7 @@ export const FontItem = ({
 }) => {
   const theme = useThemeStore();
   const handleFonts = (index: number) => {
-    theme.updateFont(fonts[index].font);
+    theme.setFont(fonts[index].font);
   };
   return (
     <div

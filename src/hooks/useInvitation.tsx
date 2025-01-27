@@ -8,7 +8,7 @@ import {
 } from '../services/invitation';
 import { getInvitationAction } from '../actions/invitationAction';
 import { InvitationDetiail } from '../types/invitationType';
-import { resetAllStores } from '@store/resetStore';
+import resetAllStores from '@/store/resetStore';
 
 export const useGetInvitation = (id: number) => {
   let { data, isError } = useQuery<InvitationDetiail>({

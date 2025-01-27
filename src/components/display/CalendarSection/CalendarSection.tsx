@@ -9,20 +9,20 @@ import DDay from './DDay';
 const CalendarSection = () => {
   const { weddingDate, weddingTime } = useWeddingStore();
   const { selectedOptionalFeatures } = useOptionalFeatureStore();
-  const { subFeatures } = useCalendarFeatureStore();
+  const { subCalendarFeatures } = useCalendarFeatureStore();
 
   const isCalenderFeatureActive = selectedOptionalFeatures.calendar;
 
   const renderSubFeatures = [
-    subFeatures.calendar && <Calendar key="calendar" />,
-    subFeatures.countdown && (
+    subCalendarFeatures.calendar && <Calendar key="calendar" />,
+    subCalendarFeatures.countdown && (
       <CountDown
         key="countdown"
         targetDate={weddingDate}
         targetTime={weddingTime}
       />
     ),
-    subFeatures.dday && <DDay key="dday" />,
+    subCalendarFeatures.dday && <DDay key="dday" />,
   ].filter(Boolean);
 
   return (

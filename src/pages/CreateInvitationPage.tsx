@@ -10,13 +10,16 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
 import { useCreateInvitation } from '@hooks/useInvitation';
-import { resetAllStores } from '@store/resetStore';
+import { useInvitationStore } from '@/store/useInvitaionStore';
+import resetAllStores from '@/store/resetStore';
+
 const sliceRanges = [[0, 3], [3, 13], [13]];
+
 const CreateInvitationPage = () => {
   const { items, initializeItems, moveItem } = useAccordionStore();
   const [steps, setSteps] = useState(1);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
-
+  const { invitationtitle } = useInvitationStore()
   useEffect(() => {
     const [start, end] = sliceRanges[steps - 1];
     initializeItems(start, end);
@@ -28,6 +31,7 @@ const CreateInvitationPage = () => {
     navigate('/dashboard');
     resetAllStores();
   };
+
   const { mutate: createInvitation } = useCreateInvitation();
 
   const handleSave = async () => {
@@ -63,7 +67,7 @@ const CreateInvitationPage = () => {
       <div className="page-container">
         <div className="create-section">
           <PageLayout
-            title="새로운 청첩장"
+            title={invitationtitle}
             leftButton={
               <HeaderButton
                 onClick={handleCancel}

@@ -3,7 +3,7 @@ import GreetingModal from './GreetingModal';
 import useGreetingStore from '../../../../store/useGreetingStore';
 
 const GreetingFeature = () => {
-  const { title, greeting, setTitle } = useGreetingStore();
+  const { greetingTitle, greetingContent, setGreetingTitle, setGreetingContent } = useGreetingStore();
   const [isModalOpen, setModalOpen] = useState(false);
 
   return (
@@ -22,16 +22,16 @@ const GreetingFeature = () => {
         <input
           type="text"
           placeholder="제목"
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          value={greetingTitle}
+          onChange={(e) => setGreetingTitle(e.target.value)}
           className="formInput"
         />
 
         <textarea
           placeholder="인사말"
-          value={greeting}
+          value={greetingContent}
           onChange={(e) =>
-            useGreetingStore.getState().setGreeting(e.target.value)
+            setGreetingContent(e.target.value)
           }
           rows={8}
           className="formInput"

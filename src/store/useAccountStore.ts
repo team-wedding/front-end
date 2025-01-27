@@ -1,17 +1,11 @@
+import { AccountDetail } from '@/types/invitationType';
 import { create } from 'zustand';
-
-type AccountInfo = {
-  accountHolder: string; // 예금주
-  bankName: string; // 은행명
-  accountNumber: string; // 계좌번호
-  kakaoPayQRCode: string; // 카카오송금QR링크
-};
 
 type RoleAccountInfo = {
   role: '신랑님' | '신부님'; // 신랑, 신부
-  accountInfo: AccountInfo;
-  fatherAccountInfo: AccountInfo;
-  motherAccountInfo: AccountInfo;
+  accountInfo: AccountDetail;
+  fatherAccountInfo: AccountDetail;
+  motherAccountInfo: AccountDetail;
 };
 
 type StoreState = {
@@ -19,7 +13,7 @@ type StoreState = {
   updateAccountInfo: (
     index: number,
     field: keyof RoleAccountInfo,
-    value: AccountInfo,
+    value: AccountDetail,
   ) => void;
   reset: () => void; // Reset 메서드 추가
 };
@@ -29,43 +23,43 @@ const initialAccounts: RoleAccountInfo[] = [
   {
     role: '신랑님',
     accountInfo: {
-      accountHolder: '',
+      accountHolderName: '',
       bankName: '',
       accountNumber: '',
-      kakaoPayQRCode: '',
+      kakaoUrl: '',
     },
     fatherAccountInfo: {
-      accountHolder: '',
+      accountHolderName: '',
       bankName: '',
       accountNumber: '',
-      kakaoPayQRCode: '',
+      kakaoUrl: '',
     },
     motherAccountInfo: {
-      accountHolder: '',
+      accountHolderName: '',
       bankName: '',
       accountNumber: '',
-      kakaoPayQRCode: '',
+      kakaoUrl: '',
     },
   },
   {
     role: '신부님',
     accountInfo: {
-      accountHolder: '',
+      accountHolderName: '',
       bankName: '',
       accountNumber: '',
-      kakaoPayQRCode: '',
+      kakaoUrl: '',
     },
     fatherAccountInfo: {
-      accountHolder: '',
+      accountHolderName: '',
       bankName: '',
       accountNumber: '',
-      kakaoPayQRCode: '',
+      kakaoUrl: '',
     },
     motherAccountInfo: {
-      accountHolder: '',
+      accountHolderName: '',
       bankName: '',
       accountNumber: '',
-      kakaoPayQRCode: '',
+      kakaoUrl: '',
     },
   },
 ];

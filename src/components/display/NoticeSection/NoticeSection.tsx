@@ -28,7 +28,7 @@ const NoticeSection = () => {
           <Slider {...settings}>
             {notices.map((notice) => (
               <div
-                key={notice.id}
+                key={notice.noticeId}
                 className="border rounded-lg shadow-sm bg-white p-8"
               >
                 {notice.image && (

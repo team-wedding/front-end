@@ -9,7 +9,7 @@ import { useInvitationStore } from './useInvitaionStore';
 import useThemeStore from './useThemeStore';
 import { useWeddingStore } from './useWeddingStore';
 
-export const resetAllStores = () => {
+const resetAllStores = () => {
   useAccountStore.getState().reset();
   useAddressStore.getState().reset();
   useBrideGroomStore.getState().reset();
@@ -21,3 +21,4 @@ export const resetAllStores = () => {
   useThemeStore.getState().reset();
   useWeddingStore.getState().reset();
 };
+export default resetAllStores;

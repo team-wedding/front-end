@@ -42,7 +42,7 @@ const DashBoardPage = () => {
               key={card.id}
               image={card.imgUrl}
               id={card.id as number}
-              title={card.content}
+              title={card.title}
             />
           ))
         )}

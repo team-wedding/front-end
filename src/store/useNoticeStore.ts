@@ -1,7 +1,7 @@
 import { create } from 'zustand';
 
 interface Notice {
-  id: number;
+  noticeId: number;
   title: string;
   content: string;
   image: string | null;
@@ -12,6 +12,7 @@ interface NoticeStore {
   expandedIds: number[];
   maxNotices: number;
   addNotice: () => void;
+  replaceNotice: (notice: Notice[]) => void;
   deleteNotice: (id: number) => void;
   updateNotice: (
     id: number,
@@ -21,7 +22,7 @@ interface NoticeStore {
   toggleExpand: (id: number) => void;
 }
 const createNewNotice = (idGenerator = Date.now) => ({
-  id: idGenerator(),
+  noticeId: idGenerator(),
   title: '',
   content: '',
   image: null,
@@ -39,16 +40,21 @@ const useNoticeStore = create<NoticeStore>((set) => ({
       return { notices: [...state.notices, newNotice] };
     }),
 
+  replaceNotice: (newNotice: Notice[]) =>
+    set(() => ({
+      notices: newNotice,
+    })),
+
   deleteNotice: (id) =>
     set((state) => ({
-      notices: state.notices.filter((notice) => notice.id !== id),
+      notices: state.notices.filter((notice) => notice.noticeId !== id),
       expandedIds: state.expandedIds.filter((expandedId) => expandedId !== id),
     })),
 
   updateNotice: (id, field, value) =>
     set((state) => ({
       notices: state.notices.map((notice) =>
-        notice.id === id ? { ...notice, [field]: value } : notice,
+        notice.noticeId === id ? { ...notice, [field]: value } : notice,
       ),
     })),
 

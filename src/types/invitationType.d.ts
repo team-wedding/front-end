@@ -5,8 +5,6 @@ export interface InvitationDetiail {
   // updatedAt?: string;
   groomName: string;
   brideName: string;
-  groomContact: string;
-  brideContact: string;
   date: string;
   location: string[];
   imgUrl: string;
@@ -17,10 +15,6 @@ export interface InvitationDetiail {
   groomMotherName: string;
   brideFatherName: string;
   brideMotherName: string;
-  groomFatherContact: string;
-  groomMotherContact: string;
-  brideFatherContact: string;
-  brideMotherContact: string;
   groomFatherAlive: boolean;
   groomMotherAlive: boolean;
   brideFatherAlive: boolean;
@@ -29,6 +23,7 @@ export interface InvitationDetiail {
   attendanceTitle: '참석 여부 제목';
   attendanceContent: '참석 여부 설명';
   attendanceIsDining: boolean;
+  attendance: boolean;
   font: string;
   calendars?: CalaendarDetail[];
   maps?: MapDetail[];
@@ -62,8 +57,8 @@ interface GalleryDetail {
   images: string[];
   grid: boolean;
 }
-interface AccountDetail {
-  order: number;
+export interface AccountDetail {
+  order?: number;
   accountHolderName: string;
   bankName: string;
   accountNumber: string;
@@ -78,9 +73,11 @@ interface ContactDetail {
   brideFatherContact: string;
   brideMotherContact: string;
 }
-interface NoticeDetail {
-  order: number;
+export interface NoticeDetail {
+  order?: number;
+  id?: number;
+  noticeId: number;
   title: string;
   content: string;
-  image: string;
+  image: string | null;
 }

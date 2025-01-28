@@ -17,18 +17,23 @@ export const useGetInvitation = (id: number) => {
   });
   return { invitations: data, error: isError };
 };
-export const useGetInvitations = (id: number) => {
+
+export const useGetInvitations = () => {
   return useQuery({
-    queryKey: ['invitations', id],
+    queryKey: ['invitations'],
     queryFn: () => getInvitations(),
   });
 };
 
 export const useCreateInvitation = () => {
   let details = getInvitationAction();
+  const queryClient = useQueryClient();
   return useMutation({
     mutationFn: () => postInvitation(details),
-    onSuccess: () => resetAllStores(),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['invitations'] });
+      resetAllStores()
+    }
   });
 };
 export const useUpdateInvitation = (id: number) => {

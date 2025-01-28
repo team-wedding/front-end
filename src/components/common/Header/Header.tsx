@@ -10,13 +10,13 @@ const Header = ({ text, leftButton, rightButton }: HeaderProps) => {
   return (
     <div className="flex items-center w-full max-w-md justify-between">
       {/* Left Button */}
-      <div className="px-4">{leftButton}</div>
+      <div className="mx-8">{leftButton}</div>
 
       {/* Text */}
       <div>{text}</div>
 
       {/* Right Button */}
-      <div className="px-4">{rightButton}</div>
+      <div className="mx-8">{rightButton}</div>
     </div>
   );
 };

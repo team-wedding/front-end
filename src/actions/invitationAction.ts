@@ -22,52 +22,60 @@ import { useLocationFeatureStore } from '@/store/OptionalFeature/useLocationFeat
 export const getInvitationAction = (): InvitationDetiail => {
   //웨딩 정보
   const { address } = useAddressStore();
+
+  // FIX: 웨딩 시간을 문자열로 처리 할지 아니면 따로 숫자로 처리할지
   const { weddingTime, formattedDate } = useWeddingStore();
   const { greetingTitle, greetingContent } = useGreetingStore();
-  //대표이밎
   const { uploadedImage } = useImageStore();
-  //신랑/신부 정보
-  const contacts = useContactStore((state) => state.contacts);
+
+  const { contacts } = useContactStore();
+
   const { brideGroom } = useBrideGroomStore();
-  //청첩장 제목
+
   const { invitationtitle } = useInvitationStore();
-  //캘린더
+
   const { subCalendarFeatures } = useCalendarFeatureStore();
-  //갤러리
+
   const { images, grid } = useGallaryStore();
-  //축의금
+
   const { accounts } = useAccountStore();
   const accountList: AccountDetail[] = accounts.flatMap((item) => [
     { order: 7, ...item.accountInfo },
     { order: 7, ...item.fatherAccountInfo },
-    { oreder: 7, ...item.motherAccountInfo },
+    { order: 7, ...item.motherAccountInfo },
   ]);
-  //배경음악
+
   const { selectedMusic } = useMusicFeatureStore();
-  //폰트
+
   const { font } = useThemeStore();
-  //공지사항
+
+  const { subFeatures: transportData, transportationInputs } =
+    useLocationFeatureStore();
+
   const { notices } = useNoticeStore();
   const noticeList: NoticeDetail[] = notices.map((value) => {
     return { order: 1, ...value };
   });
+
   return {
-    //청첩장 정보
     title: invitationtitle,
-
-    //결혼식 정보
-    // date: `${formattedDate.year} 년 ${formattedDate.month}월 ${formattedDate.day}일`,
-    date: '',
-    weddingTime: `${weddingTime.hour}시 ${weddingTime.minute}분`,
-    location: [address as string],
-    // imgUrl: uploadedImage as string,
-    imgUrl: '',
-    contentType: greetingTitle,
-    content: greetingContent,
-
-    //신부/신랑측 정보
     groomName: brideGroom[0].name,
     brideName: brideGroom[1].name,
+
+    //FIX: 백엔드에서 데이터 늘려줘야됨
+    // date: `${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일`,
+    date: '',
+
+    location: [address as string],
+    //FIX: S3 구현되면 수정
+    imgUrl: '',
+    // imgUrl: uploadedImage as string,
+
+    //FIX: 백엔드 이름 수정 예정
+    contentType: greetingTitle,
+    content: greetingContent,
+    //FIX: 수정
+    weddingTime: `${weddingTime.hour}, ${weddingTime.minute}`,
 
     groomFatherName: brideGroom[0].family.father.name,
     groomMotherName: brideGroom[0].family.mother.name,
@@ -79,23 +87,35 @@ export const getInvitationAction = (): InvitationDetiail => {
     brideFatherAlive: !brideGroom[1].family.father.isDeceased,
     brideMotherAlive: !brideGroom[1].family.mother.isDeceased,
 
-    //청첩장 스타일 정보
-    font: font,
     backgroundColor: '',
-    audio: selectedMusic.id,
 
-    //참석여부
+    //FIX: 참석여부 모달 스토어
     attendanceTitle: '참석 여부 제목',
     attendanceContent: '참석 여부 설명',
     attendanceIsDining: true,
     attendance: true,
-    //선택기능 정보
+    font: font,
+
     calendars: [
       {
         order: 1,
         calendar: subCalendarFeatures.calendar,
         dDay: subCalendarFeatures.dday,
         countdown: subCalendarFeatures.countdown,
+      },
+    ],
+    maps: [
+      {
+        order: 2,
+        tMap: transportData.navigationTmap,
+        naverMap: transportData.navigationNaver,
+        kakaoMap: transportData.navigationKakao,
+        personalCar: transportData.transportationCar,
+        subway: transportData.transportationSubway,
+        bus: transportData.transportationBus,
+        personalCarContent: transportationInputs.car,
+        subwayContent: transportationInputs.subway,
+        busContent: transportationInputs.bus,
       },
     ],
     galleries: [
@@ -108,22 +128,24 @@ export const getInvitationAction = (): InvitationDetiail => {
     accounts: accountList,
     contacts: [
       {
-        //여기 널값 조심
+        //FIX: 널값 예외처리
         order: 4,
-        groomContact: contacts[0].contact as string,
-        brideContact: contacts[1].contact as string,
-        groomFatherContact: contacts[0].fatherContact as string,
-        groomMotherContact: contacts[0].motherContact as string,
-        brideFatherContact: contacts[1].fatherContact as string,
-        brideMotherContact: contacts[1].motherContact as string,
+        groomContact: contacts[0].contact,
+        brideContact: contacts[1].contact,
+        groomFatherContact: contacts[0].fatherContact,
+        groomMotherContact: contacts[0].motherContact,
+        brideFatherContact: contacts[1].fatherContact,
+        brideMotherContact: contacts[1].motherContact,
       },
     ],
     notices: noticeList,
+
+    audio: selectedMusic.id,
   };
 };
 
 export const useUpdateInvitationStore = (details: InvitationDetiail) => {
-  //지도
+  const { setInvitationTitle } = useInvitationStore();
   const { setAddress, setJibunAddress, setCoords } = useAddressStore();
   const { setWeddingDate, setWeddingTime } = useWeddingStore();
   const { setGreetingContent, setGreetingTitle, setSelectedSample } =
@@ -132,36 +154,36 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
   const contacts = useContactStore((state) => state.updateContact);
   const { updateBrideGroom, updateFamily } = useBrideGroomStore();
   const { setFont } = useThemeStore();
-  //선택기능
   const { setGrid, setImages } = useGallaryStore();
-  //교통수단
   const {
     updateTransportationInput: setTransportSubFeature,
     toggleSubFeature: transportToggle,
   } = useLocationFeatureStore();
-  //배경음악
   const { selectMusic, toggleSubFeature: musicToggle } = useMusicFeatureStore();
-  //축의금
   const { updateAccountInfo } = useAccountStore();
-
   const { replaceNotice } = useNoticeStore();
 
   useEffect(() => {
     if (details) {
-      // Address 업데이트
+      setInvitationTitle(details.title);
+
+      //FIX: 주소 어떻게 받을지 처리
       setAddress('주소', '짚코드');
       setJibunAddress('');
       setCoords(0, 0);
-      // Wedding 정보 업데이트
+
       setWeddingDate(new Date(details.date));
+
+      //FIX: 시간 처리
       setWeddingTime(0, 0);
-      // Greeting 업데이트
+
       setGreetingContent(details.content);
       setGreetingTitle(details.contentType);
+      //FIX : SAMPLE 처리
       setSelectedSample('');
-      // 이미지 업데이트
+
       setUploadedImage(details.imgUrl);
-      // Contacts 업데이트
+
       contacts(
         0,
         'fatherContact',
@@ -193,11 +215,9 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         details.contacts ? details.contacts[0].groomContact : '',
       );
 
-      // BrideGroom 업데이트
       updateBrideGroom(0, 'name', details.brideName);
       updateBrideGroom(1, 'name', details.groomName);
 
-      // Family 정보 업데이트
       updateFamily(0, 'father', 'name', details.brideFatherName);
       updateFamily(0, 'mother', 'name', details.brideMotherName);
       updateFamily(0, 'father', 'isDeceased', details.brideFatherAlive);
@@ -328,9 +348,15 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
             },
       );
 
+      //TODO: NOTICE
+      //TODO: Calendars
+      //TODO: maps
+      //TODO : 참석의사 스토어
+      //FIX: MUSIC
+
       // musicSubFeatures();
       selectMusic(details.audio);
-      musicToggle('music', false); //Change
+      musicToggle('music', false); //수정 필요
     }
   }, [details]); // details 변경 시 실행
 };

@@ -1,8 +1,9 @@
 export interface InvitationDetiail {
   id?: number;
-  title: string;
   // createdAt?: string;
   // updatedAt?: string;
+
+  title: string;
   groomName: string;
   brideName: string;
   date: string;
@@ -11,14 +12,17 @@ export interface InvitationDetiail {
   contentType: string;
   content: string;
   weddingTime: string;
+
   groomFatherName: string;
   groomMotherName: string;
   brideFatherName: string;
   brideMotherName: string;
+
   groomFatherAlive: boolean;
   groomMotherAlive: boolean;
   brideFatherAlive: boolean;
   brideMotherAlive: boolean;
+
   backgroundColor: string;
   attendanceTitle: '참석 여부 제목';
   attendanceContent: '참석 여부 설명';

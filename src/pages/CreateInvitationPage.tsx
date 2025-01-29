@@ -16,7 +16,8 @@ import resetAllStores from '@/store/resetStore';
 const sliceRanges = [[0, 3], [3, 13], [13]];
 
 const CreateInvitationPage = () => {
-  const { items, initializeItems, moveItem } = useAccordionStore();
+  const { allItems, items, initializeItems, moveItem, optionalItems } = useAccordionStore();
+  console.log("allItems", allItems, "optionalItems", optionalItems)
   const [steps, setSteps] = useState(1);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const { invitationtitle } = useInvitationStore()

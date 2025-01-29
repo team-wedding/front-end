@@ -1,3 +1,4 @@
+import useRSVPStore from '@/store/useRSVPStore';
 import useAccountStore from './useAccountStore';
 import useAddressStore from './useAddressStore';
 import useBrideGroomStore from './useBrideGroomStore';
@@ -19,6 +20,7 @@ const resetAllStores = () => {
   useImageStore.getState().reset();
   useInvitationStore.getState().reset();
   useThemeStore.getState().reset();
+  useRSVPStore.getState().reset();
   useWeddingStore.getState().reset();
 };
 export default resetAllStores;

@@ -9,8 +9,8 @@ export interface InvitationDetiail {
   date: string;
   location: string[];
   imgUrl: string;
-  contentType: string;
-  content: string;
+  greetingTitle: string;
+  greetingContent: string;
   weddingTime: string;
 
   groomFatherName: string;
@@ -24,8 +24,8 @@ export interface InvitationDetiail {
   brideMotherAlive: boolean;
 
   backgroundColor: string;
-  attendanceTitle: '참석 여부 제목';
-  attendanceContent: '참석 여부 설명';
+  attendanceTitle: string;
+  attendanceContent: string;
   attendanceIsDining: boolean;
   attendance: boolean;
   font: string;

@@ -1,28 +1,18 @@
-import { useState } from 'react';
 import Toggle from '@common/Toggle';
+import useRSVPStore from '@/store/useRSVPStore';
 
-export interface RSVPDetails {
-  title: string;
-  desc: string;
-}
+
 
 const RsvpExample = () => {
-  const [rsvpDetail, setRsvpDetail] = useState<RSVPDetails>({
-    title: '',
-    desc: '',
-  });
-  const [meal, setMeal] = useState(false);
-  const [population, setPopulation] = useState(false);
-
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setRsvpDetail({
-      ...rsvpDetail,
-      [name]: value,
-    });
-  };
+  const {
+    rsvpTitle,
+    rsvpDescription,
+    rsvpIncludeMeal,
+    rsvpIncludePopulation,
+    setRSVPDetail,
+    setRSVPIncludeMeal,
+    setRSVPIncludePopulation,
+  } = useRSVPStore();
 
   return (
     <div className="max-w-lg mx-auto px-4 flex flex-col text-xs">
@@ -40,8 +30,10 @@ const RsvpExample = () => {
         <div className="flex flex-col gap-1">
           제목 :
           <input
-            onChange={handleChange}
+            onChange={setRSVPDetail}
+            name="rsvpTitle"
             type="text"
+            value={rsvpTitle}
             className="text-xs rounded-md border border-gray-300 shadow-md focus:outline-none focus:border-none"
             placeholder="제목을 입력해주세요"
           />
@@ -49,7 +41,9 @@ const RsvpExample = () => {
         <div className="flex flex-col gap-1">
           설명 :
           <textarea
-            onChange={handleChange}
+            onChange={setRSVPDetail}
+            name="rsvpDescription"
+            value={rsvpDescription}
             className="resize-none px-2 p-3 text-[10px] leading-3 rounded-md border border-gray-300 shadow-md"
             placeholder="설명을 입력해주세요..."
           />
@@ -57,11 +51,11 @@ const RsvpExample = () => {
         <hr />
         <div className="flex flex-row justify-between items-center  border rounded-md p-2">
           식사여부
-          <Toggle state={meal} setState={setMeal} />
+          <Toggle state={rsvpIncludeMeal} setState={setRSVPIncludeMeal} />
         </div>
         <div className="flex flex-row justify-between items-center border rounded-md p-2">
           참석 인원
-          <Toggle state={population} setState={setPopulation} />
+          <Toggle state={rsvpIncludePopulation} setState={setRSVPIncludePopulation} />
         </div>
       </section>
     </div>

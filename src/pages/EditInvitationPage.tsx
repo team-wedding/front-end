@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PageLayout from '@layout/PageLayout';
 import HeaderButton from '@common/Header/HeaderButton';
 import { useNavigate, useParams } from 'react-router';
@@ -13,6 +13,7 @@ import ResultDisplay from '@display/ResultDisplay';
 import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
 import { useUpdateInvitationStore } from '../actions/invitationAction';
 import { InvitationDetiail } from '../types/invitationType';
+import { useAccordionStore } from '@/store/useAccordionStore';
 
 const EditInvitationPage = () => {
   const navigate = useNavigate();
@@ -20,7 +21,11 @@ const EditInvitationPage = () => {
   const handleCancel = () => navigate('/dashboard');
   const { mutate: editInvitation } = useUpdateInvitation(parseInt(id!));
   const { invitations } = useGetInvitation(parseInt(id!));
+  const { setOrderItems } = useAccordionStore()
 
+  useEffect(() => {
+    setOrderItems()
+  }, [])
   useUpdateInvitationStore(invitations as InvitationDetiail);
 
   const handleSave = async () => {

@@ -18,10 +18,18 @@ import useAccountStore from '@/store/useAccountStore';
 import { useMusicFeatureStore } from '@/store/OptionalFeature/useMusicFeatureStore';
 import useNoticeStore from '@/store/useNoticeStore';
 import { useLocationFeatureStore } from '@/store/OptionalFeature/useLocationFeatureStore';
+import useRSVPStore from '@/store/useRSVPStore';
+import { useAccordionStore } from '@/store/useAccordionStore';
 
 export const getInvitationAction = (): InvitationDetiail => {
   //웨딩 정보
   const { address } = useAddressStore();
+  const { optionalItems } = useAccordionStore();
+  const findOrder = (feature: string) => {
+    if (!feature) return undefined; // feature가 없으면 undefined 반환
+    const result = optionalItems.find((value) => value.feature === feature);
+    return result?.order;
+  };
 
   // FIX: 웨딩 시간을 문자열로 처리 할지 아니면 따로 숫자로 처리할지
   const { weddingTime, formattedDate } = useWeddingStore();
@@ -34,15 +42,18 @@ export const getInvitationAction = (): InvitationDetiail => {
 
   const { invitationtitle } = useInvitationStore();
 
+  const { rsvpTitle, rsvpDescription, rsvpIncludeMeal, rsvpIncludePopulation } =
+    useRSVPStore();
+
   const { subCalendarFeatures } = useCalendarFeatureStore();
 
   const { images, grid } = useGallaryStore();
 
   const { accounts } = useAccountStore();
   const accountList: AccountDetail[] = accounts.flatMap((item) => [
-    { order: 7, ...item.accountInfo },
-    { order: 7, ...item.fatherAccountInfo },
-    { order: 7, ...item.motherAccountInfo },
+    { order: findOrder('account'), ...item.accountInfo },
+    { order: findOrder('account'), ...item.fatherAccountInfo },
+    { order: findOrder('account'), ...item.motherAccountInfo },
   ]);
 
   const { selectedMusic } = useMusicFeatureStore();
@@ -54,7 +65,7 @@ export const getInvitationAction = (): InvitationDetiail => {
 
   const { notices } = useNoticeStore();
   const noticeList: NoticeDetail[] = notices.map((value) => {
-    return { order: 1, ...value };
+    return { order: findOrder('notice'), ...value };
   });
 
   return {
@@ -70,10 +81,8 @@ export const getInvitationAction = (): InvitationDetiail => {
     //FIX: S3 구현되면 수정
     imgUrl: '',
     // imgUrl: uploadedImage as string,
-
-    //FIX: 백엔드 이름 수정 예정
-    contentType: greetingTitle,
-    content: greetingContent,
+    greetingTitle: greetingTitle,
+    greetingContent: greetingContent,
     //FIX: 수정
     weddingTime: `${weddingTime.hour}, ${weddingTime.minute}`,
 
@@ -87,18 +96,17 @@ export const getInvitationAction = (): InvitationDetiail => {
     brideFatherAlive: !brideGroom[1].family.father.isDeceased,
     brideMotherAlive: !brideGroom[1].family.mother.isDeceased,
 
+    //FIX : BackGround Color 추가
     backgroundColor: '',
-
-    //FIX: 참석여부 모달 스토어
-    attendanceTitle: '참석 여부 제목',
-    attendanceContent: '참석 여부 설명',
-    attendanceIsDining: true,
-    attendance: true,
+    attendanceTitle: rsvpTitle,
+    attendanceContent: rsvpDescription,
+    attendanceIsDining: rsvpIncludeMeal,
+    attendance: rsvpIncludePopulation,
     font: font,
 
     calendars: [
       {
-        order: 1,
+        order: findOrder('calendar')!,
         calendar: subCalendarFeatures.calendar,
         dDay: subCalendarFeatures.dday,
         countdown: subCalendarFeatures.countdown,
@@ -106,7 +114,7 @@ export const getInvitationAction = (): InvitationDetiail => {
     ],
     maps: [
       {
-        order: 2,
+        order: findOrder('location')!,
         tMap: transportData.navigationTmap,
         naverMap: transportData.navigationNaver,
         kakaoMap: transportData.navigationKakao,
@@ -120,7 +128,7 @@ export const getInvitationAction = (): InvitationDetiail => {
     ],
     galleries: [
       {
-        order: 2,
+        order: findOrder('gallery')!,
         images: images,
         grid: grid,
       },
@@ -129,7 +137,7 @@ export const getInvitationAction = (): InvitationDetiail => {
     contacts: [
       {
         //FIX: 널값 예외처리
-        order: 4,
+        order: findOrder('contact')!,
         groomContact: contacts[0].contact,
         brideContact: contacts[1].contact,
         groomFatherContact: contacts[0].fatherContact,
@@ -177,8 +185,9 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       //FIX: 시간 처리
       setWeddingTime(0, 0);
 
-      setGreetingContent(details.content);
-      setGreetingTitle(details.contentType);
+      setGreetingTitle(details.greetingTitle);
+      setGreetingContent(details.greetingContent);
+
       //FIX : SAMPLE 처리
       setSelectedSample('');
 
@@ -352,8 +361,8 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       //TODO: Calendars
       //TODO: maps
       //TODO : 참석의사 스토어
-      //FIX: MUSIC
 
+      //FIX: MUSIC
       // musicSubFeatures();
       selectMusic(details.audio);
       musicToggle('music', false); //수정 필요

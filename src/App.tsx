@@ -12,11 +12,10 @@ import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import EditInvitationPage from './pages/EditInvitationPage';
 import NotFound404 from './pages/NotFound404';
 import EmailLoginPage from './pages/EmailLoginPage';
-// import ResetPasswordPage from './pages/ResetPasswordPage';
-// import ChangePasswordPage from './pages/ChangePasswordPage';
-// import EditMyPage from './pages/EditMyPage';
 import NaverRedirect from './components/login/SocialLogin/NaverRedirect';
 import KakaoRedirect from './components/login/SocialLogin/KakaoRedirect';
+import ResetPasswordPage from './pages/ResetPasswordPage';
+import EditMyPage from './pages/EditMyPage';
 
 function App() {
   const queryClient = new QueryClient();
@@ -30,9 +29,9 @@ function App() {
           <Route path={'/login'} element={<LoginPage />} />
           <Route path="/email-login" element={<EmailLoginPage />} />
           <Route path={'/signup'} element={<SignUpPage />} />
-          {/* <Route path={"/reset-password"} element={<ResetPasswordPage />} />
-          <Route path={"edit-profile"} element={<EditMyPage />} />
-          <Route path={"/change-password"} element={<ChangePasswordPage />} /> */}
+          <Route path={"/reset-password"} element={<ResetPasswordPage />} />
+          <Route path={"/mypage"} element={<EditMyPage />} />
+          {/* <Route path={"/change-password"} element={<ChangePasswordPage />} />   */}
           <Route path={'/create'} element={<CreateInvitationPage />} />
           <Route path={'/edit/:id'} element={<EditInvitationPage />} />
           <Route path={'/preview'} element={<PreviewInvitaionPage />} />

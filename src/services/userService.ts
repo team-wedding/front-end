@@ -12,6 +12,10 @@ interface LoginInfo {
   password: string;
 }
 
+interface EmailInfo {
+  email: string;
+}
+
 // interface PasswordInfo {
 //     password: string;
 //     newPassword: string;
@@ -127,3 +131,8 @@ export const withdraw = async () => {
 //         throw error;
 //     }
 // };
+
+export const resetPassword = async (emailInfo: EmailInfo) => {
+  const response = await axiosInstance.put(API.RESETPASSWORD(), emailInfo);
+  return response.data;
+}

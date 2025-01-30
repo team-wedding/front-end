@@ -15,6 +15,7 @@ interface StoreState {
     enabled: boolean,
   ) => void;
   selectMusic: (musicId: number) => void;
+  reset: () => void;
 }
 
 export const useMusicFeatureStore = create<StoreState>((set) => ({
@@ -40,4 +41,15 @@ export const useMusicFeatureStore = create<StoreState>((set) => ({
       selectedMusic: music[0],
     }));
   },
+  reset: () =>
+    set(() => ({
+      subFeatures: {
+        music: false,
+      },
+      selectedMusic: {
+        id: null,
+        title: '',
+        src: '',
+      },
+    })),
 }));

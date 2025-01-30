@@ -19,7 +19,7 @@ const Card = ({ image, id, title }: CardProps) => {
         <div className="absolute inset-0 bg-white opacity-10"></div>
         <CardHeader id={id} title={title} />
       </div>
-      <CardFooter />
+      <CardFooter id={id} />
     </div>
   );
 };

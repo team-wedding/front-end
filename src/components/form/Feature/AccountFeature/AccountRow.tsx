@@ -8,9 +8,9 @@ const AccountRow = ({
   label: string;
   accountInfo: {
     bankName: string;
-    accountHolder: string;
+    accountHolderName: string;
     accountNumber: string;
-    kakaoPayQRCode: string;
+    kakaoUrl: string;
   };
   onUpdate: (field: keyof typeof accountInfo, value: string) => void;
 }) => {
@@ -20,14 +20,14 @@ const AccountRow = ({
       <div className="flex items-center gap-2">
         <label className="label">{label}</label>
         <BankSelector
-          selectedBank={accountInfo.bankName}
+          selectedBank={accountInfo?.bankName}
           onSelect={(bankName) => onUpdate('bankName', bankName)}
         />
         <input
           type="text"
           placeholder="예금주"
-          value={accountInfo.accountHolder}
-          onChange={(e) => onUpdate('accountHolder', e.target.value)}
+          value={accountInfo?.accountHolderName}
+          onChange={(e) => onUpdate('accountHolderName', e.target.value)}
           className="formInput"
         />
       </div>
@@ -38,7 +38,7 @@ const AccountRow = ({
         <input
           type="text"
           placeholder="계좌번호"
-          value={accountInfo.accountNumber}
+          value={accountInfo?.accountNumber}
           onChange={(e) => onUpdate('accountNumber', e.target.value)}
           className="formInput"
         />
@@ -50,8 +50,8 @@ const AccountRow = ({
         <input
           type="text"
           placeholder="카카오 송금 QR 링크"
-          value={accountInfo.kakaoPayQRCode}
-          onChange={(e) => onUpdate('kakaoPayQRCode', e.target.value)}
+          value={accountInfo?.kakaoUrl}
+          onChange={(e) => onUpdate('kakaoUrl', e.target.value)}
           className="formInput"
         />
       </div>

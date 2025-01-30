@@ -61,7 +61,7 @@ const MusicItem = () => {
       {musicData.map(({ id, title, src }) => (
         <div
           key={id}
-          className={`flex items-center justify-between px-5 py-1 gap-2 rounded-2xl select-btn hover:active-btn ${selectedMusic.id === id && 'active-btn'}`}
+          className={`flex items-center justify-between px-5 py-1 gap-2 rounded-2xl select-btn hover:active-btn ${selectedMusic && selectedMusic.id === id && 'active-btn'}`}
           onClick={() => handleSelect(id)}
         >
           <div>{title}</div>

@@ -81,7 +81,7 @@ export default function GalleryFeature() {
   return (
     <div className="flex flex-col gap-4">
       <label
-        className={`${images.length === 0 ? `flex flex-col` : `grid grid-cols-2 justify-items-center gap-2 px-4 lg:px-1 py-2 lg:grid-cols-3 lg:gap-1`} w-full h-fit p-1 border-2  rounded-md cursor-pointer items-center overflow-y-scroll`}
+        className={`${images && images.length === 0 ? `flex flex-col` : `grid grid-cols-2 justify-items-center gap-2 px-4 lg:px-1 py-2 lg:grid-cols-3 lg:gap-1`} w-full h-fit p-1 border-2  rounded-md cursor-pointer items-center overflow-y-scroll`}
         htmlFor="dropzone"
         onDrop={handleDrop}
         onDragOver={handleDrag}
@@ -89,7 +89,7 @@ export default function GalleryFeature() {
         onDragEnter={handleDragEnter}
         onClick={(e) => e.preventDefault()}
       >
-        {images.length === 0 ? (
+        {images && images.length === 0 ? (
           <div className="flex flex-col items-center justify-center pt-5 pb-6">
             <p className="mb-2 text-xs text-gray-500">
               <span className="font-semibold">Click to upload</span> or drag and
@@ -100,7 +100,7 @@ export default function GalleryFeature() {
             </p>
           </div>
         ) : (
-          images.map((value, index) => {
+          images && images.map((value, index) => {
             return (
               <div
                 className={`relative w-32 h-44 lg:w-24 lg:h-32 rounded-md flex items-center justify-center cursor-pointer ${hoveredIndex == index ? 'shadow-2xl' : 'shadow-none '}`}

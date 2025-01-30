@@ -14,11 +14,11 @@ import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
 import { useUpdateInvitationStore } from '../actions/invitationAction';
 import { InvitationDetiail } from '../types/invitationType';
 import { useAccordionStore } from '@/store/useAccordionStore';
+import resetAllStores from '@/store/resetStore';
 
 const EditInvitationPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const handleCancel = () => navigate('/dashboard');
   const { mutate: editInvitation } = useUpdateInvitation(parseInt(id!));
   const { invitations } = useGetInvitation(parseInt(id!));
   const { setOrderItems } = useAccordionStore()
@@ -31,8 +31,14 @@ const EditInvitationPage = () => {
   const handleSave = async () => {
     if (id) {
       await editInvitation();
+      resetAllStores();
       navigate('/dashboard');
     }
+  };
+
+  const handleCancel = () => {
+    navigate('/dashboard');
+    resetAllStores();
   };
 
   const [expandedIds, setExpandedIds] = useState<number[]>([]);

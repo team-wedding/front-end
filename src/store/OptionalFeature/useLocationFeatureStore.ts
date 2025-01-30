@@ -23,6 +23,7 @@ export interface StoreState {
     type: keyof StoreState['transportationInputs'],
     value: string,
   ) => void;
+  reset: () => void;
 }
 
 export const useLocationFeatureStore = create<StoreState>((set) => ({
@@ -53,6 +54,24 @@ export const useLocationFeatureStore = create<StoreState>((set) => ({
       transportationInputs: {
         ...state.transportationInputs,
         [type]: value,
+      },
+    }));
+  },
+  reset: () => {
+    set(() => ({
+      subFeatures: {
+        canMoveMap: false,
+        navigationTmap: false,
+        navigationNaver: false,
+        navigationKakao: false,
+        transportationCar: false,
+        transportationSubway: false,
+        transportationBus: false,
+      },
+      transportationInputs: {
+        car: '',
+        bus: '',
+        subway: '',
       },
     }));
   },

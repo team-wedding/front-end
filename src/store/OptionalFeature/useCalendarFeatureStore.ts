@@ -10,6 +10,7 @@ interface StoreState {
     feature: keyof StoreState['subCalendarFeatures'],
     enabled: boolean,
   ) => void;
+  reset: () => void;
 }
 
 export const useCalendarFeatureStore = create<StoreState>((set) => ({
@@ -23,6 +24,15 @@ export const useCalendarFeatureStore = create<StoreState>((set) => ({
       subCalendarFeatures: {
         ...state.subCalendarFeatures,
         [feature]: enabled,
+      },
+    }));
+  },
+  reset: () => {
+    set(() => ({
+      subCalendarFeatures: {
+        calendar: false,
+        countdown: false,
+        dday: false,
       },
     }));
   },

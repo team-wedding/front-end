@@ -5,13 +5,18 @@ interface RSVPDetails {
   rsvpDescription: string;
   rsvpIncludeMeal: boolean;
   rsvpIncludePopulation: boolean;
-  setRSVPDetail: (
+  setRSVPonChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => void;
+  setRSVPDetails: (details: {
+    rsvpTitle: string;
+    rsvpDescription: string;
+  }) => void;
   setRSVPIncludeMeal: (meal: boolean) => void;
   setRSVPIncludePopulation: (population: boolean) => void;
   reset: () => void;
 }
+
 const initialState = {
   rsvpTitle: '',
   rsvpDescription: '',
@@ -21,7 +26,7 @@ const initialState = {
 
 const useRSVPStore = create<RSVPDetails>((set) => ({
   ...initialState,
-  setRSVPDetail: (
+  setRSVPonChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
@@ -30,6 +35,11 @@ const useRSVPStore = create<RSVPDetails>((set) => ({
       [name]: value,
     }));
   },
+  setRSVPDetails: (content: Partial<RSVPDetails>) =>
+    set(() => ({
+      rsvpTitle: content.rsvpTitle,
+      rsvpDescription: content.rsvpDescription,
+    })),
   setRSVPIncludeMeal: (meal: boolean) => set(() => ({ rsvpIncludeMeal: meal })),
   setRSVPIncludePopulation: (population: boolean) =>
     set(() => ({ rsvpIncludePopulation: population })),

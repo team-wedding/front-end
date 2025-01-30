@@ -9,7 +9,7 @@ const RsvpExample = () => {
     rsvpDescription,
     rsvpIncludeMeal,
     rsvpIncludePopulation,
-    setRSVPDetail,
+    setRSVPonChange,
     setRSVPIncludeMeal,
     setRSVPIncludePopulation,
   } = useRSVPStore();
@@ -30,7 +30,7 @@ const RsvpExample = () => {
         <div className="flex flex-col gap-1">
           제목 :
           <input
-            onChange={setRSVPDetail}
+            onChange={setRSVPonChange}
             name="rsvpTitle"
             type="text"
             value={rsvpTitle}
@@ -41,7 +41,7 @@ const RsvpExample = () => {
         <div className="flex flex-col gap-1">
           설명 :
           <textarea
-            onChange={setRSVPDetail}
+            onChange={setRSVPonChange}
             name="rsvpDescription"
             value={rsvpDescription}
             className="resize-none px-2 p-3 text-[10px] leading-3 rounded-md border border-gray-300 shadow-md"

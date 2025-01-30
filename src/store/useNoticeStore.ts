@@ -20,6 +20,7 @@ interface NoticeStore {
     value: string | File | null,
   ) => void;
   toggleExpand: (id: number) => void;
+  reset: () => void;
 }
 const createNewNotice = (idGenerator = Date.now) => ({
   noticeId: idGenerator(),
@@ -57,7 +58,12 @@ const useNoticeStore = create<NoticeStore>((set) => ({
         notice.noticeId === id ? { ...notice, [field]: value } : notice,
       ),
     })),
-
+  reset: () =>
+    set(() => ({
+      notices: [createNewNotice()],
+      expandedIds: [],
+      maxNotices: 5,
+    })),
   toggleExpand: (id) =>
     set((state) => ({
       expandedIds: state.expandedIds.includes(id)

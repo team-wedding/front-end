@@ -20,15 +20,15 @@ const MoneySection = () => {
           value.role === '신랑님'
             ? accordionStates.groom
             : accordionStates.bride;
-        const accountEmpty = Object.values(accountInfo).every(
-          (value) => value === '',
-        );
-        const mothreAccountEmpty = Object.values(motherAccountInfo).every(
-          (value) => value === '',
-        );
-        const fatherAccountEmpty = Object.values(fatherAccountInfo).every(
-          (value) => value === '',
-        );
+        const accountEmpty = accountInfo
+          ? Object.values(accountInfo).every((value) => value === '')
+          : true;
+        const mothreAccountEmpty = motherAccountInfo
+          ? Object.values(motherAccountInfo).every((value) => value === '')
+          : true;
+        const fatherAccountEmpty = fatherAccountInfo
+          ? Object.values(fatherAccountInfo).every((value) => value === '')
+          : true;
         const allEmpty =
           accountEmpty && mothreAccountEmpty && fatherAccountEmpty;
         return (
@@ -36,47 +36,44 @@ const MoneySection = () => {
             {!allEmpty && (
               <>
                 <div
-                  className={`flex py-2 px-5 cursor-default justify-between items-center bg-secondary rounded-lg ${
-                    isOpen && 'rounded-b-none'
-                  }`}
+                  className={`flex py-2 px-5 cursor-default justify-between items-center bg-secondary rounded-lg ${isOpen && 'rounded-b-none'
+                    }`}
                   onClick={() =>
                     toggleAccordion(value.role === '신랑님' ? 'groom' : 'bride')
                   }
                 >
                   <div className="font-medium">{`${value.role} 계좌번호`}</div>
                   <i
-                    className={`bx bx-chevron-down text-xl transition-all duration-300 ${
-                      isOpen ? 'rotate-180' : ''
-                    }`}
+                    className={`bx bx-chevron-down text-xl transition-all duration-300 ${isOpen ? 'rotate-180' : ''
+                      }`}
                   ></i>
                 </div>
                 <div
-                  className={`overflow-hidden transition-all ${
-                    isOpen ? 'h-fit' : 'h-0'
-                  }`}
+                  className={`overflow-hidden transition-all ${isOpen ? 'h-fit' : 'h-0'
+                    }`}
                 >
                   {!accountEmpty && (
                     <AccountNumberItem
                       bank={accountInfo.bankName}
                       accountNumber={accountInfo.accountNumber}
-                      name={accountInfo.accountHolder}
-                      kakaoLink={accountInfo.kakaoPayQRCode}
+                      name={accountInfo.accountHolderName}
+                      kakaoLink={accountInfo.kakaoUrl}
                     />
                   )}
                   {!fatherAccountEmpty && (
                     <AccountNumberItem
                       bank={fatherAccountInfo.bankName}
                       accountNumber={fatherAccountInfo.accountNumber}
-                      name={fatherAccountInfo.accountHolder}
-                      kakaoLink={fatherAccountInfo.kakaoPayQRCode}
+                      name={fatherAccountInfo.accountHolderName}
+                      kakaoLink={fatherAccountInfo.kakaoUrl}
                     />
                   )}
                   {!mothreAccountEmpty && (
                     <AccountNumberItem
                       bank={motherAccountInfo.bankName}
                       accountNumber={motherAccountInfo.accountNumber}
-                      name={motherAccountInfo.accountHolder}
-                      kakaoLink={motherAccountInfo.kakaoPayQRCode}
+                      name={motherAccountInfo.accountHolderName}
+                      kakaoLink={motherAccountInfo.kakaoUrl}
                       last={true}
                     />
                   )}

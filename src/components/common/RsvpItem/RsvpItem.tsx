@@ -24,11 +24,11 @@ export default function RsvpItem({
         {description && <div className="text-sm mt-1">{description}</div>}
       </div>
       <div
-        className={`flex flex-row   gap-2 ${bride == undefined ? 'text-gray-700' : bride ? 'text-red-400' : 'text-blue-400'} ${total ? 'text-3xl font-semibold pr-10' : 'text-base font-bold pr-2'}`}
+        className={`flex flex-row gap-2 ${bride == undefined ? 'text-gray-700' : bride ? 'text-red-400' : 'text-blue-400'} ${total ? 'text-3xl font-semibold pr-10' : 'text-base font-bold pr-2'}`}
       >
         {attend}
         {unattend && (
-          <div className=" text-xs text-gray-600  self-center ">
+          <div className=" text-xs text-gray-600 self-center ">
             {' '}
             {`/ ${unattend}`}
           </div>

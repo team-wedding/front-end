@@ -1,9 +1,11 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import useNoticeStore from '@store/useNoticeStore';
 import { Notice } from './NoticeItem';
 import TrashBinIcon from '@icons/TrashBinIcon';
 import CloudArrowIcon from '@icons/CloudArrowIcon';
 import CloseIcon from '@icons/CloseIcon';
+import ReusableModal from '@/components/common/Modal/ReusableModal';
+
 const NoticeFeature = () => {
   const {
     notices,
@@ -14,6 +16,22 @@ const NoticeFeature = () => {
     updateNotice,
     toggleExpand,
   } = useNoticeStore();
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedNoticeId, setSelectedNoticeId] = useState<number | null>(null);
+
+  const handleDeleteClick = (id: number) => {
+    setSelectedNoticeId(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (selectedNoticeId !== null) {
+      deleteNotice(selectedNoticeId);
+    }
+    setIsDeleteModalOpen(false);
+    setSelectedNoticeId(null);
+  }
 
   const handleImageUpload = (id: number, file: File | null) => {
     if (file) {
@@ -39,8 +57,7 @@ const NoticeFeature = () => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                if (confirm('이 공지를 정말 삭제하시겠습니까?'))
-                  deleteNotice(notice.id);
+                handleDeleteClick(notice.id);
               }}
             >
               <TrashBinIcon />
@@ -149,6 +166,13 @@ const NoticeFeature = () => {
           + 공지 추가 ({notices.length}/{maxNotices})
         </button>
       )}
+      <ReusableModal
+        isOpen={isDeleteModalOpen}
+        title="이 공지를 삭제하시겠습니까?"
+        confirmText="확인"
+        onConfirm={confirmDelete}
+        onCancel={() => setIsDeleteModalOpen(false)}
+      />
     </div>
   );
 };

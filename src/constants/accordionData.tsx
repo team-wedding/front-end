@@ -8,11 +8,11 @@ import GalleryFeature from '@form/Feature/GalleryFeature/GalleryFeature';
 import GreetingFeature from '@form/Feature/GreetingFeature/GreetingFeature';
 import LocationFeature from '@form/Feature/LocationFeature/LocationFeature';
 import RsvpExample from '@form/Feature/RsvpFeature/RsvpExample';
-import ImageInput from '@form/Feature/ThumbnailFeature/ImageInput';
 import ThemeFeature from '@form/Theme/ThemeFeature/ThemeFeature';
 import NoticeFeature from '@form/Feature/NoticeFeature/NoticeFeature';
 import MusicFeature from '@form/Theme/MusicFeature/MusicFeature';
 import PhotoTalkFeature from '@/components/form/Feature/PhotoTalkFeature/PhotoTalkFeature';
+import ThumbnailFeature from '@/components/form/Feature/ThumbnailFeature/ThumbnailFeature';
 
 export interface AccordionItemData {
   id: number;
@@ -52,7 +52,7 @@ export const accordionData: AccordionItemData[] = [
     id: 4,
     title: '대표 이미지',
     feature: 'thumbnail',
-    content: <ImageInput />,
+    content: <ThumbnailFeature />, // <ImageInput />,
     hasToggle: false,
     hasDrag: false,
   },

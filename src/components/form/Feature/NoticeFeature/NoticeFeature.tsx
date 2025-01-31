@@ -2,9 +2,8 @@ import { useMemo } from 'react';
 import useNoticeStore from '@store/useNoticeStore';
 import { Notice } from './NoticeItem';
 import TrashBinIcon from '@icons/TrashBinIcon';
-import CloudArrowIcon from '@icons/CloudArrowIcon';
-import CloseIcon from '@icons/CloseIcon';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
+import ImageUploader from '@/components/common/ImageUploader';
 
 const NoticeFeature = () => {
   const {
@@ -17,24 +16,9 @@ const NoticeFeature = () => {
     toggleExpand,
   } = useNoticeStore();
 
-  const handleImageUpload = (id: number, file: File | null) => {
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.result && typeof reader.result === 'string') {
-          updateNotice(id, 'image', reader.result);
-        }
-      };
-      reader.onerror = () => {
-        console.error('이미지를 읽는 중 오류가 발생했습니다.');
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
   const accordionItems = useMemo(
     () =>
-      notices.map((notice) => ({
+      notices.map((notice, index) => ({
         id: notice.id,
         title: (
           <div className="flex items-center gap-2">
@@ -47,12 +31,12 @@ const NoticeFeature = () => {
             >
               <TrashBinIcon />
             </button>
-            <span>{notice.title || `공지 ${notices.indexOf(notice) + 1}`}</span>
+            <span>{notice.title || `공지 ${index + 1}`}</span>
           </div>
         ),
         content: (
-          <div className="m-3 flex flex-col gap-4">
-            <div className="flex flex-col gap-2">
+          <div className="m-3 flex flex-col gap-6">
+            <div className="flex flex-col gap-3">
               <label className="label w-full">제목</label>
               <input
                 type="text"
@@ -65,7 +49,7 @@ const NoticeFeature = () => {
               />
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-3">
               <label className="label w-full">내용</label>
               <textarea
                 placeholder="내용을 입력해주세요"
@@ -78,46 +62,16 @@ const NoticeFeature = () => {
               />
             </div>
 
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-3">
               <label className="label w-full">이미지 업로드</label>
-              {notice.image ? (
-                <div key={notice.id} className="relative">
-                  <img
-                    src={notice.image}
-                    alt={`Uploaded ${notice.id}`}
-                    className="object-cover w-full h-52 rounded-md border"
-                  />
-                  <button
-                    onClick={() => updateNotice(notice.id, 'image', null)}
-                    className="absolute top-1 right-1 bg-gray-800 text-white rounded-full p-1"
-                  >
-                    <CloseIcon className="size-[12px]" />
-                  </button>
-                </div>
-              ) : (
-                <div className="flex items-center justify-center w-full">
-                  <label className="flex flex-col items-center justify-center w-full py-8 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600">
-                    <div className="flex flex-col items-center justify-center">
-                      <CloudArrowIcon />
-                      <p className="text-sm text-gray-500 dark:text-gray-400">
-                        <span className="font-semibold">Click to upload</span>{' '}
-                        or drag and drop
-                      </p>
-                    </div>
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={(e) =>
-                        handleImageUpload(
-                          notice.id,
-                          e.target.files?.[0] || null,
-                        )
-                      }
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-              )}
+              <div key={notice.id} className="relative">
+                <ImageUploader
+                  uploadedImage={notice.image || ''}
+                  setUploadedImage={(img) =>
+                    updateNotice(notice.id, 'image', img)
+                  }
+                />
+              </div>
             </div>
           </div>
         ),

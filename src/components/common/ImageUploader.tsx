@@ -1,23 +1,32 @@
 import React, { useRef, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import useImageStore from '@store/useImageStore';
 
-const ImageInput = () => {
-  const { uploadedImage, setUploadedImage } = useImageStore();
+interface ImageUploaderProps {
+  uploadedImage: string;
+  setUploadedImage: (image: string) => void;
+  maxWidth?: number;
+  maxHeight?: number;
+  acceptedFormats?: string[];
+}
+
+const ImageUploader = ({
+  uploadedImage,
+  setUploadedImage,
+  maxWidth = 5000,
+  maxHeight = 5000,
+  acceptedFormats = ['image/svg', 'image/png', 'image/jpg'],
+}: ImageUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  const MAX_WIDTH = 5000;
-  const MAX_HEIGHT = 5000;
-
   const [isDragging, setIsDragging] = useState(false);
 
   const validateImageSize = (file: File): Promise<boolean> => {
     return new Promise((resolve) => {
       const img = new Image();
       img.src = URL.createObjectURL(file);
+
       img.onload = () => {
-        const isValid = img.width <= MAX_WIDTH && img.height <= MAX_HEIGHT;
+        const isValid = img.width <= maxWidth && img.height <= maxHeight;
         resolve(isValid);
       };
     });
@@ -25,8 +34,9 @@ const ImageInput = () => {
 
   const handleImageUpload = async (file: File) => {
     const isValid = await validateImageSize(file);
+
     if (!isValid) {
-      toast.error(`이미지 크기는 최대 ${MAX_WIDTH}x${MAX_HEIGHT}px 입니다.`, {
+      toast.error(`이미지 크기는 최대 ${maxWidth}x${maxHeight}px 입니다.`, {
         toastId: 'image-size-error',
       });
       return;
@@ -77,7 +87,7 @@ const ImageInput = () => {
   };
 
   return (
-    <div className="flex items-center justify-center max-w-lg mx-auto p-4">
+    <div className="flex items-center justify-center max-w-lg mx-auto">
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       {!uploadedImage ? (
         <label
@@ -91,12 +101,16 @@ const ImageInput = () => {
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <div className="flex flex-col items-center justify-center text-center pt-5 pb-6">
+          <div className="flex flex-col items-center justify-center text-center py-5">
             <p className="mb-2 text-xs text-gray-500">
               Click to upload or drag and drop
             </p>
             <p className="text-xs text-gray-500">
-              SVG, PNG, JPG (MAX. {MAX_WIDTH}x{MAX_HEIGHT}px)
+              {acceptedFormats
+                .join(', ')
+                .replace(/image\//g, '')
+                .toUpperCase()}{' '}
+              (MAX. {maxWidth}x{maxHeight}px)
             </p>
           </div>
           <input
@@ -112,11 +126,11 @@ const ImageInput = () => {
           <img
             src={uploadedImage}
             alt="Uploaded"
-            className="h-auto max-w-full"
+            className="h-auto max-w-full border-2 rounded-xl"
           />
           <button
             onClick={handleImageDelete}
-            className="mt-4 px-3 py-2 text-[12px] text-gray-800 bg-rose-300 rounded-xl hover:bg-rose-200"
+            className="mt-4 px-3 py-2 text-[12px] bg-button bg-opacity-80 text-white rounded-xl hover:bg-rose-200"
           >
             삭제
           </button>
@@ -126,4 +140,4 @@ const ImageInput = () => {
   );
 };
 
-export default ImageInput;
+export default ImageUploader;

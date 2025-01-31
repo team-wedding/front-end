@@ -11,6 +11,8 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
 import { useCreateInvitation } from '@hooks/useInvitation';
 import { resetAllStores } from '@store/resetStore';
+import logo from '@assets/logo.png';
+
 const sliceRanges = [[0, 3], [3, 13], [13]];
 const CreateInvitationPage = () => {
   const { items, initializeItems, moveItem } = useAccordionStore();
@@ -94,7 +96,7 @@ const CreateInvitationPage = () => {
               currentStep={steps}
               onStepClick={handleStepClick}
             />
-            <div className="bg-background bg-opacity-10 min-h-screen  font-Pretendard">
+            <div className="bg-background bg-opacity-10 min-h-screen font-Pretendard">
               <Accordion
                 items={items}
                 expandedIds={expandedIds}
@@ -102,6 +104,17 @@ const CreateInvitationPage = () => {
                 moveItem={moveItem}
               />
             </div>
+
+            {/* 미리보기 버튼 */}
+            <button
+              className="absolute bottom-20 right-10 hover:opacity-70"
+              onClick={() => navigate('/preview')}
+            >
+              <img
+                src={logo}
+                className="h-11 bg-rose-50 rounded-full shadow-xl"
+              />
+            </button>
           </PageLayout>
         </div>
 

@@ -8,7 +8,7 @@ const AccountInput = () => {
   return (
     <div>
       {accounts.map((person, index) => (
-        <div key={index} className="max-w-lg mx-auto p-3 my-6">
+        <div key={index} className="max-w-lg mx-auto my-10">
           {/* 신랑/신부 정보 */}
           <AccountRow
             label={person.role}

@@ -11,9 +11,8 @@ const RsvpExample = () => {
     title: '',
     desc: '',
   });
-  const [meal, setMeal] = useState(false);
-  const [population, setPopulation] = useState(false);
-
+  // const [meal, setMeal] = useState(false);
+  // const [population, setPopulation] = useState(false);
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -54,7 +53,7 @@ const RsvpExample = () => {
             placeholder="설명을 입력해주세요..."
           />
         </div>
-        <hr />
+        {/* <hr />
         <div className="flex flex-row justify-between items-center  border rounded-md p-2">
           식사여부
           <Toggle state={meal} setState={setMeal} />
@@ -62,7 +61,7 @@ const RsvpExample = () => {
         <div className="flex flex-row justify-between items-center border rounded-md p-2">
           참석 인원
           <Toggle state={population} setState={setPopulation} />
-        </div>
+        </div> */}
       </section>
     </div>
   );

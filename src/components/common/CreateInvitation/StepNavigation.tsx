@@ -17,7 +17,7 @@ export const StepNavigation = ({
   // onPreview,
 }: StepNavigationProps) => {
   return (
-    <div className="flex w-full justify-center gap-64">
+    <div className="flex w-full justify-between mx-6">
       {/* Previous Button */}
       <button
         onClick={onPrev}

@@ -26,7 +26,7 @@ const TransportationItem = () => {
       {transportationData.map(({ key, inputKey, title }) => (
         <div
           key={key}
-          className={`border py-2 px-6 rounded-2xl  hover:border-black ${openAccordion === key && 'bg-neutral-100 bg-opacity-30 border-black shadow-md'}`}
+          className={`border py-2 px-6 rounded-2xl hover:ring-1 hover:ring-black ${openAccordion === key && 'bg-neutral-100 bg-opacity-30 ring-1 ring-black shadow-md'}`}
         >
           <div
             className="flex items-center justify-between"

@@ -66,10 +66,8 @@ const NoticeFeature = () => {
               <label className="label w-full">이미지 업로드</label>
               <div key={notice.id} className="relative">
                 <ImageUploader
-                  uploadedImage={notice.image || ''}
-                  setUploadedImage={(img) =>
-                    updateNotice(notice.id, 'image', img)
-                  }
+                  initialImage={notice.image}
+                  onImageUpload={(img) => updateNotice(notice.id, 'image', img)}
                 />
               </div>
             </div>

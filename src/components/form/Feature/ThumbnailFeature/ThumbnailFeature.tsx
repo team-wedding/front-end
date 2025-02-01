@@ -13,8 +13,8 @@ const ThumbnailFeature = () => {
 
       <div className="my-10">
         <ImageUploader
-          uploadedImage={uploadedImage}
-          setUploadedImage={setUploadedImage}
+          initialImage={uploadedImage}
+          onImageUpload={setUploadedImage}
         />
       </div>
     </div>

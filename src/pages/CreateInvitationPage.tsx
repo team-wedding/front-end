@@ -11,12 +11,18 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
 import { useCreateInvitation } from '@hooks/useInvitation';
 import { resetAllStores } from '@store/resetStore';
+import useBrideGroomStore from '@/store/useBrideGroomStore';
+import { validateBrideGroomNames } from '@/utils/validator';
+import NameInputModal from '@/components/form/BasicInformation/NameInput/NameInputModal';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
+
 const CreateInvitationPage = () => {
   const { items, initializeItems, moveItem } = useAccordionStore();
   const [steps, setSteps] = useState(1);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { brideGroom } = useBrideGroomStore();
 
   useEffect(() => {
     const [start, end] = sliceRanges[steps - 1];
@@ -32,6 +38,11 @@ const CreateInvitationPage = () => {
   const { mutate: createInvitation } = useCreateInvitation();
 
   const handleSave = async () => {
+    if (!validateBrideGroomNames(brideGroom)) {
+      setIsModalOpen(true);
+      return;
+    }
+
     await createInvitation();
     resetAllStores();
     navigate('/dashboard');
@@ -111,6 +122,10 @@ const CreateInvitationPage = () => {
           <PreviewDisplay />
         </div>
       </div>
+      <NameInputModal
+        isOpen={isModalOpen}
+        onConfirm={() => setIsModalOpen(false)}
+      />
     </DndProvider>
   );
 };

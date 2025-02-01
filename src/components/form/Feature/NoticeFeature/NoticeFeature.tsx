@@ -1,7 +1,10 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import useNoticeStore from '@store/useNoticeStore';
 import { Notice } from './NoticeItem';
 import TrashBinIcon from '@icons/TrashBinIcon';
+import CloudArrowIcon from '@icons/CloudArrowIcon';
+import CloseIcon from '@icons/CloseIcon';
+import ReusableModal from '@/components/common/Modal/ReusableModal';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
 import ImageUploader from '@/components/common/ImageUploader';
 
@@ -16,6 +19,37 @@ const NoticeFeature = () => {
     toggleExpand,
   } = useNoticeStore();
 
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedNoticeId, setSelectedNoticeId] = useState<number | null>(null);
+
+  const handleDeleteClick = (id: number) => {
+    setSelectedNoticeId(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (selectedNoticeId !== null) {
+      deleteNotice(selectedNoticeId);
+    }
+    setIsDeleteModalOpen(false);
+    setSelectedNoticeId(null);
+  };
+
+  const handleImageUpload = (id: number, file: File | null) => {
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        if (reader.result && typeof reader.result === 'string') {
+          updateNotice(id, 'image', reader.result);
+        }
+      };
+      reader.onerror = () => {
+        console.error('이미지를 읽는 중 오류가 발생했습니다.');
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
   const accordionItems = useMemo(
     () =>
       notices.map((notice, index) => ({
@@ -25,8 +59,7 @@ const NoticeFeature = () => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                if (confirm('이 공지를 정말 삭제하시겠습니까?'))
-                  deleteNotice(notice.id);
+                handleDeleteClick(notice.id);
               }}
             >
               <TrashBinIcon />
@@ -97,6 +130,13 @@ const NoticeFeature = () => {
           + 공지 추가 ({notices.length}/{maxNotices})
         </button>
       )}
+      <ReusableModal
+        isOpen={isDeleteModalOpen}
+        title="이 공지를 삭제하시겠습니까?"
+        confirmText="확인"
+        onConfirm={confirmDelete}
+        onCancel={() => setIsDeleteModalOpen(false)}
+      />
     </div>
   );
 };

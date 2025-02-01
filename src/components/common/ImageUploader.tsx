@@ -92,26 +92,43 @@ const ImageUploader = ({
       {!uploadedImage ? (
         <label
           htmlFor="dropzone-file"
-          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${
+          className={`flex flex-col items-center justify-center w-80 h-40 border-2  ${
             isDragging
               ? 'border-rose-300 bg-rose-50'
-              : 'border-gray-300 bg-gray-50'
-          } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
+              : 'border-gray-100 bg-gray-50'
+          }  rounded-xl cursor-pointer hover:bg-gray-100`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <div className="flex flex-col items-center justify-center text-center py-5">
-            <p className="mb-2 text-xs text-gray-500">
-              Click to upload or drag and drop
-            </p>
-            <p className="text-xs text-gray-500">
+          <div className="flex flex-col items-center justify-center text-center py-5 text-[10px] text-gray-400 gap-1">
+            <svg
+              className="w-6 h-6 text-gray-700 dark:text-white my-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M5 12h14m-7 7V5"
+              />
+            </svg>
+
+            <p>이미지를 선택하거나 드래그해서 추가해주세요</p>
+            <p>
               {acceptedFormats
                 .join(', ')
                 .replace(/image\//g, '')
                 .toUpperCase()}{' '}
-              (MAX. {maxWidth}x{maxHeight}px)
+              파일 (MAX. {maxWidth}x{maxHeight}px)
             </p>
+            <p></p>
           </div>
           <input
             id="dropzone-file"

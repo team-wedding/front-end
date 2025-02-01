@@ -24,7 +24,14 @@ import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeat
 
 export const getInvitationAction = (): InvitationDetiail => {
   //웨딩 정보
-  const { address } = useAddressStore();
+  const {
+    address,
+    jibunAddress,
+    zonecode,
+    weddingHallName,
+    weddingHallDetail,
+    coords,
+  } = useAddressStore();
   const { optionalItems } = useAccordionStore();
   const findOrder = (feature: string) => {
     if (!feature) return undefined; // feature가 없으면 undefined 반환
@@ -54,9 +61,21 @@ export const getInvitationAction = (): InvitationDetiail => {
 
   const { accounts } = useAccountStore();
   const accountList: AccountDetail[] = accounts.flatMap((item) => [
-    { order: findOrder('account'), ...item.accountInfo },
-    { order: findOrder('account'), ...item.fatherAccountInfo },
-    { order: findOrder('account'), ...item.motherAccountInfo },
+    {
+      order: findOrder('account'),
+      isActive: selectedOptionalFeatures.account,
+      ...item.accountInfo,
+    },
+    {
+      order: findOrder('account'),
+      isActive: selectedOptionalFeatures.account,
+      ...item.fatherAccountInfo,
+    },
+    {
+      order: findOrder('account'),
+      isActive: selectedOptionalFeatures.account,
+      ...item.motherAccountInfo,
+    },
   ]);
 
   const { selectedMusic } = useMusicFeatureStore();
@@ -68,25 +87,37 @@ export const getInvitationAction = (): InvitationDetiail => {
 
   const { notices } = useNoticeStore();
   const noticeList: NoticeDetail[] = notices.map((value) => {
-    return { order: findOrder('notice'), ...value };
+    return {
+      order: findOrder('notice'),
+      isActive: selectedOptionalFeatures.notice,
+      ...value,
+    };
   });
+
   return {
     title: invitationtitle,
     groomName: brideGroom[0].name,
     brideName: brideGroom[1].name,
 
-    //FIX: 백엔드에서 데이터 늘려줘야됨
-    // date: `${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일`,
-    date: '',
+    date: [formattedDate.year, formattedDate.month, formattedDate.day],
 
-    location: [address as string],
+    //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
+    location: [
+      address,
+      zonecode.toString(),
+      jibunAddress,
+      JSON.stringify(coords),
+      weddingHallName,
+      weddingHallDetail,
+    ],
     //FIX: S3 구현되면 수정
     imgUrl: '',
     // imgUrl: uploadedImage as string,
+
     greetingTitle: greetingTitle,
     greetingContent: greetingContent,
-    //FIX: 수정
-    weddingTime: `${weddingTime.hour}, ${weddingTime.minute}`,
+
+    weddingTime: [weddingTime.hour!, weddingTime.minute!],
 
     groomFatherName: brideGroom[0].family.father.name,
     groomMotherName: brideGroom[0].family.mother.name,
@@ -106,67 +137,70 @@ export const getInvitationAction = (): InvitationDetiail => {
     attendance: rsvpIncludePopulation,
     font: font,
 
-    calendars: selectedOptionalFeatures.calendar
-      ? [
-          {
-            order: findOrder('calendar')!,
-            calendar: subCalendarFeatures.calendar,
-            dDay: subCalendarFeatures.dday,
-            countdown: subCalendarFeatures.countdown,
-          },
-        ]
-      : undefined,
-    maps: selectedOptionalFeatures.location
-      ? [
-          {
-            order: findOrder('location')!,
-            tMap: transportData.navigationTmap,
-            naverMap: transportData.navigationNaver,
-            kakaoMap: transportData.navigationKakao,
-            personalCar: transportData.transportationCar,
-            subway: transportData.transportationSubway,
-            bus: transportData.transportationBus,
-            personalCarContent: transportationInputs.car,
-            subwayContent: transportationInputs.subway,
-            busContent: transportationInputs.bus,
-          },
-        ]
-      : [],
-    galleries: selectedOptionalFeatures.gallery
-      ? [
-          {
-            order: findOrder('gallery')!,
-            images: images,
-            grid: grid,
-          },
-        ]
-      : [],
-    accounts: selectedOptionalFeatures.account ? accountList : [],
-    contacts: selectedOptionalFeatures.contact
-      ? [
-          {
-            //FIX: 널값 예외처리
-            order: findOrder('contact')!,
-            brideContact: contacts[0].contact,
-            groomContact: contacts[1].contact,
-            brideFatherContact: contacts[0].fatherContact,
-            brideMotherContact: contacts[0].motherContact,
-            groomFatherContact: contacts[1].fatherContact,
-            groomMotherContact: contacts[1].motherContact,
-          },
-        ]
-      : [],
-    notices: selectedOptionalFeatures.notice ? noticeList : [],
+    calendars: [
+      {
+        order: findOrder('calendar')!,
+        calendar: subCalendarFeatures.calendar,
+        isActive: selectedOptionalFeatures.calendar,
+        dDay: subCalendarFeatures.dday,
+        countdown: subCalendarFeatures.countdown,
+      },
+    ],
+    maps: [
+      {
+        order: findOrder('location')!,
+        isActive: selectedOptionalFeatures.location,
+        tMap: transportData.navigationTmap,
+        naverMap: transportData.navigationNaver,
+        kakaoMap: transportData.navigationKakao,
+        personalCar: transportData.transportationCar,
+        subway: transportData.transportationSubway,
+        bus: transportData.transportationBus,
+        personalCarContent: transportationInputs.car,
+        subwayContent: transportationInputs.subway,
+        busContent: transportationInputs.bus,
+      },
+    ],
+    galleries: [
+      {
+        order: findOrder('gallery')!,
+        images: images,
+        isActive: selectedOptionalFeatures.gallery,
+        grid: grid,
+      },
+    ],
+
+    accounts: accountList,
+    contacts: [
+      {
+        //FIX: 널값 예외처리
+        order: findOrder('contact')!,
+        isActive: selectedOptionalFeatures.contact,
+        brideContact: contacts[0].contact,
+        groomContact: contacts[1].contact,
+        brideFatherContact: contacts[0].fatherContact,
+        brideMotherContact: contacts[0].motherContact,
+        groomFatherContact: contacts[1].fatherContact,
+        groomMotherContact: contacts[1].motherContact,
+      },
+    ],
+
+    notices: noticeList,
     audio: selectedMusic?.id,
   };
 };
 
 export const useUpdateInvitationStore = (details: InvitationDetiail) => {
   const { setInvitationTitle } = useInvitationStore();
-  const { setAddress, setJibunAddress, setCoords } = useAddressStore();
+  const {
+    setAddress,
+    setJibunAddress,
+    setCoords,
+    setWeddingHallName,
+    setWeddingHallDetail,
+  } = useAddressStore();
   const { setWeddingDate, setWeddingTime } = useWeddingStore();
-  const { setGreetingContent, setGreetingTitle, setSelectedSample } =
-    useGreetingStore();
+  const { setGreetingContent, setGreetingTitle } = useGreetingStore();
   const { setUploadedImage } = useImageStore();
   const contacts = useContactStore((state) => state.updateContact);
   const { updateBrideGroom, updateFamily } = useBrideGroomStore();
@@ -186,7 +220,6 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
   const { setRSVPDetails, setRSVPIncludeMeal, setRSVPIncludePopulation } =
     useRSVPStore();
   const { toggleSubFeature: calendarToggle } = useCalendarFeatureStore();
-  console.log(details?.accounts);
 
   useEffect(() => {
     if (details) {
@@ -197,62 +230,59 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       updateBrideGroom(1, 'name', details.groomName);
       updateFamily(0, 'father', 'name', details.brideFatherName);
       updateFamily(0, 'mother', 'name', details.brideMotherName);
-      updateFamily(0, 'father', 'isDeceased', details.brideFatherAlive);
-      updateFamily(0, 'mother', 'isDeceased', details.brideMotherAlive);
+      updateFamily(0, 'father', 'isDeceased', !details.brideFatherAlive);
+      updateFamily(0, 'mother', 'isDeceased', !details.brideMotherAlive);
       updateFamily(1, 'father', 'name', details.groomFatherName);
       updateFamily(1, 'mother', 'name', details.groomMotherName);
-      updateFamily(1, 'father', 'isDeceased', details.groomFatherAlive);
-      updateFamily(1, 'mother', 'isDeceased', details.groomMotherAlive);
+      updateFamily(1, 'father', 'isDeceased', !details.groomFatherAlive);
+      updateFamily(1, 'mother', 'isDeceased', !details.groomMotherAlive);
 
       //FIX: 주소 어떻게 받을지 처리
-      setAddress('주소', '짚코드');
-      setJibunAddress('');
-      setCoords(0, 0);
-      //웨딩 날짜
-      setWeddingDate(details.date === '' ? new Date() : new Date(details.date));
+      setAddress(details.location[0], details.location[1]);
+      setJibunAddress(details.location[2]);
+      const { lat, lng } = JSON.parse(details.location[3]);
+      setCoords(lat, lng);
+      setWeddingHallName(details.location[4]);
+      setWeddingHallDetail(details.location[4]);
+
+      //FIX :: 웨딩 날짜
+      setWeddingDate(
+        details.date.length === 0
+          ? new Date()
+          : new Date(details.date.join('-')),
+      );
 
       //FIX: 시간 처리
-      setWeddingTime(12, 0);
+      setWeddingTime(details.weddingTime[0], details.weddingTime[1]);
 
       //청첩장 제목/내용
       setGreetingTitle(details.greetingTitle);
       setGreetingContent(details.greetingContent);
-
-      //FIX : SAMPLE 처리
-      setSelectedSample('');
       //대표이미지
       setUploadedImage(details.imgUrl);
       //연락처
       contacts(
         0,
         'fatherContact',
-        details.contacts ? details?.contacts[0]?.brideFatherContact : '',
+        details?.contacts[0]?.brideFatherContact || '',
       );
       contacts(
         0,
         'motherContact',
-        details.contacts ? details?.contacts[0]?.brideMotherContact : '',
+        details?.contacts[0]?.brideMotherContact || '',
       );
       contacts(
         1,
         'fatherContact',
-        details.contacts ? details?.contacts[0]?.groomFatherContact : '',
+        details?.contacts[0]?.groomFatherContact || '',
       );
       contacts(
         1,
         'motherContact',
-        details.contacts ? details?.contacts[0]?.groomMotherContact : '',
+        details?.contacts[0]?.groomMotherContact || '',
       );
-      contacts(
-        0,
-        'contact',
-        details.contacts ? details?.contacts[0]?.brideContact : '',
-      );
-      contacts(
-        1,
-        'contact',
-        details.contacts ? details?.contacts[0]?.groomContact : '',
-      );
+      contacts(0, 'contact', details?.contacts[0]?.brideContact || '');
+      contacts(1, 'contact', details?.contacts[0]?.groomContact || '');
 
       //RSVP Modal
       setRSVPDetails({
@@ -269,46 +299,22 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       //교통수단
       //TODO: CanMove 처리
       transportToggle('canMoveMap', false);
-      setTransportSubFeature(
-        'subway',
-        details.maps ? details.maps[0]?.subwayContent : '',
-      );
-      setTransportSubFeature(
-        'bus',
-        details.maps ? details.maps[0]?.busContent : '',
-      );
-      setTransportSubFeature(
-        'car',
-        details.maps ? details.maps[0]?.personalCarContent : '',
-      );
-      transportToggle(
-        'navigationKakao',
-        details.maps ? details.maps[0]?.kakaoMap : false,
-      );
-      transportToggle(
-        'navigationNaver',
-        details.maps ? details.maps[0]?.naverMap : false,
-      );
-      transportToggle(
-        'navigationTmap',
-        details.maps ? details.maps[0]?.tMap : false,
-      );
+      setTransportSubFeature('subway', details.maps[0]?.subwayContent || '');
+      setTransportSubFeature('bus', details.maps[0]?.busContent || '');
+      setTransportSubFeature('car', details.maps[0]?.personalCarContent || '');
+      transportToggle('navigationKakao', details.maps[0]?.kakaoMap || false);
+      transportToggle('navigationNaver', details.maps[0]?.naverMap || false);
+      transportToggle('navigationTmap', details.maps[0]?.tMap || false);
       transportToggle(
         'transportationCar',
-        details.maps ? details.maps[0]?.personalCar : false,
+        details.maps[0]?.personalCar || false,
       );
 
-      transportToggle(
-        'transportationBus',
-        details.maps ? details.maps[0]?.bus : false,
-      );
+      transportToggle('transportationBus', details.maps[0]?.bus || false);
 
-      transportToggle(
-        'transportationSubway',
-        details.maps ? details.maps[0]?.subway : false,
-      );
+      transportToggle('transportationSubway', details.maps[0]?.subway || false);
 
-      replaceNotice(details.notices ? details?.notices : []);
+      replaceNotice(details?.notices || []);
 
       //FIX Account 꼬임...
       updateAccountInfo(
@@ -385,55 +391,44 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       );
 
       //FIX: undefined 처리
-      calendarToggle(
-        'calendar',
-        details.calendars ? details?.calendars[0]?.calendar : false,
-      );
-      calendarToggle(
-        'dday',
-        details.calendars ? details?.calendars[0]?.dDay : false,
-      );
-      calendarToggle(
-        'countdown',
-        details.calendars ? details?.calendars[0]?.countdown : false,
-      );
+      calendarToggle('calendar', details?.calendars[0]?.calendar || false);
+      calendarToggle('dday', details?.calendars[0]?.dDay || false);
+      calendarToggle('countdown', details?.calendars[0]?.countdown || false);
 
-      toggleOptionalFeature('calendar', details?.calendars?.length !== 0);
-      toggleOptionalFeature('location', details?.maps?.length !== 0);
-      toggleOptionalFeature('gallery', details?.galleries?.length !== 0);
-      toggleOptionalFeature('account', details?.accounts?.length !== 0);
-      toggleOptionalFeature('contact', details?.contacts?.length !== 0);
-      toggleOptionalFeature('notice', details?.notices?.length !== 0);
+      toggleOptionalFeature('calendar', details?.calendars[0].isActive);
+      toggleOptionalFeature('location', details?.maps[0].isActive);
+      toggleOptionalFeature('gallery', details?.galleries[0].isActive);
+      toggleOptionalFeature('account', details?.accounts[0].isActive);
+      toggleOptionalFeature('contact', details?.contacts[0].isActive);
+      toggleOptionalFeature('notice', details?.notices[0].isActive);
 
       //FIX: MUSIC
-      // musicSubFeatures();
       selectMusic(details.audio);
       musicToggle('music', !!details.audio); //수정 필요
 
-      const data = [
-        details.calendars,
-        details.maps,
-        details.galleries,
-        details.notices,
-        details.accounts,
-        details.contacts,
-      ];
-
-      let extractedData: { name: string; order: number }[] = [];
-      data.forEach((section, index) => {
-        if (Array.isArray(section)) {
-          section.forEach((item) => {
-            if (item.order !== undefined) {
-              extractedData.push({
-                order: item.order,
-                name: Object.keys(details)[index],
-              });
-            }
-          });
-        }
-      });
-      extractedData.sort((a, b) => a.order - b.order);
-      console.log(extractedData);
+      // const data = [
+      //   details.calendars,
+      //   details.maps,
+      //   details.galleries,
+      //   details.notices,
+      //   details.accounts,
+      //   details.contacts,
+      // ];
+      // let extractedData: { name: string; order: number }[] = [];
+      // data.forEach((section, index) => {
+      //   if (Array.isArray(section)) {
+      //     section.forEach((item) => {
+      //       if (item.order !== undefined) {
+      //         extractedData.push({
+      //           order: item.order,
+      //           name: Object.keys(details)[index],
+      //         });
+      //       }
+      //     });
+      //   }
+      // });
+      // extractedData.sort((a, b) => a.order - b.order);
+      // console.log(extractedData);
     }
   }, [details]); // details 변경 시 실행
 };

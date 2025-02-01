@@ -3,9 +3,9 @@ import { create } from 'zustand';
 
 type RoleAccountInfo = {
   role: '신랑님' | '신부님'; // 신랑, 신부
-  accountInfo: AccountDetail;
-  fatherAccountInfo: AccountDetail;
-  motherAccountInfo: AccountDetail;
+  accountInfo: Omit<AccountDetail, 'order' | 'isActive'>;
+  fatherAccountInfo: Omit<AccountDetail, 'order' | 'isActive'>;
+  motherAccountInfo: Omit<AccountDetail, 'order' | 'isActive'>;
 };
 
 type StoreState = {
@@ -13,7 +13,7 @@ type StoreState = {
   updateAccountInfo: (
     index: number,
     field: keyof RoleAccountInfo,
-    value: AccountDetail,
+    value: Omit<AccountDetail, 'order' | 'isActive'>,
   ) => void;
   reset: () => void; // Reset 메서드 추가
 };

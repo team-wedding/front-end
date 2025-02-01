@@ -6,12 +6,12 @@ export interface InvitationDetiail {
   title: string;
   groomName: string;
   brideName: string;
-  date: string;
+  date: number[];
   location: string[];
   imgUrl: string;
   greetingTitle: string;
   greetingContent: string;
-  weddingTime: string;
+  weddingTime: number[];
 
   groomFatherName: string;
   groomMotherName: string;
@@ -29,23 +29,25 @@ export interface InvitationDetiail {
   attendanceIsDining: boolean;
   attendance: boolean;
   font: string;
-  calendars?: CalaendarDetail[];
-  maps?: MapDetail[];
-  galleries?: GalleryDetail[];
-  accounts?: AccountDetail[];
-  contacts?: ContactDetail[];
-  notices?: NoticeDetail[];
+  calendars: CalaendarDetail[];
+  maps: MapDetail[];
+  galleries: GalleryDetail[];
+  accounts: AccountDetail[];
+  contacts: ContactDetail[];
+  notices: NoticeDetail[];
   audio: number | nulll;
 }
 
 interface CalaendarDetail {
-  order: number;
+  order?: number;
+  isActive: boolean;
   calendar: boolean;
   dDay: boolean;
   countdown: boolean;
 }
 interface MapDetail {
-  order: number;
+  order?: number;
+  isActive: boolean;
   tMap: boolean;
   naverMap: boolean;
   kakaoMap: boolean;
@@ -57,19 +59,22 @@ interface MapDetail {
   busContent: string;
 }
 interface GalleryDetail {
-  order: number;
+  order?: number;
+  isActive: boolean;
   images: string[];
   grid: boolean;
 }
 export interface AccountDetail {
   order?: number;
+  isActive: boolean;
   accountHolderName: string;
   bankName: string;
   accountNumber: string;
   kakaoUrl: string;
 }
 interface ContactDetail {
-  order: number;
+  order?: number;
+  isActive: boolean;
   groomContact: string;
   brideContact: string;
   groomFatherContact: string;
@@ -80,6 +85,7 @@ interface ContactDetail {
 export interface NoticeDetail {
   order?: number;
   id?: number;
+  isActive: boolean;
   noticeId: number;
   title: string;
   content: string;

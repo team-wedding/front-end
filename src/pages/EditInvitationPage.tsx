@@ -15,6 +15,7 @@ import { useUpdateInvitationStore } from '../actions/invitationAction';
 import { InvitationDetiail } from '../types/invitationType';
 import { useAccordionStore } from '@/store/useAccordionStore';
 import resetAllStores from '@/store/resetStore';
+import { useInvitationStore } from '@/store/useInvitaionStore';
 
 const EditInvitationPage = () => {
   const navigate = useNavigate();
@@ -81,12 +82,12 @@ const EditInvitationPage = () => {
       handleStepClick(steps - 1);
     }
   };
-
+  const { invitationtitle } = useInvitationStore()
   return (
     <div className="page-container">
       <div className="create-section">
         <PageLayout
-          title="새로운 청첩장"
+          title={invitationtitle}
           leftButton={
             <HeaderButton
               onClick={handleCancel}

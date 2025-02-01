@@ -3,7 +3,7 @@ import AccountInput from './AccountInput';
 
 const AccountFeature = () => {
   return (
-    <div className="text-xs mx-4 my-6">
+    <div className="text-xs mx-3 my-6">
       <InformationItem
         messages={[
           '축의금 기능에서 사용되는 정보입니다.',

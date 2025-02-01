@@ -3,9 +3,14 @@ import useNoticeStore from '@store/useNoticeStore';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
+import SectionTitle from '@/components/common/SectionTitle';
 
 const NoticeSection = () => {
+  const { selectedOptionalFeatures } = useOptionalFeatureStore();
   const { notices } = useNoticeStore();
+
+  const isNoticeFeatureActive = selectedOptionalFeatures.notice;
 
   const settings = useMemo(
     () => ({
@@ -22,38 +27,42 @@ const NoticeSection = () => {
   );
 
   return (
-    <div className="column-center w-96 h-full py-10 px-6 ">
-      <div className="sub-title">NOTICE</div>
-      <div className="title">공지사항</div>
-      <div className="w-11/12 my-6">
-        {notices.length > 0 ? (
-          <Slider {...settings} className="pb-4">
-            {notices.map((notice) => (
-              <div
-                key={notice.id}
-                className="border-2 rounded-lg shadow-sm bg-white p-8 w-[90%] mx-auto text-center"
-              >
-                {notice.image && (
-                  <img
-                    src={notice.image}
-                    alt={notice.title}
-                    className="w-full object-cover h-52 rounded-md mb-6"
-                  />
-                )}
-                <h3 className="p-4 font-semibold">{notice.title}</h3>
-                <div className="overflow-auto whitespace-pre-wrap text-sm p-4">
-                  {notice.content}
+    isNoticeFeatureActive && (
+      <div className="column-center h-full py-10 px-8">
+        <SectionTitle subTitle="NOTICE" title="공지사항" />
+
+        <div className="w-80 my-6">
+          {notices.length > 0 ? (
+            <Slider {...settings} className="pb-2">
+              {notices.map((notice) => (
+                <div
+                  key={notice.id}
+                  className="rounded-lg py-10 px-8 mx-auto text-center bg-gray-50"
+                >
+                  {notice.image && (
+                    <img
+                      src={notice.image}
+                      alt={notice.title}
+                      className="w-full h-48 object-cover rounded-lg mb-6 shadow-md"
+                    />
+                  )}
+                  <h3 className="p-4 text-sm font-medium overflow-auto">
+                    {notice.title}
+                  </h3>
+                  <div className="overflow-auto whitespace-pre-wrap text-xs p-4 leading-6 font-light">
+                    {notice.content}
+                  </div>
                 </div>
-              </div>
-            ))}
-          </Slider>
-        ) : (
-          <p className="text-center font-light text-gray-500">
-            등록된 공지사항이 없습니다.
-          </p>
-        )}
+              ))}
+            </Slider>
+          ) : (
+            <p className="text-center text-gray-400">
+              등록된 공지사항이 없습니다.
+            </p>
+          )}
+        </div>
       </div>
-    </div>
+    )
   );
 };
 

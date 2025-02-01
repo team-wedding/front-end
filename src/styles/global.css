@@ -215,7 +215,7 @@
   }
 
   .label {
-    @apply block text-[11px] font-medium w-1/4;
+    @apply block text-[11px] font-medium w-[20%];
   }
 
   .splash-btn {
@@ -228,11 +228,9 @@
 
   .formInput {
     @apply bg-white border-neutral-300 text-neutral-900 text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50;
-    @apply bg-white border-neutral-300 text-neutral-900 text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50;
   }
 
   .accordion-item {
-    @apply bg-white rounded-2xl overflow-hidden transition-all duration-100 text-neutral-700 shadow-sm text-[11px];
     @apply bg-white rounded-2xl overflow-hidden transition-all duration-100 text-neutral-700 shadow-sm text-[11px];
   }
 
@@ -245,7 +243,7 @@
   }
 
   .contact-group {
-    @apply flex flex-col items-center justify-center gap-5;
+    @apply flex flex-col items-center justify-center gap-4;
   }
 
   .title {

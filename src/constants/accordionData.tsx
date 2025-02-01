@@ -12,6 +12,7 @@ import ImageInput from '@form/Feature/ThumbnailFeature/ImageInput';
 import ThemeFeature from '@form/Theme/ThemeFeature/ThemeFeature';
 import NoticeFeature from '@form/Feature/NoticeFeature/NoticeFeature';
 import MusicFeature from '@form/Theme/MusicFeature/MusicFeature';
+import PhotoTalkFeature from '@/components/form/Feature/PhotoTalkFeature/PhotoTalkFeature';
 
 export interface AccordionItemData {
   id: number;
@@ -75,7 +76,7 @@ export const accordionData: AccordionItemData[] = [
     id: 7,
     title: '실시간 포토월',
     feature: 'phototalk',
-    content: <RsvpExample />, // PhotoTalkFeature로 수정 필요
+    content: <PhotoTalkFeature />,
     hasToggle: false,
     hasDrag: false,
   },
@@ -127,17 +128,8 @@ export const accordionData: AccordionItemData[] = [
     hasToggle: true,
     hasDrag: true,
   },
-
   {
     id: 14,
-    title: '테마 색상',
-    feature: '',
-    content: <ThemeFeature />,
-    hasToggle: false,
-    hasDrag: false,
-  },
-  {
-    id: 15,
     title: '글꼴',
     feature: '',
     content: <ThemeFeature />,
@@ -145,21 +137,30 @@ export const accordionData: AccordionItemData[] = [
     hasDrag: false,
   },
   {
-    id: 16,
-    title: '인트로 효과',
-    feature: '',
-    content: <ThemeFeature />,
-    hasToggle: true,
-    hasDrag: false,
-  },
-  {
-    id: 17,
+    id: 15,
     title: '배경 음악',
     feature: 'music',
     content: <MusicFeature />,
     hasToggle: true,
     hasDrag: false,
   },
+  // {
+  //   id: 14,
+  //   title: '테마 색상',
+  //   feature: '',
+  //   content: <ThemeFeature />,
+  //   hasToggle: false,
+  //   hasDrag: false,
+  // },
+
+  // {
+  //   id: 16,
+  //   title: '인트로 효과',
+  //   feature: '',
+  //   content: <ThemeFeature />,
+  //   hasToggle: true,
+  //   hasDrag: false,
+  // },
 ];
 
 // 드래그 가능한 기능 - 섹션과 연결

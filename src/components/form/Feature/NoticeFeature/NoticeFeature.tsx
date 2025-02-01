@@ -1,9 +1,12 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import useNoticeStore from '@store/useNoticeStore';
 import { Notice } from './NoticeItem';
 import TrashBinIcon from '@icons/TrashBinIcon';
 import CloudArrowIcon from '@icons/CloudArrowIcon';
 import CloseIcon from '@icons/CloseIcon';
+import ReusableModal from '@/components/common/Modal/ReusableModal';
+import InformationItem from '@/components/common/CreateInvitation/InformationItem';
+
 const NoticeFeature = () => {
   const {
     notices,
@@ -14,6 +17,22 @@ const NoticeFeature = () => {
     updateNotice,
     toggleExpand,
   } = useNoticeStore();
+
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [selectedNoticeId, setSelectedNoticeId] = useState<number | null>(null);
+
+  const handleDeleteClick = (id: number) => {
+    setSelectedNoticeId(id);
+    setIsDeleteModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (selectedNoticeId !== null) {
+      deleteNotice(selectedNoticeId);
+    }
+    setIsDeleteModalOpen(false);
+    setSelectedNoticeId(null);
+  }
 
   const handleImageUpload = (id: number, file: File | null) => {
     if (file) {
@@ -39,19 +58,16 @@ const NoticeFeature = () => {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                if (confirm('이 공지를 정말 삭제하시겠습니까?'))
-                  deleteNotice(notice.id);
+                handleDeleteClick(notice.id);
               }}
             >
               <TrashBinIcon />
             </button>
-            <span className="text-xs font-bold">
-              {notice.title || `공지 ${notices.indexOf(notice) + 1}`}
-            </span>
+            <span>{notice.title || `공지 ${notices.indexOf(notice) + 1}`}</span>
           </div>
         ),
         content: (
-          <div className="m-2 flex flex-col gap-4">
+          <div className="m-3 flex flex-col gap-4">
             <div className="flex flex-col gap-2">
               <label className="label w-full">제목</label>
               <input
@@ -126,14 +142,10 @@ const NoticeFeature = () => {
   );
 
   return (
-    <div>
-      <div className="max-w-lg mx-auto p-4 text-[10px] text-gray-500">
-        <div className="flex items-start gap-1 mb-1">
-          <span className="text-gray-600">ⓘ</span>
-          <span>공지는 최대 5개까지 입력할 수 있습니다.</span>
-        </div>
-      </div>
-      <hr className="mb-5 border-gray-300" />
+    <div className="mx-4 my-6 text-xs">
+      <InformationItem messages={['공지는 최대 5개까지 입력할 수 있습니다.']} />
+
+      <hr />
 
       <Notice
         items={accordionItems}
@@ -144,11 +156,18 @@ const NoticeFeature = () => {
       {notices.length < maxNotices && (
         <button
           onClick={addNotice}
-          className="w-full p-2 mt-4 border rounded-md text-sm text-gray-500 hover:bg-gray-100"
+          className="w-full p-3 border rounded-2xl text-gray-500 hover:bg-button hover:bg-opacity-20 hover:shadow-md hover:border-transparent"
         >
           + 공지 추가 ({notices.length}/{maxNotices})
         </button>
       )}
+      <ReusableModal
+        isOpen={isDeleteModalOpen}
+        title="이 공지를 삭제하시겠습니까?"
+        confirmText="확인"
+        onConfirm={confirmDelete}
+        onCancel={() => setIsDeleteModalOpen(false)}
+      />
     </div>
   );
 };

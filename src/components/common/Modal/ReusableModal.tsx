@@ -1,25 +1,20 @@
-import CloseIcon from '@icons/CloseIcon';
+import CloseIcon from "../../icons/CloseIcon";
 
 interface ModalProps {
   isOpen: boolean;
-  title: string;
+  title: string | React.ReactNode;
   confirmText: string;
   onConfirm: () => void;
   onCancel: () => void;
 }
 
-const ReusableModal = ({
-  isOpen,
-  title,
-  confirmText,
-  onConfirm,
-  onCancel,
-}: ModalProps) => {
+const ReusableModal = ({ isOpen, title, confirmText, onConfirm, onCancel }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="font-Paperlogy fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="relative bg-white rounded-lg shadow-lg w-80">
+
         <div className="flex justify-end items-center p-4">
           <button
             className="text-black"
@@ -30,16 +25,22 @@ const ReusableModal = ({
           </button>
         </div>
 
-        <div className="pt-2 pb-8 text-center text-base">
+        <div className="pt-2 pb-8 text-center text-base leading-relaxed">
           <p>{title}</p>
         </div>
 
         <div className="flex border-t border-gray-300">
-          <button className="w-1/2 py-3 text-gray-500" onClick={onCancel}>
+          <button
+            className="w-1/2 py-3 text-gray-500 text-sm"
+            onClick={onCancel}
+          >
             취소
           </button>
           <div className="w-px bg-gray-300"></div>
-          <button className="w-1/2 py-3 text-red-500" onClick={onConfirm}>
+          <button
+            className="w-1/2 py-3 text-red-500 text-sm"
+            onClick={onConfirm}
+          >
             {confirmText}
           </button>
         </div>

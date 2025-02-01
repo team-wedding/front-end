@@ -11,12 +11,15 @@ const WeddingInformation = () => {
 
   const date = `${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일 ${dayOfWeek}요일, ${weddingTime}`;
 
+  const hallName = weddingHallName || '우리결혼하장';
+  const hallDetail = weddingHallDetail || '2층 사랑홀';
+
   return (
     <div className="column-center text-sm font-light gap-2">
       <div>{date}</div>
       <div className="flex opacity-60">
-        <div className="px-1">{weddingHallName}</div>
-        <div>{weddingHallDetail}</div>
+        <div className="px-1">{hallName}</div>
+        <div>{hallDetail}</div>
       </div>
     </div>
   );

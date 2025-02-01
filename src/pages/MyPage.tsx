@@ -1,39 +1,40 @@
-// import BackIcon from '@icons/BackIcon';
 import PageLayout from '@layout/PageLayout';
-// import HeaderButton from '@common/Header/HeaderButton';
 import logo from '../assets/logo_icon.svg';
+import piechart from '../assets/piechart.svg';
+import phototalk from '../assets/phototalk.svg';
 import MyPageItem from '@common/MyPage/MyPageItem';
+import { useUserStore } from '@/store/useUserStore';
+import { useNavigate } from 'react-router';
 
 const MyPage = () => {
-  // const handleBack = () => {
-  //   console.log('전으로 돌아가기');
-  // };
+  const { name } = useUserStore();
+  const navigate = useNavigate();
 
   return (
     <PageLayout
       title='우리, 결혼해요'
     >
-      <section className="flex flex-row justify-around items-center font-medium text-4xl p-8 cursor-pointer">
-        <div className="flex flex-col gap-1 text-gray-400">
+      <section className="flex flex-row justify-around items-center font-medium text-3xl p-8">
+        <div className="flex flex-col gap-2 text-gray-400">
           안녕하세요
           <div className="text-black flex flex-row gap-2">
-            ㅇㅇㅇ 님 <div className="animate-bounceX">{' > '}</div>
+            {name}님 <div className="animate-bounceX cursor-pointer" onClick={() => navigate('/mypage/edit')}>{' > '}</div>
           </div>
         </div>
         <img src={logo} alt="logo" />
       </section>
-      <hr className="flex w-5/6 justify-self-center bg-black h-px" />
-      <section className="flex flex-col px-8 gap-10 mt-10">
+      <hr className="flex bg-black h-px" />
+      <section className="flex flex-col px-8 gap-6 mt-6">
         <MyPageItem
-          icon={logo}
+          icon={piechart}
           title={'참석여부 집계요약'}
-          detail={'RSVP , 방명록 등을 볼 수 있어요'}
+          detail={'하객의 응답과 상세 목록을 확인할 수 있습니다.'}
           href='/mypage/rsvp'
         />
         <MyPageItem
-          icon={logo}
+          icon={phototalk}
           title={'포토톡'}
-          detail={'RSVP , 방명록 등을 볼 수 있어요'}
+          detail={'이미지와 축하메시지를 볼 수 있습니다.'}
           href='/mypage/rsvp' // 수정해야 함.
         />
       </section>

@@ -12,12 +12,12 @@ export default function MyPageItem({ icon, title, detail, href }: Props) {
 
   return (
     <div
-      className="flex flex-row border border-black rounded-md px-2 py-4 items-center justify-around cursor-pointer"
+      className="h-24 flex flex-row border border-black rounded-md px-2 py-2 cursor-pointer"
       onClick={() => navigate(href)}>
-      <img src={icon} alt="icon" />
-      <div className="flex flex-col gap-2">
-        <div className="text-base">{title}</div>
-        <div className="text-xs">{detail}</div>
+      <div className="flex items-center justify-center"><img className="mx-2 w-12 h-12" src={icon} alt="icon" /></div>
+      <div className="flex flex-col gap-2 mx-1 items-start justify-center">
+        <div className="text-base font-medium">{title}</div>
+        <div className="text-sm">{detail}</div>
       </div>
     </div>
   );

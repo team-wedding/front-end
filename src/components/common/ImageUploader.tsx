@@ -3,21 +3,26 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface ImageUploaderProps {
-  uploadedImage: string;
-  setUploadedImage: (image: string) => void;
+  // uploadedImage: string;
+  // setUploadedImage: (image: string) => void;
+  onImageUpload: (image: string) => void;
+  initialImage?: string;
   maxWidth?: number;
   maxHeight?: number;
   acceptedFormats?: string[];
 }
 
 const ImageUploader = ({
-  uploadedImage,
-  setUploadedImage,
+  // uploadedImage,
+  // setUploadedImage,
+  onImageUpload,
+  initialImage = '',
   maxWidth = 5000,
   maxHeight = 5000,
   acceptedFormats = ['image/svg', 'image/png', 'image/jpg'],
 }: ImageUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
+  const [uploadedImage, setUploadedImage] = useState<string>(initialImage);
   const [isDragging, setIsDragging] = useState(false);
 
   const validateImageSize = (file: File): Promise<boolean> => {
@@ -46,6 +51,7 @@ const ImageUploader = ({
     reader.onload = () => {
       if (reader.result && typeof reader.result === 'string') {
         setUploadedImage(reader.result);
+        onImageUpload(reader.result);
       }
     };
     reader.readAsDataURL(file);
@@ -81,18 +87,21 @@ const ImageUploader = ({
 
   const handleImageDelete = () => {
     setUploadedImage('');
+    onImageUpload('');
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
   };
+
+  let randomId = Math.random();
 
   return (
     <div className="flex items-center justify-center max-w-lg mx-auto">
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
       {!uploadedImage ? (
         <label
-          htmlFor="dropzone-file"
-          className={`flex flex-col items-center justify-center w-80 h-40 border-2  ${
+          htmlFor={`dropzone-file-${randomId}`}
+          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${
             isDragging
               ? 'border-rose-300 bg-rose-50'
               : 'border-gray-100 bg-gray-50'
@@ -131,7 +140,7 @@ const ImageUploader = ({
             <p></p>
           </div>
           <input
-            id="dropzone-file"
+            id={`dropzone-file-${randomId}`}
             type="file"
             className="hidden"
             onChange={handleFileInputChange}

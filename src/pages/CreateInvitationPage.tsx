@@ -38,7 +38,6 @@ const CreateInvitationPage = () => {
   const { mutate: createInvitation } = useCreateInvitation();
 
   const handleSave = async () => {
-
     if (!validateBrideGroomNames(brideGroom)) {
       setIsModalOpen(true);
       return;
@@ -107,7 +106,7 @@ const CreateInvitationPage = () => {
               currentStep={steps}
               onStepClick={handleStepClick}
             />
-            <div className="bg-background bg-opacity-10 min-h-screen  font-Pretendard">
+            <div className="bg-background bg-opacity-10 min-h-screen font-Pretendard">
               <Accordion
                 items={items}
                 expandedIds={expandedIds}
@@ -123,7 +122,10 @@ const CreateInvitationPage = () => {
           <PreviewDisplay />
         </div>
       </div>
-      <NameInputModal isOpen={isModalOpen} onConfirm={() => setIsModalOpen(false)} />
+      <NameInputModal
+        isOpen={isModalOpen}
+        onConfirm={() => setIsModalOpen(false)}
+      />
     </DndProvider>
   );
 };

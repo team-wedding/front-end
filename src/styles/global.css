@@ -132,7 +132,7 @@
 
   .layout-header,
   .layout-footer {
-    @apply fixed w-full flex-center;
+    @apply fixed w-full flex-center z-10;
     @apply md:max-w-md;
     max-width: var(--max-content-width, 448px);
   }

@@ -15,31 +15,33 @@ const NoticeSection = () => {
       slidesToShow: 1,
       slidesToScroll: 1,
       arrows: false,
+      // centerMode: true,
+      // centerPadding: '10px',
     }),
     [notices.length],
   );
 
   return (
-    <div className="column-center w-96 h-full p-4">
+    <div className="column-center w-96 h-full py-10 px-6 ">
       <div className="sub-title">NOTICE</div>
       <div className="title">공지사항</div>
-      <div className="w-11/12 h-full">
+      <div className="w-11/12 my-6">
         {notices.length > 0 ? (
-          <Slider {...settings}>
+          <Slider {...settings} className="pb-4">
             {notices.map((notice) => (
               <div
                 key={notice.id}
-                className="border rounded-lg shadow-sm bg-white p-8"
+                className="border-2 rounded-lg shadow-sm bg-white p-8 w-[90%] mx-auto text-center"
               >
                 {notice.image && (
                   <img
                     src={notice.image}
                     alt={notice.title}
-                    className="w-full object-cover h-52 rounded-md"
+                    className="w-full object-cover h-52 rounded-md mb-6"
                   />
                 )}
-                <h3 className="text-center my-4">{notice.title}</h3>
-                <div className="text-center whitespace-pre-wrap text-sm font-light">
+                <h3 className="p-4 font-semibold">{notice.title}</h3>
+                <div className="overflow-auto whitespace-pre-wrap text-sm p-4">
                   {notice.content}
                 </div>
               </div>

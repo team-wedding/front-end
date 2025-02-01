@@ -17,6 +17,7 @@ import KakaoRedirect from './components/login/SocialLogin/KakaoRedirect';
 import MyPage from './pages/MyPage';
 import RsvpStatsPage from './pages/RsvpStatsPage';
 import EditProfilePage from './pages/EditProfilePage';
+import ChangePasswordPage from './pages/ChangePasswordPage';
 
 function App() {
   const queryClient = new QueryClient();
@@ -31,6 +32,7 @@ function App() {
         <Route path={'/signup'} element={<SignUpPage />} />
         <Route path={'/mypage'} element={<MyPage />} />
         <Route path={'/mypage/edit'} element={<EditProfilePage />} />
+        <Route path={"/mypage/edit/password"} element={<ChangePasswordPage />} />
         <Route path={'/mypage/rsvp'} element={<RsvpStatsPage />} />
         <Route path={'/create'} element={<CreateInvitationPage />} />
         <Route path={'/edit/:id'} element={<EditInvitationPage />} />

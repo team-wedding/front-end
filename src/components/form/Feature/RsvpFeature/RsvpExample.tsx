@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import Toggle from '@common/Toggle';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
-import OnOff from '@/components/common/OnOff';
+
 
 export interface RSVPDetails {
   title: string;
@@ -33,9 +32,7 @@ const RsvpExample = () => {
           '제출된 답변은 마이페이지에서 확인할 수 있습니다.',
         ]}
       />
-
       <hr />
-
       <div className="flex flex-col gap-5 my-10">
         <div className="flex flex-col gap-2">
           <label className="label w-full">제목</label>
@@ -54,18 +51,8 @@ const RsvpExample = () => {
             className="formInput w-full"
           />
         </div>
-        {/* <hr />
-        <div className="flex flex-row justify-between items-center  border rounded-md p-2">
-          식사여부
-          <OnOff state={meal} setState={setMeal} />
-          {/* <Toggle state={meal} setState={setMeal} /> */}
-      </div>
-      <div className="flex justify-between items-center border rounded-2xl px-6 py-2">
-        참석 인원
-        <Toggle state={population} setState={setPopulation} />
-      </div> */}
-    </section>
-    </div >
+      </div >
+    </div>
   );
 };
 

@@ -49,31 +49,29 @@ const PhotoTalkGallery = () => {
       {isModalOpen && (
         <div
           onClick={closeModal}
-          className="page-container fixed inset-0 z-50 bg-black bg-opacity-50"
+          className="result-layout fixed inset-0 z-50 bg-black bg-opacity-50"
         >
-          <div className="preview-section p-20 h-3/4">
-            <div
-              onClick={(e) => e.stopPropagation()}
-              className="relative w-full rounded-lg overflow-hidden"
-            >
-              <div className="relative flex items-center justify-center p-9 h-full bg-black bg-opacity-50">
-                <button
-                  onClick={showPreviousImage}
-                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"
-                >
-                  <ChevronLeft />
-                </button>
-                <img
-                  src={images[currentImageIndex]}
-                  className="max-h-full object-contain rounded-md"
-                />
-                <button
-                  onClick={showNextImage}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"
-                >
-                  <ChevronRight />
-                </button>
-              </div>
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="relative w-full rounded-lg overflow-hidden"
+          >
+            <div className="relative flex items-center justify-center p-9 h-full bg-black bg-opacity-50">
+              <button
+                onClick={showPreviousImage}
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"
+              >
+                <ChevronLeft />
+              </button>
+              <img
+                src={images[currentImageIndex]}
+                className="max-h-full object-contain rounded-md"
+              />
+              <button
+                onClick={showNextImage}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"
+              >
+                <ChevronRight />
+              </button>
             </div>
           </div>
         </div>

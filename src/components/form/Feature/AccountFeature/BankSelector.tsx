@@ -44,10 +44,10 @@ const BankSelector: React.FC<{
   };
 
   return (
-    <div className="w-28 relative">
+    <div className="w-24 relative">
       <div
         onClick={toggleDropDown}
-        className="flex justify-between items-center px-3 py-2 border border-gray-300 rounded-xl bg-white cursor-pointer text-xs hover:bg-gray-100 gap-1"
+        className="flex justify-between items-center px-2 py-3 border border-gray-300 rounded-xl bg-gray-50 cursor-pointer text-[11px] hover:bg-gray-100 gap-1"
       >
         {selectedBank || '은행 선택'}
         <i

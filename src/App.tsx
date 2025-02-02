@@ -18,6 +18,7 @@ import MyPage from './pages/MyPage';
 import RsvpStatsPage from './pages/RsvpStatsPage';
 import EditProfilePage from './pages/EditProfilePage';
 import ChangePasswordPage from './pages/ChangePasswordPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 
 function App() {
   const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ function App() {
         <Route path={'/dashboard'} element={<DashBoardPage />} />
         <Route path={'/login'} element={<LoginPage />} />
         <Route path="/email-login" element={<EmailLoginPage />} />
+        <Route path={"/reset-password"} element={<ResetPasswordPage />} />
         <Route path={'/signup'} element={<SignUpPage />} />
         <Route path={'/mypage'} element={<MyPage />} />
         <Route path={'/mypage/edit'} element={<EditProfilePage />} />

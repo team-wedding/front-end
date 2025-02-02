@@ -4,7 +4,7 @@ interface Notice {
   id: number;
   title: string;
   content: string;
-  image: string | null;
+  image: string;
 }
 
 interface NoticeStore {
@@ -20,11 +20,12 @@ interface NoticeStore {
   ) => void;
   toggleExpand: (id: number) => void;
 }
+
 const createNewNotice = (idGenerator = Date.now) => ({
   id: idGenerator(),
   title: '',
   content: '',
-  image: null,
+  image: '',
 });
 
 const useNoticeStore = create<NoticeStore>((set) => ({

@@ -1,3 +1,5 @@
+import React from 'react';
+
 interface StepperProps {
   steps: string[];
   currentStep: number;
@@ -11,10 +13,10 @@ export const Stepper = ({ steps, currentStep, onStepClick }: StepperProps) => {
         const isActive = index + 1 === currentStep;
         const isCompleted = index + 1 < currentStep;
         return (
-          <div key={index}>
+          <React.Fragment key={index}>
             {/* Step Indicator */}
             <button
-              className="flex items-center rounded-xl px-1 py-2 hover:bg-gray-300 hover:bg-opacity-20 transition-all ease-in-out duration-100"
+              className="flex items-center rounded-xl px-2 py-2 hover:bg-gray-300 hover:bg-opacity-20 transition-all ease-in-out duration-100"
               onClick={() => onStepClick(index + 1)}
             >
               <div
@@ -29,7 +31,7 @@ export const Stepper = ({ steps, currentStep, onStepClick }: StepperProps) => {
                 {index + 1}
               </div>
               <div
-                className={`ml-2 ${
+                className={`ml-1 ${
                   isActive
                     ? 'text-primary font-medium'
                     : 'text-gray-300 font-light'
@@ -40,9 +42,9 @@ export const Stepper = ({ steps, currentStep, onStepClick }: StepperProps) => {
             </button>
             {/* Divider */}
             {index < steps.length - 1 && (
-              <div className="flex-grow h-px bg-gray-300 mx-2"></div>
+              <div className="flex-grow h-px bg-gray-300 mx-1"></div>
             )}
-          </div>
+          </React.Fragment>
         );
       })}
     </div>

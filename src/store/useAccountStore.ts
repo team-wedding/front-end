@@ -8,7 +8,7 @@ type AccountInfo = {
 };
 
 type RoleAccountInfo = {
-  role: '신랑님' | '신부님'; // 신랑, 신부
+  role: '신랑' | '신부'; // 신랑, 신부
   accountInfo: AccountInfo;
   fatherAccountInfo: AccountInfo;
   motherAccountInfo: AccountInfo;
@@ -27,7 +27,7 @@ type StoreState = {
 // 초기 상태 정의
 const initialAccounts: RoleAccountInfo[] = [
   {
-    role: '신랑님',
+    role: '신랑',
     accountInfo: {
       accountHolder: '',
       bankName: '',
@@ -48,7 +48,7 @@ const initialAccounts: RoleAccountInfo[] = [
     },
   },
   {
-    role: '신부님',
+    role: '신부',
     accountInfo: {
       accountHolder: '',
       bankName: '',

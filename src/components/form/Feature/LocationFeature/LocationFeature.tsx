@@ -2,23 +2,19 @@ import { useLocationFeatureStore } from '@store/OptionalFeature/useLocationFeatu
 import OnOff from '@common/OnOff';
 import NavigationItem from './NavigationItem';
 import TransportationItem from './TransportationItem';
+import InformationItem from '@/components/common/CreateInvitation/InformationItem';
 
 const LocationFeature = () => {
   const { subFeatures, toggleSubFeature } = useLocationFeatureStore();
 
   return (
-    <div className="text-[11px] mx-4 mt-4">
-      {/* 안내문 */}
-      <div className="max-w-sm mx-auto text-[9px] text-gray-400 opacity-80 m-6">
-        <div className="flex items-start gap-1">
-          <span className="text-gray-400">ⓘ</span>
-          <span>예식 장소를 나타내고 싶은 기능을 선택해주세요.</span>
-        </div>
-        <div className="flex items-start gap-1">
-          <span className="text-gray-400">ⓘ</span>
-          <span>내비게이션은 선택한 어플로 안내합니다</span>
-        </div>
-      </div>
+    <div className="text-[11px] mx-4">
+      <InformationItem
+        messages={[
+          '예식 장소를 나타내고 싶은 기능을 선택해주세요.',
+          '내비게이션은 선택한 어플로 안내합니다',
+        ]}
+      />
 
       <hr />
 

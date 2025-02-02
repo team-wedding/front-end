@@ -91,3 +91,8 @@ export const resetPassword = async (emailInfo: EmailInfo) => {
   const response = await axiosInstance.put(API.RESETPASSWORD(), emailInfo);
   return response.data;
 }
+
+export const getUserInfo = async () => {
+  const response = await axiosInstance.get(API.ACCOUNT(), {});
+  return response.data;
+}

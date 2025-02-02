@@ -14,34 +14,36 @@ import NotFound404 from './pages/NotFound404';
 import EmailLoginPage from './pages/EmailLoginPage';
 import NaverRedirect from './components/login/SocialLogin/NaverRedirect';
 import KakaoRedirect from './components/login/SocialLogin/KakaoRedirect';
+import MyPage from './pages/MyPage';
+import RsvpStatsPage from './pages/RsvpStatsPage';
+import EditProfilePage from './pages/EditProfilePage';
+import ChangePasswordPage from './pages/ChangePasswordPage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
-import EditMyPage from './pages/EditMyPage';
 
 function App() {
   const queryClient = new QueryClient();
 
   return (
     <QueryClientProvider client={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <Routes>
-          <Route path={'/'} element={<HomePage />} />
-          <Route path={'/dashboard'} element={<DashBoardPage />} />
-          <Route path={'/login'} element={<LoginPage />} />
-          <Route path="/email-login" element={<EmailLoginPage />} />
-          <Route path={'/signup'} element={<SignUpPage />} />
-          <Route path={"/reset-password"} element={<ResetPasswordPage />} />
-          <Route path={"/mypage"} element={<EditMyPage />} />
-          {/* <Route path={"/change-password"} element={<ChangePasswordPage />} />   */}
-          <Route path={'/create'} element={<CreateInvitationPage />} />
-          <Route path={'/edit/:id'} element={<EditInvitationPage />} />
-          <Route path={'/preview'} element={<PreviewInvitaionPage />} />
-          <Route path={'/result/:id'} element={<ResultPage />} />
-          <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
-          <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
-          <Route path={'*'} element={<NotFound404 />} />
-        </Routes>
-        <ReactQueryDevtools initialIsOpen={false} />
-      </QueryClientProvider>
+      <Routes>
+        <Route path={'/'} element={<HomePage />} />
+        <Route path={'/dashboard'} element={<DashBoardPage />} />
+        <Route path={'/login'} element={<LoginPage />} />
+        <Route path="/email-login" element={<EmailLoginPage />} />
+        <Route path={"/reset-password"} element={<ResetPasswordPage />} />
+        <Route path={'/signup'} element={<SignUpPage />} />
+        <Route path={'/mypage'} element={<MyPage />} />
+        <Route path={'/mypage/edit'} element={<EditProfilePage />} />
+        <Route path={"/mypage/edit/password"} element={<ChangePasswordPage />} />
+        <Route path={'/mypage/rsvp'} element={<RsvpStatsPage />} />
+        <Route path={'/create'} element={<CreateInvitationPage />} />
+        <Route path={'/edit/:id'} element={<EditInvitationPage />} />
+        <Route path={'/preview'} element={<PreviewInvitaionPage />} />
+        <Route path={'/result/:id'} element={<ResultPage />} />
+        <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
+        <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
+        <Route path={'*'} element={<NotFound404 />} />
+      </Routes>
       <ReactQueryDevtools initialIsOpen={false} />
     </QueryClientProvider>
   );

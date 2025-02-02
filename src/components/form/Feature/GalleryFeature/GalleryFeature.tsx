@@ -3,12 +3,12 @@ import CloseIcon from '@icons/CloseIcon';
 import GridIcon from '@assets/GridIcon.svg';
 import ChevronRight from '@icons/Chevron_RightIcon';
 import ChevronLeft from '@icons/Chevron_LeftIcon';
-import useGallaryFeatureStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
+import useGallaryStore from '@/store/useGallaryStore';
 
 export default function GalleryFeature() {
   const fileRef = useRef<HTMLInputElement>(null);
-  const { images, grid, setImages, setGrid } = useGallaryFeatureStore();
+  const { images, grid, setImages, setGrid } = useGallaryStore();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (images.length + e.target.files!.length <= 9) {

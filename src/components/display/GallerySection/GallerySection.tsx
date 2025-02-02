@@ -1,15 +1,14 @@
 import { useState } from 'react';
 import ChevronLeft from '@icons/Chevron_LeftIcon';
 import ChevronRight from '@icons/Chevron_RightIcon';
-import { useOptionalFeatureStore } from '@store/OptionalFeature/useOptionalFeatureStore';
 import CloseIcon from '@/components/icons/CloseIcon';
 import { useLocation } from 'react-router';
-import useGallaryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
-
+import useGallaryStore from '@/store/useGallaryStore';
 
 export default function GallerySection() {
-  const { images, grid } = useGallaryStore();
-
+  const store = useGallaryStore();
+  const images = store.images;
+  const grid = store.grid;
   const [modal, setModal] = useState(false)
   const { pathname } = useLocation()
   const isPreview = pathname == "/create"

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import { validateEmail } from '@utils/validator';
 import { postEmailLogin } from '../../../services/userService';
+import { useUserStore } from '@/store/useUserStore';
 
 interface LoginInfo {
   email: string;
@@ -10,6 +11,7 @@ interface LoginInfo {
 
 const EmailLogin = () => {
   const navigate = useNavigate();
+  const { fetchUserInfo } = useUserStore();
   const [loginInfo, setLoginInfo] = useState<LoginInfo>({
     email: '',
     password: '',
@@ -35,6 +37,7 @@ const EmailLogin = () => {
 
     try {
       await postEmailLogin(loginInfo);
+      await fetchUserInfo();
       navigate('/');
     } catch (error) {
       console.log('이메일 로그인 실패', error);
@@ -69,11 +72,10 @@ const EmailLogin = () => {
         placeholder="비밀번호 입력"
       />
       <button
-        className={`h-12 mt-4 mb-4 text-sm font-medium rounded-lg shadow-sm transition duration-100 ease-out hover:ease-in ${
-          isFormValid
-            ? 'bg-button text-primary hover:bg-rose-100'
-            : 'bg-gray-300 text-white cursor-not-allowed'
-        }`}
+        className={`h-12 mt-4 mb-4 text-sm font-medium rounded-lg shadow-sm transition duration-100 ease-out hover:ease-in ${isFormValid
+          ? 'bg-button text-primary hover:bg-rose-100'
+          : 'bg-gray-300 text-white cursor-not-allowed'
+          }`}
         disabled={!isFormValid}
         onClick={handleSubmit}
       >

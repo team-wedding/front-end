@@ -16,6 +16,7 @@ interface PhotoTalkState {
   closeEditor: () => void;
   addPhotoTalk: (photoTalk: PhotoTalk) => void;
   editPhotoTalk: (id: string, updatedPhotoTalk: PhotoTalk) => void;
+  deletePhotoTalk: (id: string) => void;
   setEditingPhotoTalk: (photoTalk: PhotoTalk | null) => void;
   getAllImages: () => string[];
 }
@@ -31,8 +32,12 @@ const usePhotoTalkStore = create<PhotoTalkState>((set, get) => ({
   editPhotoTalk: (id: string, updatedPhotoTalk: PhotoTalk): void =>
     set((state) => ({
       photoTalks: state.photoTalks.map((talk) =>
-        talk.id === id ? updatedPhotoTalk : talk,
+        talk.id === id ? { ...talk, ...updatedPhotoTalk } : talk,
       ),
+    })),
+  deletePhotoTalk: (id: string): void =>
+    set((state) => ({
+      photoTalks: state.photoTalks.filter((talk) => talk.id !== id),
     })),
   setEditingPhotoTalk: (photoTalk: PhotoTalk | null): void =>
     set({ editingPhotoTalk: photoTalk }),

@@ -1,21 +1,22 @@
 import { useState, useEffect, useRef } from 'react';
-import usePhotoTalkStore from '@store/usePhotoTalkStore';
-import { PhotoTalk } from '@store/usePhotoTalkStore';
+import usePhotoTalkStore, { PhotoTalk } from '@store/usePhotoTalkStore';
 import MenuDotsIcon from '@icons/MenuDotsIcon';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
-interface PhotoTalkCardProps {
+const PhotoTalkCard = ({
+  onEdit,
+  onDelete,
+}: {
   onEdit: (photoTalk: PhotoTalk) => void;
-}
-
-const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
+  onDelete: (photoTalk: PhotoTalk) => void;
+}) => {
   const { photoTalks } = usePhotoTalkStore();
   const [openDropdownIndex, setOpenDropdownIndex] = useState<number | null>(
     null,
   );
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
+  const dropdownRefs = useRef<(HTMLDivElement | null)[]>([]);
 
   const toggleDropdown = (index: number) => {
     setOpenDropdownIndex((prevIndex) => (prevIndex === index ? null : index));
@@ -24,8 +25,9 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
+        openDropdownIndex !== null &&
+        dropdownRefs.current[openDropdownIndex] &&
+        !dropdownRefs.current[openDropdownIndex]?.contains(event.target as Node)
       ) {
         setOpenDropdownIndex(null);
       }
@@ -35,9 +37,10 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [openDropdownIndex]);
 
-  const settings = {
+  const sliderSettings = {
+    arrows: false,
     dots: true,
     infinite: false,
     speed: 500,
@@ -52,7 +55,10 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
           key={talk.id}
           className="flex flex-col gap-2 bg-white w-full p-4 rounded-md shadow-md border border-gray-200 relative"
         >
-          <div className="absolute top-2 right-3" ref={dropdownRef}>
+          <div
+            className="absolute top-2 right-3"
+            ref={(el) => (dropdownRefs.current[index] = el)}
+          >
             <button
               className="inline-block text-gray-500 hover:bg-gray-100 focus:ring-4 focus:outline-none rounded-lg text-sm"
               type="button"
@@ -73,12 +79,22 @@ const PhotoTalkCard = ({ onEdit }: PhotoTalkCardProps) => {
                       편집하기
                     </button>
                   </li>
+                  <li>
+                    <button
+                      onClick={() => onDelete(talk)}
+                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                      aria-label="삭제하기"
+                    >
+                      삭제하기
+                    </button>
+                  </li>
                 </ul>
               </div>
             )}
           </div>
+
           <div className="my-5">
-            <Slider {...settings}>
+            <Slider {...sliderSettings}>
               {talk.images.map((image, imgIndex) => (
                 <div key={imgIndex}>
                   <img

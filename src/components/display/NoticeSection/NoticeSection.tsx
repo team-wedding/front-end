@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
-import useNoticeStore from '@store/useNoticeStore';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import SectionTitle from '@/components/common/SectionTitle';
+import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
 
 const NoticeSection = () => {
   const { selectedOptionalFeatures } = useOptionalFeatureStore();

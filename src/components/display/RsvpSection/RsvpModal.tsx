@@ -5,6 +5,7 @@ import CalendarIcon from '@icons/CalendarIcon';
 import PinIcon from '@icons/PinIcon';
 import { GuestInfo } from '@/types/GuestType';
 import { postAttendance } from '@/services/statsService';
+import { useUserStore } from '@/store/useUserStore';
 
 type InfoDetail = Omit<GuestInfo, 'userId' | 'invitationId'>;
 
@@ -44,9 +45,11 @@ const RsvpModal = ({
     }));
   };
 
+  const { id } = useUserStore();
+
   const handleSubmit = async () => {
     try {
-      const response = await postAttendance({ ...info, userId: 1, invitationId: 1 });
+      const response = await postAttendance({ ...info, userId: id, invitationId: 1 });
       console.log(response);
       setModal(false);
     } catch (error) {

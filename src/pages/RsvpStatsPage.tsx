@@ -56,6 +56,7 @@ const RsvpStatsPage = () => {
         </div>
         <section className="flex flex-col gap-2 px-4 py-2  h-96 overflow-y-scroll sm:gap-2">
           <AttendanceItem />
+          {/* <AttendanceItem />
           <AttendanceItem />
           <AttendanceItem />
           <AttendanceItem />
@@ -77,8 +78,7 @@ const RsvpStatsPage = () => {
           <AttendanceItem />
           <AttendanceItem />
           <AttendanceItem />
-          <AttendanceItem />
-          <AttendanceItem />
+          <AttendanceItem /> */}
         </section>
       </section>
     </PageLayout>

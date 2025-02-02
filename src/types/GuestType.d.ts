@@ -1,5 +1,5 @@
 export interface GuestInfo {
-    userId: number;
+    userId: number | null;
     invitationId: number;
     name: string;
     contact: string;

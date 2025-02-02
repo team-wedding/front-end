@@ -4,11 +4,11 @@ import GridIcon from '@assets/GridIcon.svg';
 import ChevronRight from '@icons/Chevron_RightIcon';
 import ChevronLeft from '@icons/Chevron_LeftIcon';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
-import useGallaryStore from '@/store/useGallaryStore';
+import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 
 export default function GalleryFeature() {
   const fileRef = useRef<HTMLInputElement>(null);
-  const { images, grid, setImages, setGrid } = useGallaryStore();
+  const { images, grid, setImages, setGrid } = useGalleryStore();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (images.length + e.target.files!.length <= 9) {

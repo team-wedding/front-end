@@ -1,8 +1,8 @@
-import useAccountStore from './useAccountStore';
+import useAccountStore from './OptionalFeature/useAccountFeatureStore';
+import useGalleryStore from './OptionalFeature/useGalleryFeatureStore';
 import useAddressStore from './useAddressStore';
 import useBrideGroomStore from './useBrideGroomStore';
 import useContactStore from './useContactStore';
-import useGallaryStore from './useGallaryStore';
 import useGreetingStore from './useGreetingStore';
 import useImageStore from './useImageStore';
 import { useInvitationStore } from './useInvitaionStore';
@@ -14,7 +14,7 @@ export const resetAllStores = () => {
   useAddressStore.getState().reset();
   useBrideGroomStore.getState().reset();
   useContactStore.getState().reset();
-  useGallaryStore.getState().reset();
+  useGalleryStore.getState().reset();
   useGreetingStore.getState().reset();
   useImageStore.getState().reset();
   useInvitationStore.getState().reset();

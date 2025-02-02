@@ -3,10 +3,11 @@ import ChevronLeft from '@icons/Chevron_LeftIcon';
 import ChevronRight from '@icons/Chevron_RightIcon';
 import CloseIcon from '@/components/icons/CloseIcon';
 import { useLocation } from 'react-router';
-import useGallaryStore from '@/store/useGallaryStore';
+import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
+import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 
 export default function GallerySection() {
-  const store = useGallaryStore();
+  const store = useGalleryStore();
   const images = store.images;
   const grid = store.grid;
   const [modal, setModal] = useState(false)

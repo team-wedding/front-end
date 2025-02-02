@@ -48,7 +48,6 @@ export const getInvitationAction = (): InvitationDetiail => {
     attendanceTitle: '참석 여부 제목',
     attendanceContent: '참석 여부 설명',
     attendanceIsDining: true,
-    //attendance: true,
   };
 };
 

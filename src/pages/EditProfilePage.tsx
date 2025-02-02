@@ -3,6 +3,7 @@ import WithdrawModal from "@/components/EditMyPage/WithdrawModal";
 import BackIcon from "@/components/icons/BackIcon";
 import ChevronRight from "@/components/icons/Chevron_RightIcon";
 import PageLayout from "@/components/layout/PageLayout";
+import { logout, withdraw } from "@/services/userService";
 import { useUserStore } from "@/store/useUserStore";
 import { useState } from "react";
 import { useNavigate } from "react-router";
@@ -14,18 +15,24 @@ const EditProfilePage = () => {
     const [isLogoutModalOpen, setIsLogoutModalOpen] = useState(false);
     const [isWithdrawModalOpen, setIsWithdrawModalOpen] = useState(false);
 
-    const handleLogout = () => {
-        // 실제 로그아웃 처리 로직 (예: API 호출)
-        console.log('로그아웃');
-        setIsLogoutModalOpen(false);
-        navigate('/login'); // 로그아웃 후 로그인 페이지로 이동
+    const handleLogout = async () => {
+        try {
+            await logout();
+            setIsLogoutModalOpen(false);
+            navigate('/login');
+        } catch (error) {
+            console.log('로그아웃 실패', error);
+        }
     };
 
-    const handleWithdraw = () => {
-        // 실제 회원탈퇴 처리 로직
-        console.log('회원탈퇴');
-        setIsWithdrawModalOpen(false);
-        navigate('/login');
+    const handleWithdraw = async () => {
+        try {
+            await withdraw();
+            setIsLogoutModalOpen(false);
+            navigate('/login');
+        } catch (error) {
+            console.log('회원탈퇴 실패', error);
+        }
     }
 
     return (

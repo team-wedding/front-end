@@ -43,7 +43,6 @@ const PhotoTalkEditor = () => {
 
   if (!isOpen) return null;
 
-  // 수정: 파일 목록(FileList 또는 배열)으로 받아 처리
   const handleImageUpload = (files: FileList | File[]) => {
     let fileArray: File[] = [];
     if (files instanceof FileList) {

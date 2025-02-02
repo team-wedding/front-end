@@ -5,10 +5,9 @@ import { useQuery } from '@tanstack/react-query';
 import { getInvitations } from '../services/invitation';
 import { InvitationDetiail } from '../types/invitationType';
 import { useEffect, useState } from 'react';
-import exampleImage from '../assets/image/wedding1.png';
 
 const DashBoardPage = () => {
-  const { data, isPending, isRefetching, status, isError } = useQuery({
+  const { data, isPending, isRefetching, status } = useQuery({
     queryKey: ['invitations'],
     queryFn: getInvitations,
   });

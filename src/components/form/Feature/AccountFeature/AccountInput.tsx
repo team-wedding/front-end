@@ -1,4 +1,4 @@
-import useAccountStore from '@store/useAccountStore';
+import useAccountStore from '@/store/OptionalFeature/useAccountFeatureStore';
 import AccountRow from './AccountRow';
 
 const AccountInput = () => {

@@ -3,9 +3,10 @@ import PageLayout from "../components/layout/PageLayout";
 import BackIcon from "../components/icons/BackIcon";
 import { getButtonClasses } from "@/components/ResetPassword/ResetPasswordButton";
 import { useNavigate } from "react-router";
+import { changePassword } from "@/services/userService";
 
 interface PasswordInfo {
-    originPassword: string;
+    password: string;
     newPassword: string;
     confirmNewPassword: string;
 }
@@ -15,7 +16,7 @@ const ChangePasswordPage = () => {
     const navigate = useNavigate();
 
     const [passwordInfo, setPasswordInfo] = useState<PasswordInfo>({
-        originPassword: '',
+        password: '',
         newPassword: '',
         confirmNewPassword: '',
     });
@@ -36,7 +37,7 @@ const ChangePasswordPage = () => {
 
         // 새 비밀번호가 기존 비밀번호와 다른 지 체크
         if (name === 'newPassword') {
-            setIsNewPasswordDifferent(value !== passwordInfo.originPassword);
+            setIsNewPasswordDifferent(value !== passwordInfo.password);
         }
 
         // 새 비밀번호 확인
@@ -50,6 +51,20 @@ const ChangePasswordPage = () => {
         })
     }
 
+    const handleSubmit = async () => {
+        if (!isFormValid) return;
+
+        const { password, newPassword } = passwordInfo;
+
+        try {
+            const responseData = await changePassword({ password, newPassword });
+            console.log(responseData);
+            navigate('/mypage');
+        } catch (error) {
+            console.log('비밀번호 변경 실패', error);
+        }
+    }
+
     const isFormValid = isNewPasswordMatch && isPasswordValid;
 
     return (
@@ -59,7 +74,7 @@ const ChangePasswordPage = () => {
                     <h1 className="text-3xl font-semibold pb-6">비밀번호 변경</h1>
                     <h3 className='text-gray-600 text-sm'>기존 비밀번호</h3>
                     <input
-                        name="originPassword"
+                        name="password"
                         onChange={handleChange}
                         className="splash-input"
                         type="password"
@@ -100,6 +115,7 @@ const ChangePasswordPage = () => {
                     <button
                         className={getButtonClasses(isFormValid)}
                         disabled={!isFormValid}
+                        onClick={handleSubmit}
                     >
                         저장
                     </button>

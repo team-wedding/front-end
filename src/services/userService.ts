@@ -4,7 +4,7 @@ import { API, axiosInstance } from '../utils/config';
 interface SignupInfo {
   name: string;
   email: string;
-  password: string
+  password: string;
 }
 
 interface LoginInfo {
@@ -14,6 +14,11 @@ interface LoginInfo {
 
 interface EmailInfo {
   email: string;
+}
+
+interface PasswordInfo {
+  password: string;
+  newPassword: string;
 }
 
 export const signup = async (signupInfo: SignupInfo) => {
@@ -94,5 +99,11 @@ export const resetPassword = async (emailInfo: EmailInfo) => {
 
 export const getUserInfo = async () => {
   const response = await axiosInstance.get(API.ACCOUNT(), {});
+  return response.data;
+}
+
+export const changePassword = async (passwordInfo: PasswordInfo) => {
+  console.log(passwordInfo);
+  const response = await axiosInstance.put(API.CHANGEPASSWORD(), passwordInfo);
   return response.data;
 }

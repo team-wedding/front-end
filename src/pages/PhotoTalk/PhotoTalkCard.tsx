@@ -53,7 +53,7 @@ const PhotoTalkCard = ({
       {photoTalks.map((talk, index) => (
         <div
           key={talk.id}
-          className="flex flex-col gap-2 bg-white w-full p-4 rounded-md shadow-md border border-gray-200 relative"
+          className="flex flex-col gap-2 bg-white w-full p-6 pb-4 rounded-md shadow-md border border-gray-200 relative"
         >
           <div
             className="absolute top-2 right-3"
@@ -93,7 +93,7 @@ const PhotoTalkCard = ({
             )}
           </div>
 
-          <div className="my-5">
+          <div className="my-3">
             <Slider {...sliderSettings}>
               {talk.images.map((image, imgIndex) => (
                 <div key={imgIndex}>

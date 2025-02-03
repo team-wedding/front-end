@@ -1,5 +1,5 @@
 import usePhotoTalkStore from '@store/usePhotoTalkStore';
-import PhotoTalkList from '@components/display/PhotoTalkSection/PhotoTalkList';
+import PhotoTalkList from '@/pages/PhotoTalk/PhotoTalkList';
 
 const PhotoTalkPage = () => {
   const { openEditor } = usePhotoTalkStore();

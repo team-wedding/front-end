@@ -149,14 +149,14 @@ const PhotoTalkEditor = () => {
             <textarea
               placeholder="내용을 입력해주세요"
               value={content}
-              rows={4}
+              rows={3}
               onChange={(e) => setContent(e.target.value)}
-              className="formInput w-full mb-2"
+              className="resize-none formInput w-full mb-2"
             />
             <label className="label w-full">
               사진 추가
               <span className="ml-2 font-light text-gray-500">
-                사진은 최대 30장까지 추가할 수 있습니다.
+                사진은 최대 10장까지 추가할 수 있습니다.
               </span>
             </label>
             {images.length === 0 ? (

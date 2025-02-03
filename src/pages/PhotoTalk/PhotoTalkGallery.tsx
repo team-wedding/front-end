@@ -46,14 +46,16 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
 
   if (images.length === 0) {
     return (
-      <p className="text-center text-gray-500">업로드된 이미지가 없습니다.</p>
+      <p className="text-center text-gray-500 my-6">
+        업로드된 이미지가 없습니다.
+      </p>
     );
   }
 
   return (
     <div>
       {isAdmin && (
-        <div className="flex justify-between items-center p-4">
+        <div className="flex justify-between items-center p-8 pb-2">
           <h2 className="text-lg font-semibold">이미지 갤러리</h2>
           <div className="flex items-center gap-3">
             <p className="text-gray-700">
@@ -70,7 +72,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
         </div>
       )}
 
-      <div className="grid grid-cols-3 gap-4 p-4">
+      <div className="grid grid-cols-3 gap-4 py-4 px-8">
         {images.map((url, index) => (
           <div key={index} className="relative group">
             {isAdmin && (
@@ -85,7 +87,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
             <img
               src={url}
               alt={`Uploaded ${index}`}
-              className="h-24 w-full rounded-lg object-cover cursor-pointer border-2"
+              className="h-28 w-full rounded-lg object-cover cursor-pointer border-2"
               onClick={() => openModal(index)}
             />
           </div>
@@ -101,7 +103,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
             onClick={(e) => e.stopPropagation()}
             className="relative w-full rounded-lg overflow-hidden"
           >
-            <div className="relative flex items-center justify-center p-9 h-full bg-black bg-opacity-50">
+            <div className="relative flex items-center justify-center p-9 h-full rounded-lg bg-black bg-opacity-50">
               <button
                 onClick={showPreviousImage}
                 className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"

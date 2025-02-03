@@ -16,8 +16,8 @@ import NaverRedirect from './components/login/SocialLogin/NaverRedirect';
 import KakaoRedirect from './components/login/SocialLogin/KakaoRedirect';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import EditMyPage from './pages/EditMyPage';
-import PhotoTalkPage from './pages/PhotoTalkPage';
-import AdminPhotoTalkPage from './pages/AdminPhotoTalkPage';
+import PhotoTalkPage from './pages/PhotoTalk/PhotoTalkPage';
+import AdminPhotoTalkPage from './pages/PhotoTalk/AdminPhotoTalkPage';
 
 function App() {
   const queryClient = new QueryClient();

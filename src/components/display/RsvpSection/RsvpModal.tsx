@@ -49,6 +49,7 @@ const RsvpModal = ({
 
   const handleSubmit = async () => {
     try {
+      console.log(id);
       const response = await postAttendance({ ...info, userId: id, invitationId: 1 });
       console.log(response);
       setModal(false);
@@ -104,11 +105,11 @@ const RsvpModal = ({
             </button>
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-8">
+          <div className="flex flex-col items-center gap-6">
             <div className="text-xl font-semibold">참석 의사 전달</div>
             <div className="flex flex-row w-full gap-8 items-center justify-between text-base">
               구분:
-              <div className="flex gap-1 w-48 justify-between">
+              <div className="flex gap-1 w-52 justify-between">
                 <button
                   className={`rounded-md px-2 py-2 w-1/2 ${info.isGroomSide ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'} `}
                   onClick={() =>
@@ -129,7 +130,7 @@ const RsvpModal = ({
             </div>
             <div className="flex flex-row w-full gap-2 items-center justify-between text-base">
               <div>참석여부: </div>
-              <div className={`flex flex-row justify-between gap-1 w-48`}>
+              <div className={`flex flex-row justify-between gap-1 w-52`}>
                 <button
                   className={`rounded-md p-1 w-1/2 ${info.attendance ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'}`}
                   onClick={() => setInfo((prev) => ({ ...prev, attendance: true }))}
@@ -150,7 +151,7 @@ const RsvpModal = ({
             <div className="flex flex-row w-full justify-between items-center text-base">
               성함:{' '}
               <input
-                className=" w-48 h-8 bg-gray-100 rounded-md splash-input text-base"
+                className="w-52 h-8 bg-gray-100 rounded-md splash-input text-base"
                 type="text"
                 onChange={handleChange}
                 name="name"
@@ -159,7 +160,7 @@ const RsvpModal = ({
             <div className="flex flex-row w-full justify-between items-center text-base">
               연락처:{' '}
               <input
-                className=" w-48 h-8 bg-gray-100 rounded-md splash-input"
+                className="w-52 h-8 bg-gray-100 rounded-md splash-input text-base"
                 type="text"
                 onChange={handleChange}
                 name="contact"
@@ -168,30 +169,31 @@ const RsvpModal = ({
             <div className="flex flex-row w-full justify-between items-center text-base">
               참석인원:{' '}
               <input
-                className=" w-48 h-8 bg-gray-100 rounded-md splash-input text-base"
+                className=" w-52 h-8 bg-gray-100 rounded-md splash-input text-base"
                 type="number"
                 onChange={handleChange}
+                placeholder='본인 제외 총 참석인원'
                 name="companions"
               />
             </div>
             <div className="flex flex-row w-full justify-between items-center text-base">
               식사여부:{' '}
-              <div className="flex gap-1 w-48 justify-between">
+              <div className="flex gap-1 w-52 justify-between">
                 {/* map으로 refact */}
                 <button
-                  className={`rounded-md  py-2 px-3  ${info.isDining == '예정' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'}`}
+                  className={`rounded-md  p-1 w-1/3  ${info.isDining == '예정' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'}`}
                   onClick={() => setInfo((prev) => ({ ...prev, isDining: '예정' }))}
                 >
                   예정
                 </button>
                 <button
-                  className={`rounded-md  py-2 px-3  ${info.isDining == '안함' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'}`}
+                  className={`rounded-md  p-1 w-1/3  ${info.isDining == '안함' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'}`}
                   onClick={() => setInfo((prev) => ({ ...prev, isDining: '안함' }))}
                 >
                   안함
                 </button>
                 <button
-                  className={`rounded-md  py-2 px-3  ${info.isDining == '미정' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'} `}
+                  className={`rounded-md  p-1 w-1/3 ${info.isDining == '미정' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'} `}
                   onClick={() => setInfo((prev) => ({ ...prev, isDining: '미정' }))}
                 >
                   미정

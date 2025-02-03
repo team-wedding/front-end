@@ -60,7 +60,7 @@ const PhotoTalkCard = ({
             ref={(el) => (dropdownRefs.current[index] = el)}
           >
             <button
-              className="inline-block text-gray-500 hover:bg-gray-100 focus:ring-4 focus:outline-none rounded-lg text-sm"
+              className="inline-block text-gray-500 hover:bg-gray-100 rounded-lg text-sm"
               type="button"
               onClick={() => toggleDropdown(index)}
               aria-label="메뉴 열기"

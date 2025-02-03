@@ -2,6 +2,7 @@ import { useState } from 'react';
 import usePhotoTalkStore from '@store/usePhotoTalkStore';
 import ChevronLeft from '@icons/Chevron_LeftIcon';
 import ChevronRight from '@icons/Chevron_RightIcon';
+import DownloadIcon from '@/components/icons/DownloadIcon';
 
 interface PhotoTalkGalleryProps {
   isAdmin?: boolean;
@@ -54,13 +55,16 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
       {isAdmin && (
         <div className="flex justify-between items-center p-4">
           <h2 className="text-lg font-semibold">이미지 갤러리</h2>
-          <div className="flex gap-2">
+          <div className="flex items-center gap-3">
+            <p className="text-gray-700">
+              {selectedImages.length} / {images.length}
+            </p>
             <button
               onClick={downloadSelectedImages}
               className="select-btn"
               disabled={selectedImages.length === 0}
             >
-              다운로드
+              <DownloadIcon />
             </button>
           </div>
         </div>

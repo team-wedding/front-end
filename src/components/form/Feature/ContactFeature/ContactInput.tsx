@@ -7,7 +7,7 @@ const ContactInput = () => {
   return (
     <div>
       {contacts.map((person, index) => (
-        <div key={index} className="max-w-lg mx-auto p-4">
+        <div key={index} className="max-w-lg mx-auto p-3 my-6">
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
               <label className="label">{person.role}</label>
@@ -50,6 +50,8 @@ const ContactInput = () => {
                 className="formInput"
               />
             </div>
+
+            <hr className="mt-8" />
           </div>
         </div>
       ))}

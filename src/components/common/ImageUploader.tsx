@@ -1,24 +1,37 @@
 import React, { useRef, useState } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import useImageStore from '@store/useImageStore';
 
-const ImageInput = () => {
-  const { uploadedImageUrl, setUploadedImageFile, setUploadedImageUrl } = useImageStore();
+interface ImageUploaderProps {
+  // uploadedImage: string;
+  // setUploadedImage: (image: string) => void;
+  onImageUpload: (image: string) => void;
+  initialImage?: string;
+  maxWidth?: number;
+  maxHeight?: number;
+  acceptedFormats?: string[];
+}
 
+const ImageUploader = ({
+  // uploadedImage,
+  // setUploadedImage,
+  onImageUpload,
+  initialImage = '',
+  maxWidth = 5000,
+  maxHeight = 5000,
+  acceptedFormats = ['image/svg', 'image/png', 'image/jpg'],
+}: ImageUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-
-  const MAX_WIDTH = 5000;
-  const MAX_HEIGHT = 5000;
-
+  const [uploadedImage, setUploadedImage] = useState<string>(initialImage);
   const [isDragging, setIsDragging] = useState(false);
 
   const validateImageSize = (file: File): Promise<boolean> => {
     return new Promise((resolve) => {
       const img = new Image();
       img.src = URL.createObjectURL(file);
+
       img.onload = () => {
-        const isValid = img.width <= MAX_WIDTH && img.height <= MAX_HEIGHT;
+        const isValid = img.width <= maxWidth && img.height <= maxHeight;
         resolve(isValid);
       };
     });
@@ -26,28 +39,29 @@ const ImageInput = () => {
 
   const handleImageUpload = async (file: File) => {
     const isValid = await validateImageSize(file);
+
     if (!isValid) {
-      toast.error(`이미지 크기는 최대 ${MAX_WIDTH}x${MAX_HEIGHT}px 입니다.`, {
+      toast.error(`이미지 크기는 최대 ${maxWidth}x${maxHeight}px 입니다.`, {
         toastId: 'image-size-error',
       });
       return;
     }
+
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.result && typeof reader.result === 'string') {
-        setUploadedImageUrl(reader.result);
+        setUploadedImage(reader.result);
+        onImageUpload(reader.result);
       }
     };
     reader.readAsDataURL(file);
   };
 
-  //TODO: 드래그드랍 이미지 처리
   const handleFileInputChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = event.target.files?.[0];
     if (file) {
-      setUploadedImageFile(file);
       await handleImageUpload(file);
     }
   };
@@ -72,37 +86,60 @@ const ImageInput = () => {
   };
 
   const handleImageDelete = () => {
-    setUploadedImageUrl('');
-    setUploadedImageFile(null);
+    setUploadedImage('');
+    onImageUpload('');
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
   };
 
+  let randomId = Math.random();
+
   return (
-    <div className="flex items-center justify-center max-w-lg mx-auto p-4">
+    <div className="flex items-center justify-center max-w-lg mx-auto">
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-      {!uploadedImageUrl ? (
+      {!uploadedImage ? (
         <label
-          htmlFor="dropzone-file"
+          htmlFor={`dropzone-file-${randomId}`}
           className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${isDragging
-            ? 'border-rose-300 bg-rose-50'
-            : 'border-gray-300 bg-gray-50'
-            } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
+              ? 'border-rose-300 bg-rose-50'
+              : 'border-gray-100 bg-gray-50'
+            }  rounded-xl cursor-pointer hover:bg-gray-100`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <div className="flex flex-col items-center justify-center text-center pt-5 pb-6">
-            <p className="mb-2 text-xs text-gray-500">
-              Click to upload or drag and drop
+          <div className="flex flex-col items-center justify-center text-center py-5 text-[10px] text-gray-400 gap-1">
+            <svg
+              className="w-6 h-6 text-gray-700 dark:text-white my-2"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              fill="none"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+                d="M5 12h14m-7 7V5"
+              />
+            </svg>
+
+            <p>이미지를 선택하거나 드래그해서 추가해주세요</p>
+            <p>
+              {acceptedFormats
+                .join(', ')
+                .replace(/image\//g, '')
+                .toUpperCase()}{' '}
+              파일 (MAX. {maxWidth}x{maxHeight}px)
             </p>
-            <p className="text-xs text-gray-500">
-              SVG, PNG, JPG (MAX. {MAX_WIDTH}x{MAX_HEIGHT}px)
-            </p>
+            <p></p>
           </div>
           <input
-            id="dropzone-file"
+            id={`dropzone-file-${randomId}`}
             type="file"
             className="hidden"
             onChange={handleFileInputChange}
@@ -112,13 +149,13 @@ const ImageInput = () => {
       ) : (
         <div className="flex flex-col items-center">
           <img
-            src={uploadedImageUrl}
+            src={uploadedImage}
             alt="Uploaded"
-            className="h-auto max-w-full"
+            className="h-auto max-w-full border-2 rounded-xl"
           />
           <button
             onClick={handleImageDelete}
-            className="mt-4 px-3 py-2 text-[12px] text-gray-800 bg-rose-300 rounded-xl hover:bg-rose-200"
+            className="mt-4 px-3 py-2 text-[12px] bg-button bg-opacity-80 text-white rounded-xl hover:bg-rose-200"
           >
             삭제
           </button>
@@ -128,4 +165,4 @@ const ImageInput = () => {
   );
 };
 
-export default ImageInput;
+export default ImageUploader;

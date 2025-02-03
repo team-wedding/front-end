@@ -1,22 +1,22 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { postNaverLogin } from '../../../services/userService';
+import { useUserStore } from '@/store/useUserStore';
 
 export const NaverRedirect = () => {
   const navigate = useNavigate();
+  const { fetchUserInfo } = useUserStore();
+  const code = new URL(window.location.href).searchParams.get('code');
 
   useEffect(() => {
     const handleLogin = async () => {
-      const code = new URL(window.location.href).searchParams.get('code');
-      console.log(code);
-
       if (code) {
         try {
           await postNaverLogin(code);
-
+          await fetchUserInfo();
           navigate('/');
-        } catch (err) {
-          console.error(err);
+        } catch (error) {
+          console.error('네이버 로그인 실패', error);
         }
       }
     };

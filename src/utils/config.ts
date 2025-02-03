@@ -39,7 +39,7 @@ axiosInstance.interceptors.response.use(
     if (status === 401) {
       try {
         // Refresh Token으로 Access Token 갱신
-        const refreshResponse = await axios.post(API.REFRESH(), {});
+        const refreshResponse = await axios.get(API.REFRESH(), {});
 
         const newAccessToken = refreshResponse.headers['authorization'];
 
@@ -72,11 +72,12 @@ export const API = {
   EMAILLOGIN: () => `${BASE_URL}/users/login`,
   KAKAOLOGIN: () => `${BASE_URL}/users/oauth/kakao`,
   NAVERLOGIN: () => `${BASE_URL}/users/oauth/naver`,
+  RESETPASSWORD: () => `${BASE_URL}/users/account/password/reset`,
   SIGNUP: () => `${BASE_URL}/users/signup`,
   LOGOUT: () => `${BASE_URL}/users/logout`,
   REFRESH: () => `${BASE_URL}/users/refresh`,
   ACCOUNT: () => `${BASE_URL}/users/account`,
   INVITATIONS: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
   ATTENDANCE: () => `${BASE_URL}/attendances`,
-  PASSWORD: () => `${BASE_URL}/users/account/password`,
+  CHANGEPASSWORD: () => `${BASE_URL}/users/account/password`,
 };

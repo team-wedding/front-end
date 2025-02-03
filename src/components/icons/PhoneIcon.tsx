@@ -1,8 +1,10 @@
-const PhoneIcon = () => {
+import { IconProps } from '@/types/icons';
+
+const PhoneIcon = ({ className }: IconProps) => {
   return (
     <div>
       <svg
-        className="w-4 h-4 text-gray-800 dark:text-white"
+        className={`${className} w-4 h-4 text-gray-800 dark:text-white`}
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"

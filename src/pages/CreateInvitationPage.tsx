@@ -12,6 +12,10 @@ import { useAccordionStore } from '@store/useAccordionStore';
 import { usePostInvitation } from '@hooks/useInvitation';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import resetAllStores from '@/store/resetStore';
+import useBrideGroomStore from '@/store/useBrideGroomStore';
+import { validateBrideGroomNames } from '@/utils/validator';
+import NameInputModal from '@/components/form/BasicInformation/NameInput/NameInputModal';
+
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
 import { getInvitationAction } from '@/actions/invitationAction';
@@ -22,6 +26,8 @@ const CreateInvitationPage = () => {
   const { items, initializeItems, moveItem } = useAccordionStore();
   const [steps, setSteps] = useState(1);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const { brideGroom } = useBrideGroomStore();
   const { invitationtitle } = useInvitationStore()
   useEffect(() => {
     const [start, end] = sliceRanges[steps - 1];
@@ -40,6 +46,11 @@ const CreateInvitationPage = () => {
   const details = getInvitationAction();
 
   const handleSave = async () => {
+    if (!validateBrideGroomNames(brideGroom)) {
+      setIsModalOpen(true);
+      return;
+    }
+
     try {
       if (uploadedImageFile) {
         const { imageUrls } = await s3Mutate([uploadedImageFile!]);
@@ -112,7 +123,7 @@ const CreateInvitationPage = () => {
               currentStep={steps}
               onStepClick={handleStepClick}
             />
-            <div className="bg-background bg-opacity-10 min-h-screen  font-Pretendard">
+            <div className="bg-background bg-opacity-10 min-h-screen font-Pretendard">
               <Accordion
                 items={items}
                 expandedIds={expandedIds}
@@ -128,6 +139,10 @@ const CreateInvitationPage = () => {
           <PreviewDisplay />
         </div>
       </div>
+      <NameInputModal
+        isOpen={isModalOpen}
+        onConfirm={() => setIsModalOpen(false)}
+      />
     </DndProvider>
   );
 };

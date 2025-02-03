@@ -1,14 +1,19 @@
 import { useState } from 'react';
 import GreetingModal from './GreetingModal';
 import useGreetingStore from '../../../../store/useGreetingStore';
+import InformationItem from '@/components/common/CreateInvitation/InformationItem';
 
 const GreetingFeature = () => {
   const { greetingTitle, greetingContent, setGreetingTitle, setGreetingContent } = useGreetingStore();
   const [isModalOpen, setModalOpen] = useState(false);
 
   return (
-    <div className="max-w-lg mx-auto p-4">
-      <div className="flex flex-col gap-3">
+    <div className="mx-4 my-6">
+      <InformationItem messages={['샘플 문구를 참고해보세요.']} />
+
+      <hr />
+
+      <div className="flex flex-col gap-3 my-6">
         <button
           data-modal-target="select-modal"
           data-modal-toggle="select-modal"

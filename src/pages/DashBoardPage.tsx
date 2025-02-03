@@ -16,15 +16,15 @@ const DashBoardPage = () => {
     }
   }, [data, status, isFetching]);
 
-  if (isError) {
-    return <>something went wrong</>;
-  }
+  // if (isError) {
+  //   return <>something went wrong</>;
+  // }
   return (
     <PageLayout title="우리, 결혼해요">
-      <div className="flex-center px-4 pb-3 border-b border-background opacity-40 text-background text-[10px] m-5 tracking-wider">
+      {/* <div className="flex-center px-4 py-3 bg-neutral-50 text-background text-[10px] mb-5 tracking-wider">
         우리만의 청첩장을 꾸미고 관리해보세요
-      </div>
-      <div className="grid grid-cols-2 gap-6 place-items-center  px-6 pb-10">
+      </div> */}
+      <div className="grid grid-cols-2 gap-6 place-items-center  mx-6 my-10">
         <div>
           <CreateCard />
         </div>

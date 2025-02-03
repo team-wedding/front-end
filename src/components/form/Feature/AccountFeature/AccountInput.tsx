@@ -1,4 +1,4 @@
-import useAccountStore from '@store/useAccountStore';
+import useAccountStore from '@/store/OptionalFeature/useAccountFeatureStore';
 import AccountRow from './AccountRow';
 
 const AccountInput = () => {
@@ -7,24 +7,8 @@ const AccountInput = () => {
 
   return (
     <div>
-      {/* 안내문 추가 */}
-      <div className="max-w-lg mx-auto p-4 text-[10px] text-gray-500">
-        <div className="flex items-start gap-1 mb-1">
-          <span className="text-gray-600">ⓘ</span>
-          <span>축의금 기능에서 사용되는 정보입니다.</span>
-        </div>
-        <div className="flex items-start gap-1">
-          <span className="text-gray-600">ⓘ</span>
-          <span>
-            입력한 계좌번호만 노출되며, 카카오 송금 QR은 선택 사항입니다.
-          </span>
-        </div>
-      </div>
-
-      <hr className="mb-5 border-gray-300" />
-
       {accounts.map((person, index) => (
-        <div key={index} className="max-w-lg mx-auto p-4">
+        <div key={index} className="max-w-lg mx-auto my-10">
           {/* 신랑/신부 정보 */}
           <AccountRow
             label={person.role}
@@ -61,7 +45,7 @@ const AccountInput = () => {
             }
           />
 
-          <hr className="mt-8 border-gray-300" />
+          <hr className="mt-8" />
         </div>
       ))}
     </div>

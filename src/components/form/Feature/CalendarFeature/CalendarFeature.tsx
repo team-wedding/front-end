@@ -1,19 +1,16 @@
+import InformationItem from '@/components/common/CreateInvitation/InformationItem';
 import { useCalendarFeatureStore } from '@store/OptionalFeature/useCalendarFeatureStore';
 
 const CalendarFeature = () => {
   const { subCalendarFeatures, toggleSubFeature } = useCalendarFeatureStore();
 
   return (
-    <div className="text-xs mx-4 mt-4">
-      {/* 안내문 추가 */}
-      <div className="max-w-sm mx-auto text-[9px] text-gray-400 opacity-80 mb-4">
-        <div className="flex items-start gap-1">
-          <span className="text-gray-400">ⓘ</span>
-          <span>예식 날짜를 나타내고 싶은 기능을 선택해주세요.</span>
-        </div>
-      </div>
+    <div className="text-xs mx-4">
+      <InformationItem
+        messages={['예식 날짜를 나타내고 싶은 기능을 선택해주세요.']}
+      />
 
-      <hr className="border-gray-200" />
+      <hr />
 
       {/* 서브 기능 - 캘린더, 카운트다운, 디데이 */}
       <div className="flex-center gap-2 text-gray-400 text-[10px] my-6">

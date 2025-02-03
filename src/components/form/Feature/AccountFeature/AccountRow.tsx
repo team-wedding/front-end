@@ -15,7 +15,7 @@ const AccountRow = ({
   onUpdate: (field: keyof typeof accountInfo, value: string) => void;
 }) => {
   return (
-    <div className="flex flex-col gap-3 mb-4">
+    <div className="flex flex-col gap-2 px-2 my-10">
       {/*은행 선택 드롭다운 / 예금주 입력 */}
       <div className="flex items-center gap-2">
         <label className="label">{label}</label>

@@ -1,12 +1,10 @@
 import { useMemo, useState } from 'react';
-import useNoticeStore from '@store/useNoticeStore';
 import { Notice } from './NoticeItem';
 import TrashBinIcon from '@icons/TrashBinIcon';
-import CloudArrowIcon from '@icons/CloudArrowIcon';
-import CloseIcon from '@icons/CloseIcon';
 import ReusableModal from '@/components/common/Modal/ReusableModal';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
 import ImageUploader from '@/components/common/ImageUploader';
+import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
 
 const NoticeFeature = () => {
   const {

@@ -79,5 +79,5 @@ export const API = {
   ACCOUNT: () => `${BASE_URL}/users/account`,
   INVITATIONS: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
   ATTENDANCE: () => `${BASE_URL}/attendances`,
-  PASSWORD: () => `${BASE_URL}/users/account/password`,
+  CHANGEPASSWORD: () => `${BASE_URL}/users/account/password`,
 };

@@ -178,8 +178,8 @@
   }
 
   .result-layout {
-    @apply column-center max-w-md bg-white gap-28 text-result tracking-wide shadow-xl pt-10 pb-28 mx-auto relative z-10;
-    @apply md:rounded-3xl md:my-12 lg:max-w-sm;
+    @apply column-center max-w-md bg-white gap-16 text-result tracking-wide shadow-xl mx-auto relative z-20 font-Pretendard;
+    @apply md:rounded-3xl md:my-12 lg:max-w-md;
     transition: all 0.3s ease;
   }
 
@@ -189,7 +189,7 @@
 
   .create-section {
     @apply h-full w-full max-w-md overflow-auto mx-auto z-20;
-    @apply lg:fixed lg:left-1/3;
+    @apply lg:fixed lg:right-1/3;
     /* @apply md:fixed md:left-10; */
     /* max-width: var(--max-content-width, 448px); */
     /* transition: all 0.3s ease; */

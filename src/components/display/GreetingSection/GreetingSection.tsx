@@ -9,11 +9,11 @@ const GreetingSection = () => {
     (person) =>
       person.name.trim() !== '' &&
       person.family.father.name.trim() !== '' &&
-      person.family.mother.name.trim() !== ''
+      person.family.mother.name.trim() !== '',
   );
 
   return (
-    <div className="column-center gap-8">
+    <div className="column-center gap-20 py-14">
       <Greeting />
       {allNamesFilled && <FamilyName />}
     </div>

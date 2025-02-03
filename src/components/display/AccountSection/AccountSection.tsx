@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import AccountNumberItem from '@common/AccountNumberItem/AccountNumberItem';
-import useAccountStore from '@store/useAccountStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import SectionTitle from '@/components/common/SectionTitle';
+import useAccountStore from '@/store/OptionalFeature/useAccountFeatureStore';
 
 const AccountSection = () => {
   const { selectedOptionalFeatures } = useOptionalFeatureStore();

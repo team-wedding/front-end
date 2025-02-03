@@ -36,7 +36,7 @@ export const StepNavigation = ({
       {/* 미리보기 버튼 */}
       <button
         className="absolute bottom-20 right-6 column-center gap-2"
-        onClick={() => navigate('/preview')}
+        onClick={() => navigate('/result/1')}
       >
         <img
           src={logo}

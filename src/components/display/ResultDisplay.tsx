@@ -1,27 +1,13 @@
-import CalendarSection from './CalendarSection/CalendarSection';
-import LocationSection from './LocationSection/LocationSection';
-import ContactSection from './ContactSection/ContactSection';
-import ThumbnailSection from './ThumbnailSection/ThumbnailSection';
-import GreetingSection from './GreetingSection/GreetingSection';
-import GallerySection from './GallerySection/GallerySection';
-import AccountSection from './AccountSection/AccountSection';
-import AttendanceSection from './AttendanceSection/AttendanceSection';
-import NoticeSection from './NoticeSection/NoticeSection';
-import PhotoTalkSection from './PhotoTalkSection/PhotoTalkSection';
+import { useAccordionStore } from '@store/useAccordionStore';
 
 const ResultDisplay = () => {
+  const { getSections } = useAccordionStore();
+
   return (
     <div className="result-layout">
-      <ThumbnailSection />
-      <GreetingSection />
-      <CalendarSection />
-      <LocationSection />
-      <ContactSection />
-      <GallerySection />
-      <AccountSection />
-      <NoticeSection />
-      <PhotoTalkSection />
-      <AttendanceSection />
+      {getSections().map((section, index) => (
+        <div key={index}>{section}</div>
+      ))}
     </div>
   );
 };

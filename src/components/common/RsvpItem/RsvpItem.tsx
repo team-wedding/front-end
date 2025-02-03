@@ -18,7 +18,7 @@ export default function RsvpItem({
   return (
     <div className="flex flex-row justify-between text-gray-700 items-center p-2 shadow-md border border-gray-100 rounded-lg bg-white">
       <div
-        className={`flex flex-col items-start ${total && 'font-semibold p-3 text-2xl'}`}
+        className={`flex flex-col items-start ${total && 'p-3 text-2xl'}`}
       >
         {title}
         {description && <div className="text-sm mt-1">{description}</div>}

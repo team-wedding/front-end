@@ -1,11 +1,18 @@
-import { getAttendances, postAttendance } from "@/services/statsService"
+import { getAttendances, getStats, postAttendance } from "@/services/statsService"
 import { GuestInfo } from "@/types/GuestType";
 import { useMutation, useQuery } from "@tanstack/react-query"
 
-export const useGetAttendances = () => {
+export const useGetStats = () => {
+    return useQuery({
+        queryKey: ['stats'],
+        queryFn: () => getStats(),
+    });
+};
+
+export const useGetAttendances = (page: number, size: number) => {
     return useQuery({
         queryKey: ['attendances'],
-        queryFn: getAttendances,
+        queryFn: () => getAttendances(page, size),
     });
 };
 

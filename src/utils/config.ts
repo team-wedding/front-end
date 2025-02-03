@@ -78,6 +78,6 @@ export const API = {
   REFRESH: () => `${BASE_URL}/users/refresh`,
   ACCOUNT: () => `${BASE_URL}/users/account`,
   INVITATIONS: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
-  ATTENDANCE: () => `${BASE_URL}/attendances`,
+  ATTENDANCE: (page?: number, size?: number) => `${BASE_URL}/attendances${page ? `/?page=${page}` : ''}${size ? `&size=${size}` : ''}`,
   CHANGEPASSWORD: () => `${BASE_URL}/users/account/password`,
 };

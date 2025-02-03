@@ -17,6 +17,7 @@ import KakaoRedirect from './components/login/SocialLogin/KakaoRedirect';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import EditMyPage from './pages/EditMyPage';
 import PhotoTalkPage from './pages/PhotoTalkPage';
+import AdminPhotoTalkPage from './pages/AdminPhotoTalkPage';
 
 function App() {
   const queryClient = new QueryClient();
@@ -38,6 +39,7 @@ function App() {
           <Route path={'/preview'} element={<PreviewInvitaionPage />} />
           <Route path={'/result/:id'} element={<ResultPage />} />
           <Route path={'/phototalk'} element={<PhotoTalkPage />} />
+          <Route path={'/mypage/phototalk'} element={<AdminPhotoTalkPage />} />
           <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
           <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
           <Route path={'*'} element={<NotFound404 />} />

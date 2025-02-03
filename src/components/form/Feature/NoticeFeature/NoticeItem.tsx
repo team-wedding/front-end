@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 
 interface NoticeItemData {
-  id: number;
+  noticeId: number;
   title: ReactNode;
   content: ReactNode;
 }
@@ -9,7 +9,7 @@ interface NoticeItemData {
 interface NoticeProps {
   items: NoticeItemData[];
   expandedIds: number[];
-  toggleExpand: (id: number) => void;
+  toggleExpand: (noticeId: number) => void;
 }
 
 interface NoticeItemProps {
@@ -27,9 +27,8 @@ const NoticeItem = ({ item, isExpanded, onToggleExpand }: NoticeItemProps) => (
       <div className="flex justify-between items-center mx-3">
         <span className="text-xs font-medium">{item.title}</span>
         <i
-          className={`bx bx-chevron-down transition-transform duration-300 text-lg ${
-            isExpanded ? 'rotate-180' : ''
-          }`}
+          className={`bx bx-chevron-down transition-transform duration-300 text-lg ${isExpanded ? 'rotate-180' : ''
+            }`}
         ></i>
       </div>
 
@@ -45,13 +44,13 @@ const NoticeItem = ({ item, isExpanded, onToggleExpand }: NoticeItemProps) => (
 export const Notice = ({ items, expandedIds, toggleExpand }: NoticeProps) => (
   <div className="my-10">
     {items.map((item) => {
-      const isExpanded = expandedIds.includes(item.id);
+      const isExpanded = expandedIds.includes(item.noticeId);
       return (
         <NoticeItem
-          key={item.id}
+          key={item.noticeId}
           item={item}
           isExpanded={isExpanded}
-          onToggleExpand={() => toggleExpand(item.id)}
+          onToggleExpand={() => toggleExpand(item.noticeId)}
         />
       );
     })}

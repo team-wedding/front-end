@@ -10,7 +10,10 @@ export const getS3ImageUrl = async (imageUrl: File[]): Promise<S3Detail> => {
   imageUrl.map((value) => (
     formData.append("images", value)
   ))
-  const response = await axios.post(API.Images(), formData, {
+  if (imageUrl.length == 0) {
+    return { imageUrls: [] }
+  }
+  const response = await axios.post(API.S3Images(), formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },

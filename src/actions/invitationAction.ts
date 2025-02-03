@@ -5,29 +5,25 @@ import { useWeddingStore } from '@store/useWeddingStore';
 import useContactStore from '@store/useContactStore';
 import useAddressStore from '@store/useAddressStore';
 import useImageStore from '@store/useImageStore';
-import {
-  AccountDetail,
-  InvitationDetiail,
-  NoticeDetail,
-} from '../types/invitationType';
+import { AccountDetail, InvitationDetiail } from '../types/invitationType';
 import { useEffect } from 'react';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import { useCalendarFeatureStore } from '@/store/OptionalFeature/useCalendarFeatureStore';
-import useGallaryStore from '@/store/useGallaryStore';
-import useAccountStore from '@/store/useAccountStore';
 import { useMusicFeatureStore } from '@/store/OptionalFeature/useMusicFeatureStore';
-import useNoticeStore from '@/store/useNoticeStore';
 import { useLocationFeatureStore } from '@/store/OptionalFeature/useLocationFeatureStore';
 import useRSVPStore from '@/store/useRSVPStore';
 import { useAccordionStore } from '@/store/useAccordionStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
+import useAccountStore from '@/store/OptionalFeature/useAccountFeatureStore';
+import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
+import useNoticeStore, {
+  Notice,
+} from '@/store/OptionalFeature/useNoticeFeatureStore';
 
-// interface Images {
-//   thumbnailImage: string;
-//   // galleryImages: string[];
-// }
-
-export const getInvitationAction = (): Omit<InvitationDetiail, 'imgUrl'> => {
+export const getInvitationAction = (): Omit<
+  InvitationDetiail,
+  'imgUrl' | 'galleries' | 'notices'
+> => {
   //웨딩 정보
   const {
     address,
@@ -52,7 +48,6 @@ export const getInvitationAction = (): Omit<InvitationDetiail, 'imgUrl'> => {
   const { invitationtitle } = useInvitationStore();
   const { rsvpTitle, rsvpDescription, rsvpIncludeMeal, rsvpIncludePopulation } =
     useRSVPStore();
-  const { images, grid } = useGallaryStore();
   const { accounts } = useAccountStore();
   const accountList: AccountDetail[] = accounts.flatMap((item) => [
     {
@@ -76,14 +71,6 @@ export const getInvitationAction = (): Omit<InvitationDetiail, 'imgUrl'> => {
   const { subCalendarFeatures } = useCalendarFeatureStore();
   const { subFeatures: transportData, transportationInputs } =
     useLocationFeatureStore();
-  const { notices } = useNoticeStore();
-  const noticeList: NoticeDetail[] = notices.map((value) => {
-    return {
-      order: findOrder('notice'),
-      isActive: selectedOptionalFeatures.notice,
-      ...value,
-    };
-  });
 
   return {
     title: invitationtitle,
@@ -146,14 +133,6 @@ export const getInvitationAction = (): Omit<InvitationDetiail, 'imgUrl'> => {
         busContent: transportationInputs.bus,
       },
     ],
-    galleries: [
-      {
-        order: findOrder('gallery')!,
-        images: images,
-        isActive: selectedOptionalFeatures.gallery,
-        grid: grid,
-      },
-    ],
 
     accounts: accountList,
     contacts: [
@@ -169,7 +148,7 @@ export const getInvitationAction = (): Omit<InvitationDetiail, 'imgUrl'> => {
         groomMotherContact: contacts[1].motherContact,
       },
     ],
-    notices: noticeList,
+    // notices: noticeList,
     audio: selectedMusic?.id,
   };
 };
@@ -189,7 +168,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
   const contacts = useContactStore((state) => state.updateContact);
   const { updateBrideGroom, updateFamily } = useBrideGroomStore();
   const { setFont } = useThemeStore();
-  const { setGrid, setImages } = useGallaryStore();
+  const { setGrid, setImages } = useGalleryStore();
   const {
     updateTransportationInput: setTransportSubFeature,
     toggleSubFeature: transportToggle,
@@ -203,6 +182,8 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
   const { setRSVPDetails, setRSVPIncludeMeal, setRSVPIncludePopulation } =
     useRSVPStore();
   const { toggleSubFeature: calendarToggle } = useCalendarFeatureStore();
+
+  console.log(details?.accounts);
 
   useEffect(() => {
     if (details) {
@@ -243,6 +224,8 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       //대표이미지
       setUploadedImageUrl(details.imgUrl);
       //연락처
+      contacts(0, 'contact', details?.contacts[0]?.brideContact || '');
+      contacts(1, 'contact', details?.contacts[0]?.groomContact || '');
       contacts(
         0,
         'fatherContact',
@@ -263,8 +246,6 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         'motherContact',
         details?.contacts[0]?.groomMotherContact || '',
       );
-      contacts(0, 'contact', details?.contacts[0]?.brideContact || '');
-      contacts(1, 'contact', details?.contacts[0]?.groomContact || '');
 
       //RSVP Modal
       setRSVPDetails({
@@ -296,9 +277,17 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
 
       transportToggle('transportationSubway', details.maps[0]?.subway || false);
 
-      replaceNotice(details?.notices || []);
+      const modifiedNotice: Notice[] = details.notices.map((value) => {
+        return {
+          noticeId: value.id!,
+          title: value.title!,
+          content: value.content as string,
+          image: value.image as string,
+          imgFile: null,
+        };
+      });
+      replaceNotice(modifiedNotice || []);
 
-      //FIX Account 꼬임...
       updateAccountInfo(
         0,
         'accountInfo',
@@ -315,7 +304,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         0,
         'fatherAccountInfo',
         details.accounts
-          ? details.accounts[0]
+          ? details.accounts[1]
           : {
               accountHolderName: '',
               bankName: '',
@@ -327,7 +316,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         0,
         'motherAccountInfo',
         details.accounts
-          ? details.accounts[0]
+          ? details.accounts[2]
           : {
               accountHolderName: '',
               bankName: '',
@@ -339,7 +328,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         1,
         'accountInfo',
         details.accounts
-          ? details.accounts[1]
+          ? details.accounts[3]
           : {
               accountHolderName: '',
               bankName: '',
@@ -351,7 +340,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         1,
         'fatherAccountInfo',
         details.accounts
-          ? details.accounts[1]
+          ? details.accounts[4]
           : {
               accountHolderName: '',
               bankName: '',
@@ -363,7 +352,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         1,
         'motherAccountInfo',
         details.accounts
-          ? details.accounts[1]
+          ? details.accounts[5]
           : {
               accountHolderName: '',
               bankName: '',
@@ -382,7 +371,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       toggleOptionalFeature('gallery', details?.galleries[0].isActive);
       toggleOptionalFeature('account', details?.accounts[0].isActive);
       toggleOptionalFeature('contact', details?.contacts[0].isActive);
-      toggleOptionalFeature('notice', details?.notices[0].isActive);
+      // toggleOptionalFeature('notice', details?.notices[0].isActive);
 
       //FIX: MUSIC
       selectMusic(details.audio);

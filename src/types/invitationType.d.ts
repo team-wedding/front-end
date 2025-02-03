@@ -31,7 +31,7 @@ export interface InvitationDetiail {
   font: string;
   calendars: CalaendarDetail[];
   maps: MapDetail[];
-  galleries: GalleryDetail[];
+  galleries: Omit<GalleryDetail[], 'images'>;
   accounts: AccountDetail[];
   contacts: ContactDetail[];
   notices: NoticeDetail[];

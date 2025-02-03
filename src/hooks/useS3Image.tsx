@@ -7,12 +7,14 @@ export const useS3Image = () => {
   return useMutation<S3Detail, Error, File[]>({
     mutationFn: (img: File[]) => getS3ImageUrl(img),
     onSuccess: async (data) => {
-      if (data.imageUrls) {
-        if (data.imageUrls.length > 0) {
-          await setUploadedImageUrl(data.imageUrls[0])
-        }
-        else {
-          console.warn('이미지 URL이 없습니다.');
+      if (data) {
+        if (data.imageUrls) {
+          if (data.imageUrls.length > 0) {
+            await setUploadedImageUrl(data.imageUrls[0])
+          }
+          else {
+            console.warn('이미지 URL이 없습니다.');
+          }
         }
       }
     },

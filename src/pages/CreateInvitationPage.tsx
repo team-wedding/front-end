@@ -19,6 +19,10 @@ import NameInputModal from '@/components/form/BasicInformation/NameInput/NameInp
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
 import { getInvitationAction } from '@/actions/invitationAction';
+import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
+import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
+import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
+import { NoticeDetail } from '@/types/invitationType';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 
@@ -41,24 +45,55 @@ const CreateInvitationPage = () => {
     resetAllStores();
   };
   const { uploadedImageFile } = useImageStore()
+  const { galleryFiles, grid } = useGalleryStore()
+  const { notices } = useNoticeStore()
+  const noticeImages = notices.flatMap((value) => {
+    if (value.imgFile) {
+      return value.imgFile
+    } else return null
+  })
   const { mutateAsync: postMutate } = usePostInvitation();  // useMutation을 직접 변수에 할당
   const { mutateAsync: s3Mutate } = useS3Image();
   const details = getInvitationAction();
+  const { optionalItems } = useAccordionStore();
+  const findOrder = (feature: string) => {
+    if (!feature) return undefined; // feature가 없으면 undefined 반환
+    const result = optionalItems.find((value) => value.feature === feature);
+    return result?.order;
+  };
+  const { selectedOptionalFeatures } = useOptionalFeatureStore();
+
 
   const handleSave = async () => {
     if (!validateBrideGroomNames(brideGroom)) {
       setIsModalOpen(true);
       return;
     }
-
     try {
-      if (uploadedImageFile) {
-        const { imageUrls } = await s3Mutate([uploadedImageFile!]);
-        await postMutate({ ...details, imgUrl: imageUrls[0] }
-        );
-      } else {
-        await postMutate({ ...details, imgUrl: "" })
+      const { imageUrls: thumbnail } = await s3Mutate(uploadedImageFile ? [uploadedImageFile!] : []);
+      const { imageUrls: gallery } = await s3Mutate(galleryFiles.length && galleryFiles.length > 0 ? galleryFiles : [])
+      const { imageUrls: noticeImg1 } = await s3Mutate(noticeImages[0] ? [noticeImages[0]] : []);
+      const { imageUrls: noticeImg2 } = await s3Mutate(noticeImages[1] ? [noticeImages[1]] : []);
+      const { imageUrls: noticeImg3 } = await s3Mutate(noticeImages[2] ? [noticeImages[2]] : []);
+      const { imageUrls: noticeImg4 } = await s3Mutate(noticeImages[3] ? [noticeImages[3]] : []);
+      const { imageUrls: noticeImg5 } = await s3Mutate(noticeImages[4] ? [noticeImages[4]] : []);
+      const noticeS3ImageList = [noticeImg1, noticeImg2, noticeImg3, noticeImg4, noticeImg5]
+
+      const noticeList: NoticeDetail[] = await notices.map((value, index) => {
+        return {
+          ...value,
+          order: findOrder('notice'),
+          isActive: selectedOptionalFeatures.notice,
+          image: noticeS3ImageList[index][0]
+        };
+      });
+      await postMutate({
+        ...details,
+        imgUrl: thumbnail.length > 0 ? thumbnail[0] : "",
+        galleries: [{ images: gallery, grid, isActive: selectedOptionalFeatures.gallery },],
+        notices: noticeList
       }
+      );
     } catch (err) {
       console.log(err)
       alert("생성중에 에러가 발생했습니다.")

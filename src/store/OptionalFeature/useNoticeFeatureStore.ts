@@ -1,10 +1,11 @@
 import { create } from 'zustand';
 
-interface Notice {
-  id: number;
+export interface Notice {
+  noticeId: number;
   title: string;
   content: string;
   image: string;
+  imgFile: File | null;
 }
 
 interface NoticeStore {
@@ -12,6 +13,7 @@ interface NoticeStore {
   expandedIds: number[];
   maxNotices: number;
   addNotice: () => void;
+  replaceNotice: (newNotice: Notice[]) => void;
   deleteNotice: (id: number) => void;
   updateNotice: (
     id: number,
@@ -19,13 +21,15 @@ interface NoticeStore {
     value: string | File | null,
   ) => void;
   toggleExpand: (id: number) => void;
+  reset: () => void;
 }
 
 const createNewNotice = (idGenerator = Date.now) => ({
-  id: idGenerator(),
+  noticeId: idGenerator(),
   title: '',
   content: '',
   image: '',
+  imgFile: null,
 });
 
 const useNoticeStore = create<NoticeStore>((set) => ({
@@ -39,17 +43,18 @@ const useNoticeStore = create<NoticeStore>((set) => ({
       const newNotice = createNewNotice();
       return { notices: [...state.notices, newNotice] };
     }),
+  replaceNotice: (newNotice: Notice[]) => set({ notices: newNotice }),
 
   deleteNotice: (id) =>
     set((state) => ({
-      notices: state.notices.filter((notice) => notice.id !== id),
+      notices: state.notices.filter((notice) => notice.noticeId !== id),
       expandedIds: state.expandedIds.filter((expandedId) => expandedId !== id),
     })),
 
   updateNotice: (id, field, value) =>
     set((state) => ({
       notices: state.notices.map((notice) =>
-        notice.id === id ? { ...notice, [field]: value } : notice,
+        notice.noticeId === id ? { ...notice, [field]: value } : notice,
       ),
     })),
 
@@ -59,6 +64,11 @@ const useNoticeStore = create<NoticeStore>((set) => ({
         ? state.expandedIds.filter((expandedId) => expandedId !== id)
         : [...state.expandedIds, id],
     })),
+  reset: () =>
+    set({
+      notices: [],
+      expandedIds: [],
+    }),
 }));
 
 export default useNoticeStore;

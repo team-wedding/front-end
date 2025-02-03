@@ -7,18 +7,16 @@ import { useGetInvitations } from '@/hooks/useInvitation';
 
 const DashBoardPage = () => {
   const { data, isPending, isRefetching, status, isError, isFetching } = useGetInvitations()
-
   const [invitations, setInvitations] = useState([]);
-
   useEffect(() => {
     if (data) {
       setInvitations(data);
     }
   }, [data, status, isFetching]);
 
-  // if (isError) {
-  //   return <>something went wrong</>;
-  // }
+  if (isError) {
+    return <>something went wrong</>;
+  }
   return (
     <PageLayout title="우리, 결혼해요">
       {/* <div className="flex-center px-4 py-3 bg-neutral-50 text-background text-[10px] mb-5 tracking-wider">

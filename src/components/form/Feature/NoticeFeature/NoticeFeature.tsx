@@ -51,13 +51,13 @@ const NoticeFeature = () => {
   const accordionItems = useMemo(
     () =>
       notices.map((notice, index) => ({
-        id: notice.noticeId,
+        noticeId: notice.noticeId,
         title: (
           <div className="flex items-center gap-2">
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                handleDeleteClick(notice.id);
+                handleDeleteClick(notice.noticeId);
               }}
             >
               <TrashBinIcon />
@@ -95,10 +95,14 @@ const NoticeFeature = () => {
 
             <div className="flex flex-col gap-3">
               <label className="label w-full">이미지 업로드</label>
-              <div key={notice.id} className="relative">
+              <div key={notice.noticeId} className="relative">
                 <ImageUploader
-                  initialImage={notice.image}
-                  onImageUpload={(img) => updateNotice(notice.id, 'image', img)}
+                  // initialImage={notice.image}
+                  // onImageUpload={(img) => updateNotice(notice.noticeId, 'image', img)}
+                  ImageUrl={notice.image}
+                  ImageFile={null}
+                  setImageFile={(file) => updateNotice(notice.noticeId, 'imgFile', file)}
+                  setImageUrl={(url) => updateNotice(notice.noticeId, 'image', url)}
                 />
               </div>
             </div>

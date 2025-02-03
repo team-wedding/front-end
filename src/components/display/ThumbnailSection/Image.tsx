@@ -2,12 +2,12 @@ import useImageStore from '@store/useImageStore';
 import thumbnail from '@assets/image/wedding1.png';
 
 const Image = () => {
-  const { uploadedImage } = useImageStore();
+  const { uploadedImageUrl } = useImageStore();
 
   return (
     <div className="flex-center w-full">
-      {uploadedImage ? (
-        <img src={uploadedImage} alt="Thumbnail" />
+      {uploadedImageUrl ? (
+        <img src={uploadedImageUrl} alt="Thumbnail" />
       ) : (
         <img src={thumbnail} alt="Default Thumbnail" />
       )}

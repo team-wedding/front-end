@@ -22,7 +22,12 @@ import useRSVPStore from '@/store/useRSVPStore';
 import { useAccordionStore } from '@/store/useAccordionStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 
-export const getInvitationAction = (): InvitationDetiail => {
+// interface Images {
+//   thumbnailImage: string;
+//   // galleryImages: string[];
+// }
+
+export const getInvitationAction = (): Omit<InvitationDetiail, 'imgUrl'> => {
   //웨딩 정보
   const {
     address,
@@ -40,25 +45,14 @@ export const getInvitationAction = (): InvitationDetiail => {
   };
 
   const { selectedOptionalFeatures } = useOptionalFeatureStore();
-
-  // FIX: 웨딩 시간을 문자열로 처리 할지 아니면 따로 숫자로 처리할지
   const { weddingTime, formattedDate } = useWeddingStore();
   const { greetingTitle, greetingContent } = useGreetingStore();
-  const { uploadedImage } = useImageStore();
-
   const { contacts } = useContactStore();
-
   const { brideGroom } = useBrideGroomStore();
-
   const { invitationtitle } = useInvitationStore();
-
   const { rsvpTitle, rsvpDescription, rsvpIncludeMeal, rsvpIncludePopulation } =
     useRSVPStore();
-
-  const { subCalendarFeatures } = useCalendarFeatureStore();
-
   const { images, grid } = useGallaryStore();
-
   const { accounts } = useAccountStore();
   const accountList: AccountDetail[] = accounts.flatMap((item) => [
     {
@@ -77,14 +71,11 @@ export const getInvitationAction = (): InvitationDetiail => {
       ...item.motherAccountInfo,
     },
   ]);
-
   const { selectedMusic } = useMusicFeatureStore();
-
   const { font } = useThemeStore();
-
+  const { subCalendarFeatures } = useCalendarFeatureStore();
   const { subFeatures: transportData, transportationInputs } =
     useLocationFeatureStore();
-
   const { notices } = useNoticeStore();
   const noticeList: NoticeDetail[] = notices.map((value) => {
     return {
@@ -98,9 +89,7 @@ export const getInvitationAction = (): InvitationDetiail => {
     title: invitationtitle,
     groomName: brideGroom[0].name,
     brideName: brideGroom[1].name,
-
     date: [formattedDate.year, formattedDate.month, formattedDate.day],
-
     //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
     location: [
       address,
@@ -110,15 +99,11 @@ export const getInvitationAction = (): InvitationDetiail => {
       weddingHallName,
       weddingHallDetail,
     ],
-    //FIX: S3 구현되면 수정
-    imgUrl: '',
-    // imgUrl: uploadedImage as string,
 
     greetingTitle: greetingTitle,
     greetingContent: greetingContent,
 
     weddingTime: [weddingTime.hour!, weddingTime.minute!],
-
     groomFatherName: brideGroom[0].family.father.name,
     groomMotherName: brideGroom[0].family.mother.name,
     brideFatherName: brideGroom[1].family.father.name,
@@ -184,7 +169,6 @@ export const getInvitationAction = (): InvitationDetiail => {
         groomMotherContact: contacts[1].motherContact,
       },
     ],
-
     notices: noticeList,
     audio: selectedMusic?.id,
   };
@@ -201,12 +185,11 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
   } = useAddressStore();
   const { setWeddingDate, setWeddingTime } = useWeddingStore();
   const { setGreetingContent, setGreetingTitle } = useGreetingStore();
-  const { setUploadedImage } = useImageStore();
+  const { setUploadedImageUrl } = useImageStore();
   const contacts = useContactStore((state) => state.updateContact);
   const { updateBrideGroom, updateFamily } = useBrideGroomStore();
   const { setFont } = useThemeStore();
   const { setGrid, setImages } = useGallaryStore();
-
   const {
     updateTransportationInput: setTransportSubFeature,
     toggleSubFeature: transportToggle,
@@ -236,7 +219,6 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       updateFamily(1, 'mother', 'name', details.groomMotherName);
       updateFamily(1, 'father', 'isDeceased', !details.groomFatherAlive);
       updateFamily(1, 'mother', 'isDeceased', !details.groomMotherAlive);
-
       //FIX: 주소 어떻게 받을지 처리
       setAddress(details.location[0], details.location[1]);
       setJibunAddress(details.location[2]);
@@ -259,7 +241,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       setGreetingTitle(details.greetingTitle);
       setGreetingContent(details.greetingContent);
       //대표이미지
-      setUploadedImage(details.imgUrl);
+      setUploadedImageUrl(details.imgUrl);
       //연락처
       contacts(
         0,

@@ -9,9 +9,12 @@ import PreviewDisplay from '@display/PreviewDisplay';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
-import { useCreateInvitation } from '@hooks/useInvitation';
+import { usePostInvitation } from '@hooks/useInvitation';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import resetAllStores from '@/store/resetStore';
+import useImageStore from '@/store/useImageStore';
+import { useS3Image } from '@/hooks/useS3Image';
+import { getInvitationAction } from '@/actions/invitationAction';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 
@@ -31,13 +34,24 @@ const CreateInvitationPage = () => {
     navigate('/dashboard');
     resetAllStores();
   };
-
-  const { mutate: createInvitation } = useCreateInvitation();
+  const { uploadedImageFile } = useImageStore()
+  const { mutateAsync: postMutate } = usePostInvitation();  // useMutation을 직접 변수에 할당
+  const { mutateAsync: s3Mutate } = useS3Image();
+  const details = getInvitationAction();
 
   const handleSave = async () => {
-    await createInvitation();
-    resetAllStores();
-    navigate('/dashboard');
+    try {
+      if (uploadedImageFile) {
+        const { imageUrls } = await s3Mutate([uploadedImageFile!]);
+        await postMutate({ ...details, imgUrl: imageUrls[0] }
+        );
+      } else {
+        await postMutate({ ...details, imgUrl: "" })
+      }
+    } catch (err) {
+      console.log(err)
+      alert("생성중에 에러가 발생했습니다.")
+    }
   };
 
   const toggleExpand = (id: number) => {
@@ -64,7 +78,7 @@ const CreateInvitationPage = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="page-container">
+      <div className="page-container relative">
         <div className="create-section">
           <PageLayout
             title={invitationtitle}
@@ -119,3 +133,4 @@ const CreateInvitationPage = () => {
 };
 
 export default CreateInvitationPage;
+

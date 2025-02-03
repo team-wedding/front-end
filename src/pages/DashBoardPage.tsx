@@ -1,16 +1,12 @@
 import Card from '@common/Card/Card';
 import PageLayout from '@layout/PageLayout';
 import CreateCard from '@common/Card/CreateCard';
-import { useQuery } from '@tanstack/react-query';
-import { getInvitations } from '../services/invitation';
 import { InvitationDetiail } from '../types/invitationType';
 import { useEffect, useState } from 'react';
+import { useGetInvitations } from '@/hooks/useInvitation';
 
 const DashBoardPage = () => {
-  const { data, isPending, isRefetching, status, isError } = useQuery({
-    queryKey: ['invitations'],
-    queryFn: getInvitations,
-  });
+  const { data, isPending, isRefetching, status, isError, isFetching } = useGetInvitations()
 
   const [invitations, setInvitations] = useState([]);
 
@@ -18,7 +14,7 @@ const DashBoardPage = () => {
     if (data) {
       setInvitations(data);
     }
-  }, [data, status]);
+  }, [data, status, isFetching]);
 
   if (isError) {
     return <>something went wrong</>;

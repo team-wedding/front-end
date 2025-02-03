@@ -1,14 +1,17 @@
 import CircleMinusIcon from '@icons/CircleMinusIcon';
 import ShareIcon from '@icons/ShareIcon';
-import React, { useRef, useState } from 'react';
+import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
 import ShareInvitation from '../Share/ShareInvitation';
-import { useDeleteInvitation } from '../../../hooks/useInvitation';
 
-const CardHeader = ({ id, title }: { id: number; title: string }) => {
-  const { mutate: deleteInvitaion } = useDeleteInvitation(id);
-  const handleDelete = () => {
-    deleteInvitaion();
-  };
+interface CardHeaderProp {
+  title: string,
+  image: string,
+  id: number
+  setModal: Dispatch<SetStateAction<boolean>>
+}
+
+
+const CardHeader = ({ title, setModal, image, id }: CardHeaderProp) => {
   const [isFocused, setIsFocused] = useState(false);
   const parentRef = useRef<HTMLButtonElement>(null);
 
@@ -25,7 +28,7 @@ const CardHeader = ({ id, title }: { id: number; title: string }) => {
 
   return (
     <div className="absolute top-0 left-0 flex justify-between w-full py-2 px-2 bg-transparent text-white font-Paperlogy">
-      <button onClick={handleDelete}>
+      <button onClick={() => setModal(true)}>
         <CircleMinusIcon />
       </button>
       {/* 청첩장 제목 입력값 */}
@@ -39,7 +42,7 @@ const CardHeader = ({ id, title }: { id: number; title: string }) => {
       >
         <ShareIcon />
         {isFocused && (
-          <ShareInvitation setIsFocused={setIsFocused} isFocused={isFocused} />
+          <ShareInvitation setIsFocused={setIsFocused} isFocused={isFocused} shareTitle={title} shareDesc={'결혼합니다'} shareImage={image} shareUrl={`http://localhost:5173/result/${id}`} shareHeader={''} />
         )}
       </button>
     </div>

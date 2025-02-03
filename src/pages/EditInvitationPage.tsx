@@ -11,18 +11,23 @@ import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import ResultDisplay from '@display/ResultDisplay';
 import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
-import { useUpdateInvitationStore } from '../actions/invitationAction';
+import { getInvitationAction, useUpdateInvitationStore } from '../actions/invitationAction';
 import { InvitationDetiail } from '../types/invitationType';
 import { useAccordionStore } from '@/store/useAccordionStore';
 import resetAllStores from '@/store/resetStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
+import { useS3Image } from '@/hooks/useS3Image';
+import useImageStore from '@/store/useImageStore';
 
 const EditInvitationPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { mutate: editInvitation } = useUpdateInvitation(parseInt(id!));
+  const { mutateAsync: editInvitation } = useUpdateInvitation(parseInt(id!));
   const { invitations } = useGetInvitation(parseInt(id!));
   const { setOrderItems } = useAccordionStore()
+  const { uploadedImageFile } = useImageStore()
+  const { mutateAsync: s3Mutate } = useS3Image();
+  const details = getInvitationAction();
 
   useEffect(() => {
     setOrderItems()
@@ -30,10 +35,17 @@ const EditInvitationPage = () => {
   useUpdateInvitationStore(invitations as InvitationDetiail);
 
   const handleSave = async () => {
-    if (id) {
-      await editInvitation();
-      resetAllStores();
-      navigate('/dashboard');
+    try {
+      if (uploadedImageFile && id) {
+        const { imageUrls } = await s3Mutate([uploadedImageFile!]);
+        await editInvitation({ ...details, imgUrl: imageUrls[0] }
+        );
+      } else {
+        await editInvitation({ ...details, imgUrl: "" })
+      }
+    } catch (err) {
+      console.log(err)
+      alert("수정중에 에러가 발생했습니다.")
     }
   };
 
@@ -133,7 +145,6 @@ const EditInvitationPage = () => {
 
       <div className="preview-section">
         <ResultDisplay />
-        {/* <ResultPage /> */}
       </div>
     </div>
   );

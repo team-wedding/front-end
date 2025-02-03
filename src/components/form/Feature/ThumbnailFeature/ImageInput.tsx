@@ -4,7 +4,8 @@ import 'react-toastify/dist/ReactToastify.css';
 import useImageStore from '@store/useImageStore';
 
 const ImageInput = () => {
-  const { uploadedImage, setUploadedImage } = useImageStore();
+  const { uploadedImageUrl, setUploadedImageFile, setUploadedImageUrl } = useImageStore();
+
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const MAX_WIDTH = 5000;
@@ -31,21 +32,22 @@ const ImageInput = () => {
       });
       return;
     }
-
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.result && typeof reader.result === 'string') {
-        setUploadedImage(reader.result);
+        setUploadedImageUrl(reader.result);
       }
     };
     reader.readAsDataURL(file);
   };
 
+  //TODO: 드래그드랍 이미지 처리
   const handleFileInputChange = async (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const file = event.target.files?.[0];
     if (file) {
+      setUploadedImageFile(file);
       await handleImageUpload(file);
     }
   };
@@ -70,7 +72,8 @@ const ImageInput = () => {
   };
 
   const handleImageDelete = () => {
-    setUploadedImage('');
+    setUploadedImageUrl('');
+    setUploadedImageFile(null);
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -79,14 +82,13 @@ const ImageInput = () => {
   return (
     <div className="flex items-center justify-center max-w-lg mx-auto p-4">
       <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
-      {!uploadedImage ? (
+      {!uploadedImageUrl ? (
         <label
           htmlFor="dropzone-file"
-          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${
-            isDragging
-              ? 'border-rose-300 bg-rose-50'
-              : 'border-gray-300 bg-gray-50'
-          } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
+          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${isDragging
+            ? 'border-rose-300 bg-rose-50'
+            : 'border-gray-300 bg-gray-50'
+            } border-dashed rounded-xl cursor-pointer hover:bg-gray-100`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
@@ -110,7 +112,7 @@ const ImageInput = () => {
       ) : (
         <div className="flex flex-col items-center">
           <img
-            src={uploadedImage}
+            src={uploadedImageUrl}
             alt="Uploaded"
             className="h-auto max-w-full"
           />

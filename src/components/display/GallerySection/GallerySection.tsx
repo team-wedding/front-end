@@ -3,12 +3,12 @@ import ChevronLeft from '@icons/Chevron_LeftIcon';
 import ChevronRight from '@icons/Chevron_RightIcon';
 import CloseIcon from '@/components/icons/CloseIcon';
 import { useLocation } from 'react-router';
-import useGallaryStore from '@/store/useGallaryStore';
+import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
+import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 
 export default function GallerySection() {
-  const store = useGallaryStore();
-  const images = store.images;
-  const grid = store.grid;
+  const { galleryImages, grid } = useGalleryStore();
+
   const [modal, setModal] = useState(false)
   const { pathname } = useLocation()
   const isPreview = pathname == "/create"
@@ -22,11 +22,11 @@ export default function GallerySection() {
   const [imageIndex, setImageIndex] = useState(0);
   const handlePrev = () => {
     if (imageIndex == 0) {
-      setImageIndex(images.length - 1);
+      setImageIndex(galleryImages.length - 1);
     } else setImageIndex((prev: number) => prev - 1);
   };
   const handleNext = () => {
-    if (imageIndex == images.length - 1) {
+    if (imageIndex == galleryImages.length - 1) {
       setImageIndex(0);
     } else setImageIndex((prev: number) => prev + 1);
   };
@@ -37,10 +37,10 @@ export default function GallerySection() {
   return (
     <div className="bg-white w-full h-fit">
       {isGalleryFeatureActive &&
-        (images ? (
+        (galleryImages ? (
           grid ? (
             <section className={`relative w-full grid grid-cols-3  ${isPreview ? "gap-3 " : "gap-y-3 px-2"}  justify-items-center items-center`}>
-              {images.map((value, index) => {
+              {galleryImages.map((value, index) => {
                 return (
                   <button key={index} className="rounded-md w-24 h-32" onClick={() => handleModal(index)}>
                     <img key={index} src={value} alt="" className="rounded-md size-full object-center" />
@@ -58,7 +58,7 @@ export default function GallerySection() {
                   <button onClick={handlePrev} className='bg-white h-6 rounded-full flex items-center justify-center'>
                     <ChevronLeft />
                   </button>
-                  <img src={images[imageIndex]} alt="gallery-image" className='w-72 rounded-md' />
+                  <img src={galleryImages[imageIndex]} alt="gallery-image" className='w-72 rounded-md' />
                   <button onClick={handleNext} className='bg-white h-6 rounded-full flex items-center justify-center'>
                     <ChevronRight />
                   </button>
@@ -68,13 +68,13 @@ export default function GallerySection() {
           ) : (
             <section className="flex flex-col w-full h-fit gap-2 px-3 justify-around items-center">
               <div className="w-full h-[450px]">
-                <img src={images[imageIndex]} alt="" className='size-full rounded-md' />
+                <img src={galleryImages[imageIndex]} alt="" className='size-full rounded-md' />
               </div>
               <div className="flex flex-row  gap-4 justify-center">
                 <button onClick={handlePrev}>
                   <ChevronLeft className='' />
                 </button>
-                <div>{`${imageIndex + 1} / ${images.length}`}</div>
+                <div>{`${imageIndex + 1} / ${galleryImages.length}`}</div>
                 <button onClick={handleNext}>
                   <ChevronRight className='' />
                 </button>

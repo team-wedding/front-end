@@ -80,4 +80,5 @@ export const API = {
   INVITATIONS: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
   ATTENDANCE: () => `${BASE_URL}/attendances`,
   CHANGEPASSWORD: () => `${BASE_URL}/users/account/password`,
+  S3Images: () => `${BASE_URL}/imageUpload/?directory=invitaion`,
 };

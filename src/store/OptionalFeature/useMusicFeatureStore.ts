@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { musicData } from '@/constants/musicData';
 
 interface StoreState {
   subFeatures: {
@@ -13,7 +14,8 @@ interface StoreState {
     feature: keyof StoreState['subFeatures'],
     enabled: boolean,
   ) => void;
-  selectMusic: (music: { id: number; title: string; src: string }) => void;
+  selectMusic: (musicId: number) => void;
+  reset: () => void;
 }
 
 export const useMusicFeatureStore = create<StoreState>((set) => ({
@@ -33,9 +35,21 @@ export const useMusicFeatureStore = create<StoreState>((set) => ({
       },
     }));
   },
-  selectMusic: (music) => {
+  selectMusic: (musicId) => {
+    const music = musicData.filter((value) => value.id == musicId);
     set(() => ({
-      selectedMusic: music,
+      selectedMusic: music[0],
     }));
   },
+  reset: () =>
+    set(() => ({
+      subFeatures: {
+        music: false,
+      },
+      selectedMusic: {
+        id: null,
+        title: '',
+        src: '',
+      },
+    })),
 }));

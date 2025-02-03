@@ -5,10 +5,10 @@ import {
   getInvitations,
   postInvitation,
   updateInvitation,
-} from '../services/invitation';
-import { getInvitationAction } from '../actions/invitationAction';
+} from '../services/invitationService';
 import { InvitationDetiail } from '../types/invitationType';
-import { resetAllStores } from '@store/resetStore';
+import resetAllStores from '@/store/resetStore';
+import { useNavigate } from 'react-router';
 
 export const useGetInvitation = (id: number) => {
   let { data, isError } = useQuery<InvitationDetiail>({
@@ -17,33 +17,60 @@ export const useGetInvitation = (id: number) => {
   });
   return { invitations: data, error: isError };
 };
-export const useGetInvitations = (id: number) => {
+
+export const useGetInvitations = () => {
   return useQuery({
-    queryKey: ['invitations', id],
+    queryKey: ['invitations'],
     queryFn: () => getInvitations(),
   });
 };
 
-export const useCreateInvitation = () => {
-  let details = getInvitationAction();
+export const usePostInvitation = () => {
+  const navigate = useNavigate()
+  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => postInvitation(details),
-    onSuccess: () => resetAllStores(),
+    mutationFn: (details: InvitationDetiail) => {
+      return postInvitation(details);
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['invitations'] });
+      console.log("생성완료")
+      navigate('/dashboard')
+      resetAllStores();
+    },
+    onError: (err) => {
+      console.log(err)
+    }
   });
 };
+
 export const useUpdateInvitation = (id: number) => {
-  let details = getInvitationAction();
+  const navigate = useNavigate()
+  const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: () => updateInvitation({ id, details }),
-    onSuccess: () => resetAllStores(),
+    mutationFn: (details: InvitationDetiail) => updateInvitation({ id, details }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['invitations'] });
+      navigate('/dashboard')
+      resetAllStores()
+    }
   });
 };
+
 export const useDeleteInvitation = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation({
+    onMutate: async (id) => {
+      await queryClient.cancelQueries({ queryKey: ["invitations"] });
+      const previousInvitations = queryClient.getQueryData(["invitations"]);
+      queryClient.setQueryData(["invitations"], (old: InvitationDetiail[]) =>
+        old.filter((inv) => inv.id !== id)
+      );
+      return { previousInvitations };
+    },
     mutationFn: () => deleteInvitation(id),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['invitaions'] });
+      queryClient.invalidateQueries({ queryKey: ['invitations'] });
     },
   });
 };

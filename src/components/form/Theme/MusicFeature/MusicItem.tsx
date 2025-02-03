@@ -34,9 +34,9 @@ const MusicItem = () => {
     }
   };
 
-  const handleSelect = (id: number, title: string, musicSrc: string) => {
+  const handleSelect = (id: number) => {
     // 음악 선택만 수행
-    selectMusic({ id, title, src: musicSrc });
+    selectMusic(id);
   };
 
   const handleBlur = (event: React.FocusEvent<HTMLDivElement>) => {
@@ -61,8 +61,8 @@ const MusicItem = () => {
       {musicData.map(({ id, title, src }) => (
         <div
           key={id}
-          className={`flex items-center justify-between px-5 py-1 gap-2 rounded-2xl select-btn hover:active-btn ${selectedMusic.id === id && 'active-btn'}`}
-          onClick={() => handleSelect(id, title, src)}
+          className={`flex items-center justify-between px-5 py-1 gap-2 rounded-2xl select-btn hover:active-btn ${selectedMusic && selectedMusic.id === id && 'active-btn'}`}
+          onClick={() => handleSelect(id)}
         >
           <div>{title}</div>
           {/* <PlayButton

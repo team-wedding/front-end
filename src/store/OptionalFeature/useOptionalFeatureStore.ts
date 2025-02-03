@@ -13,6 +13,7 @@ interface OptionalFeatureState {
     feature: Required<AccordionItemData>['feature'],
     enabled: boolean,
   ) => void;
+  reset: () => void;
 }
 
 const defaultOptionalFeatures = accordionData.reduce(
@@ -33,5 +34,9 @@ export const useOptionalFeatureStore = create<OptionalFeatureState>((set) => ({
         ...state.selectedOptionalFeatures,
         [feature]: enabled,
       },
+    })),
+  reset: () =>
+    set(() => ({
+      selectedOptionalFeatures: defaultOptionalFeatures, // 초기 상태로 복원
     })),
 }));

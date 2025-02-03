@@ -3,7 +3,6 @@ import RsvpModal from '../RsvpSection/RsvpModal';
 
 export default function AttendanceSection() {
   const [modal, setModal] = useState(false);
-  //TODO: 시간이라 날짜 어떻게 받을지
   return (
     <>
       <div className={`flex flex-col items-center gap-3  `}>
@@ -22,11 +21,6 @@ export default function AttendanceSection() {
       </div>
       {modal && (
         <RsvpModal
-          bride={'ㅇㅇㅇ'}
-          groom={'ㅇㅇㅇ'}
-          date={'ㅇㅇㅇ'}
-          time={'ㅇㅇㅇ'}
-          location={'ㅇㅇㅇ홀 ㅇㅇㅇ호 '}
           setModal={setModal}
         />
       )}

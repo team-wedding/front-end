@@ -1,68 +1,19 @@
-import { useState } from 'react';
-import usePhotoTalkStore, { PhotoTalk } from '@store/usePhotoTalkStore';
-import PhotoTalkEditor from './PhotoTalkEditor';
-import PhotoTalkCard from './PhotoTalkCard';
-import PhotoTalkGallery from './PhotoTalkGallery';
-import ImageIcon from '@icons/ImageIcon';
-import PasswordConfirmModal from './PasswordConfirmModal';
+import { Link } from 'react-router';
 
 const PhotoTalkSection = () => {
-  const { openEditor, setEditingPhotoTalk } = usePhotoTalkStore();
-  const [selectedPhotoTalk, setSelectedPhotoTalk] = useState<null | PhotoTalk>(
-    null,
-  );
-  const [isGalleryOpen, setGalleryOpen] = useState(false);
-
-  const confirmPassword = (passwordInput: string) => {
-    if (selectedPhotoTalk?.password === passwordInput) {
-      setEditingPhotoTalk(selectedPhotoTalk);
-      openEditor();
-      setSelectedPhotoTalk(null);
-    } else {
-      alert('비밀번호가 일치하지 않습니다.');
-    }
-  };
-
   return (
-    <div className="w-96">
-      <div className="column-center w-full">
+    <div className="w-full">
+      <div className="flex flex-col items-center gap-3">
         <div className="sub-title">PHOTO TALK</div>
         <div className="title">포토톡</div>
-        <button onClick={openEditor} className="select-btn">
-          작성하기
-        </button>
-      </div>
-      <div>
-        <button
-          onClick={() => setGalleryOpen(!isGalleryOpen)}
-          className="w-full flex justify-end px-8"
+        <p className="mb-2 text-center text-sm font-light">방명록 작성 문구</p>
+        <Link
+          to="/phototalk"
+          className="py-2 bg-button text-white hover:bg-button/80 rounded-full px-8"
         >
-          {isGalleryOpen ? (
-            <div className="select-btn bg-button bg-opacity-10">
-              <ImageIcon />
-            </div>
-          ) : (
-            <div className="select-btn">
-              <ImageIcon />
-            </div>
-          )}
-        </button>
-        {isGalleryOpen ? (
-          <div className="w-full p-4">
-            <h2 className="text-lg font-semibold mb-4">이미지 갤러리</h2>
-            <PhotoTalkGallery />
-          </div>
-        ) : (
-          <PhotoTalkCard onEdit={setSelectedPhotoTalk} />
-        )}
+          작성하러 가기
+        </Link>
       </div>
-      <PhotoTalkEditor />
-
-      <PasswordConfirmModal
-        isOpen={!!selectedPhotoTalk}
-        onClose={() => setSelectedPhotoTalk(null)}
-        onConfirm={confirmPassword}
-      />
     </div>
   );
 };

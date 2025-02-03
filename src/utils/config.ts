@@ -80,4 +80,6 @@ export const API = {
   INVITATIONS: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
   ATTENDANCE: () => `${BASE_URL}/attendances`,
   CHANGEPASSWORD: () => `${BASE_URL}/users/account/password`,
+  PHOTOTALKS: (id?: string, page?: number, size?: number) =>
+    `${BASE_URL}/celebrationMsgs/${id ? id : ''}${page ? `/?page=${page}` : ''}${size ? `&size=${size}` : ''}`,
 };

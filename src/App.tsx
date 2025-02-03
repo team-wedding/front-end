@@ -1,5 +1,4 @@
 import './App.css';
-import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import { Route, Routes } from 'react-router';
@@ -26,20 +25,25 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route path={'/'} element={<HomePage />} />
         <Route path={'/dashboard'} element={<DashBoardPage />} />
         <Route path={'/login'} element={<LoginPage />} />
         <Route path="/email-login" element={<EmailLoginPage />} />
-        <Route path={"/reset-password"} element={<ResetPasswordPage />} />
+        <Route path={'/reset-password'} element={<ResetPasswordPage />} />
         <Route path={'/signup'} element={<SignUpPage />} />
         <Route path={'/mypage'} element={<MyPage />} />
         <Route path={'/mypage/edit'} element={<EditProfilePage />} />
-        <Route path={"/mypage/edit/password"} element={<ChangePasswordPage />} />
+        <Route
+          path={'/mypage/edit/password'}
+          element={<ChangePasswordPage />}
+        />
         <Route path={'/mypage/rsvp'} element={<RsvpStatsPage />} />
         <Route path={'/create'} element={<CreateInvitationPage />} />
         <Route path={'/edit/:id'} element={<EditInvitationPage />} />
         <Route path={'/preview'} element={<PreviewInvitaionPage />} />
-        <Route path={'/result/:id'} element={<ResultPage />} />
+        <Route
+          path={'/result/:userId/:invitationId'}
+          element={<ResultPage />}
+        />
         <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
         <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
         <Route path={'*'} element={<NotFound404 />} />

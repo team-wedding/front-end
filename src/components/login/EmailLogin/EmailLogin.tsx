@@ -38,7 +38,8 @@ const EmailLogin = () => {
     try {
       await postEmailLogin(loginInfo);
       await fetchUserInfo();
-      navigate('/');
+
+      navigate('/dashboard');
     } catch (error) {
       console.log('이메일 로그인 실패', error);
     }
@@ -72,10 +73,11 @@ const EmailLogin = () => {
         placeholder="비밀번호 입력"
       />
       <button
-        className={`h-12 mt-4 mb-4 text-sm font-medium rounded-lg shadow-sm transition duration-100 ease-out hover:ease-in ${isFormValid
-          ? 'bg-button text-primary hover:bg-rose-100'
-          : 'bg-gray-300 text-white cursor-not-allowed'
-          }`}
+        className={`h-12 mt-4 mb-4 text-sm font-medium rounded-lg shadow-sm transition duration-100 ease-out hover:ease-in ${
+          isFormValid
+            ? 'bg-button text-primary hover:bg-rose-100'
+            : 'bg-gray-300 text-white cursor-not-allowed'
+        }`}
         disabled={!isFormValid}
         onClick={handleSubmit}
       >

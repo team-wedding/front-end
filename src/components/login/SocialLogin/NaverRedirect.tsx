@@ -14,7 +14,7 @@ export const NaverRedirect = () => {
         try {
           await postNaverLogin(code);
           await fetchUserInfo();
-          navigate('/');
+          navigate('/dashboard');
         } catch (error) {
           console.error('네이버 로그인 실패', error);
         }

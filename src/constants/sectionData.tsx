@@ -6,9 +6,9 @@ import LocationSection from '@display/LocationSection/LocationSection';
 import MusicSection from '@display/MusicSection/MusicSection';
 import NoticeSection from '@display/NoticeSection/NoticeSection';
 import PhotoTalkSection from '@display/PhotoTalkSection/PhotoTalkSection';
-import RsvpSection from '@display/RsvpSection/RsvpSection';
 import ThumbnailSection from '@display/ThumbnailSection/ThumbnailSection';
 import AccountSection from '@/components/display/AccountSection/AccountSection';
+import AttendanceSection from '@/components/display/AttendanceSection/AttendanceSection';
 
 export interface SectionItemData {
   section: React.ReactNode;
@@ -28,7 +28,7 @@ export const sectionData: SectionItemData[] = [
     hasDrag: false,
   },
   {
-    section: <RsvpSection />,
+    section: <AttendanceSection />,
     feature: 'rsvp',
     hasDrag: false,
   },

@@ -93,7 +93,7 @@ const PhotoTalkCard = ({
             )}
           </div>
 
-          <div className="my-5 w-96">
+          <div className="my-5">
             <Slider {...sliderSettings}>
               {talk.images.map((image, imgIndex) => (
                 <div key={imgIndex}>

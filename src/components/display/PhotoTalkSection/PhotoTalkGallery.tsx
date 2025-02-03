@@ -3,11 +3,28 @@ import usePhotoTalkStore from '@store/usePhotoTalkStore';
 import ChevronLeft from '@icons/Chevron_LeftIcon';
 import ChevronRight from '@icons/Chevron_RightIcon';
 
-const PhotoTalkGallery = () => {
+interface PhotoTalkGalleryProps {
+  isAdmin?: boolean;
+}
+
+const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
   const getAllImages = usePhotoTalkStore((state) => state.getAllImages);
   const images = getAllImages();
+  const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  const toggleSelectImage = (url: string) => {
+    setSelectedImages((prevSelected) =>
+      prevSelected.includes(url)
+        ? prevSelected.filter((img) => img !== url)
+        : [...prevSelected, url],
+    );
+  };
+
+  const downloadSelectedImages = () => {
+    console.log('downloaded');
+  };
 
   const openModal = (index: number) => {
     setCurrentImageIndex(index);
@@ -34,15 +51,40 @@ const PhotoTalkGallery = () => {
 
   return (
     <div>
-      <div className="grid grid-cols-3 gap-4">
+      {isAdmin && (
+        <div className="flex justify-between items-center p-4">
+          <h2 className="text-lg font-semibold">이미지 갤러리</h2>
+          <div className="flex gap-2">
+            <button
+              onClick={downloadSelectedImages}
+              className="select-btn"
+              disabled={selectedImages.length === 0}
+            >
+              다운로드
+            </button>
+          </div>
+        </div>
+      )}
+
+      <div className="grid grid-cols-3 gap-4 p-4">
         {images.map((url, index) => (
-          <img
-            key={index}
-            src={url}
-            alt={`Uploaded ${index}`}
-            className="h-24 w-full rounded-lg object-cover cursor-pointer"
-            onClick={() => openModal(index)}
-          />
+          <div key={index} className="relative group">
+            {isAdmin && (
+              <input
+                type="checkbox"
+                checked={selectedImages.includes(url)}
+                onChange={() => toggleSelectImage(url)}
+                className="absolute top-2 right-2 w-5 h-5 rounded cursor-pointer z-10"
+              />
+            )}
+
+            <img
+              src={url}
+              alt={`Uploaded ${index}`}
+              className="h-24 w-full rounded-lg object-cover cursor-pointer border-2"
+              onClick={() => openModal(index)}
+            />
+          </div>
         ))}
       </div>
 

@@ -36,17 +36,17 @@ const PhotoTalkList = ({ isAdmin }: PhotoTalkListProps) => {
 
   return (
     <div className="w-full">
-      <button
-        onClick={() => setGalleryOpen(!isGalleryOpen)}
-        className="w-full flex justify-end px-8"
-      >
-        <div className="select-btn">
+      <div className="flex justify-end mx-8">
+        <button
+          onClick={() => setGalleryOpen(!isGalleryOpen)}
+          className="select-btn"
+        >
           {isGalleryOpen ? '목록 보기' : '갤러리 보기'}
-        </div>
-      </button>
+        </button>
+      </div>
 
       {isGalleryOpen ? (
-        <PhotoTalkGallery />
+        <PhotoTalkGallery isAdmin={isAdmin} />
       ) : (
         <PhotoTalkCard
           onEdit={(talk) => {

@@ -43,7 +43,17 @@ const RsvpModal = ({ setModal }: ModalProp) => {
     weddingHallDetail,
   } = useAddressStore();
   const { brideGroom } = useBrideGroomStore();
-  const locationText = `장소: ${address},   ${jibunAddress}, ${weddingHallName},  ${weddingHallDetail}, ${zonecode}`;
+  const locationLists = [
+    address,
+    jibunAddress,
+    weddingHallName,
+    weddingHallDetail,
+    zonecode
+  ]
+    .filter(Boolean)
+    .join(", ");
+
+  const locationText = "장소: " + locationLists;
   const dateText = `날짜: ${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일  ${weddingTime.hour}시 ${weddingTime.minute}분  `;
   const { rsvpTitle, rsvpDescription } = useRSVPStore();
 

@@ -7,17 +7,18 @@ import { AccordionItemData } from '@constants/accordionData';
 import { accordionData } from '@constants/accordionData';
 import { Stepper } from '@common/CreateInvitation/Stepper';
 import { StepNavigation } from '@common/CreateInvitation/StepNavigation';
-import { DndProvider } from 'react-dnd';
-import { HTML5Backend } from 'react-dnd-html5-backend';
 import ResultDisplay from '@display/ResultDisplay';
 import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
 import { getInvitationAction, useUpdateInvitationStore } from '../actions/invitationAction';
-import { InvitationDetiail } from '../types/invitationType';
+import { InvitationDetiail, NoticeDetail } from '../types/invitationType';
 import { useAccordionStore } from '@/store/useAccordionStore';
 import resetAllStores from '@/store/resetStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import { useS3Image } from '@/hooks/useS3Image';
 import useImageStore from '@/store/useImageStore';
+import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
+import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
+import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 
 const EditInvitationPage = () => {
   const navigate = useNavigate();
@@ -28,6 +29,20 @@ const EditInvitationPage = () => {
   const { uploadedImageFile } = useImageStore()
   const { mutateAsync: s3Mutate } = useS3Image();
   const details = getInvitationAction();
+  const { galleryFiles, grid } = useGalleryStore()
+  const { notices } = useNoticeStore()
+  const noticeImages = notices.flatMap((value) => {
+    if (value.imgFile) {
+      return value.imgFile
+    } else return null
+  })  // useMutation을 직접 변수에 할당
+  const { optionalItems } = useAccordionStore();
+  const findOrder = (feature: string) => {
+    if (!feature) return undefined; // feature가 없으면 undefined 반환
+    const result = optionalItems.find((value) => value.feature === feature);
+    return result?.order;
+  };
+  const { selectedOptionalFeatures } = useOptionalFeatureStore();
 
   useEffect(() => {
     setOrderItems()
@@ -36,12 +51,30 @@ const EditInvitationPage = () => {
 
   const handleSave = async () => {
     try {
-      if (uploadedImageFile && id) {
-        const { imageUrls } = await s3Mutate([uploadedImageFile!]);
-        await editInvitation({ ...details, imgUrl: imageUrls[0] }
+      const { imageUrls: thumbnail } = await s3Mutate(uploadedImageFile ? [uploadedImageFile!] : []);
+      const { imageUrls: gallery } = await s3Mutate(galleryFiles.length && galleryFiles.length > 0 ? galleryFiles : [])
+      const { imageUrls: noticeImg1 } = await s3Mutate(noticeImages[0] ? [noticeImages[0]] : []);
+      const { imageUrls: noticeImg2 } = await s3Mutate(noticeImages[1] ? [noticeImages[1]] : []);
+      const { imageUrls: noticeImg3 } = await s3Mutate(noticeImages[2] ? [noticeImages[2]] : []);
+      const { imageUrls: noticeImg4 } = await s3Mutate(noticeImages[3] ? [noticeImages[3]] : []);
+      const { imageUrls: noticeImg5 } = await s3Mutate(noticeImages[4] ? [noticeImages[4]] : []);
+      const noticeS3ImageList = [noticeImg1, noticeImg2, noticeImg3, noticeImg4, noticeImg5]
+      const noticeList: NoticeDetail[] = await notices.map((value, index) => {
+        return {
+          ...value,
+          order: findOrder('notice'),
+          isActive: selectedOptionalFeatures.notice,
+          image: noticeS3ImageList[index][0]
+        };
+      });
+      if (id) {
+        await editInvitation({
+          ...details,
+          imgUrl: thumbnail.length > 0 ? thumbnail[0] : "",
+          galleries: [{ images: gallery, grid, isActive: selectedOptionalFeatures.gallery },],
+          notices: noticeList
+        }
         );
-      } else {
-        await editInvitation({ ...details, imgUrl: "" })
       }
     } catch (err) {
       console.log(err)
@@ -131,14 +164,14 @@ const EditInvitationPage = () => {
             onStepClick={handleStepClick}
           />
           <div className="bg-background bg-opacity-10 min-h-screen  font-Pretendard">
-            <DndProvider backend={HTML5Backend}>
-              <Accordion
-                items={items}
-                expandedIds={expandedIds}
-                toggleExpand={toggleExpand}
-                moveItem={moveItem}
-              />
-            </DndProvider>
+
+            <Accordion
+              items={items}
+              expandedIds={expandedIds}
+              toggleExpand={toggleExpand}
+              moveItem={moveItem}
+            />
+
           </div>
         </PageLayout>
       </div>

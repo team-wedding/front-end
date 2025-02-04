@@ -4,11 +4,10 @@
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
   ],
-  "include": ["vite.config.ts", "src"],
   "compilerOptions": {
     "target": "ESNext", // es버젼을 사용하겠다.
     "useDefineForClassFields": true, // class field를 사용하겠다.
-    "lib": ["DOM", "DOM.Iterable", "ESNext"], // 사용할 라이브러리를 설정한다.
+    "lib": ["ES2023", "DOM", "DOM.Iterable", "ESNext"], // 사용할 라이브러리를 설정한다.
     "allowJs": false, // js를 사용하지 않겠다.
     "skipLibCheck": true, // 모든 선언 파일(*.d.ts)의 타입 검사를 건너뜁니다
     "esModuleInterop": false,

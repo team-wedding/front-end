@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import AccountNumberItem from '@common/AccountNumberItem/AccountNumberItem';
-
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import SectionTitle from '@/components/common/SectionTitle';
 import useAccountStore from '@/store/OptionalFeature/useAccountFeatureStore';
@@ -44,21 +43,24 @@ const AccountSection = () => {
               {!allEmpty && (
                 <>
                   <div
-                    className={`flex py-3 px-5  cursor-default justify-between items-center  ${value.role === '신랑' ? 'bg-sky-50 bg-opacity-70' : 'bg-pink-50 bg-opacity-70'} rounded-md ${isOpen && 'rounded-b-none'
-                      }`}
+                    className={`flex py-3 px-5  cursor-default justify-between items-center  ${value.role === '신랑' ? 'bg-sky-50 bg-opacity-70' : 'bg-pink-50 bg-opacity-70'} rounded-md ${
+                      isOpen && 'rounded-b-none'
+                    }`}
                     onClick={() =>
                       toggleAccordion(value.role === '신랑' ? 'groom' : 'bride')
                     }
                   >
                     <div className="font-medium">{`${value.role}측 계좌번호`}</div>
                     <i
-                      className={`bx bx-chevron-down text-lg transition-all duration-300 ${isOpen ? 'rotate-180' : ''
-                        }`}
+                      className={`bx bx-chevron-down text-lg transition-all duration-300 ${
+                        isOpen ? 'rotate-180' : ''
+                      }`}
                     ></i>
                   </div>
                   <div
-                    className={`overflow-hidden transition-all shadow-inner bg-white ${isOpen ? 'h-fit' : 'h-0'
-                      }`}
+                    className={`overflow-hidden transition-all shadow-inner bg-white ${
+                      isOpen ? 'h-fit' : 'h-0'
+                    }`}
                   >
                     {!accountEmpty && (
                       <AccountNumberItem

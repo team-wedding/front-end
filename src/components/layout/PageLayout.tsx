@@ -6,7 +6,7 @@ type PageLayoutProps = {
   leftButton?: React.ReactNode;
   rightButton?: React.ReactNode;
   children?: React.ReactNode;
-  customFooter?: React.ReactNode;
+  customFooter?: React.ReactNode | false;
 };
 
 const PageLayout = ({
@@ -14,7 +14,7 @@ const PageLayout = ({
   leftButton,
   rightButton,
   children,
-  customFooter,
+  customFooter = <Footer />,
 }: PageLayoutProps) => {
   return (
     <div className="layout">
@@ -28,9 +28,7 @@ const PageLayout = ({
 
       <div className="layout-content">{children}</div>
 
-      {customFooter !== null && (
-        <div className="layout-footer">{customFooter || <Footer />}</div>
-      )}
+      {customFooter && <div className="layout-footer">{customFooter}</div>}
     </div>
   );
 };

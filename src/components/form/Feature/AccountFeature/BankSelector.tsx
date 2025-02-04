@@ -57,7 +57,7 @@ const BankSelector: React.FC<{
         ></i>
       </div>
       {isOpen && (
-        <ul className="absolute z-10 w-28 mt-2 bg-white border border-gray-300 rounded-xl max-h-36 overflow-y-auto">
+        <ul className="absolute z-[5] w-28 mt-2 bg-white border border-gray-300 rounded-xl max-h-36 overflow-y-auto">
           {banks.map((bank) => (
             <li
               key={bank.id}

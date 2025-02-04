@@ -15,7 +15,8 @@ export default {
         background: '#B78181', // 10 opacity
         information: '#E7ABAB', // 80 opacity
         highlight: '#964b00',
-        button: 'rgba(253, 151, 151)', // 20 opacity
+        button: 'rgba(253, 151, 151)',
+        button20: 'rgba(253, 151, 151, 0.2)', // 20 opacity
         border: '#DDDDDD',
         footer: '#F9EDED',
         image: '#F8FAFB',

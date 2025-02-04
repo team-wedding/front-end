@@ -8,11 +8,11 @@ const RsvpExample = () => {
   const {
     rsvpTitle,
     rsvpDescription,
-    rsvpIncludeMeal,
-    rsvpIncludePopulation,
+    // rsvpIncludeMeal,
+    // rsvpIncludePopulation,
     setRSVPonChange,
-    setRSVPIncludeMeal,
-    setRSVPIncludePopulation,
+    // setRSVPIncludeMeal,
+    // setRSVPIncludePopulation,
   } = useRSVPStore();
 
   return (

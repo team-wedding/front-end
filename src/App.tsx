@@ -38,9 +38,12 @@ function App() {
         <Route path={'/create'} element={<CreateInvitationPage />} />
         <Route path={'/edit/:id'} element={<EditInvitationPage />} />
         <Route path={'/preview'} element={<PreviewInvitaionPage />} />
-        <Route path={'/result/:userId/:invitaionId'} element={<ResultPage />} />
         <Route
-          path={'/phototalk/:userId/:invitaionId'}
+          path={'/result/:userId/:invitationId'}
+          element={<ResultPage />}
+        />
+        <Route
+          path={'/phototalk/:userId/:invitationId'}
           element={<PhotoTalkPage />}
         />
 

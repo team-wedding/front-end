@@ -4,9 +4,7 @@ import ChevronRight from '@icons/Chevron_RightIcon';
 import CloseIcon from '@/components/icons/CloseIcon';
 import { useLocation } from 'react-router';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
-import useGallaryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
-import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 
 export default function GallerySection() {
   const { galleryImages, grid } = useGalleryStore();

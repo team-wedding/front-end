@@ -5,11 +5,11 @@ import CalendarIcon from '@icons/CalendarIcon';
 import PinIcon from '@icons/PinIcon';
 import { GuestInfo } from '@/types/GuestType';
 import { postAttendance } from '@/services/statsService';
-import { useUserStore } from '@/store/useUserStore';
 import useRSVPStore from '@/store/useRSVPStore';
 import { useWeddingStore } from '@/store/useWeddingStore';
 import useAddressStore from '@/store/useAddressStore';
 import useBrideGroomStore from '@/store/useBrideGroomStore';
+import { useParams } from 'react-router';
 
 type InfoDetail = Omit<GuestInfo, 'userId' | 'invitationId'>;
 
@@ -47,12 +47,12 @@ const RsvpModal = ({
     }));
   };
 
-  const { id } = useUserStore();
+  const { userId, invitationId } = useParams();
 
   const handleSubmit = async () => {
     try {
-      console.log(id);
-      const response = await postAttendance({ ...info, userId: id, invitationId: 1 });
+      // console.log(id);
+      const response = await postAttendance({ ...info, userId: Number(userId), invitationId: Number(invitationId) });
       console.log(response);
       setModal(false);
     } catch (error) {

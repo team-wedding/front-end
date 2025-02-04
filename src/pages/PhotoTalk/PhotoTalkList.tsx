@@ -4,6 +4,8 @@ import PhotoTalkCard from '@/pages/PhotoTalk/PhotoTalkCard';
 import PhotoTalkGallery from '@/pages/PhotoTalk/PhotoTalkGallery';
 import PasswordConfirmModal from '@/pages/PhotoTalk/PasswordConfirmModal';
 import PhotoTalkEditor from '@/pages/PhotoTalk/PhotoTalkEditor';
+import ListIcon from '@/components/icons/ListIcon';
+import ImageIcon from '@/components/icons/ImageIcon';
 
 interface PhotoTalkListProps {
   isAdmin: boolean;
@@ -58,7 +60,7 @@ const PhotoTalkList = ({ isAdmin }: PhotoTalkListProps) => {
           onClick={() => setGalleryOpen(!isGalleryOpen)}
           className="select-btn"
         >
-          {isGalleryOpen ? '목록 보기' : '갤러리 보기'}
+          {isGalleryOpen ? <ListIcon /> : <ImageIcon />}
         </button>
       </div>
 

@@ -1,8 +1,8 @@
-function TrashBinIcon() {
+const ListIcon = () => {
   return (
     <div>
       <svg
-        className="w-[20px] h-[20px] text-gray-800 dark:text-white hover:text-red-500"
+        className="w-6 h-6 text-gray-800 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"
@@ -13,13 +13,12 @@ function TrashBinIcon() {
         <path
           stroke="currentColor"
           strokeLinecap="round"
-          strokeLinejoin="round"
           strokeWidth="2"
-          d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z"
+          d="M9 8h10M9 12h10M9 16h10M4.99 8H5m-.02 4h.01m0 4H5"
         />
       </svg>
     </div>
   );
-}
+};
 
-export default TrashBinIcon;
+export default ListIcon;

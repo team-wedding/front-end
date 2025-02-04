@@ -4,6 +4,7 @@ import MenuDotsIcon from '@icons/MenuDotsIcon';
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import EditIcon from '@/components/icons/EditIcon';
 
 const PhotoTalkCard = ({
   onEdit,
@@ -50,70 +51,77 @@ const PhotoTalkCard = ({
 
   return (
     <div className="flex flex-col gap-4 w-full p-8">
-      {photoTalks.map((talk, index) => (
-        <div
-          key={talk.id}
-          className="flex flex-col gap-2 bg-white w-full p-6 pb-4 rounded-md shadow-md border border-gray-200 relative"
-        >
-          <div
-            className="absolute top-2 right-3"
-            ref={(el) => (dropdownRefs.current[index] = el)}
-          >
-            <button
-              className="inline-block text-gray-500 hover:bg-gray-100 rounded-lg text-sm"
-              type="button"
-              onClick={() => toggleDropdown(index)}
-              aria-label="메뉴 열기"
-            >
-              <MenuDotsIcon />
-            </button>
-            {openDropdownIndex === index && (
-              <div className="absolute top-6 right-0 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
-                <ul className="py-2">
-                  <li>
-                    <button
-                      onClick={() => onEdit(talk)}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      aria-label="편집하기"
-                    >
-                      편집하기
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => onDelete(talk)}
-                      className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                      aria-label="삭제하기"
-                    >
-                      삭제하기
-                    </button>
-                  </li>
-                </ul>
-              </div>
-            )}
-          </div>
-
-          <div className="my-3">
-            <Slider {...sliderSettings}>
-              {talk.images.map((image, imgIndex) => (
-                <div key={imgIndex}>
-                  <img
-                    src={image}
-                    alt={`Uploaded ${imgIndex}`}
-                    className="h-48 w-full object-cover rounded-md"
-                  />
-                </div>
-              ))}
-            </Slider>
-          </div>
-
-          <p className="text-gray-700">{talk.content}</p>
-          <div className="flex justify-end p-2">
-            <span className="font-light px-2">From</span>
-            <p className="text-gray-700">{talk.name}</p>
-          </div>
+      {photoTalks.length === 0 ? (
+        <div className="flex flex-col items-center gap-4 bg-white w-full p-8 rounded-md shadow-md border border-gray-200 text-gray-500">
+          <EditIcon className="size-[28px]" strokeWidth={2} />
+          <p>첫번째 포토톡을 남겨주세요</p>
         </div>
-      ))}
+      ) : (
+        photoTalks.map((talk, index) => (
+          <div
+            key={talk.id}
+            className="flex flex-col gap-2 bg-white w-full p-6 pb-4 rounded-md shadow-md border border-gray-200 relative"
+          >
+            <div
+              className="absolute top-2 right-3"
+              ref={(el) => (dropdownRefs.current[index] = el)}
+            >
+              <button
+                className="inline-block text-gray-500 hover:bg-gray-100 rounded-lg text-sm"
+                type="button"
+                onClick={() => toggleDropdown(index)}
+                aria-label="메뉴 열기"
+              >
+                <MenuDotsIcon />
+              </button>
+              {openDropdownIndex === index && (
+                <div className="absolute top-6 right-0 z-10 bg-white divide-y divide-gray-100 rounded-lg shadow w-44">
+                  <ul className="py-2">
+                    <li>
+                      <button
+                        onClick={() => onEdit(talk)}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        aria-label="편집하기"
+                      >
+                        편집하기
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        onClick={() => onDelete(talk)}
+                        className="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                        aria-label="삭제하기"
+                      >
+                        삭제하기
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            <div className="my-3">
+              <Slider {...sliderSettings}>
+                {talk.images.map((image, imgIndex) => (
+                  <div key={imgIndex}>
+                    <img
+                      src={image}
+                      alt={`Uploaded ${imgIndex}`}
+                      className="h-48 w-full object-cover rounded-md"
+                    />
+                  </div>
+                ))}
+              </Slider>
+            </div>
+
+            <p className="text-gray-700">{talk.content}</p>
+            <div className="flex justify-end p-2">
+              <span className="font-light px-2">From</span>
+              <p className="text-gray-700">{talk.name}</p>
+            </div>
+          </div>
+        ))
+      )}
     </div>
   );
 };

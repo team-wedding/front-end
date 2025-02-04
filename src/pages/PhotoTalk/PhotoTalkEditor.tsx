@@ -116,7 +116,7 @@ const PhotoTalkEditor = () => {
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="bg-white rounded-lg shadow-md h-3/4 min-h-fit w-3/4"
+        className="bg-white rounded-lg shadow-md min-h-fit w-4/5"
       >
         <div className="flex flex-col">
           <div className="flex items-center justify-between p-4 border-b rounded-t">

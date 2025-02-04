@@ -24,13 +24,13 @@ const PreviewInvitaionPage = () => {
       rightButton={
         <div className="flex space-x-4">
           <HeaderButton onClick={() => console.log('수정하기 클릭')}>
-            <EditIcon />
+            <EditIcon className="size-[20px]" strokeWidth={1.5} />
           </HeaderButton>
           <HeaderButton onClick={() => console.log('공유하기 클릭')}>
             <ShareIcon />
           </HeaderButton>
           <HeaderButton onClick={() => console.log('삭제하기 클릭')}>
-            <TrashIcon />
+            <TrashIcon className="size-5" strokeWidth={1.5} />
           </HeaderButton>
         </div>
       }

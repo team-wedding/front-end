@@ -1,7 +1,7 @@
 import { Link, useNavigate } from 'react-router';
-import PageLayout from '../components/layout/PageLayout';
-import BackIcon from '../components/icons/BackIcon';
 import Signup from '@/components/Signup';
+import PageLayout from '@/components/layout/PageLayout';
+import BackIcon from '@/components/icons/BackIcon';
 
 const SignUpPage = () => {
   const navigate = useNavigate();

@@ -8,6 +8,9 @@ import PhotoTalkGallery from '@/components/common/PhotoTalk/PhotoTalkGallery';
 import PasswordConfirmModal from '@/components/common/PhotoTalk/PasswordConfirmModal';
 // import PhotoTalkEditor from '@/components/common/PhotoTalk/PhotoTalkEditor';
 import { PhotoTalk } from '@/types/phototalkType';
+import ListIcon from '@/components/icons/ListIcon';
+import ImageIcon from '@/components/icons/ImageIcon';
+import EditIcon from '@/components/icons/EditIcon';
 
 interface PhotoTalkListProps {
   isAdmin: boolean;
@@ -103,7 +106,7 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
           onClick={() => setGalleryOpen(!isGalleryOpen)}
           className="select-btn"
         >
-          {isGalleryOpen ? '목록 보기' : '갤러리 보기'}
+          {isGalleryOpen ? <ListIcon /> : <ImageIcon />}
         </button>
       </div>
 
@@ -125,7 +128,10 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
           />
         ))
       ) : (
-        <div className="flex-center m-10">등록된 포토톡이 없습니다.</div>
+        <div className="flex flex-col items-center gap-3 bg-white p-8 m-12 rounded-md shadow-md border border-gray-200 text-gray-600">
+          <EditIcon className="size-[28px]" strokeWidth={2} />
+          <p className="text-sm font-light">첫 번째 포토톡을 작성해 주세요</p>
+        </div>
       )}
 
       {!isAdmin && (

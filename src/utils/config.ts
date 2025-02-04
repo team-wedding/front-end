@@ -82,4 +82,5 @@ export const API = {
   CHANGEPASSWORD: () => `${BASE_URL}/users/account/password`,
   PHOTOTALKS: (id?: string, page?: number, size?: number) =>
     `${BASE_URL}/celebrationMsgs/${id ? id : ''}${page ? `/?page=${page}` : ''}${size ? `&size=${size}` : ''}`,
+  S3Images: () => `${BASE_URL}/imageUpload/?directory=invitaion`,
 };

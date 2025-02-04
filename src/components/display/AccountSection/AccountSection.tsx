@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import AccountNumberItem from '@common/AccountNumberItem/AccountNumberItem';
+
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import SectionTitle from '@/components/common/SectionTitle';
 import useAccountStore from '@/store/OptionalFeature/useAccountFeatureStore';
@@ -66,24 +67,24 @@ const AccountSection = () => {
                       <AccountNumberItem
                         bank={accountInfo.bankName}
                         accountNumber={accountInfo.accountNumber}
-                        name={accountInfo.accountHolder}
-                        kakaoLink={accountInfo.kakaoPayQRCode}
+                        name={accountInfo.accountHolderName}
+                        kakaoLink={accountInfo.kakaoUrl}
                       />
                     )}
                     {!fatherAccountEmpty && (
                       <AccountNumberItem
                         bank={fatherAccountInfo.bankName}
                         accountNumber={fatherAccountInfo.accountNumber}
-                        name={fatherAccountInfo.accountHolder}
-                        kakaoLink={fatherAccountInfo.kakaoPayQRCode}
+                        name={fatherAccountInfo.accountHolderName}
+                        kakaoLink={fatherAccountInfo.kakaoUrl}
                       />
                     )}
                     {!mothreAccountEmpty && (
                       <AccountNumberItem
                         bank={motherAccountInfo.bankName}
                         accountNumber={motherAccountInfo.accountNumber}
-                        name={motherAccountInfo.accountHolder}
-                        kakaoLink={motherAccountInfo.kakaoPayQRCode}
+                        name={motherAccountInfo.accountHolderName}
+                        kakaoLink={motherAccountInfo.kakaoUrl}
                         last={true}
                       />
                     )}

@@ -4,7 +4,6 @@ import SectionTitle from '@/components/common/SectionTitle';
 
 export default function AttendanceSection() {
   const [modal, setModal] = useState(false);
-  //TODO: 시간이라 날짜 어떻게 받을지
   return (
     <>
       <div className={`column-center gap-4 py-16 my-10 `}>
@@ -23,11 +22,6 @@ export default function AttendanceSection() {
       </div>
       {modal && (
         <RsvpModal
-          bride={'ㅇㅇㅇ'}
-          groom={'ㅇㅇㅇ'}
-          date={'ㅇㅇㅇ'}
-          time={'ㅇㅇㅇ'}
-          location={'ㅇㅇㅇ홀 ㅇㅇㅇ호 '}
           setModal={setModal}
         />
       )}

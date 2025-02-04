@@ -1,28 +1,19 @@
-import { useState } from 'react';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
+import useRSVPStore from '@/store/useRSVPStore';
 
 
-export interface RSVPDetails {
-  title: string;
-  desc: string;
-}
+
 
 const RsvpExample = () => {
-  const [rsvpDetail, setRsvpDetail] = useState<RSVPDetails>({
-    title: '',
-    desc: '',
-  });
-  // const [meal, setMeal] = useState(false);
-  // const [population, setPopulation] = useState(false);
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    setRsvpDetail({
-      ...rsvpDetail,
-      [name]: value,
-    });
-  };
+  const {
+    rsvpTitle,
+    rsvpDescription,
+    rsvpIncludeMeal,
+    rsvpIncludePopulation,
+    setRSVPonChange,
+    setRSVPIncludeMeal,
+    setRSVPIncludePopulation,
+  } = useRSVPStore();
 
   return (
     <div className="mx-4 my-6 text-xs">
@@ -37,8 +28,10 @@ const RsvpExample = () => {
         <div className="flex flex-col gap-2">
           <label className="label w-full">제목</label>
           <input
-            onChange={handleChange}
+            onChange={setRSVPonChange}
+            name="rsvpTitle"
             type="text"
+            value={rsvpTitle}
             placeholder="제목을 입력해주세요"
             className="formInput w-full"
           />
@@ -46,12 +39,14 @@ const RsvpExample = () => {
         <div className="flex flex-col gap-2">
           <label className="label w-full">내용</label>
           <textarea
-            onChange={handleChange}
-            placeholder="내용을 입력해주세요"
-            className="formInput w-full"
+            onChange={setRSVPonChange}
+            name="rsvpDescription"
+            value={rsvpDescription}
+            className="resize-none px-2 p-3 text-[10px] leading-3 rounded-md border border-gray-300 shadow-md"
+            placeholder="설명을 입력해주세요..."
           />
         </div>
-      </div >
+      </div>
     </div>
   );
 };

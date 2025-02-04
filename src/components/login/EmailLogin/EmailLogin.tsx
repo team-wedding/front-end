@@ -38,7 +38,6 @@ const EmailLogin = () => {
     try {
       await postEmailLogin(loginInfo);
       await fetchUserInfo();
-
       navigate('/dashboard');
     } catch (error) {
       console.log('이메일 로그인 실패', error);

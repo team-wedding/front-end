@@ -12,23 +12,33 @@ declare global {
 
 interface ShareProp {
   isFocused: boolean;
+  shareTitle: string;
+  shareDesc: string;
+  shareImage: string;
+  shareUrl: string;
+  shareHeader: string;
   setIsFocused: Dispatch<SetStateAction<boolean>>;
 }
 
 export default function ShareInvitation({
   isFocused,
+  shareDesc,
+  shareHeader,
+  shareImage,
+  shareUrl,
+  shareTitle,
   setIsFocused,
 }: ShareProp) {
   const canvas = useRef<HTMLCanvasElement | null>(null);
   const aRef = useRef(null);
   const [pngUrl, setPngUrl] = useState('');
 
-  let mock_Title = 'title is here';
-  let mock_Desc = 'description is here';
-  let mock_Image =
-    ' https://images.pexels.com/photos/29554688/pexels-photo-29554688/free-photo-of-romantic-wedding-couple-in-urban-tel-aviv-setting.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
-  let mock_Url = 'result';
-  let mock_Header = 'ㅇㅇㅇ 💌 ㅇㅇㅇ';
+  // let mock_Title = 'title is here';
+  // let mock_Desc = 'description is here';
+  // let mock_Image =
+  //   ' https://images.pexels.com/photos/29554688/pexels-photo-29554688/free-photo-of-romantic-wedding-couple-in-urban-tel-aviv-setting.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
+  // let mock_Url = 'result';
+  // let mock_Header = 'ㅇㅇㅇ 💌 ㅇㅇㅇ';
 
   useEffect(() => {
     if (window && window.Kakao) {
@@ -52,24 +62,23 @@ export default function ShareInvitation({
     window.Kakao.Share.sendCustom({
       templateId: 116215,
       templateArgs: {
-        THU: mock_Image,
-        headerShare: mock_Header,
-        title: mock_Title,
-        desc: mock_Desc,
-        url: mock_Url,
+        THU: shareImage,
+        headerShare: shareHeader,
+        title: shareTitle,
+        desc: shareDesc,
+        url: shareUrl,
       },
     });
   };
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText('http://localhost:5173/');
+    await navigator.clipboard.writeText(shareUrl);
     toast.success('클립보드에 복사되었습니다 😀', {
       className: 'bottom: 8rem',
       position: 'bottom-center',
       autoClose: 2000,
       hideProgressBar: true,
     });
-    // setIsFocused(false)
   };
 
   return (

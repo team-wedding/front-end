@@ -3,7 +3,12 @@ import InformationItem from '@/components/common/CreateInvitation/InformationIte
 const PhotoTalkFeature = () => {
   return (
     <div className="mx-4 my-6">
-      <InformationItem messages={['포토톡 기능에서 사용되는 예시입니다.']} />
+      <InformationItem
+        messages={[
+          '실시간 포토월 기능에서 사용되는 예시입니다.',
+          '관리자는 비밀번호 없이 방명록을 수정 및 삭제할 수 있습니다.',
+        ]}
+      />
 
       <hr />
 

@@ -8,20 +8,29 @@ import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 
 export default function GalleryFeature() {
   const fileRef = useRef<HTMLInputElement>(null);
-  const { images, grid, setImages, setGrid } = useGalleryStore();
+  const {
+    galleryImages,
+    grid,
+    setImages,
+    setGrid,
+    galleryFiles,
+    setGalleryFiles,
+  } = useGalleryStore();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (images.length + e.target.files!.length <= 9) {
+    if (galleryImages.length + e.target.files!.length <= 9) {
       const target = e.target.files as FileList;
       const fileArray = [...target].map((value: Blob) =>
         URL.createObjectURL(value),
       );
-      setImages([...images, ...fileArray]);
-    } else alert('이미지 초과?');
+      setImages([...galleryImages, ...fileArray]);
+      setGalleryFiles([...galleryFiles, ...target]);
+    } else alert('이미지개수가 9개를 초과할수없습니다!');
   };
 
   const handleDelete = (index: number) => {
-    setImages(images.filter((_, i) => i !== index));
+    setGalleryFiles(galleryFiles.filter((_, i) => i !== index));
+    setImages(galleryImages.filter((_, i) => i !== index));
   };
 
   const handleDrag = (e: React.DragEvent<HTMLLabelElement>) => {
@@ -37,14 +46,14 @@ export default function GalleryFeature() {
   const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     const files = e.dataTransfer.files;
+    setGalleryFiles([...galleryFiles, ...files]);
     if (files) {
       for (let file of files) {
         const reader = new FileReader();
         if (file) {
           reader.readAsDataURL(file);
           reader.onload = () => {
-            setImages([...images, reader.result as string]);
-            setImages([...images, reader.result as string]);
+            setImages([...galleryImages, reader.result as string]);
           };
         }
       }
@@ -68,10 +77,14 @@ export default function GalleryFeature() {
 
   const handleSortDrop = (index: number) => {
     if (draggedIndex === null) return;
-    const reorderedImages = [...images];
-    const [removed] = reorderedImages.splice(draggedIndex, 1);
-    reorderedImages.splice(index, 0, removed);
+    const reorderedImages = [...galleryImages];
+    const reorderedFiles = [...galleryFiles];
+    const [removedImage] = reorderedImages.splice(draggedIndex, 1);
+    const [removedFile] = reorderedFiles.splice(draggedIndex, 1);
+    reorderedImages.splice(index, 0, removedImage);
+    reorderedFiles.splice(index, 0, removedFile);
     setImages(reorderedImages);
+    setGalleryFiles(reorderedFiles);
     setDraggedIndex(null);
     setHoveredIndex(null);
   };
@@ -93,7 +106,7 @@ export default function GalleryFeature() {
 
       <div className="flex flex-col gap-5 my-10">
         <label
-          className={`${images.length === 0 ? `flex flex-col` : `grid grid-cols-2 justify-items-center gap-2 px-3 py-6 lg:px-1 lg:py-2 lg:grid-cols-3`} w-full h-fit border-2  rounded-lg cursor-pointer items-center overflow-y-scroll`}
+          className={`${galleryImages.length === 0 ? `flex flex-col` : `grid grid-cols-2 justify-items-center gap-2 px-3 py-6 lg:px-1 lg:py-2 lg:grid-cols-3`} w-full h-fit border-2  rounded-lg cursor-pointer items-center overflow-y-scroll`}
           htmlFor="dropzone"
           onDrop={handleDrop}
           onDragOver={handleDrag}
@@ -101,7 +114,7 @@ export default function GalleryFeature() {
           onDragEnter={handleDragEnter}
           onClick={(e) => e.preventDefault()}
         >
-          {images.length === 0 ? (
+          {galleryImages.length === 0 ? (
             <div className="flex flex-col items-center justify-center py-8">
               <p className="mb-2 text-gray-500">
                 <span className="font-semibold">Click to upload</span> or drag
@@ -112,7 +125,7 @@ export default function GalleryFeature() {
               </p>
             </div>
           ) : (
-            images.map((value, index) => {
+            galleryImages.map((value, index) => {
               return (
                 <div
                   className={`relative w-32 h-44 lg:w-24 lg:h-32 rounded-md flex items-center justify-center cursor-pointer ${hoveredIndex == index ? 'shadow-2xl' : 'shadow-none '}`}

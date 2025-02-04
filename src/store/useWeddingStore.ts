@@ -13,6 +13,7 @@ type WeddingStore = {
   };
   setWeddingDate: (date: Date | null) => void;
   setWeddingTime: (hour: number, minute: number) => void;
+  reset: () => void;
 };
 
 // 초기 상태 정의
@@ -36,9 +37,9 @@ export const useWeddingStore = create<WeddingStore>((set) => ({
     set({
       weddingDate: date,
       formattedDate: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate(),
+        year: date!.getFullYear(),
+        month: date!.getMonth() + 1,
+        day: date!.getDate(),
       },
     }),
   setWeddingTime: (hour, minute) =>

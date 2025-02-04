@@ -3,19 +3,14 @@ import ImageUploader from '@/components/common/ImageUploader';
 import useImageStore from '@/store/useImageStore';
 
 const ThumbnailFeature = () => {
-  const { uploadedImage, setUploadedImage } = useImageStore();
+  const { uploadedImageFile, setUploadedImageFile, uploadedImageUrl, setUploadedImageUrl } = useImageStore();
 
   return (
     <div className="mx-4 my-6">
       <InformationItem messages={['썸네일에 나타나는 사진입니다.']} />
-
       <hr />
-
       <div className="my-10">
-        <ImageUploader
-          initialImage={uploadedImage}
-          onImageUpload={setUploadedImage}
-        />
+        <ImageUploader ImageUrl={uploadedImageUrl} ImageFile={uploadedImageFile} setImageUrl={setUploadedImageUrl} setImageFile={setUploadedImageFile} />
       </div>
     </div>
   );

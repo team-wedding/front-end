@@ -3,33 +3,34 @@ import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 interface ImageUploaderProps {
-  // uploadedImage: string;
-  // setUploadedImage: (image: string) => void;
-  onImageUpload: (image: string) => void;
-  initialImage?: string;
+  // uploadedImageUrl: string;
+  // setUploadedImageUrl: (image: string) => void;
+  ImageUrl: string;
+  ImageFile: File | null;
+  setImageUrl: (url: string) => void;
+  setImageFile: (file: File | null) => void;
   maxWidth?: number;
   maxHeight?: number;
   acceptedFormats?: string[];
 }
 
 const ImageUploader = ({
-  // uploadedImage,
-  // setUploadedImage,
-  onImageUpload,
-  initialImage = '',
+  ImageUrl,
+  // ImageFile,
+  setImageFile,
+  setImageUrl,
   maxWidth = 5000,
   maxHeight = 5000,
   acceptedFormats = ['image/svg', 'image/png', 'image/jpg'],
 }: ImageUploaderProps) => {
   const fileInputRef = useRef<HTMLInputElement | null>(null);
-  const [uploadedImage, setUploadedImage] = useState<string>(initialImage);
+  const [uploadedImage, setUploadedImage] = useState<string>(ImageUrl);
   const [isDragging, setIsDragging] = useState(false);
 
   const validateImageSize = (file: File): Promise<boolean> => {
     return new Promise((resolve) => {
       const img = new Image();
       img.src = URL.createObjectURL(file);
-
       img.onload = () => {
         const isValid = img.width <= maxWidth && img.height <= maxHeight;
         resolve(isValid);
@@ -47,11 +48,12 @@ const ImageUploader = ({
       return;
     }
 
+    await setImageFile(file)
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.result && typeof reader.result === 'string') {
         setUploadedImage(reader.result);
-        onImageUpload(reader.result);
+        setImageUrl(reader.result)
       }
     };
     reader.readAsDataURL(file);
@@ -87,7 +89,8 @@ const ImageUploader = ({
 
   const handleImageDelete = () => {
     setUploadedImage('');
-    onImageUpload('');
+    setImageFile(null);
+    setImageUrl('')
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -101,11 +104,10 @@ const ImageUploader = ({
       {!uploadedImage ? (
         <label
           htmlFor={`dropzone-file-${randomId}`}
-          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${
-            isDragging
-              ? 'border-rose-300 bg-rose-50'
-              : 'border-gray-100 bg-gray-50'
-          }  rounded-xl cursor-pointer hover:bg-gray-100`}
+          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${isDragging
+            ? 'border-rose-300 bg-rose-50'
+            : 'border-gray-100 bg-gray-50'
+            }  rounded-xl cursor-pointer hover:bg-gray-100`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}

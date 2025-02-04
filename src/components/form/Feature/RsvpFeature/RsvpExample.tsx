@@ -1,18 +1,11 @@
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
 import useRSVPStore from '@/store/useRSVPStore';
 
-
-
-
 const RsvpExample = () => {
   const {
     rsvpTitle,
     rsvpDescription,
-    rsvpIncludeMeal,
-    rsvpIncludePopulation,
     setRSVPonChange,
-    setRSVPIncludeMeal,
-    setRSVPIncludePopulation,
   } = useRSVPStore();
 
   return (
@@ -42,8 +35,9 @@ const RsvpExample = () => {
             onChange={setRSVPonChange}
             name="rsvpDescription"
             value={rsvpDescription}
-            className="resize-none px-2 p-3 text-[10px] leading-3 rounded-md border border-gray-300 shadow-md"
-            placeholder="설명을 입력해주세요..."
+            rows={4}
+            className="formInput w-full"
+            placeholder="내용을 입력해주세요"
           />
         </div>
       </div>

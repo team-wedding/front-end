@@ -1,8 +1,8 @@
 import './App.css';
-import HomePage from './pages/HomePage';
+// import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import CreateInvitationPage from './pages/CreateInvitationPage';
 import PreviewInvitaionPage from './pages/PreviewInvitaionPage';
 import ResultPage from './pages/ResultPage';
@@ -26,7 +26,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        <Route path={'/'} element={<HomePage />} />
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path={'/dashboard'} element={<DashBoardPage />} />
         <Route path={'/login'} element={<LoginPage />} />
         <Route path="/email-login" element={<EmailLoginPage />} />

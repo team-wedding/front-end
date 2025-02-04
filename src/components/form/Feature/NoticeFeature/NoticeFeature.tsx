@@ -33,20 +33,20 @@ const NoticeFeature = () => {
     setSelectedNoticeId(null);
   };
 
-  const handleImageUpload = (id: number, file: File | null) => {
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        if (reader.result && typeof reader.result === 'string') {
-          updateNotice(id, 'image', reader.result);
-        }
-      };
-      reader.onerror = () => {
-        console.error('이미지를 읽는 중 오류가 발생했습니다.');
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleImageUpload = (id: number, file: File | null) => {
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       if (reader.result && typeof reader.result === 'string') {
+  //         updateNotice(id, 'image', reader.result);
+  //       }
+  //     };
+  //     reader.onerror = () => {
+  //       console.error('이미지를 읽는 중 오류가 발생했습니다.');
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   const accordionItems = useMemo(
     () =>

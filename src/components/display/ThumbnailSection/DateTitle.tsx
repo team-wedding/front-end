@@ -16,7 +16,8 @@ const DateTitle = () => {
   const dayOfWeek = dayOfWeeks[currentDate.getDay()];
 
   return (
-    <div className="column-center gap-1 tracking-wide font-Crimson font-light">
+    //remove font-Crimson
+    <div className="column-center gap-1 tracking-wide  font-light">
       <div className="text-3xl">{`${formattedDate.year} / ${formattedDate.month} / ${formattedDate.day}`}</div>
       <div>{dayOfWeek.toUpperCase()}</div>
     </div>

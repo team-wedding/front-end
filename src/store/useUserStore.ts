@@ -2,7 +2,7 @@ import { getUserInfo } from '@/services/userService';
 import { create } from 'zustand';
 
 interface UserState {
-    id: number | null;
+    id: number;
     email: string | null;
     name: string | null;
     provider: string | null;
@@ -12,13 +12,13 @@ interface UserState {
 }
 
 export const useUserStore = create<UserState>((set) => ({
-    id: null,
+    id: 0,
     email: null,
     name: null,
     provider: null,
 
     setUser: (id, email, name, provider) => set({ id, email, name, provider }),
-    clearUser: () => set({ id: null, email: null, name: null, provider: null }),
+    clearUser: () => set({ id: 0, email: null, name: null, provider: null }),
     fetchUserInfo: async () => {
         try {
             const userInfo = await getUserInfo();

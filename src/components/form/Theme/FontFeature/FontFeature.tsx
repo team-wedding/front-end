@@ -2,7 +2,7 @@ import fonts from "@constants/fonts";
 import useThemeStore from "@store/useThemeStore";
 
 
-const ThemeFeature = () => {
+const FontFeature = () => {
   const { fontIndex, setFont, bigSize, updateSize } = useThemeStore();
   const handleFonts = (index: number) => {
     setFont(fonts[index].font, index)
@@ -34,4 +34,4 @@ const ThemeFeature = () => {
 
   );
 };
-export default ThemeFeature
+export default FontFeature

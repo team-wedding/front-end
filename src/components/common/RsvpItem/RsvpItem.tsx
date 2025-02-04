@@ -16,23 +16,23 @@ export default function RsvpItem({
   bride,
 }: RsvpDetail) {
   return (
-    <div className="flex flex-row justify-between text-gray-700 items-center p-2 shadow-md border border-gray-100 rounded-lg bg-white">
+    <div className="flex flex-row justify-between text-gray-700 items-center p-2 border border-gray-300 rounded-lg bg-white">
       <div
-        className={`flex flex-col items-start ${total && 'font-semibold p-3 text-2xl'}`}
+        className={`flex flex-col items-start ${total && 'p-2 text-xl'}`}
       >
         {title}
         {description && <div className="text-sm mt-1">{description}</div>}
       </div>
       <div
-        className={`flex flex-row gap-2 ${bride == undefined ? 'text-gray-700' : bride ? 'text-red-400' : 'text-blue-400'} ${total ? 'text-3xl font-semibold pr-10' : 'text-base font-bold pr-2'}`}
+        className={`flex flex-row gap-2 ${bride == undefined ? 'text-gray-700' : bride ? 'text-red-400' : 'text-blue-400'} ${total ? 'text-xl font-medium pr-2' : 'text-base font-semibold pr-2'}`}
       >
         {attend}
-        {unattend && (
-          <div className=" text-xs text-gray-600 self-center ">
+        {
+          unattend !== undefined && <div className="text-xs text-gray-600 self-center">
             {' '}
             {`/ ${unattend}`}
           </div>
-        )}
+        }
       </div>
     </div>
   );

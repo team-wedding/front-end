@@ -36,7 +36,7 @@ const NoticeSection = () => {
             <Slider {...settings} className="pb-2">
               {notices.map((notice) => (
                 <div
-                  key={notice.id}
+                  key={notice.noticeId}
                   className="rounded-lg py-10 px-8 mx-auto text-center bg-gray-50"
                 >
                   {notice.image && (

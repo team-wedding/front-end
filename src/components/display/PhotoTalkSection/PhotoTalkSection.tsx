@@ -1,6 +1,9 @@
-import { Link } from 'react-router';
+import { Link, useParams } from 'react-router';
 
 const PhotoTalkSection = () => {
+  const { userId, invitationId } = useParams()
+  console.log("userId : ", userId)
+  console.log("invitaionsId : ", invitationId)
   return (
     <div className="w-96">
       <div className="column-center w-full">

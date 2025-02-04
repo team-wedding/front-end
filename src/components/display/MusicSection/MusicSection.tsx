@@ -1,7 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+//import { useEffect, useRef, useState } from 'react';
 import PlayButton from '../../form/Theme/MusicFeature/PlayButton';
 import { useOptionalFeatureStore } from '../../../store/OptionalFeature/useOptionalFeatureStore';
-import { useMusicFeatureStore } from '../../../store/OptionalFeature/useMusicFeatureStore';
+//import { useMusicFeatureStore } from '../../../store/OptionalFeature/useMusicFeatureStore';
 
 const MusicSection = () => {
   const { selectedOptionalFeatures } = useOptionalFeatureStore();
@@ -39,7 +39,7 @@ const MusicSection = () => {
   return (
     isMusicFeatureActive && (
       <div className="absolute top-3 right-6 transition-all duration-300">
-        <PlayButton isPlaying={false} onPlayPause={() => {}} />
+        <PlayButton isPlaying={false} onPlayPause={() => { }} />
       </div>
     )
   );

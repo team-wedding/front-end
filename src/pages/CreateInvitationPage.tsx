@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router';
 import { Accordion } from '@common/CreateInvitation/Accordion';
 import { Stepper } from '@common/CreateInvitation/Stepper';
 import { StepNavigation } from '@common/CreateInvitation/StepNavigation';
-import PreviewDisplay from '@display/PreviewDisplay';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
@@ -15,6 +14,7 @@ import resetAllStores from '@/store/resetStore';
 import useBrideGroomStore from '@/store/useBrideGroomStore';
 import { validateBrideGroomNames } from '@/utils/validator';
 import NameInputModal from '@/components/form/BasicInformation/NameInput/NameInputModal';
+import ResultDisplay from '@/components/display/ResultDisplay';
 
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
@@ -131,7 +131,7 @@ const CreateInvitationPage = () => {
             leftButton={
               <HeaderButton
                 onClick={handleCancel}
-                className="text-sm text-gray-600 hover:text-black active:text-rose-400"
+                className="text-sm text-gray-600 mx-6 hover:text-black active:text-rose-400"
               >
                 취소
               </HeaderButton>
@@ -139,7 +139,7 @@ const CreateInvitationPage = () => {
             rightButton={
               <HeaderButton
                 onClick={handleSave}
-                className="text-sm text-gray-600 hover:text-black active:text-rose-400"
+                className="text-sm text-gray-600 mx-6 hover:text-black active:text-rose-400"
               >
                 저장
               </HeaderButton>
@@ -170,8 +170,7 @@ const CreateInvitationPage = () => {
         </div>
 
         <div className="preview-section">
-          {/* <ResultDisplay /> */}
-          <PreviewDisplay />
+          <ResultDisplay />
         </div>
       </div>
       <NameInputModal

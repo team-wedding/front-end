@@ -2,11 +2,8 @@ import InformationItem from '@/components/common/CreateInvitation/InformationIte
 import useRSVPStore from '@/store/useRSVPStore';
 
 const RsvpExample = () => {
-  const {
-    rsvpTitle,
-    rsvpDescription,
-    setRSVPonChange,
-  } = useRSVPStore();
+
+  const { rsvpTitle, rsvpDescription, setRSVPonChange } = useRSVPStore();
 
   return (
     <div className="mx-4 my-6 text-xs">

@@ -14,7 +14,7 @@ export const KakaoRedirect = () => {
         try {
           await postKakaoLogin(code);
           await fetchUserInfo();
-          navigate('/');
+          navigate('/dashboard');
         } catch (error) {
           console.error('카카오 로그인 실패', error);
         }

@@ -1,5 +1,5 @@
 import './App.css';
-import { Route, Routes } from 'react-router';
+import { Navigate, Route, Routes } from 'react-router';
 import CreateInvitationPage from './pages/CreateInvitationPage';
 import PreviewInvitaionPage from './pages/PreviewInvitaionPage';
 import ResultPage from './pages/ResultPage';
@@ -27,7 +27,7 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <Routes>
-        {/* 로그인 */}
+        <Route path="/" element={<Navigate to="/login" replace />} />
         <Route path={'/login'} element={<LoginPage />} />
         <Route path="/email-login" element={<EmailLoginPage />} />
         <Route path={'/reset-password'} element={<ResetPasswordPage />} />

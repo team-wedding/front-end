@@ -9,9 +9,10 @@ import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 export default function GallerySection() {
   const { galleryImages, grid } = useGalleryStore();
 
-  const [modal, setModal] = useState(false);
-  const { pathname } = useLocation();
-  const isPreview = pathname == '/create';
+  const [modal, setModal] = useState(false)
+  const { pathname } = useLocation()
+  const isPreview = pathname == "/create"
+  
   const handleModal = (index: number) => {
     //수정페이지 pathname 확인
     if (!isPreview) {

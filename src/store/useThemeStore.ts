@@ -2,21 +2,21 @@ import { create } from 'zustand';
 
 interface ThemeState {
   font: string;
-  size: string;
+  bigSize: boolean;
   setFont: (font: string) => void;
-  updateSize: (size: string) => void;
+  updateSize: (size: boolean) => void;
   reset: () => void;
 }
 
 const initialState = {
   font: '',
-  size: '',
+  bigSize: false,
 };
 
 const useThemeStore = create<ThemeState>((set) => ({
   ...initialState,
   setFont: (font: string) => set(() => ({ font: font })),
-  updateSize: (size: string) => set(() => ({ size: size })),
+  updateSize: (bigSize: boolean) => set(() => ({ bigSize: bigSize })),
   reset: () => set(() => initialState),
 }));
 

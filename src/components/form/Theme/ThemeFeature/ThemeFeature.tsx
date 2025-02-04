@@ -3,9 +3,12 @@ import useThemeStore from "@store/useThemeStore";
 
 
 const ThemeFeature = () => {
-  const theme = useThemeStore();
+  const { font, setFont, size, updateSize } = useThemeStore();
   const handleFonts = (index: number) => {
-    theme.setFont(fonts[index].font)
+    setFont(fonts[index].font)
+  }
+  const handleSize = () => {
+    setBigger((prev) => !prev)
   }
   const FontContainer = ({ font, name, index }: { font: string, name: string, index: number }) => {
     return (
@@ -18,6 +21,13 @@ const ThemeFeature = () => {
   }
   return (
     <div className="grid grid-cols-2 gap-4">
+      <div className='flex flex-col gap-4 '>
+        글자 크기
+        <div className='flex flex-row justify-between w-full gap-4'>
+          <button className={`border  rounded-md py-4  w-1/2 hover:shadow-lg hover:bg-pink-300 hover:text-white ${!bigger && ' shadow-md bg-pink-300 text-white'}`} onClick={handleSize}>보통사이즈</button>
+          <button className={`border  rounded-md py-4  w-1/2 hover:shadow-lg hover:bg-pink-300 hover:text-white  ${bigger && '  shadow-md bg-pink-300 text-white'}`} onClick={handleSize}>어르신 사이즈</button>
+        </div>
+      </div>
       {fonts.map((value, index) => {
         return <FontContainer key={index} font={value.font} name={value.name} index={index} />
       })}

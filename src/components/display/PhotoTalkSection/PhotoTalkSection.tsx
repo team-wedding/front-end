@@ -16,6 +16,12 @@ const PhotoTalkSection = () => {
           <br />
           방명록에 따뜻한 한마디 남겨주세요.
         </p>
+        <p className="mb-4 text-center text-sm font-light leading-loose">
+          소중한 마음을 남겨주시면
+          <br />큰 기쁨이 될 것 같습니다.
+          <br />
+          방명록에 따뜻한 한마디 남겨주세요.
+        </p>
         <Link
           to={`/phototalk/${userId}/${invitationId}`}
           className="py-2 bg-button text-white hover:bg-button/80 rounded-full px-8"

@@ -257,8 +257,8 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       //갤러리
       setGrid(details.galleries ? details.galleries[0]?.grid : false);
       setImages(details.galleries ? details.galleries[0]?.images : []);
-      // Theme 설정 업데이트
-      setFont(details.font);
+      // FIX : 추가 인데긋
+      setFont(details.font, 0);
       //교통수단
       //TODO: CanMove 처리
       transportToggle('canMoveMap', false);

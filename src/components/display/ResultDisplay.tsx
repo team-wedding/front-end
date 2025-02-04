@@ -8,10 +8,12 @@ import AccountSection from './AccountSection/AccountSection';
 import AttendanceSection from './AttendanceSection/AttendanceSection';
 import NoticeSection from './NoticeSection/NoticeSection';
 import PhotoTalkSection from './PhotoTalkSection/PhotoTalkSection';
+import useThemeStore from '@/store/useThemeStore';
 
 const ResultDisplay = () => {
+  const { font } = useThemeStore()
   return (
-    <div className="result-layout">
+    <div className={`result-layout font-${font}`}>
       <ThumbnailSection />
       <GreetingSection />
       <CalendarSection />

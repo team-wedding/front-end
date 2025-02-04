@@ -18,15 +18,63 @@
     @apply bg-black bg-opacity-80 text-gray-800;
   }
   @font-face {
-    font-family: 'SUIT-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2')
-      format('woff2');
-    font-weight: normal;
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Heavy.ttf') format('truetype');
+    font-weight: 900;
     font-style: normal;
   }
   @font-face {
     font-family: 'NanumGothic';
-    src: url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+    src: url('/src/assets/fonts/MapoFlowerIsland.ttf');
     font-weight: normal;
     font-style: normal;
   }
@@ -39,25 +87,43 @@
   }
   @font-face {
     font-family: 'NanumSquareNeo';
-    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot);
     src:
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot?#iefix)
-        format('embedded-opentype'),
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.woff)
-        format('woff'),
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.ttf)
-        format('truetype');
+      url('/src/assets/fonts/NanumSquareNeoTTF-aLt.woff') format('woff'),
+      url('/fonts/NanumSquareNeoTTF-aLt.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
   }
   @font-face {
-    font-family: 'NanumSquareNeoVariable';
-    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot);
+    font-family: 'NanumSquareNeo';
     src:
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot?#iefix)
-        format('embedded-opentype'),
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.woff)
-        format('woff'),
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.ttf)
-        format('truetype');
+      url('/src/assets/fonts/NanumSquareNeoTTF-bRg.woff') format('woff'),
+      url('/fonts/NanumSquareNeoTTF-bRg.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'NanumSquareNeo';
+    src:
+      url('/src/assets/fonts/NanumSquareNeoTTF-cBd.woff') format('woff'),
+      url('/fonts/NanumSquareNeoTTF-cBd.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'NanumSquareNeo';
+    src:
+      url('/src/assets/fonts/NanumSquareNeoTTF-dEb.woff') format('woff'),
+      url('/fonts/NanumSquareNeoTTF-dEb.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'NanumSquareNeo';
+    src:
+      url('/src/assets/fonts/NanumSquareNeoTTF-eHv.woff') format('woff'),
+      url('/fonts/NanumSquareNeoTTF-eHv.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
   }
 
   /* Autofill 스타일 추가 */

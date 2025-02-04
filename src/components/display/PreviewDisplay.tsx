@@ -5,7 +5,7 @@ const PreviewDisplay = () => {
   const { getSections } = useAccordionStore();
   const { font } = useThemeStore()
   return (
-    <div className={`result-layout font-${font}`}>
+    <div className={`result-layout ${font}`}>
       {getSections().map((section, index) => (
         <div key={index}>{section}</div>
       ))}

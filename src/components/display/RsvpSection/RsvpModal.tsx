@@ -55,9 +55,6 @@ const RsvpModal = ({ setModal }: ModalProp) => {
     }));
   };
 
-
-  const { userId, invitationId } = useParams();
-
   const handleSubmit = async () => {
     try {
       // console.log(id);

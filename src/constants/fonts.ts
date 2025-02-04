@@ -1,26 +1,26 @@
 const fonts = [
   {
-    font: 'Mapo',
+    font: 'font-Mapo',
     name: '마포꽃섬',
   },
   {
-    font: 'NanumSquare',
+    font: 'font-NanumSquare',
     name: '나눔스퀘어네오',
   },
   {
-    font: 'NanumGothic',
+    font: 'font-NanumGothic',
     name: '나눔고딕',
   },
   {
-    font: 'Suit',
+    font: 'font-Suit',
     name: 'SUIT',
   },
   {
-    font: 'Paperlog',
+    font: 'font-Paperlog',
     name: 'PaperLog',
   },
   {
-    font: 'Crimson',
+    font: 'font-Crimson',
     name: 'Crimson',
   },
 ];

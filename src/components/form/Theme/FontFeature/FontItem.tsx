@@ -1,5 +1,5 @@
-import fonts from '../../../constants/fonts';
-import useThemeStore from '../../../store/useThemeStore';
+import fonts from "@/constants/fonts";
+import useThemeStore from "@/store/useThemeStore";
 
 const FontItem = ({
   font,
@@ -10,13 +10,13 @@ const FontItem = ({
   name: string;
   index: number;
 }) => {
-  const theme = useThemeStore();
+  const { setFont } = useThemeStore();
   const handleFonts = (index: number) => {
-    theme.updateFont(fonts[index].font);
+    setFont(fonts[index].font, index);
   };
   return (
     <div
-      className={`font-${font} flex flex-col justify-center items-center border py-5 rounded-md  hover:shadow-lg hover:border-black ${theme.font === fonts[index].font && 'shadow-lg border-black '}`}
+      className={`${font} flex flex-col justify-center items-center border py-5 rounded-md  hover:shadow-lg hover:border-black ${font === fonts[index].font && 'shadow-lg border-black '}`}
       onClick={() => handleFonts(index)}
     >
       <div className="text-xl ">Aa 가나다</div>

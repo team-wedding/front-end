@@ -59,7 +59,7 @@ const RsvpStatsPage = () => {
     >
       <section className="h-fit 6 px-2 pb-6">
         <div className="px-4 pt-2 pb-3">
-          <div className="text-xl font-medium pl-2 py-2">하객 분류</div>
+          <div className="text-xl font-medium pl-2 py-4">하객 분류</div>
           <RsvpItem title={'총 응답 수'} attend={totalResponses} total={true} />
           <div className="grid grid-cols-2 gap-2 mt-2">
             <RsvpItem title={'참석 가능'} attend={totalAttending} />

@@ -62,20 +62,20 @@ const RsvpModal = ({
   //TODO : 재사용할수있는 코드 리팩토링 특히 인풋
   return (
     <div
-      className={`fixed  z-50 top-0 left-0 size-full flex justify-center pt-10`}
+      className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50`}
     >
-      <div className="absolute top-0 left-0 w-screen h-screen bg-black/60 z-10"></div>
+      {/* <div className="absolute top-0 left-0 w-screen h-screen bg-black/60 z-10"></div> */}
       <div
-        className={`absolute z-30 flex flex-col py-6 px-5 bg-white  w-[350px] rounded-xl  border`}
+        className={`flex flex-col py-5 px-5 bg-white w-[350px] rounded-xl border`}
       >
         <button
-          className="absolute top-5 right-8"
+          className="flex justify-end items-center"
           onClick={() => setModal(false)}
         >
           <CloseIcon className={''} />
         </button>
         {step == 0 ? (
-          <div className="flex flex-col items-center gap-8">
+          <div className="flex flex-col items-center gap-4">
             <div className="text-xl font-semibold">참석 의사 전달</div>
             <div className="text-center text-base">
               서로에게 행복을 주는 사람을 만났습니다. 웃는 모습이 너무나 예쁜 그
@@ -105,8 +105,8 @@ const RsvpModal = ({
             </button>
           </div>
         ) : (
-          <div className="flex flex-col items-center gap-6">
-            <div className="text-xl font-semibold">참석 의사 전달</div>
+          <div className="flex flex-col items-center gap-6 p-1">
+            <div className="text-xl font-medium">참석 의사 전달</div>
             <div className="flex flex-row w-full gap-8 items-center justify-between text-base">
               구분:
               <div className="flex gap-1 w-52 justify-between">
@@ -151,7 +151,7 @@ const RsvpModal = ({
             <div className="flex flex-row w-full justify-between items-center text-base">
               성함:{' '}
               <input
-                className="w-52 h-8 bg-gray-100 rounded-md splash-input text-base"
+                className="w-52 h-8 bg-gray-50 rounded-md splash-input text-base"
                 type="text"
                 onChange={handleChange}
                 name="name"
@@ -160,16 +160,17 @@ const RsvpModal = ({
             <div className="flex flex-row w-full justify-between items-center text-base">
               연락처:{' '}
               <input
-                className="w-52 h-8 bg-gray-100 rounded-md splash-input text-base"
+                className="w-52 h-8 bg-gray-50 rounded-md splash-input text-base"
                 type="text"
                 onChange={handleChange}
                 name="contact"
+                placeholder='숫자만 입력'
               />
             </div>
             <div className="flex flex-row w-full justify-between items-center text-base">
               참석인원:{' '}
               <input
-                className=" w-52 h-8 bg-gray-100 rounded-md splash-input text-base"
+                className=" w-52 h-8 bg-gray-50 rounded-md splash-input text-base"
                 type="number"
                 onChange={handleChange}
                 placeholder='본인 제외 총 참석인원'

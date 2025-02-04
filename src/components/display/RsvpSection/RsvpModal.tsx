@@ -33,9 +33,9 @@ const RsvpModal = ({
 
   //FIX 비어있는 값일때 처리 필요
   const { weddingTime, formattedDate } = useWeddingStore()
-  const { address, jibunAddress, zonecode, weddingHallName, weddingHallDetail } = useAddressStore()
+  const { address, weddingHallName, weddingHallDetail } = useAddressStore()
   const { brideGroom } = useBrideGroomStore()
-  const locationText = `장소: ${address},   ${jibunAddress}, ${weddingHallName},  ${weddingHallDetail}, ${zonecode}`
+  const locationText = `장소: ${address}, ${weddingHallName}, ${weddingHallDetail}`
   const dateText = `날짜: ${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일  ${weddingTime.hour}시 ${weddingTime.minute}분  `
   const { rsvpTitle, rsvpDescription } = useRSVPStore()
 
@@ -60,8 +60,8 @@ const RsvpModal = ({
     }
   };
   const defaultScript: { title: string, description: string } = {
-    title: "참석의사전달",
-    description: " 서로에게 행복을 주는 사람을 만났습니다. 웃는 모습이 너무나 예쁜 그사람을 만났습니다.배려하는 마음이 따뜻한 그 사람을 만났습니다. 운명처럼 만나게 된 우리의 인연 그 인연에 이끌려 이제 영원을 함께 약속하려 합니다.저희의 하나 됨을 지켜보아 주시고 격려해 주시면 더없는 기쁨으로 간직하겠습니다."
+    title: "참석 의사 전달",
+    description: `서로에게 행복을 주는 사람을 만났습니다.\n웃는 모습이 너무나 예쁜 그사람을 만났습니다.배려하는 마음이 따뜻한 그 사람을 만났습니다. 운명처럼 만나게 된 우리의 인연 그 인연에 이끌려 이제 영원을 함께 약속하려 합니다.저희의 하나 됨을 지켜보아 주시고 격려해 주시면 더없는 기쁨으로 간직하겠습니다.`
   }
 
   //TODO : 동적으로 색 바꿀수있게 props로 받아서 차리

@@ -6,7 +6,9 @@ export default function AttendanceSection() {
   return (
     <>
       <div className={`flex flex-col items-center gap-3  `}>
-        <div className=" text-highlight">참석 의사 전달</div>
+        <div className="sub-title">RSVP</div>
+        <div className="title">참석 의사</div>
+        {/* <div className=" text-highlight">참석 의사 전달</div> */}
         <p className="mt-2 text-center text-sm leading-6">
           축하하는 마음으로 참석해주시는
           <br /> 모든 분들을 귀하게 모실 수 있도록

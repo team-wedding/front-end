@@ -39,7 +39,7 @@ function App() {
         <Route path={'/create'} element={<CreateInvitationPage />} />
         <Route path={'/edit/:id'} element={<EditInvitationPage />} />
         <Route path={'/preview'} element={<PreviewInvitaionPage />} />
-        <Route path={'/result/:userId/:invitaionId'} element={<ResultPage />} />
+        <Route path={'/result/:userId/:invitationId'} element={<ResultPage />} />
         <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
         <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
         <Route path={'*'} element={<NotFound404 />} />

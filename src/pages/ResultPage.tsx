@@ -8,6 +8,7 @@ import { useParams } from 'react-router';
 
 const ResultPage = () => {
   const { invitationId } = useParams();
+  console.log(invitationId);
   const { invitations } = useGetInvitation(parseInt(invitationId!));
   const { setOrderItems } = useAccordionStore();
 

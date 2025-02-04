@@ -54,7 +54,7 @@ const MusicItem = () => {
 
   return (
     <div
-      className="flex flex-col mx-2 my-6 gap-3 text-neutral-500"
+      className="flex flex-col my-10 gap-3 text-neutral-600"
       tabIndex={-1}
       onBlur={handleBlur}
     >

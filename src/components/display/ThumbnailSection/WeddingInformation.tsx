@@ -15,10 +15,10 @@ const WeddingInformation = () => {
   const hallDetail = weddingHallDetail || '2층 사랑홀';
 
   return (
-    <div className="column-center text-sm font-light gap-2">
+    <div className="column-center gap-4 tracking-normal">
       <div>{date}</div>
-      <div className="flex opacity-60">
-        <div className="px-1">{hallName}</div>
+      <div className="flex text-sm opacity-50 gap-1">
+        <div>{hallName}</div>
         <div>{hallDetail}</div>
       </div>
     </div>

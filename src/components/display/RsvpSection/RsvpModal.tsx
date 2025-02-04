@@ -17,9 +17,7 @@ interface ModalProp {
   setModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const RsvpModal = ({
-  setModal,
-}: ModalProp) => {
+const RsvpModal = ({ setModal }: ModalProp) => {
   const [step, setStep] = useState(0);
   const [info, setInfo] = useState<InfoDetail>({
     attendance: true,
@@ -31,18 +29,23 @@ const RsvpModal = ({
     isDining: '예정',
   });
 
-
-  const { userId, invitationId } = useParams()
-  console.log("userId : ", userId)
-  console.log("invitaionsId : ", invitationId)
+  const { userId, invitationId } = useParams();
+  console.log('userId : ', userId);
+  console.log('invitaionsId : ', invitationId);
 
   //FIX 비어있는 값일때 처리 필요
-  const { weddingTime, formattedDate } = useWeddingStore()
-  const { address, jibunAddress, zonecode, weddingHallName, weddingHallDetail } = useAddressStore()
-  const { brideGroom } = useBrideGroomStore()
-  const locationText = `장소: ${address},   ${jibunAddress}, ${weddingHallName},  ${weddingHallDetail}, ${zonecode}`
-  const dateText = `날짜: ${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일  ${weddingTime.hour}시 ${weddingTime.minute}분  `
-  const { rsvpTitle, rsvpDescription } = useRSVPStore()
+  const { weddingTime, formattedDate } = useWeddingStore();
+  const {
+    address,
+    jibunAddress,
+    zonecode,
+    weddingHallName,
+    weddingHallDetail,
+  } = useAddressStore();
+  const { brideGroom } = useBrideGroomStore();
+  const locationText = `장소: ${address},   ${jibunAddress}, ${weddingHallName},  ${weddingHallDetail}, ${zonecode}`;
+  const dateText = `날짜: ${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일  ${weddingTime.hour}시 ${weddingTime.minute}분  `;
+  const { rsvpTitle, rsvpDescription } = useRSVPStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -51,6 +54,7 @@ const RsvpModal = ({
       [name]: value,
     }));
   };
+
 
   const { userId, invitationId } = useParams();
 
@@ -64,10 +68,11 @@ const RsvpModal = ({
       console.log('개인 참석 여부 등록 실패', error);
     }
   };
-  const defaultScript: { title: string, description: string } = {
-    title: "참석의사전달",
-    description: " 서로에게 행복을 주는 사람을 만났습니다. 웃는 모습이 너무나 예쁜 그사람을 만났습니다.배려하는 마음이 따뜻한 그 사람을 만났습니다. 운명처럼 만나게 된 우리의 인연 그 인연에 이끌려 이제 영원을 함께 약속하려 합니다.저희의 하나 됨을 지켜보아 주시고 격려해 주시면 더없는 기쁨으로 간직하겠습니다."
-  }
+  const defaultScript: { title: string; description: string } = {
+    title: '참석의사전달',
+    description:
+      ' 서로에게 행복을 주는 사람을 만났습니다. 웃는 모습이 너무나 예쁜 그사람을 만났습니다.배려하는 마음이 따뜻한 그 사람을 만났습니다. 운명처럼 만나게 된 우리의 인연 그 인연에 이끌려 이제 영원을 함께 약속하려 합니다.저희의 하나 됨을 지켜보아 주시고 격려해 주시면 더없는 기쁨으로 간직하겠습니다.',
+  };
 
   //TODO : 동적으로 색 바꿀수있게 props로 받아서 차리
   //TODO : 재사용할수있는 코드 리팩토링 특히 인풋
@@ -88,10 +93,12 @@ const RsvpModal = ({
         {step == 0 ? (
 
           <div className="flex flex-col items-center gap-12">
-            <div className="text-2xl font-semibold">{rsvpTitle === "" ? defaultScript.title : rsvpTitle}</div>
 
+            <div className="text-2xl font-semibold">{rsvpTitle === "" ? defaultScript.title : rsvpTitle}</div>
             <div className="text-center text-base">
-              {rsvpDescription === "" ? defaultScript.description : rsvpDescription}
+              {rsvpDescription === ''
+                ? defaultScript.description
+                : rsvpDescription}
             </div>
             <div className="flex flex-col gap-3">
               <div className="flex flex-row gap-2 items-center">
@@ -173,7 +180,7 @@ const RsvpModal = ({
                 type="text"
                 onChange={handleChange}
                 name="contact"
-                placeholder='숫자만 입력'
+                placeholder="숫자만 입력"
               />
             </div>
             <div className="flex flex-row w-full justify-between items-center text-base">
@@ -182,7 +189,7 @@ const RsvpModal = ({
                 className=" w-52 h-8 bg-gray-50 rounded-md splash-input text-base"
                 type="number"
                 onChange={handleChange}
-                placeholder='본인 제외 총 참석인원'
+                placeholder="본인 제외 총 참석인원"
                 name="companions"
               />
             </div>
@@ -192,19 +199,25 @@ const RsvpModal = ({
                 {/* map으로 refact */}
                 <button
                   className={`rounded-md  p-1 w-1/3  ${info.isDining == '예정' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'}`}
-                  onClick={() => setInfo((prev) => ({ ...prev, isDining: '예정' }))}
+                  onClick={() =>
+                    setInfo((prev) => ({ ...prev, isDining: '예정' }))
+                  }
                 >
                   예정
                 </button>
                 <button
                   className={`rounded-md  p-1 w-1/3  ${info.isDining == '안함' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'}`}
-                  onClick={() => setInfo((prev) => ({ ...prev, isDining: '안함' }))}
+                  onClick={() =>
+                    setInfo((prev) => ({ ...prev, isDining: '안함' }))
+                  }
                 >
                   안함
                 </button>
                 <button
                   className={`rounded-md  p-1 w-1/3 ${info.isDining == '미정' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'} `}
-                  onClick={() => setInfo((prev) => ({ ...prev, isDining: '미정' }))}
+                  onClick={() =>
+                    setInfo((prev) => ({ ...prev, isDining: '미정' }))
+                  }
                 >
                   미정
                 </button>

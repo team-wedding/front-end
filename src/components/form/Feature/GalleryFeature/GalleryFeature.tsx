@@ -9,7 +9,14 @@ import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 export default function GalleryFeature() {
 
   const fileRef = useRef<HTMLInputElement>(null);
-  const { galleryImages, grid, setImages, setGrid, galleryFiles, setGalleryFiles } = useGalleryStore();
+  const {
+    galleryImages,
+    grid,
+    setImages,
+    setGrid,
+    galleryFiles,
+    setGalleryFiles,
+  } = useGalleryStore();
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (galleryImages.length + e.target.files!.length <= 9) {
@@ -18,12 +25,12 @@ export default function GalleryFeature() {
         URL.createObjectURL(value),
       );
       setImages([...galleryImages, ...fileArray]);
-      setGalleryFiles([...galleryFiles, ...target])
+      setGalleryFiles([...galleryFiles, ...target]);
     } else alert('이미지개수가 9개를 초과할수없습니다!');
   };
 
   const handleDelete = (index: number) => {
-    setGalleryFiles(galleryFiles.filter((_, i) => i !== index))
+    setGalleryFiles(galleryFiles.filter((_, i) => i !== index));
     setImages(galleryImages.filter((_, i) => i !== index));
   };
 
@@ -40,7 +47,7 @@ export default function GalleryFeature() {
   const handleDrop = (e: React.DragEvent<HTMLLabelElement>) => {
     e.preventDefault();
     const files = e.dataTransfer.files;
-    setGalleryFiles([...galleryFiles, ...files])
+    setGalleryFiles([...galleryFiles, ...files]);
     if (files) {
       for (let file of files) {
         const reader = new FileReader();
@@ -76,7 +83,7 @@ export default function GalleryFeature() {
     const [removedImage] = reorderedImages.splice(draggedIndex, 1);
     const [removedFile] = reorderedFiles.splice(draggedIndex, 1);
     reorderedImages.splice(index, 0, removedImage);
-    reorderedFiles.splice(index, 0, removedFile)
+    reorderedFiles.splice(index, 0, removedFile);
     setImages(reorderedImages);
     setGalleryFiles(reorderedFiles);
     setDraggedIndex(null);

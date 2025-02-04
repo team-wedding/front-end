@@ -23,12 +23,14 @@ const FamilyName = () => {
             {motherName && <span className="mx-1.5">&#183;</span>}
             <div className="flex items-center">
               {motherIsDeceased && (
-                <img src={deceasedImage} alt="故" className="w-4 h-4 mr-1" />
+                <img src={''} alt="故" className="w-4 h-4 mr-1" />
               )}
               {motherName}
             </div>
-            <div className="text-gray-500">의 {person.relation}</div>
-            <div className='mx-1'>{personName}</div>
+            <div className="text-gray-500 mx-[2px] text-[13px]">
+              의 {person.relation}
+            </div>
+            <div className="mx-1">{personName}</div>
           </div>
         );
       })}

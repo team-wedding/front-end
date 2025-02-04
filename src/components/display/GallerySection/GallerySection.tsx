@@ -8,7 +8,6 @@ import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeat
 
 export default function GallerySection() {
   const { galleryImages, grid } = useGalleryStore();
-
   const [modal, setModal] = useState(false)
   const { pathname } = useLocation()
   const isPreview = pathname == "/create"

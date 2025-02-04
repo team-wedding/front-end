@@ -6,7 +6,6 @@ const RsvpExample = () => {
     rsvpTitle,
     rsvpDescription,
     setRSVPonChange,
-    setRSVPonChange,
   } = useRSVPStore();
 
   return (

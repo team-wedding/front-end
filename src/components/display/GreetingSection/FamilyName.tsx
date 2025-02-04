@@ -1,5 +1,5 @@
 import useBrideGroomStore from '@store/useBrideGroomStore';
-// import deceasedImage from '@assets/deceased.png';
+import deceasedImage from '@assets/deceased.png';
 
 const FamilyName = () => {
   const brideGroom = useBrideGroomStore((state) => state.brideGroom);
@@ -16,7 +16,7 @@ const FamilyName = () => {
           <div key={index} className="flex items-center">
             <div className="flex items-center">
               {fatherIsDeceased && (
-                <img src={''} alt="故" className="w-4 h-4 mr-1" />
+                <img src={deceasedImage} alt="故" className="w-4 h-4 mr-1" />
               )}
               {fatherName}
             </div>

@@ -149,6 +149,10 @@
     height: var(--footer-height);
   }
 
+  .layout-footer:empty {
+    display: none;
+  }
+
   .layout-content {
     @apply bg-white w-full overflow-auto;
     margin-top: var(--header-height);

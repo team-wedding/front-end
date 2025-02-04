@@ -3,6 +3,7 @@ import usePhotoTalkStore from '@store/usePhotoTalkStore';
 import CloseIcon from '@icons/CloseIcon';
 import CloudArrowIcon from '@icons/CloudArrowIcon';
 import { useCreatePhototalk, useUpdatePhototalk } from '@/hooks/usePhototalk';
+import { useParams } from 'react-router';
 // import { useUserStore } from '@/store/useUserStore';
 
 interface PhotoTalkEditorProps {
@@ -11,11 +12,12 @@ interface PhotoTalkEditorProps {
 }
 
 const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
+  const { userId, invitationId } = useParams();
   const { editingPhotoTalk, resetFields } = usePhotoTalkStore();
   const createPhototalk = useCreatePhototalk();
   const updatePhototalk = useUpdatePhototalk();
-  // const { id } = useUserStore();
 
+  // const [isDragging, setIsDragging] = useState(false);
   const [form, setForm] = useState({
     name: '',
     message: '',
@@ -62,6 +64,25 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
     });
   };
 
+  // const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+  //   e.preventDefault();
+  //   setIsDragging(false);
+  //   const files = e.dataTransfer.files;
+  //   if (files && files.length > 0) {
+  //     handleImageUpload(files);
+  //   }
+  // };
+
+  // const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+  //   e.preventDefault();
+  //   setIsDragging(true);
+  // };
+
+  // const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+  //   e.preventDefault();
+  //   setIsDragging(false);
+  // };
+
   const handleChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -82,7 +103,12 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
       updatePhototalk.mutate(
         {
           id: editingPhotoTalk.id!,
-          photoTalkData: { ...form, password: form.password },
+          photoTalkData: {
+            ...form,
+            userId: Number(userId),
+            invitationId: Number(invitationId),
+            password: form.password,
+          },
         },
         {
           onSuccess: () => {
@@ -93,7 +119,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
       );
     } else {
       createPhototalk.mutate(
-        { ...form, userId: 1, invitationId: 1 },
+        { ...form, userId: Number(userId), invitationId: Number(invitationId) },
         {
           onSuccess: () => {
             resetFields();

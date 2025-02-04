@@ -7,6 +7,7 @@ import useRSVPStore from '@/store/useRSVPStore';
 import { useWeddingStore } from '@/store/useWeddingStore';
 import useAddressStore from '@/store/useAddressStore';
 import useBrideGroomStore from '@/store/useBrideGroomStore';
+import { useParams } from 'react-router';
 
 interface ModalProp {
   setModal: Dispatch<SetStateAction<boolean>>;
@@ -32,6 +33,11 @@ const RsvpModal = ({
     member: 0,
     dine: '예정',
   });
+
+
+  const { userId, invitationId } = useParams()
+  console.log("userId : ", userId)
+  console.log("invitaionsId : ", invitationId)
 
   //FIX 비어있는 값일때 처리 필요
   const { weddingTime, formattedDate } = useWeddingStore()

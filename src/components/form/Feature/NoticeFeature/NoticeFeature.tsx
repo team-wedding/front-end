@@ -51,13 +51,13 @@ const NoticeFeature = () => {
   const accordionItems = useMemo(
     () =>
       notices.map((notice, index) => ({
-        id: notice.id,
+        noticeId: notice.noticeId,
         title: (
           <div className="flex items-center gap-2">
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                handleDeleteClick(notice.id);
+                handleDeleteClick(notice.noticeId);
               }}
             >
               <TrashBinIcon />
@@ -74,7 +74,7 @@ const NoticeFeature = () => {
                 placeholder="제목을 입력해주세요"
                 value={notice.title}
                 onChange={(e) =>
-                  updateNotice(notice.id, 'title', e.target.value)
+                  updateNotice(notice.noticeId, 'title', e.target.value)
                 }
                 className="formInput w-full"
               />
@@ -86,7 +86,7 @@ const NoticeFeature = () => {
                 placeholder="내용을 입력해주세요"
                 value={notice.content}
                 onChange={(e) =>
-                  updateNotice(notice.id, 'content', e.target.value)
+                  updateNotice(notice.noticeId, 'content', e.target.value)
                 }
                 rows={4}
                 className="formInput w-full"
@@ -95,10 +95,14 @@ const NoticeFeature = () => {
 
             <div className="flex flex-col gap-3">
               <label className="label w-full">이미지 업로드</label>
-              <div key={notice.id} className="relative">
+              <div key={notice.noticeId} className="relative">
                 <ImageUploader
-                  initialImage={notice.image}
-                  onImageUpload={(img) => updateNotice(notice.id, 'image', img)}
+                  // initialImage={notice.image}
+                  // onImageUpload={(img) => updateNotice(notice.noticeId, 'image', img)}
+                  ImageUrl={notice.image}
+                  ImageFile={null}
+                  setImageFile={(file) => updateNotice(notice.noticeId, 'imgFile', file)}
+                  setImageUrl={(url) => updateNotice(notice.noticeId, 'image', url)}
                 />
               </div>
             </div>

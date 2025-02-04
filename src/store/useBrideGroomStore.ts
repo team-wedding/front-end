@@ -77,8 +77,9 @@ const useBrideGroomStore = create<StoreState>((set) => ({
       return { brideGroom: updatedBrideGroom };
     }),
   reset: () => {
-    // console.log('Resetting state to:', _.cloneDeep(initialBrideGroom));
-    set({ brideGroom: _.cloneDeep(initialBrideGroom) }); // 깊은 복사 적용
+    set(() => ({
+      brideGroom: _.cloneDeep(initialBrideGroom),
+    }));
   },
 }));
 

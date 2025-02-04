@@ -10,7 +10,7 @@ interface ModalProps {
 
 const InputTitleModal = ({ onClose }: ModalProps) => {
   const [titleInput, setTitleInput] = useState('');
-  const { setTitle } = useInvitationStore();
+  const { setInvitationTitle } = useInvitationStore();
   const navigate = useNavigate();
 
   const maxLength = 8;
@@ -24,7 +24,7 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
   };
 
   const handleConfirm = () => {
-    setTitle(titleInput); // 입력한 제목을 상태에 저장
+    setInvitationTitle(titleInput); // 입력한 제목을 상태에 저장
     navigate('/create'); // 페이지 이동
   };
 
@@ -63,11 +63,10 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
           <button
             onClick={handleConfirm}
             disabled={titleInput.length === 0}
-            className={`rounded-full w-8 h-8 flex justify-center items-center ${
-              titleInput.length === 0
-                ? 'bg-black bg-opacity-10 cursor-not-allowed'
-                : 'bg-rose-300 cursor-pointer hover:bg-rose-200'
-            }`}
+            className={`rounded-full w-8 h-8 flex justify-center items-center ${titleInput.length === 0
+              ? 'bg-black bg-opacity-10 cursor-not-allowed'
+              : 'bg-rose-300 cursor-pointer hover:bg-rose-200'
+              }`}
           >
             <NextIcon />
           </button>

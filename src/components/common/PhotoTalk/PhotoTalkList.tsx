@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import usePhotoTalkStore from '@store/usePhotoTalkStore';
 import PhotoTalkCard from '@/components/common/PhotoTalk/PhotoTalkCard';
 // import PasswordConfirmModal from '@/components/display/PhotoTalkSection/PasswordConfirmModal';
@@ -22,12 +22,18 @@ interface PhotoTalkResponse {
 }
 
 const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
-  const { setEditingPhotoTalk } = usePhotoTalkStore();
+  const { setEditingPhotoTalk, setPhotoTalkList } = usePhotoTalkStore();
 
   // 포토톡 전체 조회
   const { data } = useGetPhototalks(1, 10) as {
     data: PhotoTalkResponse | undefined;
   };
+  useEffect(() => {
+    if (data) {
+      setPhotoTalkList(data.allCelebrationMsgs)
+    }
+  }, [data])
+
   const deletePhototalk = useDeletePhototalk();
 
   const photoTalkList = Array.isArray(data?.allCelebrationMsgs)

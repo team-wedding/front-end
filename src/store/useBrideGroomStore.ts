@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import _ from 'lodash';
+// import _ from 'lodash';
 
 type Person = {
   name: string;

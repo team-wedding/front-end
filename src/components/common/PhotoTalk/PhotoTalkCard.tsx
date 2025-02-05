@@ -46,8 +46,8 @@ const PhotoTalkCard = ({ photoTalk, onEdit, onDelete }: PhotoTalkCardProps) => {
   };
 
   return (
-    <div className="flex flex-col gap-4 w-full p-8">
-      <div className="flex flex-col gap-2 bg-white w-full p-4 rounded-md shadow-md border border-gray-200 relative">
+    <div className="flex flex-col gap-4 w-full py-4 px-8">
+      <div className="flex flex-col gap-2 bg-white w-full p-4 rounded-xl shadow-sm border border-gray-200 relative">
         <div className="absolute top-2 right-3" ref={dropdownRef}>
           <button
             className="inline-block text-gray-500 hover:bg-gray-100 focus:ring-4 focus:outline-none rounded-lg text-sm"

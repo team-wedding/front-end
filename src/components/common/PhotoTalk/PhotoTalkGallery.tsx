@@ -56,7 +56,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
     <div>
       {isAdmin && (
         <div className="flex justify-between items-center p-8 pb-2">
-          <h2 className="text-lg font-semibold">이미지 갤러리</h2>
+          <h2 className="text-lg font-medium">갤러리</h2>
           <div className="flex items-center gap-3">
             <p className="text-gray-700">
               {selectedImages.length} / {images.length}
@@ -72,7 +72,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
         </div>
       )}
 
-      <div className="grid grid-cols-3 gap-4 py-4 px-8">
+      <div className="grid grid-cols-3 gap-1 py-4 px-8">
         {images.map((url, index) => (
           <div key={index} className="relative group">
             {isAdmin && (
@@ -80,14 +80,14 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
                 type="checkbox"
                 checked={selectedImages.includes(url)}
                 onChange={() => toggleSelectImage(url)}
-                className="absolute top-2 right-2 w-5 h-5 rounded cursor-pointer z-10"
+                className="absolute top-1 right-1 w-4 h-4 rounded cursor-pointer z-10 border-gray-400 checked:bg-button focus:ring-button focus:border-button focus:outline-none focus:ring-0"
               />
             )}
 
             <img
               src={url}
               alt={`Uploaded ${index}`}
-              className="h-24 w-full rounded-lg object-cover cursor-pointer"
+              className="h-[116px] w-full rounded-sm object-cover cursor-pointer"
               onClick={() => openModal(index)}
             />
           </div>
@@ -101,9 +101,9 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-full rounded-lg overflow-hidden"
+            className="relative w-[340px] rounded-md overflow-hidden"
           >
-            <div className="relative flex items-center justify-center p-9 h-full rounded-lg bg-black bg-opacity-50">
+            <div className="relative flex items-center justify-center px-14 py-6 h-full rounded-md bg-black bg-opacity-75">
               <button
                 onClick={showPreviousImage}
                 className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"
@@ -112,7 +112,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
               </button>
               <img
                 src={images[currentImageIndex]}
-                className="max-h-full object-contain rounded-md"
+                className="max-h-full object-contain rounded-sm"
               />
               <button
                 onClick={showNextImage}

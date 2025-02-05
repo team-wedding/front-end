@@ -147,18 +147,18 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
   return (
     isOpen && (
       <div className="result-layout fixed inset-0 z-50 bg-black bg-opacity-50">
-        <div className="bg-white rounded-lg shadow-md h-3/4 min-h-fit">
+        <div className="bg-white rounded-lg w-80 shadow-sm h-3/4 min-h-fit">
           <div className="flex flex-col">
-            <div className="flex items-center justify-between p-4 border-b rounded-t">
-              <div className="text-base font-semibold text-gray-900">
+            <div className="flex items-center justify-between p-3 border-b rounded-t">
+              <div className="text-base font-medium text-gray-900">
                 {editingPhotoTalk ? '포토톡 편집하기' : '포토톡 작성하기'}
               </div>
               <button onClick={closeEditor}>
-                <CloseIcon className="size=[20px]" />
+                <CloseIcon className="size=[12px]" />
               </button>
             </div>
 
-            <div className="flex flex-col gap-2 p-4">
+            <div className="flex flex-col gap-3 px-3 pt-4">
               <label className="label w-full">이름</label>
               <input
                 type="text"
@@ -241,7 +241,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
                       />
                       <button
                         onClick={() => handleRemoveImage(image, index)}
-                        className="absolute top-1 right-1 bg-gray-800 text-white rounded-full p-1"
+                        className="absolute top-1 right-1 bg-gray-700 text-white rounded-full p-1"
                       >
                         <CloseIcon className="size-[12px]" />
                       </button>
@@ -252,7 +252,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
 
               <button
                 onClick={handleSubmit}
-                className="border mt-4 py-2 rounded-lg w-full border-gray-300 hover:bg-gray-100"
+                className="bg-button bg-opacity-80 text-white hover:bg-rose-200 px-4 py-3 rounded-xl shrink-0 text-xs"
               >
                 {editingPhotoTalk ? '편집하기' : '등록하기'}
               </button>

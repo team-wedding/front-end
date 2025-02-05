@@ -105,6 +105,14 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
   //   setDeleteConfirmOpen(false);
   // };
 
+  if (photoTalkList.length === 0) {
+    return (
+      <p className="text-center text-sm text-gray-500 my-6">
+        업로드된 포토톡이 없습니다.
+      </p>
+    );
+  }
+
   return (
     <div className="w-full">
       <div className="flex justify-end mx-8">
@@ -134,7 +142,7 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
           />
         ))
       ) : (
-        <div className="flex flex-col items-center gap-3 bg-white p-8 m-12 rounded-md shadow-md border border-gray-200 text-gray-600">
+        <div className="flex flex-col items-center gap-2 bg-white p-8 m-8 rounded-lg shadow-sm border border-gray-200 text-gray-600">
           <EditIcon className="size-[28px]" strokeWidth={2} />
           <p className="text-sm font-light">첫 번째 포토톡을 작성해 주세요</p>
         </div>

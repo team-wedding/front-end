@@ -136,7 +136,7 @@ const EditInvitationPage = () => {
             leftButton={
               <HeaderButton
                 onClick={handleCancel}
-                className="text-sm text-gray-600 hover:text-black active:text-rose-400"
+                className="text-sm text-gray-600 mx-6 hover:text-black active:text-rose-400"
               >
                 취소
               </HeaderButton>
@@ -144,7 +144,7 @@ const EditInvitationPage = () => {
             rightButton={
               <HeaderButton
                 onClick={handleSave}
-                className="text-sm text-gray-600 hover:text-black active:text-rose-400"
+                className="text-sm text-gray-600 mx-6 hover:text-black active:text-rose-400"
               >
                 저장
               </HeaderButton>

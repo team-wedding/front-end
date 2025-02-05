@@ -38,12 +38,12 @@ export default function GallerySection() {
 
   return (
     isGalleryFeatureActive && (
-      <div className="w-full h-fit py-36">
+      <div className="w-full h-fit py-20">
         <SectionTitle subTitle="GALLERY" title="갤러리" />
         {galleryImages ? (
           grid ? (
             <section
-              className={`relative w-full grid grid-cols-3 mt-8  ${isPreview ? 'gap-2 ' : 'gap-y-3 px-2'}  justify-items-center items-center`}
+              className={`relative w-full grid grid-cols-3 mt-8  gap-2  justify-items-center items-center`}
             >
               {galleryImages.map((value, index) => {
                 return (

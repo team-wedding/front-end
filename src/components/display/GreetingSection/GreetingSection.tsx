@@ -13,11 +13,11 @@ const GreetingSection = () => {
   );
 
   return (
-    <div className="column-center py-36">
+    <div className="column-center py-20 gap-16">
       <Greeting />
       {allNamesFilled && <FamilyName />}
     </div>
   );
 };
 
-export default GreetingSection;
+export default GreetingSection

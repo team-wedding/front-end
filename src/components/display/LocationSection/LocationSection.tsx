@@ -22,7 +22,7 @@ const LocationSection = () => {
 
   return (
     isLocationFeatureActive && (
-      <div className="flex flex-col text-sm py-36">
+      <div className="flex flex-col text-sm py-20">
         <LocationTitle />
         <Map />
         {enabledNavigation.length !== 0 && <Navigation />}

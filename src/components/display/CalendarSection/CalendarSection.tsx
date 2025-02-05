@@ -27,7 +27,7 @@ const CalendarSection = () => {
 
   return (
     isCalenderFeatureActive && (
-      <div className="column-center gap-6 py-36">
+      <div className="column-center gap-6 py-20">
         <div className="sub-title text-3xl font-thin tracking-widest">
           WEDDING DAY
         </div>

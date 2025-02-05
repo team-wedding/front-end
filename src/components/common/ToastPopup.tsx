@@ -20,7 +20,7 @@ export default function ToastPopup({
 
     return (
         <div
-            className={`z-40 fixed left-1/2 transform -translate-x-1/2 rounded-lg bg-button text-lg p-2 w-3/4
+            className={`z-40 fixed left-1/2 transform -translate-x-1/2 rounded-lg bg-button text-sm p-2 w-1/4
             ${position === 'top' ? 'top-12' : 'bottom-16'}`}>
             < p className="text-white text-center">{message}</p>
         </div >

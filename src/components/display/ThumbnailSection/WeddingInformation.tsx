@@ -6,7 +6,7 @@ const WeddingInformation = () => {
   const { weddingHallName, weddingHallDetail } = useAddressStore();
 
   const currentDate = weddingDate || new Date();
-  const dayOfWeeks = ['월', '화', '수', '목', '금', '토', '일'];
+  const dayOfWeeks = ['일', '월', '화', '수', '목', '금', '토'];
   const dayOfWeek = dayOfWeeks[currentDate.getDay()];
 
   const date = `${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일 ${dayOfWeek}요일, ${weddingTime.hour}시 ${weddingTime.minute! < 9 ? '0' : ''}${weddingTime.minute!}분 `;

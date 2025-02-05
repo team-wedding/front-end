@@ -21,11 +21,11 @@ const PasswordConfirmModal = ({
     isOpen && (
       <div
         onClick={onClose}
-        className="result-layout fixed inset-0 z-50 bg-black bg-opacity-50"
+        className="result-layout fixed inset-0 z-50 bg-black bg-opacity-50 h-full md:my-0 rounded-none"
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="bg-white rounded-lg shadow-md h-3/4 min-h-fit"
+          className="bg-white rounded-lg shadow-md h-1/4 min-h-fit"
         >
           <div className="flex flex-col">
             <div className="flex items-center justify-between p-4 border-b rounded-t">

@@ -107,7 +107,7 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
 
   if (photoTalkList.length === 0) {
     return (
-      <p className="text-center text-gray-500 my-6">
+      <p className="text-center text-sm text-gray-500 my-6">
         업로드된 포토톡이 없습니다.
       </p>
     );

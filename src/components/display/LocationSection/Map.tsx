@@ -42,9 +42,9 @@ const Map = () => {
     if (zoomControl) {
       return subFeatures.canMoveMap
         ? map.addControl(
-            zoomControl,
-            window.kakao.maps.ControlPosition.TOPRIGHT,
-          )
+          zoomControl,
+          window.kakao.maps.ControlPosition.TOPRIGHT,
+        )
         : map.removeControl(zoomControl);
     }
   }, [map, subFeatures.canMoveMap, zoomControl]);
@@ -57,7 +57,7 @@ const Map = () => {
         lng: coords.lng,
       }}
       style={{
-        width: '384px',
+        width: '100%',
         height: '300px',
       }}
       level={4}

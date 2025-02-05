@@ -7,7 +7,7 @@ const PhotoTalkSection = () => {
   console.log('invitationId : ', invitationId);
 
   return (
-    <div className="column-center gap-4 py-36">
+    <div className="column-center gap-4 py-20">
       <SectionTitle subTitle="PHOTO TALK" title="포토톡" />
       <div className="column-center bg-slate-100 px-20 py-12 rounded-xl">
         <p className="text-center leading-loose mb-8">

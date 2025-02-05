@@ -2,11 +2,11 @@ import { Link } from 'react-router';
 import KakaoLoginButton from './SocialLogin/KakaoLoginButton';
 import NaverLoginButton from './SocialLogin/NaverLoginButton';
 import EmailLoginButton from './EmailLogin/EmailLoginButton';
-
+import logo from '@/assets/logo2.png'
 const Login = () => {
   return (
     <div className="flex flex-col items-center justify-center w-full h-content">
-      <img className="w-52 my-8" src="/src/assets/logo2.png" alt="Logo" />
+      <img className="w-52 my-8" src={logo} alt="Logo" />
 
       <div className="text-sm text-gray-500 opacity-70 mb-40">
         우리만의 청첩장을 만들어 보세요!

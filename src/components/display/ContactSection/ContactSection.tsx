@@ -11,7 +11,7 @@ const ContactSection = () => {
 
   return (
     isContactFeatureActive && (
-      <div className="column-center gap-6 py-36 ">
+      <div className="column-center gap-6 py-20 ">
         <SectionTitle
           subTitle="CONTACT"
           title="연락하기"

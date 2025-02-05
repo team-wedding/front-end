@@ -19,7 +19,7 @@ const AccountSection = () => {
 
   return (
     isAccountFeatureActive && (
-      <div className="column-center flex flex-col gap-5 py-36 ">
+      <div className="column-center flex flex-col gap-5 py-20 ">
         <SectionTitle
           subTitle="ACCOUNT"
           title="마음 전하실 곳"
@@ -55,24 +55,21 @@ const AccountSection = () => {
               {!allEmpty && (
                 <>
                   <div
-                    className={`flex py-3 px-5  cursor-default justify-between items-center  ${value.role === '신랑' ? 'bg-sky-50 bg-opacity-70' : 'bg-pink-50 bg-opacity-70'} rounded-md ${
-                      isOpen && 'rounded-b-none'
-                    }`}
+                    className={`flex py-3 px-5  cursor-default justify-between items-center  ${value.role === '신랑' ? 'bg-sky-50 bg-opacity-70' : 'bg-pink-50 bg-opacity-70'} rounded-md ${isOpen && 'rounded-b-none'
+                      }`}
                     onClick={() =>
                       toggleAccordion(value.role === '신랑' ? 'groom' : 'bride')
                     }
                   >
                     <div className="font-medium">{`${value.role}측에게`}</div>
                     <i
-                      className={`bx bx-chevron-down text-lg transition-all duration-300 ${
-                        isOpen ? 'rotate-180' : ''
-                      }`}
+                      className={`bx bx-chevron-down text-lg transition-all duration-300 ${isOpen ? 'rotate-180' : ''
+                        }`}
                     ></i>
                   </div>
                   <div
-                    className={`overflow-hidden transition-all shadow-inner bg-white ${
-                      isOpen ? 'h-fit' : 'h-0'
-                    }`}
+                    className={`overflow-hidden transition-all shadow-inner bg-white ${isOpen ? 'h-fit' : 'h-0'
+                      }`}
                   >
                     {!accountEmpty && (
                       <AccountNumberItem

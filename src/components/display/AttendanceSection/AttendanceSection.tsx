@@ -39,7 +39,7 @@ export default function AttendanceSection() {
 
   return (
     <>
-      <div className={`column-center py-36`}>
+      <div className={`column-center py-20`}>
         <SectionTitle
           subTitle="RSVP"
           title={rsvpTitle === '' ? defaultScript.title : rsvpTitle}

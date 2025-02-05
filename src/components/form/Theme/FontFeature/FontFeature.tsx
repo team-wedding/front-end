@@ -3,7 +3,8 @@ import fonts from '@constants/fonts';
 import useThemeStore from '@store/useThemeStore';
 
 const FontFeature = () => {
-  const { fontIndex, setFont, bigSize, updateSize } = useThemeStore();
+  //bigSize, updateSize
+  const { fontIndex, setFont } = useThemeStore();
   const handleFonts = (index: number) => {
     setFont(fonts[index].font, index);
   };

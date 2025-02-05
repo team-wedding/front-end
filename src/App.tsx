@@ -4,7 +4,7 @@ import CreateInvitationPage from './pages/CreateInvitationPage';
 import PreviewInvitaionPage from './pages/PreviewInvitaionPage';
 import ResultPage from './pages/ResultPage';
 import DashBoardPage from './pages/DashBoardPage';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import EditInvitationPage from './pages/EditInvitationPage';
 import NotFound404 from './pages/NotFound404';

@@ -1,7 +1,8 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-import { toast, ToastContainer } from 'react-toastify';
+// import { toast, ToastContainer } from 'react-toastify';
 import LinkIcon from '@icons/LinkIcon';
+import ToastPopup from '../Toastpopup';
 
 declare global {
   interface Window {
@@ -71,30 +72,32 @@ export default function ShareInvitation({
     });
   };
 
+  const [toast, setToast] = useState(false);
+
   const handleCopy = async () => {
     await navigator.clipboard.writeText(shareUrl);
-    toast.success('클립보드에 복사되었습니다 😀', {
-      className: 'bottom: 8rem',
-      position: 'bottom-center',
-      autoClose: 2000,
-      hideProgressBar: true,
-    });
+    // toast.success('클립보드에 복사되었어요!', {
+    //   position: 'bottom-center',
+    //   autoClose: 2000,
+    //   hideProgressBar: true,
+    // });
+    setToast(true);
   };
 
   return (
     <div
-      className={`${isFocused ? 'max-h-40' : 'max-h-0 invisible'} absolute flex flex-col top-5 right-2 items-center bg-[#3A3A3A] px-2 rounded-lg text-[8px]   transition-all duration-500 ease-in-out`}
+      className={`${isFocused ? 'max-h-40' : 'max-h-0 invisible'} absolute flex flex-col top-7 right-1 items-center bg-[#3A3A3A] px-1 rounded-lg text-[9px] text-white transition-all duration-500 ease-in-out`}
       onBlur={() => setIsFocused(false)}
     >
       <button
         onClick={handleCopy}
-        className="px-3 py-4 flex flex-row items-center"
+        className="px-3 py-3 flex flex-row items-center"
       >
         <LinkIcon />
         URL 공유하기
       </button>
       <hr className=" w-full" />
-      <button onClick={handleKakaoShare} className="px-3 py-4">
+      <button onClick={handleKakaoShare} className="px-3 py-3">
         {' '}
         카카오로 공유하기
       </button>
@@ -105,10 +108,17 @@ export default function ShareInvitation({
         id={'qr-code-download'}
         value={`http://localhost:5173/`}
       />
-      <a href={pngUrl} download={'qr.png'} className="px-3 py-4" ref={aRef}>
+      <a href={pngUrl} download={'qr.png'} className="px-3 py-3" ref={aRef}>
         QR 코드 저장
       </a>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
+      {toast && (
+        <ToastPopup
+          setToast={setToast}
+          message={'클립보드에 복사되었어요.'}
+          position="bottom"
+        />
+      )}
     </div>
   );
 }

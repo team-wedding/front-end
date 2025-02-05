@@ -12,6 +12,7 @@ interface PhotoTalkState {
   photoTalks: PhotoTalk[];
   editingPhotoTalk: PhotoTalk | null;
   setEditingPhotoTalk: (photoTalk: PhotoTalk | null) => void;
+  setPhotoTalkList: (PhotoTalkList: PhotoTalk[]) => void;
   addPhotoTalk: (photoTalk: PhotoTalk) => void;
   editPhotoTalk: (id: number, updateTalk: PhotoTalk) => void;
   deletePhotoTalk: (id: number, password?: string) => void;
@@ -25,6 +26,10 @@ const usePhotoTalkStore = create<PhotoTalkState>((set, get) => ({
 
   setEditingPhotoTalk: (photoTalk) => {
     set({ editingPhotoTalk: photoTalk });
+  },
+
+  setPhotoTalkList: (photoTalksList: PhotoTalk[]) => {
+    set({ photoTalks: photoTalksList });
   },
 
   addPhotoTalk: (newPhotoTalk) => {

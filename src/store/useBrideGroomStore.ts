@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import _ from 'lodash';
+// import _ from 'lodash';
 
 type Person = {
   name: string;
@@ -78,7 +78,26 @@ const useBrideGroomStore = create<StoreState>((set) => ({
     }),
   reset: () => {
     set(() => ({
-      brideGroom: _.cloneDeep(initialBrideGroom),
+      brideGroom: [
+        {
+          role: '신랑',
+          name: '',
+          relation: '아들',
+          family: {
+            father: { name: '', isDeceased: false },
+            mother: { name: '', isDeceased: false },
+          },
+        },
+        {
+          role: '신부',
+          name: '',
+          relation: '딸',
+          family: {
+            father: { name: '', isDeceased: false },
+            mother: { name: '', isDeceased: false },
+          },
+        },
+      ],
     }));
   },
 }));

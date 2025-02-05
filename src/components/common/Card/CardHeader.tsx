@@ -1,7 +1,8 @@
 import CircleMinusIcon from '@icons/CircleMinusIcon';
 import ShareIcon from '@icons/ShareIcon';
-import React, { Dispatch, SetStateAction, useRef, useState } from 'react';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import ShareInvitation from '../Share/ShareInvitation';
+import { useUserStore } from '@/store/useUserStore';
 
 interface CardHeaderProp {
   title: string;
@@ -13,6 +14,7 @@ interface CardHeaderProp {
 const CardHeader = ({ title, setModal, image, id }: CardHeaderProp) => {
   const [isFocused, setIsFocused] = useState(false);
   const parentRef = useRef<HTMLButtonElement>(null);
+  const { id: userId } = useUserStore();
 
   const handleBlur = (event: React.FocusEvent<HTMLButtonElement>) => {
     if (parentRef.current && parentRef.current.contains(event.relatedTarget)) {
@@ -26,12 +28,12 @@ const CardHeader = ({ title, setModal, image, id }: CardHeaderProp) => {
   };
 
   return (
-    <div className="absolute top-0 left-0  flex justify-between w-full py-2 px-2 bg-white bg-opacity-90 text-gray-500 font-Paperlogy">
+    <div className="top-0 left-0 flex border-t border-r border-l rounded-t-lg items-center justify-between w-full h-[36px] p-2 bg-white bg-opacity-90 text-gray-600 font-Paperlogy">
       <button onClick={() => setModal(true)}>
         <CircleMinusIcon />
       </button>
       {/* 청첩장 제목 입력값 */}
-      <div className="text-xs  px-2">{title}</div>
+      <div className="text-[10px] px-2">{title}</div>
       <button
         ref={parentRef}
         tabIndex={-1}
@@ -47,7 +49,7 @@ const CardHeader = ({ title, setModal, image, id }: CardHeaderProp) => {
             shareTitle={title}
             shareDesc={'결혼합니다'}
             shareImage={image}
-            shareUrl={`http://localhost:5173/result/${id}`}
+            shareUrl={`https://woogyeol.vercel.app/result/${userId}/${id}`}
             shareHeader={''}
           />
         )}

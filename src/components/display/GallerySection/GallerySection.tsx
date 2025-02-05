@@ -6,6 +6,7 @@ import { useLocation } from 'react-router';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import SectionTitle from '@/components/common/SectionTitle';
+import SectionTitle from '@/components/common/SectionTitle';
 
 export default function GallerySection() {
   const { galleryImages, grid } = useGalleryStore();
@@ -70,7 +71,7 @@ export default function GallerySection() {
                 </button>
               )}
               {modal && (
-                <div className="absolute flex flex-row gap-2  justify-center items-center bg-black/70 size-full">
+                <div className="absolute flex flex-row gap-4 justify-center items-center bg-black/70 size-full">
                   <button
                     onClick={handlePrev}
                     className="bg-white h-6 rounded-full flex items-center justify-center"

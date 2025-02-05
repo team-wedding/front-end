@@ -1,9 +1,10 @@
 import useAddressStore from '@store/useAddressStore';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import FileCopyIcon from '@icons/FileCopyIcon';
-import { toast, ToastContainer } from 'react-toastify';
+// import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import SectionTitle from '@/components/common/SectionTitle';
+import ToastPopup from '@/components/common/Toastpopup';
+import { useState } from 'react';
 
 const LocationTitle = () => {
   const { jibunAddress, weddingHallName, weddingHallDetail } =
@@ -11,12 +12,15 @@ const LocationTitle = () => {
 
   const addressToCopy = jibunAddress || '서울 강남구 언주로 564';
 
+  const [toast, setToast] = useState(false);
+
   const handleCopy = () => {
-    toast.success('클립보드에 복사되었습니다 😀', {
-      position: 'bottom-center',
-      autoClose: 2000,
-      hideProgressBar: true,
-    });
+    // toast.success('클립보드에 복사되었어요!', {
+    //   position: 'bottom-center',
+    //   autoClose: 2000,
+    //   hideProgressBar: true,
+    // });
+    setToast(true);
   };
 
   return (
@@ -31,7 +35,14 @@ const LocationTitle = () => {
           </button>
         </CopyToClipboard>
       </div>
-      <ToastContainer />
+      {/* <ToastContainer /> */}
+      {toast && (
+        <ToastPopup
+          setToast={setToast}
+          message={'클립보드에 복사되었어요.'}
+          position="bottom"
+        />
+      )}
     </div>
   );
 };

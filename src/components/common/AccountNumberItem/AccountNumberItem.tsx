@@ -1,5 +1,7 @@
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import kakaoPay from '@assets/kakao_pay_icon.png';
+import { useState } from 'react';
+import ToastPopup from '../Toastpopup';
 
 interface BankProps {
   bank: string;
@@ -16,24 +18,31 @@ export default function AccountNumberItem({
   kakaoLink,
   last,
 }: BankProps) {
+
+  const [toast, setToast] = useState(false);
+
   const handleAccountNumCopy = async () => {
     await navigator.clipboard.writeText(accountNumber);
-    toast.success('계좌번호가 저장되었습니다. 😀', {
-      className: 'bottom: 8rem',
-      position: 'bottom-center',
-      autoClose: 1000,
-      hideProgressBar: true,
-    });
+    // toast.success('클립보드에 복사되었어요!', {
+    //   className: 'bottom: 8rem',
+    //   position: 'bottom-center',
+    //   autoClose: 2000,
+    //   hideProgressBar: true,
+    // });
+    setToast(true);
   };
+
   const handleKakaoNumCopy = async () => {
     await navigator.clipboard.writeText(kakaoLink!);
-    toast.success('카카오페이가 저장되었습니다 😀', {
-      className: 'bottom: 8rem',
-      position: 'bottom-center',
-      autoClose: 1000,
-      hideProgressBar: true,
-    });
+    // toast.success('클립보드에 복사되었어요!', {
+    //   className: 'bottom: 8rem',
+    //   position: 'bottom-center',
+    //   autoClose: 2000,
+    //   hideProgressBar: true,
+    // });
+    setToast(true);
   };
+
   return (
     <div
       className={`flex justify-between items-center border-b p-6 text-xs ${last && 'rounded-b-md'}`}
@@ -66,6 +75,14 @@ export default function AccountNumberItem({
           </button>
         )}
       </div>
+      {/* <ToastContainer /> */}
+      {toast && (
+        <ToastPopup
+          setToast={setToast}
+          message={'클립보드에 복사되었어요.'}
+          position="bottom"
+        />
+      )}
     </div>
   );
 }

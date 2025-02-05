@@ -21,19 +21,15 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
   };
   const [modal, setModal] = useState(false);
   return (
-    <div className="relative flex flex-col items-center border border-gray-100 rounded-lg shadow-lg w-[152px] h-[227px] bg-gray-200">
-      <div className="relative h-full w-full rounded-lg overflow-hidden">
-        <img
-          src={image || logo}
-          className="object-cover h-full w-[150px] rounded-lg"
-        ></img>
-        <div className="absolute inset-0 bg-white opacity-10"></div>
-        <CardHeader
-          id={invitationId}
-          image={image}
-          title={title}
-          setModal={setModal}
-        />
+    <div className="relative flex flex-col items-center rounded-lg w-[152px] bg-gray-100 shadow-lg">
+      <CardHeader
+        id={invitationId}
+        image={image}
+        title={title}
+        setModal={setModal}
+      />
+      <div className="w-full border-l border-r">
+        <img src={image || logo} className="object-cover h-[170px] w-[152px]" />
       </div>
       <CardFooter id={invitationId} userId={id} />
       <ReusableModal

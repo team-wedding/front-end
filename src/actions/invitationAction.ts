@@ -19,6 +19,7 @@ import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import useNoticeStore, {
   Notice,
 } from '@/store/OptionalFeature/useNoticeFeatureStore';
+import fonts from '@/constants/fonts';
 
 export const getInvitationAction = (): Omit<
   InvitationDetiail,
@@ -215,7 +216,6 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
           : new Date(details.date.join('-')),
       );
 
-      //FIX: 시간 처리
       setWeddingTime(details.weddingTime[0], details.weddingTime[1]);
 
       //청첩장 제목/내용
@@ -257,8 +257,11 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       //갤러리
       setGrid(details.galleries ? details.galleries[0]?.grid : false);
       setImages(details.galleries ? details.galleries[0]?.images : []);
-      // FIX : 추가 인데긋
-      setFont(details.font, 0);
+
+      setFont(
+        details.font,
+        fonts.findIndex((value) => value.font == details.font) || 0,
+      );
       //교통수단
       //TODO: CanMove 처리
       transportToggle('canMoveMap', false);
@@ -362,16 +365,45 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       );
 
       //FIX: undefined 처리
-      calendarToggle('calendar', details?.calendars[0]?.calendar || false);
-      calendarToggle('dday', details?.calendars[0]?.dDay || false);
-      calendarToggle('countdown', details?.calendars[0]?.countdown || false);
+      calendarToggle(
+        'calendar',
+        (details.calendars.length !== 0 && details.calendars[0]?.calendar) ||
+          false,
+      );
+      calendarToggle(
+        'dday',
+        (details.calendars.length !== 0 && details.calendars[0]?.dDay) || false,
+      );
+      calendarToggle(
+        'countdown',
+        (details.calendars.length !== 0 && details.calendars[0]?.countdown) ||
+          false,
+      );
 
-      toggleOptionalFeature('calendar', details?.calendars[0].isActive);
-      toggleOptionalFeature('location', details?.maps[0].isActive);
-      toggleOptionalFeature('gallery', details?.galleries[0].isActive);
-      toggleOptionalFeature('account', details?.accounts[0].isActive);
-      toggleOptionalFeature('contact', details?.contacts[0].isActive);
-      // toggleOptionalFeature('notice', details?.notices[0].isActive);
+      toggleOptionalFeature(
+        'calendar',
+        details.calendars.length !== 0 && details.calendars[0].isActive,
+      );
+      toggleOptionalFeature(
+        'location',
+        details.location.length !== 0 && details.maps[0].isActive,
+      );
+      toggleOptionalFeature(
+        'gallery',
+        details.galleries.length !== 0 && details.galleries[0].isActive,
+      );
+      toggleOptionalFeature(
+        'account',
+        details.accounts.length !== 0 && details.accounts[0].isActive,
+      );
+      toggleOptionalFeature(
+        'contact',
+        details.contacts.length !== 0 && details.contacts[0].isActive,
+      );
+      toggleOptionalFeature(
+        'notice',
+        details.notices.length !== 0 && details.notices[0].isActive,
+      );
 
       //FIX: MUSIC
       selectMusic(details.audio);

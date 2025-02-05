@@ -4,6 +4,7 @@ import CloseIcon from '@icons/CloseIcon';
 import CloudArrowIcon from '@icons/CloudArrowIcon';
 import { useCreatePhototalk, useUpdatePhototalk } from '@/hooks/usePhototalk';
 import { useParams } from 'react-router';
+import { useS3Image } from '@/hooks/useS3Image';
 // import { useUserStore } from '@/store/useUserStore';
 
 interface PhotoTalkEditorProps {
@@ -23,6 +24,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
     message: '',
     password: '',
     imageUrl: [] as string[],
+    imageFile: [] as File[]
   });
 
   const imageUrls = Array.isArray(form.imageUrl)
@@ -40,9 +42,17 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
           : typeof editingPhotoTalk.imageUrl === 'string'
             ? JSON.parse(editingPhotoTalk.imageUrl)
             : [],
+        imageFile: []
       });
     } else {
       resetFields();
+      setForm({
+        name: '',
+        message: '',
+        password: '',
+        imageUrl: [] as string[],
+        imageFile: []
+      })
     }
   }, [isOpen, editingPhotoTalk]);
 
@@ -54,13 +64,15 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
     setForm({
       ...form,
       imageUrl: [...imageUrls, ...newImages].slice(0, 30),
+      imageFile: files
     });
   };
 
-  const handleRemoveImage = (image: string) => {
+  const handleRemoveImage = (image: string, index: number) => {
     setForm({
       ...form,
       imageUrl: imageUrls.filter((img: string) => img !== image),
+      imageFile: form.imageFile.filter((_, i) => i !== index)
     });
   };
 
@@ -93,12 +105,13 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
     }));
   };
 
-  const handleSubmit = () => {
+  const { mutateAsync: s3Mutate } = useS3Image();
+  const handleSubmit = async () => {
     if (!form.name || !form.message || !form.password) {
       alert('모든 필드를 입력해주세요.');
       return;
     }
-
+    const { imageUrls: photoTalkImageUrls } = await s3Mutate(form.imageFile);
     if (editingPhotoTalk) {
       updatePhototalk.mutate(
         {
@@ -108,6 +121,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
             userId: Number(userId),
             invitationId: Number(invitationId),
             password: form.password,
+            imageUrl: photoTalkImageUrls
           },
         },
         {
@@ -119,7 +133,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
       );
     } else {
       createPhototalk.mutate(
-        { ...form, userId: Number(userId), invitationId: Number(invitationId) },
+        { ...form, userId: Number(userId), invitationId: Number(invitationId), imageUrl: photoTalkImageUrls },
         {
           onSuccess: () => {
             resetFields();
@@ -226,7 +240,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
                         className="w-20 h-20 object-cover rounded-md border"
                       />
                       <button
-                        onClick={() => handleRemoveImage(image)}
+                        onClick={() => handleRemoveImage(image, index)}
                         className="absolute top-1 right-1 bg-gray-800 text-white rounded-full p-1"
                       >
                         <CloseIcon className="size-[12px]" />

@@ -31,7 +31,7 @@ const EditInvitationPage = () => {
   const { mutateAsync: editInvitation } = useUpdateInvitation(parseInt(id!));
   const { invitations } = useGetInvitation(parseInt(id!));
   // const { setOrderItems } = useAccordionStore()
-  const { uploadedImageFile } = useImageStore()
+  const { uploadedImageFile, uploadedImageUrl } = useImageStore()
   const { mutateAsync: s3Mutate } = useS3Image();
   const details = getInvitationAction();
   const { galleryFiles, grid } = useGalleryStore()
@@ -64,7 +64,6 @@ const EditInvitationPage = () => {
     initializeItems(start, end);
   }, [steps, initializeItems]);
 
-
   const handleSave = async () => {
     try {
       const { imageUrls: thumbnail } = await s3Mutate(uploadedImageFile ? [uploadedImageFile!] : []);
@@ -86,7 +85,7 @@ const EditInvitationPage = () => {
       if (id) {
         await editInvitation({
           ...details,
-          imgUrl: thumbnail.length > 0 ? thumbnail[0] : "",
+          imgUrl: thumbnail.length > 0 ? thumbnail[0] : uploadedImageUrl,
           galleries: [{ images: gallery, grid, isActive: selectedOptionalFeatures.gallery },],
           notices: noticeList
         }

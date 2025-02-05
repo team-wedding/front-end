@@ -2,6 +2,7 @@ import CircleMinusIcon from '@icons/CircleMinusIcon';
 import ShareIcon from '@icons/ShareIcon';
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import ShareInvitation from '../Share/ShareInvitation';
+import { useUserStore } from '@/store/useUserStore';
 
 interface CardHeaderProp {
   title: string,
@@ -14,6 +15,7 @@ interface CardHeaderProp {
 const CardHeader = ({ title, setModal, image, id }: CardHeaderProp) => {
   const [isFocused, setIsFocused] = useState(false);
   const parentRef = useRef<HTMLButtonElement>(null);
+  const { id: userId } = useUserStore()
 
   const handleBlur = (event: React.FocusEvent<HTMLButtonElement>) => {
     if (parentRef.current && parentRef.current.contains(event.relatedTarget)) {
@@ -42,7 +44,7 @@ const CardHeader = ({ title, setModal, image, id }: CardHeaderProp) => {
       >
         <ShareIcon />
         {isFocused && (
-          <ShareInvitation setIsFocused={setIsFocused} isFocused={isFocused} shareTitle={title} shareDesc={'결혼합니다'} shareImage={image} shareUrl={`http://localhost:5173/result/${id}`} shareHeader={''} />
+          <ShareInvitation setIsFocused={setIsFocused} isFocused={isFocused} shareTitle={title} shareDesc={'결혼합니다'} shareImage={image} shareUrl={`https://woogyeol.vercel.app/result/${userId}/${id}`} shareHeader={''} />
         )}
       </button>
     </div>

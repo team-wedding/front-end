@@ -12,8 +12,7 @@ export default function GallerySection() {
 
   const [modal, setModal] = useState(false)
   const { pathname } = useLocation()
-  const isPreview = pathname == "/create"
-
+  const isPreview = pathname === "/create" || pathname === "/preview"
   const handleModal = (index: number) => {
     //수정페이지 pathname 확인
     if (!isPreview) {

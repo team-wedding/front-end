@@ -10,7 +10,8 @@ import PasswordConfirmModal from '@/components/common/PhotoTalk/PasswordConfirmM
 import { PhotoTalk } from '@/types/phototalkType';
 import ListIcon from '@/components/icons/ListIcon';
 import ImageIcon from '@/components/icons/ImageIcon';
-import EditIcon from '@/components/icons/EditIcon';
+import PhotoTalkEditor from '@/components/common/PhotoTalk/PhotoTalkEditor';
+// import EditIcon from '@/components/icons/EditIcon';
 
 interface PhotoTalkListProps {
   isAdmin: boolean;
@@ -33,9 +34,9 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
   };
   useEffect(() => {
     if (data) {
-      setPhotoTalkList(data.allCelebrationMsgs)
+      setPhotoTalkList(data.allCelebrationMsgs);
     }
-  }, [data])
+  }, [data]);
 
   const deletePhototalk = useDeletePhototalk();
 
@@ -45,6 +46,7 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
 
   const [isGalleryOpen, setGalleryOpen] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
+  const [isEditorOpen, setEditorOpen] = useState(false);
   // const [isDeleting, setIsDeleting] = useState(false);
   // const [isDeleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
@@ -105,7 +107,7 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
   //   setDeleteConfirmOpen(false);
   // };
 
-  if (photoTalkList.length === 0) {
+  if (isAdmin && photoTalkList.length === 0) {
     return (
       <p className="text-center text-sm text-gray-500 my-6">
         업로드된 포토톡이 없습니다.
@@ -115,10 +117,18 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
 
   return (
     <div className="w-full">
-      <div className="flex justify-end mx-8">
+      <div className="flex justify-between mx-8">
+        {!isAdmin && (
+          <button
+            onClick={() => setEditorOpen(true)}
+            className="px-6 py-2 mr-auto bg-button/30 rounded-xl text-sm font-medium hover:bg-button/20"
+          >
+            작성하기
+          </button>
+        )}
         <button
           onClick={() => setGalleryOpen(!isGalleryOpen)}
-          className="select-btn"
+          className={`select-btn ml-auto ${isGalleryOpen ? 'text-gray-800' : ''}`}
         >
           {isGalleryOpen ? <ListIcon /> : <ImageIcon />}
         </button>
@@ -142,9 +152,11 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
           />
         ))
       ) : (
-        <div className="flex flex-col items-center gap-2 bg-white p-8 m-8 rounded-lg shadow-sm border border-gray-200 text-gray-600">
-          <EditIcon className="size-[28px]" strokeWidth={2} />
-          <p className="text-sm font-light">첫 번째 포토톡을 작성해 주세요</p>
+        <div className="flex flex-col items-center gap-2 bg-white p-10 mx-8 my-4 rounded-lg shadow-sm border border-gray-200 text-gray-600">
+          {/* <EditIcon className="size-[28px]" strokeWidth={2} /> */}
+          <p className="text-sm font-light">
+            첫 번째 포토톡을 작성하고 따뜻한 마음을 전해보세요
+          </p>
         </div>
       )}
 
@@ -200,11 +212,10 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
         </div>
       )} */}
 
-      {/* 
       <PhotoTalkEditor
         isOpen={isEditorOpen}
         closeEditor={() => setEditorOpen(false)}
-      /> */}
+      />
     </div>
   );
 };

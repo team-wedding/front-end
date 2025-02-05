@@ -24,7 +24,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
     message: '',
     password: '',
     imageUrl: [] as string[],
-    imageFile: [] as File[]
+    imageFile: [] as File[],
   });
 
   const imageUrls = Array.isArray(form.imageUrl)
@@ -42,7 +42,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
           : typeof editingPhotoTalk.imageUrl === 'string'
             ? JSON.parse(editingPhotoTalk.imageUrl)
             : [],
-        imageFile: []
+        imageFile: [],
       });
     } else {
       resetFields();
@@ -51,8 +51,8 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
         message: '',
         password: '',
         imageUrl: [] as string[],
-        imageFile: []
-      })
+        imageFile: [],
+      });
     }
   }, [isOpen, editingPhotoTalk]);
 
@@ -64,7 +64,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
     setForm({
       ...form,
       imageUrl: [...imageUrls, ...newImages].slice(0, 30),
-      imageFile: files
+      imageFile: files,
     });
   };
 
@@ -72,7 +72,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
     setForm({
       ...form,
       imageUrl: imageUrls.filter((img: string) => img !== image),
-      imageFile: form.imageFile.filter((_, i) => i !== index)
+      imageFile: form.imageFile.filter((_, i) => i !== index),
     });
   };
 
@@ -121,7 +121,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
             userId: Number(userId),
             invitationId: Number(invitationId),
             password: form.password,
-            imageUrl: photoTalkImageUrls
+            imageUrl: photoTalkImageUrls,
           },
         },
         {
@@ -133,7 +133,12 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
       );
     } else {
       createPhototalk.mutate(
-        { ...form, userId: Number(userId), invitationId: Number(invitationId), imageUrl: photoTalkImageUrls },
+        {
+          ...form,
+          userId: Number(userId),
+          invitationId: Number(invitationId),
+          imageUrl: photoTalkImageUrls,
+        },
         {
           onSuccess: () => {
             resetFields();
@@ -146,7 +151,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
 
   return (
     isOpen && (
-      <div className="result-layout fixed inset-0 z-50 bg-black bg-opacity-50">
+      <div className="flex-center fixed inset-0 z-50 bg-black bg-opacity-50">
         <div className="bg-white rounded-lg w-80 shadow-sm h-3/4 min-h-fit">
           <div className="flex flex-col">
             <div className="flex items-center justify-between p-3 border-b rounded-t">

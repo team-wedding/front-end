@@ -7,11 +7,10 @@ const PhotoTalkSection = () => {
   console.log('invitationId : ', invitationId);
 
   return (
-    <div className="bg-rose-50/70 py-16 my-10 w-full">
-      <div className="column-center gap-4">
-        <SectionTitle subTitle="PHOTO TALK" title="포토톡" />
-
-        <p className="text-center leading-loose my-5">
+    <div className="column-center gap-4 py-36">
+      <SectionTitle subTitle="PHOTO TALK" title="포토톡" />
+      <div className="column-center bg-slate-100 px-20 py-12 rounded-xl">
+        <p className="text-center leading-loose mb-8">
           소중한 마음을 남겨주시면
           <br />큰 기쁨이 될 것 같습니다
           <br />
@@ -19,7 +18,7 @@ const PhotoTalkSection = () => {
         </p>
         <Link
           to={`/phototalk/${userId}/${invitationId}`}
-          className="py-2 bg-button text-white hover:bg-button/80 rounded-full px-8"
+          className="py-2 bg-slate-700 text-white hover:bg-button/80 rounded-full px-8"
         >
           작성하러 가기
         </Link>

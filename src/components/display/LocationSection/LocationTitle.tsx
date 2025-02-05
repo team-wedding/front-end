@@ -3,8 +3,9 @@ import CopyToClipboard from 'react-copy-to-clipboard';
 import FileCopyIcon from '@icons/FileCopyIcon';
 // import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ToastPopup from '@/components/common/Toastpopup';
+import ToastPopup from '@/components/common/ToastPopup';
 import { useState } from 'react';
+import SectionTitle from '@/components/common/SectionTitle';
 
 const LocationTitle = () => {
   const { jibunAddress, weddingHallName, weddingHallDetail } =

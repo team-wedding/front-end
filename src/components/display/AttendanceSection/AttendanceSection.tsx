@@ -54,7 +54,6 @@ export default function AttendanceSection() {
           </div>
         </div>
         <button
-          className="py-2 bg-button font-medium text-white hover:bg-button/80 rounded-xl px-8"
           className="py-2 bg-button text-white hover:bg-button/80 rounded-full px-8"
           onClick={() => setModal(true)}
         >

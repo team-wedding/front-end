@@ -1,16 +1,25 @@
+import HeaderButton from '@/components/common/Header/HeaderButton';
 import PhotoTalkList from '@/components/common/PhotoTalk/PhotoTalkList';
+import BackIcon from '@/components/icons/BackIcon';
+import PageLayout from '@/components/layout/PageLayout';
+import { useNavigate } from 'react-router';
 
 const AdminPhotoTalkPage = () => {
+  const navigate = useNavigate();
   return (
-    <div className="result-layout w-full">
-      <div className="column-center w-full flex flex-col gap-4">
-        <div className="title">포토톡 모아보기</div>
-        <p className="mb-4 text-center text-sm font-light leading-loose">
-          포토톡 설명?
-        </p>
+    <PageLayout
+      title="포토톡"
+      leftButton={
+        <HeaderButton onClick={() => navigate('/mypage')}>
+          <BackIcon />
+        </HeaderButton>
+      }
+      customFooter={null}
+    >
+      <div className="column-center w-full flex flex-col py-6">
         <PhotoTalkList isAdmin={true} />
       </div>
-    </div>
+    </PageLayout>
   );
 };
 

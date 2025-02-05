@@ -13,7 +13,7 @@ const MyPage = () => {
   return (
     <PageLayout title="우리, 결혼해요">
       <section className="flex flex-row justify-around items-center font-medium text-3xl p-8 border-b shadow-inner bg-gray-50">
-        <div className="flex flex-col gap-2 text-gray-300">
+        <div className="flex flex-col gap-2 text-neutral-400">
           <div>안녕하세요</div>
           <div className="text-black flex flex-row gap-2">
             {name}님{' '}

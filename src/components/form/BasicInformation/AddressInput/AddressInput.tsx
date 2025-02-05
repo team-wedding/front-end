@@ -33,7 +33,7 @@ const AddressInput: React.FC = () => {
           />
           <button
             onClick={handleComplete}
-            className="bg-button bg-opacity-80 text-white hover:bg-rose-200  px-4 py-3 rounded-xl shrink-0 text-xs"
+            className="bg-button bg-opacity-80 text-white hover:bg-rose-200 px-4 py-3 rounded-xl shrink-0 text-xs"
           >
             검색
           </button>

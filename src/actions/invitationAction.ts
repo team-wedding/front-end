@@ -365,16 +365,45 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       );
 
       //FIX: undefined 처리
-      calendarToggle('calendar', details?.calendars[0]?.calendar || false);
-      calendarToggle('dday', details?.calendars[0]?.dDay || false);
-      calendarToggle('countdown', details?.calendars[0]?.countdown || false);
+      calendarToggle(
+        'calendar',
+        (details.calendars.length !== 0 && details.calendars[0]?.calendar) ||
+          false,
+      );
+      calendarToggle(
+        'dday',
+        (details.calendars.length !== 0 && details.calendars[0]?.dDay) || false,
+      );
+      calendarToggle(
+        'countdown',
+        (details.calendars.length !== 0 && details.calendars[0]?.countdown) ||
+          false,
+      );
 
-      toggleOptionalFeature('calendar', details?.calendars[0].isActive);
-      toggleOptionalFeature('location', details?.maps[0].isActive);
-      toggleOptionalFeature('gallery', details?.galleries[0].isActive);
-      toggleOptionalFeature('account', details?.accounts[0].isActive);
-      toggleOptionalFeature('contact', details?.contacts[0].isActive);
-      // toggleOptionalFeature('notice', details?.notices[0].isActive);
+      toggleOptionalFeature(
+        'calendar',
+        details.calendars.length !== 0 && details.calendars[0].isActive,
+      );
+      toggleOptionalFeature(
+        'location',
+        details.location.length !== 0 && details.maps[0].isActive,
+      );
+      toggleOptionalFeature(
+        'gallery',
+        details.galleries.length !== 0 && details.galleries[0].isActive,
+      );
+      toggleOptionalFeature(
+        'account',
+        details.accounts.length !== 0 && details.accounts[0].isActive,
+      );
+      toggleOptionalFeature(
+        'contact',
+        details.contacts.length !== 0 && details.contacts[0].isActive,
+      );
+      toggleOptionalFeature(
+        'notice',
+        details.notices.length !== 0 && details.notices[0].isActive,
+      );
 
       //FIX: MUSIC
       selectMusic(details.audio);

@@ -206,7 +206,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       const { lat, lng } = JSON.parse(details.location[3]);
       setCoords(lat, lng);
       setWeddingHallName(details.location[4]);
-      setWeddingHallDetail(details.location[4]);
+      setWeddingHallDetail(details.location[5]);
 
       //FIX :: 웨딩 날짜
       setWeddingDate(
@@ -294,11 +294,11 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         details.accounts
           ? details.accounts[0]
           : {
-              accountHolderName: '',
-              bankName: '',
-              accountNumber: '',
-              kakaoUrl: '',
-            },
+            accountHolderName: '',
+            bankName: '',
+            accountNumber: '',
+            kakaoUrl: '',
+          },
       );
       updateAccountInfo(
         0,
@@ -306,11 +306,11 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         details.accounts
           ? details.accounts[1]
           : {
-              accountHolderName: '',
-              bankName: '',
-              accountNumber: '',
-              kakaoUrl: '',
-            },
+            accountHolderName: '',
+            bankName: '',
+            accountNumber: '',
+            kakaoUrl: '',
+          },
       );
       updateAccountInfo(
         0,
@@ -318,11 +318,11 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         details.accounts
           ? details.accounts[2]
           : {
-              accountHolderName: '',
-              bankName: '',
-              accountNumber: '',
-              kakaoUrl: '',
-            },
+            accountHolderName: '',
+            bankName: '',
+            accountNumber: '',
+            kakaoUrl: '',
+          },
       );
       updateAccountInfo(
         1,
@@ -330,11 +330,11 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         details.accounts
           ? details.accounts[3]
           : {
-              accountHolderName: '',
-              bankName: '',
-              accountNumber: '',
-              kakaoUrl: '',
-            },
+            accountHolderName: '',
+            bankName: '',
+            accountNumber: '',
+            kakaoUrl: '',
+          },
       );
       updateAccountInfo(
         1,
@@ -342,11 +342,11 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         details.accounts
           ? details.accounts[4]
           : {
-              accountHolderName: '',
-              bankName: '',
-              accountNumber: '',
-              kakaoUrl: '',
-            },
+            accountHolderName: '',
+            bankName: '',
+            accountNumber: '',
+            kakaoUrl: '',
+          },
       );
       updateAccountInfo(
         1,
@@ -354,11 +354,11 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         details.accounts
           ? details.accounts[5]
           : {
-              accountHolderName: '',
-              bankName: '',
-              accountNumber: '',
-              kakaoUrl: '',
-            },
+            accountHolderName: '',
+            bankName: '',
+            accountNumber: '',
+            kakaoUrl: '',
+          },
       );
 
       //FIX: undefined 처리

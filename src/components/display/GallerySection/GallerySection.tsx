@@ -5,6 +5,7 @@ import CloseIcon from '@/components/icons/CloseIcon';
 import { useLocation } from 'react-router';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
+import SectionTitle from '@/components/common/SectionTitle';
 
 export default function GallerySection() {
   const { galleryImages, grid } = useGalleryStore();
@@ -12,7 +13,7 @@ export default function GallerySection() {
   const [modal, setModal] = useState(false)
   const { pathname } = useLocation()
   const isPreview = pathname == "/create"
-  
+
   const handleModal = (index: number) => {
     //수정페이지 pathname 확인
     if (!isPreview) {
@@ -37,11 +38,12 @@ export default function GallerySection() {
 
   return (
     <div className="bg-white w-full h-fit">
+      {isGalleryFeatureActive && <SectionTitle subTitle="GALLERY" title="갤러리" />}
       {isGalleryFeatureActive &&
         (galleryImages ? (
           grid ? (
             <section
-              className={`relative w-full grid grid-cols-3  ${isPreview ? 'gap-3 ' : 'gap-y-3 px-2'}  justify-items-center items-center`}
+              className={`relative w-full grid grid-cols-3  ${isPreview ? 'gap-3 ' : 'gap-y-3 gap-x-1'}  justify-items-center items-center`}
             >
               {galleryImages.map((value, index) => {
                 return (
@@ -68,7 +70,7 @@ export default function GallerySection() {
                 </button>
               )}
               {modal && (
-                <div className="absolute flex flex-row gap-2  justify-center items-center bg-black/70 size-full">
+                <div className="absolute flex flex-row gap-4 justify-center items-center bg-black/70 size-full">
                   <button
                     onClick={handlePrev}
                     className="bg-white h-6 rounded-full flex items-center justify-center"
@@ -98,7 +100,7 @@ export default function GallerySection() {
                   className="size-full rounded-md"
                 />
               </div>
-              <div className="flex flex-row  gap-4 justify-center">
+              <div className="flex flex-row gap-4 justify-center">
                 <button onClick={handlePrev}>
                   <ChevronLeft className="" />
                 </button>

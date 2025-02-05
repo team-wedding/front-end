@@ -61,35 +61,35 @@ const RsvpStatsPage = () => {
         <div className="px-4 pt-2 pb-3">
           <div className="text-xl font-medium pl-2 py-4">하객 분류</div>
           <RsvpItem title={'총 응답 수'} attend={totalResponses} total={true} />
-          <div className="grid grid-cols-2 gap-2 mt-2">
+          <div className="grid grid-cols-2 gap-3 mt-4">
             <RsvpItem title={'참석 가능'} attend={totalAttending} />
             <RsvpItem title={'참석 불가'} attend={totalNotAttending} />
             <RsvpItem
               title={'신랑측'}
-              description="(참석 가능 / 불가)"
+              description="(가능 / 불가)"
               attend={groomAttending}
               unattend={groomNotAttending}
               bride={false}
             />
             <RsvpItem
               title={'신부측'}
-              description="(참석 가능 / 불가)"
+              description="(가능 / 불가)"
               attend={brideAttending}
               unattend={brideNotAttending}
               bride={true}
             />
           </div>
-          <div className="grid col-span-3 grid-cols-3 gap-2 mt-2 ">
+          <div className="grid col-span-3 grid-cols-3 gap-3 mt-4">
             <RsvpItem title={'식사 가능'} attend={mealAvailable} />
             <RsvpItem title={'식사 불가'} attend={mealNotAvailable} />
             <RsvpItem title={'식사 미정'} attend={mealPending} />
           </div>
         </div>
 
-        <div className="text-xl font-medium px-4 py-2">상세 목록</div>
+        <div className="text-xl font-medium px-4 py-4">상세 목록</div>
         <section className="flex flex-col px-4 py-2">
           {/* 테이블 헤더 */}
-          <div className="grid grid-cols-[2.5fr_2.2fr_0.7fr_0.7fr] bg-gray-200 font-medium text-center py-2 rounded-t-lg border border-gray-300">
+          <div className="grid grid-cols-[2.5fr_2.2fr_0.7fr_0.7fr] bg-gray-100 text-sm font-medium text-center py-2 rounded-t-lg border border-gray-300">
             <span>이름</span>
             <span>연락처</span>
             <span>참석</span>
@@ -114,7 +114,7 @@ const RsvpStatsPage = () => {
               </div>
             ))
           ) : (
-            <div className="text-center text-gray-500 py-4">참석 데이터가 없습니다.</div>
+            <div className="text-center text-sm text-gray-500 py-8">참석 데이터가 없습니다.</div>
           )}
         </section>
       </section>

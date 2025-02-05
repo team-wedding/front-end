@@ -29,9 +29,9 @@ const RsvpModal = ({ setModal }: ModalProp) => {
     isDining: '예정',
   });
 
-  const { userId, invitationId } = useParams();
-  console.log('userId : ', userId);
-  console.log('invitaionsId : ', invitationId);
+  // const { userId, invitationId } = useParams();
+  // console.log('userId : ', userId);
+  // console.log('invitaionsId : ', invitationId);
 
   //FIX 비어있는 값일때 처리 필요
   const { weddingTime, formattedDate } = useWeddingStore();

@@ -35,7 +35,7 @@ const MyPage = () => {
           icon={phototalk}
           title={'포토톡'}
           detail={'이미지와 축하메시지를 볼 수 있습니다.'}
-          href='/mypage/rsvp' // 수정해야 함.
+          href='/mypage/phototalk' // 수정해야 함.
         />
       </section>
     </PageLayout>

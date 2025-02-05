@@ -53,22 +53,23 @@ const RsvpModal = ({ setModal }: ModalProp) => {
     <div
       className={`fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50`}
     >
-      <div
-        className={`flex flex-col py-5 px-5 bg-white w-[350px] rounded-xl border`}
-      >
+      <div className={`flex flex-col py-5 px-5 bg-white w-[350px] rounded-xl`}>
         <button
           className="flex justify-end items-center"
           onClick={() => setModal(false)}
         >
           <CloseIcon className={''} />
         </button>
-        <div className="flex flex-col items-center gap-6 p-1">
-          <div className="text-xl font-medium">참석 의사 전달</div>
-          <div className="flex flex-row w-full gap-8 items-center justify-between text-base">
-            구분:
-            <div className="flex gap-1 w-52 justify-between">
+        <div className="flex-center text-xl font-medium mb-5">
+          참석 의사 전달
+        </div>
+
+        <div className="flex flex-col items-center gap-3 p-4">
+          <div className="flex flex-row w-full gap-8 items-center justify-between ">
+            {/* 구분: */}
+            <div className="flex gap-2 w-full justify-between">
               <button
-                className={`rounded-md px-2 py-2 w-1/2 ${info.isGroomSide ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'} `}
+                className={`rounded-md px-2 py-3 w-1/2 ${info.isGroomSide ? 'bg-sky-200 font-medium' : 'text-gray-700 bg-gray-200'} `}
                 onClick={() =>
                   setInfo((prev) => ({
                     ...prev,
@@ -80,7 +81,7 @@ const RsvpModal = ({ setModal }: ModalProp) => {
                 신랑측
               </button>
               <button
-                className={`rounded-md px-2 py-2 w-1/2 ${info.isBrideSide ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'} `}
+                className={`rounded-md px-2 py-2 w-1/2 ${info.isBrideSide ? ' bg-rose-200 font-medium' : 'text-gray-700 bg-gray-200'} `}
                 onClick={() =>
                   setInfo((prev) => ({
                     ...prev,
@@ -93,11 +94,11 @@ const RsvpModal = ({ setModal }: ModalProp) => {
               </button>
             </div>
           </div>
-          <div className="flex flex-row w-full gap-2 items-center justify-between text-base">
-            <div>참석여부: </div>
-            <div className={`flex flex-row justify-between gap-1 w-52`}>
+          <div className="flex flex-row w-full gap-2 items-center justify-between">
+            {/* <div>참석여부: </div> */}
+            <div className={`flex flex-row justify-between gap-2 w-full`}>
               <button
-                className={`rounded-md p-1 w-1/2 ${info.attendance ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'}`}
+                className={`rounded-md p-1 w-1/2 ${info.attendance ? 'text-white bg-black' : 'text-gray-700 bg-gray-200'}`}
                 onClick={() =>
                   setInfo((prev) => ({ ...prev, attendance: true }))
                 }
@@ -105,7 +106,7 @@ const RsvpModal = ({ setModal }: ModalProp) => {
                 참석할게요
               </button>
               <button
-                className={`rounded-md p-1 w-1/2 text-base ${!info.attendance ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'}`}
+                className={`rounded-md p-2 w-1/2 text-base ${!info.attendance ? 'text-white bg-black' : 'text-gray-700 bg-gray-200'}`}
                 onClick={() =>
                   setInfo((prev) => ({ ...prev, attendance: false }))
                 }
@@ -115,67 +116,69 @@ const RsvpModal = ({ setModal }: ModalProp) => {
               </button>
             </div>
           </div>
-          <div className="flex flex-row w-full justify-between items-center text-base">
-            성함:{' '}
-            <input
-              className="w-52 h-8 bg-gray-50 rounded-md splash-input text-base"
-              type="text"
-              onChange={handleChange}
-              name="name"
-            />
-          </div>
-          <div className="flex flex-row w-full justify-between items-center text-base">
-            연락처:{' '}
-            <input
-              className="w-52 h-8 bg-gray-50 rounded-md splash-input text-base"
-              type="text"
-              onChange={handleChange}
-              name="contact"
-              placeholder="숫자만 입력"
-            />
-          </div>
-          <div className="flex flex-row w-full justify-between items-center text-base">
-            참석인원:{' '}
-            <input
-              className=" w-52 h-8 bg-gray-50 rounded-md splash-input text-base"
-              type="number"
-              onChange={handleChange}
-              placeholder="본인 제외 총 참석인원"
-              name="companions"
-            />
-          </div>
-          <div className="flex flex-row w-full justify-between items-center text-base">
-            식사여부:{' '}
-            <div className="flex gap-1 w-52 justify-between">
-              {/* map으로 refact */}
-              <button
-                className={`rounded-md  p-1 w-1/3  ${info.isDining == '예정' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'}`}
-                onClick={() =>
-                  setInfo((prev) => ({ ...prev, isDining: '예정' }))
-                }
-              >
-                예정
-              </button>
-              <button
-                className={`rounded-md  p-1 w-1/3  ${info.isDining == '안함' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'}`}
-                onClick={() =>
-                  setInfo((prev) => ({ ...prev, isDining: '안함' }))
-                }
-              >
-                안함
-              </button>
-              <button
-                className={`rounded-md  p-1 w-1/3 ${info.isDining == '미정' ? 'text-white bg-button' : 'text-gray-700  bg-gray-200'} `}
-                onClick={() =>
-                  setInfo((prev) => ({ ...prev, isDining: '미정' }))
-                }
-              >
-                미정
-              </button>
+          <div className="my-6 column-center gap-5">
+            <div className="flex flex-row w-full justify-between items-center">
+              성함
+              <input
+                className="w-48 h-10 bg-gray-50 rounded-md splash-input"
+                type="text"
+                onChange={handleChange}
+                name="name"
+              />
+            </div>
+            <div className="flex flex-row w-full justify-between items-center">
+              연락처
+              <input
+                className="w-48 h-10 bg-gray-50 rounded-md splash-input"
+                type="text"
+                onChange={handleChange}
+                name="contact"
+                placeholder="숫자만 입력"
+              />
+            </div>
+            <div className="flex flex-row w-full justify-between items-center">
+              참석인원
+              <input
+                className=" w-48 h-10 bg-gray-50 rounded-md splash-input"
+                type="number"
+                onChange={handleChange}
+                placeholder="본인 제외 총 참석인원"
+                name="companions"
+              />
+            </div>
+            <div className="flex flex-row w-full justify-between items-center gap-5">
+              식사여부
+              <div className="flex gap-1 w-48 justify-between">
+                {/* map으로 refact */}
+                <button
+                  className={`rounded-md  p-1 w-1/3  ${info.isDining == '예정' ? 'text-white bg-black' : 'text-gray-700  bg-gray-200'}`}
+                  onClick={() =>
+                    setInfo((prev) => ({ ...prev, isDining: '예정' }))
+                  }
+                >
+                  예정
+                </button>
+                <button
+                  className={`rounded-md  p-1 w-1/3  ${info.isDining == '안함' ? 'text-white bg-black' : 'text-gray-700  bg-gray-200'}`}
+                  onClick={() =>
+                    setInfo((prev) => ({ ...prev, isDining: '안함' }))
+                  }
+                >
+                  안함
+                </button>
+                <button
+                  className={`rounded-md  p-1 w-1/3 ${info.isDining == '미정' ? 'text-white bg-black' : 'text-gray-700  bg-gray-200'} `}
+                  onClick={() =>
+                    setInfo((prev) => ({ ...prev, isDining: '미정' }))
+                  }
+                >
+                  미정
+                </button>
+              </div>
             </div>
           </div>
           <button
-            className="bg-button rounded-md py-3 w-full text-white text-medium"
+            className="bg-button/80 rounded-lg py-3 w-full text-medium text-white hover:bg-button/50"
             onClick={handleSubmit}
           >
             참석의사 전달하기

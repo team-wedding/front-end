@@ -244,11 +244,11 @@
   }
 
   .preview-layout {
-    @apply column-center max-w-md bg-white gap-20 text-result tracking-wide shadow-xl mx-auto relative z-20 font-Pretendard;
+    @apply column-center max-w-md bg-white gap-2 text-result tracking-wide shadow-xl mx-auto relative z-20 font-Pretendard;
   }
 
   .result-layout {
-    @apply column-center max-w-md bg-white gap-20 text-result tracking-wide shadow-xl mx-auto relative z-20 font-Pretendard;
+    @apply column-center max-w-md bg-white text-result tracking-wide shadow-xl mx-auto relative z-20 font-Pretendard;
     @apply md:rounded-3xl md:my-12 lg:max-w-md;
     transition: all 0.3s ease;
   }

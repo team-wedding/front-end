@@ -57,7 +57,7 @@ const Map = () => {
         lng: coords.lng,
       }}
       style={{
-        // width: '384px',
+        width: '384px',
         height: '300px',
       }}
       level={4}

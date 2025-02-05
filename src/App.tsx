@@ -37,7 +37,10 @@ function App() {
         <Route path={'/create'} element={<CreateInvitationPage />} />
         <Route path={'/edit/:id'} element={<EditInvitationPage />} />
         <Route path={'/preview'} element={<PreviewInvitaionPage />} />
-        <Route path={'/result/:userId/:invitationId'} element={<ResultPage />} />
+        <Route
+          path={'/result/:userId/:invitationId'}
+          element={<ResultPage />}
+        />
         <Route
           path={'/result/:userId/:invitationId'}
           element={<ResultPage />}
@@ -59,7 +62,7 @@ function App() {
         <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
         <Route path={'*'} element={<NotFound404 />} />
       </Routes>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

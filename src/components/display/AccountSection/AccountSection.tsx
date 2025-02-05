@@ -19,7 +19,7 @@ const AccountSection = () => {
 
   return (
     isAccountFeatureActive && (
-      <div className="column-center flex flex-col gap-5 py-20 ">
+      <div className="column-center flex flex-col gap-5 py-36 ">
         <SectionTitle
           subTitle="ACCOUNT"
           title="마음 전하실 곳"

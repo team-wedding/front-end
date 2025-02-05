@@ -13,7 +13,7 @@ const GreetingSection = () => {
   );
 
   return (
-    <div className="column-center py-20">
+    <div className="column-center py-36">
       <Greeting />
       {allNamesFilled && <FamilyName />}
     </div>

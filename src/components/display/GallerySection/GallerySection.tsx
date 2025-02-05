@@ -38,7 +38,7 @@ export default function GallerySection() {
 
   return (
     isGalleryFeatureActive && (
-      <div className="w-full h-fit py-20">
+      <div className="w-full h-fit py-36">
         <SectionTitle subTitle="GALLERY" title="갤러리" />
         {galleryImages ? (
           grid ? (

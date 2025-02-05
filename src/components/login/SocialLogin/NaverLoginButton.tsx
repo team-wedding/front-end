@@ -1,5 +1,5 @@
 import LoginButton from '../LoginButton';
-
+import naverLoginImg from '@assets/naver-login.png'
 const NAVER_CLIENT_ID = import.meta.env.VITE_NAVER_CLIENT_ID;
 const STATE = 'test';
 const REDIRECT_URI = 'http://localhost:5173/oauth/callback/naver';
@@ -13,7 +13,7 @@ const NaverLoginButton = () => {
 
   return (
     <LoginButton
-      imgSrc="/src/assets/naver-login.png"
+      imgSrc={naverLoginImg}
       altText="Naver Login"
       onClick={handleNaverLogin}
     />

@@ -24,7 +24,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
   };
 
   const downloadSelectedImages = () => {
-    console.log('downloaded');
+    console.log(`${selectedImages.length} images downloaded`);
   };
 
   const openModal = (index: number) => {
@@ -87,7 +87,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
             <img
               src={url}
               alt={`Uploaded ${index}`}
-              className="h-28 w-full rounded-lg object-cover cursor-pointer border-2"
+              className="h-24 w-full rounded-lg object-cover cursor-pointer"
               onClick={() => openModal(index)}
             />
           </div>

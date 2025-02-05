@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import { Notice } from './NoticeItem';
-import TrashBinIcon from '@icons/TrashBinIcon';
 import ReusableModal from '@/components/common/Modal/ReusableModal';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
 import ImageUploader from '@/components/common/ImageUploader';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
+import TrashIcon from '@/components/icons/TrashIcon';
 
 const NoticeFeature = () => {
   const {
@@ -60,7 +60,7 @@ const NoticeFeature = () => {
                 handleDeleteClick(notice.noticeId);
               }}
             >
-              <TrashBinIcon />
+              <TrashIcon className="size-[16px]" strokeWidth={2} />
             </button>
             <span>{notice.title || `공지 ${index + 1}`}</span>
           </div>
@@ -101,8 +101,12 @@ const NoticeFeature = () => {
                   // onImageUpload={(img) => updateNotice(notice.noticeId, 'image', img)}
                   ImageUrl={notice.image}
                   ImageFile={null}
-                  setImageFile={(file) => updateNotice(notice.noticeId, 'imgFile', file)}
-                  setImageUrl={(url) => updateNotice(notice.noticeId, 'image', url)}
+                  setImageFile={(file) =>
+                    updateNotice(notice.noticeId, 'imgFile', file)
+                  }
+                  setImageUrl={(url) =>
+                    updateNotice(notice.noticeId, 'image', url)
+                  }
                 />
               </div>
             </div>

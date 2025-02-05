@@ -27,7 +27,7 @@ export default function AttendanceSection() {
       ' 서로에게 행복을 주는 사람을 만났습니다. 웃는 모습이 너무나 예쁜 그사람을 만났습니다.배려하는 마음이 따뜻한 그 사람을 만났습니다. 운명처럼 만나게 된 우리의 인연 그 인연에 이끌려 이제 영원을 함께 약속하려 합니다.저희의 하나 됨을 지켜보아 주시고 격려해 주시면 더없는 기쁨으로 간직하겠습니다.',
   };
   return (
-    <>
+    <div className={`flex flex-col items-center gap-2`}>
       <div className={`column-center gap-4 py-16 my-10 px-14`}>
         <SectionTitle subTitle="RSVP" title="참석 의사 전달" />
         <div className="flex flex-col items-center gap-12 ">
@@ -57,10 +57,8 @@ export default function AttendanceSection() {
           </div>
         </div>
         <button
-          className="py-2 bg-button  font-medium text-white hover:bg-button/80 rounded-xl px-8"
-          onClick={() =>
-            setModal(true)
-          }
+          className="py-2 bg-button font-medium text-white hover:bg-button/80 rounded-xl px-8"
+          onClick={() => setModal(true)}
         >
           참석 의사 전달하기
         </button>
@@ -70,6 +68,6 @@ export default function AttendanceSection() {
           setModal={setModal}
         />
       )}
-    </>
+    </div>
   );
 }

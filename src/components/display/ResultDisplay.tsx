@@ -9,8 +9,7 @@ const ResultDisplay = () => {
       {getSections().map((section, index) => (
         <div key={index}>{section}</div>
       ))}
-    </div>
-  )
+    </div>)
 }
 
 export default ResultDisplay;

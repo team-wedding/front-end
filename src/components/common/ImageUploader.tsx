@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
-import { toast, ToastContainer } from 'react-toastify';
+// import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import ToastPopup from './Toastpopup';
 
 interface ImageUploaderProps {
   // uploadedImageUrl: string;
@@ -38,13 +39,19 @@ const ImageUploader = ({
     });
   };
 
+  const [toast, setToast] = useState(false);
+
   const handleImageUpload = async (file: File) => {
     const isValid = await validateImageSize(file);
 
     if (!isValid) {
-      toast.error(`이미지 크기는 최대 ${maxWidth}x${maxHeight}px 입니다.`, {
-        toastId: 'image-size-error',
-      });
+      // toast.error(`이미지 크기는 최대 ${maxWidth}x${maxHeight}px 입니다.`, {
+      //   toastId: 'image-size-error',
+      //   position: 'bottom-center',
+      //   autoClose: 2000,
+      //   hideProgressBar: true,
+      // });
+      setToast(true);
       return;
     }
 
@@ -100,7 +107,7 @@ const ImageUploader = ({
 
   return (
     <div className="flex items-center justify-center max-w-lg mx-auto">
-      <ToastContainer position="top-center" autoClose={3000} hideProgressBar />
+      {/* <ToastContainer position="top-center" autoClose={3000} hideProgressBar /> */}
       {!uploadedImage ? (
         <label
           htmlFor={`dropzone-file-${randomId}`}
@@ -163,6 +170,13 @@ const ImageUploader = ({
             삭제
           </button>
         </div>
+      )}
+      {toast && (
+        <ToastPopup
+          setToast={setToast}
+          message={`이미지 크기는 최대 ${maxWidth}x${maxHeight}px 입니다.`}
+          position="bottom"
+        />
       )}
     </div>
   );

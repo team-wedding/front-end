@@ -5,11 +5,7 @@ import SectionTitle from '@/components/common/SectionTitle';
 export default function AttendanceSection() {
   const [modal, setModal] = useState(false);
   return (
-    <div className={`flex flex-col items-center gap-3  `}>
-      <div className="sub-title">RSVP</div>
-      <div className="title">참석 의사</div>
-      {/* <div className=" text-highlight">참석 의사 전달</div> */}
-      <p className="mt-2 text-center text-sm leading-6"></p>
+    <div className={`flex flex-col items-center gap-2`}>
 
       <div className={`column-center gap-4 py-16 my-10 `}>
         <SectionTitle subTitle="RSVP" title="참석 의사 전달" />
@@ -19,7 +15,7 @@ export default function AttendanceSection() {
           <br /> 참석의사를 전달 부탁드립니다
         </p>
         <button
-          className="py-2 bg-button  font-medium text-white hover:bg-button/80 rounded-xl px-8"
+          className="py-2 bg-button font-medium text-white hover:bg-button/80 rounded-xl px-8"
           onClick={() => setModal(true)}
         >
           참석 의사 전달하기

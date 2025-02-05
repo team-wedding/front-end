@@ -8,11 +8,11 @@ import GalleryFeature from '@form/Feature/GalleryFeature/GalleryFeature';
 import GreetingFeature from '@form/Feature/GreetingFeature/GreetingFeature';
 import LocationFeature from '@form/Feature/LocationFeature/LocationFeature';
 import RsvpExample from '@form/Feature/RsvpFeature/RsvpExample';
-import ThemeFeature from '@form/Theme/ThemeFeature/ThemeFeature';
 import NoticeFeature from '@form/Feature/NoticeFeature/NoticeFeature';
 import MusicFeature from '@form/Theme/MusicFeature/MusicFeature';
 import PhotoTalkFeature from '@/components/form/Feature/PhotoTalkFeature/PhotoTalkFeature';
 import ThumbnailFeature from '@/components/form/Feature/ThumbnailFeature/ThumbnailFeature';
+import FontFeature from '@/components/form/Theme/FontFeature/FontFeature';
 
 export interface AccordionItemData {
   id: number;
@@ -132,7 +132,7 @@ export const accordionData: AccordionItemData[] = [
     id: 14,
     title: '글꼴',
     feature: '',
-    content: <ThemeFeature />,
+    content: <FontFeature />,
     hasToggle: false,
     hasDrag: false,
   },

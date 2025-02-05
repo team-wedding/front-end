@@ -6,7 +6,7 @@ const PreviewDisplay = () => {
   const { font } = useThemeStore();
 
   return (
-    <div className={`preview-layout font-${font}`}>
+    <div className={`preview-layout ${font}`}>
       {getSections().map((section, index) => {
         if (index == 2 || index == 3) {
           return;

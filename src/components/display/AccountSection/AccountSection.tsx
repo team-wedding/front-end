@@ -19,8 +19,19 @@ const AccountSection = () => {
 
   return (
     isAccountFeatureActive && (
-      <div className="column-center w-full flex flex-col gap-5 py-10">
-        <SectionTitle subTitle="ACCOUNT" title="마음 전하실 곳" />
+      <div className="column-center flex flex-col gap-5 py-20 ">
+        <SectionTitle
+          subTitle="ACCOUNT"
+          title="마음 전하실 곳"
+          information={
+            <>
+              참석이 어려우신 분들을 위해 기재했습니다
+              <br />
+              너그러운 마음으로 양해 부탁드립니다
+            </>
+          }
+        />
+
         {accounts.map((value, index) => {
           const { accountInfo, motherAccountInfo, fatherAccountInfo } = value;
           const isOpen =
@@ -38,8 +49,9 @@ const AccountSection = () => {
           );
           const allEmpty =
             accountEmpty && mothreAccountEmpty && fatherAccountEmpty;
+
           return (
-            <section className="flex flex-col w-72 text-xs" key={index}>
+            <section className="flex flex-col text-sm w-80" key={index}>
               {!allEmpty && (
                 <>
                   <div
@@ -50,7 +62,7 @@ const AccountSection = () => {
                       toggleAccordion(value.role === '신랑' ? 'groom' : 'bride')
                     }
                   >
-                    <div className="font-medium">{`${value.role}측 계좌번호`}</div>
+                    <div className="font-medium">{`${value.role}측에게`}</div>
                     <i
                       className={`bx bx-chevron-down text-lg transition-all duration-300 ${
                         isOpen ? 'rotate-180' : ''

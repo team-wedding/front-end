@@ -17,20 +17,28 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
   const { id } = useUserStore();
   const handleDelete = async () => {
     await deleteInvitaion();
-    setModal(false)
+    setModal(false);
   };
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
   return (
     <div className="relative flex flex-col items-center rounded-lg w-[152px] bg-gray-100 shadow-lg">
-      <CardHeader id={invitationId} image={image} title={title} setModal={setModal} />
+      <CardHeader
+        id={invitationId}
+        image={image}
+        title={title}
+        setModal={setModal}
+      />
       <div className="w-full border-l border-r">
-        <img
-          src={image || logo}
-          className='object-cover h-[170px] w-[152px]'
-        />
+        <img src={image || logo} className="object-cover h-[170px] w-[152px]" />
       </div>
       <CardFooter id={invitationId} userId={id} />
-      <ReusableModal isOpen={modal} title={`"${title}" 청첩장을 삭제하시겠습니까? `} confirmText={'삭제'} onConfirm={handleDelete} onCancel={() => setModal(false)} />
+      <ReusableModal
+        isOpen={modal}
+        title={`"${title}" 청첩장을 삭제하시겠습니까? `}
+        confirmText={'삭제'}
+        onConfirm={handleDelete}
+        onCancel={() => setModal(false)}
+      />
     </div>
   );
 };

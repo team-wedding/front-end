@@ -27,8 +27,10 @@ const CalendarSection = () => {
 
   return (
     isCalenderFeatureActive && (
-      <div className="column-center gap-6">
-        <div className="text-3xl font-thin tracking-widest">WEDDING DAY</div>
+      <div className="column-center gap-6 py-20">
+        <div className="sub-title text-3xl font-thin tracking-widest">
+          WEDDING DAY
+        </div>
         <CalendarTitle />
         <div className="column-center gap-10">
           {/* 캘린더 기능이 활성화 될때만 렌더링 */}

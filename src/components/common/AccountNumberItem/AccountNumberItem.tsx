@@ -1,7 +1,7 @@
 // import { toast } from 'react-toastify';
 import kakaoPay from '@assets/kakao_pay_icon.png';
 import { useState } from 'react';
-import ToastPopup from '../Toastpopup';
+import ToastPopup from '../ToastPopup';
 
 interface BankProps {
   bank: string;
@@ -18,7 +18,6 @@ export default function AccountNumberItem({
   kakaoLink,
   last,
 }: BankProps) {
-
   const [toast, setToast] = useState(false);
 
   const handleAccountNumCopy = async () => {

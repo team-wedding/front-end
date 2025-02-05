@@ -27,12 +27,13 @@ const AddressInput: React.FC = () => {
             type="text"
             value={zonecode}
             placeholder="우편번호"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1 placeholder:opacity-50"
+            // className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1 placeholder:opacity-50 py-3"
+            className="formInput bg-gray-50"
             readOnly
           />
           <button
             onClick={handleComplete}
-            className="bg-rose-300 hover:bg-rose-200 text-gray-800 px-4 py-2 rounded-xl shrink-0 text-xs"
+            className="bg-button bg-opacity-80 text-white hover:bg-rose-200  px-4 py-3 rounded-xl shrink-0 text-xs"
           >
             검색
           </button>
@@ -43,8 +44,9 @@ const AddressInput: React.FC = () => {
             type="text"
             value={address}
             placeholder="기본 주소"
-            className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1 placeholder:opacity-50"
+            // className="bg-gray-50 border border-gray-300 text-gray-900 text-xs rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-primary flex-1 placeholder:opacity-50"
             readOnly
+            className="formInput bg-gray-50"
           />
         </div>
         {/* 예식장명 */}

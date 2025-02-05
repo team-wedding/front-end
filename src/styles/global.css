@@ -244,11 +244,11 @@
   }
 
   .preview-layout {
-    @apply mx-auto h-full w-full;
+    @apply column-center max-w-md bg-white gap-20 text-result tracking-wide shadow-xl mx-auto relative z-20 font-Pretendard;
   }
 
   .result-layout {
-    @apply column-center max-w-md bg-white gap-16 text-result tracking-wide shadow-xl mx-auto relative z-20 font-Pretendard;
+    @apply column-center max-w-md bg-white gap-20 text-result tracking-wide shadow-xl mx-auto relative z-20 font-Pretendard;
     @apply md:rounded-3xl md:my-12 lg:max-w-md;
     transition: all 0.3s ease;
   }
@@ -285,7 +285,7 @@
   }
 
   .label {
-    @apply block text-[11px] font-medium w-[20%];
+    @apply block text-[11px] font-medium w-[22%];
   }
 
   .splash-btn {
@@ -297,7 +297,7 @@
   }
 
   .formInput {
-    @apply bg-white border-neutral-300 text-neutral-900 text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50;
+    @apply bg-white border-neutral-300 text-neutral-900 text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50 py-2;
   }
 
   .accordion-item {

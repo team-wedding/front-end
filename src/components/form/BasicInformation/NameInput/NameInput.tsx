@@ -13,7 +13,9 @@ const NameInput = () => {
         <div key={index} className="max-w-lg mx-auto px-4 py-2">
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
-              <label className="label">{person.role} *</label>
+              <label className="label flex gap-1">
+                {person.role} <div className="text-red-600">*</div>{' '}
+              </label>
               <input
                 type="text"
                 value={person.name}
@@ -47,7 +49,7 @@ const NameInput = () => {
                       e.target.checked,
                     )
                   }
-                  className="w-5 h-5 rounded border-gray-400 checked:bg-primary focus:ring-primary focus:border-primary focus:outline-none focus:ring-0"
+                  className="w-5 h-5 rounded border-gray-400 checked:bg-button focus:ring-button focus:border-button focus:outline-none focus:ring-0"
                 ></input>
                 <span className="text-sm">故</span>
               </div>
@@ -76,7 +78,7 @@ const NameInput = () => {
                       e.target.checked,
                     )
                   }
-                  className="w-5 h-5 rounded border-gray-400 checked:bg-primary focus:ring-primary focus:border-primary focus:outline-none focus:ring-0"
+                  className="w-5 h-5 rounded border-gray-400 checked:bg-button focus:ring-button focus:border-button focus:outline-none focus:ring-0"
                 />
                 <span className="text-sm">故</span>
               </div>

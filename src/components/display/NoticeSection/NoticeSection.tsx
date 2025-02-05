@@ -46,10 +46,10 @@ const NoticeSection = () => {
                       className="w-full h-48 object-cover rounded-lg mb-6 shadow-md"
                     />
                   )}
-                  <h3 className="p-4 text-sm font-medium overflow-auto">
+                  <h3 className="p-4 text-md font-medium overflow-auto">
                     {notice.title}
                   </h3>
-                  <div className="overflow-auto whitespace-pre-wrap text-xs p-4 leading-6 font-light">
+                  <div className="overflow-auto whitespace-pre-wrap text-sm py-6 leading-6">
                     {notice.content}
                   </div>
                 </div>

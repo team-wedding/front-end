@@ -36,7 +36,7 @@ const CountDown: React.FC<CountDownProps> = ({ targetDate, targetTime }) => {
   ];
 
   return (
-    <div className="flex-center gap-2">
+    <div className="flex-center gap-2 my-2">
       {timeUnits.map((dday, index) => (
         <div key={index} className="column-center gap-3">
           {/* <div className="column-center leading-none"> */}

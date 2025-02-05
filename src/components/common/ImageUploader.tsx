@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 // import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ToastPopup from './Toastpopup';
+import ToastPopup from './ToastPopup';
 
 interface ImageUploaderProps {
   // uploadedImageUrl: string;
@@ -55,12 +55,12 @@ const ImageUploader = ({
       return;
     }
 
-    await setImageFile(file)
+    await setImageFile(file);
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.result && typeof reader.result === 'string') {
         setUploadedImage(reader.result);
-        setImageUrl(reader.result)
+        setImageUrl(reader.result);
       }
     };
     reader.readAsDataURL(file);
@@ -97,7 +97,7 @@ const ImageUploader = ({
   const handleImageDelete = () => {
     setUploadedImage('');
     setImageFile(null);
-    setImageUrl('')
+    setImageUrl('');
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }
@@ -111,10 +111,11 @@ const ImageUploader = ({
       {!uploadedImage ? (
         <label
           htmlFor={`dropzone-file-${randomId}`}
-          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${isDragging
-            ? 'border-rose-300 bg-rose-50'
-            : 'border-gray-100 bg-gray-50'
-            }  rounded-xl cursor-pointer hover:bg-gray-100`}
+          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${
+            isDragging
+              ? 'border-rose-300 bg-rose-50'
+              : 'border-gray-100 bg-gray-50'
+          }  rounded-xl cursor-pointer hover:bg-gray-100`}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}

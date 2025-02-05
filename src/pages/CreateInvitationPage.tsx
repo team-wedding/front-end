@@ -32,7 +32,7 @@ const CreateInvitationPage = () => {
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { brideGroom } = useBrideGroomStore();
-  const { invitationtitle } = useInvitationStore()
+  const { invitationtitle } = useInvitationStore();
   useEffect(() => {
     const [start, end] = sliceRanges[steps - 1];
     initializeItems(start, end);
@@ -44,15 +44,15 @@ const CreateInvitationPage = () => {
     navigate('/dashboard');
     resetAllStores();
   };
-  const { uploadedImageFile } = useImageStore()
-  const { galleryFiles, grid } = useGalleryStore()
-  const { notices } = useNoticeStore()
+  const { uploadedImageFile } = useImageStore();
+  const { galleryFiles, grid } = useGalleryStore();
+  const { notices } = useNoticeStore();
   const noticeImages = notices.flatMap((value) => {
     if (value.imgFile) {
-      return value.imgFile
-    } else return null
-  })
-  const { mutateAsync: postMutate } = usePostInvitation();  // useMutation을 직접 변수에 할당
+      return value.imgFile;
+    } else return null;
+  });
+  const { mutateAsync: postMutate } = usePostInvitation(); // useMutation을 직접 변수에 할당
   const { mutateAsync: s3Mutate } = useS3Image();
   const details = getInvitationAction();
   const { optionalItems } = useAccordionStore();
@@ -63,40 +63,60 @@ const CreateInvitationPage = () => {
   };
   const { selectedOptionalFeatures } = useOptionalFeatureStore();
 
-
   const handleSave = async () => {
     if (!validateBrideGroomNames(brideGroom)) {
       setIsModalOpen(true);
       return;
     }
     try {
-      const { imageUrls: thumbnail } = await s3Mutate(uploadedImageFile ? [uploadedImageFile!] : []);
-      const { imageUrls: gallery } = await s3Mutate(galleryFiles.length && galleryFiles.length > 0 ? galleryFiles : [])
-      const { imageUrls: noticeImg1 } = await s3Mutate(noticeImages[0] ? [noticeImages[0]] : []);
-      const { imageUrls: noticeImg2 } = await s3Mutate(noticeImages[1] ? [noticeImages[1]] : []);
-      const { imageUrls: noticeImg3 } = await s3Mutate(noticeImages[2] ? [noticeImages[2]] : []);
-      const { imageUrls: noticeImg4 } = await s3Mutate(noticeImages[3] ? [noticeImages[3]] : []);
-      const { imageUrls: noticeImg5 } = await s3Mutate(noticeImages[4] ? [noticeImages[4]] : []);
-      const noticeS3ImageList = [noticeImg1, noticeImg2, noticeImg3, noticeImg4, noticeImg5]
+      const { imageUrls: thumbnail } = await s3Mutate(
+        uploadedImageFile ? [uploadedImageFile!] : [],
+      );
+      const { imageUrls: gallery } = await s3Mutate(
+        galleryFiles.length && galleryFiles.length > 0 ? galleryFiles : [],
+      );
+      const { imageUrls: noticeImg1 } = await s3Mutate(
+        noticeImages[0] ? [noticeImages[0]] : [],
+      );
+      const { imageUrls: noticeImg2 } = await s3Mutate(
+        noticeImages[1] ? [noticeImages[1]] : [],
+      );
+      const { imageUrls: noticeImg3 } = await s3Mutate(
+        noticeImages[2] ? [noticeImages[2]] : [],
+      );
+      const { imageUrls: noticeImg4 } = await s3Mutate(
+        noticeImages[3] ? [noticeImages[3]] : [],
+      );
+      const { imageUrls: noticeImg5 } = await s3Mutate(
+        noticeImages[4] ? [noticeImages[4]] : [],
+      );
+      const noticeS3ImageList = [
+        noticeImg1,
+        noticeImg2,
+        noticeImg3,
+        noticeImg4,
+        noticeImg5,
+      ];
 
       const noticeList: NoticeDetail[] = await notices.map((value, index) => {
         return {
           ...value,
           order: findOrder('notice'),
           isActive: selectedOptionalFeatures.notice,
-          image: noticeS3ImageList[index][0]
+          image: noticeS3ImageList[index][0],
         };
       });
       await postMutate({
         ...details,
-        imgUrl: thumbnail.length > 0 ? thumbnail[0] : "",
-        galleries: [{ images: gallery, grid, isActive: selectedOptionalFeatures.gallery },],
-        notices: noticeList
-      }
-      );
+        imgUrl: thumbnail.length > 0 ? thumbnail[0] : '',
+        galleries: [
+          { images: gallery, grid, isActive: selectedOptionalFeatures.gallery },
+        ],
+        notices: noticeList,
+      });
     } catch (err) {
-      console.log(err)
-      alert("생성중에 에러가 발생했습니다.")
+      console.log(err);
+      alert('생성중에 에러가 발생했습니다.');
     }
   };
 
@@ -171,6 +191,7 @@ const CreateInvitationPage = () => {
 
         <div className="preview-section">
           <ResultDisplay />
+          {/* <PreviewDisplay /> */}
         </div>
       </div>
       <NameInputModal
@@ -182,4 +203,3 @@ const CreateInvitationPage = () => {
 };
 
 export default CreateInvitationPage;
-

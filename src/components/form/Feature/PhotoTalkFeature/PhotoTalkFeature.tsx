@@ -1,4 +1,5 @@
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
+import phototalk from '@assets/phototalk.png';
 
 const PhotoTalkFeature = () => {
   return (
@@ -13,8 +14,7 @@ const PhotoTalkFeature = () => {
       <hr />
 
       <div className="flex flex-col gap-2 my-10">
-        <label className="label">예시</label>
-        <div>(예시 이미지)</div>
+        <img alt="phototalk" src={phototalk} />
       </div>
     </div>
   );

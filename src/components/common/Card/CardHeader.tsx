@@ -5,17 +5,16 @@ import ShareInvitation from '../Share/ShareInvitation';
 import { useUserStore } from '@/store/useUserStore';
 
 interface CardHeaderProp {
-  title: string,
-  image: string,
-  id: number
-  setModal: Dispatch<SetStateAction<boolean>>
+  title: string;
+  image: string;
+  id: number;
+  setModal: Dispatch<SetStateAction<boolean>>;
 }
-
 
 const CardHeader = ({ title, setModal, image, id }: CardHeaderProp) => {
   const [isFocused, setIsFocused] = useState(false);
   const parentRef = useRef<HTMLButtonElement>(null);
-  const { id: userId } = useUserStore()
+  const { id: userId } = useUserStore();
 
   const handleBlur = (event: React.FocusEvent<HTMLButtonElement>) => {
     if (parentRef.current && parentRef.current.contains(event.relatedTarget)) {
@@ -44,7 +43,15 @@ const CardHeader = ({ title, setModal, image, id }: CardHeaderProp) => {
       >
         <ShareIcon />
         {isFocused && (
-          <ShareInvitation setIsFocused={setIsFocused} isFocused={isFocused} shareTitle={title} shareDesc={'결혼합니다'} shareImage={image} shareUrl={`https://woogyeol.vercel.app/result/${userId}/${id}`} shareHeader={''} />
+          <ShareInvitation
+            setIsFocused={setIsFocused}
+            isFocused={isFocused}
+            shareTitle={title}
+            shareDesc={'결혼합니다'}
+            shareImage={image}
+            shareUrl={`https://woogyeol.vercel.app/result/${userId}/${id}`}
+            shareHeader={''}
+          />
         )}
       </button>
     </div>

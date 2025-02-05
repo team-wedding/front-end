@@ -1,3 +1,4 @@
+import SectionTitle from '@/components/common/SectionTitle';
 import { Link, useParams } from 'react-router';
 
 const PhotoTalkSection = () => {
@@ -6,21 +7,15 @@ const PhotoTalkSection = () => {
   console.log('invitationId : ', invitationId);
 
   return (
-    <div className="w-96">
-      <div className="column-center w-full">
-        <div className="sub-title">PHOTO TALK</div>
-        <div className="title">포토톡</div>
-        <p className="mb-4 text-center text-sm font-light leading-loose">
+    <div className="bg-rose-50/70 py-16 my-10 w-full">
+      <div className="column-center gap-4">
+        <SectionTitle subTitle="PHOTO TALK" title="포토톡" />
+
+        <p className="text-center leading-loose my-5">
           소중한 마음을 남겨주시면
-          <br />큰 기쁨이 될 것 같습니다.
+          <br />큰 기쁨이 될 것 같습니다
           <br />
-          방명록에 따뜻한 한마디 남겨주세요.
-        </p>
-        <p className="mb-4 text-center text-sm font-light leading-loose">
-          소중한 마음을 남겨주시면
-          <br />큰 기쁨이 될 것 같습니다.
-          <br />
-          방명록에 따뜻한 한마디 남겨주세요.
+          방명록에 따뜻한 한마디 남겨주세요
         </p>
         <Link
           to={`/phototalk/${userId}/${invitationId}`}

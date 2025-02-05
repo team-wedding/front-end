@@ -11,8 +11,12 @@ const ContactSection = () => {
 
   return (
     isContactFeatureActive && (
-      <div className="column-center gap-6 py-12">
-        <SectionTitle subTitle="CONTACT" title="연락하기" />
+      <div className="column-center gap-6 py-20 ">
+        <SectionTitle
+          subTitle="CONTACT"
+          title="연락하기"
+          information={<>직접 축하의 마음을 전해보세요</>}
+        />
 
         {contacts.map((value, index) => {
           const { role, contact, fatherContact, motherContact } = value;
@@ -20,7 +24,7 @@ const ContactSection = () => {
           return (
             <div
               key={index}
-              className={`flex-center gap-12 text-xs py-10 px-10 rounded-lg ${role === '신랑' ? 'bg-sky-50 bg-opacity-30' : 'bg-pink-50 bg-opacity-20'}`}
+              className={`flex-center gap-12 text-sm py-14 px-10 rounded-lg ${role === '신랑' ? 'bg-sky-50/40' : 'bg-pink-50/40'}`}
             >
               {contact && (
                 <div className="font-medium">

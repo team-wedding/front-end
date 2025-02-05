@@ -5,14 +5,15 @@ import CloseIcon from '@/components/icons/CloseIcon';
 import { useLocation } from 'react-router';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
+import SectionTitle from '@/components/common/SectionTitle';
 
 export default function GallerySection() {
   const { galleryImages, grid } = useGalleryStore();
 
-  const [modal, setModal] = useState(false)
-  const { pathname } = useLocation()
-  const isPreview = pathname == "/create"
-  
+  const [modal, setModal] = useState(false);
+  const { pathname } = useLocation();
+  const isPreview = pathname === '/create' || pathname === '/preview';
+
   const handleModal = (index: number) => {
     //수정페이지 pathname 확인
     if (!isPreview) {
@@ -36,12 +37,13 @@ export default function GallerySection() {
   const isGalleryFeatureActive = selectedOptionalFeatures.gallery;
 
   return (
-    <div className="bg-white w-full h-fit">
-      {isGalleryFeatureActive &&
-        (galleryImages ? (
+    isGalleryFeatureActive && (
+      <div className="w-full h-fit py-20">
+        <SectionTitle subTitle="GALLERY" title="갤러리" />
+        {galleryImages ? (
           grid ? (
             <section
-              className={`relative w-full grid grid-cols-3  ${isPreview ? 'gap-3 ' : 'gap-y-3 px-2'}  justify-items-center items-center`}
+              className={`relative w-full grid grid-cols-3 mt-8  ${isPreview ? 'gap-2 ' : 'gap-y-3 px-2'}  justify-items-center items-center`}
             >
               {galleryImages.map((value, index) => {
                 return (
@@ -91,14 +93,14 @@ export default function GallerySection() {
             </section>
           ) : (
             <section className="flex flex-col w-full h-fit gap-2 px-3 justify-around items-center">
-              <div className="w-full h-[450px]">
+              <div className="w-full h-96 mt-10">
                 <img
                   src={galleryImages[imageIndex]}
                   alt=""
                   className="size-full rounded-md"
                 />
               </div>
-              <div className="flex flex-row  gap-4 justify-center">
+              <div className="flex flex-row  gap-4 justify-center py-2 px-3 text-gray-400">
                 <button onClick={handlePrev}>
                   <ChevronLeft className="" />
                 </button>
@@ -111,7 +113,8 @@ export default function GallerySection() {
           )
         ) : (
           <div>NO IMAGES UPLOADED YET</div>
-        ))}
-    </div>
+        )}
+      </div>
+    )
   );
 }

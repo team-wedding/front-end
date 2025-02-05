@@ -17,21 +17,32 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
   const { id } = useUserStore();
   const handleDelete = async () => {
     await deleteInvitaion();
-    setModal(false)
+    setModal(false);
   };
-  const [modal, setModal] = useState(false)
+  const [modal, setModal] = useState(false);
   return (
-    <div className="relative flex flex-col items-center border border-gray-200 rounded-lg shadow-xl w-[150px] h-[225px] bg-gray-200">
+    <div className="relative flex flex-col items-center border border-gray-100 rounded-lg shadow-lg w-[152px] h-[227px] bg-gray-200">
       <div className="relative h-full w-full rounded-lg overflow-hidden">
         <img
           src={image || logo}
-          className="object-cover h-full w-[188px] rounded-lg"
+          className="object-cover h-full w-[150px] rounded-lg"
         ></img>
         <div className="absolute inset-0 bg-white opacity-10"></div>
-        <CardHeader id={invitationId} image={image} title={title} setModal={setModal} />
+        <CardHeader
+          id={invitationId}
+          image={image}
+          title={title}
+          setModal={setModal}
+        />
       </div>
       <CardFooter id={invitationId} userId={id} />
-      <ReusableModal isOpen={modal} title={`"${title}" 청첩장을 삭제하시겠습니까? `} confirmText={'삭제'} onConfirm={handleDelete} onCancel={() => setModal(false)} />
+      <ReusableModal
+        isOpen={modal}
+        title={`"${title}" 청첩장을 삭제하시겠습니까? `}
+        confirmText={'삭제'}
+        onConfirm={handleDelete}
+        onCancel={() => setModal(false)}
+      />
     </div>
   );
 };

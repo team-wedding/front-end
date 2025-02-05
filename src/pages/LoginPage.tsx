@@ -3,7 +3,7 @@ import Login from '@/components/login/Login';
 
 const LoginPage = () => {
   return (
-    <PageLayout customFooter={null}>
+    <PageLayout customHeader={false} customFooter={false}>
       <Login />
     </PageLayout>
   );

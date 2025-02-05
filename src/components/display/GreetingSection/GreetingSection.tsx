@@ -13,7 +13,7 @@ const GreetingSection = () => {
   );
 
   return (
-    <div className="column-center gap-20 py-14">
+    <div className="column-center py-20">
       <Greeting />
       {allNamesFilled && <FamilyName />}
     </div>

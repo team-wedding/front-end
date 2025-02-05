@@ -6,7 +6,7 @@ const Transportation = () => {
   const { subFeatures, transportationInputs } = useLocationFeatureStore();
 
   return (
-    <div className="flex flex-col py-14 px-10 gap-6 bg-neutral-100 bg-opacity-50 text-xs">
+    <div className="flex flex-col py-14 px-10 gap-6 bg-neutral-100 bg-opacity-50 leading-6">
       <div className="flex flex-col gap-6">
         {transportationData.map(
           ({ key, inputKey, title, icon }) =>

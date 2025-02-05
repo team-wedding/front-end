@@ -55,13 +55,14 @@ const RsvpModal = ({ setModal }: ModalProp) => {
     }));
   };
 
-
-  const { userId, invitationId } = useParams();
-
   const handleSubmit = async () => {
     try {
       // console.log(id);
-      const response = await postAttendance({ ...info, userId: Number(userId), invitationId: Number(invitationId) });
+      const response = await postAttendance({
+        ...info,
+        userId: Number(userId),
+        invitationId: Number(invitationId),
+      });
       console.log(response);
       setModal(false);
     } catch (error) {
@@ -91,10 +92,10 @@ const RsvpModal = ({ setModal }: ModalProp) => {
           <CloseIcon className={''} />
         </button>
         {step == 0 ? (
-
           <div className="flex flex-col items-center gap-12">
-
-            <div className="text-2xl font-semibold">{rsvpTitle === "" ? defaultScript.title : rsvpTitle}</div>
+            <div className="text-2xl font-semibold">
+              {rsvpTitle === '' ? defaultScript.title : rsvpTitle}
+            </div>
             <div className="text-center text-base">
               {rsvpDescription === ''
                 ? defaultScript.description
@@ -129,7 +130,11 @@ const RsvpModal = ({ setModal }: ModalProp) => {
                 <button
                   className={`rounded-md px-2 py-2 w-1/2 ${info.isGroomSide ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'} `}
                   onClick={() =>
-                    setInfo((prev) => ({ ...prev, isGroomSide: true, isBrideSide: false }))
+                    setInfo((prev) => ({
+                      ...prev,
+                      isGroomSide: true,
+                      isBrideSide: false,
+                    }))
                   }
                 >
                   신랑측
@@ -137,7 +142,11 @@ const RsvpModal = ({ setModal }: ModalProp) => {
                 <button
                   className={`rounded-md px-2 py-2 w-1/2 ${info.isBrideSide ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'} `}
                   onClick={() =>
-                    setInfo((prev) => ({ ...prev, isGroomSide: false, isBrideSide: true }))
+                    setInfo((prev) => ({
+                      ...prev,
+                      isGroomSide: false,
+                      isBrideSide: true,
+                    }))
                   }
                 >
                   신부측
@@ -149,7 +158,9 @@ const RsvpModal = ({ setModal }: ModalProp) => {
               <div className={`flex flex-row justify-between gap-1 w-52`}>
                 <button
                   className={`rounded-md p-1 w-1/2 ${info.attendance ? 'text-white bg-button' : 'text-gray-700 bg-gray-200'}`}
-                  onClick={() => setInfo((prev) => ({ ...prev, attendance: true }))}
+                  onClick={() =>
+                    setInfo((prev) => ({ ...prev, attendance: true }))
+                  }
                 >
                   참석할게요
                 </button>

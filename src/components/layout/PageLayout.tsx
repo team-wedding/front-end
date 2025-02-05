@@ -6,6 +6,7 @@ type PageLayoutProps = {
   leftButton?: React.ReactNode;
   rightButton?: React.ReactNode;
   children?: React.ReactNode;
+  customHeader?: React.ReactNode | false;
   customFooter?: React.ReactNode | false;
 };
 
@@ -14,17 +15,14 @@ const PageLayout = ({
   leftButton,
   rightButton,
   children,
+  customHeader = (
+    <Header text={title} leftButton={leftButton} rightButton={rightButton} />
+  ),
   customFooter = <Footer />,
 }: PageLayoutProps) => {
   return (
     <div className="layout">
-      <div className="layout-header">
-        <Header
-          text={title}
-          leftButton={leftButton}
-          rightButton={rightButton}
-        />
-      </div>
+      {customHeader && <div className="layout-header">{customHeader}</div>}
 
       <div className="layout-content">{children}</div>
 

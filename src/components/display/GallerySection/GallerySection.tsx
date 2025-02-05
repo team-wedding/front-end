@@ -6,7 +6,6 @@ import { useLocation } from 'react-router';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import SectionTitle from '@/components/common/SectionTitle';
-import SectionTitle from '@/components/common/SectionTitle';
 
 export default function GallerySection() {
   const { galleryImages, grid } = useGalleryStore();

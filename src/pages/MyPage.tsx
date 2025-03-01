@@ -42,6 +42,7 @@ const MyPage = () => {
           href="/mypage/phototalk" // 수정해야 함.
         />
       </section>
+      <p onClick={() => navigate('/mypage/theme')}>테마 &gt;</p>
     </PageLayout>
   );
 };

@@ -20,7 +20,6 @@ import ChangePasswordPage from '@/pages/ChangePasswordPage';
 import SignUpPage from '@/pages/SignUpPage';
 import AdminPhotoTalkPage from '@/pages/PhotoTalk/AdminPhotoTalkPage';
 import PhotoTalkPage from '@/pages/PhotoTalk/PhotoTalkPage';
-import DarkMode from './pages/DarkMode';
 
 function App() {
   const queryClient = new QueryClient();
@@ -59,7 +58,6 @@ function App() {
         />
         <Route path={'/mypage/rsvp'} element={<RsvpStatsPage />} />
         <Route path={'/mypage/phototalk'} element={<AdminPhotoTalkPage />} />
-        <Route path={'/mypage/theme'} element={<DarkMode />} />
         <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
         <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
         <Route path={'*'} element={<NotFound404 />} />

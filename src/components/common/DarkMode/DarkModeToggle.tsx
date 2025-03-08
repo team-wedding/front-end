@@ -13,7 +13,7 @@ const DarkModeToggle = () => {
         onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}
         className="p-2 rounded-xl flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-700"
       >
-        {mode === 'light' ? <SunIcon /> : <MoonIcon />}
+        {mode === 'light' ? <MoonIcon /> : <SunIcon />}
       </button>
     </div>
   );

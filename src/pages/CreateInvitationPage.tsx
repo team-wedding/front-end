@@ -15,7 +15,6 @@ import useBrideGroomStore from '@/store/useBrideGroomStore';
 import { validateBrideGroomNames } from '@/utils/validator';
 import NameInputModal from '@/components/form/BasicInformation/NameInput/NameInputModal';
 import ResultDisplay from '@/components/display/ResultDisplay';
-
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
 import { getInvitationAction } from '@/actions/invitationAction';
@@ -63,39 +62,48 @@ const CreateInvitationPage = () => {
   };
   const { selectedOptionalFeatures } = useOptionalFeatureStore();
 
+
+  const uploadToS3 = async (files: File[]) => {
+    const { imageUrls } = await s3Mutate(files.length ? files : []);
+    return imageUrls;
+  };
+
   const handleSave = async () => {
     if (!validateBrideGroomNames(brideGroom)) {
       setIsModalOpen(true);
       return;
     }
     try {
-      const { imageUrls: thumbnail } = await s3Mutate(
-        uploadedImageFile ? [uploadedImageFile!] : [],
+      // const { imageUrls: thumbnail } = await s3Mutate(
+      //   uploadedImageFile ? [uploadedImageFile!] : [],
+      // );
+      // const { imageUrls: gallery } = await s3Mutate(
+      //   galleryFiles.length && galleryFiles.length > 0 ? galleryFiles : [],
+      // );
+      // const { imageUrls: noticeImg1 } = await s3Mutate(
+      //   noticeImages[0] ? [noticeImages[0]] : [],
+      // );
+      // const { imageUrls: noticeImg2 } = await s3Mutate(
+      //   noticeImages[1] ? [noticeImages[1]] : [],
+      // );
+      // const { imageUrls: noticeImg3 } = await s3Mutate(
+      //   noticeImages[2] ? [noticeImages[2]] : [],
+      // );
+      // const { imageUrls: noticeImg4 } = await s3Mutate(
+      //   noticeImages[3] ? [noticeImages[3]] : [],
+      // );
+      // const { imageUrls: noticeImg5 } = await s3Mutate(
+      //   noticeImages[4] ? [noticeImages[4]] : [],
+      // );
+      const thumbnail = await uploadToS3(uploadedImageFile ? [uploadedImageFile] : []);
+      const gallery = await uploadToS3(galleryFiles);
+      const noticeS3ImageList = await Promise.all(
+        noticeImages.map((image) => uploadToS3(image ? [image] : []))
       );
-      const { imageUrls: gallery } = await s3Mutate(
-        galleryFiles.length && galleryFiles.length > 0 ? galleryFiles : [],
-      );
-      const { imageUrls: noticeImg1 } = await s3Mutate(
-        noticeImages[0] ? [noticeImages[0]] : [],
-      );
-      const { imageUrls: noticeImg2 } = await s3Mutate(
-        noticeImages[1] ? [noticeImages[1]] : [],
-      );
-      const { imageUrls: noticeImg3 } = await s3Mutate(
-        noticeImages[2] ? [noticeImages[2]] : [],
-      );
-      const { imageUrls: noticeImg4 } = await s3Mutate(
-        noticeImages[3] ? [noticeImages[3]] : [],
-      );
-      const { imageUrls: noticeImg5 } = await s3Mutate(
-        noticeImages[4] ? [noticeImages[4]] : [],
-      );
-      const noticeS3ImageList = [
-        noticeImg1,
-        noticeImg2,
-        noticeImg3,
-        noticeImg4,
-        noticeImg5,
+      const s3ImageList = [
+        thumbnail,
+        gallery,
+        ...noticeS3ImageList
       ];
 
       const noticeList: NoticeDetail[] = await notices.map((value, index) => {
@@ -103,7 +111,7 @@ const CreateInvitationPage = () => {
           ...value,
           order: findOrder('notice'),
           isActive: selectedOptionalFeatures.notice,
-          image: noticeS3ImageList[index][0],
+          image: s3ImageList[index][0],
         };
       });
       await postMutate({
@@ -188,7 +196,6 @@ const CreateInvitationPage = () => {
             </div>
           </PageLayout>
         </div>
-
         <div className="preview-section">
           <ResultDisplay />
           {/* <PreviewDisplay /> */}

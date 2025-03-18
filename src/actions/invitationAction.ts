@@ -184,8 +184,6 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
     useRSVPStore();
   const { toggleSubFeature: calendarToggle } = useCalendarFeatureStore();
 
-  console.log(details?.accounts);
-
   useEffect(() => {
     if (details) {
       //청첩장 제몫
@@ -204,17 +202,42 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       //FIX: 주소 어떻게 받을지 처리
       setAddress(details.location[0], details.location[1]);
       setJibunAddress(details.location[2]);
-      const { lat, lng } = JSON.parse(details.location[3]);
-      setCoords(lat, lng);
+      try {
+        // 배열 길이 확인 후 3번째 요소 존재 여부 체크
+        if (details.location.length <= 3) {
+          throw new Error('details.location[3]이 존재하지 않습니다.');
+        }
+        // JSON 문자열인지 확인 후 파싱 시도
+        const locationData = details.location[3];
+        if (typeof locationData !== 'string') {
+          throw new Error('details.location[3]은 문자열이 아닙니다.');
+        }
+        const { lat, lng } = JSON.parse(locationData);
+        setCoords(lat, lng);
+      } catch (error) {
+        console.error('주소 불러오는데 에러 발생:', error);
+      }
+
       setWeddingHallName(details.location[4]);
       setWeddingHallDetail(details.location[5]);
 
-      //FIX :: 웨딩 날짜
-      setWeddingDate(
-        details.date.length === 0
-          ? new Date()
-          : new Date(details.date.join('-')),
-      );
+      try {
+        //  비어 있는 경우, 현재 날짜 설정
+        if (details.date.length === 0) {
+          setWeddingDate(new Date());
+        } else {
+          //조인후 DATE 포멧 확인
+          const dateStr = details.date.join('-');
+          const parsedDate = new Date(dateStr);
+          if (isNaN(parsedDate.getTime())) {
+            throw new Error(`잘못된 날짜 형식: ${dateStr}`);
+          }
+          setWeddingDate(parsedDate);
+        }
+      } catch (error) {
+        console.error('에러 발생: 날짜 불러오는데 에러 발생 ', error);
+        setWeddingDate(new Date());
+      }
 
       setWeddingTime(details.weddingTime[0], details.weddingTime[1]);
 
@@ -291,78 +314,30 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       });
       replaceNotice(modifiedNotice || []);
 
-      updateAccountInfo(
-        0,
+      //계좌
+      const defaultAccount = {
+        accountHolderName: '',
+        bankName: '',
+        accountNumber: '',
+        kakaoUrl: '',
+      };
+
+      const accountKeys = [
         'accountInfo',
-        details.accounts
-          ? details.accounts[0]
-          : {
-            accountHolderName: '',
-            bankName: '',
-            accountNumber: '',
-            kakaoUrl: '',
-          },
-      );
-      updateAccountInfo(
-        0,
         'fatherAccountInfo',
-        details.accounts
-          ? details.accounts[1]
-          : {
-            accountHolderName: '',
-            bankName: '',
-            accountNumber: '',
-            kakaoUrl: '',
-          },
-      );
-      updateAccountInfo(
-        0,
         'motherAccountInfo',
-        details.accounts
-          ? details.accounts[2]
-          : {
-            accountHolderName: '',
-            bankName: '',
-            accountNumber: '',
-            kakaoUrl: '',
-          },
-      );
-      updateAccountInfo(
-        1,
-        'accountInfo',
-        details.accounts
-          ? details.accounts[3]
-          : {
-            accountHolderName: '',
-            bankName: '',
-            accountNumber: '',
-            kakaoUrl: '',
-          },
-      );
-      updateAccountInfo(
-        1,
-        'fatherAccountInfo',
-        details.accounts
-          ? details.accounts[4]
-          : {
-            accountHolderName: '',
-            bankName: '',
-            accountNumber: '',
-            kakaoUrl: '',
-          },
-      );
-      updateAccountInfo(
-        1,
-        'motherAccountInfo',
-        details.accounts
-          ? details.accounts[5]
-          : {
-            accountHolderName: '',
-            bankName: '',
-            accountNumber: '',
-            kakaoUrl: '',
-          },
-      );
+      ] as const;
+
+      [0, 1].forEach((index) => {
+        accountKeys.forEach((key, keyIndex) => {
+          const accountData =
+            Array.isArray(details.accounts) &&
+            details.accounts.length > index * 3 + keyIndex
+              ? details.accounts[index * 3 + keyIndex]
+              : defaultAccount;
+          updateAccountInfo(index, key, accountData);
+        });
+      });
 
       //FIX: undefined 처리
       calendarToggle(
@@ -380,58 +355,24 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
           false,
       );
 
-      toggleOptionalFeature(
-        'calendar',
-        details.calendars.length !== 0 && details.calendars[0].isActive,
-      );
-      toggleOptionalFeature(
-        'location',
-        details.location.length !== 0 && details.maps[0].isActive,
-      );
-      toggleOptionalFeature(
-        'gallery',
-        details.galleries.length !== 0 && details.galleries[0].isActive,
-      );
-      toggleOptionalFeature(
-        'account',
-        details.accounts.length !== 0 && details.accounts[0].isActive,
-      );
-      toggleOptionalFeature(
-        'contact',
-        details.contacts.length !== 0 && details.contacts[0].isActive,
-      );
-      toggleOptionalFeature(
-        'notice',
-        details.notices.length !== 0 && details.notices[0].isActive,
-      );
+      const features = [
+        { key: 'calendar', list: details.calendars },
+        { key: 'location', list: details.maps },
+        { key: 'gallery', list: details.galleries },
+        { key: 'account', list: details.accounts },
+        { key: 'contact', list: details.contacts },
+        { key: 'notice', list: details.notices },
+      ];
+
+      features.forEach(({ key, list }) => {
+        const isActive =
+          Array.isArray(list) && list.length > 0 && list[0].isActive;
+        toggleOptionalFeature(key, isActive);
+      });
 
       //FIX: MUSIC
       selectMusic(details.audio);
       musicToggle('music', !!details.audio); //수정 필요
-
-      // const data = [
-      //   details.calendars,
-      //   details.maps,
-      //   details.galleries,
-      //   details.notices,
-      //   details.accounts,
-      //   details.contacts,
-      // ];
-      // let extractedData: { name: string; order: number }[] = [];
-      // data.forEach((section, index) => {
-      //   if (Array.isArray(section)) {
-      //     section.forEach((item) => {
-      //       if (item.order !== undefined) {
-      //         extractedData.push({
-      //           order: item.order,
-      //           name: Object.keys(details)[index],
-      //         });
-      //       }
-      //     });
-      //   }
-      // });
-      // extractedData.sort((a, b) => a.order - b.order);
-      // console.log(extractedData);
     }
   }, [details]); // details 변경 시 실행
 };

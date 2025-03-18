@@ -61,8 +61,6 @@ const CreateInvitationPage = () => {
     return result?.order;
   };
   const { selectedOptionalFeatures } = useOptionalFeatureStore();
-
-
   const uploadToS3 = async (files: File[]) => {
     const { imageUrls } = await s3Mutate(files.length ? files : []);
     return imageUrls;
@@ -74,27 +72,6 @@ const CreateInvitationPage = () => {
       return;
     }
     try {
-      // const { imageUrls: thumbnail } = await s3Mutate(
-      //   uploadedImageFile ? [uploadedImageFile!] : [],
-      // );
-      // const { imageUrls: gallery } = await s3Mutate(
-      //   galleryFiles.length && galleryFiles.length > 0 ? galleryFiles : [],
-      // );
-      // const { imageUrls: noticeImg1 } = await s3Mutate(
-      //   noticeImages[0] ? [noticeImages[0]] : [],
-      // );
-      // const { imageUrls: noticeImg2 } = await s3Mutate(
-      //   noticeImages[1] ? [noticeImages[1]] : [],
-      // );
-      // const { imageUrls: noticeImg3 } = await s3Mutate(
-      //   noticeImages[2] ? [noticeImages[2]] : [],
-      // );
-      // const { imageUrls: noticeImg4 } = await s3Mutate(
-      //   noticeImages[3] ? [noticeImages[3]] : [],
-      // );
-      // const { imageUrls: noticeImg5 } = await s3Mutate(
-      //   noticeImages[4] ? [noticeImages[4]] : [],
-      // );
       const thumbnail = await uploadToS3(uploadedImageFile ? [uploadedImageFile] : []);
       const gallery = await uploadToS3(galleryFiles);
       const noticeS3ImageList = await Promise.all(

@@ -63,10 +63,11 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
           <button
             onClick={handleConfirm}
             disabled={titleInput.length === 0}
-            className={`rounded-full w-8 h-8 flex justify-center items-center ${titleInput.length === 0
-              ? 'bg-black bg-opacity-10 cursor-not-allowed'
-              : 'bg-rose-300 cursor-pointer hover:bg-rose-200'
-              }`}
+            className={`rounded-full w-8 h-8 flex justify-center items-center ${
+              titleInput.length === 0
+                ? 'bg-black bg-opacity-10 cursor-not-allowed'
+                : 'bg-rose-300 cursor-pointer hover:bg-rose-200'
+            }`}
           >
             <NextIcon />
           </button>

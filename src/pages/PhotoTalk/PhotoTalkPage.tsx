@@ -1,58 +1,54 @@
-// import PhotoTalkEditor from '@/components/common/PhotoTalk/PhotoTalkEditor';
+import PhotoTalkEditor from '@/components/common/PhotoTalk/PhotoTalkEditor';
 import PhotoTalkList from '@/components/common/PhotoTalk/PhotoTalkList';
 import BackIcon from '@/components/icons/BackIcon';
-import PageLayout from '@/components/layout/PageLayout';
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router';
 
 const PhotoTalkPage = () => {
   const [isEditorOpen, setEditorOpen] = useState(false);
-  console.log(isEditorOpen)
+  console.log(isEditorOpen);
   const navigate = useNavigate();
 
   const { userId, invitationId } = useParams();
 
   return (
-    <PageLayout
-      leftButton={
-        <button onClick={() => navigate(`/result/${userId}/${invitationId}`)}>
+    <div className="bg-white max-w-[520px]  min-h-screen m-auto">
+      <header className="fixed top-0 left-0 right-0 z-20 m-auto max-w-[520px] bg-white/60 flex-center h-12 backdrop-blur-3xl">
+        <button
+          onClick={() => navigate(`/result/${userId}/${invitationId}`)}
+          className="absolute left-0 p-3"
+        >
           <BackIcon />
         </button>
-      }
-      rightButton={null}
-      title="포토톡"
-      customFooter={false}
-    >
-      <div className="column-center">
-        {/* <div className="sub-title">PHOTO TALK</div>
-          <div className="title">포토톡</div> */}
-        <div className="w-full py-8 bg-slate-100 mb-8">
-          <p className="text-center text-sm font-light leading-loose">
-            사진과 함께 축하 메시지를 남길 수 있는 공간이에요!
-            <br />
-            다른 사람들의 포토톡도 함께 보며 추억을 나눠보면 어떨까요?
-          </p>
-          {/* <button className="text-xs">작성 방법 보기</button> */}
+        <div className="absolute left-1/2 transform -translate-x-1/2 text-md">
+          포토톡
         </div>
+      </header>
 
-        {/* <button
-          onClick={() => setEditorOpen(true)}
-          className="my-8 px-6 py-2 bg-button/30 rounded-xl text-sm font-medium hover:bg-button/20"
-        >
-          작성하기
-        </button> */}
+      <div className="h-12"></div>
 
-        <PhotoTalkList
-          isAdmin={false}
-          onOpenEditor={() => setEditorOpen(true)}
-        />
+      <aside className="py-8 w-full">
+        <p className="text-center text-xs font-light leading-loose tracking-wide text-black/80">
+          사진과 함께 축하 메시지를 남길 수 있는 공간이에요!
+          <br />
+          다른 사람들의 포토톡도 함께 보며 추억을 나눠보면 어떨까요?
+        </p>
+      </aside>
 
-        {/* <PhotoTalkEditor
+      <main>
+        <section className="px-3 bg-gradient-to-br from-[#DEE8FF] via-[#EFE1F4] to-[#FFDBE9] rounded-t-[40px] border-t min-h-screen">
+          <PhotoTalkList
+            isAdmin={false}
+            onOpenEditor={() => setEditorOpen(true)}
+          />
+        </section>
+
+        <PhotoTalkEditor
           isOpen={isEditorOpen}
           closeEditor={() => setEditorOpen(false)}
-        /> */}
-      </div>
-    </PageLayout>
+        />
+      </main>
+    </div>
   );
 };
 

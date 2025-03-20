@@ -3,8 +3,8 @@ import { Link, useParams } from 'react-router';
 
 const PhotoTalkSection = () => {
   const { userId, invitationId } = useParams();
-  console.log('userId : ', userId);
-  console.log('invitationId : ', invitationId);
+  // console.log('userId : ', userId);
+  // console.log('invitationId : ', invitationId);
 
   return (
     <div className="column-center gap-4 py-20">

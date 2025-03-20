@@ -1,21 +1,69 @@
-import PenIcon from '@icons/PenIcon';
-import SearchIcon from '@icons/SearchIcon';
-import { useNavigate } from 'react-router';
+import ShareIcon from '@icons/ShareIcon';
+import { Dispatch, SetStateAction, useRef, useState } from 'react';
+import ShareInvitation from '../Share/ShareInvitation';
+import { useUserStore } from '@/store/useUserStore';
+import { useGetInvitation } from '@/hooks/useInvitation';
 
-const CardFooter = ({ id: invitationId, userId }: { id: number, userId: number }) => {
-  const navigate = useNavigate()
+interface CardFooterProps {
+  title: string;
+  image: string;
+  id: number;
+  setModal: Dispatch<SetStateAction<boolean>>;
+}
+
+const CardFooter = ({ title, image, id }: CardFooterProps) => {
+  const [isFocused, setIsFocused] = useState(false);
+  const parentRef = useRef<HTMLButtonElement>(null);
+  const { id: userId } = useUserStore();
+
+  const { invitations } = useGetInvitation(id);
+  const createdAt = invitations?.createdAt?.split('T')[0];
+
+  const handleBlur = (event: React.FocusEvent<HTMLButtonElement>) => {
+    if (parentRef.current && parentRef.current.contains(event.relatedTarget)) {
+      return;
+    }
+    setIsFocused(false);
+  };
+
+  const handleFocus = () => {
+    setIsFocused(true);
+  };
+
   return (
-    <div className="bottom-0 left-0 border-l border-r border-b flex justify-evenly items-center bg-white text-[8px] text-gray-400 h-[36px] w-full rounded-b-lg py-3 px-1">
-      <button className="flex-center gap-1 hover:opacity-30  transition-all duration-100" onClick={() => navigate(`/edit/${invitationId}`)}>
-        <PenIcon />
-        <div>수정하기</div>
+    <main
+      className="flex-between w-full h-14 rounded-b-2xl
+     px-4"
+    >
+      {/* 청첩장 제목 입력값 */}
+      <div>
+        <span className="text-md font-medium text-white">{title}</span>
+        <div className="text-[9px] font-extralight text-white/50 tracking-wide">
+          {createdAt}
+        </div>
+      </div>
+
+      <button
+        ref={parentRef}
+        tabIndex={-1}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        className="text-white/90"
+      >
+        <ShareIcon />
+        {isFocused && (
+          <ShareInvitation
+            setIsFocused={setIsFocused}
+            isFocused={isFocused}
+            shareTitle={title}
+            shareDesc={'결혼합니다'}
+            shareImage={image}
+            shareUrl={`http://localhost:5173/result/${userId}/${id}`}
+            shareHeader={''}
+          />
+        )}
       </button>
-      <div className="border-l h-full"></div>
-      <button className="flex-center gap-1 hover:opacity-30 transition-all duration-100" onClick={() => navigate(`/result/${userId}/${invitationId}`)}>
-        <SearchIcon />
-        <div>미리보기</div>
-      </button>
-    </div>
+    </main>
   );
 };
 

@@ -1,5 +1,4 @@
-import Header from '../common/Header/Header';
-import Footer from '../common/Footer/Footer';
+import Header from '../common/Header';
 
 type PageLayoutProps = {
   title?: string | React.ReactNode;
@@ -18,7 +17,7 @@ const PageLayout = ({
   customHeader = (
     <Header text={title} leftButton={leftButton} rightButton={rightButton} />
   ),
-  customFooter = <Footer />,
+  customFooter = <></>,
 }: PageLayoutProps) => {
   return (
     <div className="layout">

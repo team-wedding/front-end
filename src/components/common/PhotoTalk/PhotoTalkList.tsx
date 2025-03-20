@@ -11,7 +11,7 @@ import { PhotoTalk } from '@/types/phototalkType';
 import ListIcon from '@/components/icons/ListIcon';
 import ImageIcon from '@/components/icons/ImageIcon';
 import PhotoTalkEditor from '@/components/common/PhotoTalk/PhotoTalkEditor';
-// import EditIcon from '@/components/icons/EditIcon';
+import EditIcon from '@/components/icons/EditIcon';
 
 interface PhotoTalkListProps {
   isAdmin: boolean;
@@ -109,28 +109,37 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
 
   if (isAdmin && photoTalkList.length === 0) {
     return (
-      <p className="text-center text-sm text-gray-500 my-6">
-        업로드된 포토톡이 없습니다.
-      </p>
+      <>
+        <div className="h-6"></div>
+        <p className="text-center text-sm text-black/30 font-light bg-white/50 rounded-2xl p-16 w-[80%] m-auto">
+          업로드된 포토톡이 없습니다.
+        </p>
+      </>
     );
   }
 
   return (
     <div className="w-full">
-      <div className="flex justify-between mx-8">
-        {!isAdmin && (
+      <div className="flex-between py-3 px-2">
+        {isAdmin ? (
+          <p className="text-xs text-[#494949] font-extralight">
+            하객분들의 축하메시지와 사진을 볼 수 있습니다.
+          </p>
+        ) : (
           <button
             onClick={() => setEditorOpen(true)}
-            className="px-6 py-2 mr-auto bg-button/30 rounded-xl text-sm font-medium hover:bg-button/20"
+            className="px-4 py-2 bg-black/80 shadow-sm rounded-full text-xs text-white hover:bg-black/70"
           >
             작성하기
           </button>
         )}
         <button
           onClick={() => setGalleryOpen(!isGalleryOpen)}
-          className={`select-btn ml-auto ${isGalleryOpen ? 'text-gray-800' : ''}`}
+          // className={`select-btn ml-auto ${isGalleryOpen ? 'text-gray-800' : ''}`}
+          className={`px-4 py-2 ml-auto text-xs font-light rounded-full bg-white shadow-sm hover:bg-white/80`}
         >
-          {isGalleryOpen ? <ListIcon /> : <ImageIcon />}
+          {/* {isGalleryOpen ? <ListIcon /> : <ImageIcon />} */}
+          {isGalleryOpen ? '전체 보아보기' : '사진만 모아보기'}
         </button>
       </div>
 
@@ -149,13 +158,15 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
               setSelectedPhotoTalk({ data: photoTalk, mode: 'delete' });
               setPasswordModalOpen(true);
             }}
+            isAdmin={isAdmin}
           />
         ))
       ) : (
-        <div className="flex flex-col items-center gap-2 bg-white p-10 mx-8 my-4 rounded-lg shadow-sm border border-gray-200 text-gray-600">
-          {/* <EditIcon className="size-[28px]" strokeWidth={2} /> */}
-          <p className="text-sm font-light">
-            첫 번째 포토톡을 작성하고 따뜻한 마음을 전해보세요
+        <div className="flex-center w-[80%] m-auto gap-2 bg-white/30 p-12 rounded-2xl mt-6">
+          <EditIcon className="size-[20px] text-black/30" strokeWidth={1} />
+          <p className="text-sm font-light text-black/30 text-center leading-6">
+            첫 번째 포토톡을 작성하고
+            <br /> 따뜻한 마음을 전해보세요
           </p>
         </div>
       )}

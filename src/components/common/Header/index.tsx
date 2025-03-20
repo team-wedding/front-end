@@ -8,7 +8,7 @@ type HeaderProps = {
 
 const Header = ({ text, leftButton, rightButton }: HeaderProps) => {
   return (
-    <div className="relative flex items-center w-full max-w-md">
+    <div className="relative flex items-center w-full max-w-[520px]">
       {/* Left Button */}
       <div className="mx-2">{leftButton}</div>
 

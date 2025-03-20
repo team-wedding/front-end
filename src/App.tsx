@@ -14,12 +14,13 @@ import MyPage from './pages/MyPage';
 import RsvpStatsPage from './pages/RsvpStatsPage';
 import EditProfilePage from './pages/EditProfilePage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
-import LoginPage from '@/pages/LoginPage';
-import EmailLoginPage from '@/pages/EmailLoginPage';
 import ChangePasswordPage from '@/pages/ChangePasswordPage';
 import SignUpPage from '@/pages/SignUpPage';
 import AdminPhotoTalkPage from '@/pages/PhotoTalk/AdminPhotoTalkPage';
 import PhotoTalkPage from '@/pages/PhotoTalk/PhotoTalkPage';
+import StartPage from '@/pages/StartPage';
+import LoginPage from '@/pages/LoginPage';
+import ScrollToTop from '@/components/common/ScrollToTop';
 import DarkModeProvider from './components/providers/DarkModeProvider';
 
 function App() {
@@ -28,21 +29,22 @@ function App() {
   return (
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
+        <ScrollToTop />
         <Routes>
-          <Route path="/" element={<Navigate to="/login" replace />} />
-          <Route path={'/login'} element={<LoginPage />} />
-          <Route path="/email-login" element={<EmailLoginPage />} />
+          {/* <Route path="/" element={<Navigate to="/" replace />} /> */}
+          <Route path={'/'} element={<StartPage />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path={'/reset-password'} element={<ResetPasswordPage />} />
           <Route path={'/signup'} element={<SignUpPage />} />
           {/* 청첩장 */}
           <Route path={'/dashboard'} element={<DashBoardPage />} />
           <Route path={'/create'} element={<CreateInvitationPage />} />
           <Route path={'/edit/:id'} element={<EditInvitationPage />} />
-          <Route path={'/preview'} element={<PreviewInvitaionPage />} />
           <Route
-            path={'/result/:userId/:invitationId'}
-            element={<ResultPage />}
+            path={'/preview/:id/:invitationId'}
+            element={<PreviewInvitaionPage />}
           />
+          <Route path={'/preview'} element={<PreviewInvitaionPage />} />
           <Route
             path={'/result/:userId/:invitationId'}
             element={<ResultPage />}

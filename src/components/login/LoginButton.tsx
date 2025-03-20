@@ -12,12 +12,12 @@ const LoginButton = ({
   additionalStyles,
 }: LoginButtonProps) => {
   return (
-    <img
-      src={imgSrc}
-      alt={altText}
-      className={`cursor-pointer w-full ${additionalStyles || ''}`}
+    <button
       onClick={onClick}
-    />
+      className={`cursor-pointer ${additionalStyles || ''}`}
+    >
+      <img src={imgSrc} alt={altText} />
+    </button>
   );
 };
 

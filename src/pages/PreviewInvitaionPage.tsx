@@ -6,7 +6,7 @@ import BackIcon from '@icons/BackIcon';
 // import HeaderButton from '@common/Header/HeaderButton';
 import { useNavigate, useParams } from 'react-router';
 import PreviewDisplay from '@/components/display/PreviewDisplay';
-import { useUserStore } from '@/store/useUserStore';
+// import { useUserStore } from '@/store/useUserStore';
 import { useGetInvitation } from '@/hooks/useInvitation';
 import { useAccordionStore } from '@/store/useAccordionStore';
 import { useEffect } from 'react';
@@ -35,7 +35,6 @@ const PreviewInvitaionPage = () => {
     navigate(`/edit/${invitationId}`);
   };
 
-  console.log(invitationId);
   return (
     // <PageLayout
     //   leftButton={
@@ -54,14 +53,14 @@ const PreviewInvitaionPage = () => {
         {invitationId && (
           <button
             onClick={handleEdit}
-            className="px-3 py-1 mx-3 rounded-full text-sm bg-gradient-to-r from-[#CEDFFF] to-[#F8D4E2] text-black font-light border border-white"
+            className="px-3 py-1 mr-3 rounded-full text-sm bg-gradient-to-r from-[#CEDFFF] to-[#F8D4E2] text-black font-light border border-white"
           >
             수정하기
           </button>
         )}
       </header>
 
-      <div className="text-center text-xs text-black/30 p-8">
+      <div className="text-center text-xs text-black/70 p-6 animate-pulse">
         미리보기 화면입니다.
       </div>
 

@@ -8,8 +8,8 @@ import PhotoTalkGallery from '@/components/common/PhotoTalk/PhotoTalkGallery';
 import PasswordConfirmModal from '@/components/common/PhotoTalk/PasswordConfirmModal';
 // import PhotoTalkEditor from '@/components/common/PhotoTalk/PhotoTalkEditor';
 import { PhotoTalk } from '@/types/phototalkType';
-import ListIcon from '@/components/icons/ListIcon';
-import ImageIcon from '@/components/icons/ImageIcon';
+// import ListIcon from '@/components/icons/ListIcon';
+// import ImageIcon from '@/components/icons/ImageIcon';
 import PhotoTalkEditor from '@/components/common/PhotoTalk/PhotoTalkEditor';
 import EditIcon from '@/components/icons/EditIcon';
 
@@ -119,7 +119,7 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
   }
 
   return (
-    <div className="w-full">
+    <div className="w-full pb-20">
       <div className="flex-between py-3 px-2">
         {isAdmin ? (
           <p className="text-xs text-[#494949] font-extralight">
@@ -128,7 +128,7 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
         ) : (
           <button
             onClick={() => setEditorOpen(true)}
-            className="px-4 py-2 bg-black/80 shadow-sm rounded-full text-xs text-white hover:bg-black/70"
+            className="px-4 py-2 bg-black/90 shadow-sm rounded-full text-xs text-white hover:bg-black/80"
           >
             작성하기
           </button>

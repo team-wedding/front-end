@@ -7,6 +7,7 @@ import RsvpStatsPage from '@/pages/RsvpStatsPage';
 import AdminPhotoTalkPage from '@/pages/PhotoTalk/AdminPhotoTalkPage';
 import Tab from '@/components/common/Tab';
 import { useEffect, useState } from 'react';
+import ChevronRight from '@/components/icons/Chevron_RightIcon';
 
 const TabData = [
   {
@@ -44,8 +45,8 @@ const MyPage = () => {
           <MoonIcon />
         </button>
 
-        <section className="flex-center text-lg p-6 border-none gap-3">
-          <div className="column-center gap-2">
+        <section className="flex-center text-lg p-6 border-none gap-2">
+          <div className="column-center">
             <img src={profile} alt="profile" className="w-16" />
             {/* <button
               className="text-xs text-[#B4B4B4] font-extralight"
@@ -57,14 +58,14 @@ const MyPage = () => {
 
           <div className="flex flex-col text-lg font-extralight leading-6">
             <div>안녕하세요,</div>
-            <div className="flex">
+            <div className="flex-center">
               <div className="font-medium">{name}</div>
               <div>님</div>
               <div
-                className="animate-bounceX cursor-pointer font-medium ml-2"
+                className="animate-pulse cursor-pointer font-medium"
                 onClick={() => navigate('/mypage/edit')}
               >
-                {' > '}
+                <ChevronRight />
               </div>
             </div>
           </div>

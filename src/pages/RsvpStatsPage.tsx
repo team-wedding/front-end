@@ -75,15 +75,15 @@ const RsvpStatsPage = () => {
     //   }
     //   customFooter={null}
     // >
-    <>
-      <section>
+    <main>
+      <section className="mb-10">
         <h6 className="flex items-center gap-2 text-xs font-medium text-[#535353] p-3">
           {/* 아이콘 */}
           <img src={statsIcon} alt="stats" />
           <span>참석여부 집계 요약</span>
         </h6>
 
-        <article className="h-fit bg-white rounded-xl w-full p-3">
+        <article className="h-fit bg-white rounded-xl w-full p-5">
           <RsvpItem title={'총 응답 수'} attend={totalResponses} total={true} />
           <div className="grid grid-cols-2">
             <RsvpItem title={'참석 가능'} attend={totalAttending} />
@@ -111,7 +111,7 @@ const RsvpStatsPage = () => {
         </article>
       </section>
 
-      <section className="mt-8">
+      <section className="flex-1">
         <h6 className="flex items-center gap-2 text-xs font-medium text-[#535353] p-3">
           <img src={listIcon} alt="stats" />
           <span>상세 목록</span>
@@ -119,12 +119,12 @@ const RsvpStatsPage = () => {
 
         <article className="flex flex-col">
           {/* 테이블 헤더 */}
-          <div className="grid grid-cols-[2.5fr_2.2fr_0.7fr_0.7fr] bg-gray-100 text-sm font-medium text-center py-2 rounded-t-lg border border-gray-300">
+          <header className="grid grid-cols-[2.5fr_2.2fr_0.7fr_0.7fr] bg-gray-100 text-sm font-medium text-center py-2 rounded-t-lg border border-gray-300">
             <span>이름</span>
             <span>연락처</span>
             <span>참석</span>
             <span>식사</span>
-          </div>
+          </header>
 
           {/* 데이터 목록 */}
           {attendanceList.length > 0 ? (
@@ -146,13 +146,13 @@ const RsvpStatsPage = () => {
               </div>
             ))
           ) : (
-            <div className="text-center text-sm text-gray-500 py-8">
+            <p className="text-center text-sm text-gray-500 py-8">
               참석 데이터가 없습니다.
-            </div>
+            </p>
           )}
         </article>
       </section>
-    </>
+    </main>
 
     // </PageLayout>
   );

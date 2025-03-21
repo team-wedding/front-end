@@ -97,7 +97,7 @@ const PhotoTalkCard = ({
         )}
 
         <div
-          className={`${images.length > 0 ? `grid grid-cols-2 place-content-center gap-2 px-4 h-[200px]` : `flex-center `}`}
+          className={`${images.length > 0 ? `grid grid-cols-2 place-content-center gap-3 px-4 h-[200px]` : `flex-center `}`}
         >
           <Slider {...settings}>
             {images.length > 0 &&
@@ -111,7 +111,7 @@ const PhotoTalkCard = ({
                 </div>
               ))}
           </Slider>
-          <p className="text-gray-800 text-sm break-keep w-full flex-center text-ellipsis p-3">
+          <p className="text-gray-800 text-sm break-keep w-full flex-center text-ellipsis p-4">
             {photoTalk.message}
           </p>
         </div>

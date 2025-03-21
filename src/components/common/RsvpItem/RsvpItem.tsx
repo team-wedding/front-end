@@ -16,7 +16,7 @@ export default function RsvpItem({
   bride,
 }: RsvpDetail) {
   return (
-    <div className="flex flex-row justify-between text-gray-700 items-center p-3  border-b">
+    <div className="flex flex-row justify-between text-gray-700 items-center p-3">
       <div className={`flex flex-col items-start text-sm ${total && ''}`}>
         {title}
         {description && (

@@ -28,16 +28,16 @@ const MyPage = () => {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState(0);
 
-  // const location = useLocation();
+  const location = useLocation();
 
-  // useEffect(() => {
-  //   const currentTabIndex = TabData.findIndex(
-  //     (tab) => tab.href === location.pathname,
-  //   );
-  //   if (currentTabIndex !== -1) {
-  //     setActiveTab(currentTabIndex);
-  //   }
-  // }, [location.pathname]);
+  useEffect(() => {
+    const currentTabIndex = TabData.findIndex((tab) =>
+      location.pathname.startsWith(tab.href),
+    );
+    if (currentTabIndex !== -1) {
+      setActiveTab(currentTabIndex);
+    }
+  }, [location.pathname]);
 
   return (
     <div className="bg-white max-w-[520px]  min-h-screen m-auto">

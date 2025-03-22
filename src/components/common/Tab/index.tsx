@@ -17,7 +17,7 @@ const Tab = ({ data, activeTab, setActiveTab }: TabProps) => {
           <button
             key={index}
             onClick={() => setActiveTab(index)}
-            className={`w-full p-3 border-b text-sm ${activeTab === index ? `border-b-2 border-[#565656] font-semibold` : `border-[#EBEBEB] text-[#BDBDBD]`}`}
+            className={`w-full p-3 border-b text-xs font-light ${activeTab === index ? `border-b-2 border-[#565656] font-semibold` : `border-[#EBEBEB] text-[#BDBDBD]`}`}
           >
             {tab.label}
           </button>

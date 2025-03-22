@@ -11,7 +11,7 @@ const BackIcon = () => (
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="2"
+      strokeWidth="1.5"
       d="m15 19-7-7 7-7"
     />
   </svg>

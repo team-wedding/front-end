@@ -20,7 +20,7 @@ const PhotoTalkPage = () => {
         >
           <BackIcon />
         </button>
-        <div className="absolute left-1/2 transform -translate-x-1/2 text-base font-medium">
+        <div className="absolute left-1/2 transform -translate-x-1/2 text-base">
           포토톡
         </div>
       </header>
@@ -28,7 +28,7 @@ const PhotoTalkPage = () => {
       <div className="h-12"></div>
 
       <aside className="w-full">
-        <p className="text-center text-sm font-extralight leading-loose tracking-tight text-black/80 p-6 break-keep">
+        <p className="text-center text-sm font-light leading-loose tracking-tight text-black/80 py-8 px-6 break-keep">
           📷 사진과 함께 축하 메시지를 남길 수 있는 공간이에요! 💬
           <br />
           다른 사람들의 포토톡도 함께 보며 추억을 나눠보면 어떨까요? 🥳

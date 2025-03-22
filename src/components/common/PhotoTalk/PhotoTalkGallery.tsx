@@ -55,15 +55,15 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
   return (
     <div>
       {isAdmin && (
-        <div className="flex justify-between items-center p-8 pb-2">
-          <h2 className="text-lg font-medium">갤러리</h2>
-          <div className="flex items-center gap-3">
-            <p className="text-gray-700">
+        <div className="flex justify-end items-center px-2">
+          {/* <h2 className="text-xs text-black/50">사진을 관리할 수 있습니다.</h2> */}
+          <div className="flex-center gap-2 mb-2">
+            <p className="text-gray-700 text-xs">
               {selectedImages.length} / {images.length}
             </p>
             <button
               onClick={downloadSelectedImages}
-              className="select-btn"
+              className="bg-white/80 px-2 py-1 rounded-xl active:bg-black/30 shadow-md"
               disabled={selectedImages.length === 0}
             >
               <DownloadIcon />
@@ -72,22 +72,24 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
         </div>
       )}
 
-      <div className="grid grid-cols-3 gap-1 py-4 px-8">
+      <div className="grid grid-cols-3 gap-1 p-2 place-items-center">
         {images.map((url, index) => (
           <div key={index} className="relative group">
             {isAdmin && (
-              <input
-                type="checkbox"
-                checked={selectedImages.includes(url)}
-                onChange={() => toggleSelectImage(url)}
-                className="absolute top-1 right-1 w-4 h-4 rounded cursor-pointer z-10 border-gray-400 checked:bg-button focus:ring-button focus:border-button focus:outline-none focus:ring-0"
-              />
+              <div className="absolute -top-1 left-0 p-1 rounded">
+                <input
+                  type="checkbox"
+                  checked={selectedImages.includes(url)}
+                  onChange={() => toggleSelectImage(url)}
+                  className="size-4 rounded bg-white/90 cursor-pointer z-10 border-none checked:bg-black focus:ring-0 focus:outline-none"
+                />
+              </div>
             )}
 
             <img
               src={url}
               alt={`Uploaded ${index}`}
-              className="h-[116px] w-full rounded-sm object-cover cursor-pointer"
+              className="w-full aspect-[1/1] rounded object-cover cursor-pointer shadow-custom"
               onClick={() => openModal(index)}
             />
           </div>
@@ -97,30 +99,46 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
       {isModalOpen && (
         <div
           onClick={closeModal}
-          className="result-layout fixed inset-0 z-50 bg-black bg-opacity-50"
+          className="max-w-[520px] m-auto column-center fixed inset-0 z-50 bg-black bg-opacity-80"
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-[340px] rounded-md overflow-hidden"
+            className="relative w-[80%] aspect-[3/4] rounded-2xl overflow-hidden backdrop-blur-3xl bg-black/30 shadow-custom py-16 "
           >
-            <div className="relative flex items-center justify-center px-14 py-6 h-full rounded-md bg-black bg-opacity-75">
+            <div className="relative flex-center w-full h-full px-10">
               <button
                 onClick={showPreviousImage}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/80 rounded-full hover:bg-opacity-75"
               >
                 <ChevronLeft />
               </button>
+
+              {/* <div className="p-10"> */}
               <img
                 src={images[currentImageIndex]}
-                className="max-h-full object-contain rounded-sm"
+                alt="미리보기"
+                className="max-w-full max-h-full object-contain rounded-xl"
               />
+              {/* </div> */}
+
               <button
                 onClick={showNextImage}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/80  rounded-full hover:bg-opacity-75"
               >
                 <ChevronRight />
               </button>
             </div>
+
+            {isAdmin && (
+              <footer className="absolute bottom-3 right-0 left-0 m-auto w-full gap-4 text-white/80 px-4">
+                <button className="w-1/2 py-3 text-xs rounded-lg bg-black/0 hover:bg-white/10 font-medium">
+                  삭제
+                </button>
+                <button className="w-1/2 py-3 text-xs rounded-lg bg-black/0 hover:bg-white/10 font-medium">
+                  다운로드
+                </button>
+              </footer>
+            )}
           </div>
         </div>
       )}

@@ -3,6 +3,8 @@ import usePhotoTalkStore from '@store/usePhotoTalkStore';
 import ChevronLeft from '@icons/Chevron_LeftIcon';
 import ChevronRight from '@icons/Chevron_RightIcon';
 import DownloadIcon from '@/components/icons/DownloadIcon';
+import JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 interface PhotoTalkGalleryProps {
   isAdmin?: boolean;
@@ -15,6 +17,8 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
+  const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
+
   const toggleSelectImage = (url: string) => {
     setSelectedImages((prevSelected) =>
       prevSelected.includes(url)
@@ -23,8 +27,48 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
     );
   };
 
-  const downloadSelectedImages = () => {
+  const downloadSelectedImages = async (selectedImages: string[]) => {
+    // zip 다운
+    if (selectedImages.length >= 10) {
+      const zip = new JSZip();
+      const folder = zip.folder('phototalk-images');
+
+      await Promise.all(
+        selectedImages.map(async (url, index) => {
+          const response = await fetch(url);
+          const blob = await response.blob();
+          folder?.file(`phototalk_${index + 1}.jpg`, blob);
+        }),
+      );
+
+      const content = await zip.generateAsync({ type: 'blob' });
+      saveAs(content, 'phototalk_images.zip');
+    } else {
+      // 순차 다운
+      for (let i = 0; i < selectedImages.length; i++) {
+        const url = selectedImages[i];
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = `phototalk_${i + 1}.jpg`;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+        await delay(500);
+      }
+    }
+
     console.log(`${selectedImages.length} images downloaded`);
+  };
+
+  const downloadCurrentImage = () => {
+    const url = images[currentImageIndex];
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `phototalk_${currentImageIndex + 1}.jpg`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const openModal = (index: number) => {
@@ -62,7 +106,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
               {selectedImages.length} / {images.length}
             </p>
             <button
-              onClick={downloadSelectedImages}
+              onClick={() => downloadSelectedImages(selectedImages)}
               className="bg-white/80 px-2 py-1 rounded-xl active:bg-black/30 shadow-md"
               disabled={selectedImages.length === 0}
             >
@@ -81,7 +125,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
                   type="checkbox"
                   checked={selectedImages.includes(url)}
                   onChange={() => toggleSelectImage(url)}
-                  className="size-4 rounded bg-white/90 cursor-pointer z-10 border-none checked:bg-black focus:ring-0 focus:outline-none"
+                  className="size-4 rounded bg-white/60 cursor-pointer z-10 border-none shadow-inner checked:bg-black focus:ring-0 focus:outline-none"
                 />
               </div>
             )}
@@ -103,12 +147,12 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
         >
           <div
             onClick={(e) => e.stopPropagation()}
-            className="relative w-[80%] aspect-[3/4] rounded-2xl overflow-hidden backdrop-blur-3xl bg-black/30 shadow-custom py-16 "
+            className="relative w-[90%] aspect-[4/5] rounded-2xl overflow-hidden backdrop-blur-3xl bg-black/30 shadow-custom py-16 "
           >
-            <div className="relative flex-center w-full h-full px-10">
+            <div className="relative flex-center w-full h-full px-4">
               <button
                 onClick={showPreviousImage}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/80 rounded-full hover:bg-opacity-75"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/40  rounded-full hover:bg-opacity-75"
               >
                 <ChevronLeft />
               </button>
@@ -123,7 +167,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
 
               <button
                 onClick={showNextImage}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/80  rounded-full hover:bg-opacity-75"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/40  rounded-full hover:bg-opacity-75"
               >
                 <ChevronRight />
               </button>
@@ -131,10 +175,16 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
 
             {isAdmin && (
               <footer className="absolute bottom-3 right-0 left-0 m-auto w-full gap-4 text-white/80 px-4">
-                <button className="w-1/2 py-3 text-xs rounded-lg bg-black/0 hover:bg-white/10 font-medium">
+                <button
+                  className="w-1/2 py-3 text-xs rounded-lg bg-black/0 hover:bg-white/10 font-medium"
+                  onClick={() => {}}
+                >
                   삭제
                 </button>
-                <button className="w-1/2 py-3 text-xs rounded-lg bg-black/0 hover:bg-white/10 font-medium">
+                <button
+                  className="w-1/2 py-3 text-xs rounded-lg bg-black/0 hover:bg-white/10 font-medium"
+                  onClick={downloadCurrentImage}
+                >
                   다운로드
                 </button>
               </footer>

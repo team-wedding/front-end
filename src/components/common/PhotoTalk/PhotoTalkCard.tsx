@@ -126,7 +126,7 @@ const PhotoTalkCard = ({
               ))}
           </Slider> */}
           <p
-            className={`text-black/80 text-xs font-medium leading-relaxed break-keep w-full flex-center text-ellipsis tracking-tight text-center ${images.length > 0 ? 'p-3' : 'p-10'}`}
+            className={`text-black/80 text-xs font-medium leading-relaxed break-keep w-full flex-center text-ellipsis tracking-tight  ${images.length > 0 ? 'p-3' : 'p-10'}`}
           >
             {photoTalk.message}
           </p>

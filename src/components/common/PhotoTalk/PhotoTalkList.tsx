@@ -12,6 +12,7 @@ import { PhotoTalk } from '@/types/phototalkType';
 // import ImageIcon from '@/components/icons/ImageIcon';
 import PhotoTalkEditor from '@/components/common/PhotoTalk/PhotoTalkEditor';
 import EditIcon from '@/components/icons/EditIcon';
+import ReusableModal from '@/components/common/Modal/ReusableModal';
 
 interface PhotoTalkListProps {
   isAdmin: boolean;
@@ -32,13 +33,15 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
   const { data } = useGetPhototalks(1, 10) as {
     data: PhotoTalkResponse | undefined;
   };
+
+  // 포토톡 삭제
+  const { mutate: deletePhototalk } = useDeletePhototalk();
+
   useEffect(() => {
     if (data) {
       setPhotoTalkList(data.allCelebrationMsgs);
     }
   }, [data]);
-
-  const deletePhototalk = useDeletePhototalk();
 
   const photoTalkList = Array.isArray(data?.allCelebrationMsgs)
     ? data.allCelebrationMsgs
@@ -47,9 +50,10 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
   const [isGalleryOpen, setGalleryOpen] = useState(false);
   const [passwordInput, setPasswordInput] = useState('');
   const [isEditorOpen, setEditorOpen] = useState(false);
-  // const [isDeleting, setIsDeleting] = useState(false);
-  // const [isDeleteConfirmOpen, setDeleteConfirmOpen] = useState(false);
   const [isPasswordModalOpen, setPasswordModalOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
+
+  // const [isDeleting, setIsDeleting] = useState(false);
 
   // 선택한 포토톡 및 모드 관리
   const [selectedPhotoTalk, setSelectedPhotoTalk] = useState<{
@@ -68,11 +72,13 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
 
     // 편집 모드
     if (selectedPhotoTalk.mode === 'edit') {
-      setEditingPhotoTalk(selectedPhotoTalk.data);
       if (onOpenEditor) onOpenEditor();
+
+      setEditingPhotoTalk(selectedPhotoTalk.data);
     } else if (selectedPhotoTalk.mode === 'delete') {
       if (!selectedPhotoTalk.data.id) return; // id가 없으면 실행 방지
-      deletePhototalk.mutate(
+
+      deletePhototalk(
         {
           id: selectedPhotoTalk.data.id,
           name: selectedPhotoTalk.data.name,
@@ -91,21 +97,42 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
     setSelectedPhotoTalk({ data: null, mode: null });
   };
 
-  // const handleDeleteClick = (talk: PhotoTalk) => {
-  //   setSelectedPhotoTalk();
-  //   setIsDeleting(true);
-  //   if (isAdmin) {
-  //     setDeleteConfirmOpen(true);
-  //   }
-  // };
+  const handleEdit = (photoTalk: PhotoTalk) => {
+    setSelectedPhotoTalk({ data: photoTalk, mode: 'edit' });
+    setPasswordModalOpen(true);
+  };
 
-  // const confirmDelete = () => {
-  //   if (selectedPhotoTalk?.data) {
-  //     adminDeletePhotoTalk(selectedPhotoTalk?.data.id);
-  //   }
-  //   setSelectedPhotoTalk({ data: null, mode: 'delete' });
-  //   setDeleteConfirmOpen(false);
-  // };
+  const handleDelete = (photoTalk: PhotoTalk) => {
+    setSelectedPhotoTalk({ data: photoTalk, mode: 'delete' });
+
+    if (isAdmin) {
+      setDeleteModalOpen(true);
+    } else {
+      setPasswordModalOpen(true);
+    }
+  };
+
+  const handleAdminDelete = () => {
+    if (!selectedPhotoTalk?.data || selectedPhotoTalk.data.id === undefined)
+      return;
+
+    deletePhototalk(
+      {
+        id: selectedPhotoTalk.data.id,
+        name: selectedPhotoTalk.data.name,
+        password: '',
+        role: 'admin',
+      },
+      {
+        onSuccess: () => {
+          console.log('관리자 삭제 완료');
+        },
+      },
+    );
+
+    setDeleteModalOpen(false);
+    setSelectedPhotoTalk({ data: null, mode: null });
+  };
 
   if (isAdmin && photoTalkList.length === 0) {
     return (
@@ -120,11 +147,15 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
 
   return (
     <div className="w-full pb-20">
-      <div className="flex-between py-3 px-2">
+      <div className="flex-between py-3 px-2 mb-2">
         {isAdmin ? (
-          <p className="text-xs text-[#494949] font-extralight">
-            하객분들의 축하메시지와 사진을 볼 수 있습니다.
-          </p>
+          isGalleryOpen ? (
+            <p className="text-xs text-[#494949] font-light">갤러리</p>
+          ) : (
+            <p className="text-xs text-[#494949] font-light">
+              하객분들의 축하메시지와 사진을 볼 수 있습니다.
+            </p>
+          )
         ) : (
           <button
             onClick={() => setEditorOpen(true)}
@@ -136,7 +167,7 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
         <button
           onClick={() => setGalleryOpen(!isGalleryOpen)}
           // className={`select-btn ml-auto ${isGalleryOpen ? 'text-gray-800' : ''}`}
-          className={`px-4 py-2 ml-auto text-xs font-light rounded-full bg-white shadow-sm hover:bg-white/80`}
+          className={`px-4 py-2 ml-auto text-xs font-light rounded-full bg-white shadow-sm hover:bg-opacity-50 active:bg-black/10`}
         >
           {/* {isGalleryOpen ? <ListIcon /> : <ImageIcon />} */}
           {isGalleryOpen ? '전체 보아보기' : '사진만 모아보기'}
@@ -150,14 +181,8 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
           <PhotoTalkCard
             key={photoTalk.id}
             photoTalk={photoTalk}
-            onEdit={() => {
-              setSelectedPhotoTalk({ data: photoTalk, mode: 'edit' });
-              setPasswordModalOpen(true);
-            }}
-            onDelete={() => {
-              setSelectedPhotoTalk({ data: photoTalk, mode: 'delete' });
-              setPasswordModalOpen(true);
-            }}
+            onEdit={() => handleEdit(photoTalk)}
+            onDelete={() => handleDelete(photoTalk)}
             isAdmin={isAdmin}
           />
         ))
@@ -171,7 +196,18 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
         </div>
       )}
 
-      {!isAdmin && (
+      {isAdmin ? (
+        <ReusableModal
+          isOpen={isDeleteModalOpen}
+          title="정말 삭제하시겠습니까?"
+          confirmText="삭제"
+          onConfirm={() => handleAdminDelete()}
+          onCancel={() => {
+            setDeleteModalOpen(false);
+            setSelectedPhotoTalk({ data: null, mode: null });
+          }}
+        />
+      ) : (
         <PasswordConfirmModal
           isOpen={isPasswordModalOpen}
           onClose={() => {
@@ -179,7 +215,7 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
             setSelectedPhotoTalk({ data: null, mode: null });
             setPasswordInput('');
           }}
-          onConfirm={confirmPassword}
+          onConfirm={() => confirmPassword()}
           passwordInput={passwordInput}
           setPasswordInput={setPasswordInput}
           isEditMode={selectedPhotoTalk.mode === 'edit'}

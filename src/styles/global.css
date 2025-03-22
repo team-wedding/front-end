@@ -300,7 +300,7 @@
   }
 
   .formInput {
-    @apply bg-white border-neutral-300 text-neutral-900 text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50 py-2;
+    @apply border-gray-200 bg-gray-50 text-neutral-900 text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50 focus:placeholder-transparent py-2 focus:bg-white;
   }
 
   .accordion-item {

@@ -55,7 +55,7 @@ const PhotoTalkCard = ({
   return (
     // <div className="w-full my-3">
     <div
-      className={`flex-center bg-white w-full rounded-xl relative mb-3 shadow-custom ${images.length > 0 ? `h-[220px] pb-3` : `h-[100px]`}`}
+      className={`flex-center bg-white w-full rounded-2xl relative mb-3 shadow-custom ${images.length > 0 ? `h-[220px] pb-3` : `h-fit`}`}
     >
       <div className={``} ref={dropdownRef}>
         <button
@@ -69,7 +69,7 @@ const PhotoTalkCard = ({
 
         {openDropdown && (
           <div
-            className={`absolute top-8 right-5 z-10 bg-gray-200/20 backdrop-blur-xl divide-y divide-gray-100 rounded-2xl shadow-md w-[30%] px-2 py-1`}
+            className={`absolute top-8 right-5 z-10 bg-gray-100/20 backdrop-blur-xl divide-y divide-gray-100 rounded-2xl shadow-md w-[30%] px-2 py-1`}
           >
             <ul className="py-2">
               {!isAdmin && (
@@ -97,9 +97,23 @@ const PhotoTalkCard = ({
         )}
 
         <div
-          className={`${images.length > 0 ? `grid grid-cols-2 place-content-center gap-3 px-4 h-[200px]` : `flex-center `}`}
+          className={`${images.length > 0 ? `grid grid-cols-2 place-content-center gap-4 p-4 h-[200px]` : `flex-center`}`}
         >
-          <Slider {...settings}>
+          {images.length > 0 && (
+            <Slider {...settings}>
+              {images.length > 0 &&
+                images.map((image: string, index: number) => (
+                  <div key={index} className="">
+                    <img
+                      src={image}
+                      alt={`Uploaded ${index}`}
+                      className="w-full h-40 object-cover rounded-md"
+                    />
+                  </div>
+                ))}
+            </Slider>
+          )}
+          {/* <Slider {...settings}>
             {images.length > 0 &&
               images.map((image: string, index: number) => (
                 <div key={index} className="">
@@ -110,13 +124,15 @@ const PhotoTalkCard = ({
                   />
                 </div>
               ))}
-          </Slider>
-          <p className="text-gray-800 text-sm break-keep w-full flex-center text-ellipsis p-4">
+          </Slider> */}
+          <p
+            className={`text-black/80 text-xs font-medium leading-relaxed break-keep w-full flex-center text-ellipsis tracking-tight text-center ${images.length > 0 ? 'p-3' : 'p-10'}`}
+          >
             {photoTalk.message}
           </p>
         </div>
 
-        <footer className="flex text-gray-400 px-4 py-1 text-xs absolute bottom-1 right-1 font-light">
+        <footer className="flex text-gray-500 px-4 py-1 text-xs absolute bottom-1 right-1 font-light">
           <span className="mr-2">From.</span>
           <p>{photoTalk.name}</p>
         </footer>

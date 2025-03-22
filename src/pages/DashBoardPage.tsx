@@ -38,7 +38,7 @@ const DashBoardPage = () => {
 
         <div className="min-h-screen px-3 pb-40 flex-1">
           <div className="h-full flex-between">
-            <div className="text-sm font-light py-3 text-neutral-900">
+            <div className="text-sm font-extralight py-3 text-neutral-900">
               나의 청첩장 목록
             </div>
           </div>

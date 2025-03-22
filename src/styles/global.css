@@ -284,7 +284,7 @@
   } */
 
   .splash-btn {
-    @apply bg-gradient-to-r from-[#141414] to-[#141414]  h-14 w-full rounded-3xl text-white text-sm tracking-wide transition-all duration-200 ease-in-out active:from-[#CEDFFF] active:to-[#F8D4E2] active:shadow-sm active:text-black;
+    @apply bg-gradient-to-r from-[#141414] to-[#141414] p-5 w-full rounded-3xl text-white text-sm tracking-wide transition-all duration-200 ease-in-out active:from-[#CEDFFF] active:to-[#F8D4E2] active:shadow-sm active:text-black;
   }
 
   /* .splash-input {

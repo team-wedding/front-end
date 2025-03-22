@@ -11,12 +11,12 @@ import NotFound404 from './pages/NotFound404';
 import NaverRedirect from './components/login/SocialLogin/NaverRedirect';
 import KakaoRedirect from './components/login/SocialLogin/KakaoRedirect';
 import MyPage from './pages/MyPage';
-import RsvpStatsPage from './pages/RsvpStatsPage';
+// import RsvpStatsPage from './pages/RsvpStatsPage';
 import EditProfilePage from './pages/EditProfilePage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import ChangePasswordPage from '@/pages/ChangePasswordPage';
 import SignUpPage from '@/pages/SignUpPage';
-import AdminPhotoTalkPage from '@/pages/PhotoTalk/AdminPhotoTalkPage';
+// import AdminPhotoTalkPage from '@/pages/PhotoTalk/AdminPhotoTalkPage';
 import PhotoTalkPage from '@/pages/PhotoTalk/PhotoTalkPage';
 import StartPage from '@/pages/StartPage';
 import LoginPage from '@/pages/LoginPage';
@@ -54,14 +54,14 @@ function App() {
             element={<PhotoTalkPage />}
           />
           {/* 마이페이지 */}
-          <Route path={'/mypage'} element={<MyPage />} />
+          {/* <Route path={'/mypage'} element={<MyPage />} /> */}
           <Route path={'/mypage/edit'} element={<EditProfilePage />} />
           <Route
             path={'/mypage/edit/password'}
             element={<ChangePasswordPage />}
           />
-          <Route path={'/mypage/rsvp'} element={<RsvpStatsPage />} />
-          <Route path={'/mypage/phototalk'} element={<AdminPhotoTalkPage />} />
+          <Route path={'/mypage/rsvp'} element={<MyPage />} />
+          <Route path={'/mypage/phototalk'} element={<MyPage />} />
           <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
           <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
           <Route path={'*'} element={<NotFound404 />} />

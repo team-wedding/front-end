@@ -15,7 +15,7 @@ const Navbar = () => {
   const navItems = [
     { label: 'Card', path: '/dashboard', Icon: GridIcon },
     { label: '', path: '/create', Icon: CreateCardButton },
-    { label: 'My', path: '/mypage', Icon: UserIcon },
+    { label: 'My', path: '/mypage/rsvp', Icon: UserIcon },
   ];
 
   return (

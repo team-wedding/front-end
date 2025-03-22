@@ -13,12 +13,12 @@ const TabData = [
   {
     label: 'RSVP',
     content: <RsvpStatsPage />,
-    // href: '/mypage/rsvp'
+    href: '/mypage/rsvp',
   },
   {
     label: '포토톡',
     content: <AdminPhotoTalkPage />,
-    // href: '/mypage/phototalk',
+    href: '/mypage/phototalk',
   },
 ];
 
@@ -26,8 +26,9 @@ const MyPage = () => {
   const { name } = useUserStore();
 
   const navigate = useNavigate();
-  const location = useLocation();
   const [activeTab, setActiveTab] = useState(0);
+
+  // const location = useLocation();
 
   // useEffect(() => {
   //   const currentTabIndex = TabData.findIndex(
@@ -80,7 +81,7 @@ const MyPage = () => {
           activeTab={activeTab}
           setActiveTab={(index) => {
             setActiveTab(index);
-            // navigate(TabData[index].href);
+            navigate(TabData[index].href);
           }}
         />
       </main>

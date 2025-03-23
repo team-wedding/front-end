@@ -116,11 +116,11 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
         </div>
       )}
 
-      <div className="grid grid-cols-3 gap-1 p-2 place-items-center">
+      <div className="grid grid-cols-3 gap-[2px] p-2 place-items-center">
         {images.map((url, index) => (
           <div key={index} className="relative group">
             {isAdmin && (
-              <div className="absolute -top-1 left-0 p-1 rounded">
+              <div className="absolute -top-1 left-0 p-1 rounded-sm">
                 <input
                   type="checkbox"
                   checked={selectedImages.includes(url)}
@@ -133,7 +133,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
             <img
               src={url}
               alt={`Uploaded ${index}`}
-              className="w-full aspect-[1/1] rounded object-cover cursor-pointer shadow-custom"
+              className="w-full aspect-[1/1] rounded-sm object-cover cursor-pointer shadow-custom"
               onClick={() => openModal(index)}
             />
           </div>
@@ -152,9 +152,9 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
             <div className="relative flex-center w-full h-full px-4">
               <button
                 onClick={showPreviousImage}
-                className="absolute left-3 top-1/2 transform -translate-y-1/2 bg-white/40  rounded-full hover:bg-opacity-75"
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 rounded-full hover:opacity-50"
               >
-                <ChevronLeft />
+                <ChevronLeft className="size-7 text-white/70" />
               </button>
 
               {/* <div className="p-10"> */}
@@ -167,22 +167,22 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
 
               <button
                 onClick={showNextImage}
-                className="absolute right-3 top-1/2 transform -translate-y-1/2 bg-white/40  rounded-full hover:bg-opacity-75"
+                className="absolute right-3 top-1/2 transform -translate-y-1/2rounded-full hover:opacity-50"
               >
-                <ChevronRight />
+                <ChevronRight className="size-7 text-white/70" />
               </button>
             </div>
 
             {isAdmin && (
               <footer className="absolute bottom-3 right-0 left-0 m-auto w-full gap-4 text-white/80 px-4">
                 <button
-                  className="w-1/2 py-3 text-xs rounded-lg bg-black/0 hover:bg-white/10 font-medium"
+                  className="w-1/2 py-3 text-xs rounded-xl bg-black/0 hover:bg-white/10 font-medium"
                   onClick={() => {}}
                 >
                   삭제
                 </button>
                 <button
-                  className="w-1/2 py-3 text-xs rounded-lg bg-black/0 hover:bg-white/10 font-medium"
+                  className="w-1/2 py-3 text-xs rounded-xl bg-black/0 hover:bg-white/10 font-medium"
                   onClick={downloadCurrentImage}
                 >
                   다운로드

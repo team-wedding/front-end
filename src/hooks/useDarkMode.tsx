@@ -1,17 +1,32 @@
-import { useDarkModeStore } from '@/store/useDarkModeStore';
 import { useEffect } from 'react';
+import { useDarkModeStore } from '@/store/useDarkModeStore';
 
 const useDarkMode = () => {
-  const { mode } = useDarkModeStore();
+  const { mode, setMode, userSelected, initializeMode } = useDarkModeStore();
+
+  useEffect(() => {
+    initializeMode();
+  }, [initializeMode]);
 
   useEffect(() => {
     const root = document.documentElement;
-    if (mode === 'dark') {
-      root.classList.add('dark');
-    } else if (mode === 'light') {
-      root.classList.remove('dark');
-    }
+    root.classList.toggle('dark', mode === 'dark');
   }, [mode]);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+    const handleChange = (event: MediaQueryListEvent) => {
+      if (userSelected) return;
+      const newMode = event.matches ? 'dark' : 'light';
+      setMode(newMode, false);
+    };
+
+    mediaQuery.addEventListener('change', handleChange);
+    return () => {
+      mediaQuery.removeEventListener('change', handleChange);
+    };
+  }, [setMode, userSelected]);
 };
 
 export default useDarkMode;

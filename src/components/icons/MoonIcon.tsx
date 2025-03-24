@@ -15,6 +15,7 @@ const MoonIcon = () => {
         clipRule="evenodd"
       />
     </svg>
+
   );
 };
 

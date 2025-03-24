@@ -5,6 +5,8 @@ import { useGetInvitations } from '@/hooks/useInvitation';
 import Navbar from '@/components/common/Navbar';
 import logo from '@/assets/woogyeol/logo_light.png';
 import MoonIcon from '@/components/icons/MoonIcon';
+import DarkModeToggle from '@/components/common/DarkMode/DarkModeToggle';
+
 
 const DashBoardPage = () => {
   const { data, isPending, isRefetching, status, isError, isFetching } =
@@ -20,13 +22,13 @@ const DashBoardPage = () => {
   if (isError) {
     return <>something went wrong</>;
   }
+
   return (
     <div className="bg-white max-w-[520px]  min-h-screen m-auto">
       {/* 헤더 */}
       <header className="fixed top-0 left-0 right-0 z-20 m-auto max-w-[520px] bg-white flex justify-start items-center max-h-12">
         <div className="p-3">
           <img alt="WooGyeol" src={logo} className="w-6" />
-        </div>
         <button className="p-3 absolute top-0 right-0">
           <MoonIcon />
         </button>
@@ -35,7 +37,6 @@ const DashBoardPage = () => {
       {/* 메인 */}
       <main className="min-h-screen flex flex-col">
         <div className="h-12"></div>
-
         <div className="min-h-screen px-3 pb-40 flex-1">
           <div className="h-full flex-between">
             <div className="text-sm font-extralight py-3 text-neutral-900">

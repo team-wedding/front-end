@@ -29,7 +29,7 @@ export interface InvitationDetiail {
   attendanceIsDining: boolean;
   attendance: boolean;
   font: string;
-  calendars: CalaendarDetail[];
+  calendars: CalendarDetail[];
   maps: MapDetail[];
   galleries: Omit<GalleryDetail[], 'images'>;
   accounts: AccountDetail[];
@@ -38,7 +38,7 @@ export interface InvitationDetiail {
   audio: number | nulll;
 }
 
-interface CalaendarDetail {
+interface CalendarDetail {
   order?: number;
   isActive: boolean;
   calendar: boolean;

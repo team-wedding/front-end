@@ -39,7 +39,7 @@ const EditProfilePage = () => {
     <PageLayout
       title="내 정보 관리"
       leftButton={
-        <button onClick={() => navigate('/mypage')}>
+        <button onClick={() => navigate(-1)}>
           <BackIcon />
         </button>
       }

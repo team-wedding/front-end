@@ -26,28 +26,31 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center w-full rounded-xl shadow-custom">
-      <div className="relative rounded-xl group transition-all duration-300 delay-100 ease-in-out hover:-translate-y-0.5 active:-translate-y-0.5">
-        <button
-          onClick={() => setModal(true)}
-          className="absolute top-2 left-2 z-10 w-fit bg-black/10 rounded-full text-white/80"
-        >
-          <CircleMinusIcon />
-        </button>
+    <div className="relative flex flex-col items-center justify-center w-full rounded-xl shadow-md hover:shadow-custom">
+      <div className="relative rounded-xl group transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:-translate-y-0.5">
+        <header>
+          <button
+            onClick={() => setModal(true)}
+            className="absolute top-2 left-2 z-10 w-fit bg-black/10 rounded-full text-white/80"
+          >
+            <CircleMinusIcon />
+          </button>
+        </header>
+
         <img
           src={image || logo}
-          className="object-cover aspect-[3/4] rounded-xl transition-shadow duration-300 group-hover:shadow-custom"
+          className="object-cover aspect-[3/4] rounded-xl"
           onClick={() => navigate(`/preview/${id}/${invitationId}`)}
         />
 
-        <div className="absolute bottom-0 bg-black/60 w-full rounded-b-xl">
+        <footer className="absolute bottom-0 bg-black/60 w-full rounded-b-xl">
           <CardFooter
             id={invitationId}
             image={image}
             title={title}
             setModal={setModal}
           />
-        </div>
+        </footer>
       </div>
 
       <ReusableModal

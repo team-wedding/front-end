@@ -147,7 +147,7 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
 
   return (
     <div className="w-full pb-20">
-      <div className="flex-between pt-2 px-2 pb-4">
+      <div className="flex-between p-2">
         {isAdmin ? (
           isGalleryOpen ? (
             <p className="text-xs text-[#494949] font-light">갤러리</p>

@@ -1,6 +1,6 @@
 const UserIcon = () => (
   <svg
-    className="size-7 dark:text-white"
+    className="size-7"
     aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
     width="24"

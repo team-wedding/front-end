@@ -4,10 +4,6 @@ import { useEffect, useState } from 'react';
 import { useGetInvitations } from '@/hooks/useInvitation';
 import Navbar from '@/components/common/Navbar';
 import logo from '@/assets/woogyeol/logo_light.png';
-import MoonIcon from '@/components/icons/MoonIcon';
-import Navbar from '@/components/common/Navbar';
-import logo from '@/assets/woogyeol/logo_light.png';
-import MoonIcon from '@/components/icons/MoonIcon';
 import DarkModeToggle from '@/components/common/DarkMode/DarkModeToggle';
 
 const DashBoardPage = () => {
@@ -32,9 +28,9 @@ const DashBoardPage = () => {
         <div className="p-3">
           <img alt="WooGyeol" src={logo} className="w-6" />
         </div>
-        <button className="p-3 absolute top-0 right-0">
-          <MoonIcon />
-        </button>
+        <div className="absolute top-0 right-0">
+          <DarkModeToggle />
+        </div>
       </header>
 
       {/* 메인 */}

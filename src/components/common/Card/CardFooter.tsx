@@ -17,7 +17,7 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
   const { id: userId } = useUserStore();
 
   const { invitations } = useGetInvitation(id);
-  const createdAt = invitations?.createdAt?.split('T')[0];
+  const createdAt = invitations?.createdAt.split('T')[0];
 
   const handleBlur = (event: React.FocusEvent<HTMLButtonElement>) => {
     if (parentRef.current && parentRef.current.contains(event.relatedTarget)) {

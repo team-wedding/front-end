@@ -9,7 +9,6 @@ import logo from '@/assets/woogyeol/logo_light.png';
 
 const ResultPage = () => {
   const { invitationId } = useParams();
-  // console.log(invitationId);
   const { invitations } = useGetInvitation(parseInt(invitationId!));
   const { setOrderItems } = useAccordionStore();
 

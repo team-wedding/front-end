@@ -62,7 +62,39 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
             shareHeader={''}
           />
         )}
+    <main
+      className="flex-between w-full h-14 rounded-b-2xl
+     px-4"
+    >
+      {/* 청첩장 제목 입력값 */}
+      <div>
+        <span className="text-md font-medium text-white">{title}</span>
+        <div className="text-[9px] font-extralight text-white/50 tracking-wide">
+          {createdAt}
+        </div>
+      </div>
+
+      <button
+        ref={parentRef}
+        tabIndex={-1}
+        onBlur={handleBlur}
+        onFocus={handleFocus}
+        className="text-white/90"
+      >
+        <ShareIcon />
+        {isFocused && (
+          <ShareInvitation
+            setIsFocused={setIsFocused}
+            isFocused={isFocused}
+            shareTitle={title}
+            shareDesc={'결혼합니다'}
+            shareImage={image}
+            shareUrl={`http://localhost:5173/result/${userId}/${id}`}
+            shareHeader={''}
+          />
+        )}
       </button>
+    </main>
     </main>
   );
 };

@@ -22,7 +22,7 @@ import StartPage from '@/pages/StartPage';
 import LoginPage from '@/pages/LoginPage';
 import ScrollToTop from '@/components/common/ScrollToTop';
 import DarkModeProvider from './components/providers/DarkModeProvider';
-
+        
 function App() {
   const queryClient = new QueryClient();
 

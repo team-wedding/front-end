@@ -1,6 +1,5 @@
 import SectionTitle from '@/components/common/SectionTitle';
 import { useUserStore } from '@/store/useUserStore';
-import { useUserStore } from '@/store/useUserStore';
 import { Link, useParams } from 'react-router';
 
 const PhotoTalkSection = () => {
@@ -18,7 +17,6 @@ const PhotoTalkSection = () => {
           방명록에 따뜻한 한마디 남겨주세요
         </p>
         <Link
-          to={`/phototalk/${id}/${invitationId}`}
           to={`/phototalk/${id}/${invitationId}`}
           className="py-2 bg-slate-700 text-white hover:bg-button/80 rounded-full px-8"
         >

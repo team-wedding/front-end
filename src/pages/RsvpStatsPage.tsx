@@ -5,6 +5,7 @@ import RsvpItem from '@common/RsvpItem/RsvpItem';
 import { useNavigate } from 'react-router';
 import { useGetAttendances, useGetStats } from '@/hooks/useStats';
 import { GuestInfo } from '@/types/GuestType';
+import { downloadRsvpExcel } from '@/utils/excelDownloader';
 
 // API 응답 데이터 타입을 명확하게 정의
 interface AttendanceResponse {
@@ -59,9 +60,9 @@ const RsvpStatsPage = () => {
     >
       <section className="h-fit 6 px-2 pb-6">
         <div className="px-4 pt-2 pb-3">
-          <div className="text-xl font-medium pl-2 py-4">하객 분류</div>
+          <div className="text-lg font-medium pl-2 py-4">하객 분류</div>
           <RsvpItem title={'총 응답 수'} attend={totalResponses} total={true} />
-          <div className="grid grid-cols-2 gap-3 mt-4">
+          <div className="grid grid-cols-2">
             <RsvpItem title={'참석 가능'} attend={totalAttending} />
             <RsvpItem title={'참석 불가'} attend={totalNotAttending} />
             <RsvpItem
@@ -79,14 +80,19 @@ const RsvpStatsPage = () => {
               bride={true}
             />
           </div>
-          <div className="grid col-span-3 grid-cols-3 gap-3 mt-4">
+          <div className="grid col-span-3 grid-cols-3">
             <RsvpItem title={'식사 가능'} attend={mealAvailable} />
             <RsvpItem title={'식사 불가'} attend={mealNotAvailable} />
             <RsvpItem title={'식사 미정'} attend={mealPending} />
           </div>
         </div>
 
-        <div className="text-xl font-medium px-4 py-4">상세 목록</div>
+        <div className='flex justify-between items-center'>
+          <div className="text-lg font-medium px-4 py-4">상세 목록</div>
+          <button className='border border-gray-300 rounded-xl mx-4 my-4 px-2 hover:opacity-80 transition' onClick={() => downloadRsvpExcel(attendanceList)}>
+            <img src="/src/assets/microsoft-excel-128.png" alt="엑셀 파일 다운로드" className="w-8 h-8" />
+          </button>
+        </div>
         <section className="flex flex-col px-4 py-2">
           {/* 테이블 헤더 */}
           <div className="grid grid-cols-[2.5fr_2.2fr_0.7fr_0.7fr] bg-gray-100 text-sm font-medium text-center py-2 rounded-t-lg border border-gray-300">

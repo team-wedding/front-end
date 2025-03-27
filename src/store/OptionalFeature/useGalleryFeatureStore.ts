@@ -17,7 +17,7 @@ const useGalleryStore = create<StoreState>((set) => ({
   setGalleryFiles: (files: File[]) => set(() => ({ galleryFiles: files })),
   grid: true,
   setGrid: (grid: boolean) => set(() => ({ grid })),
-  reset: () => set({ galleryImages: [] }),
+  reset: () => set({ galleryImages: [], galleryFiles: [] }),
 }));
 
 export default useGalleryStore;

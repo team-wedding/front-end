@@ -40,8 +40,8 @@ const CreateInvitationPage = () => {
   const navigate = useNavigate();
 
   const handleCancel = () => {
-    navigate('/dashboard');
     resetAllStores();
+    navigate('/dashboard');
   };
   const { uploadedImageFile } = useImageStore();
   const { galleryFiles, grid } = useGalleryStore();
@@ -72,17 +72,16 @@ const CreateInvitationPage = () => {
       return;
     }
     try {
-      const thumbnail = await uploadToS3(uploadedImageFile ? [uploadedImageFile] : []);
-      const gallery = await uploadToS3(galleryFiles);
-      const noticeS3ImageList = await Promise.all(
-        noticeImages.map((image) => uploadToS3(image ? [image] : []))
-      );
+      const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
+        uploadToS3(uploadedImageFile ? [uploadedImageFile] : []),
+        uploadToS3(galleryFiles),
+        ...noticeImages.map((image) => uploadToS3(image ? [image] : []))
+      ]);
       const s3ImageList = [
         thumbnail,
         gallery,
         ...noticeS3ImageList
       ];
-
       const noticeList: NoticeDetail[] = await notices.map((value, index) => {
         return {
           ...value,

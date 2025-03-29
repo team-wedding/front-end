@@ -186,7 +186,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
 
   useEffect(() => {
     if (details) {
-      //청첩장 제몫
+      //청첩장 제목
       setInvitationTitle(details.title);
       //가족이름
       updateBrideGroom(0, 'name', details.brideName);
@@ -239,7 +239,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         setWeddingDate(new Date());
       }
 
-      setWeddingTime(details.weddingTime[0], details.weddingTime[1]);
+      // setWeddingTime(details.weddingTime[0], details.weddingTime[1]);
 
       //청첩장 제목/내용
       setGreetingTitle(details.greetingTitle);

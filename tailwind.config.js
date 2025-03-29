@@ -2,6 +2,7 @@ import flowbitePlugin from 'flowbite/plugin';
 import defaultTheme from 'tailwindcss/defaultTheme';
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: 'class',
   content: [
     './index.html',
     './src/**/*.{js,ts,jsx,tsx}',
@@ -31,6 +32,9 @@ export default {
         NanumSquareNeo: ['NanumSquareNeo', ...defaultTheme.fontFamily.sans],
         Mapo: ['MapoFlowerIsland', ...defaultTheme.fontFamily.sans],
         NanumGothic: ['NanumGothic', ...defaultTheme.fontFamily.sans],
+      },
+      boxShadow: {
+        custom: '0px 9px 20px rgba(0, 0, 0, 0.15)',
       },
       animation: {
         bounceX: 'bounceX 1s ease-in-out infinite',

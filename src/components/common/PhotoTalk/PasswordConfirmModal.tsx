@@ -21,46 +21,48 @@ const PasswordConfirmModal = ({
     isOpen && (
       <div
         onClick={onClose}
-        className="result-layout fixed inset-0 z-50 bg-black bg-opacity-50 h-full md:my-0 rounded-none"
+        className="max-w-[520px] flex-center fixed m-auto inset-0 z-50 bg-black bg-opacity-50 h-full w-full rounded-none"
       >
         <div
           onClick={(e) => e.stopPropagation()}
-          className="bg-white rounded-lg shadow-md h-1/4 min-h-fit"
+          className="bg-white/90 backdrop-blur-2xl rounded-2xl shadow-custom min-h-fit column-center pb-4"
         >
-          <div className="flex flex-col">
-            <div className="flex items-center justify-between p-4 border-b rounded-t">
-              <h2 className="text-base font-semibold text-gray-900">
-                {isEditMode ? '포토톡 편집하기' : '포토톡 삭제하기'}
-              </h2>
-              <button onClick={onClose}>
-                <CloseIcon className="size=[20px]" />
-              </button>
-            </div>
-            <div className="flex flex-col p-4">
-              <p className="text-sm font-light m-4 px-4 flex justify-center">
-                {isEditMode
-                  ? '관리자 및 작성자만 편집할 수 있습니다.'
-                  : '비밀번호를 입력해야 삭제할 수 있습니다.'}
-              </p>
+          {/* <div className=""> */}
+          <div className="flex-between px-4 py-3 rounded-t border-b-2 border-black/0 w-full text-black/80">
+            <h2 className="text-base font-medium">
+              {/* {isEditMode ? '포토톡 편집하기' : '포토톡 삭제하기'} */}
+            </h2>
+            <button onClick={onClose}>
+              <CloseIcon className="size-6" />
+            </button>
+          </div>
+          <div className="flex flex-col items-center w-full px-12 py-4 gap-7">
+            <p className="text-sm font-light text-black">
+              {isEditMode
+                ? '관리자 및 작성자만 편집할 수 있습니다.'
+                : '비밀번호를 입력해야 삭제할 수 있습니다.'}
+            </p>
+
+            <div className="flex flex-col w-full gap-2">
               <input
                 type="password"
                 value={passwordInput}
                 onChange={(e) => setPasswordInput(e.target.value)}
                 placeholder="비밀번호를 입력하세요"
-                className="formInput m-4 mb-2"
+                className="rounded-xl border-none text-xs bg-white/100 p-3 focus:ring-1 focus:ring-white/100 placeholder:text-black/30 focus-visible:outline-1"
                 autoFocus
               />
-              <div className="flex justify-center">
-                <button
-                  onClick={onConfirm}
-                  className="w-full m-4 px-4 py-2 border bg-gray-200 hover:bg-gray-300 rounded-md"
-                >
-                  {isEditMode ? '편집하기' : '삭제하기'}
-                </button>
-              </div>
+
+              <button
+                onClick={onConfirm}
+                className="p-3 text-xs text-white font-light rounded-xl bg-gradient-to-br from-[#000000] via-[#232323] to-[#494949]"
+              >
+                {isEditMode ? '편집하기' : '삭제하기'}
+              </button>
             </div>
           </div>
         </div>
+        {/* </div> */}
       </div>
     )
   );

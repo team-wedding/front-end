@@ -162,7 +162,7 @@ const CreateInvitationPage = () => {
               currentStep={steps}
               onStepClick={handleStepClick}
             />
-            <div className="bg-background bg-opacity-10 min-h-screen font-Pretendard">
+            <div className="bg-background/10 min-h-screen font-Pretendard">
               <Accordion
                 items={items}
                 expandedIds={expandedIds}

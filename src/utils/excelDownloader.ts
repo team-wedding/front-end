@@ -1,6 +1,20 @@
 import { GuestInfo } from "@/types/GuestType";
 import XLSX from 'xlsx-js-style';
 
+const headerStyle = {
+    font: { bold: true, color: { rgb: '000000' }, name: '함초롱바탕', sz: 13 },
+    fill: { fgColor: { rgb: 'BC8F8F' } },
+    alignment: { horizontal: 'center', vertical: 'center' },
+    border: { left: { style: 'thin', color: { auto: 1 } }, right: { style: 'thin', color: { auto: 1 } }, top: { style: 'thin', color: { auto: 1 } }, bottom: { style: 'thin', color: { auto: 1 } } }
+};
+
+const dataStyle = {
+    font: { color: { rgb: '000000' }, name: '함초롱바탕', sz: 11 },
+    fill: { fgColor: { rgb: 'FFFAFA' } },
+    alignment: { horizontal: 'center', vertical: 'center' },
+    border: { left: { style: 'thin', color: { auto: 1 } }, right: { style: 'thin', color: { auto: 1 } }, top: { style: 'thin', color: { auto: 1 } }, bottom: { style: 'thin', color: { auto: 1 } } }
+};
+
 export const downloadRsvpExcel = (attendanceList: GuestInfo[]) => {
     const excelData = attendanceList.map((item) => ({
         "대표자": item.name,
@@ -12,18 +26,6 @@ export const downloadRsvpExcel = (attendanceList: GuestInfo[]) => {
 
     // Excel 파일 생성 및 다운로드
     const wb = XLSX.utils.book_new();
-    const headerStyle = {
-        font: { bold: true, color: { rgb: '000000' }, name: '함초롱바탕', sz: 13 },
-        fill: { fgColor: { rgb: 'BC8F8F' } },
-        alignment: { horizontal: 'center', vertical: 'center' },
-        border: { left: { style: 'thin', color: { auto: 1 } }, right: { style: 'thin', color: { auto: 1 } }, top: { style: 'thin', color: { auto: 1 } }, bottom: { style: 'thin', color: { auto: 1 } } }
-    };
-    const dataStyle = {
-        font: { color: { rgb: '000000' }, name: '함초롱바탕', sz: 11 },
-        fill: { fgColor: { rgb: 'FFFAFA' } },
-        alignment: { horizontal: 'center', vertical: 'center' },
-        border: { left: { style: 'thin', color: { auto: 1 } }, right: { style: 'thin', color: { auto: 1 } }, top: { style: 'thin', color: { auto: 1 } }, bottom: { style: 'thin', color: { auto: 1 } } }
-    };
 
     // 열의 폭을 정의
     const colWidths = [80, 80, 120, 80, 80];

@@ -2,7 +2,7 @@ import { IconProps } from '../../types/icons';
 
 const ChevronRight = ({ className }: IconProps) => (
   <svg
-    className={`size-6 text-gray-800 dark:text-white ${className}`}
+    className={`size-6  ${className}`}
     aria-hidden="true"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -14,7 +14,7 @@ const ChevronRight = ({ className }: IconProps) => (
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="2"
+      strokeWidth="1.5"
       d="m10 16 4-4-4-4"
     />
   </svg>

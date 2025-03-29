@@ -8,7 +8,6 @@ import { downloadRsvpExcel } from '@/utils/excelDownloader';
 import statsIcon from '@assets/statsIcon.svg';
 import listIcon from '@assets/listIcon.svg';
 
-
 // API 응답 데이터 타입을 명확하게 정의
 interface AttendanceResponse {
   allAttendances: GuestInfo[];
@@ -76,6 +75,7 @@ const RsvpStatsPage = () => {
     //   customFooter={null}
     // >
     <main>
+
       <section className="mb-5 mx-3">
         <h6 className="flex items-center gap-2 text-xs font-medium text-[#535353] my-4" onClick={() => downloadRsvpExcel(attendanceList)}>
           {/* 아이콘 */}
@@ -84,6 +84,7 @@ const RsvpStatsPage = () => {
         </h6>
 
         <article className="h-fit bg-white rounded-xl w-full p-4">
+
           <RsvpItem title={'총 응답 수'} attend={totalResponses} total={true} />
           <div className="grid grid-cols-2">
             <RsvpItem title={'참석 가능'} attend={totalAttending} />
@@ -110,8 +111,7 @@ const RsvpStatsPage = () => {
           </div>
         </article>
       </section>
-
-
+          
       <section className="flex-1 mx-3">
         <div className='flex justify-between'>
           <h6 className="flex items-center gap-2 text-xs font-medium text-[#535353]">

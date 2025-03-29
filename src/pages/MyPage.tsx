@@ -1,48 +1,93 @@
-import PageLayout from '@layout/PageLayout';
-import logo from '../assets/logo3.png';
-import piechart from '../assets/piechart.svg';
-import phototalk from '../assets/phototalk.svg';
-import MyPageItem from '@common/MyPage/MyPageItem';
+import { useLocation, useNavigate } from 'react-router';
 import { useUserStore } from '@/store/useUserStore';
-import { useNavigate } from 'react-router';
+import profile from '../assets/woogyeol/profile_light.png';
+import MoonIcon from '@/components/icons/MoonIcon';
+import Navbar from '@/components/common/Navbar';
+import RsvpStatsPage from '@/pages/RsvpStatsPage';
+import AdminPhotoTalkPage from '@/pages/PhotoTalk/AdminPhotoTalkPage';
+import Tab from '@/components/common/Tab';
+import { useEffect, useState } from 'react';
+import ChevronRight from '@/components/icons/Chevron_RightIcon';
+
+const TabData = [
+  {
+    label: 'RSVP',
+    content: <RsvpStatsPage />,
+    href: '/mypage/rsvp',
+  },
+  {
+    label: '포토톡',
+    content: <AdminPhotoTalkPage />,
+    href: '/mypage/phototalk',
+  },
+];
 
 const MyPage = () => {
   const { name } = useUserStore();
+
   const navigate = useNavigate();
+  const [activeTab, setActiveTab] = useState(0);
+
+  const location = useLocation();
+
+  useEffect(() => {
+    const currentTabIndex = TabData.findIndex((tab) =>
+      location.pathname.startsWith(tab.href),
+    );
+    if (currentTabIndex !== -1) {
+      setActiveTab(currentTabIndex);
+    }
+  }, [location.pathname]);
 
   return (
-    <PageLayout title="우리, 결혼해요">
-      <section className="flex flex-row justify-around items-center font-medium text-3xl p-8 border-b shadow-inner bg-gray-50">
-        <div className="flex flex-col gap-2 text-neutral-400">
-          <div>안녕하세요</div>
-          <div className="text-black flex flex-row gap-2">
-            {name}님{' '}
-            <div
-              className="animate-bounceX cursor-pointer"
+    <div className="bg-white max-w-[520px]  min-h-screen m-auto">
+      <header className="relative top-0 left-0 right-0 z-20 m-auto max-w-[520px] px-2 bg-white max-h-12">
+        <button className="p-3 absolute top-0 right-0">
+          <MoonIcon />
+        </button>
+
+        <section className="flex-center text-lg p-6 border-none gap-2">
+          <div className="column-center">
+            <img src={profile} alt="profile" className="w-16" />
+            {/* <button
+              className="text-xs text-[#B4B4B4] font-extralight"
               onClick={() => navigate('/mypage/edit')}
             >
-              {' > '}
+              프로필 수정
+            </button> */}
+          </div>
+
+          <div className="flex flex-col text-lg font-extralight leading-6">
+            <div>안녕하세요,</div>
+            <div className="flex-center">
+              <div className="font-medium">{name}</div>
+              <div>님</div>
+              <div
+                className="animate-pulse cursor-pointer font-medium"
+                onClick={() => navigate('/mypage/edit')}
+              >
+                <ChevronRight />
+              </div>
             </div>
           </div>
-        </div>
-        <img src={logo} alt="logo" className="w-20" />
-      </section>
-      {/* <hr className="flex bg-gray-50 h-2" /> */}
-      <section className="flex flex-col px-8 gap-5 my-8">
-        <MyPageItem
-          icon={piechart}
-          title={'참석여부 집계요약'}
-          detail={'하객의 응답과 상세 목록을 확인할 수 있습니다.'}
-          href="/mypage/rsvp"
+        </section>
+      </header>
+
+      <main className="flex flex-col flex-1">
+        <div className="h-16"></div>
+
+        <Tab
+          data={TabData}
+          activeTab={activeTab}
+          setActiveTab={(index) => {
+            setActiveTab(index);
+            navigate(TabData[index].href);
+          }}
         />
-        <MyPageItem
-          icon={phototalk}
-          title={'포토톡'}
-          detail={'이미지와 축하메시지를 볼 수 있습니다.'}
-          href="/mypage/phototalk" // 수정해야 함.
-        />
-      </section>
-    </PageLayout>
+      </main>
+
+      <Navbar />
+    </div>
   );
 };
 

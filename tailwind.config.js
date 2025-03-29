@@ -33,6 +33,9 @@ export default {
         Mapo: ['MapoFlowerIsland', ...defaultTheme.fontFamily.sans],
         NanumGothic: ['NanumGothic', ...defaultTheme.fontFamily.sans],
       },
+      boxShadow: {
+        custom: '0px 9px 20px rgba(0, 0, 0, 0.15)',
+      },
       animation: {
         bounceX: 'bounceX 1s ease-in-out infinite',
       },

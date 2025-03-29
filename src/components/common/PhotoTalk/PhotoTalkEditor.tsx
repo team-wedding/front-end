@@ -151,19 +151,19 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
 
   return (
     isOpen && (
-      <div className="flex-center fixed inset-0 z-50 bg-black bg-opacity-50">
-        <div className="bg-white rounded-lg w-80 shadow-sm h-3/4 min-h-fit">
+      <div className="flex-center fixed inset-0 z-50 bg-black bg-opacity-50 max-w-[520px] m-auto">
+        <div className="bg-white rounded-2xl shadow-custom backdrop-blur-3xl w-[80%] p-2">
           <div className="flex flex-col">
-            <div className="flex items-center justify-between p-3 border-b rounded-t">
-              <div className="text-base font-medium text-gray-900">
+            <div className="flex items-center justify-between p-2">
+              <div className="text-base text-gray-900">
                 {editingPhotoTalk ? '포토톡 편집하기' : '포토톡 작성하기'}
               </div>
               <button onClick={closeEditor}>
-                <CloseIcon className="size=[12px]" />
+                <CloseIcon className="size-6" />
               </button>
             </div>
 
-            <div className="flex flex-col gap-3 px-3 pt-4">
+            <div className="flex flex-col gap-2 px-3 py-4">
               <label className="label w-full">이름</label>
               <input
                 type="text"
@@ -194,19 +194,19 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
                 className="formInput w-full mb-2"
               />
 
-              <label className="label w-full">
+              <label className="label w-full flex">
                 사진 추가
-                <span className="ml-2 font-light text-gray-500">
+                <span className="ml-2 font-extralight text-gray-500">
                   사진은 최대 10장까지 추가할 수 있습니다.
                 </span>
               </label>
 
               {imageUrls.length === 0 ? (
-                <div className="flex items-center justify-center w-full">
-                  <label className="flex flex-col items-center justify-center w-full py-8 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100">
-                    <div className="flex flex-col items-center justify-center">
+                <div className="flex-center w-full mb-2">
+                  <label className="column-center w-full py-10 border border-dashed border-gray-300 rounded-2xl cursor-pointer bg-gray-50 hover:bg-gray-100">
+                    <div className="column-center">
                       <CloudArrowIcon />
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm text-black/50">
                         <span className="font-semibold">Click to upload</span>{' '}
                         or drag and drop
                       </p>
@@ -223,7 +223,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
                 </div>
               ) : (
                 <div className="flex flex-nowrap gap-2 overflow-x-auto py-2">
-                  <div className="flex w-20 h-20 items-center justify-center border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 flex-shrink-0">
+                  <div className="flex-center w-20 h-20 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 flex-shrink-0">
                     <label className="size-[24px]">
                       <CloudArrowIcon />
                       <input
@@ -257,7 +257,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
 
               <button
                 onClick={handleSubmit}
-                className="bg-button bg-opacity-80 text-white hover:bg-rose-200 px-4 py-3 rounded-xl shrink-0 text-xs"
+                className="bg-black text-white hover:bg-rose-200 p-4 rounded-2xl shrink-0 text-xs"
               >
                 {editingPhotoTalk ? '편집하기' : '등록하기'}
               </button>

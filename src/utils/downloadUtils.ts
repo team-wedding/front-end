@@ -1,49 +1,72 @@
 import JSZip from 'jszip';
 import { saveAs } from 'file-saver';
 
-const fileName = (index: number) => `phototalk_${index + 1}.jpg`;
+const setFileName = (index: number) => `phototalk_${index + 1}.jpg`;
 const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 
-// 한 장 다운로드
-export const downloadImage = (url: string, index: number) => {
-  const link = document.createElement('a');
+// 이미지 URL에서 Blob 객체로 바꾸고, 파일 이름을 반환
+const fetchImageAsBlob = async (url: string, index: number) => {
+  try {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return { blob, fileName: setFileName(index) };
+  } catch (err) {
+    console.error('Download error: ', err);
+    return null;
+  }
+};
 
-  link.href = url;
-  link.download = fileName(index);
+// Blob 객체를 파일로 다운로드
+const downloadBlob = (blob: Blob, fileName: string) => {
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob); // Blob을 URL로 변환
+  link.download = fileName;
   document.body.appendChild(link);
   link.click();
   document.body.removeChild(link);
 };
 
+// 여러 이미지를 zip 파일로 압축해서 다운로드
+const downloadZip = async (images: string[]) => {
+  const zip = new JSZip();
+  const folder = zip.folder('phototalk-images');
+
+  const downloadPromises = images.map(async (url, index) => {
+    const result = await fetchImageAsBlob(url, index);
+
+    if (result) {
+      folder?.file(result.fileName, result.blob);
+    }
+  });
+
+  await Promise.all(downloadPromises);
+  const content = await zip.generateAsync({ type: 'blob' });
+  saveAs(content, 'phototalk_images.zip');
+};
+
+// 한 장 다운로드
+export const downloadImage = async (url: string, index: number) => {
+  const result = await fetchImageAsBlob(url, index);
+
+  if (result) {
+    downloadBlob(result.blob, result.fileName);
+  }
+};
+
 // 여러 장 다운로드
 export const downloadSelectedImages = async (selectedImages: string[]) => {
-  // 10개 이상이면 zip 다운
-  if (selectedImages.length >= 10) {
-    const zip = new JSZip();
-    const folder = zip.folder('phototalk-images');
+  const imageAmount = selectedImages.length;
 
-    await Promise.all(
-      selectedImages.map(async (url, index) => {
-        const response = await fetch(url);
-        const blob = await response.blob();
-
-        folder?.file(fileName(index), blob);
-      }),
-    );
-
-    const content = await zip.generateAsync({ type: 'blob' });
-    saveAs(content, 'phototalk_images.zip');
+  if (imageAmount >= 10) {
+    await downloadZip(selectedImages);
   } else {
-    // 10개 미만이면 순차 다운
-    for (let index = 0; index < selectedImages.length; index++) {
+    for (let index = 0; index < imageAmount; index++) {
       const url = selectedImages[index];
-      const link = document.createElement('a');
+      const result = await fetchImageAsBlob(url, index);
 
-      link.href = url;
-      link.download = fileName(index);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
+      if (result) {
+        downloadBlob(result.blob, result.fileName);
+      }
 
       await delay(500);
     }

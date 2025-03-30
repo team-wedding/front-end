@@ -23,6 +23,11 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
     );
   };
 
+  const toggleAllImages = () => {
+    const allSelected = selectedImages.length === images.length;
+    return setSelectedImages(allSelected ? [] : [...images]);
+  };
+
   // 여러 장 다운로드
   const handleDownloadSelected = async () => {
     await downloadSelectedImages(selectedImages);
@@ -45,20 +50,38 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
   return (
     <div>
       {isAdmin && (
-        <header className="flex justify-end items-center px-2" role="banner">
-          <div className="flex-center gap-2 mb-2">
-            <p className="text-gray-700 text-xs">
-              {selectedImages.length} / {images.length}
-            </p>
-            <button
-              onClick={handleDownloadSelected}
-              className="bg-white/80 px-2 py-1 rounded-xl active:bg-black/30 shadow-md"
-              disabled={selectedImages.length === 0}
-              aria-label="선택한 이미지 다운로드"
+        <header className="flex justify-between items-center m-2" role="banner">
+          <div className="flex-center gap-1">
+            <input
+              type="checkbox"
+              id="check-all"
+              checked={selectedImages.length === images.length}
+              onChange={toggleAllImages}
+              className="size-4 rounded bg-white border border-gray-200 cursor-pointer z-10 shadow-inner checked:bg-black focus:ring-0 focus:outline-none"
+              aria-label={`이미지 전체 선택`}
+            />
+            <label
+              htmlFor="check-all"
+              className="text-xs font-light text-black/80"
             >
-              <DownloadIcon />
-            </button>
+              모두 선택하기
+            </label>
+
+            <p className="text-xs font-light text-black/80">
+              <span>( </span>
+              <span className="font-medium">{selectedImages.length}</span>
+              <span className=""> / {images.length} ) </span>
+            </p>
           </div>
+
+          <button
+            onClick={handleDownloadSelected}
+            className="bg-white/80 px-2 py-1 rounded-xl active:bg-black/30 shadow-md"
+            disabled={selectedImages.length === 0}
+            aria-label="선택한 이미지 다운로드"
+          >
+            <DownloadIcon />
+          </button>
         </header>
       )}
 

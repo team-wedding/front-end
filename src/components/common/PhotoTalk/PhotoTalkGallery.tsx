@@ -3,14 +3,23 @@ import usePhotoTalkStore from '@store/usePhotoTalkStore';
 import DownloadIcon from '@/components/icons/DownloadIcon';
 import { downloadSelectedImages } from '@/utils/downloadUtils';
 import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/PhotoTalkGalleryModal';
+import { phototalkData } from '@/constants/phototalkData';
 
 interface PhotoTalkGalleryProps {
   isAdmin?: boolean;
+  isPreview?: boolean;
 }
 
-const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
+const PhotoTalkGallery = ({
+  isAdmin = false,
+  isPreview = false,
+}: PhotoTalkGalleryProps) => {
+  const previewImages = phototalkData.flatMap(
+    (phototalk) => phototalk.imageUrl,
+  );
   const getAllImages = usePhotoTalkStore((state) => state.getAllImages);
-  const images = getAllImages();
+  const images = isPreview ? previewImages : getAllImages();
+
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -24,8 +33,10 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
   };
 
   const toggleAllImages = () => {
-    const allSelected = selectedImages.length === images.length;
-    return setSelectedImages(allSelected ? [] : [...images]);
+    const allSelected = images.every((image) => selectedImages.includes(image));
+    const newSelected = allSelected ? [] : [...images];
+
+    setSelectedImages(newSelected);
   };
 
   // 여러 장 다운로드
@@ -41,7 +52,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
 
   if (images.length === 0) {
     return (
-      <p className="text-center text-gray-500 my-6">
+      <p className="text-center text-gray-500 my-6 text-sm">
         업로드된 이미지가 없습니다.
       </p>
     );

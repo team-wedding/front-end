@@ -1,12 +1,5 @@
+import { PhotoTalk } from '@/types/phototalkType';
 import { create } from 'zustand';
-
-export interface PhotoTalk {
-  id?: number;
-  name: string;
-  message: string;
-  password: string;
-  imageUrl: string[];
-}
 
 interface PhotoTalkState {
   photoTalks: PhotoTalk[];

@@ -1,5 +1,5 @@
 import './App.css';
-import { Navigate, Route, Routes } from 'react-router';
+import { Route, Routes } from 'react-router';
 import CreateInvitationPage from './pages/CreateInvitationPage';
 import PreviewInvitaionPage from './pages/PreviewInvitaionPage';
 import ResultPage from './pages/ResultPage';
@@ -22,7 +22,7 @@ import StartPage from '@/pages/StartPage';
 import LoginPage from '@/pages/LoginPage';
 import ScrollToTop from '@/components/common/ScrollToTop';
 import DarkModeProvider from './components/providers/DarkModeProvider';
-        
+
 function App() {
   const queryClient = new QueryClient();
 

@@ -75,13 +75,9 @@ const CreateInvitationPage = () => {
       const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
         uploadToS3(uploadedImageFile ? [uploadedImageFile] : []),
         uploadToS3(galleryFiles),
-        ...noticeImages.map((image) => uploadToS3(image ? [image] : []))
+        ...noticeImages.map((image) => uploadToS3(image ? [image] : [])),
       ]);
-      const s3ImageList = [
-        thumbnail,
-        gallery,
-        ...noticeS3ImageList
-      ];
+      const s3ImageList = [thumbnail, gallery, ...noticeS3ImageList];
       const noticeList: NoticeDetail[] = await notices.map((value, index) => {
         return {
           ...value,

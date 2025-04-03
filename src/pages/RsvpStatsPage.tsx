@@ -21,7 +21,6 @@ interface StatsResponse {
 }
 
 const RsvpStatsPage = () => {
-
   const { data: stats } = useGetStats() as { data: StatsResponse | undefined };
 
   // useGetAttendances의 반환 타입을 명확하게 지정
@@ -75,16 +74,14 @@ const RsvpStatsPage = () => {
     //   customFooter={null}
     // >
     <main>
-
       <section className="mb-5 mx-3">
-        <h6 className="flex items-center gap-2 text-xs font-medium text-[#535353] my-4" onClick={() => downloadRsvpExcel(attendanceList)}>
+        <h6 className="flex items-center gap-2 text-xs font-medium text-[#535353] my-4">
           {/* 아이콘 */}
           <img src={statsIcon} alt="stats" />
           <span>하객 분류</span>
         </h6>
 
         <article className="h-fit bg-white rounded-xl w-full p-4">
-
           <RsvpItem title={'총 응답 수'} attend={totalResponses} total={true} />
           <div className="grid grid-cols-2">
             <RsvpItem title={'참석 가능'} attend={totalAttending} />
@@ -111,20 +108,24 @@ const RsvpStatsPage = () => {
           </div>
         </article>
       </section>
-          
+
       <section className="flex-1 mx-3">
-        <div className='flex justify-between'>
+        <div className="flex justify-between">
           <h6 className="flex items-center gap-2 text-xs font-medium text-[#535353]">
             <img src={listIcon} alt="stats" />
             <span>상세 목록</span>
           </h6>
-          <button className='border border-gray-300 rounded-xl my-4 px-2 hover:opacity-80 transition'>
-            <img src="/src/assets/microsoft-excel-128.png" alt="엑셀 파일 다운로드" className="w-8 h-8" />
+          <button className="border border-gray-300 rounded-xl my-4 px-2 hover:opacity-80 transition">
+            <img
+              src="/src/assets/microsoft-excel-128.png"
+              alt="엑셀 파일 다운로드"
+              className="w-8 h-8"
+              onClick={() => downloadRsvpExcel(attendanceList)}
+            />
           </button>
         </div>
 
         <article className="flex flex-col">
-
           {/* 테이블 헤더 */}
           <header className="grid grid-cols-[2.5fr_2.2fr_0.7fr_0.7fr] bg-gray-100 text-sm font-medium text-center py-2 rounded-t-lg border border-gray-300">
             <span>이름</span>

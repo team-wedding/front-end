@@ -7,7 +7,10 @@ import { Stepper } from '@common/CreateInvitation/Stepper';
 import { StepNavigation } from '@common/CreateInvitation/StepNavigation';
 import ResultDisplay from '@display/ResultDisplay';
 import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
-import { getInvitationAction, useUpdateInvitationStore } from '../actions/invitationAction';
+import {
+  getInvitationAction,
+  useUpdateInvitationStore,
+} from '../actions/invitationAction';
 import { InvitationDetiail, NoticeDetail } from '../types/invitationType';
 import { useAccordionStore } from '@/store/useAccordionStore';
 import resetAllStores from '@/store/resetStore';
@@ -20,27 +23,25 @@ import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 
-
-
 const sliceRanges = [[0, 3], [3, 13], [13]];
 
 const EditInvitationPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const { invitationtitle } = useInvitationStore()
+  const { invitationtitle } = useInvitationStore();
   const { mutateAsync: editInvitation } = useUpdateInvitation(parseInt(id!));
   const { invitations } = useGetInvitation(parseInt(id!));
   // const { setOrderItems } = useAccordionStore()
-  const { uploadedImageFile, uploadedImageUrl } = useImageStore()
+  const { uploadedImageFile, uploadedImageUrl } = useImageStore();
   const { mutateAsync: s3Mutate } = useS3Image();
   const details = getInvitationAction();
-  const { galleryFiles, grid } = useGalleryStore()
-  const { notices } = useNoticeStore()
+  const { galleryFiles, grid } = useGalleryStore();
+  const { notices } = useNoticeStore();
   const noticeImages = notices.flatMap((value) => {
     if (value.imgFile) {
-      return value.imgFile
-    } else return null
-  })  // useMutation을 직접 변수에 할당
+      return value.imgFile;
+    } else return null;
+  }); // useMutation을 직접 변수에 할당
   const { optionalItems } = useAccordionStore();
   const findOrder = (feature: string) => {
     if (!feature) return undefined; // feature가 없으면 undefined 반환
@@ -73,28 +74,33 @@ const EditInvitationPage = () => {
       const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
         uploadToS3(uploadedImageFile ? [uploadedImageFile] : []),
         uploadToS3(galleryFiles),
-        ...noticeImages.map((image) => uploadToS3(image ? [image] : []))
+        ...noticeImages.map((image) => uploadToS3(image ? [image] : [])),
       ]);
       const noticeList: NoticeDetail[] = await notices.map((value, index) => {
         return {
           ...value,
           order: findOrder('notice'),
           isActive: selectedOptionalFeatures.notice,
-          image: noticeS3ImageList[index][0]
+          image: noticeS3ImageList[index][0],
         };
       });
       if (id) {
         await editInvitation({
           ...details,
           imgUrl: thumbnail.length > 0 ? thumbnail[0] : uploadedImageUrl,
-          galleries: [{ images: gallery, grid, isActive: selectedOptionalFeatures.gallery },],
-          notices: noticeList
-        }
-        );
+          galleries: [
+            {
+              images: gallery,
+              grid,
+              isActive: selectedOptionalFeatures.gallery,
+            },
+          ],
+          notices: noticeList,
+        });
       }
     } catch (err) {
-      console.log(err)
-      alert("수정중에 에러가 발생했습니다.")
+      console.log(err);
+      alert('수정중에 에러가 발생했습니다.');
     }
   };
 
@@ -108,7 +114,6 @@ const EditInvitationPage = () => {
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   };
-
 
   const handleStepClick = (step: number) => {
     if (step > 0 && step <= sliceRanges.length) {

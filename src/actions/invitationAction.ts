@@ -21,76 +21,123 @@ import useNoticeStore, {
 } from '@/store/OptionalFeature/useNoticeFeatureStore';
 import fonts from '@/constants/fonts';
 
-export const initInvitationAction = (): InvitationDetiail => {
+const defaultInvitationValues: InvitationDetiail = {
+  title: '',
+  createdAt: '',
+  groomName: '',
+  brideName: '',
+  date: [0, 0, 0],
+  //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
+  location: ['', '', '', '', '', ''],
+  greetingTitle: '',
+  greetingContent: '',
+  weddingTime: [0, 0],
+  groomFatherName: '',
+  groomMotherName: '',
+  brideFatherName: '',
+  brideMotherName: '',
+  groomFatherAlive: true,
+  groomMotherAlive: true,
+  brideFatherAlive: true,
+  brideMotherAlive: true,
+  //FIX : BackGround Color 추가
+  backgroundColor: '',
+  attendanceTitle: '',
+  attendanceContent: '',
+  attendanceIsDining: false,
+  attendance: false,
+  font: 'Crimson',
+  fontSize: false,
+  calendars: [
+    {
+      order: 1,
+      calendar: false,
+      isActive: false,
+      dDay: false,
+      countdown: false,
+    },
+  ],
+  maps: [
+    {
+      order: 2,
+      isActive: false,
+      tMap: false,
+      naverMap: false,
+      kakaoMap: false,
+      personalCar: false,
+      subway: false,
+      bus: false,
+      personalCarContent: '',
+      subwayContent: '',
+      busContent: '',
+    },
+  ],
+  accounts: [],
+  contacts: [
+    {
+      order: 4,
+      isActive: false,
+      brideContact: '',
+      groomContact: '',
+      brideFatherContact: '',
+      brideMotherContact: '',
+      groomFatherContact: '',
+      groomMotherContact: '',
+    },
+  ],
+  notices: [],
+  audio: 0,
+  imgUrl: '',
+  galleries: [],
+};
+
+export const stepOneInvitationAction = (): InvitationDetiail => {
   const { invitationtitle } = useInvitationStore();
+  const { brideGroom } = useBrideGroomStore();
+  const { weddingTime, formattedDate } = useWeddingStore();
+  const {
+    address,
+    jibunAddress,
+    zonecode,
+    weddingHallName,
+    weddingHallDetail,
+    coords,
+  } = useAddressStore();
   return {
+    ...defaultInvitationValues,
     title: invitationtitle,
-    createdAt: '',
-    groomName: '',
-    brideName: '',
-    date: [0, 0, 0],
+    groomName: brideGroom[0].name,
+    brideName: brideGroom[1].name,
+    date: [formattedDate.year, formattedDate.month, formattedDate.day],
+    weddingTime: [weddingTime.hour || 12, weddingTime.minute || 0],
+
     //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
-    location: ['', '', '', '', '', ''],
-    greetingTitle: '',
-    greetingContent: '',
-    weddingTime: [0, 0],
-    groomFatherName: '',
-    groomMotherName: '',
-    brideFatherName: '',
-    brideMotherName: '',
-    groomFatherAlive: true,
-    groomMotherAlive: true,
-    brideFatherAlive: true,
-    brideMotherAlive: true,
-    //FIX : BackGround Color 추가
-    backgroundColor: '',
-    attendanceTitle: '',
-    attendanceContent: '',
-    attendanceIsDining: false,
-    attendance: false,
-    font: 'Crimson',
+    location: [
+      address,
+      zonecode.toString(),
+      jibunAddress,
+      JSON.stringify(coords),
+      weddingHallName,
+      weddingHallDetail,
+    ],
+  };
+};
+
+export const stepTwoInvitationAction = (): Partial<InvitationDetiail> => {
+  return {
+    ...defaultInvitationValues,
+  };
+};
+
+export const stepThreeInvitationAction = (): Partial<InvitationDetiail> => {
+  const { selectedMusic } = useMusicFeatureStore();
+  const { font } = useThemeStore();
+  return {
+    ...defaultInvitationValues,
+    font: font,
     fontSize: false,
-    calendars: [
-      {
-        order: 1,
-        calendar: false,
-        isActive: false,
-        dDay: false,
-        countdown: false,
-      },
-    ],
-    maps: [
-      {
-        order: 2,
-        isActive: false,
-        tMap: false,
-        naverMap: false,
-        kakaoMap: false,
-        personalCar: false,
-        subway: false,
-        bus: false,
-        personalCarContent: '',
-        subwayContent: '',
-        busContent: '',
-      },
-    ],
-    accounts: [],
-    contacts: [
-      {
-        order: 4,
-        isActive: false,
-        brideContact: '',
-        groomContact: '',
-        brideFatherContact: '',
-        brideMotherContact: '',
-        groomFatherContact: '',
-        groomMotherContact: '',
-      },
-    ],
-    notices: [],
-    audio: 0,
-    imgUrl: '',
-    galleries: [],
+    backgroundColor: '',
+    audio: selectedMusic,
   };
 };
 
@@ -113,7 +160,6 @@ export const getInvitationAction = (): Omit<
     const result = optionalItems.find((value) => value.feature === feature);
     return result?.order;
   };
-
   const { selectedOptionalFeatures } = useOptionalFeatureStore();
   const { weddingTime, formattedDate } = useWeddingStore();
   const { greetingTitle, greetingContent } = useGreetingStore();
@@ -151,7 +197,6 @@ export const getInvitationAction = (): Omit<
     groomName: brideGroom[0].name,
     brideName: brideGroom[1].name,
     date: [formattedDate.year, formattedDate.month, formattedDate.day],
-    fontSize: false,
     //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
     location: [
       address,
@@ -183,6 +228,7 @@ export const getInvitationAction = (): Omit<
     attendanceIsDining: rsvpIncludeMeal,
     attendance: rsvpIncludePopulation,
     font: font,
+    fontSize: false,
 
     calendars: [
       {
@@ -293,6 +339,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       }
 
       setWeddingHallName(details.location[4]);
+      setWeddingTime(details.weddingTime[0], details.weddingTime[1]);
       setWeddingHallDetail(details.location[5]);
 
       try {

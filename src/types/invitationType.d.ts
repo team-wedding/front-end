@@ -1,6 +1,6 @@
 export interface InvitationDetiail {
   id?: number;
-  createdAt: string;
+  createdAt?: string;
   // updatedAt?: string;
 
   title: string;

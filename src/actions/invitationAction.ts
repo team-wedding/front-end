@@ -1,3 +1,4 @@
+import { AccountDetail, InvitationDetiail } from '@/types/invitationType';
 import useBrideGroomStore from '@store/useBrideGroomStore';
 import useGreetingStore from '@store/useGreetingStore';
 import useThemeStore from '@store/useThemeStore';
@@ -5,7 +6,6 @@ import { useWeddingStore } from '@store/useWeddingStore';
 import useContactStore from '@store/useContactStore';
 import useAddressStore from '@store/useAddressStore';
 import useImageStore from '@store/useImageStore';
-import { AccountDetail, InvitationDetiail } from '../types/invitationType';
 import { useEffect } from 'react';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import { useCalendarFeatureStore } from '@/store/OptionalFeature/useCalendarFeatureStore';
@@ -20,6 +20,78 @@ import useNoticeStore, {
   Notice,
 } from '@/store/OptionalFeature/useNoticeFeatureStore';
 import fonts from '@/constants/fonts';
+
+export const initInvitationAction = (): InvitationDetiail => {
+  const { invitationtitle } = useInvitationStore();
+  return {
+    title: invitationtitle,
+    groomName: '',
+    brideName: '',
+    date: [0, 0, 0],
+    //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
+    location: ['', '', '', '', '', ''],
+    greetingTitle: '',
+    greetingContent: '',
+    weddingTime: [0, 0],
+    groomFatherName: '',
+    groomMotherName: '',
+    brideFatherName: '',
+    brideMotherName: '',
+    groomFatherAlive: true,
+    groomMotherAlive: true,
+    brideFatherAlive: true,
+    brideMotherAlive: true,
+    //FIX : BackGround Color 추가
+    backgroundColor: '',
+    attendanceTitle: '',
+    attendanceContent: '',
+    attendanceIsDining: false,
+    attendance: false,
+    font: 'Crimson',
+    fontSize: false,
+    calendars: [
+      {
+        order: 1,
+        calendar: false,
+        isActive: false,
+        dDay: false,
+        countdown: false,
+      },
+    ],
+    maps: [
+      {
+        order: 2,
+        isActive: false,
+        tMap: false,
+        naverMap: false,
+        kakaoMap: false,
+        personalCar: false,
+        subway: false,
+        bus: false,
+        personalCarContent: '',
+        subwayContent: '',
+        busContent: '',
+      },
+    ],
+    accounts: [],
+    contacts: [
+      {
+        order: 4,
+        isActive: false,
+        brideContact: '',
+        groomContact: '',
+        brideFatherContact: '',
+        brideMotherContact: '',
+        groomFatherContact: '',
+        groomMotherContact: '',
+      },
+    ],
+    notices: [],
+    audio: 0,
+    imgUrl: '',
+    galleries: [],
+  };
+};
 
 export const getInvitationAction = (): Omit<
   InvitationDetiail,

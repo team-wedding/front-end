@@ -86,7 +86,7 @@ export default function ShareInvitation({
 
   return (
     <div
-      className={`${isFocused ? 'max-h-40' : 'max-h-0 invisible'} absolute flex flex-col top-7 right-1 items-center bg-[#3A3A3A] px-1 rounded-lg text-[9px] text-white transition-all duration-500 ease-in-out`}
+      className={`${isFocused ? 'max-h-40' : 'max-h-0 invisible'} absolute flex flex-col bottom-7 right-5 items-center bg-black/70 px-1 rounded-lg text-[9px] text-white/80 transition-all duration-500 ease-in-out backdrop-blur-3xl`}
       onBlur={() => setIsFocused(false)}
     >
       <button

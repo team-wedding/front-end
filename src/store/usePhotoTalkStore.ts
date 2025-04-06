@@ -61,7 +61,13 @@ const usePhotoTalkStore = create<PhotoTalkState>((set, get) => ({
   },
 
   getAllImages: () => {
-    return get().photoTalks.flatMap((talk) => talk.imageUrl);
+    return get().photoTalks.flatMap((talk) =>
+      Array.isArray(talk.imageUrl)
+        ? talk.imageUrl
+        : typeof talk.imageUrl === 'string' && talk.imageUrl !== ''
+          ? JSON.parse(talk.imageUrl)
+          : [],
+    );
   },
 
   resetFields: () =>

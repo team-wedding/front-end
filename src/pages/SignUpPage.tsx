@@ -1,30 +1,24 @@
-import { Link, useNavigate } from 'react-router';
 import Signup from '@/components/Signup';
-import PageLayout from '@/components/layout/PageLayout';
-import BackIcon from '@/components/icons/BackIcon';
+import logo from '@/assets/woogyeol/logo_light.png';
 
 const SignUpPage = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return (
-    <PageLayout
-      leftButton={
-        <button onClick={() => navigate(-1)}>
-          <BackIcon />
-        </button>
-      }
-      customFooter={null}
-    >
-      <div className="flex flex-col items-center w-full h-content p-8">
-        <Signup />
-        <div className="flex gap-1 text-sm text-gray-500 opacity-70">
-          이미 계정이 있으신가요?
-          <Link to="/email-login" className="underline hover:text-gray-800">
-            로그인
-          </Link>
+    <div className="bg-white column-center min-h-screen relative max-w-[520px] m-auto">
+      <header className="column-center mb-10">
+        <div className="pt-6 pb-3">
+          <img src={logo} alt="우결 로고" className="w-20 opacity-80" />
         </div>
-      </div>
-    </PageLayout>
+        <span className="text-black/60 text-sm font-extralight">
+          우리만의 청첩장을 만들어봐요!
+        </span>
+      </header>
+
+      <main className="w-full flex-center">
+        <Signup />
+      </main>
+    </div>
   );
 };
 

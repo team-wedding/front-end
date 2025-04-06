@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import usePhotoTalkStore from '@store/usePhotoTalkStore';
-import ChevronLeft from '@icons/Chevron_LeftIcon';
-import ChevronRight from '@icons/Chevron_RightIcon';
 import DownloadIcon from '@/components/icons/DownloadIcon';
+import { downloadSelectedImages } from '@/utils/downloadUtils';
+import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/PhotoTalkGalleryModal';
 
 interface PhotoTalkGalleryProps {
   isAdmin?: boolean;
@@ -23,26 +23,21 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
     );
   };
 
-  const downloadSelectedImages = () => {
-    console.log(`${selectedImages.length} images downloaded`);
+  const toggleAllImages = () => {
+    const allSelected = selectedImages.length === images.length;
+    return setSelectedImages(allSelected ? [] : [...images]);
+  };
+
+  // 여러 장 다운로드
+  const handleDownloadSelected = async () => {
+    await downloadSelectedImages(selectedImages);
   };
 
   const openModal = (index: number) => {
     setCurrentImageIndex(index);
     setModalOpen(true);
   };
-
   const closeModal = () => setModalOpen(false);
-
-  const showNextImage = () => {
-    setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-  };
-
-  const showPreviousImage = () => {
-    setCurrentImageIndex((prevIndex) =>
-      prevIndex === 0 ? images.length - 1 : prevIndex - 1,
-    );
-  };
 
   if (images.length === 0) {
     return (
@@ -55,74 +50,76 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
   return (
     <div>
       {isAdmin && (
-        <div className="flex justify-between items-center p-8 pb-2">
-          <h2 className="text-lg font-medium">갤러리</h2>
-          <div className="flex items-center gap-3">
-            <p className="text-gray-700">
-              {selectedImages.length} / {images.length}
-            </p>
-            <button
-              onClick={downloadSelectedImages}
-              className="select-btn"
-              disabled={selectedImages.length === 0}
+        <header className="flex justify-between items-center m-2" role="banner">
+          <div className="flex-center gap-1">
+            <input
+              type="checkbox"
+              id="check-all"
+              checked={selectedImages.length === images.length}
+              onChange={toggleAllImages}
+              className="size-4 rounded bg-white border border-gray-200 cursor-pointer z-10 shadow-inner checked:bg-black focus:ring-0 focus:outline-none"
+              aria-label={`이미지 전체 선택`}
+            />
+            <label
+              htmlFor="check-all"
+              className="text-xs font-light text-black/80"
             >
-              <DownloadIcon />
-            </button>
+              모두 선택하기
+            </label>
+
+            <p className="text-xs font-light text-black/80">
+              <span>( </span>
+              <span className="font-medium">{selectedImages.length}</span>
+              <span className=""> / {images.length} ) </span>
+            </p>
           </div>
-        </div>
+
+          <button
+            onClick={handleDownloadSelected}
+            className="bg-white/80 px-2 py-1 rounded-xl active:bg-black/30 shadow-md"
+            disabled={selectedImages.length === 0}
+            aria-label="선택한 이미지 다운로드"
+          >
+            <DownloadIcon />
+          </button>
+        </header>
       )}
 
-      <div className="grid grid-cols-3 gap-1 py-4 px-8">
+      <main
+        className="grid grid-cols-3 gap-[2px] p-2 place-items-center"
+        role="main"
+      >
         {images.map((url, index) => (
-          <div key={index} className="relative group">
+          <div key={index} className="relative group hover:opacity-95">
             {isAdmin && (
-              <input
-                type="checkbox"
-                checked={selectedImages.includes(url)}
-                onChange={() => toggleSelectImage(url)}
-                className="absolute top-1 right-1 w-4 h-4 rounded cursor-pointer z-10 border-gray-400 checked:bg-button focus:ring-button focus:border-button focus:outline-none focus:ring-0"
-              />
+              <div className="absolute -top-1 left-0 p-1 rounded-sm">
+                <input
+                  type="checkbox"
+                  checked={selectedImages.includes(url)}
+                  onChange={() => toggleSelectImage(url)}
+                  className="size-4 rounded bg-white/60  cursor-pointer z-10 border-none shadow-inner checked:bg-black focus:ring-0 focus:outline-none"
+                  aria-label={`이미지 ${index + 1} 선택`}
+                />
+              </div>
             )}
 
             <img
               src={url}
-              alt={`Uploaded ${index}`}
-              className="h-[116px] w-full rounded-sm object-cover cursor-pointer"
+              alt={`Uploaded image ${index + 1}`}
+              className="w-full aspect-[1/1] rounded-sm object-cover cursor-pointer shadow-custom"
               onClick={() => openModal(index)}
             />
           </div>
         ))}
-      </div>
+      </main>
 
       {isModalOpen && (
-        <div
-          onClick={closeModal}
-          className="result-layout fixed inset-0 z-50 bg-black bg-opacity-50"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="relative w-[340px] rounded-md overflow-hidden"
-          >
-            <div className="relative flex items-center justify-center px-14 py-6 h-full rounded-md bg-black bg-opacity-75">
-              <button
-                onClick={showPreviousImage}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"
-              >
-                <ChevronLeft />
-              </button>
-              <img
-                src={images[currentImageIndex]}
-                className="max-h-full object-contain rounded-sm"
-              />
-              <button
-                onClick={showNextImage}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full hover:bg-opacity-75"
-              >
-                <ChevronRight />
-              </button>
-            </div>
-          </div>
-        </div>
+        <PhotoTalkGalleryModal
+          isAdmin={isAdmin}
+          images={images}
+          currentImageIndex={currentImageIndex}
+          closeModal={closeModal}
+        />
       )}
     </div>
   );

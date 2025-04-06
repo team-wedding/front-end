@@ -1,6 +1,6 @@
 export interface InvitationDetiail {
   id?: number;
-  // createdAt?: string;
+  createdAt: string;
   // updatedAt?: string;
 
   title: string;
@@ -39,7 +39,7 @@ export interface InvitationDetiail {
   audio: number | nulll;
 }
 
-interface CalaendarDetail {
+interface CalendarDetail {
   order?: number;
   isActive: boolean;
   calendar: boolean;

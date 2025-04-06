@@ -34,7 +34,6 @@ const RsvpModal = ({ setModal }: ModalProp) => {
 
   const handleSubmit = async () => {
     try {
-      // console.log(id);
       const response = await postAttendance({
         ...info,
         userId: Number(userId),

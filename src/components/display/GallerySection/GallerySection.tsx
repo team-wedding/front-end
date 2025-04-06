@@ -40,7 +40,7 @@ export default function GallerySection() {
     isGalleryFeatureActive && (
       <div className="w-full h-fit py-20">
         <SectionTitle subTitle="GALLERY" title="갤러리" />
-        {galleryImages ? (
+        {galleryImages && galleryImages.length !== 0 ? (
           grid ? (
             <section
               className={`relative w-full grid grid-cols-3 mt-8  gap-2  justify-items-center items-center`}

@@ -29,6 +29,7 @@ export interface InvitationDetiail {
   attendanceIsDining: boolean;
   attendance: boolean;
   font: string;
+  fontSize: boolean;
   calendars: CalaendarDetail[];
   maps: MapDetail[];
   galleries: Omit<GalleryDetail[], 'images'>;

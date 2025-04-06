@@ -78,9 +78,10 @@ export const API = {
   REFRESH: () => `${BASE_URL}/users/refresh`,
   ACCOUNT: () => `${BASE_URL}/users/account`,
   INVITATIONS: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
-  ATTENDANCE: (page?: number, size?: number) => `${BASE_URL}/attendances${page ? `/?page=${page}` : ''}${size ? `&size=${size}` : ''}`,
+  ATTENDANCE: (page?: number, size?: number) =>
+    `${BASE_URL}/attendances${page ? `/?page=${page}` : ''}${size ? `&size=${size}` : ''}`,
   CHANGEPASSWORD: () => `${BASE_URL}/users/account/password`,
   PHOTOTALKS: (id?: string, page?: number, size?: number) =>
     `${BASE_URL}/celebrationMsgs/${id ? id : ''}${page ? `/?page=${page}` : ''}${size ? `&size=${size}` : ''}`,
-  S3Images: () => `${BASE_URL}/imageUpload/?directory=invitaion`,
+  S3Images: () => `${BASE_URL}/s3/?directory=invitation`,
 };

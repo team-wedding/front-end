@@ -17,7 +17,7 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
   const { id: userId } = useUserStore();
 
   const { invitations } = useGetInvitation(id);
-  const createdAt = invitations?.createdAt.split('T')[0];
+  const createdAt = invitations?.createdAt?.split('T')[0];
 
   const handleBlur = (event: React.FocusEvent<HTMLButtonElement>) => {
     if (parentRef.current && parentRef.current.contains(event.relatedTarget)) {
@@ -32,12 +32,12 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
 
   return (
     <main
-      className="flex-between w-full h-14 rounded-b-2xl
+      className="flex-between w-full h-14 rounded-b-xl backdrop-blur-sm
      px-4"
     >
       {/* 청첩장 제목 입력값 */}
-      <div>
-        <span className="text-md font-medium text-white">{title}</span>
+      <div className="flex flex-col items-start">
+        <span className="text-md font-medium text-white/90">{title}</span>
         <div className="text-[9px] font-extralight text-white/50 tracking-wide">
           {createdAt}
         </div>
@@ -48,7 +48,7 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
         tabIndex={-1}
         onBlur={handleBlur}
         onFocus={handleFocus}
-        className="text-white/90"
+        className="text-white/80"
       >
         <ShareIcon />
         {isFocused && (

@@ -2,71 +2,36 @@ import { PhotoTalk } from '@/types/phototalkType';
 import { create } from 'zustand';
 
 interface PhotoTalkState {
-  photoTalks: PhotoTalk[];
+  photoTalkList: PhotoTalk[];
   editingPhotoTalk: PhotoTalk | null;
-  setEditingPhotoTalk: (photoTalk: PhotoTalk | null) => void;
   setPhotoTalkList: (PhotoTalkList: PhotoTalk[]) => void;
-  addPhotoTalk: (photoTalk: PhotoTalk) => void;
-  editPhotoTalk: (id: number, updateTalk: PhotoTalk) => void;
-  deletePhotoTalk: (id: number, password?: string) => void;
+  setEditingPhotoTalk: (photoTalk: PhotoTalk | null) => void;
   resetFields: () => void;
   getAllImages: () => string[];
 }
 
 const usePhotoTalkStore = create<PhotoTalkState>((set, get) => ({
-  photoTalks: [],
+  photoTalkList: [],
   editingPhotoTalk: null,
-
+  setPhotoTalkList: (photoTalkList: PhotoTalk[]) => {
+    set({ photoTalkList: photoTalkList });
+  },
   setEditingPhotoTalk: (photoTalk) => {
     set({ editingPhotoTalk: photoTalk });
   },
-
-  setPhotoTalkList: (photoTalksList: PhotoTalk[]) => {
-    set({ photoTalks: photoTalksList });
-  },
-
-  addPhotoTalk: (newPhotoTalk) => {
-    set((state) => ({
-      photoTalks: [newPhotoTalk, ...state.photoTalks],
-    }));
-  },
-
-  editPhotoTalk: (id, updateTalk) => {
-    set((state) => ({
-      photoTalks: state.photoTalks.map((talk) =>
-        talk.id === id ? updateTalk : talk,
-      ),
-    }));
-  },
-
-  deletePhotoTalk: (id, password) => {
-    const talk = get().photoTalks.find((t) => t.id === id);
-    if (!talk) return false;
-
-    if (talk.password === password) {
-      set((state) => ({
-        photoTalks: state.photoTalks.filter((t) => t.id !== id),
-      }));
-      return true;
-    }
-
-    return false;
-  },
-
-  getAllImages: () => {
-    return get().photoTalks.flatMap((talk) =>
-      Array.isArray(talk.imageUrl)
-        ? talk.imageUrl
-        : typeof talk.imageUrl === 'string' && talk.imageUrl !== ''
-          ? JSON.parse(talk.imageUrl)
-          : [],
-    );
-  },
-
   resetFields: () =>
     set({
       editingPhotoTalk: null,
     }),
+  getAllImages: () => {
+    return get().photoTalkList.flatMap((photoTalk) =>
+      Array.isArray(photoTalk.imageUrl)
+        ? photoTalk.imageUrl
+        : typeof photoTalk.imageUrl === 'string' && photoTalk.imageUrl !== ''
+          ? JSON.parse(photoTalk.imageUrl)
+          : [],
+    );
+  },
 }));
 
 export default usePhotoTalkStore;

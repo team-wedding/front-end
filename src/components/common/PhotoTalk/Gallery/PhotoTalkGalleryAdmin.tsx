@@ -1,17 +1,21 @@
 import PhotoTalkGalleryGrid from '@/components/common/PhotoTalk/Gallery/PhotoTalkGalleryGrid';
 import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/Modal/GalleryModal/PhotoTalkGalleryModal';
 import DownloadIcon from '@/components/icons/DownloadIcon';
-import usePhotoTalkStore from '@/store/usePhotoTalkStore';
-import { USER_MODE } from '@/types/users';
+import { UserMode } from '@/types/users';
 import { downloadSelectedImages } from '@/utils/downloadUtils';
 import { useState } from 'react';
 
-const userMode = USER_MODE.ADMIN;
+interface PhotoTalkGalleryAdminProps {
+  userMode: UserMode;
+  images: string[];
+  isEmpty: boolean;
+}
 
-const PhotoTalkGalleryAdmin = () => {
-  const getAllImages = usePhotoTalkStore((state) => state.getAllImages);
-  const images = getAllImages();
-
+const PhotoTalkGalleryAdmin = ({
+  userMode,
+  images,
+  isEmpty,
+}: PhotoTalkGalleryAdminProps) => {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -71,8 +75,8 @@ const PhotoTalkGalleryAdmin = () => {
       </header>
 
       <PhotoTalkGalleryGrid
-        userMode={userMode}
         images={images}
+        isExample={isEmpty}
         onImageClick={(index) => {
           setCurrentImageIndex(index);
           setModalOpen(true);

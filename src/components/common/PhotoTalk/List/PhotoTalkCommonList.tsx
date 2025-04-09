@@ -1,8 +1,9 @@
 import PhotoTalkCard from '@/components/common/PhotoTalk/Card/PhotoTalkCard';
 import PhotoTalkGallery from '@/components/common/PhotoTalk/Gallery/PhotoTalkGallery';
 import { PhotoTalk } from '@/types/phototalkType';
-import PhotoTalkListEmptyState from '@/components/common/PhotoTalk/List/PhotoTalkListEmptyState';
 import { UserMode } from '@/types/users';
+import { examplePhototalkCard } from '@/constants/phototalkData';
+import PhotoTalkEmptyState from '@/components/common/PhotoTalk/EmptyState/PhotoTalkEmptyState';
 
 interface PhotoTalkCommonListProps {
   userMode: UserMode;
@@ -19,22 +20,33 @@ const PhotoTalkCommonList = ({
   onDelete,
   isGalleryOpen,
 }: PhotoTalkCommonListProps) => {
-  const hasPhotoTalk = photoTalkList.length > 0;
+  const isCardEmpty = photoTalkList.length === 0;
+  const photoTalks = isCardEmpty ? examplePhototalkCard : photoTalkList;
 
-  if (!hasPhotoTalk) return <PhotoTalkListEmptyState userMode={userMode} />;
+  return (
+    <>
+      {isCardEmpty && (
+        <PhotoTalkEmptyState
+          userMode={userMode}
+          viewType={`${isGalleryOpen ? 'gallery' : 'list'}`}
+        />
+      )}
 
-  return isGalleryOpen ? (
-    <PhotoTalkGallery userMode={userMode} />
-  ) : (
-    photoTalkList.map((photoTalk) => (
-      <PhotoTalkCard
-        key={photoTalk.id}
-        photoTalk={photoTalk}
-        onEdit={onEdit ? () => onEdit(photoTalk) : undefined}
-        onDelete={() => onDelete(photoTalk)}
-        userMode={userMode}
-      />
-    ))
+      {isGalleryOpen ? (
+        <PhotoTalkGallery userMode={userMode} />
+      ) : (
+        photoTalks.map((photoTalk) => (
+          <PhotoTalkCard
+            key={photoTalk.id}
+            photoTalk={photoTalk}
+            isExample={isCardEmpty}
+            onEdit={onEdit ? () => onEdit(photoTalk) : undefined}
+            onDelete={() => onDelete(photoTalk)}
+            userMode={userMode}
+          />
+        ))
+      )}
+    </>
   );
 };
 

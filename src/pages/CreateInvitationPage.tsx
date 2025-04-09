@@ -22,6 +22,7 @@ import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
 import { NoticeDetail } from '@/types/invitationType';
+import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 
@@ -75,13 +76,9 @@ const CreateInvitationPage = () => {
       const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
         uploadToS3(uploadedImageFile ? [uploadedImageFile] : []),
         uploadToS3(galleryFiles),
-        ...noticeImages.map((image) => uploadToS3(image ? [image] : []))
+        ...noticeImages.map((image) => uploadToS3(image ? [image] : [])),
       ]);
-      const s3ImageList = [
-        thumbnail,
-        gallery,
-        ...noticeS3ImageList
-      ];
+      const s3ImageList = [thumbnail, gallery, ...noticeS3ImageList];
       const noticeList: NoticeDetail[] = await notices.map((value, index) => {
         return {
           ...value,
@@ -128,8 +125,11 @@ const CreateInvitationPage = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="page-container relative">
-        <div className="create-section">
+      <div className="page-container">
+        <div className="create-section relative">
+          <div className="absolute bottom-16 right-4">
+            <PreviewButton />
+          </div>
           <PageLayout
             title={invitationtitle}
             leftButton={

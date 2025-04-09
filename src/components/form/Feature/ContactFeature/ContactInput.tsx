@@ -1,8 +1,13 @@
+import DebouncedInput, { DebouncedInputHandle } from '@/components/common/DebounceInput/DebounceInput';
 import useContactStore from '@store/useContactStore';
+import { useRef } from 'react';
 
 const ContactInput = () => {
   const contacts = useContactStore((state) => state.contacts);
   const updateContact = useContactStore((state) => state.updateContact);
+  const contactNumberInputRef = useRef<DebouncedInputHandle>(null);
+  const contactMotherNumberInputRef = useRef<DebouncedInputHandle>(null);
+  const contactfatherNumberInputRef = useRef<DebouncedInputHandle>(null);
 
   return (
     <div>
@@ -11,7 +16,7 @@ const ContactInput = () => {
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
               <label className="label">{person.role}</label>
-              <input
+              {/* <input
                 type="tel"
                 placeholder="010-0000-0000"
                 value={person.contact}
@@ -20,12 +25,23 @@ const ContactInput = () => {
                 }
                 pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
                 className="formInput"
+              /> */}
+              <DebouncedInput
+                type='tel'
+                ref={contactNumberInputRef}
+                value={person.contact}
+                onDebouncedChange={(value) =>
+                  updateContact(index, 'contact', value)
+                }
+                pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                placeholder="010-0000-0000"
+                className="formInput"
               />
             </div>
 
             <div className="flex items-center gap-2">
               <label className="label">아버지</label>
-              <input
+              {/* <input
                 type="tel"
                 placeholder="010-0000-0000"
                 value={person.fatherContact}
@@ -34,12 +50,23 @@ const ContactInput = () => {
                 }
                 pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
                 className="formInput"
+              /> */}
+              <DebouncedInput
+                type='tel'
+                ref={contactfatherNumberInputRef}
+                value={person.fatherContact}
+                onDebouncedChange={(value) =>
+                  updateContact(index, 'fatherContact', value)
+                }
+                pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                placeholder="010-0000-0000"
+                className="formInput"
               />
             </div>
 
             <div className="flex items-center gap-2">
               <label className="label">어머니</label>
-              <input
+              {/* <input
                 type="tel"
                 placeholder="010-0000-0000"
                 value={person.motherContact}
@@ -47,6 +74,17 @@ const ContactInput = () => {
                   updateContact(index, 'motherContact', e.target.value)
                 }
                 pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                className="formInput"
+              /> */}
+              <DebouncedInput
+                type='tel'
+                ref={contactMotherNumberInputRef}
+                value={person.motherContact}
+                onDebouncedChange={(value) =>
+                  updateContact(index, 'motherContact', value)
+                }
+                pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+                placeholder="010-0000-0000"
                 className="formInput"
               />
             </div>

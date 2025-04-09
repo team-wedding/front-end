@@ -133,7 +133,6 @@ export const stepThreeInvitationAction = (): Partial<InvitationDetiail> => {
   const { selectedMusic } = useMusicFeatureStore();
   const { font } = useThemeStore();
   return {
-    ...defaultInvitationValues,
     font: font,
     fontSize: false,
     backgroundColor: '',

@@ -1,9 +1,6 @@
-import PhotoTalkGalleryEmptyState from '@/components/common/PhotoTalk/Gallery/PhotoTalkGalleryEmptyState';
-import { UserMode } from '@/types/users';
-
 interface PhotoTalkGalleryGridProps {
-  userMode?: UserMode;
   images: string[];
+  isExample?: boolean;
   onImageClick: (index: number) => void;
   checkboxOptions?: {
     show: boolean;
@@ -13,16 +10,13 @@ interface PhotoTalkGalleryGridProps {
 }
 
 const PhotoTalkGalleryGrid = ({
-  userMode,
   images,
+  isExample,
   onImageClick,
   checkboxOptions,
 }: PhotoTalkGalleryGridProps) => {
-  if (images.length === 0)
-    return <PhotoTalkGalleryEmptyState userMode={userMode} />;
-
   return (
-    <div>
+    <>
       <main className="grid grid-cols-3 gap-[2px] p-2 place-items-center">
         {images.map((url, index) => (
           <div key={index} className="relative group hover:opacity-95">
@@ -41,13 +35,21 @@ const PhotoTalkGalleryGrid = ({
             <img
               src={url}
               alt={`Uploaded image ${index + 1}`}
-              className="w-full aspect-[1/1] rounded-sm object-cover cursor-pointer shadow-custom"
+              className={`w-full aspect-[1/1] rounded-sm object-cover cursor-pointer shadow-custom`}
               onClick={() => onImageClick(index)}
             />
+
+            {isExample && (
+              <footer className="absolute left-0 right-0 bottom-0 backdrop-blur-xl bg-black/30 rounded-sm p-1">
+                <p className="text-center text-xs text-white font-extralight">
+                  example
+                </p>
+              </footer>
+            )}
           </div>
         ))}
       </main>
-    </div>
+    </>
   );
 };
 

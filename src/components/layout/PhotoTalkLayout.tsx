@@ -29,12 +29,12 @@ const PhotoTalkLayout = ({
 
   return (
     <div className="bg-white max-w-[520px] min-h-screen m-auto">
-      <header className="fixed top-0 left-0 right-0 z-20 m-auto max-w-[520px] flex-between h-12 backdrop-blur-3xl bg-black/50 text-white">
+      <header className="fixed top-0 left-0 right-0 z-20 m-auto max-w-[520px] flex-between h-12 backdrop-blur-2xl bg-black/60 text-white">
         <button onClick={handleBack} aria-label="뒤로가기" className="p-2">
           <BackIcon />
         </button>
         <h1
-          className={`absolute left-1/2 transform -translate-x-1/2 ${titleStyle}`}
+          className={`absolute left-1/2 transform -translate-x-1/2 text-sm ${titleStyle}`}
         >
           {title}
         </h1>

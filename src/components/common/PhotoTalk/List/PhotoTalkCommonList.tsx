@@ -1,7 +1,6 @@
 import PhotoTalkCard from '@/components/common/PhotoTalk/Card/PhotoTalkCard';
 import PhotoTalkGallery from '@/components/common/PhotoTalk/Gallery/PhotoTalkGallery';
 import { PhotoTalk } from '@/types/phototalkType';
-import PhotoTalkListEmptyState from '@/components/common/PhotoTalk/List/PhotoTalkListEmptyState';
 import { UserMode } from '@/types/users';
 import SkeletonPhotoTalk from '@/components/common/Skeleton/SkeletonPhotoTalk';
 import SkeletonGallery from '@components/common/Skeleton/SkeletonGallery';
@@ -33,18 +32,21 @@ const PhotoTalkCommonList = ({
 
   if (!hasPhotoTalk) return <PhotoTalkListEmptyState userMode={userMode} />;
 
-  return isGalleryOpen ? (
-    <PhotoTalkGallery userMode={userMode} />
-  ) : (
-    photoTalkList.map((photoTalk) => (
-      <PhotoTalkCard
-        key={photoTalk.id}
-        photoTalk={photoTalk}
-        onEdit={onEdit ? () => onEdit(photoTalk) : undefined}
-        onDelete={() => onDelete(photoTalk)}
-        userMode={userMode}
-      />
-    ))
+      {isGalleryOpen ? (
+        <PhotoTalkGallery userMode={userMode} />
+      ) : (
+        photoTalks.map((photoTalk) => (
+          <PhotoTalkCard
+            key={photoTalk.id}
+            photoTalk={photoTalk}
+            isExample={isCardEmpty}
+            onEdit={onEdit ? () => onEdit(photoTalk) : undefined}
+            onDelete={() => onDelete(photoTalk)}
+            userMode={userMode}
+          />
+        ))
+      )}
+    </>
   );
 };
 

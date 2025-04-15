@@ -1,8 +1,10 @@
 import { useDebouncedCallback } from '@/hooks/useDebounce';
+import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import {
   useImperativeHandle,
   useRef,
   forwardRef,
+  useEffect,
 } from 'react';
 
 type DebouncedInputProps = {
@@ -39,6 +41,9 @@ const DebouncedInput = forwardRef<DebouncedInputHandle, DebouncedInputProps>(
       delay
     );
 
+
+    const { register, unregister } = useDebouncedInputStore();
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       const val = e.target.value;
       valueRef.current = val;
@@ -52,6 +57,12 @@ const DebouncedInput = forwardRef<DebouncedInputHandle, DebouncedInputProps>(
     useImperativeHandle(ref, () => ({
       flush,
     }));
+
+    useEffect(() => {
+      const handle = { flush };
+      register(handle);
+      return () => unregister(handle);
+    }, [flush]);
 
     return (
       <input

@@ -23,6 +23,7 @@ import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeat
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
 import { NoticeDetail } from '@/types/invitationType';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
+import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 
@@ -56,6 +57,9 @@ const CreateInvitationPage = () => {
   const { mutateAsync: s3Mutate } = useS3Image();
   const details = getInvitationAction();
   const { optionalItems } = useAccordionStore();
+  const flushAll = useDebouncedInputStore((s) => s.flushAll);
+
+
   const findOrder = (feature: string) => {
     if (!feature) return undefined; // feature가 없으면 undefined 반환
     const result = optionalItems.find((value) => value.feature === feature);

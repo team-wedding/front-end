@@ -1,9 +1,13 @@
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
+import DebouncedInput, { DebouncedInputHandle } from '@/components/common/DebounceInput/DebounceInput';
 import useRSVPStore from '@/store/useRSVPStore';
+import { useRef } from 'react';
 
 const RsvpExample = () => {
 
-  const { rsvpTitle, rsvpDescription, setRSVPonChange } = useRSVPStore();
+  const { rsvpTitle, rsvpDescription, setRSVPTitle, setRSVPDescription } = useRSVPStore();
+  const rsvpDesciptionInputRef = useRef<DebouncedInputHandle>(null);
+
 
   return (
     <div className="mx-4 my-6 text-xs">
@@ -17,10 +21,10 @@ const RsvpExample = () => {
       <div className="flex flex-col gap-5 my-10">
         <div className="flex flex-col gap-2">
           <label className="label w-full">제목</label>
-          <input
-            onChange={setRSVPonChange}
-            name="rsvpTitle"
-            type="text"
+          <DebouncedInput
+            type='text'
+            ref={rsvpDesciptionInputRef}
+            onDebouncedChange={(value: string) => setRSVPTitle(value)}
             value={rsvpTitle}
             placeholder="제목을 입력해주세요"
             className="formInput w-full"
@@ -29,13 +33,26 @@ const RsvpExample = () => {
         <div className="flex flex-col gap-2">
           <label className="label w-full">내용</label>
           <textarea
-            onChange={setRSVPonChange}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setRSVPDescription(e.currentTarget.value) }}
             name="rsvpDescription"
             value={rsvpDescription}
             rows={4}
             className="formInput w-full"
             placeholder="내용을 입력해주세요"
           />
+
+          {/*
+          TODO: FIX THIS INTO TEXT AREA
+          <DebouncedInput
+            type='text'
+            ref={rsvpDesciptionInputRef}
+            onDebouncedChange={(value: string) => setRSVPD(value)}
+            name="rsvpDescription"
+            value={rsvpDescription}
+            rows={4}
+            className="formInput w-full"
+            placeholder="내용을 입력해주세요"
+          /> */}
         </div>
       </div>
     </div>

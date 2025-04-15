@@ -4,7 +4,11 @@ import {
   postAttendance,
 } from '@/services/statsService';
 import { GuestInfo } from '@/types/GuestType';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import {
+  useMutation,
+  UseMutationOptions,
+  useQuery,
+} from '@tanstack/react-query';
 
 export const useGetStats = () => {
   return useQuery({
@@ -20,8 +24,12 @@ export const useGetAttendances = (page: number, size: number) => {
   });
 };
 
-export const usePostAttendance = (guestInfo: GuestInfo) => {
+export const usePostAttendance = (
+  guestInfo: GuestInfo,
+  options?: UseMutationOptions,
+) => {
   return useMutation({
     mutationFn: () => postAttendance(guestInfo),
+    ...options,
   });
 };

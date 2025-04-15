@@ -22,9 +22,24 @@ import StartPage from '@/pages/StartPage';
 import LoginPage from '@/pages/LoginPage';
 import ScrollToTop from '@/components/common/ScrollToTop';
 import DarkModeProvider from './components/providers/DarkModeProvider';
+import { useUserStore } from './store/useUserStore';
+import useAuthStore from './store/useAuthStore';
+import { useEffect } from 'react';
 
 function App() {
   const queryClient = new QueryClient();
+  const fetchUserInfo = useUserStore((state) => state.fetchUserInfo);
+  const token = useAuthStore((state) => state.accessToken);
+
+  // console.log('현재 token:', token);
+
+  useEffect(() => {
+    // console.log('✅ useEffect 실행됨, token:', token);
+    if (token) {
+      fetchUserInfo();
+      console.log('사용자 정보 api 호출');
+    }
+  }, [token]);
 
   return (
     <DarkModeProvider>
@@ -41,7 +56,7 @@ function App() {
           <Route path={'/create'} element={<CreateInvitationPage />} />
           <Route path={'/edit/:id'} element={<EditInvitationPage />} />
           <Route
-            path={'/preview/:id/:invitationId'}
+            path={'/preview/:userId/:invitationId'}
             element={<PreviewInvitaionPage />}
           />
           <Route path={'/preview'} element={<PreviewInvitaionPage />} />

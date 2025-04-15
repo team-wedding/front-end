@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import CloseIcon from '@icons/CloseIcon';
 import { GuestInfo } from '@/types/GuestType';
-import { postAttendance } from '@/services/statsService';
 import { useParams } from 'react-router';
+import { usePostAttendance } from '@/hooks/useStats';
 
 type InfoDetail = Omit<GuestInfo, 'userId' | 'invitationId'>;
 
@@ -23,6 +23,18 @@ const RsvpModal = ({ setModal }: ModalProp) => {
 
   const { userId, invitationId } = useParams();
 
+  const parsedUserId = Number(userId);
+  const parsedInvitationId = Number(invitationId);
+
+  // 유효성 체크
+  if (!parsedUserId || !parsedInvitationId) {
+    console.error(
+      'userId 또는 invitationId가 유효하지 않습니다.',
+      userId,
+      invitationId,
+    );
+  }
+
   //FIX 비어있는 값일때 처리 필요
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -32,19 +44,45 @@ const RsvpModal = ({ setModal }: ModalProp) => {
     }));
   };
 
-  const handleSubmit = async () => {
-    try {
-      const response = await postAttendance({
-        ...info,
-        userId: Number(userId),
-        invitationId: Number(invitationId),
-      });
-      console.log(response);
-      setModal(false);
-    } catch (error) {
-      console.log('개인 참석 여부 등록 실패', error);
+  const mutation = usePostAttendance(
+    {
+      ...info,
+      userId: Number(userId),
+      invitationId: Number(invitationId),
+    },
+    {
+      onSuccess: (data) => {
+        console.log('참석 의사 post 성공', data);
+        setModal(false);
+      },
+      onError: (error) => {
+        console.error('참석 의사 post 실패', error);
+      },
+    },
+  );
+
+  const handleSubmit = () => {
+    if (!userId || !invitationId) {
+      console.log('userId 또는 invitationId 누락', userId, invitationId);
+      return;
     }
+    mutation.mutate();
   };
+
+  // const handleSubmit = async () => {
+  //   try {
+  //     const response = await postAttendance({
+  //       ...info,
+  //       userId: Number(userId),
+  //       invitationId: Number(invitationId),
+  //     });
+  //     console.log(response);
+  //     setModal(false);
+  //   } catch (error) {
+  //     console.log(userId, invitationId);
+  //     console.log('개인 참석 여부 등록 실패', error);
+  //   }
+  // };
 
   //TODO : 동적으로 색 바꿀수있게 props로 받아서 차리
   //TODO : 재사용할수있는 코드 리팩토링 특히 인풋

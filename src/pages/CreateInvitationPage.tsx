@@ -15,7 +15,6 @@ import useBrideGroomStore from '@/store/useBrideGroomStore';
 import { validateBrideGroomNames } from '@/utils/validator';
 import NameInputModal from '@/components/form/BasicInformation/NameInput/NameInputModal';
 import ResultDisplay from '@/components/display/ResultDisplay';
-
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
 import { getInvitationAction } from '@/actions/invitationAction';
@@ -23,6 +22,7 @@ import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
 import { NoticeDetail } from '@/types/invitationType';
+import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 
@@ -41,8 +41,8 @@ const CreateInvitationPage = () => {
   const navigate = useNavigate();
 
   const handleCancel = () => {
-    navigate('/dashboard');
     resetAllStores();
+    navigate('/dashboard');
   };
   const { uploadedImageFile } = useImageStore();
   const { galleryFiles, grid } = useGalleryStore();
@@ -62,6 +62,10 @@ const CreateInvitationPage = () => {
     return result?.order;
   };
   const { selectedOptionalFeatures } = useOptionalFeatureStore();
+  const uploadToS3 = async (files: File[]) => {
+    const { imageUrls } = await s3Mutate(files.length ? files : []);
+    return imageUrls;
+  };
 
   const handleSave = async () => {
     if (!validateBrideGroomNames(brideGroom)) {
@@ -69,41 +73,18 @@ const CreateInvitationPage = () => {
       return;
     }
     try {
-      const { imageUrls: thumbnail } = await s3Mutate(
-        uploadedImageFile ? [uploadedImageFile!] : [],
-      );
-      const { imageUrls: gallery } = await s3Mutate(
-        galleryFiles.length && galleryFiles.length > 0 ? galleryFiles : [],
-      );
-      const { imageUrls: noticeImg1 } = await s3Mutate(
-        noticeImages[0] ? [noticeImages[0]] : [],
-      );
-      const { imageUrls: noticeImg2 } = await s3Mutate(
-        noticeImages[1] ? [noticeImages[1]] : [],
-      );
-      const { imageUrls: noticeImg3 } = await s3Mutate(
-        noticeImages[2] ? [noticeImages[2]] : [],
-      );
-      const { imageUrls: noticeImg4 } = await s3Mutate(
-        noticeImages[3] ? [noticeImages[3]] : [],
-      );
-      const { imageUrls: noticeImg5 } = await s3Mutate(
-        noticeImages[4] ? [noticeImages[4]] : [],
-      );
-      const noticeS3ImageList = [
-        noticeImg1,
-        noticeImg2,
-        noticeImg3,
-        noticeImg4,
-        noticeImg5,
-      ];
-
+      const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
+        uploadToS3(uploadedImageFile ? [uploadedImageFile] : []),
+        uploadToS3(galleryFiles),
+        ...noticeImages.map((image) => uploadToS3(image ? [image] : [])),
+      ]);
+      const s3ImageList = [thumbnail, gallery, ...noticeS3ImageList];
       const noticeList: NoticeDetail[] = await notices.map((value, index) => {
         return {
           ...value,
           order: findOrder('notice'),
           isActive: selectedOptionalFeatures.notice,
-          image: noticeS3ImageList[index][0],
+          image: s3ImageList[index][0],
         };
       });
       await postMutate({
@@ -144,8 +125,11 @@ const CreateInvitationPage = () => {
 
   return (
     <DndProvider backend={HTML5Backend}>
-      <div className="page-container relative">
-        <div className="create-section">
+      <div className="page-container">
+        <div className="create-section relative">
+          <div className="absolute bottom-16 right-4">
+            <PreviewButton />
+          </div>
           <PageLayout
             title={invitationtitle}
             leftButton={
@@ -188,7 +172,6 @@ const CreateInvitationPage = () => {
             </div>
           </PageLayout>
         </div>
-
         <div className="preview-section">
           <ResultDisplay />
           {/* <PreviewDisplay /> */}

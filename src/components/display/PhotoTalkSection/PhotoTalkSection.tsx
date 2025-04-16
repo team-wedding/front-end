@@ -1,10 +1,18 @@
 import SectionTitle from '@/components/common/SectionTitle';
-import { useUserStore } from '@/store/useUserStore';
-import { Link, useParams } from 'react-router';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 const PhotoTalkSection = () => {
-  const { id } = useUserStore();
-  const { invitationId } = useParams();
+  const navigate = useNavigate();
+  const { userId, invitationId } = useParams();
+  const location = useLocation();
+
+  const isPreview = location.pathname.includes('/preview');
+
+  const handleClick = () => {
+    return isPreview
+      ? navigate(`/preview/phototalk`)
+      : navigate(`/phototalk/${userId}/${invitationId}`);
+  };
 
   return (
     <div className="column-center gap-4 py-20">
@@ -16,12 +24,13 @@ const PhotoTalkSection = () => {
           <br />
           방명록에 따뜻한 한마디 남겨주세요
         </p>
-        <Link
-          to={`/phototalk/${id}/${invitationId}`}
+        <button
+          onClick={handleClick}
+          aria-label="포토톡 작성하기"
           className="py-2 bg-slate-700 text-white hover:bg-button/80 rounded-full px-8"
         >
           작성하러 가기
-        </Link>
+        </button>
       </div>
     </div>
   );

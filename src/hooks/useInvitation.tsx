@@ -33,10 +33,10 @@ export const usePostInvitation = () => {
       return postInvitation(details);
     },
     onSuccess: () => {
+      resetAllStores();
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
       console.log("생성완료")
       navigate('/dashboard')
-      resetAllStores();
     },
     onError: (err) => {
       console.log(err)

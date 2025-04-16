@@ -2,9 +2,9 @@
 // import BackIcon from '@icons/BackIcon';
 // import PageLayout from '@layout/PageLayout';
 import RsvpItem from '@common/RsvpItem/RsvpItem';
-import { useNavigate } from 'react-router';
 import { useGetAttendances, useGetStats } from '@/hooks/useStats';
 import { GuestInfo } from '@/types/GuestType';
+import { downloadRsvpExcel } from '@/utils/excelDownloader';
 import statsIcon from '@assets/statsIcon.svg';
 import listIcon from '@assets/listIcon.svg';
 
@@ -21,8 +21,6 @@ interface StatsResponse {
 }
 
 const RsvpStatsPage = () => {
-  const navigate = useNavigate();
-
   const { data: stats } = useGetStats() as { data: StatsResponse | undefined };
 
   // useGetAttendances의 반환 타입을 명확하게 지정
@@ -76,14 +74,14 @@ const RsvpStatsPage = () => {
     //   customFooter={null}
     // >
     <main>
-      <section className="mb-10">
-        <h6 className="flex items-center gap-2 text-xs font-medium text-[#535353] p-3">
+      <section className="mb-5 mx-3">
+        <h6 className="flex items-center gap-2 text-xs font-medium text-[#535353] my-4">
           {/* 아이콘 */}
           <img src={statsIcon} alt="stats" />
-          <span>참석여부 집계 요약</span>
+          <span>하객 분류</span>
         </h6>
 
-        <article className="h-fit bg-white rounded-xl w-full p-5">
+        <article className="h-fit bg-white rounded-xl w-full p-4">
           <RsvpItem title={'총 응답 수'} attend={totalResponses} total={true} />
           <div className="grid grid-cols-2">
             <RsvpItem title={'참석 가능'} attend={totalAttending} />
@@ -111,11 +109,21 @@ const RsvpStatsPage = () => {
         </article>
       </section>
 
-      <section className="flex-1">
-        <h6 className="flex items-center gap-2 text-xs font-medium text-[#535353] p-3">
-          <img src={listIcon} alt="stats" />
-          <span>상세 목록</span>
-        </h6>
+      <section className="flex-1 mx-3">
+        <div className="flex justify-between">
+          <h6 className="flex items-center gap-2 text-xs font-medium text-[#535353]">
+            <img src={listIcon} alt="stats" />
+            <span>상세 목록</span>
+          </h6>
+          <button className="border border-gray-300 rounded-xl my-4 px-2 hover:opacity-80 transition">
+            <img
+              src="/src/assets/microsoft-excel-128.png"
+              alt="엑셀 파일 다운로드"
+              className="w-8 h-8"
+              onClick={() => downloadRsvpExcel(attendanceList)}
+            />
+          </button>
+        </div>
 
         <article className="flex flex-col">
           {/* 테이블 헤더 */}

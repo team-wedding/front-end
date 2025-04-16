@@ -32,13 +32,15 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
 
   return (
     <main
-      className="flex-between w-full h-14 rounded-b-2xl
+      className="flex-between w-full h-16 rounded-b-xl backdrop-blur-sm
      px-4"
     >
       {/* 청첩장 제목 입력값 */}
-      <div>
-        <span className="text-md font-medium text-white">{title}</span>
-        <div className="text-[9px] font-extralight text-white/50 tracking-wide">
+      <div className="flex flex-col items-start">
+        <span className="text-md font-medium text-label-overlay mb-1">
+          {title}
+        </span>
+        <div className="text-[9px] font-extralight text-label-overlay tracking-wide">
           {createdAt}
         </div>
       </div>
@@ -48,7 +50,7 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
         tabIndex={-1}
         onBlur={handleBlur}
         onFocus={handleFocus}
-        className="text-white/90"
+        className="text-label-overlay"
       >
         <ShareIcon />
         {isFocused && (

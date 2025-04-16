@@ -90,7 +90,7 @@ const PhotoTalkGallery = ({ isAdmin = false }: PhotoTalkGalleryProps) => {
 
   if (images.length === 0) {
     return (
-      <p className="text-center text-gray-500 my-6">
+      <p className="text-center text-label-secondary/60 dark:text-label-secondary-dark/60 my-6 text-sm">
         업로드된 이미지가 없습니다.
       </p>
     );

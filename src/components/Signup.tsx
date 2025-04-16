@@ -80,7 +80,10 @@ const Signup = () => {
           <legend className="sr-only">회원가입 폼</legend>
 
           <div className="w-full">
-            <label htmlFor="name" className="text-gray-600 text-sm mx-2">
+            <label
+              htmlFor="name"
+              className="text-label-secondary/60 dark:text-label-secondary-dark/60 text-sm mx-2"
+            >
               이름
             </label>
             <input
@@ -91,7 +94,7 @@ const Signup = () => {
               placeholder="이름 입력"
             />
             {!isNameValid && signupInfo.name.length > 0 && (
-              <p className="m-2 text-xs text-red-500">
+              <p className="m-2 text-xs text-status-error dark:text-status-error-dark">
                 {' '}
                 이름은 최소 2자 이상이어야 합니다.
               </p>
@@ -99,7 +102,10 @@ const Signup = () => {
           </div>
 
           <div className="w-full">
-            <label htmlFor="email" className="text-gray-600 text-sm mx-2">
+            <label
+              htmlFor="email"
+              className="text-label-secondary/60 dark:text-label-secondary-dark/60 text-sm mx-2"
+            >
               이메일
             </label>
             <input
@@ -110,14 +116,17 @@ const Signup = () => {
               placeholder="이메일 입력"
             />
             {!isEmailValid && signupInfo.email.length > 0 && (
-              <p className="m-2 text-xs text-red-500">
+              <p className="m-2 text-xs text-status-error dark:text-status-error-dark">
                 올바른 이메일 형식을 입력하세요.
               </p>
             )}
           </div>
 
           <div className="w-full">
-            <label htmlFor="password" className="text-gray-600 text-sm mx-2">
+            <label
+              htmlFor="password"
+              className="text-label-secondary/60 dark:text-label-secondary-dark/60 text-sm mx-2"
+            >
               비밀번호
             </label>
             <input
@@ -128,7 +137,7 @@ const Signup = () => {
               placeholder="숫자, 영문, 특수문자 8 ~ 16자 입력"
             />
             {!isPasswordValid && signupInfo.password.length > 0 && (
-              <p className="m-2 text-xs text-red-500">
+              <p className="m-2 text-xs text-status-error dark:text-status-error-dark">
                 비밀번호는 숫자, 영문, 특수문자를 포함해 8 ~ 16자여야 합니다.
               </p>
             )}
@@ -137,7 +146,7 @@ const Signup = () => {
           <div className="w-full">
             <label
               htmlFor="confirmPassword"
-              className="text-gray-600 text-sm mx-2"
+              className="text-label-secondary/60 dark:text-label-secondary-dark/60 text-sm mx-2"
             >
               비밀번호 확인
             </label>
@@ -160,7 +169,7 @@ const Signup = () => {
           type="submit"
           className={`splash-btn mt-2 hover:ease-in ${
             isFormValid
-              ? 'bg-gradient-to-r from-[#CEDFFF] to-[#F8D4E2] text-black'
+              ? 'bg-gradient-to-r from-primary-muted to-secondary-muted text-black dark:from-primary-muted-dark dark:to-secondary-muted-dark dark:text-white'
               : 'cursor-not-allowed'
           }`}
           disabled={!isFormValid} // 폼이 유효하지 않으면 버튼 비활성화
@@ -168,11 +177,11 @@ const Signup = () => {
           회원가입
         </button>
 
-        <p className="text-[#9B9B9B] text-xs text-center pt-4 pb-10">
+        <p className="text-label-secondary/60 dark:text-label-secondary-dark/60 text-xs text-center pt-4 pb-10">
           이미 계정이 있으신가요?{' '}
           <Link
             to="/login"
-            className="text-black font-medium hover:text-gray-800"
+            className="text-label dark:text-label-dark font-medium hover:text-label-secondary/60 dark:hover:text-label-secondary-dark/60"
           >
             로그인
           </Link>

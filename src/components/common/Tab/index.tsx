@@ -17,14 +17,14 @@ const Tab = ({ data, activeTab, setActiveTab }: TabProps) => {
           <button
             key={index}
             onClick={() => setActiveTab(index)}
-            className={`w-full p-3 border-b text-xs font-light ${activeTab === index ? `border-b-2 border-[#565656] font-semibold` : `border-[#EBEBEB] text-[#BDBDBD]`}`}
+            className={`w-full p-3 border-b text-label dark:text-label-dark text-xs font-light ${activeTab === index ? `border-b-2 border-label dark:border-label-dark font-semibold` : `border-border dark-border-border-dark text-label-secondary/60 dark:text-label-dark/60`}`}
           >
             {tab.label}
           </button>
         ))}
       </div>
 
-      <div className="flex-1 pb-40 px-3 bg-[#F2F2F7]">
+      <div className="flex-1 pb-40 px-3 bg-surface-muted dark:bg-surface-muted-dark">
         <div className="h-4"></div>
         {data[activeTab].content}
       </div>

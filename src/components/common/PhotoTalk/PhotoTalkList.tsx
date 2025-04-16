@@ -144,7 +144,7 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
     return (
       <>
         <div className="h-6"></div>
-        <p className="text-center text-sm text-black/30 font-light bg-white/50 rounded-2xl p-16 w-[80%] m-auto">
+        <p className="text-center text-sm text-label-secondary/60 dark:text-label-secondary-dark/60 font-light bg-surface dark:bg-surface-dark rounded-2xl p-16 w-[80%] m-auto">
           업로드된 포토톡이 없습니다.
         </p>
       </>
@@ -156,26 +156,26 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
       <div className="flex-between p-2">
         {isAdmin ? (
           isGalleryOpen ? (
-            <p className="text-xs text-[#494949] font-light">갤러리</p>
+            <p className="text-xs text-label-secondary/60 dark:text-label-secondary-dark/60 font-light">
+              갤러리
+            </p>
           ) : (
-            <p className="text-xs text-[#494949] font-light">
+            <p className="text-xs text-label-secondary/60 dark:text-label-secondary-dark/60 font-light">
               하객분들의 축하메시지와 사진을 볼 수 있습니다.
             </p>
           )
         ) : (
           <button
             onClick={() => setEditorOpen(true)}
-            className="px-4 py-2 bg-black/90 shadow-sm rounded-full text-xs text-white hover:bg-black/80"
+            className="px-4 py-2 bg-surface-button dark:bg-surface-button-dark shadow-sm rounded-full text-xs text-label-button/60 dark:text-label-button-dark/60 hover:bg-surface-button-dark/80 dark:hover:bg-surface-button-dark/80"
           >
             작성하기
           </button>
         )}
         <button
           onClick={() => setGalleryOpen(!isGalleryOpen)}
-          // className={`select-btn ml-auto ${isGalleryOpen ? 'text-gray-800' : ''}`}
-          className={`px-4 py-2 ml-auto text-xs font-light rounded-full bg-white shadow-sm hover:bg-opacity-50 active:bg-black/10`}
+          className={`px-4 py-2 ml-auto text-xs text-label dark:text-label-dark font-light rounded-full bg-surface dark:bg-surface-dark shadow-sm hover:bg-opacity-50 active:bg-surface/10 dark:active:bg-surface-dark/10`}
         >
-          {/* {isGalleryOpen ? <ListIcon /> : <ImageIcon />} */}
           {isGalleryOpen ? '전체 보아보기' : '사진만 모아보기'}
         </button>
       </div>
@@ -193,9 +193,12 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
           />
         ))
       ) : (
-        <div className="flex-center w-[80%] m-auto gap-2 bg-white/30 p-12 rounded-2xl mt-6">
-          <EditIcon className="size-[20px] text-black/30" strokeWidth={1} />
-          <p className="text-sm font-light text-black/30 text-center leading-6">
+        <div className="flex-center w-[80%] m-auto gap-2 bg-surface-muted dark:bg-surface-muted-dark p-12 rounded-2xl mt-6">
+          <EditIcon
+            className="size-[20px] text-label-secondary/60 dark:text-label-secondary-dark/60"
+            strokeWidth={1}
+          />
+          <p className="text-sm font-light text-label-secondary/60 dark:text-label-secondary-dark/60 text-center leading-6">
             첫 번째 포토톡을 작성하고
             <br /> 따뜻한 마음을 전해보세요
           </p>
@@ -227,43 +230,6 @@ const PhotoTalkList = ({ isAdmin, onOpenEditor }: PhotoTalkListProps) => {
           isEditMode={selectedPhotoTalk.mode === 'edit'}
         />
       )}
-
-      {/* {isAdmin && isDeleteConfirmOpen && (
-        <div
-          onClick={() => setDeleteConfirmOpen(false)}
-          className="result-layout fixed inset-0 z-50 bg-black bg-opacity-50"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="bg-white rounded-lg shadow-md p-6 w-3/4"
-          >
-            <div className="flex flex-col gap-5 mb-7">
-              <p className="text-lg font-semibold text-gray-900">
-                삭제하시겠습니까?
-              </p>
-              <p className="text-sm text-gray-600">
-                이 작업은 되돌릴 수 없습니다.
-              </p>
-            </div>
-            <div className="flex justify-end gap-4">
-              <button
-                onClick={() => setDeleteConfirmOpen(false)}
-                className="px-4 py-2 bg-gray-300 hover:bg-gray-400 text-gray-700 rounded-md"
-              >
-                취소
-              </button>
-              <button
-                onClick={() => {
-                  console.log('삭제');
-                }}
-                className="px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-md"
-              >
-                삭제하기
-              </button>
-            </div>
-          </div>
-        </div>
-      )} */}
 
       <PhotoTalkEditor
         isOpen={isEditorOpen}

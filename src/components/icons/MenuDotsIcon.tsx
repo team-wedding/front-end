@@ -2,7 +2,7 @@ const MenuDotsIcon = () => {
   return (
     <div>
       <svg
-        className="w-6 h-6 text-gray-800 dark:text-white"
+        className="w-6 h-6 text-icon dark:text-icon-dark"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"

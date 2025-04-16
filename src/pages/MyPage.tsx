@@ -1,13 +1,14 @@
 import { useLocation, useNavigate } from 'react-router';
 import { useUserStore } from '@/store/useUserStore';
 import profile from '../assets/woogyeol/profile_light.png';
-import MoonIcon from '@/components/icons/MoonIcon';
-import Navbar from '@/components/common/Navbar/Navbar';
+import profileDark from '../assets/woogyeol/profile_dark.png';
+import Navbar from '@/components/common/Navbar';
 import RsvpStatsPage from '@/pages/RsvpStatsPage';
 import AdminPhotoTalkPage from '@/pages/PhotoTalk/AdminPhotoTalkPage';
 import Tab from '@/components/common/Tab/Tab';
 import { useEffect, useState } from 'react';
 import ChevronRight from '@/components/icons/Chevron_RightIcon';
+import DarkModeToggle from '@/components/common/DarkMode/DarkModeToggle';
 
 const TabData = [
   {
@@ -40,15 +41,24 @@ const MyPage = () => {
   }, [location.pathname]);
 
   return (
-    <div className="bg-white max-w-[520px]  min-h-screen m-auto">
-      <header className="relative top-0 left-0 right-0 z-20 m-auto max-w-[520px] px-2 bg-white max-h-12">
-        <button className="p-3 absolute top-0 right-0">
-          <MoonIcon />
+    <div className="bg-surface dark:bg-surface-dark max-w-[520px]  min-h-screen m-auto">
+      <header className="relative top-0 left-0 right-0 z-20 m-auto max-w-[520px] px-2 bg-surface dark:bg-surface-dark max-h-12">
+        <button className="absolute top-0 right-0">
+          <DarkModeToggle />
         </button>
 
         <section className="flex-center text-lg p-6 border-none gap-3">
           <div className="column-center">
-            <img src={profile} alt="profile" className="w-20" />
+            <img
+              src={profile}
+              alt="profile"
+              className="w-16 block dark:hidden"
+            />
+            <img
+              src={profileDark}
+              alt="profile"
+              className="w-16 hidden dark:block"
+            />
             {/* <button
               className="text-xs text-[#B4B4B4] font-extralight"
               onClick={() => navigate('/mypage/edit')}
@@ -57,7 +67,7 @@ const MyPage = () => {
             </button> */}
           </div>
 
-          <div className="flex flex-col text-lg font-extralight leading-6 text-black/90">
+          <div className="flex flex-col text-label dark:text-label-dark text-lg font-extralight leading-6">
             <div>안녕하세요,</div>
             <div className="flex-center">
               <div className="font-medium">{name || '김우결'}</div>

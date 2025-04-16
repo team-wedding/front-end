@@ -28,8 +28,8 @@ const PhotoTalkLayout = ({
   const handleBack = () => navigate(-1);
 
   return (
-    <div className="bg-surface dark:bg-surface-dark max-w-[520px] min-h-screen m-auto">
-      <header className="fixed top-0 left-0 right-0 z-20 m-auto max-w-[520px] flex-between h-12 backdrop-blur-2xl bg-surface-muted dark:bg-surface-muted-dark text-label dark:text-label-dark">
+    <div className="bg-white max-w-[520px] min-h-screen m-auto">
+      <header className="fixed top-0 left-0 right-0 z-20 m-auto max-w-[520px] flex-between h-12 backdrop-blur-2xl bg-black/60 text-white">
         <button onClick={handleBack} aria-label="뒤로가기" className="p-2">
           <BackIcon />
         </button>
@@ -43,7 +43,7 @@ const PhotoTalkLayout = ({
       <div className="h-12"></div>
 
       <main>
-        <aside className="text-center text-sm font-light leading-loose tracking-tight text-label-secondary/60 dark:text-label-secondary-dark/60 py-8 px-6 break-keep">
+        <aside className="text-center text-sm font-light leading-loose tracking-tight text-black/80 py-8 px-6 break-keep">
           {asideText}
         </aside>
 

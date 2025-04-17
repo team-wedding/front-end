@@ -41,7 +41,6 @@ const DebouncedInput = forwardRef<DebouncedInputHandle, DebouncedInputProps>(
       delay
     );
 
-
     const { register, unregister } = useDebouncedInputStore();
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +61,7 @@ const DebouncedInput = forwardRef<DebouncedInputHandle, DebouncedInputProps>(
       const handle = { flush };
       register(handle);
       return () => unregister(handle);
-    }, [flush]);
+    }, []);
 
     return (
       <input

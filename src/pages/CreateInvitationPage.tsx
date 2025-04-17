@@ -11,7 +11,7 @@ import { useAccordionStore } from '@store/useAccordionStore';
 import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
 import resetAllStores from '@/store/resetStore';
 import useBrideGroomStore from '@/store/useBrideGroomStore';
-import { validateBrideGroomNames } from '@/utils/validator';
+//import { validateBrideGroomNames } from '@/utils/validator';
 import NameInputModal from '@/components/form/BasicInformation/NameInput/NameInputModal';
 import ResultDisplay from '@/components/display/ResultDisplay';
 import useImageStore from '@/store/useImageStore';
@@ -110,19 +110,21 @@ const CreateInvitationPage = () => {
   }, [invitations?.title])
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (!validateBrideGroomNames(brideGroom)) {
-        setIsModalOpen(true);
-        return
-      }
-      else setAutoSaveModal(true);
+    const intervalId = setInterval(async () => {
+      await flushAll()
+      // if (!validateBrideGroomNames(brideGroom)) {
+      //   console.log(!validateBrideGroomNames(brideGroom), brideGroom[0].name, brideGroom[1].name)
+      //   setIsModalOpen(true);
+      //   return
+      // }
+      setAutoSaveModal(true);
       updateSetup()
       useUpdateInvitationStore(invitations as InvitationDetiail);
       setTimeout(() => {
         setAutoSaveModal(false);
         setIsModalOpen(false)
       }, 3000); // 모달 인터벌
-    }, 30000); // 임시저장 인터벌
+    }, 20000); // 임시저장 인터벌
     return () => {
       clearInterval(intervalId); // 컴포넌트 unmount 시 cleanup
     };
@@ -159,7 +161,6 @@ const CreateInvitationPage = () => {
     resetAllStores();
     navigate('/dashboard');
   };
-
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="page-container">

@@ -22,7 +22,7 @@ export default function AttendanceSection() {
   } = {
     title: '참석 의사 전달',
     description: (
-      <div>
+      <>
         {/* 서로에게 행복을 주는 사람을 만났습니다
         <br />
         운명처럼 만나게 된 우리의 인연 그 인연에 이끌려 이제 영원을 함께
@@ -33,7 +33,7 @@ export default function AttendanceSection() {
         축하해 주시는 한 분 한 분을 <br />
         소중히 모실 수 있도록 <br />
         참석 의사를 사전에 전달해 주시길 부탁드립니다
-      </div>
+      </>
     ),
   };
 

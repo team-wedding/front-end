@@ -1,8 +1,9 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
 import NextIcon from '@icons/NextIcon';
 import { useInvitationStore } from '@store/useInvitaionStore';
 import CloseIcon from '@icons/CloseIcon';
+import { usePostInvitation } from '@/hooks/useInvitation';
+import { defaultInvitationValues } from '@/actions/invitationAction';
 
 interface ModalProps {
   onClose: () => void;
@@ -11,7 +12,7 @@ interface ModalProps {
 const InputTitleModal = ({ onClose }: ModalProps) => {
   const [titleInput, setTitleInput] = useState('');
   const { setInvitationTitle } = useInvitationStore();
-  const navigate = useNavigate();
+  const { mutateAsync: postMutate } = usePostInvitation();
 
   const maxLength = 8;
 
@@ -23,9 +24,13 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
     }
   };
 
+  const initialDetail = defaultInvitationValues
   const handleConfirm = () => {
     setInvitationTitle(titleInput); // 입력한 제목을 상태에 저장
-    navigate('/create'); // 페이지 이동
+    postMutate({
+      ...initialDetail,
+      title: titleInput
+    })
   };
 
   return (
@@ -63,11 +68,10 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
           <button
             onClick={handleConfirm}
             disabled={titleInput.length === 0}
-            className={`rounded-full w-8 h-8 flex justify-center items-center ${
-              titleInput.length === 0
-                ? 'bg-black bg-opacity-10 cursor-not-allowed'
-                : 'bg-rose-300 cursor-pointer hover:bg-rose-200'
-            }`}
+            className={`rounded-full w-8 h-8 flex justify-center items-center ${titleInput.length === 0
+              ? 'bg-black bg-opacity-10 cursor-not-allowed'
+              : 'bg-rose-300 cursor-pointer hover:bg-rose-200'
+              }`}
           >
             <NextIcon />
           </button>

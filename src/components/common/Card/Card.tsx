@@ -6,6 +6,7 @@ import { useUserStore } from '@/store/useUserStore';
 import { useNavigate } from 'react-router';
 import CircleMinusIcon from '@/components/icons/CircleMinusIcon';
 import CardFooter from '@/components/common/Card/CardFooter';
+import { useS3RemoveImage } from '@/hooks/useS3Image';
 
 interface CardProps {
   image: string;
@@ -16,13 +17,15 @@ interface CardProps {
 const Card = ({ image, id: invitationId, title }: CardProps) => {
   const navigate = useNavigate();
 
-  const { mutate: deleteInvitaion } = useDeleteInvitation(invitationId);
+  const { mutate: deleteInvitation } = useDeleteInvitation(invitationId);
+  const { mutate: deleteS3Invitation } = useS3RemoveImage(invitationId.toString())
   const { id } = useUserStore();
 
   const [modal, setModal] = useState(false);
 
   const handleDelete = async () => {
-    await deleteInvitaion();
+    await deleteInvitation();
+    await deleteS3Invitation();
     setModal(false);
   };
 

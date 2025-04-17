@@ -5,18 +5,28 @@ export interface S3Detail {
   imageUrls: string[];
 }
 
-export const getS3ImageUrl = async (imageUrl: File[]): Promise<S3Detail> => {
+export interface S3Props {
+  imageFiles: File[];
+  directory: string;
+}
+
+export const getS3ImageUrl = async ({ imageFiles, directory }: S3Props): Promise<S3Detail> => {
   const formData = new FormData()
-  imageUrl.map((value) => (
+  imageFiles.map((value) => (
     formData.append("images", value)
   ))
-  if (imageUrl.length == 0) {
+  if (imageFiles.length == 0) {
     return { imageUrls: [] }
   }
-  const response = await axios.post(API.S3Images(), formData, {
+  const response = await axios.post(API.S3Images(directory), formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
   });
+  return response.data;
+};
+
+export const deleteS3ImageUrl = async (id: string) => {
+  const response = await axios.delete(API.S3InvitationRemoval(id));
   return response.data;
 };

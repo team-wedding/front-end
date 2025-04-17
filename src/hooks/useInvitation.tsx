@@ -32,11 +32,11 @@ export const usePostInvitation = () => {
     mutationFn: (details: InvitationDetiail) => {
       return postInvitation(details);
     },
-    onSuccess: () => {
+    onSuccess: (data) => {
+      const { id } = data
       resetAllStores();
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
-      console.log("생성완료")
-      navigate('/dashboard')
+      navigate(`/create/${id}`)
     },
     onError: (err) => {
       console.log(err)
@@ -45,14 +45,11 @@ export const usePostInvitation = () => {
 };
 
 export const useUpdateInvitation = (id: number) => {
-  const navigate = useNavigate()
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (details: InvitationDetiail) => updateInvitation({ id, details }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
-      navigate('/dashboard')
-      resetAllStores()
     }
   });
 };

@@ -6,7 +6,6 @@ import { useWeddingStore } from '@store/useWeddingStore';
 import useContactStore from '@store/useContactStore';
 import useAddressStore from '@store/useAddressStore';
 import useImageStore from '@store/useImageStore';
-import { useEffect } from 'react';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import { useCalendarFeatureStore } from '@/store/OptionalFeature/useCalendarFeatureStore';
 import { useMusicFeatureStore } from '@/store/OptionalFeature/useMusicFeatureStore';
@@ -21,12 +20,14 @@ import useNoticeStore, {
 } from '@/store/OptionalFeature/useNoticeFeatureStore';
 import fonts from '@/constants/fonts';
 
-const defaultInvitationValues: InvitationDetiail = {
-  title: '',
+const defaultCoord = { lat: 37.5086, lng: 127.0397 };
+
+const today = new Date();
+export const defaultInvitationValues: Omit<InvitationDetiail, 'title'> = {
   createdAt: '',
   groomName: '',
   brideName: '',
-  date: [0, 0, 0],
+  date: [today.getFullYear(), today.getMonth() + 1, today.getDate()],
   //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
   location: ['', '', '', '', '', ''],
   greetingTitle: '',
@@ -40,7 +41,6 @@ const defaultInvitationValues: InvitationDetiail = {
   groomMotherAlive: true,
   brideFatherAlive: true,
   brideMotherAlive: true,
-  //FIX : BackGround Color 추가
   backgroundColor: '',
   attendanceTitle: '',
   attendanceContent: '',
@@ -91,54 +91,73 @@ const defaultInvitationValues: InvitationDetiail = {
   galleries: [],
 };
 
-export const stepOneInvitationAction = (): InvitationDetiail => {
-  const { invitationtitle } = useInvitationStore();
-  const { brideGroom } = useBrideGroomStore();
-  const { weddingTime, formattedDate } = useWeddingStore();
-  const {
-    address,
-    jibunAddress,
-    zonecode,
-    weddingHallName,
-    weddingHallDetail,
-    coords,
-  } = useAddressStore();
-  return {
-    ...defaultInvitationValues,
-    title: invitationtitle,
-    groomName: brideGroom[0].name,
-    brideName: brideGroom[1].name,
-    date: [formattedDate.year, formattedDate.month, formattedDate.day],
-    weddingTime: [weddingTime.hour || 12, weddingTime.minute || 0],
+// export const stepOneInvitationAction = (): InvitationDetiail => {
+//   const { invitationtitle } = useInvitationStore();
+//   const { brideGroom } = useBrideGroomStore();
+//   const { weddingTime, formattedDate } = useWeddingStore();
+//   const {
+//     address,
+//     jibunAddress,
+//     zonecode,
+//     weddingHallName,
+//     weddingHallDetail,
+//     coords,
+//   } = useAddressStore();
+//   return {
+//     ...defaultInvitationValues,
+//     title: invitationtitle,
+//     groomName: brideGroom[0].name,
+//     brideName: brideGroom[1].name,
+//     date: [formattedDate.year, formattedDate.month, formattedDate.day],
+//     weddingTime: [weddingTime.hour || 12, weddingTime.minute || 0],
 
-    //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
-    location: [
-      address,
-      zonecode.toString(),
-      jibunAddress,
-      JSON.stringify(coords),
-      weddingHallName,
-      weddingHallDetail,
-    ],
-  };
-};
+//     //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
+//     location: [
+//       address,
+//       zonecode.toString(),
+//       jibunAddress,
+//       JSON.stringify(coords),
+//       weddingHallName,
+//       weddingHallDetail,
+//     ],
+//   };
+// };
 
-export const stepTwoInvitationAction = (): Partial<InvitationDetiail> => {
-  return {
-    ...defaultInvitationValues,
-  };
-};
-
-export const stepThreeInvitationAction = (): Partial<InvitationDetiail> => {
-  const { selectedMusic } = useMusicFeatureStore();
-  const { font } = useThemeStore();
-  return {
-    font: font,
-    fontSize: false,
-    backgroundColor: '',
-    audio: selectedMusic,
-  };
-};
+// export const stepTwoInvitationAction = (): Partial<InvitationDetiail> => {
+//   const { accounts } = useAccountStore();
+//   const { rsvpTitle, rsvpDescription, rsvpIncludeMeal, rsvpIncludePopulation } =
+//     useRSVPStore();
+//   const accountList: AccountDetail[] = accounts.flatMap((item) => [
+//     {
+//       order: findOrder('account'),
+//       isActive: selectedOptionalFeatures.account,
+//       ...item.accountInfo,
+//     },
+//     {
+//       order: findOrder('account'),
+//       isActive: selectedOptionalFeatures.account,
+//       ...item.fatherAccountInfo,
+//     },
+//     {
+//       order: findOrder('account'),
+//       isActive: selectedOptionalFeatures.account,
+//       ...item.motherAccountInfo,
+//     },
+//   ]);
+//   return {
+//     ...defaultInvitationValues,
+//   };
+// };
+// export const stepThreeInvitationAction = (): Partial<InvitationDetiail> => {
+//   const { selectedMusic } = useMusicFeatureStore();
+//   const { font } = useThemeStore();
+//   return {
+//     font: font,
+//     fontSize: false,
+//     backgroundColor: '',
+//     audio: selectedMusic,
+//   };
+// };
 
 export const getInvitationAction = (): Omit<
   InvitationDetiail,
@@ -269,230 +288,233 @@ export const getInvitationAction = (): Omit<
       },
     ],
     // notices: noticeList,
-    audio: selectedMusic?.id,
+    audio: selectedMusic?.id || 1,
   };
 };
 
 export const useUpdateInvitationStore = (details: InvitationDetiail) => {
-  const { setInvitationTitle } = useInvitationStore();
   const {
     setAddress,
     setJibunAddress,
     setCoords,
     setWeddingHallName,
     setWeddingHallDetail,
-  } = useAddressStore();
-  const { setWeddingDate, setWeddingTime } = useWeddingStore();
-  const { setGreetingContent, setGreetingTitle } = useGreetingStore();
-  const { setUploadedImageUrl } = useImageStore();
-  const contacts = useContactStore((state) => state.updateContact);
-  const { updateBrideGroom, updateFamily } = useBrideGroomStore();
-  const { setFont } = useThemeStore();
-  const { setGrid, setImages } = useGalleryStore();
+  } = useAddressStore.getState();
+  const { setWeddingDate, setWeddingTime } = useWeddingStore.getState();
+  const { setGreetingContent, setGreetingTitle } = useGreetingStore.getState();
+  const { setUploadedImageUrl } = useImageStore.getState();
+  const updateContact = useContactStore.getState().updateContact;
+  const { updateBrideGroom, updateFamily } = useBrideGroomStore.getState();
+  const { setFont } = useThemeStore.getState();
+  const { setGrid, setImages } = useGalleryStore.getState();
   const {
     updateTransportationInput: setTransportSubFeature,
     toggleSubFeature: transportToggle,
-  } = useLocationFeatureStore();
-
-  const { selectMusic, toggleSubFeature: musicToggle } = useMusicFeatureStore();
-
-  const { toggleOptionalFeature } = useOptionalFeatureStore();
-  const { updateAccountInfo } = useAccountStore();
-  const { replaceNotice } = useNoticeStore();
+  } = useLocationFeatureStore.getState();
+  const { selectMusic, toggleSubFeature: musicToggle } =
+    useMusicFeatureStore.getState();
+  const { toggleOptionalFeature } = useOptionalFeatureStore.getState();
+  const { updateAccountInfo } = useAccountStore.getState();
+  const { replaceNotice } = useNoticeStore.getState();
   const { setRSVPDetails, setRSVPIncludeMeal, setRSVPIncludePopulation } =
-    useRSVPStore();
-  const { toggleSubFeature: calendarToggle } = useCalendarFeatureStore();
+    useRSVPStore.getState();
+  const { toggleSubFeature: calendarToggle } =
+    useCalendarFeatureStore.getState();
+  if (details) {
+    //청첩장 제목
+    // setInvitationTitle(details.title);
+    //가족이름
+    updateBrideGroom(0, 'name', details.brideName);
+    updateBrideGroom(1, 'name', details.groomName);
+    updateFamily(0, 'father', 'name', details.brideFatherName);
+    updateFamily(0, 'mother', 'name', details.brideMotherName);
+    updateFamily(0, 'father', 'isDeceased', !details.brideFatherAlive);
+    updateFamily(0, 'mother', 'isDeceased', !details.brideMotherAlive);
+    updateFamily(1, 'father', 'name', details.groomFatherName);
+    updateFamily(1, 'mother', 'name', details.groomMotherName);
+    updateFamily(1, 'father', 'isDeceased', !details.groomFatherAlive);
+    updateFamily(1, 'mother', 'isDeceased', !details.groomMotherAlive);
 
-  useEffect(() => {
-    if (details) {
-      //청첩장 제목
-      setInvitationTitle(details.title);
-      //가족이름
-      updateBrideGroom(0, 'name', details.brideName);
-      updateBrideGroom(1, 'name', details.groomName);
-      updateFamily(0, 'father', 'name', details.brideFatherName);
-      updateFamily(0, 'mother', 'name', details.brideMotherName);
-      updateFamily(0, 'father', 'isDeceased', !details.brideFatherAlive);
-      updateFamily(0, 'mother', 'isDeceased', !details.brideMotherAlive);
-      updateFamily(1, 'father', 'name', details.groomFatherName);
-      updateFamily(1, 'mother', 'name', details.groomMotherName);
-      updateFamily(1, 'father', 'isDeceased', !details.groomFatherAlive);
-      updateFamily(1, 'mother', 'isDeceased', !details.groomMotherAlive);
-      //FIX: 주소 어떻게 받을지 처리
-      setAddress(details.location[0], details.location[1]);
-      setJibunAddress(details.location[2]);
-      try {
-        // 배열 길이 확인 후 3번째 요소 존재 여부 체크
-        if (details.location.length <= 3) {
-          throw new Error('details.location[3]이 존재하지 않습니다.');
-        }
-        // JSON 문자열인지 확인 후 파싱 시도
-        const locationData = details.location[3];
-        if (typeof locationData !== 'string') {
-          throw new Error('details.location[3]은 문자열이 아닙니다.');
-        }
+    //FIX: 주소 어떻게 받을지 처리
+    setAddress(details.location[0], details.location[1]);
+    setJibunAddress(details.location[2]);
+    try {
+      // JSON 문자열인지 확인 후 파싱 시도
+      const locationData = details.location[3];
+      if (typeof locationData !== 'string') {
+        throw new Error('details.location[3]은 문자열이 아닙니다.');
+      }
+      if (locationData.trim() !== '') {
         const { lat, lng } = JSON.parse(locationData);
         setCoords(lat, lng);
-      } catch (error) {
-        console.error('주소 불러오는데 에러 발생:', error);
+      } else {
+        const { lat, lng } = defaultCoord;
+        setCoords(lat, lng);
       }
-
-      setWeddingHallName(details.location[4]);
-      setWeddingTime(details.weddingTime[0], details.weddingTime[1]);
-      setWeddingHallDetail(details.location[5]);
-
-      try {
-        //  비어 있는 경우, 현재 날짜 설정
-        if (details.date.length === 0) {
-          setWeddingDate(new Date());
-        } else {
-          //조인후 DATE 포멧 확인
-          const dateStr = details.date.join('-');
-          const parsedDate = new Date(dateStr);
-          if (isNaN(parsedDate.getTime())) {
-            throw new Error(`잘못된 날짜 형식: ${dateStr}`);
-          }
-          setWeddingDate(parsedDate);
-        }
-      } catch (error) {
-        console.error('에러 발생: 날짜 불러오는데 에러 발생 ', error);
-        setWeddingDate(new Date());
-      }
-
-      // setWeddingTime(details.weddingTime[0], details.weddingTime[1]);
-
-      //청첩장 제목/내용
-      setGreetingTitle(details.greetingTitle);
-      setGreetingContent(details.greetingContent);
-      //대표이미지
-      setUploadedImageUrl(details.imgUrl);
-      //연락처
-      contacts(0, 'contact', details?.contacts[0]?.brideContact || '');
-      contacts(1, 'contact', details?.contacts[0]?.groomContact || '');
-      contacts(
-        0,
-        'fatherContact',
-        details?.contacts[0]?.brideFatherContact || '',
-      );
-      contacts(
-        0,
-        'motherContact',
-        details?.contacts[0]?.brideMotherContact || '',
-      );
-      contacts(
-        1,
-        'fatherContact',
-        details?.contacts[0]?.groomFatherContact || '',
-      );
-      contacts(
-        1,
-        'motherContact',
-        details?.contacts[0]?.groomMotherContact || '',
-      );
-
-      //RSVP Modal
-      setRSVPDetails({
-        rsvpTitle: details.attendanceTitle,
-        rsvpDescription: details.attendanceContent,
-      });
-      setRSVPIncludeMeal(details.attendanceIsDining);
-      setRSVPIncludePopulation(details.attendance);
-      //갤러리
-      setGrid(details.galleries ? details.galleries[0]?.grid : false);
-      setImages(details.galleries ? details.galleries[0]?.images : []);
-
-      setFont(
-        details.font,
-        fonts.findIndex((value) => value.font == details.font) || 0,
-      );
-      //교통수단
-      //TODO: CanMove 처리
-      transportToggle('canMoveMap', false);
-      setTransportSubFeature('subway', details.maps[0]?.subwayContent || '');
-      setTransportSubFeature('bus', details.maps[0]?.busContent || '');
-      setTransportSubFeature('car', details.maps[0]?.personalCarContent || '');
-      transportToggle('navigationKakao', details.maps[0]?.kakaoMap || false);
-      transportToggle('navigationNaver', details.maps[0]?.naverMap || false);
-      transportToggle('navigationTmap', details.maps[0]?.tMap || false);
-      transportToggle(
-        'transportationCar',
-        details.maps[0]?.personalCar || false,
-      );
-
-      transportToggle('transportationBus', details.maps[0]?.bus || false);
-
-      transportToggle('transportationSubway', details.maps[0]?.subway || false);
-
-      const modifiedNotice: Notice[] = details.notices.map((value) => {
-        return {
-          noticeId: value.id!,
-          title: value.title!,
-          content: value.content as string,
-          image: value.image as string,
-          imgFile: null,
-        };
-      });
-      replaceNotice(modifiedNotice || []);
-
-      //계좌
-      const defaultAccount = {
-        accountHolderName: '',
-        bankName: '',
-        accountNumber: '',
-        kakaoUrl: '',
-      };
-
-      const accountKeys = [
-        'accountInfo',
-        'fatherAccountInfo',
-        'motherAccountInfo',
-      ] as const;
-
-      [0, 1].forEach((index) => {
-        accountKeys.forEach((key, keyIndex) => {
-          const accountData =
-            Array.isArray(details.accounts) &&
-            details.accounts.length > index * 3 + keyIndex
-              ? details.accounts[index * 3 + keyIndex]
-              : defaultAccount;
-          updateAccountInfo(index, key, accountData);
-        });
-      });
-
-      //FIX: undefined 처리
-      calendarToggle(
-        'calendar',
-        (details.calendars.length !== 0 && details.calendars[0]?.calendar) ||
-          false,
-      );
-      calendarToggle(
-        'dday',
-        (details.calendars.length !== 0 && details.calendars[0]?.dDay) || false,
-      );
-      calendarToggle(
-        'countdown',
-        (details.calendars.length !== 0 && details.calendars[0]?.countdown) ||
-          false,
-      );
-
-      const features = [
-        { key: 'calendar', list: details.calendars },
-        { key: 'location', list: details.maps },
-        { key: 'gallery', list: details.galleries },
-        { key: 'account', list: details.accounts },
-        { key: 'contact', list: details.contacts },
-        { key: 'notice', list: details.notices },
-      ];
-
-      features.forEach(({ key, list }) => {
-        const isActive =
-          Array.isArray(list) && list.length > 0 && list[0].isActive;
-        toggleOptionalFeature(key, isActive);
-      });
-
-      //FIX: MUSIC
-      selectMusic(details.audio);
-      musicToggle('music', !!details.audio); //수정 필요
+    } catch (error) {
+      console.error('주소 불러오는데 에러 발생:', error);
     }
-  }, [details]); // details 변경 시 실행
+
+    setWeddingHallName(details.location[4]);
+    setWeddingTime(details.weddingTime[0], details.weddingTime[1]);
+    setWeddingHallDetail(details.location[5]);
+
+    try {
+      //  비어 있는 경우, 현재 날짜 설정
+      if (details.date.length === 0) {
+        setWeddingDate(today);
+      } else {
+        const [year, month, day] = details.date;
+        if (
+          typeof year !== 'number' ||
+          typeof month !== 'number' ||
+          typeof day !== 'number' ||
+          year < 1000 ||
+          month < 1 ||
+          month > 12 ||
+          day < 1 ||
+          day > 31
+        ) {
+          alert(`잘못된 날짜 값입니다: ${year}-${month}-${day}`);
+          setWeddingDate(today);
+        }
+        //조인후 DATE 포멧 확인
+        const dateStr = details.date.join('-');
+        const parsedDate = new Date(dateStr);
+        if (isNaN(parsedDate.getTime())) {
+          throw new Error(`Date 생성 실패: ${dateStr}`);
+        }
+        setWeddingDate(parsedDate);
+      }
+    } catch (error) {
+      console.error('에러 발생: 날짜 불러오는데 에러 발생 ', error);
+      setWeddingDate(today);
+    }
+
+    //청첩장 제목/내용
+    setGreetingTitle(details.greetingTitle);
+    setGreetingContent(details.greetingContent);
+    //대표이미지
+    setUploadedImageUrl(details.imgUrl);
+    //연락처
+    updateContact(0, 'contact', details?.contacts[0]?.brideContact || '');
+    updateContact(1, 'contact', details?.contacts[0]?.groomContact || '');
+    updateContact(
+      0,
+      'fatherContact',
+      details?.contacts[0]?.brideFatherContact || '',
+    );
+    updateContact(
+      0,
+      'motherContact',
+      details?.contacts[0]?.brideMotherContact || '',
+    );
+    updateContact(
+      1,
+      'fatherContact',
+      details?.contacts[0]?.groomFatherContact || '',
+    );
+    updateContact(
+      1,
+      'motherContact',
+      details?.contacts[0]?.groomMotherContact || '',
+    );
+
+    //RSVP Modal
+    setRSVPDetails({
+      rsvpTitle: details.attendanceTitle,
+      rsvpDescription: details.attendanceContent,
+    });
+    setRSVPIncludeMeal(details.attendanceIsDining);
+    setRSVPIncludePopulation(details.attendance);
+    //갤러리
+    setGrid(details.galleries ? details.galleries[0]?.grid : false);
+    setImages(details.galleries ? details.galleries[0]?.images : []);
+
+    setFont(
+      details.font,
+      fonts.findIndex((value) => value.font == details.font) || 0,
+    );
+
+    transportToggle('canMoveMap', false);
+    setTransportSubFeature('subway', details.maps[0]?.subwayContent || '');
+    setTransportSubFeature('bus', details.maps[0]?.busContent || '');
+    setTransportSubFeature('car', details.maps[0]?.personalCarContent || '');
+    transportToggle('navigationKakao', details.maps[0]?.kakaoMap || false);
+    transportToggle('navigationNaver', details.maps[0]?.naverMap || false);
+    transportToggle('navigationTmap', details.maps[0]?.tMap || false);
+    transportToggle('transportationCar', details.maps[0]?.personalCar || false);
+
+    transportToggle('transportationBus', details.maps[0]?.bus || false);
+
+    transportToggle('transportationSubway', details.maps[0]?.subway || false);
+
+    const modifiedNotice: Notice[] = details.notices.map((value) => {
+      return {
+        noticeId: value.id!,
+        title: value.title!,
+        content: value.content as string,
+        image: value.image as string,
+        imgFile: null,
+      };
+    });
+    replaceNotice(modifiedNotice || []);
+
+    //계좌
+    const defaultAccount = {
+      accountHolderName: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoUrl: '',
+    };
+
+    const accountKeys = [
+      'accountInfo',
+      'fatherAccountInfo',
+      'motherAccountInfo',
+    ] as const;
+
+    [0, 1].forEach((index) => {
+      accountKeys.forEach((key, keyIndex) => {
+        const accountData =
+          Array.isArray(details.accounts) &&
+          details.accounts.length > index * 3 + keyIndex
+            ? details.accounts[index * 3 + keyIndex]
+            : defaultAccount;
+        updateAccountInfo(index, key, accountData);
+      });
+    });
+
+    //FIX: undefined 처리
+    calendarToggle(
+      'calendar',
+      (details.calendars.length !== 0 && details.calendars[0]?.calendar) ||
+        false,
+    );
+    calendarToggle(
+      'dday',
+      (details.calendars.length !== 0 && details.calendars[0]?.dDay) || false,
+    );
+    calendarToggle(
+      'countdown',
+      (details.calendars.length !== 0 && details.calendars[0]?.countdown) ||
+        false,
+    );
+
+    const features = [
+      { key: 'calendar', list: details.calendars },
+      { key: 'location', list: details.maps },
+      { key: 'gallery', list: details.galleries },
+      { key: 'account', list: details.accounts },
+      { key: 'contact', list: details.contacts },
+      { key: 'notice', list: details.notices },
+    ];
+    features.forEach(({ key, list }) => {
+      const isActive =
+        Array.isArray(list) && list.length > 0 && list[0].isActive;
+      toggleOptionalFeature(key, isActive);
+    });
+    selectMusic(details.audio);
+    musicToggle('music', !!details.audio); //수정 필요
+  }
 };

@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
 import PageLayout from '@layout/PageLayout';
 import HeaderButton from '@common/Header/HeaderButton';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { Accordion } from '@common/CreateInvitation/Accordion';
 import { Stepper } from '@common/CreateInvitation/Stepper';
 import { StepNavigation } from '@common/CreateInvitation/StepNavigation';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
-import { usePostInvitation } from '@hooks/useInvitation';
-import { useInvitationStore } from '@/store/useInvitaionStore';
+import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
 import resetAllStores from '@/store/resetStore';
 import useBrideGroomStore from '@/store/useBrideGroomStore';
 import { validateBrideGroomNames } from '@/utils/validator';
@@ -17,13 +16,16 @@ import NameInputModal from '@/components/form/BasicInformation/NameInput/NameInp
 import ResultDisplay from '@/components/display/ResultDisplay';
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
-import { getInvitationAction } from '@/actions/invitationAction';
+import { getInvitationAction, useUpdateInvitationStore } from '@/actions/invitationAction';
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
-import { NoticeDetail } from '@/types/invitationType';
+import { InvitationDetiail, NoticeDetail } from '@/types/invitationType';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
+import logo from '@/assets/woogyeol/logo_light.png';
+import { S3Props } from '@/services/imageService';
+import { useInvitationStore } from '@/store/useInvitaionStore';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 
@@ -32,78 +34,104 @@ const CreateInvitationPage = () => {
   const [steps, setSteps] = useState(1);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { brideGroom } = useBrideGroomStore();
-  const { invitationtitle } = useInvitationStore();
-  useEffect(() => {
-    const [start, end] = sliceRanges[steps - 1];
-    initializeItems(start, end);
-  }, [steps, initializeItems]);
-
+  const [autoSaveModal, setAutoSaveModal] = useState(false)
   const navigate = useNavigate();
-
-  const handleCancel = () => {
-    resetAllStores();
-    navigate('/dashboard');
-  };
+  const { brideGroom } = useBrideGroomStore();
   const { uploadedImageFile } = useImageStore();
   const { galleryFiles, grid } = useGalleryStore();
+  const { invitationtitle, setInvitationTitle } = useInvitationStore();
   const { notices } = useNoticeStore();
   const noticeImages = notices.flatMap((value) => {
     if (value.imgFile) {
       return value.imgFile;
     } else return null;
   });
-  const { mutateAsync: postMutate } = usePostInvitation(); // useMutation을 직접 변수에 할당
-  const { mutateAsync: s3Mutate } = useS3Image();
-  const details = getInvitationAction();
-  const { optionalItems } = useAccordionStore();
-  const flushAll = useDebouncedInputStore((s) => s.flushAll);
+  const { id } = useParams();
 
+  const { mutateAsync: updateMutate } = useUpdateInvitation(parseInt(id!));
+
+  const { invitations } = useGetInvitation(parseInt(id!));
+
+  const details = getInvitationAction();
+
+  const { mutateAsync: s3Mutate } = useS3Image();
+
+  const { optionalItems } = useAccordionStore();
+
+  const flushAll = useDebouncedInputStore((s) => s.flushAll);
 
   const findOrder = (feature: string) => {
     if (!feature) return undefined; // feature가 없으면 undefined 반환
     const result = optionalItems.find((value) => value.feature === feature);
     return result?.order;
   };
+
   const { selectedOptionalFeatures } = useOptionalFeatureStore();
-  const uploadToS3 = async (files: File[]) => {
-    const { imageUrls } = await s3Mutate(files.length ? files : []);
+
+  const uploadToS3 = async ({ imageFiles, directory }: S3Props) => {
+    const { imageUrls } = await s3Mutate(imageFiles.length ? { imageFiles, directory } : { imageFiles: [], directory });
     return imageUrls;
   };
 
+  const updateSetup = async () => {
+    await flushAll()
+    const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
+      uploadToS3(uploadedImageFile ? { imageFiles: [uploadedImageFile], directory: 'thumbnail' } : { imageFiles: [], directory: 'thumbnail' }),
+      uploadToS3(galleryFiles ? { imageFiles: galleryFiles, directory: 'gallery' } : { imageFiles: [], directory: 'gallery' }),
+      ...noticeImages.map((imageFile) => uploadToS3(imageFile ? { imageFiles: [imageFile], directory: "notice" } : { imageFiles: [], directory: 'notice' })),
+    ]);
+    const s3ImageList = [thumbnail, gallery, ...noticeS3ImageList];
+    const noticeList: NoticeDetail[] = notices.map((value, index) => {
+      return {
+        ...value,
+        order: findOrder('notice'),
+        isActive: selectedOptionalFeatures.notice,
+        image: s3ImageList[index][0],
+      };
+    });
+    updateMutate({
+      ...details,
+      imgUrl: thumbnail.length > 0 ? thumbnail[0] : '',
+      galleries: [
+        { images: gallery, grid, isActive: selectedOptionalFeatures.gallery },
+      ],
+      notices: noticeList,
+    })
+  }
+
   const handleSave = async () => {
-    if (!validateBrideGroomNames(brideGroom)) {
-      setIsModalOpen(true);
-      return;
-    }
-    try {
-      const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
-        uploadToS3(uploadedImageFile ? [uploadedImageFile] : []),
-        uploadToS3(galleryFiles),
-        ...noticeImages.map((image) => uploadToS3(image ? [image] : [])),
-      ]);
-      const s3ImageList = [thumbnail, gallery, ...noticeS3ImageList];
-      const noticeList: NoticeDetail[] = await notices.map((value, index) => {
-        return {
-          ...value,
-          order: findOrder('notice'),
-          isActive: selectedOptionalFeatures.notice,
-          image: s3ImageList[index][0],
-        };
-      });
-      await postMutate({
-        ...details,
-        imgUrl: thumbnail.length > 0 ? thumbnail[0] : '',
-        galleries: [
-          { images: gallery, grid, isActive: selectedOptionalFeatures.gallery },
-        ],
-        notices: noticeList,
-      });
-    } catch (err) {
-      console.log(err);
-      alert('생성중에 에러가 발생했습니다.');
-    }
+    updateSetup()
   };
+
+  useEffect(() => {
+    if (invitations?.title) {
+      setInvitationTitle(invitations?.title)
+    }
+  }, [invitations?.title])
+
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      if (!validateBrideGroomNames(brideGroom)) {
+        setIsModalOpen(true);
+        return
+      }
+      else setAutoSaveModal(true);
+      updateSetup()
+      useUpdateInvitationStore(invitations as InvitationDetiail);
+      setTimeout(() => {
+        setAutoSaveModal(false);
+        setIsModalOpen(false)
+      }, 3000); // 모달 인터벌
+    }, 30000); // 임시저장 인터벌
+    return () => {
+      clearInterval(intervalId); // 컴포넌트 unmount 시 cleanup
+    };
+  }, [updateMutate]);
+
+  useEffect(() => {
+    const [start, end] = sliceRanges[steps - 1];
+    initializeItems(start, end);
+  }, [steps, initializeItems]);
 
   const toggleExpand = (id: number) => {
     setExpandedIds((prev) =>
@@ -116,6 +144,7 @@ const CreateInvitationPage = () => {
       setSteps(step);
     }
   };
+
   const handleNext = () => {
     if (steps < sliceRanges.length) {
       handleStepClick(steps + 1);
@@ -126,13 +155,22 @@ const CreateInvitationPage = () => {
       handleStepClick(steps - 1);
     }
   };
+  const handleCancel = () => {
+    resetAllStores();
+    navigate('/dashboard');
+  };
 
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="page-container">
         <div className="create-section relative">
+          {autoSaveModal &&
+            <div className='fixed flex flex-row gap-4  top-10 right-10 z-20 bg-purple-200/40 text-white px-2 py-2 rounded-md'>
+              <img alt="WooGyeol" src={logo} className="w-6 animate-spin" />
+              auto-saving....</div>
+          }
           <div className="absolute bottom-16 right-4">
-            <PreviewButton />
+            <PreviewButton isSaving={autoSaveModal} />
           </div>
           <PageLayout
             title={invitationtitle}

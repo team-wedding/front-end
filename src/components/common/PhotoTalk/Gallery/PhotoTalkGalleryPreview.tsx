@@ -19,7 +19,6 @@ const PhotoTalkGalleryPreview = ({
   return (
     <div>
       <PhotoTalkGalleryGrid
-        userMode={userMode}
         images={images}
         onImageClick={(index) => {
           setCurrentImageIndex(index);

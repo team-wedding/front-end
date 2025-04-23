@@ -10,6 +10,7 @@ import PhotoTalkAction from '@/components/common/PhotoTalk/Action/PhotoTalkActio
 interface PhotoTalkCardProps {
   userMode: UserMode;
   photoTalk: PhotoTalk;
+  isExample: boolean;
   onEdit?: () => void;
   onDelete?: () => void;
 }
@@ -17,6 +18,7 @@ interface PhotoTalkCardProps {
 const PhotoTalkCard = ({
   userMode,
   photoTalk,
+  isExample,
   onEdit,
   onDelete,
 }: PhotoTalkCardProps) => {
@@ -109,6 +111,14 @@ const PhotoTalkCard = ({
           <span className="mr-2">From.</span>
           <p>{photoTalk.name}</p>
         </footer>
+
+        {isExample && (
+          <footer className="absolute left-0 right-0 -bottom-7 backdrop-blur-xl bg-black/20 p-2 rounded-lg shadow-sm">
+            <p className="text-center text-xs text-white font-extralight">
+              example
+            </p>
+          </footer>
+        )}
       </div>
     </div>
   );

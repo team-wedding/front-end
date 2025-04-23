@@ -1,12 +1,16 @@
 import PhotoTalkGalleryGrid from '@/components/common/PhotoTalk/Gallery/PhotoTalkGalleryGrid';
 import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/Modal/GalleryModal/PhotoTalkGalleryModal';
 import { phototalkData } from '@/constants/phototalkData';
-import { USER_MODE } from '@/types/users';
+import { UserMode } from '@/types/users';
 import { useState } from 'react';
 
-const userMode = USER_MODE.PREVIEW;
+interface PhotoTalkGalleryPreviewProps {
+  userMode: UserMode;
+}
 
-const PhotoTalkGalleryPreview = () => {
+const PhotoTalkGalleryPreview = ({
+  userMode,
+}: PhotoTalkGalleryPreviewProps) => {
   const images = phototalkData.flatMap((phototalk) => phototalk.imageUrl);
 
   const [isModalOpen, setModalOpen] = useState(false);

@@ -1,16 +1,32 @@
 import { PhotoTalk } from '@/types/phototalkType';
-import phototalk1 from '@/assets/phototalk/phototalk1.jpg';
-import phototalk2 from '@/assets/phototalk/phototalk2.jpg';
-import phototalk3 from '@/assets/phototalk/phototalk3.jpg';
-import phototalk4 from '@/assets/phototalk/phototalk4.jpg';
-import phototalk5 from '@/assets/phototalk/phototalk5.jpg';
-import phototalk6 from '@/assets/phototalk/phototalk6.jpg';
-import phototalk7 from '@/assets/phototalk/phototalk7.jpg';
-import phototalk8 from '@/assets/phototalk/phototalk8.jpg';
-import phototalk9 from '@/assets/phototalk/phototalk9.jpg';
-import phototalk10 from '@/assets/phototalk/phototalk10.jpg';
-import phototalk11 from '@/assets/phototalk/phototalk11.jpg';
-import phototalk12 from '@/assets/phototalk/phototalk12.jpg';
+import phototalk1 from '@/assets/phototalk//preview/phototalk1.jpg';
+import phototalk2 from '@/assets/phototalk/preview/phototalk2.jpg';
+import phototalk3 from '@/assets/phototalk/preview/phototalk3.jpg';
+import phototalk4 from '@/assets/phototalk/preview/phototalk4.jpg';
+import phototalk5 from '@/assets/phototalk/preview/phototalk5.jpg';
+import phototalk6 from '@/assets/phototalk/preview/phototalk6.jpg';
+import phototalk7 from '@/assets/phototalk/preview/phototalk7.jpg';
+import phototalk8 from '@/assets/phototalk/preview/phototalk8.jpg';
+import phototalk9 from '@/assets/phototalk/preview/phototalk9.jpg';
+import phototalk10 from '@/assets/phototalk/preview/phototalk10.jpg';
+import phototalk11 from '@/assets/phototalk/preview/phototalk11.jpg';
+import phototalk12 from '@/assets/phototalk/preview/phototalk12.jpg';
+
+import example1 from '@assets/phototalk/example/example1.jpg';
+import example2 from '@assets/phototalk/example/example2.jpg';
+import example3 from '@assets/phototalk/example/example3.jpg';
+
+export const exampleImages = [example1, example2, example3];
+
+export const examplePhototalkCard: PhotoTalk[] = [
+  {
+    id: 0,
+    name: '무도',
+    password: '',
+    message: '결혼 축하해 오늘은 너의 날이야 💃🕺',
+    imageUrl: exampleImages,
+  },
+];
 
 export const phototalkData: PhotoTalk[] = [
   {

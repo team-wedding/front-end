@@ -62,6 +62,7 @@ const PhotoTalkCard = ({
       <div ref={dropdownRef}>
         <button
           className="inline-block hover:bg-surface-muted dark:hover:bg-surface-muted-dark focus:ring-0 focus:outline-none rounded-lg text-sm absolute top-1 right-4"
+          className="inline-block hover:bg-surface-muted dark:hover:bg-surface-muted-dark focus:ring-0 focus:outline-none rounded-lg text-sm absolute top-1 right-4"
           type="button"
           onClick={() => setOpenDropdown(!openDropdown)}
           aria-label="메뉴 열기"
@@ -71,6 +72,7 @@ const PhotoTalkCard = ({
 
         {openDropdown && (
           <div
+            className={`absolute top-8 right-5 z-10 bg-surface border border-border dark:border-border-dark dark:bg-surface-dark backdrop-blur-xl divide-y divide-border rounded-2xl shadow-md w-[30%] px-2 py-1`}
             className={`absolute top-8 right-5 z-10 bg-surface border border-border dark:border-border-dark dark:bg-surface-dark backdrop-blur-xl divide-y divide-border rounded-2xl shadow-md w-[30%] px-2 py-1`}
           >
             <PhotoTalkAction

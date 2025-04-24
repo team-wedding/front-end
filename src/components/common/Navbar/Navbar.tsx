@@ -38,7 +38,7 @@ const Navbar = () => {
 
   return (
     <div className="relative">
-      <div className="fixed bottom-4 left-0 right-0 z-20 m-auto w-fit flex-center bg-black/70 rounded-3xl p-4 shadow-md backdrop-blur-3xl">
+      <div className="fixed bottom-4 left-0 right-0 z-20 m-auto w-fit flex-center bg-black/80 rounded-3xl p-4 shadow-md backdrop-blur-3xl">
         {navItems.map((item) => (
           <button
             key={item.label}

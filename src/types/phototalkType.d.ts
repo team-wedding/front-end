@@ -16,3 +16,10 @@ export interface CreatePhotoTalk {
   message: string;
   imageUrl: string[];
 }
+
+export interface PhotoTalkResponse {
+  allCelebrationMsgs: PhotoTalk[];
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+}

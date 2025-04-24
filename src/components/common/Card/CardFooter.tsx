@@ -31,24 +31,25 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
   };
 
   return (
-    <main
-      className="flex-between w-full h-14 rounded-b-xl backdrop-blur-sm
-     px-4"
+    <footer
+      className="flex-between h-[60px]
+     px-4 absolute bottom-0 bg-black/60 w-full rounded-b-xl"
     >
       {/* 청첩장 제목 입력값 */}
       <div className="flex flex-col items-start">
-        <span className="text-md font-medium text-white/90">{title}</span>
-        <div className="text-[9px] font-extralight text-white/50 tracking-wide">
+        <h2 className="text-base font-medium text-white/90">{title}</h2>
+        <span className="text-[10px] font-light text-white/40 tracking-wide">
           {createdAt}
-        </div>
+        </span>
       </div>
 
       <button
         ref={parentRef}
+        aria-label="공유하기"
         tabIndex={-1}
         onBlur={handleBlur}
         onFocus={handleFocus}
-        className="text-white/80"
+        className="text-white/90"
       >
         <ShareIcon />
         {isFocused && (
@@ -63,7 +64,7 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
           />
         )}
       </button>
-    </main>
+    </footer>
   );
 };
 

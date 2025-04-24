@@ -34,9 +34,13 @@ axiosInstance.interceptors.response.use(
     return res;
   },
   async (error) => {
-    const status = error.response ? error.response.status : null;
+    const status = error.response?.status;
+    const originalRequest = error.config;
     console.log(status);
-    if (status === 401) {
+
+    const isAuthRequired = !originalRequest.headers?.['X-No-Auth'];
+
+    if (status === 401 && isAuthRequired) {
       try {
         // Refresh Token으로 Access Token 갱신
         const refreshResponse = await axios.get(API.REFRESH(), {});
@@ -48,9 +52,8 @@ axiosInstance.interceptors.response.use(
           useAuthStore.getState().setAccessToken(newAccessToken);
 
           // 실패했던 요청을 다시 실행
-          const retryConfig = error.config;
-          retryConfig.headers.Authorization = `${newAccessToken}`; // *** 확인
-          return axiosInstance.request(retryConfig);
+          originalRequest.headers.Authorization = `${newAccessToken}`; // *** 확인
+          return axiosInstance.request(originalRequest);
         }
       } catch (refreshError) {
         console.error('Refresh Token 갱신 실패:', refreshError);
@@ -81,8 +84,18 @@ export const API = {
   ATTENDANCE: (page?: number, size?: number) =>
     `${BASE_URL}/attendances${page ? `/?page=${page}` : ''}${size ? `&size=${size}` : ''}`,
   CHANGEPASSWORD: () => `${BASE_URL}/users/account/password`,
-  PHOTOTALKS: (id?: string, page?: number, size?: number) =>
-    `${BASE_URL}/celebrationMsgs/${id ? id : ''}${page ? `/?page=${page}` : ''}${size ? `&size=${size}` : ''}`,
+  PHOTOTALKS: {
+    list: () => `${BASE_URL}/celebrationMsgs`,
+    guestList: (userId: string) =>
+      `${BASE_URL}/celebrationMsgs/guest/${userId}`,
+
+    detail: (id: string) => `${BASE_URL}/celebrationMsgs/${id}`,
+    create: () => `${BASE_URL}/celebrationMsgs`,
+    update: (id: string) => `${BASE_URL}/celebrationMsgs/${id}`,
+
+    deleteByGuest: (id: string) => `${BASE_URL}/celebrationMsgs/${id}`,
+    deleteByAdmin: (id: string) => `${BASE_URL}/celebrationMsgs/admin/${id}`,
+  },
   S3Images: (directory: string) => `${BASE_URL}/s3/?directory=${directory}`,
   S3InvitationRemoval: (id: string) => `${BASE_URL}/s3/invitations/${id}`,
 };

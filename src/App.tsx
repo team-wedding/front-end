@@ -1,7 +1,6 @@
 import './App.css';
 import { Route, Routes } from 'react-router';
 import CreateInvitationPage from './pages/CreateInvitationPage';
-import ResultPage from './pages/ResultPage';
 import DashBoardPage from './pages/DashBoardPage';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
@@ -13,13 +12,15 @@ import EditProfilePage from './pages/EditProfilePage';
 import ResetPasswordPage from './pages/ResetPasswordPage';
 import ChangePasswordPage from '@/pages/ChangePasswordPage';
 import SignUpPage from '@/pages/SignUpPage';
-import PhotoTalkPage from '@/pages/PhotoTalk/PhotoTalkPage';
 import StartPage from '@/pages/StartPage';
 import LoginPage from '@/pages/LoginPage';
 import ScrollToTop from '@/components/common/ScrollToTop';
 import DarkModeProvider from './components/providers/DarkModeProvider';
 import PreviewPhotoTalkPage from '@/pages/PhotoTalk/PreviewPhotoTalkPage';
 import PreviewInvitationPage from '@/pages/PreviewInvitationPage';
+import EditInvitationPage from '@/pages/EditInvitationPage';
+import ResultPage from '@/pages/ResultPage';
+import GuestPhotoTalkPage from '@/pages/PhotoTalk/GuestPhotoTalkPage';
 
 function App() {
   const queryClient = new QueryClient();
@@ -55,7 +56,7 @@ function App() {
           />
           <Route
             path={'/phototalk/:userId/:invitationId'}
-            element={<PhotoTalkPage />}
+            element={<GuestPhotoTalkPage />}
           />
 
           {/* 마이페이지 */}

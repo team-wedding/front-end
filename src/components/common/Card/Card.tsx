@@ -19,7 +19,7 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
 
   const { mutate: deleteInvitation } = useDeleteInvitation(invitationId);
   const { mutate: deleteS3Invitation } = useS3RemoveImage(invitationId.toString())
-  const { id } = useUserStore();
+  const { id: userId } = useUserStore();
 
   const [modal, setModal] = useState(false);
 
@@ -31,11 +31,12 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
 
   return (
     <div className="relative flex flex-col items-center justify-center w-full rounded-xl shadow-md hover:shadow-custom">
-      <div className="relative rounded-xl group transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:-translate-y-0.5">
+      <section className="relative rounded-xl group transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:-translate-y-0.5">
         <header>
           <button
             onClick={() => setModal(true)}
-            className="absolute top-2 left-2 z-10 w-fit bg-black/10 rounded-full text-white/80"
+            aria-label="삭제하기"
+            className="absolute top-2 left-2 z-10 w-fit bg-black/10 rounded-full text-white/60"
           >
             <CircleMinusIcon />
           </button>
@@ -44,18 +45,16 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
         <img
           src={image || logo}
           className="object-cover aspect-[3/4] rounded-xl"
-          onClick={() => navigate(`/preview/${id}/${invitationId}`)}
+          onClick={() => navigate(`/preview/${userId}/${invitationId}`)}
         />
 
-        <footer className="absolute bottom-0 bg-black/60 w-full rounded-b-xl">
-          <CardFooter
-            id={invitationId}
-            image={image}
-            title={title}
-            setModal={setModal}
-          />
-        </footer>
-      </div>
+        <CardFooter
+          id={invitationId}
+          image={image}
+          title={title}
+          setModal={setModal}
+        />
+      </section>
 
       <ReusableModal
         isOpen={modal}

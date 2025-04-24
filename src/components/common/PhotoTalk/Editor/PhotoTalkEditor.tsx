@@ -8,15 +8,19 @@ import { useS3Image } from '@/hooks/useS3Image';
 // import { useUserStore } from '@/store/useUserStore';
 
 interface PhotoTalkEditorProps {
-  isOpen: boolean;
+  isEditorOpen: boolean;
   closeEditor: () => void;
 }
 
-const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
+const PhotoTalkEditor = ({
+  isEditorOpen,
+  closeEditor,
+}: PhotoTalkEditorProps) => {
   const { userId, invitationId } = useParams();
   const { editingPhotoTalk, resetFields } = usePhotoTalkStore();
   const createPhototalk = useCreatePhototalk();
   const updatePhototalk = useUpdatePhototalk();
+  const { mutateAsync: s3Mutate } = useS3Image();
 
   // const [isDragging, setIsDragging] = useState(false);
   const [form, setForm] = useState({
@@ -54,7 +58,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
         imageFile: [],
       });
     }
-  }, [isOpen, editingPhotoTalk]);
+  }, [isEditorOpen, editingPhotoTalk]);
 
   const handleImageUpload = (e: ChangeEvent<HTMLInputElement>) => {
     if (!e.target.files) return;
@@ -105,7 +109,6 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
     }));
   };
 
-  const { mutateAsync: s3Mutate } = useS3Image();
   const handleSubmit = async () => {
     if (!form.name || !form.message || !form.password) {
       alert('모든 필드를 입력해주세요.');
@@ -150,7 +153,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
   };
 
   return (
-    isOpen && (
+    isEditorOpen && (
       <div className="flex-center fixed inset-0 z-50 bg-black bg-opacity-50 max-w-[520px] m-auto">
         <div className="bg-white rounded-2xl shadow-custom backdrop-blur-3xl w-[80%] p-2">
           <div className="flex flex-col">
@@ -257,7 +260,7 @@ const PhotoTalkEditor = ({ isOpen, closeEditor }: PhotoTalkEditorProps) => {
 
               <button
                 onClick={handleSubmit}
-                className="bg-black text-white hover:bg-rose-200 p-4 rounded-2xl shrink-0 text-xs"
+                className={`bg-black text-white hover:bg-rose-200 p-4 rounded-2xl shrink-0 text-xs`}
               >
                 {editingPhotoTalk ? '편집하기' : '등록하기'}
               </button>

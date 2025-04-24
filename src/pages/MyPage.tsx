@@ -2,10 +2,10 @@ import { useLocation, useNavigate } from 'react-router';
 import { useUserStore } from '@/store/useUserStore';
 import profile from '../assets/woogyeol/profile_light.png';
 import MoonIcon from '@/components/icons/MoonIcon';
-import Navbar from '@/components/common/Navbar';
+import Navbar from '@/components/common/Navbar/Navbar';
 import RsvpStatsPage from '@/pages/RsvpStatsPage';
 import AdminPhotoTalkPage from '@/pages/PhotoTalk/AdminPhotoTalkPage';
-import Tab from '@/components/common/Tab';
+import Tab from '@/components/common/Tab/Tab';
 import { useEffect, useState } from 'react';
 import ChevronRight from '@/components/icons/Chevron_RightIcon';
 
@@ -46,9 +46,9 @@ const MyPage = () => {
           <MoonIcon />
         </button>
 
-        <section className="flex-center text-lg p-6 border-none gap-2">
+        <section className="flex-center text-lg p-6 border-none gap-3">
           <div className="column-center">
-            <img src={profile} alt="profile" className="w-16" />
+            <img src={profile} alt="profile" className="w-20" />
             {/* <button
               className="text-xs text-[#B4B4B4] font-extralight"
               onClick={() => navigate('/mypage/edit')}
@@ -57,10 +57,10 @@ const MyPage = () => {
             </button> */}
           </div>
 
-          <div className="flex flex-col text-lg font-extralight leading-6">
+          <div className="flex flex-col text-lg font-extralight leading-6 text-black/90">
             <div>안녕하세요,</div>
             <div className="flex-center">
-              <div className="font-medium">{name}</div>
+              <div className="font-medium">{name || '김우결'}</div>
               <div>님</div>
               <div
                 className="animate-pulse cursor-pointer font-medium"
@@ -74,7 +74,7 @@ const MyPage = () => {
       </header>
 
       <main className="flex flex-col flex-1">
-        <div className="h-16"></div>
+        <div className="h-20"></div>
 
         <Tab
           data={TabData}

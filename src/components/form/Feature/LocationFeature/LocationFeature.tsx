@@ -1,8 +1,8 @@
 import { useLocationFeatureStore } from '@store/OptionalFeature/useLocationFeatureStore';
-import OnOff from '@common/OnOff';
 import NavigationItem from './NavigationItem';
 import TransportationItem from './TransportationItem';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
+import OnOff from '@/components/common/Toggle/OnOff';
 
 const LocationFeature = () => {
   const { subFeatures, toggleSubFeature } = useLocationFeatureStore();
@@ -22,7 +22,7 @@ const LocationFeature = () => {
         <div>지도 이동 및 확대</div>
         <OnOff
           state={subFeatures.canMoveMap}
-          setState={(enabled) => toggleSubFeature('canMoveMap', enabled)}
+          setState={(enabled: boolean) => toggleSubFeature('canMoveMap', enabled)}
         />
       </div>
 

@@ -2,9 +2,9 @@ import Card from '@common/Card/Card';
 import { InvitationDetiail } from '../types/invitationType';
 import { useEffect, useState } from 'react';
 import { useGetInvitations } from '@/hooks/useInvitation';
-import Navbar from '@/components/common/Navbar';
 import logo from '@/assets/woogyeol/logo_light.png';
 import DarkModeToggle from '@/components/common/DarkMode/DarkModeToggle';
+import Navbar from '@/components/common/Navbar/Navbar';
 
 const DashBoardPage = () => {
   const { data, isPending, isRefetching, status, isError, isFetching } =

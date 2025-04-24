@@ -18,7 +18,6 @@ import ScrollToTop from '@/components/common/ScrollToTop';
 import DarkModeProvider from './components/providers/DarkModeProvider';
 import PreviewPhotoTalkPage from '@/pages/PhotoTalk/PreviewPhotoTalkPage';
 import PreviewInvitationPage from '@/pages/PreviewInvitationPage';
-import EditInvitationPage from '@/pages/EditInvitationPage';
 import ResultPage from '@/pages/ResultPage';
 import GuestPhotoTalkPage from '@/pages/PhotoTalk/GuestPhotoTalkPage';
 

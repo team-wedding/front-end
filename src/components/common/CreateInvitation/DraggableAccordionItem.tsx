@@ -1,9 +1,9 @@
 import React from 'react';
 import DragAndDrop from '../DragAndDrop';
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
-import Toggle from '../Toggle';
 import { AccordionItemData } from '@constants/accordionData';
 import { useToggleFeatureStore } from '@store/OptionalFeature/useToggleFeatureStore.';
+import Toggle from '@/components/common/Toggle/Toggle';
 
 export interface DraggableAccordionItemProps {
   item: AccordionItemData;
@@ -57,9 +57,8 @@ export const DraggableAccordionItem = ({
               <Toggle state={isFeatureActive} setState={handleToggle} />
             )}
             <i
-              className={`bx bx-chevron-down text-xl transition-all duration-300 ${
-                expandedIds.includes(item.id) ? 'rotate-180' : ''
-              }`}
+              className={`bx bx-chevron-down text-xl transition-all duration-300 ${expandedIds.includes(item.id) ? 'rotate-180' : ''
+                }`}
             ></i>
           </div>
         </div>
@@ -68,9 +67,8 @@ export const DraggableAccordionItem = ({
       {/* 콘텐츠 */}
       <div
         id={`accordion-content-${item.id}`} // 제목이랑 연결
-        className={`px-5 pb-5 overflow-hidden transition-all duration-300 ease-in-out ${
-          expandedIds.includes(item.id) ? 'opacity-100' : 'opacity-0'
-        }`}
+        className={`px-5 pb-5 overflow-hidden transition-all duration-300 ease-in-out ${expandedIds.includes(item.id) ? 'opacity-100' : 'opacity-0'
+          }`}
       >
         <div>{item.content}</div>
       </div>

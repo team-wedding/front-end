@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLocationFeatureStore';
-import OnOff from '../../../common/OnOff';
 import TextEditor from '../../../common/TextEditor';
 import { transportationData } from '../../../../constants/transportationData';
+import OnOff from '@/components/common/Toggle/OnOff';
 
 const TransportationItem = () => {
   const {
@@ -35,7 +35,7 @@ const TransportationItem = () => {
             <div>{title}</div>
             <OnOff
               state={subFeatures[key]}
-              setState={(enabled) => toggleSubFeature(key, enabled)}
+              setState={(enabled: boolean) => toggleSubFeature(key, enabled)}
             />
           </div>
           {openAccordion === key && (

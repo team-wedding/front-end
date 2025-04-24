@@ -1,4 +1,4 @@
-import Header from '../common/Header';
+import Header from "@/components/common/Header/Header";
 
 type PageLayoutProps = {
   title?: string | React.ReactNode;

@@ -321,11 +321,8 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
   const { toggleSubFeature: calendarToggle } =
     useCalendarFeatureStore.getState();
   if (details) {
-    //청첩장 제목
-    // setInvitationTitle(details.title);
-    //가족이름
-    updateBrideGroom(0, 'name', details.brideName);
-    updateBrideGroom(1, 'name', details.groomName);
+    updateBrideGroom(0, 'name', details.groomName);
+    updateBrideGroom(1, 'name', details.brideName);
     updateFamily(0, 'father', 'name', details.brideFatherName);
     updateFamily(0, 'mother', 'name', details.brideMotherName);
     updateFamily(0, 'father', 'isDeceased', !details.brideFatherAlive);
@@ -335,7 +332,6 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
     updateFamily(1, 'father', 'isDeceased', !details.groomFatherAlive);
     updateFamily(1, 'mother', 'isDeceased', !details.groomMotherAlive);
 
-    //FIX: 주소 어떻게 받을지 처리
     setAddress(details.location[0], details.location[1]);
     setJibunAddress(details.location[2]);
     try {
@@ -360,7 +356,6 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
     setWeddingHallDetail(details.location[5]);
 
     try {
-      //  비어 있는 경우, 현재 날짜 설정
       if (details.date.length === 0) {
         setWeddingDate(today);
       } else {
@@ -485,7 +480,6 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
       });
     });
 
-    //FIX: undefined 처리
     calendarToggle(
       'calendar',
       (details.calendars.length !== 0 && details.calendars[0]?.calendar) ||

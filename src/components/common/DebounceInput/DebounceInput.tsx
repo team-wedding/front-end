@@ -67,6 +67,7 @@ const DebouncedInput = forwardRef<DebouncedInputHandle, DebouncedInputProps>(
       <input
         type={type}
         pattern={pattern}
+        defaultValue={valueRef.current}
         onChange={handleChange}
         placeholder={placeholder}
         className={className}

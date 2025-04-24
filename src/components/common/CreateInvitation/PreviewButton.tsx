@@ -3,14 +3,20 @@ import { useNavigate } from 'react-router';
 
 interface PreviewButtonProps {
   id?: string;
-  isSaving?: boolean
+  isSaving: boolean
+  update: () => void
 }
 
-const PreviewButton = ({ id, isSaving }: PreviewButtonProps) => {
+const PreviewButton = ({ id, isSaving, update }: PreviewButtonProps) => {
   const navigate = useNavigate();
 
-  const handleClick = () =>
-    !isSaving && id ? navigate(`/preview/${id}`) : navigate('/preview');
+  const handleClick = () => {
+    update();
+    if (!isSaving) {
+      navigate(id ? `/preview/${id}` : '/preview');
+    }
+  };
+
 
   return (
     <button

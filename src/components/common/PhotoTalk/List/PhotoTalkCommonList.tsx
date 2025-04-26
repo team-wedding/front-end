@@ -11,6 +11,7 @@ interface PhotoTalkCommonListProps {
   onEdit?: (photoTalk: PhotoTalk) => void;
   onDelete: (photoTalk: PhotoTalk) => void;
   isGalleryOpen: boolean;
+  isPending: boolean;
 }
 
 const PhotoTalkCommonList = ({
@@ -19,6 +20,7 @@ const PhotoTalkCommonList = ({
   onEdit,
   onDelete,
   isGalleryOpen,
+  isPending,
 }: PhotoTalkCommonListProps) => {
   const isCardEmpty = photoTalkList.length === 0;
   const photoTalks = isCardEmpty ? examplePhototalkCard : photoTalkList;

@@ -51,17 +51,14 @@ const PhotoTalkListGuest = ({
         onOpenEditor={onOpenEditor}
       />
 
-      {isLoading ? (
-        <>loading...</>
-      ) : (
-        <PhotoTalkCommonList
-          userMode={userMode}
-          photoTalkList={photoTalkList}
-          onEdit={(talk) => openModal(talk, ACTION_MODE.EDIT)}
-          onDelete={(talk) => openModal(talk, ACTION_MODE.DELETE)}
-          isGalleryOpen={isGalleryOpen}
-        />
-      )}
+      <PhotoTalkCommonList
+        userMode={userMode}
+        photoTalkList={photoTalkList}
+        onEdit={(talk) => openModal(talk, ACTION_MODE.EDIT)}
+        onDelete={(talk) => openModal(talk, ACTION_MODE.DELETE)}
+        isGalleryOpen={isGalleryOpen}
+        isPending={isLoading}
+      />
 
       <PasswordConfirmModal
         mode={actionMode}

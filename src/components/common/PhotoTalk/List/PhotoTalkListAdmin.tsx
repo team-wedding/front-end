@@ -35,16 +35,13 @@ const PhotoTalkListAdmin = ({
         onToggleGallery={() => setGalleryOpen(!isGalleryOpen)}
       />
 
-      {isLoading ? (
-        <>loading...</>
-      ) : (
-        <PhotoTalkCommonList
-          userMode={userMode}
-          photoTalkList={photoTalkList}
-          onDelete={(talk) => openModal(talk, ACTION_MODE.DELETE)}
-          isGalleryOpen={isGalleryOpen}
-        />
-      )}
+      <PhotoTalkCommonList
+        userMode={userMode}
+        photoTalkList={photoTalkList}
+        onDelete={(talk) => openModal(talk, ACTION_MODE.DELETE)}
+        isGalleryOpen={isGalleryOpen}
+        isPending={isLoading}
+      />
 
       <ReusableModal
         isOpen={isModalOpen}

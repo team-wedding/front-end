@@ -4,6 +4,7 @@ const SkeletonGallery = () => {
       <div className="w-full rounded-sm aspect-[1/1] bg-gray-200 dark:bg-gray-700" />
       <div className="w-full rounded-sm aspect-[1/1] bg-gray-200 dark:bg-gray-700" />
       <div className="w-full rounded-sm aspect-[1/1] bg-gray-200 dark:bg-gray-700" />
+      <span className="sr-only">Loading...</span>
     </div>
   );
 };

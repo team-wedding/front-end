@@ -2,8 +2,10 @@ import PhotoTalkCard from '@/components/common/PhotoTalk/Card/PhotoTalkCard';
 import PhotoTalkGallery from '@/components/common/PhotoTalk/Gallery/PhotoTalkGallery';
 import { PhotoTalk } from '@/types/phototalkType';
 import { UserMode } from '@/types/users';
-import SkeletonPhotoTalk from '@/components/common/Skeleton/SkeletonPhotoTalk';
-import SkeletonGallery from '@components/common/Skeleton/SkeletonGallery';
+import { examplePhototalkCard } from '@/constants/phototalkData';
+import PhotoTalkEmptyState from '@/components/common/PhotoTalk/EmptyState/PhotoTalkEmptyState';
+import SkeletonPhotoTalk from '../../Skeleton/SkeletonPhotoTalk';
+import SkeletonGallery from '../../Skeleton/SkeletonGallery';
 
 interface PhotoTalkCommonListProps {
   userMode: UserMode;
@@ -22,7 +24,8 @@ const PhotoTalkCommonList = ({
   isGalleryOpen,
   isPending,
 }: PhotoTalkCommonListProps) => {
-  const hasPhotoTalk = photoTalkList.length > 0;
+  const isCardEmpty = !isPending && photoTalkList.length === 0;
+  const photoTalks = isCardEmpty ? examplePhototalkCard : photoTalkList;
 
   if (isPending) {
     return isGalleryOpen
@@ -34,7 +37,14 @@ const PhotoTalkCommonList = ({
         ));
   }
 
-  if (!hasPhotoTalk) return <PhotoTalkListEmptyState userMode={userMode} />;
+  return (
+    <>
+      {isCardEmpty && (
+        <PhotoTalkEmptyState
+          userMode={userMode}
+          viewType={`${isGalleryOpen ? 'gallery' : 'list'}`}
+        />
+      )}
 
       {isGalleryOpen ? (
         <PhotoTalkGallery userMode={userMode} />

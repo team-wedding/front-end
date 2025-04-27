@@ -45,7 +45,6 @@ const PhotoTalkCommonList = ({
           viewType={`${isGalleryOpen ? 'gallery' : 'list'}`}
         />
       )}
-
       {isGalleryOpen ? (
         <PhotoTalkGallery userMode={userMode} />
       ) : (

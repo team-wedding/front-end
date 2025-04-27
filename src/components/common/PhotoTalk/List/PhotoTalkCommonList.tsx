@@ -26,8 +26,12 @@ const PhotoTalkCommonList = ({
 
   if (isPending) {
     return isGalleryOpen
-      ? Array.from({ length: 3 }).map((_, i) => <SkeletonGallery key={i} />)
-      : Array.from({ length: 3 }).map((_, i) => <SkeletonPhotoTalk key={i} />);
+      ? Array.from({ length: 3 }).map((_, index) => (
+          <SkeletonGallery key={index} />
+        ))
+      : Array.from({ length: 3 }).map((_, index) => (
+          <SkeletonPhotoTalk key={index} />
+        ));
   }
 
   if (!hasPhotoTalk) return <PhotoTalkListEmptyState userMode={userMode} />;

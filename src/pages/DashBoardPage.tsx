@@ -3,8 +3,7 @@ import { InvitationDetiail } from '../types/invitationType';
 import { useEffect, useState } from 'react';
 import { useGetInvitations } from '@/hooks/useInvitation';
 import Navbar from '@common/Navbar/Navbar';
-import logo from '@/assets/woogyeol/logo_light.png';
-import logoDark from '@/assets/woogyeol/logo_dark.png';
+import Logo from '@common/Logo';
 import DarkModeToggle from '@/components/common/DarkMode/DarkModeToggle';
 
 const DashBoardPage = () => {
@@ -27,12 +26,7 @@ const DashBoardPage = () => {
       {/* 헤더 */}
       <header className="fixed top-0 left-0 right-0 z-20 m-auto max-w-[520px] bg-surface dark:bg-surface-dark flex justify-start items-center max-h-12">
         <div className="p-3">
-          <img alt="WooGyeol" src={logo} className="w-6 block dark:hidden" />
-          <img
-            alt="WooGyeol"
-            src={logoDark}
-            className="w-6 hidden dark:block"
-          />
+          <Logo className="w-6" />
         </div>
         <div className="absolute top-0 right-0">
           <DarkModeToggle />

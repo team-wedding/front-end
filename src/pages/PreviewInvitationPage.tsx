@@ -6,9 +6,8 @@ import { useAccordionStore } from '@/store/useAccordionStore';
 import { useEffect } from 'react';
 import { useUpdateInvitationStore } from '@/actions/invitationAction';
 import { InvitationDetiail } from '@/types/invitationType';
-import logo from '@/assets/woogyeol/logo_light.png';
-import logoDark from '@/assets/woogyeol/logo_dark.png';
 import CloseIcon from '@/components/icons/CloseIcon';
+import Logo from '@/components/common/Logo';
 
 const PreviewInvitationPage = () => {
   const navigate = useNavigate();
@@ -73,12 +72,7 @@ const PreviewInvitationPage = () => {
       <main className="pb-40 relative">
         <PreviewDisplay />
         <footer className="absolute bottom-10 right-0 left-0 flex-center gap-1">
-          <img src={logo} alt="WooGyeol" className="w-4 block dark:hidden" />
-          <img
-            src={logoDark}
-            alt="WooGyeol"
-            className="w-4 hidden dark:block"
-          />
+          <Logo className="w-4" />
           <span className="text-xs text-label-secondary/60 dark:text-label-secondary-dark/60">
             우리, 결혼해요
           </span>

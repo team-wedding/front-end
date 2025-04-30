@@ -1,6 +1,5 @@
 import { useNavigate } from 'react-router';
-import logo from '@/assets/woogyeol/logo_light.png';
-import logoDark from '@/assets/woogyeol/logo_dark.png';
+import Logo from '@/components/common/Logo';
 
 const StartPage = () => {
   const navigate = useNavigate();
@@ -10,16 +9,7 @@ const StartPage = () => {
       <main className="column-center gap-8 w-full flex-1">
         <header className="column-center gap-3">
           <div className="p-2">
-            <img
-              src={logo}
-              alt="우결 로고"
-              className="w-32 block dark:hidden"
-            />
-            <img
-              src={logoDark}
-              alt="우결 로고"
-              className="w-32 dark:block hidden"
-            />
+            <Logo className="w-32" />
           </div>
           <h1 className="font-semibold text-3xl text-label dark:text-label-dark">
             우리, 결혼해요

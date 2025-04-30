@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLocationFeatureStore';
-import OnOff from '../../../common/OnOff';
+import OnOff from '@common/Toggle/OnOff';
 import TextEditor from '../../../common/TextEditor';
 import { transportationData } from '../../../../constants/transportationData';
 

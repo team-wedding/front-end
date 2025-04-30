@@ -2,7 +2,7 @@ const CloudArrowIcon = () => {
   return (
     <div>
       <svg
-        className="w-6 h-6 mb-4 text-gray-500 dark:text-gray-400"
+        className="w-6 h-6 mb-4 text-icon-muted/60 dark:text-icon-muted-dark/60"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"

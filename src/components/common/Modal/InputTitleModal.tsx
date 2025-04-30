@@ -31,11 +31,11 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
   return (
     <div className="fixed inset-0 z-50 flex-center bg-black bg-opacity-50">
       {/* 모달 내용 */}
-      <div className="bg-white rounded-lg shadow-lg w-80 px-4 pt-4 pb-10">
+      <div className="bg-surface dark:bg-surface-muted-dark rounded-lg shadow-lg w-80 px-4 pt-4 pb-10">
         {/* 닫기 버튼 */}
         <div className="flex justify-end items-center">
           <button
-            className="text-black hover:text-gray-400"
+            className="text-label dark:text-label-dark hover:text-label-secondary/60 dark:hover:text-label-secondary-dark/60"
             onClick={onClose}
             aria-label="Close modal"
           >
@@ -43,7 +43,7 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
           </button>
         </div>
 
-        <div className="p-1 text-center text-base">
+        <div className="p-1 text-center text-base text-label dark:text-label-dark">
           <p>청첩장 제목을 정해주세요</p>
         </div>
 
@@ -51,13 +51,13 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
           <input
             type="text"
             placeholder="ex. 청첩장1, 친구용, 혼주용"
-            className="text-center w-[60%] focus:outline-none focus:ring-0 focus:border-rose-300 border-0 border-b border-gray-500 text-xs placeholder:text-gray-300 ml-4"
+            className="bg-surface dark:bg-surface-dark text-center text-label dark:text-label-dark w-[60%] focus:outline-none focus:ring-0 focus:border-secondary dark:focus:border-secondary-dark border-0 border-b border-border dark:border-border-dark text-xs placeholder:text-label-secondary/60 dark:placeholder:text-label-secondary-dark/60 ml-4"
             value={titleInput}
             autoFocus
             onChange={handleTitleChange}
           />
           {/* 입력 가능한 문자 표시 */}
-          <div className="text-[8px] text-gray-400 flex justify-center items-center">
+          <div className="text-[8px] text-label-secondary/60 dark:text-label-secondary-dark/60 flex justify-center items-center">
             {titleInput.length} / {maxLength}
           </div>
           <button
@@ -65,8 +65,8 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
             disabled={titleInput.length === 0}
             className={`rounded-full w-8 h-8 flex justify-center items-center ${
               titleInput.length === 0
-                ? 'bg-black bg-opacity-10 cursor-not-allowed'
-                : 'bg-rose-300 cursor-pointer hover:bg-rose-200'
+                ? 'bg-surface-muted dark:bg-surface-muted-dark cursor-not-allowed'
+                : 'bg-secondary/30 dark:bg-secondary-dark/30 cursor-pointer hover:bg-secondary/20 dark:hover:bg-secondary-dark/20'
             }`}
           >
             <NextIcon />

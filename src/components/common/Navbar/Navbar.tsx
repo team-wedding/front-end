@@ -38,12 +38,12 @@ const Navbar = () => {
 
   return (
     <div className="relative">
-      <div className="fixed bottom-4 left-0 right-0 z-20 m-auto w-fit flex-center bg-black/80 rounded-3xl p-4 shadow-md backdrop-blur-3xl">
+      <div className="fixed bottom-4 left-0 right-0 z-20 m-auto w-fit flex-center bg-surface-overlay/60 dark:bg-surface-overlay-dark/60 rounded-3xl p-4 shadow-md backdrop-blur-3xl">
         {navItems.map((item) => (
           <button
             key={item.label}
             onClick={() => handleClick(item.path)}
-            className={`w-14 column-center gap-[2px] text-[8px] font-semibold ${isActive(item.path) ? 'text-white' : 'text-white/30'}`}
+            className={`w-14 column-center gap-[2px] text-[8px] font-semibold ${isActive(item.path) ? 'text-label-overlay' : 'text-label-overlay-muted/30'}`}
           >
             <item.Icon />
             {item.label}
@@ -55,7 +55,7 @@ const Navbar = () => {
         {isModalOpen && <InputTitleModal onClose={handleModal} />}
       </div>
 
-      <article className="fixed bottom-0 left-0 right-0 z-10 m-auto  bg-gradient-to-b from-transparent via-[#ffffff]/70 via-50% to-[#ffffff]/100 to-80%  max-w-[520px] h-40"></article>
+      <article className="fixed bottom-0 left-0 right-0 z-10 m-auto  bg-gradient-to-b from-transparent via-surface/70 via-50% to-surface/100 to-80% dark:via-surface-dark/70 dark:to-surface-dark/100 max-w-[520px] h-40"></article>
     </div>
   );
 };

@@ -55,7 +55,12 @@ const EmailLogin = () => {
           <legend className="sr-only">이메일 로그인 폼</legend>
 
           <div className="w-full">
-            <label htmlFor="email"></label>
+            <label
+              htmlFor="email"
+              className="text-label-secondary/60 dark:text-label-secondary-dark/60 text-sm mx-2"
+            >
+              이메일
+            </label>
             <input
               id="email"
               name="email"
@@ -65,14 +70,19 @@ const EmailLogin = () => {
               placeholder="이메일 입력"
             />
             {!isEmailValid && loginInfo.email.length > 0 && (
-              <p className="m-2 text-xs text-red-500">
+              <p className="m-2 text-xs text-status-error dark:text-status-error-dark">
                 올바른 이메일 형식을 입력하세요.
               </p>
             )}
           </div>
 
           <div className="w-full">
-            <label htmlFor="password"></label>
+            <label
+              htmlFor="password"
+              className="text-label-secondary/60 dark:text-label-secondary-dark/60 text-sm mx-2"
+            >
+              비밀번호
+            </label>
             <input
               id="password"
               name="password"
@@ -87,16 +97,21 @@ const EmailLogin = () => {
         <button
           type="submit"
           className={`splash-btn hover:ease-in ${
-            isFormValid ? 'bg-red-100' : 'cursor-not-allowed'
+            isFormValid
+              ? 'bg-gradient-to-r from-primary-muted to-secondary-muted text-black dark:from-primary-muted-dark dark:to-secondary-muted-dark dark:text-white'
+              : 'cursor-not-allowed'
           }`}
           disabled={!isFormValid}
         >
           로그인
         </button>
 
-        <p className="text-[#9B9B9B] text-xs text-center my-4">
+        <p className="text-label-secondary/60 dark:text-label-secondary-dark/60 text-xs text-center my-4">
           아직 계정이 없으신가요?{' '}
-          <Link to="/signup" className="text-black font-medium">
+          <Link
+            to="/signup"
+            className="text-label dark:text-label-dark font-medium hover:text-label-secondary/60 dark:hover:text-label-secondary-dark/60"
+          >
             회원가입
           </Link>
         </p>

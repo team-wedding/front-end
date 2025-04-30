@@ -188,7 +188,7 @@
 
 @layer components {
   .layout {
-    @apply flex flex-col m-auto bg-white overflow-auto;
+    @apply flex flex-col m-auto bg-surface dark:bg-surface-dark overflow-auto;
     max-width: var(--max-content-width, 520px);
   }
 
@@ -199,13 +199,13 @@
   }
 
   .layout-header {
-    @apply text-sm bg-white;
+    @apply text-sm bg-surface dark:bg-surface-dark;
     top: 0;
     height: var(--header-height);
   }
 
   .layout-footer {
-    @apply text-[10px] bg-white;
+    @apply text-[10px] bg-surface dark:bg-surface-dark;
     bottom: 0;
     height: var(--footer-height);
   }
@@ -215,7 +215,7 @@
   }
 
   .layout-content {
-    @apply bg-white w-full overflow-auto;
+    @apply bg-surface dark:bg-surface-dark w-full overflow-auto;
     margin-top: var(--header-height);
     margin-bottom: var(--footer-height);
     height: calc(100vh - var(--header-height) - var(--footer-height));
@@ -276,7 +276,7 @@
   }
 
   .label {
-    @apply block text-[11px] font-medium w-[22%];
+    @apply block text-[11px] font-medium w-[22%] text-label dark:text-label-dark;
   }
 
   /* .splash-btn {
@@ -285,6 +285,8 @@
 
   .splash-btn {
     @apply bg-gradient-to-r from-[#141414] to-[#141414] p-5 w-full rounded-3xl text-white text-sm tracking-wide transition-all duration-200 ease-in-out active:from-[#CEDFFF] active:to-[#F8D4E2] active:shadow-sm active:text-black;
+
+    @apply dark:from-[#ffffff] dark:to-[#ffffff] dark:text-black dark:active:from-[#687BAF] dark:active:to-[#AC6083] dark:active:text-white;
   }
 
   /* .splash-input {
@@ -292,7 +294,9 @@
   } */
 
   .splash-input {
-    @apply bg-[#F6F6F6] h-14 w-full rounded-xl border-none px-8 text-sm focus-visible:ring-1 focus:ring-black/70 focus:border-none placeholder:text-gray-300;
+    @apply bg-[#F2F2F7] h-14 w-full rounded-xl border-none px-8 text-sm focus-visible:ring-1 focus:ring-[#C6C6C8] focus:border-none placeholder:text-[#3C3C43] placeholder:opacity-30;
+
+    @apply dark:bg-[#1C1C1E] dark:text-white dark:focus:ring-[#38383A] dark:placeholder:text-[#EBEBF5];
   }
 
   .gradient {
@@ -300,7 +304,7 @@
   }
 
   .formInput {
-    @apply border-gray-200 bg-gray-50 text-neutral-900 text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50 focus:placeholder-transparent py-2 focus:bg-white;
+    @apply border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-label dark:text-label-dark text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary flex-1 min-w-0 placeholder:text-placeholder/30 dark:placeholder:text-placeholder-dark/30 focus:placeholder-transparent py-2 focus:bg-surface dark:focus:bg-surface-dark;
   }
 
   .accordion-item {

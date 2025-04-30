@@ -47,17 +47,17 @@ const PhotoTalkGalleryAdmin = ({
             id="check-all"
             checked={selectedImages.length === images.length}
             onChange={toggleAllImages}
-            className="size-4 rounded bg-white border border-gray-200 cursor-pointer z-10 shadow-inner checked:bg-black focus:ring-0 focus:outline-none"
+            className="size-4 rounded bg-white border border-border dark:border-dark cursor-pointer z-10 shadow-inner checked:bg-black dark:checked:bg-black focus:ring-0 focus:outline-none"
             aria-label="이미지 전체 선택"
           />
           <label
             htmlFor="check-all"
-            className="text-xs font-light text-black/80"
+            className="text-xs font-light text-label dark:text-label-dark"
           >
             모두 선택하기
           </label>
 
-          <p className="text-xs font-light text-black/80">
+          <p className="text-xs font-light text-label dark:text-label-dark">
             <span>( </span>
             <span className="font-medium">{selectedImages.length}</span>
             <span className=""> / {images.length} ) </span>
@@ -66,7 +66,7 @@ const PhotoTalkGalleryAdmin = ({
 
         <button
           onClick={handleDownloadSelected}
-          className="bg-white/80 px-2 py-1 rounded-xl active:bg-black/30 shadow-md"
+          className="bg-surface dark:bg-surface-dark px-2 py-1 rounded-xl active:bg-black/30 dark:active:bg-white/30 shadow-md"
           disabled={selectedImages.length === 0}
           aria-label="선택한 이미지 다운로드"
         >

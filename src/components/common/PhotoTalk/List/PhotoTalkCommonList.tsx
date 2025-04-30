@@ -4,6 +4,8 @@ import { PhotoTalk } from '@/types/phototalkType';
 import { UserMode } from '@/types/users';
 import { examplePhototalkCard } from '@/constants/phototalkData';
 import PhotoTalkEmptyState from '@/components/common/PhotoTalk/EmptyState/PhotoTalkEmptyState';
+import SkeletonPhotoTalk from '../../Skeleton/SkeletonPhotoTalk';
+import SkeletonGallery from '../../Skeleton/SkeletonGallery';
 
 interface PhotoTalkCommonListProps {
   userMode: UserMode;
@@ -11,6 +13,7 @@ interface PhotoTalkCommonListProps {
   onEdit?: (photoTalk: PhotoTalk) => void;
   onDelete: (photoTalk: PhotoTalk) => void;
   isGalleryOpen: boolean;
+  isPending: boolean;
 }
 
 const PhotoTalkCommonList = ({
@@ -19,9 +22,20 @@ const PhotoTalkCommonList = ({
   onEdit,
   onDelete,
   isGalleryOpen,
+  isPending,
 }: PhotoTalkCommonListProps) => {
-  const isCardEmpty = photoTalkList.length === 0;
+  const isCardEmpty = !isPending && photoTalkList.length === 0;
   const photoTalks = isCardEmpty ? examplePhototalkCard : photoTalkList;
+
+  if (isPending) {
+    return isGalleryOpen
+      ? Array.from({ length: 3 }).map((_, index) => (
+          <SkeletonGallery key={index} />
+        ))
+      : Array.from({ length: 3 }).map((_, index) => (
+          <SkeletonPhotoTalk key={index} />
+        ));
+  }
 
   return (
     <>

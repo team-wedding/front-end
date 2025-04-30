@@ -1,7 +1,7 @@
 const NextIcon = () => {
   return (
     <svg
-      className="size-5 text-gray-800 dark:text-white"
+      className="size-5 text-white"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
       width="24"

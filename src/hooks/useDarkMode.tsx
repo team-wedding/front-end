@@ -27,6 +27,8 @@ const useDarkMode = () => {
       mediaQuery.removeEventListener('change', handleChange);
     };
   }, [setMode, userSelected]);
+
+  return mode;
 };
 
 export default useDarkMode;

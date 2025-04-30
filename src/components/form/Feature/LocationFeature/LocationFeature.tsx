@@ -1,8 +1,8 @@
 import { useLocationFeatureStore } from '@store/OptionalFeature/useLocationFeatureStore';
+import OnOff from '@common/Toggle/OnOff';
 import NavigationItem from './NavigationItem';
 import TransportationItem from './TransportationItem';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
-import OnOff from '@/components/common/Toggle/OnOff';
 
 const LocationFeature = () => {
   const { subFeatures, toggleSubFeature } = useLocationFeatureStore();

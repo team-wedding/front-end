@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLocationFeatureStore';
+import OnOff from '@common/Toggle/OnOff';
 import TextEditor from '../../../common/TextEditor';
 import { transportationData } from '../../../../constants/transportationData';
-import OnOff from '@/components/common/Toggle/OnOff';
 
 const TransportationItem = () => {
   const {

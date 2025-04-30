@@ -13,7 +13,9 @@ const Header = ({ text, leftButton, rightButton }: HeaderProps) => {
       <div className="mx-2">{leftButton}</div>
 
       {/* Text - 중앙 정렬 */}
-      <div className="absolute left-1/2 transform -translate-x-1/2">{text}</div>
+      <div className="absolute left-1/2 transform -translate-x-1/2 text-label dark:text-label-dark">
+        {text}
+      </div>
 
       {/* Right Button */}
       <div className="mx-2 ml-auto">{rightButton}</div>

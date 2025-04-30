@@ -20,10 +20,10 @@ const ReusableModal = ({
   return (
     isOpen && (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div className="relative bg-white rounded-lg shadow-lg w-80">
+        <div className="relative bg-surface dark:bg-surface-muted-dark rounded-lg shadow-lg w-80">
           <div className="flex justify-end items-center">
             <button
-              className="text-black my-3 mx-4"
+              className="text-label dark:text-label-dark my-3 mx-4"
               onClick={onCancel}
               aria-label="Close modal"
             >
@@ -31,20 +31,20 @@ const ReusableModal = ({
             </button>
           </div>
 
-          <div className="mt-2 mb-10 text-center text-base leading-relaxed">
+          <div className="mt-2 mb-10 text-label dark:text-label-dark text-center text-base leading-relaxed">
             <p>{title}</p>
           </div>
 
-          <div className="flex border-t border-gray-300">
+          <div className="flex border-t border-border dark:border-border-dark">
             <button
-              className="w-1/2 py-3 text-gray-500 text-sm"
+              className="w-1/2 py-3 text-label-secondary/60 dark:text-label-secondary-dark/60 text-sm"
               onClick={onCancel}
             >
               취소
             </button>
-            <div className="w-px bg-gray-300"></div>
+            <div className="w-px bg-border dark:bg-border-dark"></div>
             <button
-              className="w-1/2 py-3 text-red-500 text-sm"
+              className="w-1/2 py-3 text-status-error dark:text-status-error-dark text-sm"
               onClick={onConfirm}
             >
               {confirmText}

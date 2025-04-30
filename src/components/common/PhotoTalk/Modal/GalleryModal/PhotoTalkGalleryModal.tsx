@@ -65,7 +65,7 @@ const PhotoTalkGalleryModal = ({
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="w-[90%] aspect-[3/4] rounded-2xl overflow-hidden backdrop-blur-3xl bg-black/30 shadow-custom py-8"
+        className="w-[90%] aspect-[3/4] rounded-2xl overflow-hidden backdrop-blur-3xl bg-black/30 dark:bg-surface-muted-dark/30 shadow-custom py-8"
       >
         <header>
           <h2 id="modal-title" className="sr-only">

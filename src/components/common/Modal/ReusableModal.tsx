@@ -20,7 +20,7 @@ const ReusableModal = ({
   return (
     isOpen && (
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-        <div className="relative bg-surface dark:bg-surface-dark rounded-lg shadow-lg w-80">
+        <div className="relative bg-surface dark:bg-surface-muted-dark rounded-lg shadow-lg w-80">
           <div className="flex justify-end items-center">
             <button
               className="text-label dark:text-label-dark my-3 mx-4"

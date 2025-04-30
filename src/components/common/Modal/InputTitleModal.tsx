@@ -31,7 +31,7 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
   return (
     <div className="fixed inset-0 z-50 flex-center bg-black bg-opacity-50">
       {/* 모달 내용 */}
-      <div className="bg-surface dark:bg-surface-dark rounded-lg shadow-lg w-80 px-4 pt-4 pb-10">
+      <div className="bg-surface dark:bg-surface-muted-dark rounded-lg shadow-lg w-80 px-4 pt-4 pb-10">
         {/* 닫기 버튼 */}
         <div className="flex justify-end items-center">
           <button

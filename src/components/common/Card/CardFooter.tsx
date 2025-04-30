@@ -50,7 +50,6 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
         onBlur={handleBlur}
         onFocus={handleFocus}
         className="text-label-overlay"
-        className="text-label-overlay"
       >
         <ShareIcon />
         {isFocused && (

@@ -48,6 +48,7 @@ const PhotoTalkListPreview = ({
         onEdit={() => openModal(ACTION_MODE.EDIT)}
         onDelete={() => openModal(ACTION_MODE.DELETE)}
         isGalleryOpen={isGalleryOpen}
+        isPending={false}
       />
 
       <PasswordConfirmModal

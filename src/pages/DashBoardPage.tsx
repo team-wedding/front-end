@@ -2,7 +2,7 @@ import Card from '@common/Card/Card';
 import { InvitationDetiail } from '../types/invitationType';
 import { useEffect, useState } from 'react';
 import { useGetInvitations } from '@/hooks/useInvitation';
-import Navbar from '@/components/common/Navbar';
+import Navbar from '@common/Navbar/Navbar';
 import logo from '@/assets/woogyeol/logo_light.png';
 import logoDark from '@/assets/woogyeol/logo_dark.png';
 import DarkModeToggle from '@/components/common/DarkMode/DarkModeToggle';

@@ -38,7 +38,7 @@ const PhotoTalkLayout = ({
           <BackIcon />
         </button>
         <h1
-          className={`absolute left-1/2 transform -translate-x-1/2 ${titleStyle}`}
+          className={`absolute left-1/2 transform -translate-x-1/2 text-label dark:text-label-dark ${titleStyle}`}
         >
           {title}
         </h1>

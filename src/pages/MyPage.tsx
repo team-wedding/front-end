@@ -2,7 +2,7 @@ import { useLocation, useNavigate } from 'react-router';
 import { useUserStore } from '@/store/useUserStore';
 import profile from '../assets/woogyeol/profile_light.png';
 import profileDark from '../assets/woogyeol/profile_dark.png';
-import Navbar from '@/components/common/Navbar';
+import Navbar from '@common/Navbar/Navbar';
 import RsvpStatsPage from '@/pages/RsvpStatsPage';
 import AdminPhotoTalkPage from '@/pages/PhotoTalk/AdminPhotoTalkPage';
 import Tab from '@/components/common/Tab/Tab';

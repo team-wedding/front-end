@@ -26,7 +26,7 @@ const PhotoTalkGalleryGrid = ({
                   type="checkbox"
                   checked={checkboxOptions.selectedImages.includes(url)}
                   onChange={() => checkboxOptions.onSelectImage(url)}
-                  className="size-4 rounded bg-white/60  cursor-pointer z-10 border-none shadow-inner checked:bg-black focus:ring-0 focus:outline-none"
+                  className="size-4 rounded bg-white border border-border dark:border-dark cursor-pointer z-10 shadow-inner checked:bg-black dark:checked:bg-black focus:ring-0 focus:outline-none"
                   aria-label={`이미지 ${index + 1} 선택`}
                 />
               </div>

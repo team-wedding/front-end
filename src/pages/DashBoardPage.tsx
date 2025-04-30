@@ -5,6 +5,7 @@ import { useGetInvitations } from '@/hooks/useInvitation';
 import Navbar from '@common/Navbar/Navbar';
 import Logo from '@common/Logo';
 import DarkModeToggle from '@/components/common/DarkMode/DarkModeToggle';
+import SkeletonCard from '@/components/common/Skeleton/SkeletonCard';
 
 const DashBoardPage = () => {
   const { data, isPending, isRefetching, status, isError, isFetching } =
@@ -44,18 +45,18 @@ const DashBoardPage = () => {
             </div>
           </div>
           <div className="grid grid-cols-2 gap-2 place-items-center">
-            {isPending || isRefetching ? (
-              <>Loading....</>
-            ) : (
-              invitations.map((card: InvitationDetiail) => (
-                <Card
-                  key={card.id}
-                  image={card.imgUrl}
-                  id={card.id as number}
-                  title={card.title}
-                />
-              ))
-            )}
+            {isPending || isRefetching
+              ? Array.from({ length: 4 }).map((_, i) => (
+                  <SkeletonCard key={i} />
+                ))
+              : invitations.map((card: InvitationDetiail) => (
+                  <Card
+                    key={card.id}
+                    image={card.imgUrl}
+                    id={card.id as number}
+                    title={card.title}
+                  />
+                ))}
           </div>
 
           {invitations.length === 0 && (

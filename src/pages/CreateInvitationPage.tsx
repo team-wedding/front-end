@@ -93,7 +93,6 @@ const CreateInvitationPage = () => {
     })
   }
 
-  //FIX: TITLE DISAPPEAR 
   useEffect(() => {
     if (invitations?.title) {
       setInvitationTitle(invitations?.title)
@@ -125,9 +124,6 @@ const CreateInvitationPage = () => {
     initializeItems(start, end);
   }, [steps, initializeItems]);
 
-  useEffect(() => {
-    useUpdateInvitationStore(invitations as InvitationDetiail);
-  }, []);
   const toggleExpand = (id: number) => {
     setExpandedIds((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],

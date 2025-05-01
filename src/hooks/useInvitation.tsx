@@ -47,7 +47,7 @@ export const usePostInvitation = () => {
 export const useUpdateInvitation = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (details: InvitationDetiail) => updateInvitation({ id, details }),
+    mutationFn: (details: Omit<InvitationDetiail, 'title'>) => updateInvitation({ id, details }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
     }

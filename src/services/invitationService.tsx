@@ -33,7 +33,7 @@ export const updateInvitation = async ({
   details,
 }: {
   id: number;
-  details: InvitationDetiail;
+  details: Omit<InvitationDetiail, 'title'>;
 }) => {
   const { data } = await axiosInstance.put(
     API.INVITATIONS(id.toString()),

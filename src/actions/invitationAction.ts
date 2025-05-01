@@ -6,7 +6,6 @@ import { useWeddingStore } from '@store/useWeddingStore';
 import useContactStore from '@store/useContactStore';
 import useAddressStore from '@store/useAddressStore';
 import useImageStore from '@store/useImageStore';
-import { useInvitationStore } from '@/store/useInvitaionStore';
 import { useCalendarFeatureStore } from '@/store/OptionalFeature/useCalendarFeatureStore';
 import { useMusicFeatureStore } from '@/store/OptionalFeature/useMusicFeatureStore';
 import { useLocationFeatureStore } from '@/store/OptionalFeature/useLocationFeatureStore';
@@ -91,77 +90,9 @@ export const defaultInvitationValues: Omit<InvitationDetiail, 'title'> = {
   galleries: [],
 };
 
-// export const stepOneInvitationAction = (): InvitationDetiail => {
-//   const { invitationtitle } = useInvitationStore();
-//   const { brideGroom } = useBrideGroomStore();
-//   const { weddingTime, formattedDate } = useWeddingStore();
-//   const {
-//     address,
-//     jibunAddress,
-//     zonecode,
-//     weddingHallName,
-//     weddingHallDetail,
-//     coords,
-//   } = useAddressStore();
-//   return {
-//     ...defaultInvitationValues,
-//     title: invitationtitle,
-//     groomName: brideGroom[0].name,
-//     brideName: brideGroom[1].name,
-//     date: [formattedDate.year, formattedDate.month, formattedDate.day],
-//     weddingTime: [weddingTime.hour || 12, weddingTime.minute || 0],
-
-//     //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
-//     location: [
-//       address,
-//       zonecode.toString(),
-//       jibunAddress,
-//       JSON.stringify(coords),
-//       weddingHallName,
-//       weddingHallDetail,
-//     ],
-//   };
-// };
-
-// export const stepTwoInvitationAction = (): Partial<InvitationDetiail> => {
-//   const { accounts } = useAccountStore();
-//   const { rsvpTitle, rsvpDescription, rsvpIncludeMeal, rsvpIncludePopulation } =
-//     useRSVPStore();
-//   const accountList: AccountDetail[] = accounts.flatMap((item) => [
-//     {
-//       order: findOrder('account'),
-//       isActive: selectedOptionalFeatures.account,
-//       ...item.accountInfo,
-//     },
-//     {
-//       order: findOrder('account'),
-//       isActive: selectedOptionalFeatures.account,
-//       ...item.fatherAccountInfo,
-//     },
-//     {
-//       order: findOrder('account'),
-//       isActive: selectedOptionalFeatures.account,
-//       ...item.motherAccountInfo,
-//     },
-//   ]);
-//   return {
-//     ...defaultInvitationValues,
-//   };
-// };
-// export const stepThreeInvitationAction = (): Partial<InvitationDetiail> => {
-//   const { selectedMusic } = useMusicFeatureStore();
-//   const { font } = useThemeStore();
-//   return {
-//     font: font,
-//     fontSize: false,
-//     backgroundColor: '',
-//     audio: selectedMusic,
-//   };
-// };
-
 export const getInvitationAction = (): Omit<
   InvitationDetiail,
-  'imgUrl' | 'galleries' | 'notices'
+  'imgUrl' | 'galleries' | 'notices' | 'title'
 > => {
   //웨딩 정보
   const {
@@ -183,7 +114,6 @@ export const getInvitationAction = (): Omit<
   const { greetingTitle, greetingContent } = useGreetingStore();
   const { contacts } = useContactStore();
   const { brideGroom } = useBrideGroomStore();
-  const { invitationtitle } = useInvitationStore();
   const { rsvpTitle, rsvpDescription, rsvpIncludeMeal, rsvpIncludePopulation } =
     useRSVPStore();
   const { accounts } = useAccountStore();
@@ -211,7 +141,6 @@ export const getInvitationAction = (): Omit<
     useLocationFeatureStore();
 
   return {
-    title: invitationtitle,
     groomName: brideGroom[0].name,
     brideName: brideGroom[1].name,
     date: [formattedDate.year, formattedDate.month, formattedDate.day],
@@ -272,11 +201,9 @@ export const getInvitationAction = (): Omit<
         busContent: transportationInputs.bus,
       },
     ],
-
     accounts: accountList,
     contacts: [
       {
-        //FIX: 널값 예외처리
         order: findOrder('contact')!,
         isActive: selectedOptionalFeatures.contact,
         brideContact: contacts[0].contact,
@@ -320,6 +247,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
     useRSVPStore.getState();
   const { toggleSubFeature: calendarToggle } =
     useCalendarFeatureStore.getState();
+
   if (details) {
     updateBrideGroom(0, 'name', details.groomName);
     updateBrideGroom(1, 'name', details.brideName);
@@ -331,24 +259,22 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
     updateFamily(1, 'mother', 'name', details.groomMotherName);
     updateFamily(1, 'father', 'isDeceased', !details.groomFatherAlive);
     updateFamily(1, 'mother', 'isDeceased', !details.groomMotherAlive);
-
     setAddress(details.location[0], details.location[1]);
     setJibunAddress(details.location[2]);
     try {
       // JSON 문자열인지 확인 후 파싱 시도
       const locationData = details.location[3];
-      if (typeof locationData !== 'string') {
-        throw new Error('details.location[3]은 문자열이 아닙니다.');
-      }
+      //비어있으면 ..
       if (locationData.trim() !== '') {
         const { lat, lng } = JSON.parse(locationData);
         setCoords(lat, lng);
       } else {
+        //초기값
         const { lat, lng } = defaultCoord;
         setCoords(lat, lng);
       }
-    } catch (error) {
-      console.error('주소 불러오는데 에러 발생:', error);
+    } catch {
+      console.log('location Coord가 이상함', details.location[3]);
     }
 
     setWeddingHallName(details.location[4]);
@@ -360,6 +286,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         setWeddingDate(today);
       } else {
         const [year, month, day] = details.date;
+        console.log('date: ', year, month, day);
         if (
           typeof year !== 'number' ||
           typeof month !== 'number' ||
@@ -376,14 +303,10 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         //조인후 DATE 포멧 확인
         const dateStr = details.date.join('-');
         const parsedDate = new Date(dateStr);
-        if (isNaN(parsedDate.getTime())) {
-          throw new Error(`Date 생성 실패: ${dateStr}`);
-        }
         setWeddingDate(parsedDate);
       }
     } catch (error) {
       console.error('에러 발생: 날짜 불러오는데 에러 발생 ', error);
-      setWeddingDate(today);
     }
 
     //청첩장 제목/내용
@@ -439,9 +362,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
     transportToggle('navigationNaver', details.maps[0]?.naverMap || false);
     transportToggle('navigationTmap', details.maps[0]?.tMap || false);
     transportToggle('transportationCar', details.maps[0]?.personalCar || false);
-
     transportToggle('transportationBus', details.maps[0]?.bus || false);
-
     transportToggle('transportationSubway', details.maps[0]?.subway || false);
 
     const modifiedNotice: Notice[] = details.notices.map((value) => {

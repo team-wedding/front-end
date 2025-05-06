@@ -92,3 +92,12 @@ export interface NoticeDetail {
   content: string;
   image: string | null;
 }
+
+export interface S3UploadResponse {
+  imageUrls: string[];
+}
+
+export interface S3UploadRequest {
+  imageFiles: File[];
+  directory: string;
+}

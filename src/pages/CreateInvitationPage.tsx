@@ -18,15 +18,16 @@ import { getInvitationAction, useUpdateInvitationStore } from '@/actions/invitat
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
-import { InvitationDetail, NoticeDetail } from '@/types/invitationType';
+import { InvitationDetail, NoticeDetail, S3UploadRequest } from '@/types/invitationType';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import logo from '@/assets/woogyeol/logo_light.png';
-import { S3Props } from '@/services/imageService';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import ReusableModal from '@/components/common/Modal/ReusableModal';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
+const AUTO_SAVE_MODAL_DURATION_MS = 3000;
+const AUTO_SAVE_INTERVAL_MS = 25000;
 
 const CreateInvitationPage = () => {
   const navigate = useNavigate();
@@ -62,12 +63,12 @@ const CreateInvitationPage = () => {
     return result?.order;
   };
 
-  const uploadToS3 = async ({ imageFiles, directory }: S3Props) => {
+  const uploadToS3 = async ({ imageFiles, directory }: S3UploadRequest) => {
     const { imageUrls } = await s3Mutate(imageFiles.length ? { imageFiles, directory } : { imageFiles: [], directory });
     return imageUrls;
   };
 
-  const updateSetup = async () => {
+  const saveInvitationData = async () => {
     await flushAll()
     const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
       uploadToS3(uploadedImageFile ? { imageFiles: [uploadedImageFile], directory: 'thumbnail' } : { imageFiles: [], directory: 'thumbnail' }),
@@ -108,13 +109,13 @@ const CreateInvitationPage = () => {
       //   return
       // }
       setAutoSaveModal(true);
-      updateSetup()
+      saveInvitationData()
       useUpdateInvitationStore(invitations as InvitationDetail);
       setTimeout(() => {
         setAutoSaveModal(false);
         setIsModalOpen(false)
-      }, 3000); // 모달 인터벌
-    }, 25000); // 임시저장 인터벌
+      }, AUTO_SAVE_MODAL_DURATION_MS); // 모달 인터벌
+    }, AUTO_SAVE_INTERVAL_MS); // 임시저장 인터벌
     return () => {
       clearInterval(intervalId); // 컴포넌트 unmount 시 cleanup
     };
@@ -154,7 +155,7 @@ const CreateInvitationPage = () => {
     navigate('/dashboard');
   };
   const handleSave = async () => {
-    updateSetup()
+    saveInvitationData()
   };
   return (
     <DndProvider backend={HTML5Backend}>
@@ -207,7 +208,7 @@ const CreateInvitationPage = () => {
             </div>
           </PageLayout>
           <div className="absolute bottom-16 right-4">
-            <PreviewButton id={id} isSaving={autoSaveModal} update={updateSetup} />
+            <PreviewButton id={id} isSaving={autoSaveModal} update={saveInvitationData} />
           </div>
         </div>
         <div className="preview-section">

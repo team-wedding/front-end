@@ -1,16 +1,9 @@
 import axios from 'axios';
 import { API } from '../utils/config';
+import { S3UploadRequest, S3UploadResponse } from '@/types/invitationType';
 
-export interface S3Detail {
-  imageUrls: string[];
-}
 
-export interface S3Props {
-  imageFiles: File[];
-  directory: string;
-}
-
-export const getS3ImageUrl = async ({ imageFiles, directory }: S3Props): Promise<S3Detail> => {
+export const getS3ImageUrl = async ({ imageFiles, directory }: S3UploadRequest): Promise<S3UploadResponse> => {
   const formData = new FormData()
   imageFiles.map((value) => (
     formData.append("images", value)

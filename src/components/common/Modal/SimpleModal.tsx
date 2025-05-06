@@ -1,20 +1,17 @@
 interface ModalProps {
   isOpen: boolean;
+  message: string | React.ReactNode;
   onConfirm: () => void;
 }
 
-const NameInputModal = ({ isOpen, onConfirm }: ModalProps) => {
+const SimpleModal = ({ isOpen, message, onConfirm }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
     <div className="font-Paperlogy fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="relative bg-white rounded-lg shadow-lg w-80">
-        <div className="pt-12 pb-8 text-center text-base">
-          <p>
-            신랑 및 신부의 이름을
-            <br />
-            모두 입력해주세요.
-          </p>
+        <div className="flex items-center justify-center pt-4 text-center text-base h-[132px]">
+          <p>{message}</p>
         </div>
 
         <div className="flex border-t border-gray-300">
@@ -27,4 +24,4 @@ const NameInputModal = ({ isOpen, onConfirm }: ModalProps) => {
   );
 };
 
-export default NameInputModal;
+export default SimpleModal;

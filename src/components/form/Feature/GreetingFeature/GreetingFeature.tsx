@@ -4,7 +4,12 @@ import useGreetingStore from '../../../../store/useGreetingStore';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
 
 const GreetingFeature = () => {
-  const { greetingTitle, greetingContent, setGreetingTitle, setGreetingContent } = useGreetingStore();
+  const {
+    greetingTitle,
+    greetingContent,
+    setGreetingTitle,
+    setGreetingContent,
+  } = useGreetingStore();
   const [isModalOpen, setModalOpen] = useState(false);
 
   return (
@@ -35,9 +40,7 @@ const GreetingFeature = () => {
         <textarea
           placeholder="인사말"
           value={greetingContent}
-          onChange={(e) =>
-            setGreetingContent(e.target.value)
-          }
+          onChange={(e) => setGreetingContent(e.target.value)}
           rows={8}
           className="formInput"
         />

@@ -16,13 +16,17 @@ const CalendarFeature = () => {
       <div className="flex-center gap-2 text-gray-400 text-[10px] my-6">
         <button
           className={`select-btn ${subCalendarFeatures.calendar ? 'active-btn' : ''}`}
-          onClick={() => toggleSubFeature('calendar', !subCalendarFeatures.calendar)}
+          onClick={() =>
+            toggleSubFeature('calendar', !subCalendarFeatures.calendar)
+          }
         >
           캘린더
         </button>
         <button
           className={`select-btn ${subCalendarFeatures.countdown ? 'active-btn' : ''}`}
-          onClick={() => toggleSubFeature('countdown', !subCalendarFeatures.countdown)}
+          onClick={() =>
+            toggleSubFeature('countdown', !subCalendarFeatures.countdown)
+          }
         >
           카운트다운
         </button>

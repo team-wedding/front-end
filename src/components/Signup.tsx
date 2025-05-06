@@ -6,6 +6,7 @@ import {
 } from '@/utils/validator';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router';
+import axios from 'axios';
 
 interface SignupInfo {
   name: string;
@@ -66,7 +67,16 @@ const Signup = () => {
       console.log(responseData);
       navigate('/login');
     } catch (error) {
-      console.log('회원가입 실패', error);
+      if (axios.isAxiosError(error)) {
+        const errMsg = error.response?.data?.message;
+        if (errMsg === '이미 해당 email로 회원가입된 이력있음.') {
+          navigate('/login', {
+            state: { errorMessage: errMsg },
+          });
+        } else {
+          console.error('회원가입 실패', error);
+        }
+      }
     }
   };
 

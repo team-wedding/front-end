@@ -98,7 +98,6 @@ export default function ShareInvitation({
       </button>
       <hr className=" w-full" />
       <button onClick={handleKakaoShare} className="px-3 py-3">
-        {' '}
         카카오로 공유하기
       </button>
       <hr className=" w-full" />
@@ -106,7 +105,7 @@ export default function ShareInvitation({
         ref={canvas}
         className="hidden"
         id={'qr-code-download'}
-        value={`http://localhost:5173/`}
+        value={`https://woogyeol.vercel.app/`}
       />
       <a href={pngUrl} download={'qr.png'} className="px-3 py-3" ref={aRef}>
         QR 코드 저장

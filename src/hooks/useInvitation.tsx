@@ -6,12 +6,12 @@ import {
   postInvitation,
   updateInvitation,
 } from '../services/invitationService';
-import { InvitationDetiail } from '../types/invitationType';
+import { InvitationDetail } from '../types/invitationType';
 import resetAllStores from '@/store/resetStore';
 import { useNavigate } from 'react-router';
 
 export const useGetInvitation = (id: number) => {
-  let { data, isError } = useQuery<InvitationDetiail>({
+  let { data, isError } = useQuery<InvitationDetail>({
     queryKey: ['invitations', id],
     queryFn: () => getInvitation(id),
   });
@@ -29,7 +29,7 @@ export const usePostInvitation = () => {
   const navigate = useNavigate()
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (details: InvitationDetiail) => {
+    mutationFn: (details: InvitationDetail) => {
       return postInvitation(details);
     },
     onSuccess: (data) => {
@@ -47,7 +47,7 @@ export const usePostInvitation = () => {
 export const useUpdateInvitation = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (details: Omit<InvitationDetiail, 'title'>) => updateInvitation({ id, details }),
+    mutationFn: (details: Omit<InvitationDetail, 'title'>) => updateInvitation({ id, details }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
     }
@@ -60,7 +60,7 @@ export const useDeleteInvitation = (id: number) => {
     onMutate: async (id) => {
       await queryClient.cancelQueries({ queryKey: ["invitations"] });
       const previousInvitations = queryClient.getQueryData(["invitations"]);
-      queryClient.setQueryData(["invitations"], (old: InvitationDetiail[]) =>
+      queryClient.setQueryData(["invitations"], (old: InvitationDetail[]) =>
         old.filter((inv) => inv.id !== id)
       );
       return { previousInvitations };

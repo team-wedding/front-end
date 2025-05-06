@@ -1,4 +1,4 @@
-import { AccountDetail, InvitationDetiail } from '@/types/invitationType';
+import { AccountDetail, InvitationDetail } from '@/types/invitationType';
 import useBrideGroomStore from '@store/useBrideGroomStore';
 import useGreetingStore from '@store/useGreetingStore';
 import useThemeStore from '@store/useThemeStore';
@@ -22,7 +22,8 @@ import fonts from '@/constants/fonts';
 const defaultCoord = { lat: 37.5086, lng: 127.0397 };
 
 const today = new Date();
-export const defaultInvitationValues: Omit<InvitationDetiail, 'title'> = {
+
+export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
   createdAt: '',
   groomName: '',
   brideName: '',
@@ -91,7 +92,7 @@ export const defaultInvitationValues: Omit<InvitationDetiail, 'title'> = {
 };
 
 export const getInvitationAction = (): Omit<
-  InvitationDetiail,
+  InvitationDetail,
   'imgUrl' | 'galleries' | 'notices' | 'title'
 > => {
   //웨딩 정보
@@ -219,7 +220,7 @@ export const getInvitationAction = (): Omit<
   };
 };
 
-export const useUpdateInvitationStore = (details: InvitationDetiail) => {
+export const useUpdateInvitationStore = (details: InvitationDetail) => {
   const {
     setAddress,
     setJibunAddress,
@@ -286,7 +287,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
         setWeddingDate(today);
       } else {
         const [year, month, day] = details.date;
-        console.log('date: ', year, month, day);
+        console.log('date: ', year, month, day, today);
         if (
           typeof year !== 'number' ||
           typeof month !== 'number' ||

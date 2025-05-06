@@ -1,4 +1,4 @@
-export interface InvitationDetiail {
+export interface InvitationDetail {
   id?: number;
   createdAt?: string;
   // updatedAt?: string;

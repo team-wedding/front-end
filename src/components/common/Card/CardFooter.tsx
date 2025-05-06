@@ -33,7 +33,7 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
   return (
     <footer
       className="flex-between h-[60px]
-     px-4 absolute bottom-0 bg-black/60 w-full rounded-b-xl"
+    px-4 absolute bottom-0 bg-black/60 w-full rounded-b-xl"
     >
       {/* 청첩장 제목 입력값 */}
       <div className="flex flex-col items-start">
@@ -59,7 +59,7 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
             shareTitle={title}
             shareDesc={'결혼합니다'}
             shareImage={image}
-            shareUrl={`http://localhost:5173/result/${userId}/${id}`}
+            shareUrl={`https://woogyeol.vercel.app/result/${userId}/${id}`}
             shareHeader={''}
           />
         )}

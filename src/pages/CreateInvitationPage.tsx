@@ -18,7 +18,7 @@ import { getInvitationAction, useUpdateInvitationStore } from '@/actions/invitat
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
-import { InvitationDetiail, NoticeDetail } from '@/types/invitationType';
+import { InvitationDetail, NoticeDetail } from '@/types/invitationType';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import logo from '@/assets/woogyeol/logo_light.png';
@@ -101,7 +101,7 @@ const CreateInvitationPage = () => {
 
   useEffect(() => {
     const intervalId = setInterval(async () => {
-      await flushAll()
+      // await flushAll()
       // if (!validateBrideGroomNames(brideGroom)) {
       //   console.log(!validateBrideGroomNames(brideGroom), brideGroom[0].name, brideGroom[1].name)
       //   setIsModalOpen(true);
@@ -109,7 +109,7 @@ const CreateInvitationPage = () => {
       // }
       setAutoSaveModal(true);
       updateSetup()
-      useUpdateInvitationStore(invitations as InvitationDetiail);
+      useUpdateInvitationStore(invitations as InvitationDetail);
       setTimeout(() => {
         setAutoSaveModal(false);
         setIsModalOpen(false)

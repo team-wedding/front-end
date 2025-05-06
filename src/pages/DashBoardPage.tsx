@@ -1,5 +1,5 @@
 import Card from '@common/Card/Card';
-import { InvitationDetiail } from '../types/invitationType';
+import { InvitationDetail } from '../types/invitationType';
 import { useEffect, useState } from 'react';
 import { useGetInvitations } from '@/hooks/useInvitation';
 import Navbar from '@common/Navbar/Navbar';
@@ -49,7 +49,7 @@ const DashBoardPage = () => {
               ? Array.from({ length: 4 }).map((_, i) => (
                 <SkeletonCard key={i} />
               ))
-              : invitations.map((card: InvitationDetiail) => (
+              : invitations.map((card: InvitationDetail) => (
                 <Card
                   key={card.id}
                   image={card.imgUrl}

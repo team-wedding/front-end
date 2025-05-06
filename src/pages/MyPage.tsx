@@ -47,27 +47,21 @@ const MyPage = () => {
           <DarkModeToggle />
         </button>
 
-        <section className="flex-center text-lg p-6 border-none gap-3">
+        <section className="flex-center text-lg p-10 border-none gap-3">
           <div className="column-center">
             <img
               src={profile}
               alt="profile"
-              className="w-16 block dark:hidden"
+              className="w-12 block dark:hidden"
             />
             <img
               src={profileDark}
               alt="profile"
-              className="w-16 hidden dark:block"
+              className="w-12 hidden dark:block"
             />
-            {/* <button
-              className="text-xs text-[#B4B4B4] font-extralight"
-              onClick={() => navigate('/mypage/edit')}
-            >
-              프로필 수정
-            </button> */}
           </div>
 
-          <div className="flex flex-col text-label dark:text-label-dark text-lg font-extralight leading-6">
+          <div className="flex flex-col text-label dark:text-label-dark text-xl font-extralight leading-6">
             <div>안녕하세요,</div>
             <div className="flex-center">
               <div className="font-medium">{name || '김우결'}</div>

@@ -20,7 +20,7 @@ export default function RsvpItem({
       <div className={`flex flex-col items-start text-sm ${total && ''}`}>
         {title}
         {description && (
-          <div className="text-[10px] mt-1 text-gray-300">{description}</div>
+          <div className="text-[10px] mt-1 text-gray-400">{description}</div>
         )}
       </div>
       <div

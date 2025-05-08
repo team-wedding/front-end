@@ -264,7 +264,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     setJibunAddress(details.location[2]);
     try {
       // JSON 문자열인지 확인 후 파싱 시도
-      const locationData = details.location[3];
+      const locationData = Array.from(details.location)[3];
       //비어있으면 ..
       if (locationData.trim() !== '') {
         const { lat, lng } = JSON.parse(locationData);
@@ -275,7 +275,14 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
         setCoords(lat, lng);
       }
     } catch {
-      console.log('location Coord가 이상함', details.location[3]);
+      console.log(
+        'location Coord가 이상함',
+        typeof details.location,
+        typeof details.location[3],
+        details.location,
+        details.location[3],
+        Array.from(details.location)[3],
+      );
     }
 
     setWeddingHallName(details.location[4]);
@@ -286,8 +293,10 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       if (details.date.length === 0) {
         setWeddingDate(today);
       } else {
-        const [year, month, day] = details.date;
-        console.log('date: ', year, month, day, today);
+        const [year, month, day] = Array.from(details.date);
+        console.log(
+          `잘못된 날짜 값입니다: 날짜:${details.date}  타입:${typeof details.date}  결과:${year}-${month}-${day}`,
+        );
         if (
           typeof year !== 'number' ||
           typeof month !== 'number' ||
@@ -299,7 +308,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
           day > 31
         ) {
           alert(
-            `잘못된 날짜 값입니다: ${details.date} ${year}-${month}-${day}`,
+            `잘못된 날짜 값입니다: 날짜:${details.date}  타입:${typeof details.date}  결과:${year}-${month}-${day}`,
           );
           setWeddingDate(today);
         }

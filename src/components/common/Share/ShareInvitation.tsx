@@ -105,7 +105,7 @@ export default function ShareInvitation({
         ref={canvas}
         className="hidden"
         id={'qr-code-download'}
-        value={`https://woogyeol.vercel.app/`}
+        value={`https://woogyeol.vercel.app/${shareUrl}`}
       />
       <a href={pngUrl} download={'qr.png'} className="px-3 py-3" ref={aRef}>
         QR 코드 저장

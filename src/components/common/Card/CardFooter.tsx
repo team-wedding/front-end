@@ -59,8 +59,8 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
             shareTitle={title}
             shareDesc={'결혼합니다'}
             shareImage={image}
-            shareUrl={`https://woogyeol.vercel.app/result/${userId}/${id}`}
-            shareHeader={''}
+            shareUrl={`result/${userId}/${id}`}
+            shareHeader={'Woogyeol'}
           />
         )}
       </button>

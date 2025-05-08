@@ -298,7 +298,9 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
           day < 1 ||
           day > 31
         ) {
-          alert(`잘못된 날짜 값입니다: ${year}-${month}-${day}`);
+          alert(
+            `잘못된 날짜 값입니다: ${details.date} ${year}-${month}-${day}`,
+          );
           setWeddingDate(today);
         }
         //조인후 DATE 포멧 확인

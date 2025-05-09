@@ -260,14 +260,20 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     updateFamily(1, 'mother', 'name', details.groomMotherName);
     updateFamily(1, 'father', 'isDeceased', !details.groomFatherAlive);
     updateFamily(1, 'mother', 'isDeceased', !details.groomMotherAlive);
-    setAddress(details.location[0], details.location[1]);
-    setJibunAddress(details.location[2]);
+
+    const locationData =
+      typeof details.location == 'string'
+        ? JSON.parse(details.location)
+        : Array.from(details.location);
+
+    setAddress(locationData[0], locationData[1]);
+    setJibunAddress(locationData[2]);
     try {
       // JSON 문자열인지 확인 후 파싱 시도
-      const locationData = Array.from(details.location)[3];
+      // const locationData = Array.from(details.location)[3];
       //비어있으면 ..
-      if (locationData.trim() !== '') {
-        const { lat, lng } = JSON.parse(locationData);
+      if (locationData[3].trim() !== '') {
+        const { lat, lng } = JSON.parse(locationData[3]);
         setCoords(lat, lng);
       } else {
         //초기값
@@ -275,46 +281,57 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
         setCoords(lat, lng);
       }
     } catch {
-      console.log(
-        'location Coord가 이상함',
-        typeof details.location,
-        typeof details.location[3],
-        details.location,
-        details.location[3],
-        Array.from(details.location)[3],
+      alert(
+        `'location Coord가 이상함',
+        ${typeof locationData} ,
+        ${typeof locationData[3]},
+        ${locationData},
+        ${locationData[3]},
+        `,
       );
     }
 
-    setWeddingHallName(details.location[4]);
-    setWeddingTime(details.weddingTime[0], details.weddingTime[1]);
-    setWeddingHallDetail(details.location[5]);
+    setWeddingHallName(locationData[4]);
+    setWeddingHallDetail(locationData[5]);
+
+    try {
+      const weddingTime =
+        typeof details.weddingTime == 'string'
+          ? JSON.parse(details.weddingTime)
+          : Array.from(details.weddingTime);
+      setWeddingTime(weddingTime[0], weddingTime[1]);
+    } catch {
+      console.log(
+        `잘못된 시간 값입니다: 날짜:${details.weddingTime}  타입:${typeof details.weddingTime}  결과:${details.weddingTime[0]} ${details.weddingTime[1]}`,
+      );
+    }
 
     try {
       if (details.date.length === 0) {
         setWeddingDate(today);
       } else {
-        const [year, month, day] = Array.from(details.date);
+        const [year, month, day] =
+          typeof details.date == 'string'
+            ? JSON.parse(details.date)
+            : Array.from(details.date);
+
         console.log(
           `잘못된 날짜 값입니다: 날짜:${details.date}  타입:${typeof details.date}  결과:${year}-${month}-${day}`,
         );
+
         if (
-          typeof year !== 'number' ||
-          typeof month !== 'number' ||
-          typeof day !== 'number' ||
-          year < 1000 ||
-          month < 1 ||
-          month > 12 ||
-          day < 1 ||
-          day > 31
+          parseInt(year) < 1000 ||
+          parseInt(month) < 1 ||
+          parseInt(month) > 12 ||
+          parseInt(day) < 1 ||
+          parseInt(day) > 31
         ) {
           alert(
             `잘못된 날짜 값입니다: 날짜:${details.date}  타입:${typeof details.date}  결과:${year}-${month}-${day}`,
           );
           setWeddingDate(today);
         }
-        //조인후 DATE 포멧 확인
-        const dateStr = details.date.join('-');
-        const parsedDate = new Date(dateStr);
+        const parsedDate = new Date(`${year}-${month}-${day}`);
         setWeddingDate(parsedDate);
       }
     } catch (error) {

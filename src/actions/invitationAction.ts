@@ -314,11 +314,6 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
           typeof details.date == 'string'
             ? JSON.parse(details.date)
             : Array.from(details.date);
-
-        console.log(
-          `잘못된 날짜 값입니다: 날짜:${details.date}  타입:${typeof details.date}  결과:${year}-${month}-${day}`,
-        );
-
         if (
           parseInt(year) < 1000 ||
           parseInt(month) < 1 ||
@@ -343,29 +338,17 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     setGreetingContent(details.greetingContent);
     //대표이미지
     setUploadedImageUrl(details.imgUrl);
+    const contactInfo =
+      typeof details.contacts == 'string'
+        ? JSON.parse(details.contacts)
+        : Array.from(details.contacts);
     //연락처
-    updateContact(0, 'contact', details?.contacts[0]?.brideContact || '');
-    updateContact(1, 'contact', details?.contacts[0]?.groomContact || '');
-    updateContact(
-      0,
-      'fatherContact',
-      details?.contacts[0]?.brideFatherContact || '',
-    );
-    updateContact(
-      0,
-      'motherContact',
-      details?.contacts[0]?.brideMotherContact || '',
-    );
-    updateContact(
-      1,
-      'fatherContact',
-      details?.contacts[0]?.groomFatherContact || '',
-    );
-    updateContact(
-      1,
-      'motherContact',
-      details?.contacts[0]?.groomMotherContact || '',
-    );
+    updateContact(0, 'contact', contactInfo[0].brideContact || '');
+    updateContact(1, 'contact', contactInfo[0].groomContact || '');
+    updateContact(0, 'fatherContact', contactInfo[0].brideFatherContact || '');
+    updateContact(0, 'motherContact', contactInfo[0].brideMotherContact || '');
+    updateContact(1, 'fatherContact', contactInfo[0].groomFatherContact || '');
+    updateContact(1, 'motherContact', contactInfo[0].groomMotherContact || '');
 
     //RSVP Modal
     setRSVPDetails({
@@ -375,35 +358,50 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     setRSVPIncludeMeal(details.attendanceIsDining);
     setRSVPIncludePopulation(details.attendance);
     //갤러리
-    setGrid(details.galleries ? details.galleries[0]?.grid : false);
-    setImages(details.galleries ? details.galleries[0]?.images : []);
-
+    const galleryData =
+      typeof details.galleries == 'string'
+        ? JSON.parse(details.galleries)
+        : Array.from(details.galleries);
+    setGrid(galleryData.grid);
+    setImages(galleryData.images);
+    //폰트
     setFont(
       details.font,
       fonts.findIndex((value) => value.font == details.font) || 0,
     );
 
+    //Trnasportation
+    const mapData =
+      typeof details.maps == 'string'
+        ? JSON.parse(details.maps)[0]
+        : Array.from(details.maps)[0];
     transportToggle('canMoveMap', false);
-    setTransportSubFeature('subway', details.maps[0]?.subwayContent || '');
-    setTransportSubFeature('bus', details.maps[0]?.busContent || '');
-    setTransportSubFeature('car', details.maps[0]?.personalCarContent || '');
-    transportToggle('navigationKakao', details.maps[0]?.kakaoMap || false);
-    transportToggle('navigationNaver', details.maps[0]?.naverMap || false);
-    transportToggle('navigationTmap', details.maps[0]?.tMap || false);
-    transportToggle('transportationCar', details.maps[0]?.personalCar || false);
-    transportToggle('transportationBus', details.maps[0]?.bus || false);
-    transportToggle('transportationSubway', details.maps[0]?.subway || false);
+    setTransportSubFeature('subway', mapData.subwayContent || '');
+    setTransportSubFeature('bus', mapData.busContent || '');
+    setTransportSubFeature('car', mapData.personalCarContent || '');
+    transportToggle('navigationKakao', mapData.kakaoMap || false);
+    transportToggle('navigationNaver', mapData.naverMap || false);
+    transportToggle('navigationTmap', mapData.tMap || false);
+    transportToggle('transportationCar', mapData.personalCar || false);
+    transportToggle('transportationBus', mapData.bus || false);
+    transportToggle('transportationSubway', mapData.subway || false);
 
-    const modifiedNotice: Notice[] = details.notices.map((value) => {
-      return {
-        noticeId: value.id!,
-        title: value.title!,
-        content: value.content as string,
-        image: value.image as string,
-        imgFile: null,
-      };
-    });
-    replaceNotice(modifiedNotice || []);
+    const noticesData =
+      typeof details.notices == 'string'
+        ? JSON.parse(details.notices)
+        : Array.from(details.notices);
+    const modifiedNotice: Notice[] = noticesData.map(
+      (value: Notice & { id: number }) => {
+        return {
+          noticeId: value.id!,
+          title: value.title!,
+          content: value.content as string,
+          image: value.image as string,
+          imgFile: null,
+        };
+      },
+    );
+    replaceNotice(modifiedNotice);
 
     //계좌
     const defaultAccount = {
@@ -418,31 +416,36 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       'fatherAccountInfo',
       'motherAccountInfo',
     ] as const;
-
+    const accountsData =
+      typeof details.accounts == 'string'
+        ? JSON.parse(details.accounts)
+        : Array.from(details.accounts);
     [0, 1].forEach((index) => {
       accountKeys.forEach((key, keyIndex) => {
         const accountData =
-          Array.isArray(details.accounts) &&
-          details.accounts.length > index * 3 + keyIndex
-            ? details.accounts[index * 3 + keyIndex]
+          Array.isArray(accountsData) &&
+          accountsData.length > index * 3 + keyIndex
+            ? accountsData[index * 3 + keyIndex]
             : defaultAccount;
         updateAccountInfo(index, key, accountData);
       });
     });
 
+    const calendarsData =
+      typeof details.calendars == 'string'
+        ? JSON.parse(details.calendars)
+        : Array.from(details.calendars);
     calendarToggle(
       'calendar',
-      (details.calendars.length !== 0 && details.calendars[0]?.calendar) ||
-        false,
+      (calendarsData.length !== 0 && calendarsData[0].calendar) || false,
     );
     calendarToggle(
       'dday',
-      (details.calendars.length !== 0 && details.calendars[0]?.dDay) || false,
+      (calendarsData.length !== 0 && calendarsData[0].dDay) || false,
     );
     calendarToggle(
       'countdown',
-      (details.calendars.length !== 0 && details.calendars[0]?.countdown) ||
-        false,
+      (calendarsData.length !== 0 && calendarsData[0].countdown) || false,
     );
 
     const features = [

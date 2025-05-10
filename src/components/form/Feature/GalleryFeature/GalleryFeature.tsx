@@ -12,9 +12,9 @@ export default function GalleryFeature() {
   const {
     galleryImages,
     grid,
+    galleryFiles,
     setImages,
     setGrid,
-    galleryFiles,
     setGalleryFiles,
   } = useGalleryStore();
 
@@ -23,14 +23,16 @@ export default function GalleryFeature() {
   let acceptedFormats = ['image/svg', 'image/png', 'image/jpg'];
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (galleryImages.length + e.target.files!.length <= 9) {
-      const target = e.target.files as FileList;
-      const fileArray = [...target].map((value: Blob) =>
-        URL.createObjectURL(value),
-      );
-      setImages([...galleryImages, ...fileArray]);
-      setGalleryFiles([...galleryFiles, ...target]);
-    } else alert('이미지개수가 9개를 초과할수없습니다!');
+    if (galleryImages) {
+      if (galleryImages.length + e.target.files!.length < 9) {
+        const target = e.target.files as FileList;
+        const fileArray = [...target].map((value: Blob) =>
+          URL.createObjectURL(value),
+        );
+        setImages([...galleryImages, ...fileArray]);
+        setGalleryFiles([...galleryFiles, ...target]);
+      } else alert('이미지개수가 9개를 초과할수없습니다!');
+    }
   };
 
   const handleDelete = (index: number) => {

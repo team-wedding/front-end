@@ -32,7 +32,7 @@ export interface InvitationDetail {
   fontSize: boolean;
   calendars: CalaendarDetail[];
   maps: MapDetail[];
-  galleries: Omit<GalleryDetail[], 'images'>;
+  galleries: GalleryDetail[];
   accounts: AccountDetail[];
   contacts: ContactDetail[];
   notices: NoticeDetail[];

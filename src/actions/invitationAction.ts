@@ -1,4 +1,8 @@
-import { AccountDetail, InvitationDetail } from '@/types/invitationType';
+import {
+  AccountDetail,
+  GalleryDetail,
+  InvitationDetail,
+} from '@/types/invitationType';
 import useBrideGroomStore from '@store/useBrideGroomStore';
 import useGreetingStore from '@store/useGreetingStore';
 import useThemeStore from '@store/useThemeStore';
@@ -46,7 +50,7 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
   attendanceContent: '',
   attendanceIsDining: false,
   attendance: false,
-  font: 'Crimson',
+  font: 'font-Paperlog',
   fontSize: false,
   calendars: [
     {
@@ -72,7 +76,50 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
       busContent: '',
     },
   ],
-  accounts: [],
+  accounts: [
+    {
+      isActive: false,
+      accountHolderName: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoUrl: '',
+    },
+    {
+      isActive: false,
+      accountHolderName: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoUrl: '',
+    },
+    {
+      isActive: false,
+      accountHolderName: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoUrl: '',
+    },
+    {
+      isActive: false,
+      accountHolderName: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoUrl: '',
+    },
+    {
+      isActive: false,
+      accountHolderName: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoUrl: '',
+    },
+    {
+      isActive: false,
+      accountHolderName: '',
+      bankName: '',
+      accountNumber: '',
+      kakaoUrl: '',
+    },
+  ],
   contacts: [
     {
       order: 4,
@@ -88,7 +135,7 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
   notices: [],
   audio: 0,
   imgUrl: '',
-  galleries: [],
+  galleries: [{ isActive: false, images: [], grid: false }],
 };
 
 export const getInvitationAction = (): Omit<
@@ -252,12 +299,12 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
   if (details) {
     updateBrideGroom(0, 'name', details.groomName);
     updateBrideGroom(1, 'name', details.brideName);
-    updateFamily(0, 'father', 'name', details.brideFatherName);
-    updateFamily(0, 'mother', 'name', details.brideMotherName);
+    updateFamily(1, 'father', 'name', details.brideFatherName);
+    updateFamily(1, 'mother', 'name', details.brideMotherName);
     updateFamily(0, 'father', 'isDeceased', !details.brideFatherAlive);
     updateFamily(0, 'mother', 'isDeceased', !details.brideMotherAlive);
-    updateFamily(1, 'father', 'name', details.groomFatherName);
-    updateFamily(1, 'mother', 'name', details.groomMotherName);
+    updateFamily(0, 'father', 'name', details.groomFatherName);
+    updateFamily(0, 'mother', 'name', details.groomMotherName);
     updateFamily(1, 'father', 'isDeceased', !details.groomFatherAlive);
     updateFamily(1, 'mother', 'isDeceased', !details.groomMotherAlive);
 
@@ -265,12 +312,12 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       typeof details.location == 'string'
         ? JSON.parse(details.location)
         : Array.from(details.location);
-
-    setAddress(locationData[0], locationData[1]);
-    setJibunAddress(locationData[2]);
     try {
+      setAddress(locationData[0], locationData[1]);
+      setJibunAddress(locationData[2]);
+      setWeddingHallName(locationData[4]);
+      setWeddingHallDetail(locationData[5]);
       // JSON 문자열인지 확인 후 파싱 시도
-      // const locationData = Array.from(details.location)[3];
       //비어있으면 ..
       if (locationData[3].trim() !== '') {
         const { lat, lng } = JSON.parse(locationData[3]);
@@ -290,9 +337,6 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
         `,
       );
     }
-
-    setWeddingHallName(locationData[4]);
-    setWeddingHallDetail(locationData[5]);
 
     try {
       const weddingTime =
@@ -357,13 +401,23 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     });
     setRSVPIncludeMeal(details.attendanceIsDining);
     setRSVPIncludePopulation(details.attendance);
-    //갤러리
-    const galleryData =
+
+    //갤러리;
+    const galleryData: GalleryDetail[] =
       typeof details.galleries == 'string'
         ? JSON.parse(details.galleries)
-        : Array.from(details.galleries);
-    setGrid(galleryData.grid);
-    setImages(galleryData.images);
+        : typeof details.galleries == 'object'
+          ? Array.from(details.galleries)
+          : details.galleries;
+    setGrid(galleryData[0].grid);
+    const galleryImagesData =
+      typeof galleryData[0].images == 'string'
+        ? JSON.parse(galleryData[0].images)
+        : typeof galleryData[0].images == 'object'
+          ? Array.from(galleryData[0].images)
+          : galleryData[0].images;
+    setImages(galleryImagesData);
+
     //폰트
     setFont(
       details.font,
@@ -449,12 +503,12 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     );
 
     const features = [
-      { key: 'calendar', list: details.calendars },
-      { key: 'location', list: details.maps },
-      { key: 'gallery', list: details.galleries },
-      { key: 'account', list: details.accounts },
-      { key: 'contact', list: details.contacts },
-      { key: 'notice', list: details.notices },
+      { key: 'calendar', list: calendarsData },
+      { key: 'location', list: mapData },
+      { key: 'gallery', list: galleryData },
+      { key: 'account', list: accountsData },
+      { key: 'contact', list: contactInfo },
+      { key: 'notice', list: noticesData },
     ];
     features.forEach(({ key, list }) => {
       const isActive =

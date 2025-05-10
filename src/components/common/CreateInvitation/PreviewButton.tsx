@@ -3,18 +3,15 @@ import { useNavigate } from 'react-router';
 
 interface PreviewButtonProps {
   id?: string;
-  isSaving: boolean
-  update: () => void
+  update: () => void;
 }
 
-const PreviewButton = ({ id, isSaving, update }: PreviewButtonProps) => {
+const PreviewButton = ({ id, update }: PreviewButtonProps) => {
   const navigate = useNavigate();
 
   const handleClick = () => {
     update();
-    if (!isSaving) {
-      navigate(id ? `/preview/${id}` : '/preview');
-    }
+    navigate(id ? `/preview/${id}` : '/preview');
   };
 
 
@@ -27,10 +24,10 @@ const PreviewButton = ({ id, isSaving, update }: PreviewButtonProps) => {
       <img
         src={logo}
         alt="로고"
-        className={`h-14 rounded-full shadow-xl backdrop-blur-lg hover:opacity-70 ${isSaving && 'animate-spin'}`}
+        className={`h-14 rounded-full shadow-xl backdrop-blur-lg hover:opacity-70`}
       />
       <span className="animate-pulse rounded-md backdrop-blur-lg px-2 py-1 font-light text-xs">
-        {isSaving ? '자동저장' : '미리보기'}
+        {'미리보기'}
       </span>
     </button>
   );

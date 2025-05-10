@@ -21,13 +21,14 @@ import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
 import { InvitationDetail, NoticeDetail, S3UploadRequest } from '@/types/invitationType';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
-import logo from '@/assets/woogyeol/logo_light.png';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import ReusableModal from '@/components/common/Modal/ReusableModal';
+import { validateBrideGroomNames } from '@/utils/validator';
+import useBrideGroomStore from '@/store/useBrideGroomStore';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
-const AUTO_SAVE_MODAL_DURATION_MS = 3000;
-const AUTO_SAVE_INTERVAL_MS = 25000;
+// const AUTO_SAVE_MODAL_DURATION_MS = 3000;
+// const AUTO_SAVE_INTERVAL_MS = 5000;
 
 const CreateInvitationPage = () => {
   const navigate = useNavigate();
@@ -35,8 +36,8 @@ const CreateInvitationPage = () => {
   const [steps, setSteps] = useState(1);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [autoSaveModal, setAutoSaveModal] = useState(false)
   const [cancelModal, setCancelModal] = useState(false)
+  // const [autoSaveModal, setAutoSaveModal] = useState(false)
   const details = getInvitationAction();
   const { optionalItems } = useAccordionStore();
   const { invitations } = useGetInvitation(parseInt(id!));
@@ -46,6 +47,7 @@ const CreateInvitationPage = () => {
   const { galleryFiles, grid } = useGalleryStore();
   const { invitationtitle, setInvitationTitle } = useInvitationStore();
   const { notices } = useNoticeStore();
+  const { brideGroom } = useBrideGroomStore();
   const noticeImages = notices.flatMap((value) => {
     if (value.imgFile) {
       return value.imgFile;
@@ -70,28 +72,34 @@ const CreateInvitationPage = () => {
 
   const saveInvitationData = async () => {
     await flushAll()
-    const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
-      uploadToS3(uploadedImageFile ? { imageFiles: [uploadedImageFile], directory: 'thumbnail' } : { imageFiles: [], directory: 'thumbnail' }),
-      uploadToS3(galleryFiles ? { imageFiles: galleryFiles, directory: 'gallery' } : { imageFiles: [], directory: 'gallery' }),
-      ...noticeImages.map((imageFile) => uploadToS3(imageFile ? { imageFiles: [imageFile], directory: "notice" } : { imageFiles: [], directory: 'notice' })),
-    ]);
-    const s3ImageList = [thumbnail, gallery, ...noticeS3ImageList];
-    const noticeList: NoticeDetail[] = notices.map((value, index) => {
-      return {
-        ...value,
-        order: findOrder('notice'),
-        isActive: selectedOptionalFeatures.notice,
-        image: s3ImageList[index][0],
-      };
-    });
-    await updateMutate({
-      ...details,
-      imgUrl: thumbnail.length > 0 ? thumbnail[0] : '',
-      galleries: [
-        { images: gallery, grid, isActive: selectedOptionalFeatures.gallery },
-      ],
-      notices: noticeList,
-    })
+    if (!validateBrideGroomNames(brideGroom)) {
+      console.log(!validateBrideGroomNames(brideGroom), brideGroom[0].name, brideGroom[1].name)
+      setIsModalOpen(true);
+      return
+    } else {
+      const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
+        uploadToS3(uploadedImageFile ? { imageFiles: [uploadedImageFile], directory: 'thumbnail' } : { imageFiles: [], directory: 'thumbnail' }),
+        uploadToS3(galleryFiles ? { imageFiles: galleryFiles, directory: 'gallery' } : { imageFiles: [], directory: 'gallery' }),
+        ...noticeImages.map((imageFile) => uploadToS3(imageFile ? { imageFiles: [imageFile], directory: "notice" } : { imageFiles: [], directory: 'notice' })),
+      ]);
+      const s3ImageList = [thumbnail, gallery, ...noticeS3ImageList];
+      const noticeList: NoticeDetail[] = notices.map((value, index) => {
+        return {
+          ...value,
+          order: findOrder('notice'),
+          isActive: selectedOptionalFeatures.notice,
+          image: s3ImageList[index][0],
+        };
+      });
+      await updateMutate({
+        ...details,
+        imgUrl: thumbnail.length > 0 ? thumbnail[0] : invitations ? invitations.imgUrl : '',
+        galleries: [
+          { images: gallery, grid, isActive: selectedOptionalFeatures.gallery },
+        ],
+        notices: noticeList,
+      })
+    }
   }
 
   useEffect(() => {
@@ -101,29 +109,29 @@ const CreateInvitationPage = () => {
   }, [invitations?.title])
 
   useEffect(() => {
-    const intervalId = setInterval(async () => {
-      // await flushAll()
-      // if (!validateBrideGroomNames(brideGroom)) {
-      //   console.log(!validateBrideGroomNames(brideGroom), brideGroom[0].name, brideGroom[1].name)
-      //   setIsModalOpen(true);
-      //   return
-      // }
-      setAutoSaveModal(true);
-      saveInvitationData()
-      useUpdateInvitationStore(invitations as InvitationDetail);
-      setTimeout(() => {
-        setAutoSaveModal(false);
-        setIsModalOpen(false)
-      }, AUTO_SAVE_MODAL_DURATION_MS); // 모달 인터벌
-    }, AUTO_SAVE_INTERVAL_MS); // 임시저장 인터벌
-    return () => {
-      clearInterval(intervalId); // 컴포넌트 unmount 시 cleanup
-    };
-  }, [updateMutate]);
+    useUpdateInvitationStore(invitations as InvitationDetail);
+  }, [invitations])
+
   useEffect(() => {
     const [start, end] = sliceRanges[steps - 1];
     initializeItems(start, end);
   }, [steps, initializeItems]);
+
+  // useEffect(() => {
+  //   const intervalId = setInterval(async () => {
+  //     await flushAll()
+  //     setAutoSaveModal(true);
+  //     await saveInvitationData()
+  //     // useUpdateInvitationStore(invitations as InvitationDetail);
+  //     setTimeout(() => {
+  //       setAutoSaveModal(false);
+  //       setIsModalOpen(false)
+  //     }, AUTO_SAVE_MODAL_DURATION_MS); // 모달 인터벌
+  //   }, AUTO_SAVE_INTERVAL_MS); // 임시저장 인터벌
+  //   return () => {
+  //     clearInterval(intervalId); // 컴포넌트 unmount 시 cleanup
+  //   };
+  // }, [updateMutate]);
 
   const toggleExpand = (id: number) => {
     setExpandedIds((prev) =>
@@ -161,11 +169,6 @@ const CreateInvitationPage = () => {
     <DndProvider backend={HTML5Backend}>
       <div className="page-container">
         <div className="create-section relative">
-          {autoSaveModal &&
-            <div className='fixed flex flex-row gap-4  top-10 right-10 z-20 bg-purple-200/60 text-white px-2 py-2 rounded-md'>
-              <img alt="WooGyeol" src={logo} className="w-6 animate-spin" />
-              auto-saving....</div>
-          }
           <PageLayout
             title={invitationtitle}
             leftButton={
@@ -208,7 +211,7 @@ const CreateInvitationPage = () => {
             </div>
           </PageLayout>
           <div className="absolute bottom-16 right-4">
-            <PreviewButton id={id} isSaving={autoSaveModal} update={saveInvitationData} />
+            <PreviewButton id={id} update={saveInvitationData} />
           </div>
         </div>
         <div className="preview-section">

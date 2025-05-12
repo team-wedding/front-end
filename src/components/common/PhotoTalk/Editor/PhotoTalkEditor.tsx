@@ -5,6 +5,7 @@ import CloudArrowIcon from '@icons/CloudArrowIcon';
 import { useCreatePhototalk, useUpdatePhototalk } from '@/hooks/usePhototalk';
 import { useParams } from 'react-router';
 import { useS3Image } from '@/hooks/useS3Image';
+import TipTapEditor from '@components/common/PhotoTalk/Editor/TiptapEditor';
 // import { useUserStore } from '@/store/useUserStore';
 
 interface PhotoTalkEditorProps {
@@ -188,13 +189,19 @@ const PhotoTalkEditor = ({
               />
 
               <label className="label w-full">내용</label>
-              <textarea
+              {/* <textarea
                 name="message"
                 placeholder="내용을 입력해주세요"
                 value={form.message}
                 rows={4}
                 onChange={handleChange}
                 className="formInput w-full mb-2"
+              /> */}
+              <TipTapEditor
+                content={form.message}
+                onChange={(value) => {
+                  setForm((prev) => ({ ...prev, message: value }));
+                }}
               />
 
               <label className="label w-full flex">

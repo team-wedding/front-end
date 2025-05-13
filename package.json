@@ -32,6 +32,7 @@
     "file-saver": "^2.0.5",
     "flowbite": "^2.5.2",
     "flowbite-react": "^0.10.2",
+    "flowbite-typography": "^1.0.5",
     "isomorphic-dompurify": "^2.20.0",
     "jsdom": "^26.0.0",
     "jszip": "^3.10.1",
@@ -57,6 +58,7 @@
     "zustand": "^5.0.2"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.16",
     "@types/file-saver": "^2.0.7",
     "@types/lodash": "^4.17.14",
     "@types/node": "^22.10.7",

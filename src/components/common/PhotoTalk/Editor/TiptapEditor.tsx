@@ -10,6 +10,12 @@ interface TipTapEditorProps {
 
 const TipTapEditor = ({ content, onChange }: TipTapEditorProps) => {
   const editor = useEditor({
+    editorProps: {
+      attributes: {
+        class:
+          'prose prose-sm dark:prose-invert prose-headings:my-2 prose-p:m-0 min-h-[65px] focus:outline-none',
+      },
+    },
     extensions: [StarterKit],
     content,
     onUpdate({ editor }) {
@@ -24,9 +30,11 @@ const TipTapEditor = ({ content, onChange }: TipTapEditorProps) => {
   }, [content, editor]);
 
   return (
-    <div className="border rounded-md p-2 bg-white dark:bg-gray-800">
+    <div className="border rounded-md bg-white dark:bg-gray-800">
       {editor && <MenuBar editor={editor} />}
-      <EditorContent editor={editor} />
+      <div className="p-4 h-[100px] overflow-y-auto">
+        <EditorContent editor={editor} />
+      </div>
     </div>
   );
 };

@@ -2,6 +2,8 @@ import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import { useEffect } from 'react';
 import MenuBar from './MenuBar';
+import debounce from 'lodash/debounce';
+import { useMemo } from 'react';
 
 interface TipTapEditorProps {
   content: string;
@@ -9,6 +11,14 @@ interface TipTapEditorProps {
 }
 
 const TipTapEditor = ({ content, onChange }: TipTapEditorProps) => {
+  const debouncedOnChange = useMemo(
+    () =>
+      debounce((content: string) => {
+        onChange(content);
+      }, 200),
+    [onChange],
+  );
+
   const editor = useEditor({
     editorProps: {
       attributes: {
@@ -19,7 +29,7 @@ const TipTapEditor = ({ content, onChange }: TipTapEditorProps) => {
     extensions: [StarterKit],
     content,
     onUpdate({ editor }) {
-      onChange(editor.getHTML());
+      debouncedOnChange(editor.getHTML());
     },
   });
 
@@ -29,12 +39,22 @@ const TipTapEditor = ({ content, onChange }: TipTapEditorProps) => {
     }
   }, [content, editor]);
 
+  useEffect(() => {
+    return () => {
+      debouncedOnChange.cancel();
+    };
+  }, [debouncedOnChange]);
+
   return (
     <div className="border rounded-md bg-white dark:bg-gray-800">
-      {editor && <MenuBar editor={editor} />}
-      <div className="p-4 h-[100px] overflow-y-auto">
-        <EditorContent editor={editor} />
-      </div>
+      {editor && (
+        <>
+          <MenuBar editor={editor} />
+          <div className="p-4 h-[100px] overflow-y-auto">
+            <EditorContent editor={editor} />
+          </div>
+        </>
+      )}
     </div>
   );
 };

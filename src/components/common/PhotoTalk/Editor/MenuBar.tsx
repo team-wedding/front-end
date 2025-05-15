@@ -67,6 +67,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
           </div>
         )}
       </div>
+
       {/* Bold */}
       <button
         type="button"

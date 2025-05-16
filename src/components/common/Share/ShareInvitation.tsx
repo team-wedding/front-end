@@ -75,7 +75,9 @@ export default function ShareInvitation({
   const [toast, setToast] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(shareUrl);
+    await navigator.clipboard.writeText(
+      `https://woogyeol.vercel.app/${shareUrl}`,
+    );
     // toast.success('클립보드에 복사되었어요!', {
     //   position: 'bottom-center',
     //   autoClose: 2000,

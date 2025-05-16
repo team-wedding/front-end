@@ -1,11 +1,6 @@
 import { useDebouncedCallback } from '@/hooks/useDebounce';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
-import {
-  useImperativeHandle,
-  useRef,
-  forwardRef,
-  useEffect,
-} from 'react';
+import { useImperativeHandle, useRef, forwardRef, useEffect } from 'react';
 
 type DebouncedInputProps = {
   value: string;
@@ -32,13 +27,13 @@ const DebouncedInput = forwardRef<DebouncedInputHandle, DebouncedInputProps>(
       placeholder = '',
       className = '',
     },
-    ref
+    ref,
   ) => {
     const valueRef = useRef(value);
 
     const { callback: debouncedChange, flush } = useDebouncedCallback(
       onDebouncedChange,
-      delay
+      delay,
     );
 
     const { register, unregister } = useDebouncedInputStore();
@@ -74,7 +69,7 @@ const DebouncedInput = forwardRef<DebouncedInputHandle, DebouncedInputProps>(
         onBlur={handleBlur}
       />
     );
-  }
+  },
 );
 
 DebouncedInput.displayName = 'DebouncedInput';

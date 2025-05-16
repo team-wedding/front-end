@@ -114,7 +114,10 @@ const PhotoTalkEditor = ({
       alert('모든 필드를 입력해주세요.');
       return;
     }
-    const { imageUrls: photoTalkImageUrls } = await s3Mutate({ imageFiles: form.imageFile, directory: "phototalk" });
+    const { imageUrls: photoTalkImageUrls } = await s3Mutate({
+      imageFiles: form.imageFile,
+      directory: 'phototalk',
+    });
     if (editingPhotoTalk) {
       updatePhototalk.mutate(
         {

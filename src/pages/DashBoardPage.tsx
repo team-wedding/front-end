@@ -47,16 +47,16 @@ const DashBoardPage = () => {
           <div className="grid grid-cols-2 gap-2 place-items-center">
             {isPending || isRefetching
               ? Array.from({ length: 4 }).map((_, i) => (
-                <SkeletonCard key={i} />
-              ))
+                  <SkeletonCard key={i} />
+                ))
               : invitations.map((card: InvitationDetail) => (
-                <Card
-                  key={card.id}
-                  image={card.imgUrl}
-                  id={card.id as number}
-                  title={card.title}
-                />
-              ))}
+                  <Card
+                    key={card.id}
+                    image={card.imgUrl}
+                    id={card.id as number}
+                    title={card.title}
+                  />
+                ))}
           </div>
 
           {invitations.length === 0 && (

@@ -24,13 +24,13 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
     }
   };
 
-  const initialDetail = defaultInvitationValues
+  const initialDetail = defaultInvitationValues;
   const handleConfirm = () => {
     setInvitationTitle(titleInput); // 입력한 제목을 상태에 저장
     postMutate({
       ...initialDetail,
-      title: titleInput
-    })
+      title: titleInput,
+    });
   };
 
   return (
@@ -68,10 +68,11 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
           <button
             onClick={handleConfirm}
             disabled={titleInput.length === 0}
-            className={`rounded-full w-8 h-8 flex justify-center items-center ${titleInput.length === 0
+            className={`rounded-full w-8 h-8 flex justify-center items-center ${
+              titleInput.length === 0
                 ? 'bg-surface-muted dark:bg-surface-muted-dark cursor-not-allowed'
                 : 'bg-secondary/30 dark:bg-secondary-dark/30 cursor-pointer hover:bg-secondary/20 dark:hover:bg-secondary-dark/20'
-              }`}
+            }`}
           >
             <NextIcon />
           </button>

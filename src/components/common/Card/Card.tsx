@@ -18,7 +18,9 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
   const navigate = useNavigate();
 
   const { mutate: deleteInvitation } = useDeleteInvitation(invitationId);
-  const { mutate: deleteS3Invitation } = useS3RemoveImage(invitationId.toString())
+  const { mutate: deleteS3Invitation } = useS3RemoveImage(
+    invitationId.toString(),
+  );
   const { id: userId } = useUserStore();
 
   const [modal, setModal] = useState(false);

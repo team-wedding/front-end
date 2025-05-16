@@ -55,7 +55,8 @@ export default function AttendanceSection() {
         <div className="column-center py-10 bg-rose-50/70 rounded-xl w-full">
           <div className="flex flex-col gap-4 mb-10 mx-12">
             <div className="flex flex-row gap-2">
-              <HeartIcon /> {`${brideGroom[0].name || '김세모'} & ${brideGroom[1].name || '이네모'}`}
+              <HeartIcon />{' '}
+              {`${brideGroom[0].name || '김세모'} & ${brideGroom[1].name || '이네모'}`}
             </div>
             <div className="flex flex-row gap-2">
               <CalendarIcon />
@@ -68,7 +69,7 @@ export default function AttendanceSection() {
                 {address && <div className="mb-1">{address.split('(')[0]}</div>}
                 {(weddingHallName || weddingHallDetail) && (
                   <div className="text-gray-500">
-                    {`${weddingHallName || '미정'}, ${weddingHallDetail || " 미정"}`}
+                    {`${weddingHallName || '미정'}, ${weddingHallDetail || ' 미정'}`}
                   </div>
                 )}
               </div>

@@ -1,4 +1,6 @@
-import DebouncedInput, { DebouncedInputHandle } from '@/components/common/DebounceInput/DebounceInput';
+import DebouncedInput, {
+  DebouncedInputHandle,
+} from '@/components/common/DebounceInput/DebounceInput';
 import useContactStore from '@store/useContactStore';
 import { useRef } from 'react';
 
@@ -27,7 +29,7 @@ const ContactInput = () => {
                 className="formInput"
               /> */}
               <DebouncedInput
-                type='tel'
+                type="tel"
                 ref={contactNumberInputRef}
                 value={person.contact}
                 onDebouncedChange={(value) =>
@@ -52,7 +54,7 @@ const ContactInput = () => {
                 className="formInput"
               /> */}
               <DebouncedInput
-                type='tel'
+                type="tel"
                 ref={contactfatherNumberInputRef}
                 value={person.fatherContact}
                 onDebouncedChange={(value) =>
@@ -77,7 +79,7 @@ const ContactInput = () => {
                 className="formInput"
               /> */}
               <DebouncedInput
-                type='tel'
+                type="tel"
                 ref={contactMotherNumberInputRef}
                 value={person.motherContact}
                 onDebouncedChange={(value) =>

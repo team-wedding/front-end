@@ -14,7 +14,6 @@ const PreviewButton = ({ id, update }: PreviewButtonProps) => {
     navigate(id ? `/preview/${id}` : '/preview');
   };
 
-
   return (
     <button
       className="column-center rounded-full"

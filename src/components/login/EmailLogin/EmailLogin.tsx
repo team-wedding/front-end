@@ -21,7 +21,7 @@ const EmailLogin = () => {
   const [loginValid, setLoginValid] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLoginValid(true)
+    setLoginValid(true);
     const { name, value } = e.target;
 
     if (name === 'email') {
@@ -45,7 +45,7 @@ const EmailLogin = () => {
       navigate('/dashboard');
     } catch (error) {
       console.log('이메일 로그인 실패', error);
-      setLoginValid(false)
+      setLoginValid(false);
     }
   };
 
@@ -104,10 +104,11 @@ const EmailLogin = () => {
 
         <button
           type="submit"
-          className={`splash-btn hover:ease-in ${isFormValid
+          className={`splash-btn hover:ease-in ${
+            isFormValid
               ? 'bg-gradient-to-r from-primary-muted to-secondary-muted text-black dark:from-primary-muted-dark dark:to-secondary-muted-dark dark:text-white'
               : 'cursor-not-allowed'
-            }`}
+          }`}
           disabled={!isFormValid}
         >
           로그인

@@ -1,6 +1,8 @@
 import { useRef } from 'react';
 import BankSelector from './BankSelector';
-import DebouncedInput, { DebouncedInputHandle } from '@/components/common/DebounceInput/DebounceInput';
+import DebouncedInput, {
+  DebouncedInputHandle,
+} from '@/components/common/DebounceInput/DebounceInput';
 
 const AccountRow = ({
   label,
@@ -36,7 +38,7 @@ const AccountRow = ({
           className="formInput"
         /> */}
         <DebouncedInput
-          type='text'
+          type="text"
           ref={accountNameInputRef}
           value={accountInfo?.accountHolderName}
           onDebouncedChange={(value) => onUpdate('accountHolderName', value)}
@@ -56,7 +58,7 @@ const AccountRow = ({
           className="formInput"
         /> */}
         <DebouncedInput
-          type='text'
+          type="text"
           ref={accountNumberInputRef}
           value={accountInfo?.accountHolderName}
           onDebouncedChange={(value) => onUpdate('accountNumber', value)}
@@ -76,7 +78,7 @@ const AccountRow = ({
           className="formInput"
         /> */}
         <DebouncedInput
-          type='text'
+          type="text"
           ref={accountKakaoInputRef}
           value={accountInfo?.accountHolderName}
           onDebouncedChange={(value) => onUpdate('kakaoUrl', value)}

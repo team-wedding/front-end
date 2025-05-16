@@ -2,7 +2,7 @@ import { useRef, useEffect } from 'react';
 
 export function useDebouncedCallback<T extends (...args: any[]) => void>(
   callback: T,
-  delay: number
+  delay: number,
 ): {
   callback: (...args: Parameters<T>) => void;
   flush: () => void;

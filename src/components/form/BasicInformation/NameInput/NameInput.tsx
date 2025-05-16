@@ -1,5 +1,6 @@
-
-import DebouncedInput, { DebouncedInputHandle } from '@/components/common/DebounceInput/DebounceInput';
+import DebouncedInput, {
+  DebouncedInputHandle,
+} from '@/components/common/DebounceInput/DebounceInput';
 import useBrideGroomStore from '@store/useBrideGroomStore';
 import { useRef } from 'react';
 
@@ -26,11 +27,12 @@ const NameInput = () => {
                 {person.role} <div className="text-red-600">*</div>{' '}
               </label>
               <DebouncedInput
-                type='text'
+                type="text"
                 ref={nameInputRef}
                 value={person.name}
                 onDebouncedChange={(value) =>
-                  updateBrideGroom(index, 'name', value)}
+                  updateBrideGroom(index, 'name', value)
+                }
                 placeholder="성함(OOO)"
                 className="formInput"
               />
@@ -38,7 +40,7 @@ const NameInput = () => {
             <div className="flex items-center gap-2">
               <label className="label">아버지</label>
               <DebouncedInput
-                type='text'
+                type="text"
                 ref={fatherNameInputRef}
                 value={person.family.father.name}
                 onDebouncedChange={(value) =>
@@ -67,7 +69,7 @@ const NameInput = () => {
             <div className="flex items-center gap-2">
               <label className="label">어머니</label>
               <DebouncedInput
-                type='text'
+                type="text"
                 ref={motherNameInputRef}
                 value={person.family.mother.name}
                 onDebouncedChange={(value) =>

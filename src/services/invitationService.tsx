@@ -14,9 +14,7 @@ export const getInvitation = async (id: number) => {
 };
 
 //청첩장 생성
-export const postInvitation = async (
-  details: Omit<InvitationDetail, 'id'>,
-) => {
+export const postInvitation = async (details: Omit<InvitationDetail, 'id'>) => {
   const { data } = await axiosInstance.post(API.INVITATIONS(), details);
   return data;
 };

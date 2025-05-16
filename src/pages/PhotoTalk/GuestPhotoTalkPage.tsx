@@ -1,29 +1,41 @@
 import PhotoTalkEditor from '@/components/common/PhotoTalk/Editor/PhotoTalkEditor';
 import PhotoTalkListGuest from '@/components/common/PhotoTalk/List/PhotoTalkListGuest';
 import PhotoTalkLayout from '@/components/layout/PhotoTalkLayout';
-import { useGetGuestPhototalks } from '@/hooks/usePhototalk';
+import { useInfinitePhototalkByQuery } from '@/hooks/usePhototalk';
+import { getGuestPhototalks } from '@/services/phototalkService';
 import usePhotoTalkStore from '@/store/usePhotoTalkStore';
+import { PhotoTalk, PhotoTalkResponse } from '@/types/phototalkType';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
 const GuestPhotoTalkPage = () => {
   const { setPhotoTalkList } = usePhotoTalkStore();
   const [isEditorOpen, setEditorOpen] = useState(false);
-  const { id: userId } = useParams();
+  const { userId } = useParams();
 
-  const isPublicApiReady = false; // 백엔드 api 만들어지면 수정
-  const { data, isLoading } = useGetGuestPhototalks(
-    userId || '',
-    1,
-    20,
-    !!userId && isPublicApiReady,
-  );
+  const {
+    items: data,
+    isLoading,
+    observeRef,
+    isFetchingNextPage,
+  } = useInfinitePhototalkByQuery<PhotoTalkResponse, PhotoTalk>({
+    queryFn: (page) => getGuestPhototalks(userId!, page, 6),
+    extractItems: (res) => res.allCelebrationMsgs,
+    getHasMore: (res) => res.currentPage < res.totalPages,
+  });
+
+  // useEffect(() => {
+  //   if (data) {
+  //     console.log('받아온 포토톡 데이터:', data.allCelebrationMsgs);
+  //     setPhotoTalkList(data.allCelebrationMsgs);
+  //   }
+  // }, [data]);
 
   useEffect(() => {
-    if (data) {
-      setPhotoTalkList(data.allCelebrationMsgs);
+    if (data.length > 0) {
+      setPhotoTalkList(data);
     }
-  }, [data]);
+  }, [data, setPhotoTalkList]);
 
   return (
     <PhotoTalkLayout title="포토톡">
@@ -32,9 +44,11 @@ const GuestPhotoTalkPage = () => {
         className="px-3 bg-gradient-to-br from-[#DEE8FF] via-[#EFE1F4] to-[#FFDBE9] rounded-t-[40px] border-t min-h-screen pb-28"
       >
         <PhotoTalkListGuest
-          photoTalkList={data?.allCelebrationMsgs || []}
+          photoTalkList={data || []}
           isLoading={isLoading}
           onOpenEditor={() => setEditorOpen(true)}
+          observeRef={observeRef}
+          isFetchingNextPage={isFetchingNextPage}
         />
       </section>
 

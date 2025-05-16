@@ -1,5 +1,7 @@
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
+import Underline from '@tiptap/extension-underline';
+import Highlight from '@tiptap/extension-highlight';
 import { useEffect } from 'react';
 import MenuBar from './MenuBar';
 import debounce from 'lodash/debounce';
@@ -23,10 +25,10 @@ const TipTapEditor = ({ content, onChange }: TipTapEditorProps) => {
     editorProps: {
       attributes: {
         class:
-          'prose prose-sm dark:prose-invert prose-headings:my-2 prose-p:m-0 min-h-[65px] focus:outline-none',
+          'prose prose-sm dark:prose-invert prose-headings:my-2 prose-p:m-0 min-h-[120px] focus:outline-none',
       },
     },
-    extensions: [StarterKit],
+    extensions: [StarterKit, Underline, Highlight],
     content,
     onUpdate({ editor }) {
       debouncedOnChange(editor.getHTML());
@@ -50,7 +52,7 @@ const TipTapEditor = ({ content, onChange }: TipTapEditorProps) => {
       {editor && (
         <>
           <MenuBar editor={editor} />
-          <div className="p-4 h-[100px] overflow-y-auto">
+          <div className="p-4 h-[160px] overflow-y-auto">
             <EditorContent editor={editor} />
           </div>
         </>

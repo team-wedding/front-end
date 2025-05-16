@@ -1,4 +1,4 @@
-const CodeIcon = () => {
+const HighlightIcon = () => {
   return (
     <div>
       <svg
@@ -13,13 +13,12 @@ const CodeIcon = () => {
         <path
           stroke="currentColor"
           strokeLinecap="round"
-          strokeLinejoin="round"
           strokeWidth="2"
-          d="m8 8-4 4 4 4m8 0 4-4-4-4m-2-3-4 14"
+          d="M9 19.2H5.5c-.3 0-.5-.2-.5-.5V16c0-.2.2-.4.5-.4h13c.3 0 .5.2.5.4v2.7c0 .3-.2.5-.5.5H18m-6-1 1.4 1.8h.2l1.4-1.7m-7-5.4L12 4c0-.1 0-.1 0 0l4 8.8m-6-2.7h4m-7 2.7h2.5m5 0H17"
         />
       </svg>
     </div>
   );
 };
 
-export default CodeIcon;
+export default HighlightIcon;

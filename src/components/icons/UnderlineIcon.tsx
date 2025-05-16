@@ -1,4 +1,4 @@
-const StrikeIcon = () => {
+const UnderlineIcon = () => {
   return (
     <div>
       <svg
@@ -13,13 +13,12 @@ const StrikeIcon = () => {
         <path
           stroke="currentColor"
           strokeLinecap="round"
-          strokeLinejoin="round"
           strokeWidth="2"
-          d="M7 6.2V5h12v1.2M7 19h6m.2-14-1.677 6.523M9.6 19l1.029-4M5 5l6.523 6.523M19 19l-7.477-7.477"
+          d="M6 19h12M8 5v9a4 4 0 0 0 8 0V5M6 5h4m4 0h4"
         />
       </svg>
     </div>
   );
 };
 
-export default StrikeIcon;
+export default UnderlineIcon;

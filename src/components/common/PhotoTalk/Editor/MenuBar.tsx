@@ -1,8 +1,8 @@
 import BoldIcon from '@/components/icons/BoldIcon';
 import ChevronDownIcon from '@/components/icons/ChevronDownIcon';
-import CodeIcon from '@/components/icons/CodeIcon';
+import HighlightIcon from '@/components/icons/HighlightIcon';
 import ItalicIcon from '@/components/icons/ItalicIcon';
-import StrikeIcon from '@/components/icons/StrikeIcon';
+import UnderlineIcon from '@/components/icons/UnderlineIcon';
 import { Editor } from '@tiptap/react';
 import { useState } from 'react';
 
@@ -16,7 +16,7 @@ const MenuBar = ({ editor }: MenuBarProps) => {
   if (!editor) return null;
 
   return (
-    <div className="relative flex flex-wrap items-center gap-2 border-b border-gray-200 p-2 dark:border-gray-600 bg-gray-50 dark:bg-gray-700">
+    <div className="relative flex flex-wrap items-center gap-1 border-b border-gray-200 p-2 dark:border-gray-600 bg-gray-50 dark:bg-gray-700">
       <div className="relative">
         <button
           type="button"
@@ -92,28 +92,28 @@ const MenuBar = ({ editor }: MenuBarProps) => {
         <span className="sr-only">Italic</span>
       </button>
 
-      {/* Strike */}
+      {/* Underline */}
       <button
         type="button"
-        onClick={() => editor.chain().focus().toggleStrike().run()}
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
         className={`p-1.5 text-gray-500 rounded-sm hover:text-gray-900 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 ${
-          editor.isActive('strike') ? 'bg-gray-200 dark:bg-gray-600' : ''
+          editor.isActive('underline') ? 'bg-gray-200 dark:bg-gray-600' : ''
         }`}
       >
-        <StrikeIcon />
-        <span className="sr-only">Strike</span>
+        <UnderlineIcon />
+        <span className="sr-only">Underline</span>
       </button>
 
-      {/* Code */}
+      {/* Highlight */}
       <button
         type="button"
-        onClick={() => editor.chain().focus().toggleCode().run()}
+        onClick={() => editor.chain().focus().toggleHighlight().run()}
         className={`p-1.5 text-gray-500 rounded-sm hover:text-gray-900 hover:bg-gray-100 dark:hover:text-white dark:hover:bg-gray-600 ${
-          editor.isActive('code') ? 'bg-gray-200 dark:bg-gray-600' : ''
+          editor.isActive('highlight') ? 'bg-gray-200 dark:bg-gray-600' : ''
         }`}
       >
-        <CodeIcon />
-        <span className="sr-only">Code</span>
+        <HighlightIcon />
+        <span className="sr-only">Highlight</span>
       </button>
     </div>
   );

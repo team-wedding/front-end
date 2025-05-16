@@ -5,7 +5,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { PhotoTalk } from '@/types/phototalkType';
 import { UserMode } from '@/types/users';
-import PhotoTalkAction from '@/components/common/PhotoTalk/Action/PhotoTalkAction';
 
 interface PhotoTalkCardProps {
   userMode: UserMode;
@@ -16,7 +15,6 @@ interface PhotoTalkCardProps {
 }
 
 const PhotoTalkCard = ({
-  userMode,
   photoTalk,
   isExample,
   onEdit,

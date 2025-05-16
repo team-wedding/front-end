@@ -39,7 +39,7 @@ const MusicSection = () => {
   return (
     isMusicFeatureActive && (
       <div className="absolute top-3 right-6 transition-all duration-300">
-        <PlayButton isPlaying={false} onPlayPause={() => { }} />
+        <PlayButton isPlaying={false} onPlayPause={() => {}} />
       </div>
     )
   );

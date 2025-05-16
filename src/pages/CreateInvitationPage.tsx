@@ -13,7 +13,7 @@ import { useInvitationStore } from '@/store/useInvitaionStore';
 import resetAllStores from '@/store/resetStore';
 import useBrideGroomStore from '@/store/useBrideGroomStore';
 import { validateBrideGroomNames } from '@/utils/validator';
-import NameInputModal from '@/components/form/BasicInformation/NameInput/NameInputModal';
+import SimpleModal from '@/components/common/Modal/SimpleModal';
 import ResultDisplay from '@/components/display/ResultDisplay';
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
@@ -177,8 +177,15 @@ const CreateInvitationPage = () => {
           {/* <PreviewDisplay /> */}
         </div>
       </div>
-      <NameInputModal
+      <SimpleModal
         isOpen={isModalOpen}
+        message={
+          <>
+            신랑 및 신부의 이름을
+            <br />
+            모두 입력해주세요.
+          </>
+        }
         onConfirm={() => setIsModalOpen(false)}
       />
     </DndProvider>

@@ -1,4 +1,3 @@
-
 interface Props {
   state: boolean;
   setState: (enabled: boolean) => void;

@@ -26,7 +26,7 @@ export const useGetInvitations = () => {
 };
 
 export const usePostInvitation = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (details: InvitationDetiail) => {
@@ -35,25 +35,26 @@ export const usePostInvitation = () => {
     onSuccess: () => {
       resetAllStores();
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
-      console.log("생성완료")
-      navigate('/dashboard')
+      console.log('생성완료');
+      navigate('/dashboard');
     },
     onError: (err) => {
-      console.log(err)
-    }
+      console.log(err);
+    },
   });
 };
 
 export const useUpdateInvitation = (id: number) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (details: InvitationDetiail) => updateInvitation({ id, details }),
+    mutationFn: (details: InvitationDetiail) =>
+      updateInvitation({ id, details }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
-      navigate('/dashboard')
-      resetAllStores()
-    }
+      navigate('/dashboard');
+      resetAllStores();
+    },
   });
 };
 
@@ -61,10 +62,10 @@ export const useDeleteInvitation = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation({
     onMutate: async (id) => {
-      await queryClient.cancelQueries({ queryKey: ["invitations"] });
-      const previousInvitations = queryClient.getQueryData(["invitations"]);
-      queryClient.setQueryData(["invitations"], (old: InvitationDetiail[]) =>
-        old.filter((inv) => inv.id !== id)
+      await queryClient.cancelQueries({ queryKey: ['invitations'] });
+      const previousInvitations = queryClient.getQueryData(['invitations']);
+      queryClient.setQueryData(['invitations'], (old: InvitationDetiail[]) =>
+        old.filter((inv) => inv.id !== id),
       );
       return { previousInvitations };
     },

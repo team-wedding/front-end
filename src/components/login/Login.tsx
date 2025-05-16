@@ -2,7 +2,7 @@ import { Link } from 'react-router';
 import KakaoLoginButton from './SocialLogin/KakaoLoginButton';
 import NaverLoginButton from './SocialLogin/NaverLoginButton';
 import EmailLoginButton from './EmailLogin/EmailLoginButton';
-import logo from '@/assets/logo2.png'
+import logo from '@/assets/logo2.png';
 const Login = () => {
   return (
     <div className="flex flex-col items-center justify-center w-full h-content">

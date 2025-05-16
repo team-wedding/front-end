@@ -27,8 +27,9 @@ const NoticeItem = ({ item, isExpanded, onToggleExpand }: NoticeItemProps) => (
       <div className="flex justify-between items-center mx-3">
         <span className="text-xs font-medium">{item.title}</span>
         <i
-          className={`bx bx-chevron-down transition-transform duration-300 text-lg ${isExpanded ? 'rotate-180' : ''
-            }`}
+          className={`bx bx-chevron-down transition-transform duration-300 text-lg ${
+            isExpanded ? 'rotate-180' : ''
+          }`}
         ></i>
       </div>
 

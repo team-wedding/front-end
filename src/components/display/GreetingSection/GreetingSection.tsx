@@ -20,4 +20,4 @@ const GreetingSection = () => {
   );
 };
 
-export default GreetingSection
+export default GreetingSection;

@@ -1,13 +1,14 @@
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
-import DebouncedInput, { DebouncedInputHandle } from '@/components/common/DebounceInput/DebounceInput';
+import DebouncedInput, {
+  DebouncedInputHandle,
+} from '@/components/common/DebounceInput/DebounceInput';
 import useRSVPStore from '@/store/useRSVPStore';
 import { useRef } from 'react';
 
 const RsvpExample = () => {
-
-  const { rsvpTitle, rsvpDescription, setRSVPTitle, setRSVPDescription } = useRSVPStore();
+  const { rsvpTitle, rsvpDescription, setRSVPTitle, setRSVPDescription } =
+    useRSVPStore();
   const rsvpDesciptionInputRef = useRef<DebouncedInputHandle>(null);
-
 
   return (
     <div className="mx-4 my-6 text-xs">
@@ -22,7 +23,7 @@ const RsvpExample = () => {
         <div className="flex flex-col gap-2">
           <label className="label w-full">제목</label>
           <DebouncedInput
-            type='text'
+            type="text"
             ref={rsvpDesciptionInputRef}
             onDebouncedChange={(value: string) => setRSVPTitle(value)}
             value={rsvpTitle}
@@ -33,7 +34,9 @@ const RsvpExample = () => {
         <div className="flex flex-col gap-2">
           <label className="label w-full">내용</label>
           <textarea
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => { setRSVPDescription(e.currentTarget.value) }}
+            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+              setRSVPDescription(e.currentTarget.value);
+            }}
             name="rsvpDescription"
             value={rsvpDescription}
             rows={4}

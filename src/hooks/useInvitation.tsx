@@ -26,31 +26,32 @@ export const useGetInvitations = () => {
 };
 
 export const usePostInvitation = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: (details: InvitationDetail) => {
       return postInvitation(details);
     },
     onSuccess: (data) => {
-      const { id } = data
+      const { id } = data;
       resetAllStores();
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
-      navigate(`/create/${id}`)
+      navigate(`/create/${id}`);
     },
     onError: (err) => {
-      console.log(err)
-    }
+      console.log(err);
+    },
   });
 };
 
 export const useUpdateInvitation = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (details: Omit<InvitationDetail, 'title'>) => updateInvitation({ id, details }),
+    mutationFn: (details: Omit<InvitationDetail, 'title'>) =>
+      updateInvitation({ id, details }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
-    }
+    },
   });
 };
 
@@ -58,10 +59,10 @@ export const useDeleteInvitation = (id: number) => {
   const queryClient = useQueryClient();
   return useMutation({
     onMutate: async (id) => {
-      await queryClient.cancelQueries({ queryKey: ["invitations"] });
-      const previousInvitations = queryClient.getQueryData(["invitations"]);
-      queryClient.setQueryData(["invitations"], (old: InvitationDetail[]) =>
-        old.filter((inv) => inv.id !== id)
+      await queryClient.cancelQueries({ queryKey: ['invitations'] });
+      const previousInvitations = queryClient.getQueryData(['invitations']);
+      queryClient.setQueryData(['invitations'], (old: InvitationDetail[]) =>
+        old.filter((inv) => inv.id !== id),
       );
       return { previousInvitations };
     },

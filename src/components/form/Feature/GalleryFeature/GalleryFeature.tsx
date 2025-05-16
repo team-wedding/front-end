@@ -7,7 +7,6 @@ import InformationItem from '@/components/common/CreateInvitation/InformationIte
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 
 export default function GalleryFeature() {
-
   const fileRef = useRef<HTMLInputElement>(null);
   const {
     galleryImages,

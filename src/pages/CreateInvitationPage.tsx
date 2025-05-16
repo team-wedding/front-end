@@ -10,15 +10,22 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
 import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
 import resetAllStores from '@/store/resetStore';
-import NameInputModal from '@/components/form/BasicInformation/NameInput/NameInputModal';
+import SimpleModal from '@/components/common/Modal/SimpleModal';
 import ResultDisplay from '@/components/display/ResultDisplay';
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
-import { getInvitationAction, useUpdateInvitationStore } from '@/actions/invitationAction';
+import {
+  getInvitationAction,
+  useUpdateInvitationStore,
+} from '@/actions/invitationAction';
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
-import { InvitationDetail, NoticeDetail, S3UploadRequest } from '@/types/invitationType';
+import {
+  InvitationDetail,
+  NoticeDetail,
+  S3UploadRequest,
+} from '@/types/invitationType';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
@@ -36,7 +43,7 @@ const CreateInvitationPage = () => {
   const [steps, setSteps] = useState(1);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [cancelModal, setCancelModal] = useState(false)
+  const [cancelModal, setCancelModal] = useState(false);
   // const [autoSaveModal, setAutoSaveModal] = useState(false)
   const details = getInvitationAction();
   const { optionalItems } = useAccordionStore();
@@ -66,21 +73,43 @@ const CreateInvitationPage = () => {
   };
 
   const uploadToS3 = async ({ imageFiles, directory }: S3UploadRequest) => {
-    const { imageUrls } = await s3Mutate(imageFiles.length ? { imageFiles, directory } : { imageFiles: [], directory });
+    const { imageUrls } = await s3Mutate(
+      imageFiles.length
+        ? { imageFiles, directory }
+        : { imageFiles: [], directory },
+    );
     return imageUrls;
   };
 
   const saveInvitationData = async () => {
-    await flushAll()
+    await flushAll();
     if (!validateBrideGroomNames(brideGroom)) {
-      console.log(!validateBrideGroomNames(brideGroom), brideGroom[0].name, brideGroom[1].name)
+      console.log(
+        !validateBrideGroomNames(brideGroom),
+        brideGroom[0].name,
+        brideGroom[1].name,
+      );
       setIsModalOpen(true);
-      return
+      return;
     } else {
       const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
-        uploadToS3(uploadedImageFile ? { imageFiles: [uploadedImageFile], directory: 'thumbnail' } : { imageFiles: [], directory: 'thumbnail' }),
-        uploadToS3(galleryFiles ? { imageFiles: galleryFiles, directory: 'gallery' } : { imageFiles: [], directory: 'gallery' }),
-        ...noticeImages.map((imageFile) => uploadToS3(imageFile ? { imageFiles: [imageFile], directory: "notice" } : { imageFiles: [], directory: 'notice' })),
+        uploadToS3(
+          uploadedImageFile
+            ? { imageFiles: [uploadedImageFile], directory: 'thumbnail' }
+            : { imageFiles: [], directory: 'thumbnail' },
+        ),
+        uploadToS3(
+          galleryFiles
+            ? { imageFiles: galleryFiles, directory: 'gallery' }
+            : { imageFiles: [], directory: 'gallery' },
+        ),
+        ...noticeImages.map((imageFile) =>
+          uploadToS3(
+            imageFile
+              ? { imageFiles: [imageFile], directory: 'notice' }
+              : { imageFiles: [], directory: 'notice' },
+          ),
+        ),
       ]);
       const s3ImageList = [thumbnail, gallery, ...noticeS3ImageList];
       const noticeList: NoticeDetail[] = notices.map((value, index) => {
@@ -93,24 +122,29 @@ const CreateInvitationPage = () => {
       });
       await updateMutate({
         ...details,
-        imgUrl: thumbnail.length > 0 ? thumbnail[0] : invitations ? invitations.imgUrl : '',
+        imgUrl:
+          thumbnail.length > 0
+            ? thumbnail[0]
+            : invitations
+              ? invitations.imgUrl
+              : '',
         galleries: [
           { images: gallery, grid, isActive: selectedOptionalFeatures.gallery },
         ],
         notices: noticeList,
-      })
+      });
     }
-  }
+  };
 
   useEffect(() => {
     if (invitations?.title) {
-      setInvitationTitle(invitations?.title)
+      setInvitationTitle(invitations?.title);
     }
-  }, [invitations?.title])
+  }, [invitations?.title]);
 
   useEffect(() => {
     useUpdateInvitationStore(invitations as InvitationDetail);
-  }, [invitations])
+  }, [invitations]);
 
   useEffect(() => {
     const [start, end] = sliceRanges[steps - 1];
@@ -156,14 +190,14 @@ const CreateInvitationPage = () => {
   const handleCancel = () => {
     resetAllStores();
     navigate('/dashboard');
-    setCancelModal(true)
+    setCancelModal(true);
   };
   const handleConfirmCancel = () => {
     resetAllStores();
     navigate('/dashboard');
   };
   const handleSave = async () => {
-    saveInvitationData()
+    saveInvitationData();
   };
   return (
     <DndProvider backend={HTML5Backend}>
@@ -218,11 +252,26 @@ const CreateInvitationPage = () => {
           <ResultDisplay />
         </div>
       </div>
-      <NameInputModal
+      <SimpleModal
         isOpen={isModalOpen}
+        message={
+          <>
+            신랑 및 신부의 이름을
+            <br />
+            모두 입력해주세요.
+          </>
+        }
         onConfirm={() => setIsModalOpen(false)}
       />
-      <ReusableModal isOpen={cancelModal} title={"작성 중인 내용이 삭제됩니다"} confirmText={'저장하지 않고 나가면 입력한 내용이 모두 삭제돼요. 계속하시겠어요?'} onConfirm={handleConfirmCancel} onCancel={() => setCancelModal(false)}></ReusableModal>
+      <ReusableModal
+        isOpen={cancelModal}
+        title={'작성 중인 내용이 삭제됩니다'}
+        confirmText={
+          '저장하지 않고 나가면 입력한 내용이 모두 삭제돼요. 계속하시겠어요?'
+        }
+        onConfirm={handleConfirmCancel}
+        onCancel={() => setCancelModal(false)}
+      ></ReusableModal>
     </DndProvider>
   );
 };

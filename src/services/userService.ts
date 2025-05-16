@@ -23,10 +23,12 @@ interface PasswordInfo {
 
 export const signup = async (signupInfo: SignupInfo) => {
   console.log({ signupInfo, provider: 'local' });
-  const response = await axiosInstance.post(API.SIGNUP(), { ...signupInfo, provider: 'local' });
+  const response = await axiosInstance.post(API.SIGNUP(), {
+    ...signupInfo,
+    provider: 'local',
+  });
   return response.data;
-}
-
+};
 
 export const postEmailLogin = async (loginInfo: LoginInfo) => {
   const response = await axiosInstance.post(API.EMAILLOGIN(), loginInfo);
@@ -60,14 +62,14 @@ export const withdraw = async () => {
 export const resetPassword = async (emailInfo: EmailInfo) => {
   const response = await axiosInstance.put(API.RESETPASSWORD(), emailInfo);
   return response.data;
-}
+};
 
 export const getUserInfo = async () => {
   const response = await axiosInstance.get(API.ACCOUNT(), {});
   return response.data;
-}
+};
 
 export const changePassword = async (passwordInfo: PasswordInfo) => {
   const response = await axiosInstance.put(API.CHANGEPASSWORD(), passwordInfo);
   return response.data;
-}
+};

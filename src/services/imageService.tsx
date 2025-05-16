@@ -2,14 +2,14 @@ import axios from 'axios';
 import { API } from '../utils/config';
 import { S3UploadRequest, S3UploadResponse } from '@/types/invitationType';
 
-
-export const getS3ImageUrl = async ({ imageFiles, directory }: S3UploadRequest): Promise<S3UploadResponse> => {
-  const formData = new FormData()
-  imageFiles.map((value) => (
-    formData.append("images", value)
-  ))
+export const getS3ImageUrl = async ({
+  imageFiles,
+  directory,
+}: S3UploadRequest): Promise<S3UploadResponse> => {
+  const formData = new FormData();
+  imageFiles.map((value) => formData.append('images', value));
   if (imageFiles.length == 0) {
-    return { imageUrls: [] }
+    return { imageUrls: [] };
   }
   const response = await axios.post(API.S3Images(directory), formData, {
     headers: {

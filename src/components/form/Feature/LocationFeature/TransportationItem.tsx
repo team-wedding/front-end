@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLocationFeatureStore';
 import OnOff from '@common/Toggle/OnOff';
-import TextEditor from '../../../common/TextEditor';
+// import TextEditor from '../../../common/TextEditor';
 import { transportationData } from '../../../../constants/transportationData';
+import TipTapEditor from '@/components/common/PhotoTalk/Editor/TiptapEditor';
 
 const TransportationItem = () => {
   const {
@@ -19,10 +20,7 @@ const TransportationItem = () => {
   };
 
   return (
-    <div
-      className="flex flex-col gap-2 
-    my-6 mx-2 transition-all duration-200"
-    >
+    <div className="flex flex-col gap-2 my-6 mx-2 transition-all duration-200">
       {transportationData.map(({ key, inputKey, title }) => (
         <div
           key={key}
@@ -40,9 +38,15 @@ const TransportationItem = () => {
           </div>
           {openAccordion === key && (
             <div className="my-6">
-              <TextEditor
+              {/* <TextEditor
                 value={transportationInputs[inputKey]}
                 setValue={(value) => updateTransportationInput(inputKey, value)}
+              /> */}
+              <TipTapEditor
+                content={transportationInputs[inputKey] || ''}
+                onChange={(value) => {
+                  updateTransportationInput(inputKey, value);
+                }}
               />
             </div>
           )}

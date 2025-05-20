@@ -10,7 +10,8 @@
     "lint": "npx eslint .",
     "lint:fix": "npx eslint . --fix",
     "format": "npx prettier --write .",
-    "postinstall": "npm install rollup @rollup/plugin-node-resolve @rollup/plugin-commonjs"
+    "postinstall": "npm install rollup @rollup/plugin-node-resolve @rollup/plugin-commonjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -48,13 +49,15 @@
     "react-router": "^7.0.2",
     "react-slick": "^0.30.3",
     "react-toastify": "^11.0.0",
-    "rollup": "^4.39.0",
+    "rollup": "^4.40.2",
     "slick-carousel": "^1.8.1",
     "uuid": "^11.0.5",
     "xlsx-js-style": "^1.2.0",
     "zustand": "^5.0.2"
   },
   "devDependencies": {
+    "@commitlint/cli": "^19.8.1",
+    "@commitlint/config-conventional": "^19.8.1",
     "@types/file-saver": "^2.0.7",
     "@types/lodash": "^4.17.14",
     "@types/node": "^22.10.7",
@@ -70,6 +73,7 @@
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "eslint-plugin-react": "^7.37.2",
+    "husky": "^9.1.7",
     "kakao.maps.d.ts": "^0.1.40",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",

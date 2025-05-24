@@ -5,7 +5,7 @@ import CloudArrowIcon from '@icons/CloudArrowIcon';
 import { useCreatePhototalk, useUpdatePhototalk } from '@/hooks/usePhototalk';
 import { useParams } from 'react-router';
 import { useS3Image } from '@/hooks/useS3Image';
-import TipTapEditor from '@components/common/PhotoTalk/Editor/TiptapEditor';
+import TipTapEditor from '@/components/common/Editor/TiptapEditor';
 // import { useUserStore } from '@/store/useUserStore';
 
 interface PhotoTalkEditorProps {

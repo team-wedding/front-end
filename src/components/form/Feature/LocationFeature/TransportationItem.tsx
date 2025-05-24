@@ -3,7 +3,7 @@ import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLo
 import OnOff from '@common/Toggle/OnOff';
 // import TextEditor from '../../../common/TextEditor';
 import { transportationData } from '../../../../constants/transportationData';
-import TipTapEditor from '@/components/common/PhotoTalk/Editor/TiptapEditor';
+import TipTapEditor from '@/components/common/Editor/TiptapEditor';
 
 const TransportationItem = () => {
   const {

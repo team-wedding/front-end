@@ -18,18 +18,17 @@ const PhotoTalkAction = ({
           <button
             onClick={onEdit}
             aria-label="편집하기"
-            className="block w-full text-left text-sm text-gray-700 p-2 pl-3 hover:bg-black/5 rounded-2xl"
+            className="block w-full text-left text-sm text-label dark:text-label-dark p-2 pl-3 hover:bg-surface-muted dark:hover:bg-surface-muted-dark rounded-xl"
           >
             편집하기
           </button>
         </li>
       )}
-
       <li>
         <button
           onClick={onDelete}
           aria-label="삭제하기"
-          className="block w-full text-left text-sm text-red-500 p-2 pl-3 hover:bg-black/5 rounded-2xl"
+          className="block w-full text-left text-sm text-status-error dark:text-status-error-dark p-2 pl-3 hover:bg-surface-muted dark:hover:bg-surface-muted-dark rounded-xl"
         >
           삭제하기
         </button>

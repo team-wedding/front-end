@@ -1,6 +1,6 @@
-export interface InvitationDetiail {
+export interface InvitationDetail {
   id?: number;
-  createdAt: string;
+  createdAt?: string;
   // updatedAt?: string;
 
   title: string;
@@ -29,9 +29,10 @@ export interface InvitationDetiail {
   attendanceIsDining: boolean;
   attendance: boolean;
   font: string;
-  calendars: CalendarDetail[];
+  fontSize: boolean;
+  calendars: CalaendarDetail[];
   maps: MapDetail[];
-  galleries: Omit<GalleryDetail[], 'images'>;
+  galleries: GalleryDetail[];
   accounts: AccountDetail[];
   contacts: ContactDetail[];
   notices: NoticeDetail[];
@@ -90,4 +91,13 @@ export interface NoticeDetail {
   title: string;
   content: string;
   image: string | null;
+}
+
+export interface S3UploadResponse {
+  imageUrls: string[];
+}
+
+export interface S3UploadRequest {
+  imageFiles: File[];
+  directory: string;
 }

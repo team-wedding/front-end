@@ -18,8 +18,10 @@ const EmailLogin = () => {
   });
 
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [loginValid, setLoginValid] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoginValid(true);
     const { name, value } = e.target;
 
     if (name === 'email') {
@@ -43,6 +45,7 @@ const EmailLogin = () => {
       navigate('/dashboard');
     } catch (error) {
       console.log('이메일 로그인 실패', error);
+      setLoginValid(false);
     }
   };
 
@@ -87,10 +90,15 @@ const EmailLogin = () => {
               id="password"
               name="password"
               onChange={handleChange}
-              className="splash-input"
+              className={`splash-input ${!loginValid ? 'animate-shake ring-1 ring-status-error-dark dark:ring-status-error-dark' : 'ring-0'}`}
               type="password"
               placeholder="비밀번호 입력"
             />
+            {!loginValid && loginInfo.password.length > 0 && (
+              <p className="m-2 text-xs text-status-error dark:text-status-error-dark">
+                비밀번호가 정확하지 않습니다
+              </p>
+            )}
           </div>
         </fieldset>
 

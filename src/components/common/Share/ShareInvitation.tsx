@@ -75,7 +75,9 @@ export default function ShareInvitation({
   const [toast, setToast] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(shareUrl);
+    await navigator.clipboard.writeText(
+      `https://woogyeol.vercel.app/${shareUrl}`,
+    );
     // toast.success('클립보드에 복사되었어요!', {
     //   position: 'bottom-center',
     //   autoClose: 2000,
@@ -98,7 +100,6 @@ export default function ShareInvitation({
       </button>
       <hr className=" w-full" />
       <button onClick={handleKakaoShare} className="px-3 py-3">
-        {' '}
         카카오로 공유하기
       </button>
       <hr className=" w-full" />
@@ -106,7 +107,7 @@ export default function ShareInvitation({
         ref={canvas}
         className="hidden"
         id={'qr-code-download'}
-        value={`http://localhost:5173/`}
+        value={`https://woogyeol.vercel.app/${shareUrl}`}
       />
       <a href={pngUrl} download={'qr.png'} className="px-3 py-3" ref={aRef}>
         QR 코드 저장

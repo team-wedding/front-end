@@ -3,13 +3,16 @@ import { useNavigate } from 'react-router';
 
 interface PreviewButtonProps {
   id?: string;
+  update: () => void;
 }
 
-const PreviewButton = ({ id }: PreviewButtonProps) => {
+const PreviewButton = ({ id, update }: PreviewButtonProps) => {
   const navigate = useNavigate();
 
-  const handleClick = () =>
-    id ? navigate(`/preview/${id}`) : navigate('/preview');
+  const handleClick = () => {
+    update();
+    navigate(id ? `/preview/${id}` : '/preview');
+  };
 
   return (
     <button
@@ -20,10 +23,10 @@ const PreviewButton = ({ id }: PreviewButtonProps) => {
       <img
         src={logo}
         alt="로고"
-        className="h-14 rounded-full shadow-xl backdrop-blur-lg hover:opacity-70"
+        className={`h-14 rounded-full shadow-xl backdrop-blur-lg hover:opacity-70`}
       />
       <span className="animate-pulse rounded-md backdrop-blur-lg px-2 py-1 font-light text-xs">
-        미리보기
+        {'미리보기'}
       </span>
     </button>
   );

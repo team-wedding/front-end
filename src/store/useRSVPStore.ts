@@ -5,9 +5,8 @@ interface RSVPDetails {
   rsvpDescription: string;
   rsvpIncludeMeal: boolean;
   rsvpIncludePopulation: boolean;
-  setRSVPonChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => void;
+  setRSVPTitle: (RSVPTitle: string) => void;
+  setRSVPDescription: (RSVPDescriptions: string) => void;
   setRSVPDetails: (details: {
     rsvpTitle: string;
     rsvpDescription: string;
@@ -26,13 +25,14 @@ const initialState = {
 
 const useRSVPStore = create<RSVPDetails>((set) => ({
   ...initialState,
-  setRSVPonChange: (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
-  ) => {
-    const { name, value } = e.target;
-    set((state) => ({
-      ...state,
-      [name]: value,
+  setRSVPTitle: (RSVPtitle: string) => {
+    set(() => ({
+      rsvpTitle: RSVPtitle,
+    }));
+  },
+  setRSVPDescription: (RSVPDescription: string) => {
+    set(() => ({
+      rsvpDescription: RSVPDescription,
     }));
   },
   setRSVPDetails: (content: Partial<RSVPDetails>) =>

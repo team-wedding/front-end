@@ -5,7 +5,7 @@ import { useGetInvitation } from '@/hooks/useInvitation';
 import { useAccordionStore } from '@/store/useAccordionStore';
 import { useEffect } from 'react';
 import { useUpdateInvitationStore } from '@/actions/invitationAction';
-import { InvitationDetiail } from '@/types/invitationType';
+import { InvitationDetail } from '@/types/invitationType';
 import CloseIcon from '@/components/icons/CloseIcon';
 import Logo from '@/components/common/Logo';
 
@@ -20,7 +20,7 @@ const PreviewInvitationPage = () => {
     setOrderItems();
   }, []);
 
-  useUpdateInvitationStore(invitations as InvitationDetiail);
+  useUpdateInvitationStore(invitations as InvitationDetail);
 
   const handleBack = () => {
     navigate(-1);

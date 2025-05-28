@@ -33,7 +33,7 @@ const TransportationItem = () => {
             <div>{title}</div>
             <OnOff
               state={subFeatures[key]}
-              setState={(enabled) => toggleSubFeature(key, enabled)}
+              setState={(enabled: boolean) => toggleSubFeature(key, enabled)}
             />
           </div>
           {openAccordion === key && (

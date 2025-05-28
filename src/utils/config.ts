@@ -96,6 +96,6 @@ export const API = {
     deleteByGuest: (id: string) => `${BASE_URL}/celebrationMsgs/${id}`,
     deleteByAdmin: (id: string) => `${BASE_URL}/celebrationMsgs/admin/${id}`,
   },
-
-  S3Images: () => `${BASE_URL}/s3/?directory=invitation`,
+  S3Images: (directory: string) => `${BASE_URL}/s3/?directory=${directory}`,
+  S3InvitationRemoval: (id: string) => `${BASE_URL}/s3/invitations/${id}`,
 };

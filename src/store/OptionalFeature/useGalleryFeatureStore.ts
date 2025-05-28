@@ -13,9 +13,9 @@ type StoreState = {
 const useGalleryStore = create<StoreState>((set) => ({
   galleryImages: [],
   galleryFiles: [],
-  setImages: (galleryImages: string[]) => set(() => ({ galleryImages })),
-  setGalleryFiles: (files: File[]) => set(() => ({ galleryFiles: files })),
   grid: true,
+  setImages: (images: string[]) => set(() => ({ galleryImages: images })),
+  setGalleryFiles: (files: File[]) => set(() => ({ galleryFiles: files })),
   setGrid: (grid: boolean) => set(() => ({ grid })),
   reset: () => set({ galleryImages: [], galleryFiles: [] }),
 }));

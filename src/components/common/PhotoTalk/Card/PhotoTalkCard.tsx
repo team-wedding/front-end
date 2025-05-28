@@ -61,7 +61,7 @@ const PhotoTalkCard = ({
 
   return (
     <div
-      className={`flex-center bg-white w-full rounded-2xl relative mb-3 shadow-custom ${hasImage ? `h-[220px] pb-3` : `h-fit`}`}
+      className={`flex-center bg-surface dark:bg-surface-dark w-full rounded-2xl relative mb-3 shadow-custom ${hasImage ? `h-[220px] pb-3` : `h-fit`}`}
     >
       <div ref={dropdownRef}>
         <button
@@ -103,7 +103,7 @@ const PhotoTalkCard = ({
           )}
 
           <p
-            className={`text-black/80 text-xs font-medium leading-relaxed break-keep w-full flex-center text-ellipsis tracking-tight ${hasImage ? 'p-3' : 'p-10'}`}
+            className={`text-label dark:text-label-dark text-xs font-medium leading-relaxed break-keep w-full flex-center text-ellipsis tracking-tight ${hasImage ? 'p-3' : 'p-10'}`}
             dangerouslySetInnerHTML={{ __html: photoTalkMessage }}
           />
         </div>

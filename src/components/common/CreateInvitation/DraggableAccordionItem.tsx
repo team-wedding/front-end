@@ -1,9 +1,9 @@
 import React from 'react';
 import DragAndDrop from '../DragAndDrop';
 import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
-import Toggle from '@common/Toggle/Toggle';
 import { AccordionItemData } from '@constants/accordionData';
 import { useToggleFeatureStore } from '@store/OptionalFeature/useToggleFeatureStore.';
+import Toggle from '@/components/common/Toggle/Toggle';
 
 export interface DraggableAccordionItemProps {
   item: AccordionItemData;

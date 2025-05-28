@@ -13,12 +13,16 @@ interface PhotoTalkListGuestProps {
   photoTalkList: PhotoTalk[];
   isLoading: boolean;
   onOpenEditor: () => void;
+  observeRef?: React.RefObject<HTMLDivElement>;
+  isFetchingNextPage?: boolean;
 }
 
 const PhotoTalkListGuest = ({
   photoTalkList,
   isLoading,
   onOpenEditor,
+  observeRef,
+  isFetchingNextPage,
 }: PhotoTalkListGuestProps) => {
   const { setEditingPhotoTalk } = usePhotoTalkStore();
   const [isGalleryOpen, setGalleryOpen] = useState(false);
@@ -58,6 +62,8 @@ const PhotoTalkListGuest = ({
         onDelete={(talk) => openModal(talk, ACTION_MODE.DELETE)}
         isGalleryOpen={isGalleryOpen}
         isPending={isLoading}
+        observeRef={observeRef}
+        isFetchingNextPage={isFetchingNextPage}
       />
 
       <PasswordConfirmModal

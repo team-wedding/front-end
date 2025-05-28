@@ -11,11 +11,15 @@ const userMode = USER_MODE.ADMIN;
 interface PhotoTalkListAdminProps {
   photoTalkList: PhotoTalk[];
   isLoading: boolean;
+  observeRef?: React.RefObject<HTMLDivElement>;
+  isFetchingNextPage?: boolean;
 }
 
 const PhotoTalkListAdmin = ({
   photoTalkList,
   isLoading,
+  observeRef,
+  isFetchingNextPage,
 }: PhotoTalkListAdminProps) => {
   const [isGalleryOpen, setGalleryOpen] = useState(false);
 
@@ -28,7 +32,7 @@ const PhotoTalkListAdmin = ({
     });
 
   return (
-    <div>
+    <>
       <PhotoTalkListHeader
         userMode={userMode}
         isGalleryOpen={isGalleryOpen}
@@ -41,6 +45,8 @@ const PhotoTalkListAdmin = ({
         onDelete={(talk) => openModal(talk, ACTION_MODE.DELETE)}
         isGalleryOpen={isGalleryOpen}
         isPending={isLoading}
+        observeRef={observeRef}
+        isFetchingNextPage={isFetchingNextPage}
       />
 
       <ReusableModal
@@ -50,7 +56,7 @@ const PhotoTalkListAdmin = ({
         title="정말 삭제하시겠습니까?"
         confirmText="삭제"
       />
-    </div>
+    </>
   );
 };
 

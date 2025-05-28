@@ -163,7 +163,7 @@ export const useUpdateInvitationStore = (details: InvitationDetiail) => {
     setWeddingHallName,
     setWeddingHallDetail,
   } = useAddressStore();
-  const { setWeddingDate, setWeddingTime } = useWeddingStore();
+  const { setWeddingDate } = useWeddingStore();
   const { setGreetingContent, setGreetingTitle } = useGreetingStore();
   const { setUploadedImageUrl } = useImageStore();
   const contacts = useContactStore((state) => state.updateContact);

@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import { useNavigate } from 'react-router';
 import { postNaverLogin } from '../../../services/userService';
 import { useUserStore } from '@/store/useUserStore';
+import axios from 'axios';
 
 export const NaverRedirect = () => {
   const navigate = useNavigate();
@@ -16,12 +17,21 @@ export const NaverRedirect = () => {
           await fetchUserInfo();
           navigate('/dashboard');
         } catch (error) {
-          console.error('네이버 로그인 실패', error);
+          if (axios.isAxiosError(error)) {
+            const errMsg = error.response?.data?.message;
+            if (errMsg === '이미 해당 email로 회원가입된 이력있음.') {
+              navigate('/login', {
+                state: { errorMessage: errMsg },
+              });
+            } else {
+              console.error('네이버 로그인 실패', error);
+            }
+          }
         }
       }
     };
     handleLogin();
-  }, [navigate]);
+  }, [code, fetchUserInfo, navigate]);
 
   return <div>{/* <h1 className="text-gray-300">로그인 중입니다.</h1> */}</div>;
 };

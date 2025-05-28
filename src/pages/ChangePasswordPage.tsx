@@ -58,7 +58,7 @@ const ChangePasswordPage = () => {
     try {
       const responseData = await changePassword({ password, newPassword });
       console.log(responseData);
-      navigate('/mypage');
+      navigate('/mypage/rsvp');
     } catch (error) {
       console.log('비밀번호 변경 실패', error);
     }
@@ -69,7 +69,7 @@ const ChangePasswordPage = () => {
   return (
     <PageLayout
       leftButton={
-        <button onClick={() => navigate('/mypage/edit')}>
+        <button onClick={() => navigate(-1)}>
           <BackIcon />
         </button>
       }

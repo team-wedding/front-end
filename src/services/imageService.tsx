@@ -6,12 +6,10 @@ export interface S3Detail {
 }
 
 export const getS3ImageUrl = async (imageUrl: File[]): Promise<S3Detail> => {
-  const formData = new FormData()
-  imageUrl.map((value) => (
-    formData.append("images", value)
-  ))
+  const formData = new FormData();
+  imageUrl.map((value) => formData.append('images', value));
   if (imageUrl.length == 0) {
-    return { imageUrls: [] }
+    return { imageUrls: [] };
   }
   const response = await axios.post(API.S3Images(), formData, {
     headers: {

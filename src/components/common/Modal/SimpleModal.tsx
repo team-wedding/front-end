@@ -1,20 +1,17 @@
 interface ModalProps {
   isOpen: boolean;
+  message: string | React.ReactNode;
   onConfirm: () => void;
 }
 
-const TemporaryPassword = ({ isOpen, onConfirm }: ModalProps) => {
+const SimpleModal = ({ isOpen, message, onConfirm }: ModalProps) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+    <div className="font-Paperlogy fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
       <div className="relative bg-white rounded-lg shadow-lg w-80">
-        <div className="pt-12 pb-8 text-center text-base leading-relaxed">
-          <p>
-            입력한 주소로
-            <br />
-            임시 비밀번호가 전송되었습니다.
-          </p>
+        <div className="flex items-center justify-center pt-4 text-center text-base h-[132px]">
+          <p>{message}</p>
         </div>
 
         <div className="flex border-t border-gray-300">
@@ -27,4 +24,4 @@ const TemporaryPassword = ({ isOpen, onConfirm }: ModalProps) => {
   );
 };
 
-export default TemporaryPassword;
+export default SimpleModal;

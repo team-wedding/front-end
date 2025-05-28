@@ -6,11 +6,14 @@ import Navbar from '@common/Navbar/Navbar';
 import Logo from '@common/Logo';
 import DarkModeToggle from '@/components/common/DarkMode/DarkModeToggle';
 import SkeletonCard from '@/components/common/Skeleton/SkeletonCard';
+import InputTitleModal from '@/components/common/Modal/InputTitleModal';
 
 const DashBoardPage = () => {
   const { data, isPending, isRefetching, status, isError, isFetching } =
     useGetInvitations();
   const [invitations, setInvitations] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const handleModal = () => setIsModalOpen((prev) => !prev);
 
   useEffect(() => {
     if (data) {
@@ -62,11 +65,18 @@ const DashBoardPage = () => {
           {invitations.length === 0 && (
             <div className="column-center gap-4 w-3/4 m-auto h-60 rounded-2xl bg-surface-muted dark:bg-surface-muted-dark text-label-secondary/60 dark:text-label-secondary-dark/60">
               <span className="text-md">아직 저장된 청첩장이 없어요.</span>
-              <button className="w-28 py-2 text-sm bg-surface-button text-label-button/60 rounded-2xl trasition-all duration-200">
+              <button
+                className="w-28 py-2 text-sm bg-surface-button text-label-button/60 rounded-2xl trasition-all duration-200"
+                onClick={handleModal}
+              >
                 청첩장 만들기
               </button>
             </div>
           )}
+
+          <div className="absolute top-0">
+            {isModalOpen && <InputTitleModal onClose={handleModal} />}
+          </div>
         </div>
       </main>
 

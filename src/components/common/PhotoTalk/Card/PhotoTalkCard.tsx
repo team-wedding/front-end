@@ -17,7 +17,6 @@ interface PhotoTalkCardProps {
 }
 
 const PhotoTalkCard = ({
-  userMode,
   photoTalk,
   isExample,
   onEdit,

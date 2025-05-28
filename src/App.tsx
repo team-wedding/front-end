@@ -21,9 +21,21 @@ import PreviewInvitationPage from '@/pages/PreviewInvitationPage';
 import EditInvitationPage from '@/pages/EditInvitationPage';
 import ResultPage from '@/pages/ResultPage';
 import GuestPhotoTalkPage from '@/pages/PhotoTalk/GuestPhotoTalkPage';
+import { useUserStore } from './store/useUserStore';
+import useAuthStore from './store/useAuthStore';
+import { useEffect } from 'react';
 
 function App() {
   const queryClient = new QueryClient();
+
+  const fetchUserInfo = useUserStore((state) => state.fetchUserInfo);
+  const token = useAuthStore((state) => state.accessToken);
+
+  useEffect(() => {
+    if (token) {
+      fetchUserInfo();
+    }
+  }, [token]);
 
   return (
     <DarkModeProvider>

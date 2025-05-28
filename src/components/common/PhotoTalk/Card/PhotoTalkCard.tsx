@@ -5,6 +5,8 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { PhotoTalk } from '@/types/phototalkType';
 import { UserMode } from '@/types/users';
+import PhotoTalkAction from '@/components/common/PhotoTalk/Action/PhotoTalkAction';
+import DOMPurify from 'dompurify';
 
 interface PhotoTalkCardProps {
   userMode: UserMode;
@@ -55,13 +57,15 @@ const PhotoTalkCard = ({
     arrows: false,
   };
 
+  const photoTalkMessage = DOMPurify.sanitize(photoTalk.message);
+
   return (
     <div
       className={`flex-center bg-surface dark:bg-surface-dark w-full rounded-2xl relative mb-3 shadow-custom ${hasImage ? `h-[220px] pb-3` : `h-fit`}`}
     >
       <div ref={dropdownRef}>
         <button
-          className="inline-block hover:bg-surface-muted dark:hover:bg-surface-muted-dark focus:ring-0 focus:outline-none rounded-lg text-sm absolute top-1 right-4"
+          className="inline-block text-gray-500 hover:bg-gray-100 focus:ring-0 focus:outline-none rounded-lg text-sm absolute top-1 right-4"
           type="button"
           onClick={() => setOpenDropdown(!openDropdown)}
           aria-label="메뉴 열기"
@@ -71,7 +75,7 @@ const PhotoTalkCard = ({
 
         {openDropdown && (
           <div
-            className={`absolute top-8 right-5 z-10 bg-surface border border-border dark:border-border-dark dark:bg-surface-dark backdrop-blur-xl divide-y divide-border rounded-2xl shadow-md w-[30%] px-2 py-1`}
+            className={`absolute top-8 right-5 z-10 bg-gray-100/20 backdrop-blur-xl divide-y divide-gray-100 rounded-2xl shadow-md w-[30%] px-2 py-1`}
           >
             <PhotoTalkAction
               userMode={userMode}
@@ -97,14 +101,14 @@ const PhotoTalkCard = ({
               ))}
             </Slider>
           )}
+
           <p
-            className={`text-label dark:text-label-dark text-xs font-medium leading-relaxed break-keep w-full flex-center text-ellipsis tracking-tight  ${hasImage ? 'p-3' : 'p-10'}`}
-          >
-            {photoTalk.message}
-          </p>
+            className={`text-label dark:text-label-dark text-xs font-medium leading-relaxed break-keep w-full flex-center text-ellipsis tracking-tight ${hasImage ? 'p-3' : 'p-10'}`}
+            dangerouslySetInnerHTML={{ __html: photoTalkMessage }}
+          />
         </div>
 
-        <footer className="flex text-label-secondary/60 dark:text-label-secondary-dark/60 px-4 py-1 text-xs absolute bottom-1 right-1 font-light">
+        <footer className="flex text-gray-500 px-4 py-2 text-xs absolute bottom-1 right-1 font-light">
           <span className="mr-2">From.</span>
           <p>{photoTalk.name}</p>
         </footer>

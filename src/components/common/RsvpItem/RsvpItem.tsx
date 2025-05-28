@@ -16,19 +16,19 @@ export default function RsvpItem({
   bride,
 }: RsvpDetail) {
   return (
-    <div className="flex flex-row justify-between text-gray-700 items-center p-2 shadow-md border border-gray-100 rounded-lg bg-white">
-      <div
-        className={`flex flex-col items-start ${total && 'font-semibold p-3 text-2xl'}`}
-      >
+    <div className="flex flex-row justify-between text-gray-700 items-center p-3">
+      <div className={`flex flex-col items-start text-sm ${total && ''}`}>
         {title}
-        {description && <div className="text-sm mt-1">{description}</div>}
+        {description && (
+          <div className="text-[10px] mt-1 text-gray-400">{description}</div>
+        )}
       </div>
       <div
-        className={`flex flex-row   gap-2 ${bride == undefined ? 'text-gray-700' : bride ? 'text-red-400' : 'text-blue-400'} ${total ? 'text-3xl font-semibold pr-10' : 'text-base font-bold pr-2'}`}
+        className={`flex gap-2 px-2 ${bride == undefined ? 'text-gray-700' : bride ? 'text-red-400' : 'text-blue-400'} ${total ? 'text-xl font-medium' : 'text-base font-semibold'}`}
       >
         {attend}
-        {unattend && (
-          <div className=" text-xs text-gray-600  self-center ">
+        {unattend !== undefined && (
+          <div className="text-xs text-gray-600 self-center">
             {' '}
             {`/ ${unattend}`}
           </div>

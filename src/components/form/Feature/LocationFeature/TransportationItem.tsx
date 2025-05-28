@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLocationFeatureStore';
-import OnOff from '../../../common/OnOff';
-import TextEditor from '../../../common/TextEditor';
+import OnOff from '@common/Toggle/OnOff';
+// import TextEditor from '../../../common/TextEditor';
 import { transportationData } from '../../../../constants/transportationData';
+import TipTapEditor from '@/components/common/Editor/TiptapEditor';
 
 const TransportationItem = () => {
   const {
@@ -19,14 +20,11 @@ const TransportationItem = () => {
   };
 
   return (
-    <div
-      className="flex flex-col gap-2 
-    my-6 mx-2 transition-all duration-200"
-    >
+    <div className="flex flex-col gap-2 my-6 mx-2 transition-all duration-200">
       {transportationData.map(({ key, inputKey, title }) => (
         <div
           key={key}
-          className={`border py-2 px-6 rounded-2xl  hover:border-black ${openAccordion === key && 'bg-neutral-100 bg-opacity-30 border-black shadow-md'}`}
+          className={`border py-2 px-6 rounded-2xl hover:ring-1 hover:ring-black ${openAccordion === key && 'bg-neutral-100 bg-opacity-30 ring-1 ring-black shadow-md'}`}
         >
           <div
             className="flex items-center justify-between"
@@ -35,14 +33,20 @@ const TransportationItem = () => {
             <div>{title}</div>
             <OnOff
               state={subFeatures[key]}
-              setState={(enabled) => toggleSubFeature(key, enabled)}
+              setState={(enabled: boolean) => toggleSubFeature(key, enabled)}
             />
           </div>
           {openAccordion === key && (
             <div className="my-6">
-              <TextEditor
+              {/* <TextEditor
                 value={transportationInputs[inputKey]}
                 setValue={(value) => updateTransportationInput(inputKey, value)}
+              /> */}
+              <TipTapEditor
+                content={transportationInputs[inputKey] || ''}
+                onChange={(value) => {
+                  updateTransportationInput(inputKey, value);
+                }}
               />
             </div>
           )}

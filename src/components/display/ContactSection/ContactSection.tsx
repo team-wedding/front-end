@@ -1,38 +1,64 @@
-import Contact from './Contact';
 import useContactStore from '@store/useContactStore';
-import ContactTitle from './ContactTitle';
+import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
+import ContactItem from './ContactItem';
+import SectionTitle from '@/components/common/SectionTitle';
 
 const ContactSection = () => {
+  const { selectedOptionalFeatures } = useOptionalFeatureStore();
   const contacts = useContactStore((state) => state.contacts);
 
-  // 신랑 및 신부 정보
-  const groom = contacts.find((person) => person.role === '신랑');
-  const bride = contacts.find((person) => person.role === '신부');
+  const isContactFeatureActive = selectedOptionalFeatures.contact;
 
   return (
-    <div className="column-center gap-6">
-      <ContactTitle />
-      <div className="column-center gap-5 mb-10 text-sm">
-        <Contact title="신랑에게 연락하기" phoneNumber={groom?.contact} />
-        <Contact title="신부에게 연락하기" phoneNumber={bride?.contact} />
-      </div>
+    isContactFeatureActive && (
+      <div className="column-center gap-6 py-20 ">
+        <SectionTitle
+          subTitle="CONTACT"
+          title="연락하기"
+          information={<>직접 축하의 마음을 전해보세요</>}
+        />
 
-      <div className="column-center gap-10 text-xs">
-        <div className="text-gray-500">혼주에게 연락하기</div>
-        <div className="flex-center gap-20 ">
-          <div className="contact-group">
-            <div className="text-sky-400 ">신랑측 혼주</div>
-            <Contact title="아버지" phoneNumber={groom?.fatherContact} />
-            <Contact title="어머니" phoneNumber={groom?.motherContact} />
-          </div>
-          <div className="contact-group">
-            <div className="text-pink-400">신부측 혼주</div>
-            <Contact title="아버지" phoneNumber={bride?.fatherContact} />
-            <Contact title="어머니" phoneNumber={bride?.motherContact} />
-          </div>
-        </div>
+        {contacts.map((value, index) => {
+          const { role, contact, fatherContact, motherContact } = value;
+
+          return (
+            <div
+              key={index}
+              className={`flex-center gap-12 text-sm py-14 px-10 rounded-lg ${role === '신랑' ? 'bg-sky-50/40' : 'bg-pink-50/40'}`}
+            >
+              {contact && (
+                <div className="font-medium">
+                  <ContactItem
+                    title={`${role}에게 연락하기`}
+                    phoneNumber={contact}
+                    role={role}
+                  />
+                </div>
+              )}
+
+              {(fatherContact || motherContact) && (
+                <div className="contact-group text-gray-500">
+                  {fatherContact && (
+                    <ContactItem
+                      title={`${role} 아버지`}
+                      phoneNumber={fatherContact}
+                      role={role}
+                    />
+                  )}
+                  {motherContact && (
+                    <ContactItem
+                      title={`${role} 어머니`}
+                      phoneNumber={motherContact}
+                      role={role}
+                    />
+                  )}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
-    </div>
+    )
   );
 };
 

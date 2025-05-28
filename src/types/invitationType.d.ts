@@ -1,100 +1,81 @@
-export interface InvitationDetiail {
+export interface InvitationDetail {
   id?: number;
-  title: string;
-  // createdAt?: string;
+  createdAt?: string;
   // updatedAt?: string;
+
+  title: string;
   groomName: string;
   brideName: string;
-  groomContact: string;
-  brideContact: string;
-  date: string;
+  date: number[];
   location: string[];
   imgUrl: string;
-  contentType: string;
-  content: string;
-  weddingTime: string;
+  greetingTitle: string;
+  greetingContent: string;
+  weddingTime: number[];
+
   groomFatherName: string;
   groomMotherName: string;
   brideFatherName: string;
   brideMotherName: string;
-  groomFatherContact: string;
-  groomMotherContact: string;
-  brideFatherContact: string;
-  brideMotherContact: string;
+
   groomFatherAlive: boolean;
   groomMotherAlive: boolean;
   brideFatherAlive: boolean;
   brideMotherAlive: boolean;
+
   backgroundColor: string;
-  attendanceTitle: '참석 여부 제목';
-  attendanceContent: '참석 여부 설명';
-  attendanceIsDining: true;
+  attendanceTitle: string;
+  attendanceContent: string;
+  attendanceIsDining: boolean;
+  attendance: boolean;
   font: string;
-  calendars?: CalaendarDetail[];
-  maps?: MapDetail[];
-  galleries?: [];
-  accounts?: [
-    {
-      order: number;
-      accountHolderName: string;
-      bankName: string;
-      accountNumber: string;
-      kakaoUrl: string;
-    },
-  ];
-  contacts?: [
-    {
-      order: number;
-      groomContact: string;
-      brideContact: string;
-      groomFatherContact: string;
-      groomMotherContact: string;
-      brideFatherContact: string;
-      brideMotherContact: string;
-    },
-  ];
-  notices?: [
-    {
-      order: number;
-      title: string;
-      content: string;
-      image: string;
-    },
-  ];
+  fontSize: boolean;
+  calendars: CalaendarDetail[];
+  maps: MapDetail[];
+  galleries: GalleryDetail[];
+  accounts: AccountDetail[];
+  contacts: ContactDetail[];
+  notices: NoticeDetail[];
+  audio: number | nulll;
 }
 
-interface CalaendarDetail {
-  order: number;
-  calendar: true;
-  dDay: true;
-  countdown: true;
+interface CalendarDetail {
+  order?: number;
+  isActive: boolean;
+  calendar: boolean;
+  dDay: boolean;
+  countdown: boolean;
 }
 interface MapDetail {
-  order: number;
-  tMap: true;
-  naverMap: false;
-  kakaoMap: false;
-  personalCar: true;
-  subway: false;
-  bus: false;
+  order?: number;
+  isActive: boolean;
+  tMap: boolean;
+  naverMap: boolean;
+  kakaoMap: boolean;
+  personalCar: boolean;
+  subway: boolean;
+  bus: boolean;
   personalCarContent: string;
   subwayContent: string;
   busContent: string;
 }
 interface GalleryDetail {
-  order: number;
+  order?: number;
+  isActive: boolean;
   images: string[];
-  grid: true;
+  grid: boolean;
 }
-interface AccountDetail {
-  order: number;
+export interface AccountDetail {
+  order?: number;
+  isActive: boolean;
   accountHolderName: string;
   bankName: string;
   accountNumber: string;
   kakaoUrl: string;
 }
 interface ContactDetail {
-  order: number;
+  order?: number;
+  isActive: boolean;
   groomContact: string;
   brideContact: string;
   groomFatherContact: string;
@@ -102,9 +83,21 @@ interface ContactDetail {
   brideFatherContact: string;
   brideMotherContact: string;
 }
-interface NoticeDetail {
-  order: number;
+export interface NoticeDetail {
+  order?: number;
+  id?: number;
+  isActive: boolean;
+  noticeId: number;
   title: string;
   content: string;
-  image: string;
+  image: string | null;
+}
+
+export interface S3UploadResponse {
+  imageUrls: string[];
+}
+
+export interface S3UploadRequest {
+  imageFiles: File[];
+  directory: string;
 }

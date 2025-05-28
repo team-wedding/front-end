@@ -1,5 +1,7 @@
-import { toast } from 'react-toastify';
+// import { toast } from 'react-toastify';
 import kakaoPay from '@assets/kakao_pay_icon.png';
+import { useState } from 'react';
+import ToastPopup from '../ToastPopup';
 
 interface BankProps {
   bank: string;
@@ -16,53 +18,70 @@ export default function AccountNumberItem({
   kakaoLink,
   last,
 }: BankProps) {
+  const [toast, setToast] = useState(false);
+
   const handleAccountNumCopy = async () => {
     await navigator.clipboard.writeText(accountNumber);
-    toast.success('계좌번호가 저장되었습니다. 😀', {
-      className: 'bottom: 8rem',
-      position: 'bottom-center',
-      autoClose: 1000,
-      hideProgressBar: true,
-    });
+    // toast.success('클립보드에 복사되었어요!', {
+    //   className: 'bottom: 8rem',
+    //   position: 'bottom-center',
+    //   autoClose: 2000,
+    //   hideProgressBar: true,
+    // });
+    setToast(true);
   };
+
   const handleKakaoNumCopy = async () => {
     await navigator.clipboard.writeText(kakaoLink!);
-    toast.success('카카오페이가 저장되었습니다 😀', {
-      className: 'bottom: 8rem',
-      position: 'bottom-center',
-      autoClose: 1000,
-      hideProgressBar: true,
-    });
+    // toast.success('클립보드에 복사되었어요!', {
+    //   className: 'bottom: 8rem',
+    //   position: 'bottom-center',
+    //   autoClose: 2000,
+    //   hideProgressBar: true,
+    // });
+    setToast(true);
   };
+
   return (
     <div
-      className={`flex flex-row justify-between w-full border p-3 text-sm ${last && 'rounded-b-lg'}`}
+      className={`flex justify-between items-center border-b p-6 text-xs ${last && 'rounded-b-md'}`}
     >
-      <div className="flex flex-col items-start justify-center">
-        <div className="flex-wrap">
+      <div className="flex flex-col items-start justify-center gap-2">
+        <div className="flex flex-col gap-1">
           <div>{bank}</div>
-          {accountNumber}
+          <div className="text-neutral-400">{accountNumber}</div>
         </div>
         <div>{name}</div>
       </div>
-      <div className="flex flex-col items-start justify-center gap-2 h-full">
+      <div className="flex flex-col items-center justify-center gap-2">
         {accountNumber !== '' && (
           <button
             onClick={handleAccountNumCopy}
-            className="flex justify-center ring-2 ring-gray-200 w-16 h-7  rounded-2xl text-[13px] leading-7 text-primary  hover:ring-primary "
+            className="flex items-center border border-gray-400  shadow-sm h-6 px-2 bg-white rounded-full text-[10px] hover:bg-gray-200"
           >
             복사하기
           </button>
         )}
         {kakaoLink !== '' && (
           <button
-            className="flex rounded-2xl ring-2 ring-transparent hover:ring-primary "
+            className="flex hover:opacity-70 "
             onClick={handleKakaoNumCopy}
           >
-            <img className="w-16 h-7" src={kakaoPay} />
+            <img
+              className="w-[52px] shadow-sm rounded-full border border-gray-400"
+              src={kakaoPay}
+            />
           </button>
         )}
       </div>
+      {/* <ToastContainer /> */}
+      {toast && (
+        <ToastPopup
+          setToast={setToast}
+          message={'클립보드에 복사되었어요.'}
+          position="bottom"
+        />
+      )}
     </div>
   );
 }

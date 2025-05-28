@@ -8,15 +8,17 @@ type HeaderProps = {
 
 const Header = ({ text, leftButton, rightButton }: HeaderProps) => {
   return (
-    <div className="flex items-center w-full max-w-md justify-between">
+    <div className="relative flex items-center w-full max-w-[520px]">
       {/* Left Button */}
-      <div className="px-4">{leftButton}</div>
+      <div className="mx-2">{leftButton}</div>
 
-      {/* Text */}
-      <div>{text}</div>
+      {/* Text - 중앙 정렬 */}
+      <div className="absolute left-1/2 transform -translate-x-1/2 text-label dark:text-label-dark">
+        {text}
+      </div>
 
       {/* Right Button */}
-      <div className="px-4">{rightButton}</div>
+      <div className="mx-2 ml-auto">{rightButton}</div>
     </div>
   );
 };

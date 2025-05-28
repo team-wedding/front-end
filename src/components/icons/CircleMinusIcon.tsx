@@ -2,7 +2,7 @@ const CircleMinusIcon = () => {
   return (
     <div>
       <svg
-        className="size-3 dark:text-white"
+        className="size-4 dark:text-white"
         aria-hidden="true"
         xmlns="http://www.w3.org/2000/svg"
         width="24"

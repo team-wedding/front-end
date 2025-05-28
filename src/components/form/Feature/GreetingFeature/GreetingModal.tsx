@@ -13,7 +13,8 @@ const GreetingModal = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
-  const { selectedSample, setSelectedSample, setGreeting } = useGreetingStore();
+  const { selectedSample, setSelectedSample, setGreetingContent } =
+    useGreetingStore();
 
   if (!isOpen) return null;
 
@@ -23,31 +24,33 @@ const GreetingModal = ({
       onClick={onClose}
     >
       <div className="create-section p-10">
-        <div
-          className="bg-white rounded-lg shadow-md h-3/4"
-          onClick={(e) => e.stopPropagation()}
-        >
+        <div className="bg-white rounded-lg shadow-md h-3/4">
           <div className="flex flex-col h-full">
             <div className="flex items-center justify-between p-4 border-b rounded-t">
-              <div className="text-base font-semibold text-gray-900">
+              <div
+                className="mx-2 text-sm font-semibold text-gray-900"
+                onClick={(e) => e.stopPropagation()}
+              >
                 샘플 문구 선택
               </div>
+
               <button onClick={onClose}>
-                <CloseIcon className="size=[20px]" />
+                <CloseIcon className="size-5" />
               </button>
             </div>
-            <div className="flex flex-col gap-4 p-4 overflow-y-auto">
+
+            <div className="flex flex-col gap-4 p-5 pb-10 overflow-y-auto">
               {greetingSample.map((text, index) => (
                 <button
                   key={index}
-                  className={`whitespace-pre-wrap text-sm cursor-pointer p-5 rounded-lg border w-full ${
+                  className={`whitespace-pre-wrap text-sm cursor-pointer leading-6 p-5 rounded-lg border w-full ${
                     text === selectedSample
                       ? 'border-black bg-gray-100'
                       : 'border-gray-200 hover:bg-gray-100'
                   }`}
                   onClick={() => {
                     setSelectedSample(text);
-                    setGreeting(text);
+                    setGreetingContent(text);
                   }}
                 >
                   {text}

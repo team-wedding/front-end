@@ -22,10 +22,10 @@ const Calendar = () => {
   const allDays = eachDayOfInterval({ start: startDay, end: endDay });
 
   return (
-    <div className="flex flex-col items-center justify-center text-xs max-w-72 gap-6">
+    <div className="flex flex-col items-center justify-center text-sm gap-6">
       <div className="border-b opacity-80 w-full"></div>
       <div>
-        <div className="grid grid-cols-7 p-2 gap-4 text-center font-light">
+        <div className="grid grid-cols-7 p-2 gap-4 text-center font-light ">
           {dayOfWeeks.map((day) => (
             <div key={day} className={`${day === '일' && 'text-rose-400'}`}>
               {day}

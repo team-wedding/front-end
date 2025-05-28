@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { validateEmail } from '@utils/validator';
 import { postEmailLogin } from '../../../services/userService';
+import { useUserStore } from '@/store/useUserStore';
 
 interface LoginInfo {
   email: string;
@@ -10,14 +11,17 @@ interface LoginInfo {
 
 const EmailLogin = () => {
   const navigate = useNavigate();
+  const { fetchUserInfo } = useUserStore();
   const [loginInfo, setLoginInfo] = useState<LoginInfo>({
     email: '',
     password: '',
   });
 
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [loginValid, setLoginValid] = useState(true);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setLoginValid(true);
     const { name, value } = e.target;
 
     if (name === 'email') {
@@ -30,56 +34,97 @@ const EmailLogin = () => {
     });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
     if (!isFormValid) return;
 
     try {
       await postEmailLogin(loginInfo);
-      navigate('/');
+      await fetchUserInfo();
+      navigate('/dashboard');
     } catch (error) {
       console.log('이메일 로그인 실패', error);
+      setLoginValid(false);
     }
   };
 
   const isFormValid = isEmailValid && loginInfo.password.length > 0;
 
   return (
-    <div className="flex flex-col w-full gap-3">
-      <h1 className="text-3xl font-semibold pb-6">이메일로 로그인</h1>
-      <h3 className="text-gray-600 text-sm">이메일</h3>
-      <input
-        name="email"
-        onChange={handleChange}
-        className="splash-input"
-        type="email"
-        placeholder="이메일 입력"
-      />
-      {!isEmailValid && loginInfo.email.length > 0 && (
-        <p className="text-xs text-rose-500">
-          올바른 이메일 형식을 입력하세요.
-        </p>
-      )}
+    <main className="column-center w-11/12">
+      <form onSubmit={handleSubmit} className="w-full column-center gap-4">
+        <fieldset className="w-full column-center gap-2">
+          <legend className="sr-only">이메일 로그인 폼</legend>
 
-      <h3 className="text-gray-600 text-sm">비밀번호</h3>
-      <input
-        name="password"
-        onChange={handleChange}
-        className="splash-input"
-        type="password"
-        placeholder="비밀번호 입력"
-      />
-      <button
-        className={`h-12 mt-4 mb-4 text-sm font-medium rounded-lg shadow-sm transition duration-100 ease-out hover:ease-in ${
-          isFormValid
-            ? 'bg-button text-primary hover:bg-rose-100'
-            : 'bg-gray-300 text-white cursor-not-allowed'
-        }`}
-        disabled={!isFormValid}
-        onClick={handleSubmit}
-      >
-        로그인
-      </button>
-    </div>
+          <div className="w-full">
+            <label
+              htmlFor="email"
+              className="text-label-secondary/60 dark:text-label-secondary-dark/60 text-sm mx-2"
+            >
+              이메일
+            </label>
+            <input
+              id="email"
+              name="email"
+              onChange={handleChange}
+              className="splash-input"
+              type="email"
+              placeholder="이메일 입력"
+            />
+            {!isEmailValid && loginInfo.email.length > 0 && (
+              <p className="m-2 text-xs text-status-error dark:text-status-error-dark">
+                올바른 이메일 형식을 입력하세요.
+              </p>
+            )}
+          </div>
+
+          <div className="w-full">
+            <label
+              htmlFor="password"
+              className="text-label-secondary/60 dark:text-label-secondary-dark/60 text-sm mx-2"
+            >
+              비밀번호
+            </label>
+            <input
+              id="password"
+              name="password"
+              onChange={handleChange}
+              className={`splash-input ${!loginValid ? 'animate-shake ring-1 ring-status-error-dark dark:ring-status-error-dark' : 'ring-0'}`}
+              type="password"
+              placeholder="비밀번호 입력"
+            />
+            {!loginValid && loginInfo.password.length > 0 && (
+              <p className="m-2 text-xs text-status-error dark:text-status-error-dark">
+                비밀번호가 정확하지 않습니다
+              </p>
+            )}
+          </div>
+        </fieldset>
+
+        <button
+          type="submit"
+          className={`splash-btn hover:ease-in ${
+            isFormValid
+              ? 'bg-gradient-to-r from-primary-muted to-secondary-muted text-black dark:from-primary-muted-dark dark:to-secondary-muted-dark dark:text-white'
+              : 'cursor-not-allowed'
+          }`}
+          disabled={!isFormValid}
+        >
+          로그인
+        </button>
+
+        <p className="text-label-secondary/60 dark:text-label-secondary-dark/60 text-xs text-center my-4">
+          아직 계정이 없으신가요?{' '}
+          <Link
+            to="/signup"
+            className="text-label dark:text-label-dark font-medium hover:text-label-secondary/60 dark:hover:text-label-secondary-dark/60"
+          >
+            회원가입
+          </Link>
+        </p>
+      </form>
+    </main>
   );
 };
 

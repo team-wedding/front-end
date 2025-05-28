@@ -1,4 +1,5 @@
-import LoginButton from '../LoginButton';
+import LoginButton from '@/components/login/LoginButton';
+import kakaoLoginImg from '@assets/kakao_login.png';
 
 const K_REST_API_KEY = import.meta.env.VITE_K_REST_API_KEY;
 const K_REDIRECT_URI = `http://localhost:5173/oauth/callback/kakao`;
@@ -11,9 +12,10 @@ const KakaoLoginButton = () => {
 
   return (
     <LoginButton
-      imgSrc="/src/assets/kakao-login.png"
+      imgSrc={kakaoLoginImg}
       altText="Kakao Login"
       onClick={handleKakaoLogin}
+      additionalStyles="w-[60px]"
     />
   );
 };

@@ -1,6 +1,6 @@
 const BackIcon = () => (
   <svg
-    className="size-5 text-gray-800 dark:text-white"
+    className="size-5 text-icon dark:text-icon-dark"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"
@@ -11,7 +11,7 @@ const BackIcon = () => (
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="2"
+      strokeWidth="1.5"
       d="m15 19-7-7 7-7"
     />
   </svg>

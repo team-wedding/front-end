@@ -1,12 +1,12 @@
-import Header from '../common/Header/Header';
-import Footer from '../common/Footer/Footer';
+import Header from '@common/Header/Header';
 
 type PageLayoutProps = {
   title?: string | React.ReactNode;
   leftButton?: React.ReactNode;
   rightButton?: React.ReactNode;
   children?: React.ReactNode;
-  customFooter?: React.ReactNode;
+  customHeader?: React.ReactNode | false;
+  customFooter?: React.ReactNode | false;
 };
 
 const PageLayout = ({
@@ -14,23 +14,18 @@ const PageLayout = ({
   leftButton,
   rightButton,
   children,
-  customFooter,
+  customHeader = (
+    <Header text={title} leftButton={leftButton} rightButton={rightButton} />
+  ),
+  customFooter = <></>,
 }: PageLayoutProps) => {
   return (
     <div className="layout">
-      <div className="layout-header">
-        <Header
-          text={title}
-          leftButton={leftButton}
-          rightButton={rightButton}
-        />
-      </div>
+      {customHeader && <div className="layout-header">{customHeader}</div>}
 
       <div className="layout-content">{children}</div>
 
-      {customFooter !== null && (
-        <div className="layout-footer">{customFooter || <Footer />}</div>
-      )}
+      {customFooter && <div className="layout-footer">{customFooter}</div>}
     </div>
   );
 };

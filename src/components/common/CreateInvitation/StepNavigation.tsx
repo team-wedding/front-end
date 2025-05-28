@@ -6,7 +6,6 @@ interface StepNavigationProps {
   totalSteps: number;
   onPrev: () => void;
   onNext: () => void;
-  // onPreview?: () => void; // 미리보기 버튼 핸들러
 }
 
 export const StepNavigation = ({
@@ -14,23 +13,23 @@ export const StepNavigation = ({
   totalSteps,
   onPrev,
   onNext,
-  // onPreview,
 }: StepNavigationProps) => {
   return (
-    <div className="flex w-full justify-center gap-64">
+    <div className="flex w-full justify-between mx-6">
       {/* Previous Button */}
       <button
         onClick={onPrev}
-        className={`px-2 py-1 rounded bg-rose-200 ${
+        className={`px-2 py-1 rounded-lg bg-rose-200 ${
           currentStep === 1 ? 'opacity-0' : 'hover:bg-rose-100'
         }`}
         disabled={currentStep === 1}
       >
         <BackIcon />
       </button>
+
       <button
         onClick={onNext}
-        className={`px-2 py-1 rounded bg-rose-200 ${
+        className={`px-2 py-1 rounded-lg bg-rose-200 ${
           currentStep === totalSteps ? 'opacity-0' : 'hover:bg-rose-100'
         }`}
         disabled={currentStep === totalSteps}

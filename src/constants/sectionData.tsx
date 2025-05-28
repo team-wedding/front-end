@@ -3,12 +3,12 @@ import ContactSection from '@display/ContactSection/ContactSection';
 import GallerySection from '@display/GallerySection/GallerySection';
 import GreetingSection from '@display/GreetingSection/GreetingSection';
 import LocationSection from '@display/LocationSection/LocationSection';
-import MoneySection from '@display/MoneySection/MoneySection';
 import MusicSection from '@display/MusicSection/MusicSection';
 import NoticeSection from '@display/NoticeSection/NoticeSection';
 import PhotoTalkSection from '@display/PhotoTalkSection/PhotoTalkSection';
-import RsvpSection from '@display/RsvpSection/RsvpSection';
 import ThumbnailSection from '@display/ThumbnailSection/ThumbnailSection';
+import AccountSection from '@/components/display/AccountSection/AccountSection';
+import AttendanceSection from '@/components/display/AttendanceSection/AttendanceSection';
 
 export interface SectionItemData {
   section: React.ReactNode;
@@ -28,7 +28,7 @@ export const sectionData: SectionItemData[] = [
     hasDrag: false,
   },
   {
-    section: <RsvpSection />,
+    section: <AttendanceSection />,
     feature: 'rsvp',
     hasDrag: false,
   },
@@ -53,7 +53,7 @@ export const sectionData: SectionItemData[] = [
     hasDrag: true,
   },
   {
-    section: <MoneySection />,
+    section: <AccountSection />,
     feature: 'account',
     hasDrag: true,
   },

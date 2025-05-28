@@ -1,5 +1,6 @@
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DynaPuff:wght@400..700&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -7,26 +8,70 @@
 
 @layer base {
   :root {
-    --header-height: 3.5rem;
-    --footer-height: 3.5rem;
+    @apply font-Pretendard bg-black;
+
+    --header-height: 3rem;
+    --footer-height: 3rem;
   }
 
-  html,
-  body,
-  #root {
-    @apply bg-black bg-opacity-80 text-gray-800;
-    @apply bg-black bg-opacity-80 text-gray-800;
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Thin.ttf') format('truetype');
+    font-weight: 100;
+    font-style: normal;
   }
   @font-face {
-    font-family: 'SUIT-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_suit@1.0/SUIT-Regular.woff2')
-      format('woff2');
-    font-weight: normal;
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-ExtraLight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Medium.ttf') format('truetype');
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-SemiBold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Bold.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-ExtraBold.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'SUIT';
+    src: url('/src/assets/fonts/SUIT-Heavy.ttf') format('truetype');
+    font-weight: 900;
     font-style: normal;
   }
   @font-face {
     font-family: 'NanumGothic';
-    src: url('http://fonts.googleapis.com/earlyaccess/nanumgothic.css');
+    src: url('/src/assets/fonts/MapoFlowerIsland.ttf');
     font-weight: normal;
     font-style: normal;
   }
@@ -39,25 +84,43 @@
   }
   @font-face {
     font-family: 'NanumSquareNeo';
-    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot);
     src:
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.eot?#iefix)
-        format('embedded-opentype'),
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.woff)
-        format('woff'),
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeoTTF-bRg.ttf)
-        format('truetype');
+      url('/src/assets/fonts/NanumSquareNeoTTF-aLt.woff') format('woff'),
+      url('/fonts/NanumSquareNeoTTF-aLt.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
   }
   @font-face {
-    font-family: 'NanumSquareNeoVariable';
-    src: url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot);
+    font-family: 'NanumSquareNeo';
     src:
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.eot?#iefix)
-        format('embedded-opentype'),
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.woff)
-        format('woff'),
-      url(https://hangeul.pstatic.net/hangeul_static/webfont/NanumSquareNeo/NanumSquareNeo-Variable.ttf)
-        format('truetype');
+      url('/src/assets/fonts/NanumSquareNeoTTF-bRg.woff') format('woff'),
+      url('/fonts/NanumSquareNeoTTF-bRg.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'NanumSquareNeo';
+    src:
+      url('/src/assets/fonts/NanumSquareNeoTTF-cBd.woff') format('woff'),
+      url('/fonts/NanumSquareNeoTTF-cBd.ttf') format('truetype');
+    font-weight: 700;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'NanumSquareNeo';
+    src:
+      url('/src/assets/fonts/NanumSquareNeoTTF-dEb.woff') format('woff'),
+      url('/fonts/NanumSquareNeoTTF-dEb.ttf') format('truetype');
+    font-weight: 800;
+    font-style: normal;
+  }
+  @font-face {
+    font-family: 'NanumSquareNeo';
+    src:
+      url('/src/assets/fonts/NanumSquareNeoTTF-eHv.woff') format('woff'),
+      url('/fonts/NanumSquareNeoTTF-eHv.ttf') format('truetype');
+    font-weight: 900;
+    font-style: normal;
   }
 
   /* Autofill 스타일 추가 */
@@ -125,32 +188,34 @@
 
 @layer components {
   .layout {
-    @apply flex flex-col h-full w-full m-auto bg-white font-Paperlogy overflow-auto;
-    @apply md:max-w-sm;
-    max-width: var(--max-content-width, 448px);
+    @apply flex flex-col m-auto bg-surface dark:bg-surface-dark overflow-auto;
+    max-width: var(--max-content-width, 520px);
   }
 
   .layout-header,
   .layout-footer {
-    @apply fixed w-full flex-center;
-    @apply md:max-w-md;
-    max-width: var(--max-content-width, 448px);
+    @apply fixed flex-center w-full z-10;
+    max-width: var(--max-content-width, 520px);
   }
 
   .layout-header {
-    @apply border-b border-neutral-200 text-sm bg-white;
+    @apply text-sm bg-surface dark:bg-surface-dark;
     top: 0;
     height: var(--header-height);
   }
 
   .layout-footer {
-    @apply border-t border-neutral-200 text-[10px] bg-footer;
+    @apply text-[10px] bg-surface dark:bg-surface-dark;
     bottom: 0;
     height: var(--footer-height);
   }
 
+  .layout-footer:empty {
+    display: none;
+  }
+
   .layout-content {
-    @apply bg-white w-full overflow-auto;
+    @apply bg-surface dark:bg-surface-dark w-full overflow-auto;
     margin-top: var(--header-height);
     margin-bottom: var(--footer-height);
     height: calc(100vh - var(--header-height) - var(--footer-height));
@@ -163,33 +228,29 @@
   .stepper-layout {
     @apply fixed w-full bg-white z-10 flex-center text-xs px-12 py-2;
     @apply md:max-w-md;
-    max-width: var(--max-content-width, 448px);
-  }
-
-  .splash-layout,
-  .auth-layout {
-    @apply w-full h-screen m-auto bg-white;
-    @apply md:max-w-md;
-    max-width: var(--max-content-width, 448px);
+    max-width: var(--max-content-width, 520px);
   }
 
   .preview-layout {
-    @apply mx-auto h-full w-full;
+    @apply column-center max-w-md bg-white text-result tracking-wide rounded-3xl shadow-xl mx-auto relative z-20 font-Pretendard;
+    /* @apply md:rounded-t-3xl md:mt-12; */
+    /* @apply md:my-12 lg:max-w-md; */
+    transition: all 0.3s ease;
   }
 
   .result-layout {
-    @apply column-center max-w-md bg-white gap-28 text-result tracking-wide shadow-xl pt-10 pb-28 mx-auto relative z-10;
-    @apply md:rounded-3xl md:my-12 lg:max-w-sm;
+    @apply column-center max-w-md bg-white text-result tracking-wide shadow-custom mx-auto relative z-20 font-Pretendard mb-40 rounded-b-3xl;
+    @apply md:rounded-t-3xl md:mt-12;
     transition: all 0.3s ease;
   }
 
   .page-container {
-    @apply flex w-full h-full relative;
+    @apply w-full h-full relative;
   }
 
   .create-section {
-    @apply flex flex-col h-full w-full max-w-md overflow-auto mx-auto z-20;
-    @apply lg:fixed lg:left-1/3;
+    @apply h-full w-full max-w-[520px] overflow-auto mx-auto z-20 bg-[#F0E9EC];
+    /* @apply lg:fixed lg:right-1/3; */
     /* @apply md:fixed md:left-10; */
     /* max-width: var(--max-content-width, 448px); */
     /* transition: all 0.3s ease; */
@@ -197,7 +258,7 @@
 
   .preview-section {
     @apply hidden overflow-auto bg-black bg-opacity-50 absolute top-0 right-0;
-    @apply lg:flex lg:w-[33%] lg:justify-center;
+    /* @apply lg:flex lg:w-[33%] lg:justify-center; */
     /* @apply md:flex md:w-[30%] md:justify-center; */
     /* transition: all 0.3s ease; */
   }
@@ -215,24 +276,38 @@
   }
 
   .label {
-    @apply block text-[11px] font-medium w-1/4;
+    @apply block text-[11px] font-medium w-[22%] text-label dark:text-label-dark;
   }
+
+  /* .splash-btn {
+    @apply py-3 text-sm bg-primary rounded-lg text-white shadow-sm transition duration-100 ease-out hover:ease-in;
+  } */
 
   .splash-btn {
-    @apply py-3 text-sm bg-primary rounded-lg text-white shadow-sm transition duration-100 ease-out hover:ease-in;
+    @apply bg-gradient-to-r from-[#141414] to-[#141414] p-5 w-full rounded-3xl text-white text-sm tracking-wide transition-all duration-200 ease-in-out active:from-[#CEDFFF] active:to-[#F8D4E2] active:shadow-sm active:text-black;
+
+    @apply dark:from-[#ffffff] dark:to-[#ffffff] dark:text-black dark:active:from-[#687BAF] dark:active:to-[#AC6083] dark:active:text-white;
   }
 
-  .splash-input {
+  /* .splash-input {
     @apply px-5 py-3 rounded-lg text-sm border border-gray-300 focus-visible:ring-1 focus:ring-primary focus:border-none placeholder:text-gray-400;
+  } */
+
+  .splash-input {
+    @apply bg-[#F2F2F7] h-14 w-full rounded-xl border-none px-8 text-sm focus-visible:ring-1 focus:ring-[#C6C6C8] focus:border-none placeholder:text-[#3C3C43] placeholder:opacity-30;
+
+    @apply dark:bg-[#1C1C1E] dark:text-white dark:focus:ring-[#38383A] dark:placeholder:text-[#EBEBF5];
+  }
+
+  .gradient {
+    @aaply bg-gradient-to-r from-[#CEDFFF] to-[#F8D4E2];
   }
 
   .formInput {
-    @apply bg-white border-neutral-300 text-neutral-900 text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50;
-    @apply bg-white border-neutral-300 text-neutral-900 text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary focus:border-[rgba(53,53,53,0.6)] flex-1 min-w-0 placeholder:opacity-50;
+    @apply border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-label dark:text-label-dark text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary flex-1 min-w-0 placeholder:text-placeholder/30 dark:placeholder:text-placeholder-dark/30 focus:placeholder-transparent py-2 focus:bg-surface dark:focus:bg-surface-dark;
   }
 
   .accordion-item {
-    @apply bg-white rounded-2xl overflow-hidden transition-all duration-100 text-neutral-700 shadow-sm text-[11px];
     @apply bg-white rounded-2xl overflow-hidden transition-all duration-100 text-neutral-700 shadow-sm text-[11px];
   }
 
@@ -240,12 +315,20 @@
     @apply flex justify-center items-center;
   }
 
+  .flex-between {
+    @apply flex justify-between items-center;
+  }
+
+  .column-between {
+    @apply flex flex-col justify-between items-center;
+  }
+
   .column-center {
     @apply flex flex-col justify-center items-center;
   }
 
   .contact-group {
-    @apply flex flex-col items-center justify-center gap-5;
+    @apply flex flex-col items-center justify-center gap-4;
   }
 
   .title {

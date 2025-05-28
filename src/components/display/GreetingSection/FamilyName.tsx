@@ -7,9 +7,9 @@ const FamilyName = () => {
   return (
     <div className="column-center text-sm gap-2 tracking-normal">
       {brideGroom.map((person, index) => {
-        const fatherName = person.family.father.name || 'ㅇㅇㅇ';
+        const fatherName = person.family.father.name || '아버지';
         const fatherIsDeceased = person.family.father.isDeceased;
-        const motherName = person.family.mother.name || 'ㅇㅇㅇ';
+        const motherName = person.family.mother.name || '어머니';
         const motherIsDeceased = person.family.mother.isDeceased;
         const personName = person.name || 'ㅇㅇㅇ';
         return (
@@ -27,8 +27,10 @@ const FamilyName = () => {
               )}
               {motherName}
             </div>
-            <div className="text-gray-500">의 {person.relation}</div>
-            <div>{personName}</div>
+            <div className="text-gray-500 mx-[2px] text-[13px]">
+              의 {person.relation}
+            </div>
+            <div className="mx-1">{personName}</div>
           </div>
         );
       })}

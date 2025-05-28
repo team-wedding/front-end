@@ -1,68 +1,37 @@
-import { useState } from 'react';
-import usePhotoTalkStore, { PhotoTalk } from '@store/usePhotoTalkStore';
-import PhotoTalkEditor from './PhotoTalkEditor';
-import PhotoTalkCard from './PhotoTalkCard';
-import PhotoTalkGallery from './PhotoTalkGallery';
-import ImageIcon from '@icons/ImageIcon';
-import PasswordConfirmModal from './PasswordConfirmModal';
+import SectionTitle from '@/components/common/SectionTitle';
+import { useLocation, useNavigate, useParams } from 'react-router';
 
 const PhotoTalkSection = () => {
-  const { openEditor, setEditingPhotoTalk } = usePhotoTalkStore();
-  const [selectedPhotoTalk, setSelectedPhotoTalk] = useState<null | PhotoTalk>(
-    null,
-  );
-  const [isGalleryOpen, setGalleryOpen] = useState(false);
+  const navigate = useNavigate();
+  const { userId, invitationId } = useParams();
+  const location = useLocation();
 
-  const confirmPassword = (passwordInput: string) => {
-    if (selectedPhotoTalk?.password === passwordInput) {
-      setEditingPhotoTalk(selectedPhotoTalk);
-      openEditor();
-      setSelectedPhotoTalk(null);
-    } else {
-      alert('비밀번호가 일치하지 않습니다.');
-    }
+  const isPreview = location.pathname.includes('/preview');
+
+  const handleClick = () => {
+    return isPreview
+      ? navigate(`/preview/phototalk`)
+      : navigate(`/phototalk/${userId}/${invitationId}`);
   };
 
   return (
-    <div className="w-96">
-      <div className="column-center w-full">
-        <div className="sub-title">PHOTO TALK</div>
-        <div className="title">포토톡</div>
-        <button onClick={openEditor} className="select-btn">
-          작성하기
-        </button>
-      </div>
-      <div>
+    <div className="column-center gap-4 py-20">
+      <SectionTitle subTitle="PHOTO TALK" title="포토톡" />
+      <div className="column-center bg-slate-100 px-20 py-12 rounded-xl">
+        <p className="text-center leading-loose mb-8">
+          소중한 마음을 남겨주시면
+          <br />큰 기쁨이 될 것 같습니다
+          <br />
+          방명록에 따뜻한 한마디 남겨주세요
+        </p>
         <button
-          onClick={() => setGalleryOpen(!isGalleryOpen)}
-          className="w-full flex justify-end px-8"
+          onClick={handleClick}
+          aria-label="포토톡 작성하기"
+          className="py-2 bg-slate-700 text-white hover:bg-button/80 rounded-full px-8"
         >
-          {isGalleryOpen ? (
-            <div className="select-btn bg-button bg-opacity-10">
-              <ImageIcon />
-            </div>
-          ) : (
-            <div className="select-btn">
-              <ImageIcon />
-            </div>
-          )}
+          작성하러 가기
         </button>
-        {isGalleryOpen ? (
-          <div className="w-full p-4">
-            <h2 className="text-lg font-semibold mb-4">이미지 갤러리</h2>
-            <PhotoTalkGallery />
-          </div>
-        ) : (
-          <PhotoTalkCard onEdit={setSelectedPhotoTalk} />
-        )}
       </div>
-      <PhotoTalkEditor />
-
-      <PasswordConfirmModal
-        isOpen={!!selectedPhotoTalk}
-        onClose={() => setSelectedPhotoTalk(null)}
-        onConfirm={confirmPassword}
-      />
     </div>
   );
 };

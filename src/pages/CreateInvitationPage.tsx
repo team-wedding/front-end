@@ -1,85 +1,118 @@
 import { useEffect, useState } from 'react';
 import PageLayout from '@layout/PageLayout';
 import HeaderButton from '@common/Header/HeaderButton';
-import { useNavigate } from 'react-router';
+import { useNavigate, useParams } from 'react-router';
 import { Accordion } from '@common/CreateInvitation/Accordion';
 import { Stepper } from '@common/CreateInvitation/Stepper';
 import { StepNavigation } from '@common/CreateInvitation/StepNavigation';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
-import { usePostInvitation } from '@hooks/useInvitation';
-import { useInvitationStore } from '@/store/useInvitaionStore';
+import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
 import resetAllStores from '@/store/resetStore';
-import useBrideGroomStore from '@/store/useBrideGroomStore';
-import { validateBrideGroomNames } from '@/utils/validator';
 import SimpleModal from '@/components/common/Modal/SimpleModal';
 import ResultDisplay from '@/components/display/ResultDisplay';
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
-import { getInvitationAction } from '@/actions/invitationAction';
+import {
+  getInvitationAction,
+  useUpdateInvitationStore,
+} from '@/actions/invitationAction';
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
-import { NoticeDetail } from '@/types/invitationType';
+import {
+  InvitationDetail,
+  NoticeDetail,
+  S3UploadRequest,
+} from '@/types/invitationType';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
+import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
+import { useInvitationStore } from '@/store/useInvitaionStore';
+import ReusableModal from '@/components/common/Modal/ReusableModal';
+import { validateBrideGroomNames } from '@/utils/validator';
+import useBrideGroomStore from '@/store/useBrideGroomStore';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
+// const AUTO_SAVE_MODAL_DURATION_MS = 3000;
+// const AUTO_SAVE_INTERVAL_MS = 5000;
 
 const CreateInvitationPage = () => {
-  const { items, initializeItems, moveItem } = useAccordionStore();
+  const navigate = useNavigate();
+  const { id } = useParams();
   const [steps, setSteps] = useState(1);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const { brideGroom } = useBrideGroomStore();
-  const { invitationtitle } = useInvitationStore();
-  useEffect(() => {
-    const [start, end] = sliceRanges[steps - 1];
-    initializeItems(start, end);
-  }, [steps, initializeItems]);
-
-  const navigate = useNavigate();
-
-  const handleCancel = () => {
-    resetAllStores();
-    navigate('/dashboard');
-  };
+  const [cancelModal, setCancelModal] = useState(false);
+  // const [autoSaveModal, setAutoSaveModal] = useState(false)
+  const details = getInvitationAction();
+  const { optionalItems } = useAccordionStore();
+  const { invitations } = useGetInvitation(parseInt(id!));
+  const { items, initializeItems, moveItem } = useAccordionStore();
+  const { selectedOptionalFeatures } = useOptionalFeatureStore();
   const { uploadedImageFile } = useImageStore();
   const { galleryFiles, grid } = useGalleryStore();
+  const { invitationtitle, setInvitationTitle } = useInvitationStore();
   const { notices } = useNoticeStore();
+  const { brideGroom } = useBrideGroomStore();
   const noticeImages = notices.flatMap((value) => {
     if (value.imgFile) {
       return value.imgFile;
     } else return null;
   });
-  const { mutateAsync: postMutate } = usePostInvitation(); // useMutation을 직접 변수에 할당
+
+  const { mutateAsync: updateMutate } = useUpdateInvitation(parseInt(id!));
   const { mutateAsync: s3Mutate } = useS3Image();
-  const details = getInvitationAction();
-  const { optionalItems } = useAccordionStore();
+
+  const flushAll = useDebouncedInputStore((s) => s.flushAll);
+
   const findOrder = (feature: string) => {
     if (!feature) return undefined; // feature가 없으면 undefined 반환
     const result = optionalItems.find((value) => value.feature === feature);
     return result?.order;
   };
-  const { selectedOptionalFeatures } = useOptionalFeatureStore();
-  const uploadToS3 = async (files: File[]) => {
-    const { imageUrls } = await s3Mutate(files.length ? files : []);
+
+  const uploadToS3 = async ({ imageFiles, directory }: S3UploadRequest) => {
+    const { imageUrls } = await s3Mutate(
+      imageFiles.length
+        ? { imageFiles, directory }
+        : { imageFiles: [], directory },
+    );
     return imageUrls;
   };
 
-  const handleSave = async () => {
+  const saveInvitationData = async () => {
+    await flushAll();
     if (!validateBrideGroomNames(brideGroom)) {
+      console.log(
+        !validateBrideGroomNames(brideGroom),
+        brideGroom[0].name,
+        brideGroom[1].name,
+      );
       setIsModalOpen(true);
       return;
-    }
-    try {
+    } else {
       const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
-        uploadToS3(uploadedImageFile ? [uploadedImageFile] : []),
-        uploadToS3(galleryFiles),
-        ...noticeImages.map((image) => uploadToS3(image ? [image] : [])),
+        uploadToS3(
+          uploadedImageFile
+            ? { imageFiles: [uploadedImageFile], directory: 'thumbnail' }
+            : { imageFiles: [], directory: 'thumbnail' },
+        ),
+        uploadToS3(
+          galleryFiles
+            ? { imageFiles: galleryFiles, directory: 'gallery' }
+            : { imageFiles: [], directory: 'gallery' },
+        ),
+        ...noticeImages.map((imageFile) =>
+          uploadToS3(
+            imageFile
+              ? { imageFiles: [imageFile], directory: 'notice' }
+              : { imageFiles: [], directory: 'notice' },
+          ),
+        ),
       ]);
       const s3ImageList = [thumbnail, gallery, ...noticeS3ImageList];
-      const noticeList: NoticeDetail[] = await notices.map((value, index) => {
+      const noticeList: NoticeDetail[] = notices.map((value, index) => {
         return {
           ...value,
           order: findOrder('notice'),
@@ -87,26 +120,58 @@ const CreateInvitationPage = () => {
           image: s3ImageList[index][0],
         };
       });
-      await postMutate({
+      await updateMutate({
         ...details,
-        imgUrl: thumbnail.length > 0 ? thumbnail[0] : '',
+        imgUrl:
+          thumbnail.length > 0
+            ? thumbnail[0]
+            : invitations
+              ? invitations.imgUrl
+              : '',
         galleries: [
           { images: gallery, grid, isActive: selectedOptionalFeatures.gallery },
         ],
         notices: noticeList,
       });
-    } catch (err) {
-      console.log(err);
-      alert('생성중에 에러가 발생했습니다.');
     }
   };
+
+  useEffect(() => {
+    if (invitations?.title) {
+      setInvitationTitle(invitations?.title);
+    }
+  }, [invitations?.title]);
+
+  useEffect(() => {
+    useUpdateInvitationStore(invitations as InvitationDetail);
+  }, [invitations]);
+
+  useEffect(() => {
+    const [start, end] = sliceRanges[steps - 1];
+    initializeItems(start, end);
+  }, [steps, initializeItems]);
+
+  // useEffect(() => {
+  //   const intervalId = setInterval(async () => {
+  //     await flushAll()
+  //     setAutoSaveModal(true);
+  //     await saveInvitationData()
+  //     // useUpdateInvitationStore(invitations as InvitationDetail);
+  //     setTimeout(() => {
+  //       setAutoSaveModal(false);
+  //       setIsModalOpen(false)
+  //     }, AUTO_SAVE_MODAL_DURATION_MS); // 모달 인터벌
+  //   }, AUTO_SAVE_INTERVAL_MS); // 임시저장 인터벌
+  //   return () => {
+  //     clearInterval(intervalId); // 컴포넌트 unmount 시 cleanup
+  //   };
+  // }, [updateMutate]);
 
   const toggleExpand = (id: number) => {
     setExpandedIds((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   };
-
   const handleStepClick = (step: number) => {
     if (step > 0 && step <= sliceRanges.length) {
       setSteps(step);
@@ -122,14 +187,22 @@ const CreateInvitationPage = () => {
       handleStepClick(steps - 1);
     }
   };
-
+  const handleCancel = () => {
+    resetAllStores();
+    navigate('/dashboard');
+    setCancelModal(true);
+  };
+  const handleConfirmCancel = () => {
+    resetAllStores();
+    navigate('/dashboard');
+  };
+  const handleSave = async () => {
+    saveInvitationData();
+  };
   return (
     <DndProvider backend={HTML5Backend}>
       <div className="page-container">
         <div className="create-section relative">
-          <div className="absolute bottom-16 right-4">
-            <PreviewButton />
-          </div>
           <PageLayout
             title={invitationtitle}
             leftButton={
@@ -171,10 +244,12 @@ const CreateInvitationPage = () => {
               />
             </div>
           </PageLayout>
+          <div className="absolute bottom-16 right-4">
+            <PreviewButton id={id} update={saveInvitationData} />
+          </div>
         </div>
         <div className="preview-section">
           <ResultDisplay />
-          {/* <PreviewDisplay /> */}
         </div>
       </div>
       <SimpleModal
@@ -188,6 +263,15 @@ const CreateInvitationPage = () => {
         }
         onConfirm={() => setIsModalOpen(false)}
       />
+      <ReusableModal
+        isOpen={cancelModal}
+        title={'작성 중인 내용이 삭제됩니다'}
+        confirmText={
+          '저장하지 않고 나가면 입력한 내용이 모두 삭제돼요. 계속하시겠어요?'
+        }
+        onConfirm={handleConfirmCancel}
+        onCancel={() => setCancelModal(false)}
+      ></ReusableModal>
     </DndProvider>
   );
 };

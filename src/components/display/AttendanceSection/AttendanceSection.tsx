@@ -22,7 +22,7 @@ export default function AttendanceSection() {
   } = {
     title: '참석 의사 전달',
     description: (
-      <div>
+      <>
         {/* 서로에게 행복을 주는 사람을 만났습니다
         <br />
         운명처럼 만나게 된 우리의 인연 그 인연에 이끌려 이제 영원을 함께
@@ -33,7 +33,7 @@ export default function AttendanceSection() {
         축하해 주시는 한 분 한 분을 <br />
         소중히 모실 수 있도록 <br />
         참석 의사를 사전에 전달해 주시길 부탁드립니다
-      </div>
+      </>
     ),
   };
 
@@ -55,7 +55,8 @@ export default function AttendanceSection() {
         <div className="column-center py-10 bg-rose-50/70 rounded-xl w-full">
           <div className="flex flex-col gap-4 mb-10 mx-12">
             <div className="flex flex-row gap-2">
-              <HeartIcon /> {`${brideGroom[0].name} & ${brideGroom[1].name}`}
+              <HeartIcon />{' '}
+              {`${brideGroom[0].name || '김세모'} & ${brideGroom[1].name || '이네모'}`}
             </div>
             <div className="flex flex-row gap-2">
               <CalendarIcon />
@@ -68,7 +69,7 @@ export default function AttendanceSection() {
                 {address && <div className="mb-1">{address.split('(')[0]}</div>}
                 {(weddingHallName || weddingHallDetail) && (
                   <div className="text-gray-500">
-                    {weddingHallName + ', ' + weddingHallDetail}
+                    {`${weddingHallName || '미정'}, ${weddingHallDetail || ' 미정'}`}
                   </div>
                 )}
               </div>

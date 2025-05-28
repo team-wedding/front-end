@@ -11,9 +11,9 @@ export default function GalleryFeature() {
   const {
     galleryImages,
     grid,
+    galleryFiles,
     setImages,
     setGrid,
-    galleryFiles,
     setGalleryFiles,
   } = useGalleryStore();
 
@@ -22,14 +22,16 @@ export default function GalleryFeature() {
   let acceptedFormats = ['image/svg', 'image/png', 'image/jpg'];
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (galleryImages.length + e.target.files!.length <= 9) {
-      const target = e.target.files as FileList;
-      const fileArray = [...target].map((value: Blob) =>
-        URL.createObjectURL(value),
-      );
-      setImages([...galleryImages, ...fileArray]);
-      setGalleryFiles([...galleryFiles, ...target]);
-    } else alert('이미지개수가 9개를 초과할수없습니다!');
+    if (galleryImages) {
+      if (galleryImages.length + e.target.files!.length < 9) {
+        const target = e.target.files as FileList;
+        const fileArray = [...target].map((value: Blob) =>
+          URL.createObjectURL(value),
+        );
+        setImages([...galleryImages, ...fileArray]);
+        setGalleryFiles([...galleryFiles, ...target]);
+      } else alert('이미지개수가 9개를 초과할수없습니다!');
+    }
   };
 
   const handleDelete = (index: number) => {
@@ -110,7 +112,7 @@ export default function GalleryFeature() {
 
       <div className="flex flex-col gap-5 my-10">
         <label
-          className={`${galleryImages.length === 0 ? `flex flex-col` : `grid grid-cols-2 justify-items-center gap-x-5 gap-y-2 px-3 py-1 lg:px-1 lg:py-2 lg:grid-cols-3`} w-full h-fit border-2 border-gray-100   rounded-lg cursor-pointer items-center overflow-y-scroll`}
+          className={`${galleryImages && galleryImages.length !== 0 ? `grid grid-cols-2 justify-items-center gap-x-5 gap-y-2 px-3 py-1 lg:px-1 lg:py-2 lg:grid-cols-3` : `flex flex-col`} w-full h-fit border-2 border-gray-100   rounded-lg cursor-pointer items-center overflow-y-scroll`}
           htmlFor="dropzone"
           onDrop={handleDrop}
           onDragOver={handleDrag}
@@ -118,7 +120,32 @@ export default function GalleryFeature() {
           onDragEnter={handleDragEnter}
           onClick={(e) => e.preventDefault()}
         >
-          {galleryImages.length === 0 ? (
+          {galleryImages && galleryImages.length !== 0 ? (
+            galleryImages.map((value, index) => {
+              return (
+                <div
+                  className={`relative w-28 h-40 lg:w-24 lg:h-32 rounded-md flex items-center justify-center cursor-pointer ${hoveredIndex == index ? 'shadow-2xl' : 'shadow-none '}`}
+                  key={index}
+                  onDragStart={() => handleSortDragStart(index)}
+                  onDragOver={(e) => handleSortDragOver(index, e)}
+                  onDrop={() => handleSortDrop(index)}
+                  onDragEnd={handleSortDragEnd}
+                >
+                  <div
+                    className="absolute size-4 top-2 right-2 rounded-full bg-gray-400/60 group hover:bg-black"
+                    onClick={() => handleDelete(index)}
+                  >
+                    <CloseIcon className="size-4 text-white " />
+                  </div>
+                  <img
+                    src={value}
+                    alt=""
+                    className="object-center  rounded-md size-full border border-gray-300"
+                  />
+                </div>
+              );
+            })
+          ) : (
             <div className="flex flex-col items-center justify-center text-center py-5 text-[10px] w-full text-gray-400 gap-1 bg-gray-50">
               <svg
                 className="w-6 h-6 text-gray-700 dark:text-white my-2"
@@ -147,31 +174,6 @@ export default function GalleryFeature() {
                 파일 (MAX. {maxWidth}x{maxHeight}px)
               </p>
             </div>
-          ) : (
-            galleryImages.map((value, index) => {
-              return (
-                <div
-                  className={`relative w-28 h-40 lg:w-24 lg:h-32 rounded-md flex items-center justify-center cursor-pointer ${hoveredIndex == index ? 'shadow-2xl' : 'shadow-none '}`}
-                  key={index}
-                  onDragStart={() => handleSortDragStart(index)}
-                  onDragOver={(e) => handleSortDragOver(index, e)}
-                  onDrop={() => handleSortDrop(index)}
-                  onDragEnd={handleSortDragEnd}
-                >
-                  <div
-                    className="absolute size-4 top-2 right-2 rounded-full bg-gray-400/60 group hover:bg-black"
-                    onClick={() => handleDelete(index)}
-                  >
-                    <CloseIcon className="size-4 text-white " />
-                  </div>
-                  <img
-                    src={value}
-                    alt=""
-                    className="object-center  rounded-md size-full border border-gray-300"
-                  />
-                </div>
-              );
-            })
           )}
         </label>
 

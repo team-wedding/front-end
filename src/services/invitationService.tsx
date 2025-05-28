@@ -1,4 +1,4 @@
-import { InvitationDetiail } from '../types/invitationType';
+import { InvitationDetail } from '../types/invitationType';
 import { axiosInstance, API } from '../utils/config';
 
 //청첩장 리스트 조회
@@ -14,9 +14,7 @@ export const getInvitation = async (id: number) => {
 };
 
 //청첩장 생성
-export const postInvitation = async (
-  details: Omit<InvitationDetiail, 'id'>,
-) => {
+export const postInvitation = async (details: Omit<InvitationDetail, 'id'>) => {
   const { data } = await axiosInstance.post(API.INVITATIONS(), details);
   return data;
 };
@@ -33,7 +31,7 @@ export const updateInvitation = async ({
   details,
 }: {
   id: number;
-  details: InvitationDetiail;
+  details: Omit<InvitationDetail, 'title'>;
 }) => {
   const { data } = await axiosInstance.put(
     API.INVITATIONS(id.toString()),

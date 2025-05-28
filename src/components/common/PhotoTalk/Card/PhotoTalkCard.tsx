@@ -57,7 +57,7 @@ const PhotoTalkCard = ({
 
   return (
     <div
-      className={`flex-center bg-surface dark:bg-surface-dark w-full rounded-2xl relative mb-3 shadow-custom ${images.length > 0 ? `h-[220px] pb-3` : `h-fit`}`}
+      className={`flex-center bg-surface dark:bg-surface-dark w-full rounded-2xl relative mb-3 shadow-custom ${hasImage ? `h-[220px] pb-3` : `h-fit`}`}
     >
       <div ref={dropdownRef}>
         <button
@@ -73,28 +73,11 @@ const PhotoTalkCard = ({
           <div
             className={`absolute top-8 right-5 z-10 bg-surface border border-border dark:border-border-dark dark:bg-surface-dark backdrop-blur-xl divide-y divide-border rounded-2xl shadow-md w-[30%] px-2 py-1`}
           >
-            <ul className="py-2">
-              {!isAdmin && (
-                <li>
-                  <button
-                    onClick={onEdit}
-                    className="block w-full text-left text-sm text-label dark:text-label-dark p-2 pl-3 hover:bg-surface-muted dark:hover:bg-surface-muted-dark rounded-xl"
-                    aria-label="편집하기"
-                  >
-                    편집하기
-                  </button>
-                </li>
-              )}
-
-              <li>
-                <button
-                  onClick={onDelete}
-                  className="block w-full text-left text-sm text-status-error dark:text-status-error-dark p-2 pl-3 hover:bg-surface-muted dark:hover:bg-surface-muted-dark rounded-xl"
-                >
-                  삭제하기
-                </button>
-              </li>
-            </ul>
+            <PhotoTalkAction
+              userMode={userMode}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
           </div>
         )}
 
@@ -103,20 +86,19 @@ const PhotoTalkCard = ({
         >
           {hasImage && (
             <Slider {...settings}>
-              {images.length > 0 &&
-                images.map((image: string, index: number) => (
-                  <div key={index} className="">
-                    <img
-                      src={image}
-                      alt={`Uploaded ${index}`}
-                      className="w-full h-40 object-cover rounded-md"
-                    />
-                  </div>
-                ))}
+              {images.map((image: string, index: number) => (
+                <div key={index}>
+                  <img
+                    src={image}
+                    alt={`Uploaded ${index}`}
+                    className="w-full h-40 object-cover rounded-md"
+                  />
+                </div>
+              ))}
             </Slider>
           )}
           <p
-            className={`text-label dark:text-label-dark text-xs font-medium leading-relaxed break-keep w-full flex-center text-ellipsis tracking-tight  ${images.length > 0 ? 'p-3' : 'p-10'}`}
+            className={`text-label dark:text-label-dark text-xs font-medium leading-relaxed break-keep w-full flex-center text-ellipsis tracking-tight  ${hasImage ? 'p-3' : 'p-10'}`}
           >
             {photoTalk.message}
           </p>

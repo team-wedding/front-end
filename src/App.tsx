@@ -2,7 +2,7 @@ import './App.css';
 import { Route, Routes } from 'react-router';
 import CreateInvitationPage from './pages/CreateInvitationPage';
 import DashBoardPage from './pages/DashBoardPage';
-// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import NotFound404 from './pages/NotFound404';
 import NaverRedirect from './components/login/SocialLogin/NaverRedirect';
@@ -18,7 +18,6 @@ import ScrollToTop from '@/components/common/ScrollToTop';
 import DarkModeProvider from './components/providers/DarkModeProvider';
 import PreviewPhotoTalkPage from '@/pages/PhotoTalk/PreviewPhotoTalkPage';
 import PreviewInvitationPage from '@/pages/PreviewInvitationPage';
-import EditInvitationPage from '@/pages/EditInvitationPage';
 import ResultPage from '@/pages/ResultPage';
 import GuestPhotoTalkPage from '@/pages/PhotoTalk/GuestPhotoTalkPage';
 import { useUserStore } from './store/useUserStore';
@@ -50,8 +49,8 @@ function App() {
 
           {/* 청첩장 만들기 */}
           <Route path={'/dashboard'} element={<DashBoardPage />} />
-          <Route path={'/create'} element={<CreateInvitationPage />} />
-          <Route path={'/edit/:id'} element={<EditInvitationPage />} />
+          <Route path={'/create/:id'} element={<CreateInvitationPage />} />
+          <Route path={'/edit/:id'} element={<CreateInvitationPage />} />
           <Route
             path={'/preview/:userId?/:invitationId?'}
             element={<PreviewInvitationPage />}
@@ -83,7 +82,7 @@ function App() {
           <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
           <Route path={'*'} element={<NotFound404 />} />
         </Routes>
-        {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     </DarkModeProvider>
   );

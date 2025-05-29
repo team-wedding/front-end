@@ -189,7 +189,6 @@ const CreateInvitationPage = () => {
   };
   const handleCancel = () => {
     resetAllStores();
-    navigate('/dashboard');
     setCancelModal(true);
   };
   const handleConfirmCancel = () => {
@@ -265,10 +264,10 @@ const CreateInvitationPage = () => {
       />
       <ReusableModal
         isOpen={cancelModal}
-        title={'작성 중인 내용이 삭제됩니다'}
-        confirmText={
+        title={
           '저장하지 않고 나가면 입력한 내용이 모두 삭제돼요. 계속하시겠어요?'
         }
+        confirmText={'확인'}
         onConfirm={handleConfirmCancel}
         onCancel={() => setCancelModal(false)}
       ></ReusableModal>

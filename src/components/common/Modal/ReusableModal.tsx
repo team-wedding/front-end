@@ -31,7 +31,7 @@ const ReusableModal = ({
             </button>
           </div>
 
-          <div className="mt-2 mb-10 text-label dark:text-label-dark text-center text-base leading-relaxed">
+          <div className="mt-2 mb-10 text-label dark:text-label-dark text-center text-base leading-relaxed px-6">
             <p>{title}</p>
           </div>
 

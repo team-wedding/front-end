@@ -64,7 +64,7 @@ const PhotoTalkCard = ({
     <div
       className={`flex-center bg-surface dark:bg-surface-dark w-full rounded-2xl relative mb-3 shadow-custom ${hasImage ? `h-[220px] pb-3` : `h-fit`}`}
     >
-      <div ref={dropdownRef}>
+      <div ref={dropdownRef} className="w-full">
         <button
           className="inline-block text-gray-500 hover:bg-gray-100 focus:ring-0 focus:outline-none rounded-lg text-sm absolute top-1 right-4"
           type="button"

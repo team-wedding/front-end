@@ -7,6 +7,7 @@ import { GuestInfo } from '@/types/GuestType';
 import { downloadRsvpExcel } from '@/utils/excelDownloader';
 import statsIcon from '@assets/statsIcon.svg';
 import listIcon from '@assets/listIcon.svg';
+import ExcelIcon from '@/components/icons/ExcelIcon';
 
 // API 응답 데이터 타입을 명확하게 정의
 interface AttendanceResponse {
@@ -115,13 +116,11 @@ const RsvpStatsPage = () => {
             <img src={listIcon} alt="stats" />
             <span>상세 목록</span>
           </h6>
-          <button className="border border-gray-300 rounded-xl my-4 px-2 hover:opacity-80 transition">
-            <img
-              src="/src/assets/microsoft-excel-128.png"
-              alt="엑셀 파일 다운로드"
-              className="w-8 h-8"
-              onClick={() => downloadRsvpExcel(attendanceList)}
-            />
+          <button
+            className="border border-gray-300 rounded-xl my-4 px-3 py-1 hover:opacity-80 transition"
+            onClick={() => downloadRsvpExcel(attendanceList)}
+          >
+            <ExcelIcon />
           </button>
         </div>
 

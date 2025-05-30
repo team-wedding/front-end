@@ -15,6 +15,9 @@ export const useGetInvitation = (id: number) => {
     queryKey: ['invitations', id],
     queryFn: () => getInvitation(id),
   });
+  if (isError) {
+    throw new Error(`청첩장 불러오기 실패`);
+  }
   return { invitations: data, error: isError };
 };
 
@@ -38,8 +41,8 @@ export const usePostInvitation = () => {
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
       navigate(`/create/${id}`);
     },
-    onError: (err) => {
-      console.log(err);
+    onError: (error) => {
+      throw new Error(`청첩장 생성 실패:${error}`);
     },
   });
 };
@@ -51,6 +54,9 @@ export const useUpdateInvitation = (id: number) => {
       updateInvitation({ id, details }),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
+    },
+    onError: (error) => {
+      throw new Error(`청첩장 수정 실패:${error}`);
     },
   });
 };
@@ -69,6 +75,9 @@ export const useDeleteInvitation = (id: number) => {
     mutationFn: () => deleteInvitation(id),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
+    },
+    onError: (error) => {
+      throw new Error(`청첩장 삭제 실패:${error}`);
     },
   });
 };

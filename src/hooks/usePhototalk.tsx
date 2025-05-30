@@ -50,8 +50,8 @@ export const useInfinitePhototalkByQuery = <T, ItemType>({
       setItems((prev) => [...prev, ...extractItems(res)]); // 기존 + 새 데이터 누적
       setHasMore(getHasMore(res)); // 더 불러올 수 있는지
       setPage((prev) => prev + 1); // 다음 페이지로 증가
-    } catch (e) {
-      console.error(e);
+    } catch (error) {
+      throw new Error(`포토톡 다음페이지 불러오기 실패 :${error}`);
     } finally {
       setIsFetching(false);
     }

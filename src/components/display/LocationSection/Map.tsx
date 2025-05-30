@@ -24,7 +24,7 @@ const Map = () => {
           const lng = parseFloat(result[0].x);
           setCoords(lat, lng);
         } else {
-          console.error('주소 변환 실패');
+          throw new Error('주소 변환 실패');
         }
       });
     }

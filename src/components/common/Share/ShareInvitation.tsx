@@ -34,13 +34,6 @@ export default function ShareInvitation({
   const aRef = useRef(null);
   const [pngUrl, setPngUrl] = useState('');
 
-  // let mock_Title = 'title is here';
-  // let mock_Desc = 'description is here';
-  // let mock_Image =
-  //   ' https://images.pexels.com/photos/29554688/pexels-photo-29554688/free-photo-of-romantic-wedding-couple-in-urban-tel-aviv-setting.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
-  // let mock_Url = 'result';
-  // let mock_Header = 'ㅇㅇㅇ 💌 ㅇㅇㅇ';
-
   useEffect(() => {
     if (window && window.Kakao) {
       if (!window.Kakao.isInitialized()) {
@@ -78,11 +71,6 @@ export default function ShareInvitation({
     await navigator.clipboard.writeText(
       `https://woogyeol.vercel.app/${shareUrl}`,
     );
-    // toast.success('클립보드에 복사되었어요!', {
-    //   position: 'bottom-center',
-    //   autoClose: 2000,
-    //   hideProgressBar: true,
-    // });
     setToast(true);
   };
 

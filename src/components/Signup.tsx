@@ -74,7 +74,7 @@ const Signup = () => {
             state: { errorMessage: errMsg },
           });
         } else {
-          console.error('회원가입 실패', error);
+          throw new Error(`회원가입 실패 :${error}`);
         }
       }
     }

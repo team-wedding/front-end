@@ -24,7 +24,7 @@ export const KakaoRedirect = () => {
                 state: { errorMessage: errMsg },
               });
             } else {
-              console.error('카카오 로그인 실패', error);
+              throw new Error(`카카오 로그인 실패 :${error}`);
             }
           }
         }

@@ -42,7 +42,7 @@ const RsvpModal = ({ setModal }: ModalProp) => {
       console.log(response);
       setModal(false);
     } catch (error) {
-      console.log('개인 참석 여부 등록 실패', error);
+      throw new Error(`개인 참석 여부 등록 실패 :${error}`);
     }
   };
 

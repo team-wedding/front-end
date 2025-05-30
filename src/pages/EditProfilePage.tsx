@@ -21,7 +21,7 @@ const EditProfilePage = () => {
       setIsLogoutModalOpen(false);
       navigate('/login');
     } catch (error) {
-      console.log('로그아웃 실패', error);
+      throw new Error(`로그아웃 실패 :${error}`);
     }
   };
 

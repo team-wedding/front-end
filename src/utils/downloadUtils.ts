@@ -7,7 +7,8 @@ const delay = (ms: number) => new Promise((res) => setTimeout(res, ms));
 // 이미지 URL에서 Blob 객체로 바꾸고, 파일 이름을 반환
 const fetchImageAsBlob = async (url: string, index: number) => {
   try {
-    const response = await fetch(url);
+    const bustingUrl = `${url}?cache_bust=${Date.now()}`;
+    const response = await fetch(bustingUrl);
     const blob = await response.blob();
     return { blob, fileName: setFileName(index) };
   } catch (err) {

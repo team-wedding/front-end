@@ -11,17 +11,20 @@ import TipTapEditor from '@/components/common/Editor/TiptapEditor';
 interface PhotoTalkEditorProps {
   isEditorOpen: boolean;
   closeEditor: () => void;
+  refetch: () => void;
 }
 
 const PhotoTalkEditor = ({
   isEditorOpen,
   closeEditor,
+  refetch,
 }: PhotoTalkEditorProps) => {
   const { userId, invitationId } = useParams();
   const { editingPhotoTalk, resetFields } = usePhotoTalkStore();
   const createPhototalk = useCreatePhototalk();
   const updatePhototalk = useUpdatePhototalk();
   const { mutateAsync: s3Mutate } = useS3Image();
+  // const { mutate: updateS3Image } = useUpdatePhototalkS3Image();
 
   // const [isDragging, setIsDragging] = useState(false);
   const [form, setForm] = useState({
@@ -110,6 +113,35 @@ const PhotoTalkEditor = ({
     }));
   };
 
+  // const handleReplaceImage = async (
+  //   e: ChangeEvent<HTMLInputElement>,
+  //   index: number,
+  // ) => {
+  //   const file = e.target.files?.[0];
+  //   if (!file || !editingPhotoTalk) return;
+
+  //   const newPreviewUrl = URL.createObjectURL(file);
+  //   const newImageUrls = [...form.imageUrl];
+  //   newImageUrls[index] = newPreviewUrl;
+
+  //   setForm({
+  //     ...form,
+  //     imageUrl: newImageUrls,
+  //   });
+  // };
+
+  const handleCloseEditor = () => {
+    resetFields();
+    setForm({
+      name: '',
+      message: '',
+      password: '',
+      imageUrl: [],
+      imageFile: [],
+    });
+    closeEditor();
+  };
+
   const handleSubmit = async () => {
     if (!form.name || !form.message || !form.password) {
       alert('모든 필드를 입력해주세요.');
@@ -120,6 +152,12 @@ const PhotoTalkEditor = ({
       directory: 'phototalk',
     });
     if (editingPhotoTalk) {
+      // await updateS3Image({
+      //   id: editingPhotoTalk.id,
+      //   index: ,
+      //   newImageFile: photoTalkImageUrls
+      // })
+
       updatePhototalk.mutate(
         {
           id: editingPhotoTalk.id!,
@@ -133,8 +171,8 @@ const PhotoTalkEditor = ({
         },
         {
           onSuccess: () => {
-            resetFields();
-            closeEditor();
+            refetch();
+            handleCloseEditor();
           },
         },
       );
@@ -148,8 +186,8 @@ const PhotoTalkEditor = ({
         },
         {
           onSuccess: () => {
-            resetFields();
-            closeEditor();
+            refetch();
+            handleCloseEditor();
           },
         },
       );
@@ -165,7 +203,7 @@ const PhotoTalkEditor = ({
               <div className="text-base text-label dark:text-label-dark">
                 {editingPhotoTalk ? '포토톡 편집하기' : '포토톡 작성하기'}
               </div>
-              <button onClick={closeEditor}>
+              <button onClick={handleCloseEditor}>
                 <CloseIcon className="size-6 text-label dark:text-label-dark" />
               </button>
             </div>
@@ -251,7 +289,7 @@ const PhotoTalkEditor = ({
                   </div>
 
                   {form.imageUrl.map((image, index) => (
-                    <div key={image} className="relative flex-shrink-0">
+                    <div key={index} className="relative flex-shrink-0">
                       <img
                         src={image}
                         alt={`Uploaded ${index}`}

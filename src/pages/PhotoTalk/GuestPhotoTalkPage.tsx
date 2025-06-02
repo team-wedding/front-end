@@ -9,17 +9,21 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
 const GuestPhotoTalkPage = () => {
-  const { setPhotoTalkList } = usePhotoTalkStore();
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isEditorOpen, setEditorOpen] = useState(false);
   const { userId } = useParams();
+
+  const { setPhotoTalkList } = usePhotoTalkStore();
 
   const {
     items: data,
     isLoading,
     observeRef,
     isFetchingNextPage,
+    refetch,
+    fetchUntilFull,
   } = useInfinitePhototalkByQuery<PhotoTalkResponse, PhotoTalk>({
-    queryFn: (page) => getGuestPhototalks(userId!, page, 6),
+    queryFn: (page) => getGuestPhototalks(userId!, page, 10),
     extractItems: (res) => res.allCelebrationMsgs,
     getHasMore: (res) => res.currentPage < res.totalPages,
   });
@@ -37,6 +41,12 @@ const GuestPhotoTalkPage = () => {
     }
   }, [data, setPhotoTalkList]);
 
+  useEffect(() => {
+    if (isGalleryOpen) {
+      fetchUntilFull();
+    }
+  }, []);
+
   return (
     <PhotoTalkLayout title="포토톡">
       <section
@@ -49,6 +59,9 @@ const GuestPhotoTalkPage = () => {
           onOpenEditor={() => setEditorOpen(true)}
           observeRef={observeRef}
           isFetchingNextPage={isFetchingNextPage}
+          refetch={refetch}
+          isGalleryOpen={isGalleryOpen}
+          onToggleGallery={() => setIsGalleryOpen((prev) => !prev)}
         />
       </section>
 
@@ -56,6 +69,7 @@ const GuestPhotoTalkPage = () => {
         <PhotoTalkEditor
           isEditorOpen={isEditorOpen}
           closeEditor={() => setEditorOpen(false)}
+          refetch={refetch}
         />
       </section>
     </PhotoTalkLayout>

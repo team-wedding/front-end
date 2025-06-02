@@ -95,7 +95,6 @@ export const useInfinitePhototalkByQuery = <T, ItemType>({
   const observerCallback = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       if (entries[0].isIntersecting) {
-        console.log('감지됨');
         loadMore();
       }
     },

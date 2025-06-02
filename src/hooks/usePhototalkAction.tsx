@@ -26,6 +26,7 @@ export const usePhototalkAction = ({
     null,
   );
   const [actionMode, setActionMode] = useState<ActionMode | null>(null);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const { mutate: deleteByAdmin } = useDeletePhototalkByAdmin();
   const { mutate: deleteByGuest } = useDeletePhototalkByGuest();
@@ -42,14 +43,16 @@ export const usePhototalkAction = ({
     setPasswordInput('');
     setSelectedPhotoTalk(null);
     setActionMode(null);
+    setErrorMessage('');
   };
 
   const checkPassword = (phototalk: PhotoTalk): boolean => {
     if (phototalk.password !== passwordInput) {
-      alert('비밀번호가 일치하지 않습니다.');
+      setErrorMessage('비밀번호가 일치하지 않습니다.');
       return false;
     }
 
+    setErrorMessage('');
     return true;
   };
 
@@ -96,6 +99,7 @@ export const usePhototalkAction = ({
               onDelete?.(selectedPhotoTalk);
               refetch?.();
               closeModal();
+              alert(`${selectedPhotoTalk.name}님의 포토톡이 삭제되었습니다`);
             },
           },
         );
@@ -112,5 +116,7 @@ export const usePhototalkAction = ({
     setPasswordInput,
     selectedPhotoTalk,
     actionMode,
+    errorMessage,
+    setErrorMessage,
   };
 };

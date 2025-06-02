@@ -39,6 +39,8 @@ const PhotoTalkListGuest = ({
     passwordInput,
     setPasswordInput,
     actionMode,
+    errorMessage,
+    setErrorMessage,
   } = usePhototalkAction({
     mode: userMode,
     onEdit: (photoTalk) => {
@@ -78,6 +80,8 @@ const PhotoTalkListGuest = ({
         onConfirm={confirmAction}
         passwordInput={passwordInput}
         setPasswordInput={setPasswordInput}
+        errorMessage={errorMessage}
+        setErrorMessage={setErrorMessage}
       />
     </div>
   );

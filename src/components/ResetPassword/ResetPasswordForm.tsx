@@ -28,7 +28,7 @@ const ResetPasswordForm = ({ setIsModalOpen }: ResetPasswordFormProps) => {
       await resetPassword(emailInfo);
       setIsModalOpen(true);
     } catch (error) {
-      console.log('비밀번호 초기화 실패', error);
+      throw new Error(`비밀번호 초기화 실패 :${error}`);
     }
   };
 

@@ -1,7 +1,6 @@
 import ReusableModal from '@/components/common/Modal/ReusableModal';
 import PhotoTalkCommonList from '@/components/common/PhotoTalk/List/PhotoTalkCommonList';
 import { PhotoTalk } from '@/types/phototalkType';
-import { useState } from 'react';
 import { usePhototalkAction } from '@/hooks/usePhototalkAction';
 import { ACTION_MODE, USER_MODE } from '@/types/users';
 import PhotoTalkListHeader from '@/components/common/PhotoTalk/List/PhotoTalkListHeader';
@@ -13,6 +12,9 @@ interface PhotoTalkListAdminProps {
   isLoading: boolean;
   observeRef?: React.RefObject<HTMLDivElement>;
   isFetchingNextPage?: boolean;
+  refetch: () => void;
+  isGalleryOpen: boolean;
+  onToggleGallery: () => void;
 }
 
 const PhotoTalkListAdmin = ({
@@ -20,15 +22,17 @@ const PhotoTalkListAdmin = ({
   isLoading,
   observeRef,
   isFetchingNextPage,
+  refetch,
+  isGalleryOpen,
+  onToggleGallery,
 }: PhotoTalkListAdminProps) => {
-  const [isGalleryOpen, setGalleryOpen] = useState(false);
-
   const { isModalOpen, openModal, closeModal, confirmAction } =
     usePhototalkAction({
       mode: userMode,
       onDelete: (photoTalk) => {
         console.log(`${userMode}: ${photoTalk.name}님의 포토톡 삭제 완료`);
       },
+      refetch,
     });
 
   return (
@@ -36,7 +40,7 @@ const PhotoTalkListAdmin = ({
       <PhotoTalkListHeader
         userMode={userMode}
         isGalleryOpen={isGalleryOpen}
-        onToggleGallery={() => setGalleryOpen(!isGalleryOpen)}
+        onToggleGallery={onToggleGallery}
       />
 
       <PhotoTalkCommonList

@@ -23,6 +23,7 @@ export default [
       ...react.configs.recommended.rules,
       'react/react-in-jsx-scope': 'off', // JSX Transform 설정
       'react/prop-types': 'off',
+      '@typescript-eslint/no-explicit-any': 'warn',
     },
     settings: {
       react: {

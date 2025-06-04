@@ -60,7 +60,7 @@ const ChangePasswordPage = () => {
       console.log(responseData);
       navigate('/mypage/rsvp');
     } catch (error) {
-      console.log('비밀번호 변경 실패', error);
+      throw new Error(`비밀번호 변경 실패 :${error}`);
     }
   };
 

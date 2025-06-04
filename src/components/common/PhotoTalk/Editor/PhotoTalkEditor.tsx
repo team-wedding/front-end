@@ -11,7 +11,7 @@ import TipTapEditor from '@/components/common/Editor/TiptapEditor';
 interface PhotoTalkEditorProps {
   isEditorOpen: boolean;
   closeEditor: () => void;
-  refetch: () => void;
+  refetch?: () => void;
 }
 
 const PhotoTalkEditor = ({
@@ -171,7 +171,7 @@ const PhotoTalkEditor = ({
         },
         {
           onSuccess: () => {
-            refetch();
+            refetch?.();
             handleCloseEditor();
           },
         },
@@ -186,7 +186,7 @@ const PhotoTalkEditor = ({
         },
         {
           onSuccess: () => {
-            refetch();
+            refetch?.();
             handleCloseEditor();
           },
         },

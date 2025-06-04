@@ -57,11 +57,44 @@ export const useInfinitePhototalkByQuery = <T, ItemType>({
     }
   }, [enabled, hasMore, isFetching, page, queryFn, extractItems, getHasMore]);
 
+  const refetch = useCallback(async () => {
+    setIsFetching(true);
+    try {
+      const res = await queryFn(initialPage);
+      const freshItems = extractItems(res);
+      setItems(freshItems);
+      setPage(initialPage + 1);
+      setHasMore(getHasMore(res));
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsFetching(false);
+    }
+  }, [queryFn, extractItems, getHasMore, initialPage]);
+
+  const fetchUntilFull = useCallback(async () => {
+    await refetch();
+
+    let loading = true;
+    let prevLength = 0;
+
+    while (loading) {
+      const currentLength = items.length;
+
+      if (currentLength === prevLength || !hasMore) {
+        loading = false;
+        break;
+      }
+
+      prevLength = currentLength;
+      await loadMore();
+    }
+  }, [refetch, loadMore, items.length, hasMore]);
+
   // IntersectionObserver가 호출할 함수
   const observerCallback = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       if (entries[0].isIntersecting) {
-        console.log('감지됨');
         loadMore();
       }
     },
@@ -89,6 +122,8 @@ export const useInfinitePhototalkByQuery = <T, ItemType>({
     isFetchingNextPage,
     hasMore,
     observeRef,
+    refetch,
+    fetchUntilFull,
   };
 };
 

@@ -3,16 +3,20 @@ import { useInfinitePhototalkByQuery } from '@/hooks/usePhototalk';
 import { getPhototalks } from '@/services/phototalkService';
 import usePhotoTalkStore from '@/store/usePhotoTalkStore';
 import { PhotoTalk, PhotoTalkResponse } from '@/types/phototalkType';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const AdminPhotoTalkPage = () => {
+  const [isGalleryOpen, setIsGalleryOpen] = useState(false);
+
   const {
     items: data,
     isLoading,
     observeRef,
     isFetchingNextPage,
+    refetch,
+    fetchUntilFull,
   } = useInfinitePhototalkByQuery<PhotoTalkResponse, PhotoTalk>({
-    queryFn: (page) => getPhototalks(page, 6),
+    queryFn: (page) => getPhototalks(page, 10),
     extractItems: (res) => res.allCelebrationMsgs,
     getHasMore: (res) => res.currentPage < res.totalPages,
   });
@@ -24,6 +28,12 @@ const AdminPhotoTalkPage = () => {
     }
   }, [data, setPhotoTalkList]);
 
+  useEffect(() => {
+    if (isGalleryOpen) {
+      fetchUntilFull();
+    }
+  }, []);
+
   return (
     <main className="min-h-screen" aria-label="관리자 포토톡 리스트">
       <PhotoTalkListAdmin
@@ -31,6 +41,9 @@ const AdminPhotoTalkPage = () => {
         isLoading={isLoading}
         observeRef={observeRef}
         isFetchingNextPage={isFetchingNextPage}
+        refetch={refetch}
+        isGalleryOpen={isGalleryOpen}
+        onToggleGallery={() => setIsGalleryOpen((prev) => !prev)}
       />
     </main>
   );

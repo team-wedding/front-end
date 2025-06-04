@@ -32,7 +32,7 @@ Sentry.init({
   profilesSampleRate: 1.0,
 });
 
-https: createRoot(document.getElementById('root')!).render(
+createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <BrowserRouter>
       <Sentry.ErrorBoundary

@@ -44,8 +44,8 @@ const EmailLogin = () => {
       await fetchUserInfo();
       navigate('/dashboard');
     } catch (error) {
-      console.log('이메일 로그인 실패', error);
       setLoginValid(false);
+      throw new Error(`이메일 로그인 실패 :${error}`);
     }
   };
 

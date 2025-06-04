@@ -24,7 +24,7 @@ export const NaverRedirect = () => {
                 state: { errorMessage: errMsg },
               });
             } else {
-              console.error('네이버 로그인 실패', error);
+              throw new Error(`네이버 로그인 실패 :${error}`);
             }
           }
         }

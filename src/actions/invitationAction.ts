@@ -374,7 +374,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
         setWeddingDate(parsedDate);
       }
     } catch (error) {
-      console.error('에러 발생: 날짜 불러오는데 에러 발생 ', error);
+      throw new Error(`에러 발생: 날짜 불러오는데 에러 발생 :${error}`);
     }
 
     //청첩장 제목/내용

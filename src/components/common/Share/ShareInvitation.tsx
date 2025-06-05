@@ -68,9 +68,7 @@ export default function ShareInvitation({
   const [toast, setToast] = useState(false);
 
   const handleCopy = async () => {
-    await navigator.clipboard.writeText(
-      `https://woogyeol.vercel.app/${shareUrl}`,
-    );
+    await navigator.clipboard.writeText(`https://woogyeol.site/${shareUrl}`);
     setToast(true);
   };
 
@@ -95,7 +93,7 @@ export default function ShareInvitation({
         ref={canvas}
         className="hidden"
         id={'qr-code-download'}
-        value={`https://woogyeol.vercel.app/${shareUrl}`}
+        value={`https://woogyeol.site/${shareUrl}`}
       />
       <a href={pngUrl} download={'qr.png'} className="px-3 py-3" ref={aRef}>
         QR 코드 저장

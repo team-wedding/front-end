@@ -297,6 +297,15 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     useCalendarFeatureStore.getState();
 
   if (details) {
+    console.log(
+      details,
+      details.location,
+      typeof details.location,
+      details.weddingTime,
+      typeof details.weddingTime,
+      details.date,
+      typeof details.date,
+    );
     updateBrideGroom(0, 'name', details.groomName);
     updateBrideGroom(1, 'name', details.brideName);
     updateFamily(1, 'father', 'name', details.brideFatherName);

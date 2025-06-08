@@ -380,6 +380,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
           setWeddingDate(today);
         }
         const parsedDate = new Date(`${year}-${month}-${day}`);
+        console.log(parsedDate, year, month, day);
         setWeddingDate(parsedDate);
       }
     } catch (error) {

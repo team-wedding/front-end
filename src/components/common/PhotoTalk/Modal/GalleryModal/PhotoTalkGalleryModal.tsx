@@ -113,11 +113,12 @@ const PhotoTalkGalleryModal = ({
           </span>
         </aside>
 
-        <PhotoTalkGalleryModalFooter
-          userMode={userMode}
-          isExample={isExample!}
-          onDownload={downloadCurrentImage}
-        />
+        {userMode === USER_MODE.ADMIN && (
+          <PhotoTalkGalleryModalFooter
+            isExample={isExample!}
+            onDownload={downloadCurrentImage}
+          />
+        )}
       </div>
     </section>,
     document.body,

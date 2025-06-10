@@ -27,7 +27,7 @@ const EMPTY_STATE_CONFIG: Record<string, React.ReactNode> = {
     <>
       <p className="flex-center text-center leading-relaxed text-white/80 bg-black/10 text-md rounded-xl w-full h-[12rem] backdrop-blur-xl ">
         첫 번째 사진을 올리고
-        <br /> 추억을 나눠보세요
+        <br /> 추억을 나눠보세요.
       </p>
     </>
   ),

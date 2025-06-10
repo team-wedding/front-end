@@ -1,20 +1,15 @@
 import DownloadIcon from '@/components/icons/DownloadIcon';
 import TrashIcon from '@/components/icons/TrashIcon';
-import { USER_MODE, UserMode } from '@/types/users';
 
 interface PhotoTalkGalleryModalFooterProps {
-  userMode: UserMode;
   isExample: boolean;
   onDownload: () => void;
 }
 
 const PhotoTalkGalleryModalFooter = ({
-  userMode,
   isExample,
   onDownload,
 }: PhotoTalkGalleryModalFooterProps) => {
-  if (userMode == USER_MODE.GUEST && USER_MODE.PREVIEW) return null;
-
   return (
     <footer className="flex-center w-full gap-4 text-white/90 p-2 bg-black/80 dark:bg-black/60">
       <button

@@ -1,129 +1,104 @@
-import { useState, useEffect, useRef } from 'react';
+import React, { useMemo } from 'react';
 import MenuDotsIcon from '@icons/MenuDotsIcon';
-import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { PhotoTalk } from '@/types/phototalkType';
 import { UserMode } from '@/types/users';
-import PhotoTalkAction from '@/components/common/PhotoTalk/Action/PhotoTalkAction';
-import DOMPurify from 'dompurify';
+import PhotoTalkAction from '@/components/common/PhotoTalk/Card/PhotoTalkAction';
+import PhotoTalkMessage from '@/components/common/PhotoTalk/Card/PhotoTalkMessage';
+import { useDropdown } from '@/hooks/useDropDown';
+import PhotoTalkImage from '@/components/common/PhotoTalk/Card/PhotoTalkImage';
 
 interface PhotoTalkCardProps {
   userMode: UserMode;
   photoTalk: PhotoTalk;
-  isExample: boolean;
   onEdit?: () => void;
   onDelete?: () => void;
 }
 
+const usePhotoTalkImages = (photoTalk: PhotoTalk) => {
+  return useMemo(() => {
+    if (Array.isArray(photoTalk.imageUrl)) {
+      return photoTalk.imageUrl;
+    }
+    if (typeof photoTalk.imageUrl === 'string') {
+      try {
+        return JSON.parse(photoTalk.imageUrl);
+      } catch {
+        return [];
+      }
+    }
+    return [];
+  }, [photoTalk.imageUrl]);
+};
+
 const PhotoTalkCard = ({
   userMode,
   photoTalk,
-  isExample,
   onEdit,
   onDelete,
 }: PhotoTalkCardProps) => {
-  const [openDropdown, setOpenDropdown] = useState(false);
-  const dropdownRef = useRef<HTMLDivElement | null>(null);
-
-  const images = Array.isArray(photoTalk.imageUrl)
-    ? photoTalk.imageUrl
-    : typeof photoTalk.imageUrl === 'string'
-      ? JSON.parse(photoTalk.imageUrl)
-      : [];
+  const { open, setOpen, ref } = useDropdown();
+  const images = usePhotoTalkImages(photoTalk);
   const hasImage = images.length > 0;
 
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target as Node)
-      ) {
-        setOpenDropdown(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, []);
-
-  const settings = {
-    dots: true,
-    infinite: false,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
-    arrows: false,
-  };
-
-  const photoTalkMessage = DOMPurify.sanitize(photoTalk.message);
-
   return (
-    <div
-      className={`flex-center bg-surface dark:bg-surface-dark w-full rounded-2xl relative mb-3 shadow-custom ${hasImage ? `h-[220px] pb-3` : `h-fit`}`}
+    <article
+      role="group"
+      aria-label={`${photoTalk.name}님의 포토톡`}
+      className={`flex flex-col justify-center bg-surface/60 backdrop-blur-lg dark:bg-surface-dark/70 w-full rounded-xl relative mb-3 py-4 px-2 shadow-custom border dark:border-black trasition-all duration-300 ease-in-out ${hasImage ? `min-h-[14rem]` : `h-fit`} `}
     >
-      <div ref={dropdownRef}>
+      <header ref={ref} className="relative">
         <button
-          className="inline-block text-gray-500 hover:bg-gray-100 focus:ring-0 focus:outline-none rounded-lg text-sm absolute top-1 right-4"
           type="button"
-          onClick={() => setOpenDropdown(!openDropdown)}
           aria-label="메뉴 열기"
+          aria-haspopup="true"
+          className="inline-block text-gray-500 hover:bg-gray-100 focus:ring-0 focus:outline-none rounded-lg text-sm absolute -top-2 right-4 dark:hover:bg-gray-800 "
+          onClick={() => setOpen(!open)}
         >
           <MenuDotsIcon />
         </button>
 
-        {openDropdown && (
-          <div
-            className={`absolute top-8 right-5 z-10 bg-gray-100/20 backdrop-blur-xl divide-y divide-gray-100 rounded-2xl shadow-md w-[30%] px-2 py-1`}
+        {open && (
+          <nav
+            aria-label="포토톡 카드 옵션"
+            className={`absolute top-6 right-2 z-50 bg-gray-200 dark:bg-gray-800 backdrop-blur-3xl divide-y divide-gray-100 rounded-2xl shadow-md w-[9rem] px-2 py-1 `}
           >
             <PhotoTalkAction
               userMode={userMode}
               onEdit={onEdit}
               onDelete={onDelete}
             />
-          </div>
+          </nav>
+        )}
+      </header>
+
+      <main
+        className={`w-full p-2 ${hasImage ? `grid grid-cols-2 gap-1` : `flex-center`}`}
+      >
+        {hasImage && (
+          <section
+            aria-label="포토톡 사진"
+            className="w-full h-full overflow-visible"
+          >
+            <PhotoTalkImage userMode={userMode} images={images} />
+          </section>
         )}
 
-        <div
-          className={`${hasImage ? `grid grid-cols-2 place-content-center gap-4 p-4 h-[200px]` : `flex-center`}`}
+        <section
+          aria-label="포토톡 메시지"
+          className="w-full h-full flex-center"
         >
-          {hasImage && (
-            <Slider {...settings}>
-              {images.map((image: string, index: number) => (
-                <div key={index}>
-                  <img
-                    src={image}
-                    alt={`Uploaded ${index}`}
-                    className="w-full h-40 object-cover rounded-md"
-                  />
-                </div>
-              ))}
-            </Slider>
-          )}
+          <PhotoTalkMessage message={photoTalk.message} hasImage={hasImage} />
+        </section>
+      </main>
 
-          <p
-            className={`text-label dark:text-label-dark text-xs font-medium leading-relaxed break-keep w-full flex-center text-ellipsis tracking-tight ${hasImage ? 'p-3' : 'p-10'}`}
-            dangerouslySetInnerHTML={{ __html: photoTalkMessage }}
-          />
-        </div>
-
-        <footer className="flex text-gray-500 px-4 py-2 text-xs absolute bottom-1 right-1 font-light">
-          <span className="mr-2">From.</span>
-          <p>{photoTalk.name}</p>
-        </footer>
-
-        {isExample && (
-          <footer className="absolute left-0 right-0 -bottom-7 backdrop-blur-xl bg-black/20 p-2 rounded-lg shadow-sm">
-            <p className="text-center text-xs text-white font-extralight">
-              example
-            </p>
-          </footer>
-        )}
-      </div>
-    </div>
+      <footer className="flex items-center justify-end gap-1 pr-6 text-label-secondary/80  dark:text-label-secondary-dark/80 text-sm">
+        <span className="italic">from.</span>
+        <p className="font-medium">{photoTalk.name}</p>
+      </footer>
+    </article>
   );
 };
 
-export default PhotoTalkCard;
+export default React.memo(PhotoTalkCard);

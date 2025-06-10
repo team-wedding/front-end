@@ -245,10 +245,13 @@ const PhotoTalkEditor = ({
                 }}
               />
 
-              <label className="label w-full flex">
+              <label className="label w-full flex items-center gap-2">
                 사진 추가
-                <span className="ml-2 font-extralight text-label-secondary/60 dark:text-label-secondary-dark/60">
-                  사진은 최대 10장까지 추가할 수 있습니다.
+                <span className="font-extralight text-label-secondary/80 dark:text-label-secondary-dark/80 flex-center gap-1">
+                  <span>사진은 최대 10장까지 추가할 수 있습니다.</span>
+                  <span className="text-black font-light dark:text-white">
+                    ( {imageUrls.length} / 10 )
+                  </span>
                 </span>
               </label>
 

@@ -1,6 +1,6 @@
 const BackIcon = () => (
   <svg
-    className="size-5 text-icon dark:text-icon-dark"
+    className="size-5 dark:text-icon-dark"
     xmlns="http://www.w3.org/2000/svg"
     width="24"
     height="24"

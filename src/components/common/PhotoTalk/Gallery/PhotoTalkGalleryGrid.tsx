@@ -17,7 +17,7 @@ const PhotoTalkGalleryGrid = ({
 }: PhotoTalkGalleryGridProps) => {
   return (
     <>
-      <main className="grid grid-cols-3 gap-[2px] p-2 place-items-center">
+      <main className="grid grid-cols-3 gap-[2px] place-items-center">
         {images.map((url, index) => (
           <div key={index} className="relative group hover:opacity-95">
             {checkboxOptions?.show && (
@@ -26,7 +26,7 @@ const PhotoTalkGalleryGrid = ({
                   type="checkbox"
                   checked={checkboxOptions.selectedImages.includes(url)}
                   onChange={() => checkboxOptions.onSelectImage(url)}
-                  className="size-4 rounded bg-white border border-border dark:border-dark cursor-pointer z-10 shadow-inner checked:bg-black dark:checked:bg-black focus:ring-0 focus:outline-none"
+                  className="size-4 rounded bg-white/70 border-border dark:border-dark cursor-pointer z-10 shadow-inner checked:bg-black dark:checked:bg-black focus:ring-0 focus:outline-none"
                   aria-label={`이미지 ${index + 1} 선택`}
                 />
               </div>
@@ -40,8 +40,8 @@ const PhotoTalkGalleryGrid = ({
             />
 
             {isExample && (
-              <footer className="absolute left-0 right-0 bottom-0 backdrop-blur-xl bg-black/30 rounded-sm p-1">
-                <p className="text-center text-xs text-white font-extralight">
+              <footer className="absolute left-0 right-0 bottom-0 backdrop-blur-3xl rounded-b-sm dark:bg-black/40">
+                <p className="text-center text-sm text-white/80 font-extralight">
                   example
                 </p>
               </footer>

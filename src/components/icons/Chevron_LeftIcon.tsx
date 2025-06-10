@@ -1,3 +1,4 @@
+import React from 'react';
 import { IconProps } from '../../types/icons';
 
 const ChevronLeft = ({ className }: IconProps) => (
@@ -20,4 +21,4 @@ const ChevronLeft = ({ className }: IconProps) => (
   </svg>
 );
 
-export default ChevronLeft;
+export default React.memo(ChevronLeft);

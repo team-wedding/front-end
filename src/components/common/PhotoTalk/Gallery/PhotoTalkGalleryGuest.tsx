@@ -1,3 +1,4 @@
+import PhotoTalkEmptyState from '@/components/common/PhotoTalk/EmptyState/PhotoTalkEmptyState';
 import PhotoTalkGalleryGrid from '@/components/common/PhotoTalk/Gallery/PhotoTalkGalleryGrid';
 import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/Modal/GalleryModal/PhotoTalkGalleryModal';
 import { UserMode } from '@/types/users';
@@ -6,22 +7,28 @@ import { useState } from 'react';
 interface PhotoTalkGalleryGuestProps {
   userMode: UserMode;
   images: string[];
-  isEmpty: boolean;
+  isCardEmpty: boolean;
+  isImageEmpty: boolean;
 }
 
 const PhotoTalkGalleryGuest = ({
   userMode,
   images,
-  isEmpty,
+  isCardEmpty,
+  isImageEmpty,
 }: PhotoTalkGalleryGuestProps) => {
   const [isModalOpen, setModalOpen] = useState(false);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
     <>
+      {isImageEmpty && !isCardEmpty && (
+        <PhotoTalkEmptyState userMode={userMode} viewType="gallery" />
+      )}
+
       <PhotoTalkGalleryGrid
         images={images}
-        isExample={isEmpty}
+        isExample={isCardEmpty}
         onImageClick={(index) => {
           setCurrentImageIndex(index);
           setModalOpen(true);

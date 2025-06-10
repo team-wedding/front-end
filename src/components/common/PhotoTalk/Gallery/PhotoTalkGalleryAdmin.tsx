@@ -1,3 +1,4 @@
+import PhotoTalkEmptyState from '@/components/common/PhotoTalk/EmptyState/PhotoTalkEmptyState';
 import PhotoTalkGalleryGrid from '@/components/common/PhotoTalk/Gallery/PhotoTalkGalleryGrid';
 import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/Modal/GalleryModal/PhotoTalkGalleryModal';
 import DownloadIcon from '@/components/icons/DownloadIcon';
@@ -8,13 +9,15 @@ import { useState } from 'react';
 interface PhotoTalkGalleryAdminProps {
   userMode: UserMode;
   images: string[];
-  isEmpty: boolean;
+  isCardEmpty: boolean;
+  isImageEmpty: boolean;
 }
 
 const PhotoTalkGalleryAdmin = ({
   userMode,
   images,
-  isEmpty,
+  isCardEmpty,
+  isImageEmpty,
 }: PhotoTalkGalleryAdminProps) => {
   const [selectedImages, setSelectedImages] = useState<string[]>([]);
   const [isModalOpen, setModalOpen] = useState(false);
@@ -39,25 +42,27 @@ const PhotoTalkGalleryAdmin = ({
   };
 
   return (
-    <div>
-      <header className="flex justify-between items-center m-2" role="banner">
+    <>
+      <header className="flex justify-between items-center mb-2" role="banner">
         <div className="flex-center gap-1">
           <input
             type="checkbox"
             id="check-all"
-            checked={selectedImages.length === images.length}
+            checked={
+              selectedImages.length === images.length && images.length !== 0
+            }
             onChange={toggleAllImages}
-            className="size-4 rounded bg-white border border-border dark:border-dark cursor-pointer z-10 shadow-inner checked:bg-black dark:checked:bg-black focus:ring-0 focus:outline-none"
+            className="size-4 rounded bg-white/80 border border-border dark:border-white/10 cursor-pointer z-10 shadow-inner  dark:bg-black/20 checked:bg-black dark:checked:bg-black focus:ring-0 focus:outline-none"
             aria-label="이미지 전체 선택"
           />
           <label
             htmlFor="check-all"
-            className="text-xs font-light text-label dark:text-label-dark"
+            className="text-xs font-light text-label dark:text-label-dark/80 ml-1"
           >
             모두 선택하기
           </label>
 
-          <p className="text-xs font-light text-label dark:text-label-dark">
+          <p className="text-xs font-light text-label dark:text-label-dark/80">
             <span>( </span>
             <span className="font-medium">{selectedImages.length}</span>
             <span className=""> / {images.length} ) </span>
@@ -66,17 +71,21 @@ const PhotoTalkGalleryAdmin = ({
 
         <button
           onClick={handleDownloadSelected}
-          className="bg-surface dark:bg-surface-dark px-2 py-1 rounded-xl active:bg-black/30 dark:active:bg-white/30 shadow-md"
-          disabled={selectedImages.length === 0}
+          className={`bg-surface dark:bg-surface-dark px-3 py-1 rounded-full shadow active:bg-black/20 dark:active:bg-white/20 ${isCardEmpty && 'cursor-not-allowed'}`}
           aria-label="선택한 이미지 다운로드"
+          disabled={isCardEmpty}
         >
-          <DownloadIcon />
+          <DownloadIcon className="size-5" />
         </button>
       </header>
 
+      {isImageEmpty && !isCardEmpty && (
+        <PhotoTalkEmptyState userMode={userMode} viewType="gallery" />
+      )}
+
       <PhotoTalkGalleryGrid
         images={images}
-        isExample={isEmpty}
+        isExample={isCardEmpty}
         onImageClick={(index) => {
           setCurrentImageIndex(index);
           setModalOpen(true);
@@ -92,11 +101,12 @@ const PhotoTalkGalleryAdmin = ({
         <PhotoTalkGalleryModal
           userMode={userMode}
           images={images}
+          isExample={isCardEmpty}
           currentImageIndex={currentImageIndex}
           closeModal={() => setModalOpen(false)}
         />
       )}
-    </div>
+    </>
   );
 };
 

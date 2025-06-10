@@ -57,10 +57,13 @@ const PreviewInvitationPage = () => {
         <div className="fixed top-3 left-3 right-0 z-50 m-auto max-w-[520px]">
           <button
             aria-label="미리보기 닫기"
-            className="bg-surface-muted dark:surface-muted rounded-full p-1 hover:bg-surface-muted/20 dark:hover:surface-muted/20"
+            className="bg-black/20 dark:bg-white/20 rounded-full p-2 hover:bg-surface-muted/20 dark:hover:surface-muted/20"
             onClick={handleBack}
           >
-            <CloseIcon className="size-5 text-white" />
+            <CloseIcon
+              className="size-5 text-white dark:text-black"
+              strokeWidth="2"
+            />
           </button>
         </div>
       )}

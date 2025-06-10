@@ -1,17 +1,17 @@
 import { create } from 'zustand';
 
 type WeddingStore = {
-  weddingDate: Date;
+  weddingDate: Date | null;
   weddingTime: {
-    hour: number;
-    minute: number;
+    hour: number | null;
+    minute: number | null;
   };
   formattedDate: {
     year: number;
     month: number;
     day: number;
   };
-  setWeddingDate: (date: Date) => void;
+  setWeddingDate: (date: Date | null) => void;
   setWeddingTime: (hour: number, minute: number) => void;
   reset: () => void;
 };
@@ -37,9 +37,9 @@ export const useWeddingStore = create<WeddingStore>((set) => ({
     set({
       weddingDate: date,
       formattedDate: {
-        year: date.getFullYear(),
-        month: date.getMonth() + 1,
-        day: date.getDate(),
+        year: date!.getFullYear(),
+        month: date!.getMonth() + 1,
+        day: date!.getDate(),
       },
     }),
   setWeddingTime: (hour, minute) =>

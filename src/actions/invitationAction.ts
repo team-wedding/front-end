@@ -360,6 +360,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     }
 
     try {
+      console.log(details.date, typeof details.date);
       if (details.date.length === 0) {
         setWeddingDate(today);
       } else {

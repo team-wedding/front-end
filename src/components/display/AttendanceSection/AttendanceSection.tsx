@@ -8,11 +8,14 @@ import useRSVPStore from '@/store/useRSVPStore';
 import HeartIcon from '@icons/HeartIcon';
 import CalendarIcon from '@icons/CalendarIcon';
 import PinIcon from '@icons/PinIcon';
+import Toast from '@/components/common/Toast';
+
 export default function AttendanceSection() {
   const [modal, setModal] = useState(false);
   const { weddingTime, formattedDate } = useWeddingStore();
   const { address, weddingHallName, weddingHallDetail } = useAddressStore();
   const { brideGroom } = useBrideGroomStore();
+  const [toastMessage, setToastMessage] = useState('');
 
   const dateText = `날짜: ${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일  ${weddingTime.hour}시 ${weddingTime.minute === 0 ? '' : weddingTime.minute + '분'}  `;
   const { rsvpTitle, rsvpDescription } = useRSVPStore();
@@ -35,6 +38,13 @@ export default function AttendanceSection() {
         참석 의사를 사전에 전달해 주시길 부탁드립니다
       </>
     ),
+  };
+
+  const handleShowToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => {
+      setToastMessage('');
+    }, 2000);
   };
 
   return (
@@ -83,7 +93,8 @@ export default function AttendanceSection() {
           </button>
         </div>
       </div>
-      {modal && <RsvpModal setModal={setModal} />}
+      {toastMessage && <Toast message={toastMessage} />}
+      {modal && <RsvpModal setModal={setModal} showToast={handleShowToast} />}
     </>
   );
 }

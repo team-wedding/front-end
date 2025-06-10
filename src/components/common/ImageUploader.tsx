@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
 // import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import ToastPopup from './ToastPopup';
+import Toast from './Toast';
+import useToast from '@/hooks/useToast';
 
 interface ImageUploaderProps {
   // uploadedImageUrl: string;
@@ -39,19 +40,13 @@ const ImageUploader = ({
     });
   };
 
-  const [toast, setToast] = useState(false);
+  const { message, duration, showToast } = useToast();
 
   const handleImageUpload = async (file: File) => {
     const isValid = await validateImageSize(file);
 
     if (!isValid) {
-      // toast.error(`이미지 크기는 최대 ${maxWidth}x${maxHeight}px 입니다.`, {
-      //   toastId: 'image-size-error',
-      //   position: 'bottom-center',
-      //   autoClose: 2000,
-      //   hideProgressBar: true,
-      // });
-      setToast(true);
+      showToast(`이미지 크기는 최대 ${maxWidth}x${maxHeight}px 입니다.`, 3000);
       return;
     }
 
@@ -172,13 +167,7 @@ const ImageUploader = ({
           </button>
         </div>
       )}
-      {toast && (
-        <ToastPopup
-          setToast={setToast}
-          message={`이미지 크기는 최대 ${maxWidth}x${maxHeight}px 입니다.`}
-          position="bottom"
-        />
-      )}
+      {message && <Toast key={message} message={message} duration={duration} />}
     </div>
   );
 };

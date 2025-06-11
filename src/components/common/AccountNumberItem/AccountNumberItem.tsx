@@ -1,7 +1,7 @@
 // import { toast } from 'react-toastify';
 import kakaoPay from '@assets/kakao_pay_icon.png';
 import useToast from '@/hooks/useToast';
-import Toast from '../Toast';
+import Toast from '@/components/common/Toast';
 
 interface BankProps {
   bank: string;

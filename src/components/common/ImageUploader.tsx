@@ -41,7 +41,6 @@ const ImageUploader = ({
   };
 
   const { message, duration, showToast } = useToast();
-  const { message, duration, showToast } = useToast();
 
   const handleImageUpload = async (file: File) => {
     const isValid = await validateImageSize(file);

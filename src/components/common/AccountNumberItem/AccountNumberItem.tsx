@@ -19,7 +19,6 @@ export default function AccountNumberItem({
   last,
 }: BankProps) {
   const { message, showToast } = useToast();
-  const { message, showToast } = useToast();
 
   const handleAccountNumCopy = async () => {
     await navigator.clipboard.writeText(accountNumber);

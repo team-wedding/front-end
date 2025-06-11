@@ -297,15 +297,6 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     useCalendarFeatureStore.getState();
 
   if (details) {
-    console.log(
-      details,
-      details.location,
-      typeof details.location,
-      details.weddingTime,
-      typeof details.weddingTime,
-      details.date,
-      typeof details.date,
-    );
     updateBrideGroom(0, 'name', details.groomName);
     updateBrideGroom(1, 'name', details.brideName);
     updateFamily(1, 'father', 'name', details.brideFatherName);
@@ -348,10 +339,10 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     }
 
     try {
-      const weddingTime =
-        typeof details.weddingTime == 'string'
-          ? JSON.parse(details.weddingTime)
-          : Array.from(details.weddingTime);
+      const weddingTime = details.weddingTime;
+      // typeof details.weddingTime == 'string'
+      //   ? JSON.parse(details.weddingTime)
+      //   : Array.from(details.weddingTime);
       setWeddingTime(weddingTime[0], weddingTime[1]);
     } catch {
       console.log(
@@ -364,22 +355,22 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       if (details.date.length === 0) {
         setWeddingDate(today);
       } else {
-        const [year, month, day] =
-          typeof details.date == 'string'
-            ? JSON.parse(details.date)
-            : Array.from(details.date);
-        if (
-          parseInt(year) < 1000 ||
-          parseInt(month) < 1 ||
-          parseInt(month) > 12 ||
-          parseInt(day) < 1 ||
-          parseInt(day) > 31
-        ) {
-          alert(
-            `잘못된 날짜 값입니다: 날짜:${details.date}  타입:${typeof details.date}  결과:${year}-${month}-${day}`,
-          );
-          setWeddingDate(today);
-        }
+        const [year, month, day] = details.date;
+        // typeof details.date == 'string'
+        //   ? JSON.parse(details.date)
+        //   : Array.from(details.date);
+        // if (
+        //   parseInt(year) < 1000 ||
+        //   parseInt(month) < 1 ||
+        //   parseInt(month) > 12 ||
+        //   parseInt(day) < 1 ||
+        //   parseInt(day) > 31
+        // ) {
+        //   alert(
+        //     `잘못된 날짜 값입니다: 날짜:${details.date}  타입:${typeof details.date}  결과:${year}-${month}-${day}`,
+        //   );
+        //   setWeddingDate(today);
+        // }
         const parsedDate = new Date(`${year}-${month}-${day}`);
         console.log(parsedDate, year, month, day);
         setWeddingDate(parsedDate);

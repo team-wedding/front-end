@@ -41,11 +41,13 @@ const ImageUploader = ({
   };
 
   const { message, duration, showToast } = useToast();
+  const { message, duration, showToast } = useToast();
 
   const handleImageUpload = async (file: File) => {
     const isValid = await validateImageSize(file);
 
     if (!isValid) {
+      showToast(`이미지 크기는 최대 ${maxWidth}x${maxHeight}px 입니다.`, 3000);
       showToast(`이미지 크기는 최대 ${maxWidth}x${maxHeight}px 입니다.`, 3000);
       return;
     }
@@ -167,6 +169,7 @@ const ImageUploader = ({
           </button>
         </div>
       )}
+      {message && <Toast key={message} message={message} duration={duration} />}
       {message && <Toast key={message} message={message} duration={duration} />}
     </div>
   );

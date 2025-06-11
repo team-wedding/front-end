@@ -29,8 +29,8 @@ import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import ReusableModal from '@/components/common/Modal/ReusableModal';
-import CloseIcon from '@/components/icons/CloseIcon';
 import ToastPopup from '@/components/common/ToastPopup';
+import ChevronLeft from '@/components/icons/Chevron_LeftIcon';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 // const AUTO_SAVE_MODAL_DURATION_MS = 3000;
@@ -199,7 +199,7 @@ const CreateInvitationPage = () => {
                 onClick={handleCancel}
                 className="text-sm text-gray-600 mx-6 hover:text-black active:text-rose-400"
               >
-                <CloseIcon className="" />
+                <ChevronLeft />
               </HeaderButton>
             }
             rightButton={

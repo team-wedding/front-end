@@ -23,12 +23,10 @@ export default function AccountNumberItem({
   const handleAccountNumCopy = async () => {
     await navigator.clipboard.writeText(accountNumber);
     showToast('클립보드에 복사되었습니다.');
-    showToast('클립보드에 복사되었습니다.');
   };
 
   const handleKakaoNumCopy = async () => {
     await navigator.clipboard.writeText(kakaoLink!);
-    showToast('클립보드에 복사되었습니다.');
     showToast('클립보드에 복사되었습니다.');
   };
 
@@ -65,7 +63,6 @@ export default function AccountNumberItem({
         )}
       </div>
       {/* <ToastContainer /> */}
-      {message && <Toast key={message} message={message} />}
       {message && <Toast key={message} message={message} />}
     </div>
   );

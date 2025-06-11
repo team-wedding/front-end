@@ -356,6 +356,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
         setWeddingDate(today);
       } else {
         const [year, month, day] = details.date;
+        console.log(details.date, typeof details.date, year, month, day);
         // typeof details.date == 'string'
         //   ? JSON.parse(details.date)
         //   : Array.from(details.date);

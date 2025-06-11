@@ -65,7 +65,7 @@ const DashBoardPage = () => {
             <div className="column-center gap-4 w-4/5 m-auto h-60 rounded-2xl bg-surface-muted dark:bg-surface-muted-dark text-label-secondary/60 dark:text-label-secondary-dark/60 mt-4">
               <span className="text-md">아직 저장된 청첩장이 없어요.</span>
               <button
-                className="w-[8rem] p-2 text-md bg-surface-button text-label-button/60 rounded-3xl trasition-all duration-200 dark:bg-white/80 hover:bg-black/10 dark:hover:bg-white/20"
+                className="w-[8rem] p-2 text-md bg-surface-button text-label-button/60 rounded-3xl trasition-all duration-200 dark:bg-white/60 hover:bg-black/10 dark:hover:bg-white/20"
                 onClick={handleModal}
               >
                 청첩장 만들기

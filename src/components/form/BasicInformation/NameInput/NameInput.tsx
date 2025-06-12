@@ -23,9 +23,7 @@ const NameInput = () => {
         <div key={index} className="max-w-lg mx-auto px-4 py-2">
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
-              <label className="label flex gap-1">
-                {person.role} <div className="text-red-600">*</div>{' '}
-              </label>
+              <label className="label flex gap-1">{person.role}</label>
               <DebouncedInput
                 type="text"
                 ref={nameInputRef}

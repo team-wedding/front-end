@@ -61,7 +61,7 @@ const DashBoardPage = () => {
                 ))}
           </div>
 
-          {invitations.length === 0 && (
+          {!isPending && !isRefetching && invitations.length === 0 && (
             <div className="column-center gap-4 w-4/5 m-auto h-60 rounded-2xl bg-surface-muted dark:bg-surface-muted-dark text-label-secondary/60 dark:text-label-secondary-dark/60 mt-4">
               <span className="text-md">아직 저장된 청첩장이 없어요.</span>
               <button

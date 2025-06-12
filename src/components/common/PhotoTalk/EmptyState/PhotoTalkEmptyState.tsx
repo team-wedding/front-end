@@ -3,31 +3,33 @@ import { UserMode } from '@/types/users';
 const EMPTY_STATE_CONFIG: Record<string, React.ReactNode> = {
   'list-admin': (
     <>
-      {/* <div className="h-2"></div> */}
-      {/* <p className="text-center text-xs text-black/20 bg-black/0 font-light rounded-xl p-2 w-full m-auto leading-6 mb-1">
-        아직 업로드된 포토톡이 없습니다.
-      </p> */}
+      <p className="flex-center h-[14rem] w-full text-center text-md text-white/80 bg-black/10 backdrop-blur-xl rounded-xl dark:text-black/90 dark:bg-white/10">
+        아직 업로드된 포토톡이 없어요.
+      </p>
     </>
   ),
   'list-guest': (
-    <div className="flex items-center gap-1 w-full m-auto backdrop-blur-sm px-2 mt-4 mb-2">
-      <p className="text-xs font-light text-black/50 text-start leading-6">
-        첫 번째 포토톡을 작성하고 따뜻한 마음을 전해보세요
+    <>
+      <p className="flex-center h-[14rem] w-full text-md backdrop-blur-xl rounded-xl text-white/80 bg-black/10 text-center">
+        첫 번째 포토톡으로 따뜻한 마음을 전해보세요.
       </p>
-    </div>
+    </>
   ),
   'gallery-admin': (
     <>
-      {/* <div className="h-2"></div> */}
-      {/* <p className="text-center text-black/20 bg-black/0 text-xs font-light p-2 rounded-xl w-full m-auto backdrop-blur-sm leading-6">
-        아직 업로드된 이미지가 없습니다.
-      </p> */}
+      <p className="flex-center text-center text-white/80 bg-black/10 text-md rounded-xl w-full h-[12rem] backdrop-blur-xl leading-relaxed">
+        업로드된 이미지가 없습니다.
+        <br /> 하객 포토를 기다려보세요.
+      </p>
     </>
   ),
   'gallery-guest': (
-    <p className="text-start text-black/50 text-xs font-light rounded-lg w-full px-2 mt-4 m-auto backdrop-blur-lg leading-6">
-      첫 번째 사진을 올리고 추억을 나눠보세요.
-    </p>
+    <>
+      <p className="flex-center text-center leading-relaxed text-white/80 bg-black/10 text-md rounded-xl w-full h-[12rem] backdrop-blur-xl ">
+        첫 번째 사진을 올리고
+        <br /> 추억을 나눠보세요.
+      </p>
+    </>
   ),
 };
 

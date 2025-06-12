@@ -37,13 +37,12 @@ const DashBoardPage = () => {
         </div>
       </header>
 
-      {/* 메인 */}
       <main className="min-h-screen flex flex-col">
         <div className="h-12"></div>
 
         <div className="min-h-screen px-3 pb-40 flex-1">
           <div className="h-full flex-between">
-            <div className="text-sm font-extralight py-3 text-label dark:text-label-dark">
+            <div className="text-sm font-light py-3 text-label dark:text-label-dark">
               나의 청첩장 목록
             </div>
           </div>
@@ -63,10 +62,10 @@ const DashBoardPage = () => {
           </div>
 
           {!isPending && !isRefetching && invitations.length === 0 && (
-            <div className="column-center gap-4 w-3/4 m-auto h-60 rounded-2xl bg-surface-muted dark:bg-surface-muted-dark text-label-secondary/60 dark:text-label-secondary-dark/60">
+            <div className="column-center gap-4 w-4/5 m-auto h-60 rounded-2xl bg-surface-muted dark:bg-surface-muted-dark text-label-secondary/60 dark:text-label-secondary-dark/60 mt-4">
               <span className="text-md">아직 저장된 청첩장이 없어요.</span>
               <button
-                className="w-28 py-2 text-sm bg-surface-button text-label-button/60 rounded-2xl transition-all duration-200"
+                className="w-[8rem] p-2 text-md bg-surface-button text-label-button/60 rounded-3xl trasition-all duration-200 dark:bg-white/60 hover:bg-black/10 dark:hover:bg-white/20"
                 onClick={handleModal}
               >
                 청첩장 만들기
@@ -80,7 +79,6 @@ const DashBoardPage = () => {
         </div>
       </main>
 
-      {/* 메뉴 */}
       <Navbar />
     </div>
   );

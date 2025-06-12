@@ -148,5 +148,12 @@ export default {
       },
     },
   },
+  safelist: [
+    'dark',
+    'custom-dots',
+    'custom-dots li',
+    'custom-dots li button:before',
+    'custom-dots li.slick-active button:before',
+  ],
   plugins: [flowbitePlugin, tailwindTypography, flowbiteTypography],
 };

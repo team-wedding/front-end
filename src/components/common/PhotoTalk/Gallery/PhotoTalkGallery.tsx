@@ -7,13 +7,14 @@ import { USER_MODE, UserMode } from '@/types/users';
 
 interface PhotoTalkGalleryProps {
   userMode: UserMode;
+  isCardEmpty: boolean;
 }
 
-const PhotoTalkGallery = ({ userMode }: PhotoTalkGalleryProps) => {
+const PhotoTalkGallery = ({ userMode, isCardEmpty }: PhotoTalkGalleryProps) => {
   const getAllImages = usePhotoTalkStore((state) => state.getAllImages)();
-  const isImageEmpty = getAllImages.length === 0;
 
-  const images = isImageEmpty ? exampleImages : getAllImages;
+  const images = isCardEmpty ? exampleImages : getAllImages;
+  const isImageEmpty = getAllImages.length === 0;
 
   return (
     <>
@@ -21,14 +22,16 @@ const PhotoTalkGallery = ({ userMode }: PhotoTalkGalleryProps) => {
         <PhotoTalkGalleryAdmin
           userMode={userMode}
           images={images}
-          isEmpty={isImageEmpty}
+          isCardEmpty={isCardEmpty}
+          isImageEmpty={isImageEmpty}
         />
       )}
       {userMode === USER_MODE.GUEST && (
         <PhotoTalkGalleryGuest
           userMode={userMode}
           images={images}
-          isEmpty={isImageEmpty}
+          isCardEmpty={isCardEmpty}
+          isImageEmpty={isImageEmpty}
         />
       )}
       {userMode === USER_MODE.PREVIEW && (

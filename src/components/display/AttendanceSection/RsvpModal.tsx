@@ -8,9 +8,10 @@ type InfoDetail = Omit<GuestInfo, 'userId' | 'invitationId'>;
 
 interface ModalProp {
   setModal: Dispatch<SetStateAction<boolean>>;
+  showToast: (message: string) => void;
 }
 
-const RsvpModal = ({ setModal }: ModalProp) => {
+const RsvpModal = ({ setModal, showToast }: ModalProp) => {
   const [info, setInfo] = useState<InfoDetail>({
     attendance: true,
     isGroomSide: true,
@@ -40,6 +41,7 @@ const RsvpModal = ({ setModal }: ModalProp) => {
         invitationId: Number(invitationId),
       });
       console.log(response);
+      showToast('참석 의사가 성공적으로 전달되었습니다.');
       setModal(false);
     } catch (error) {
       throw new Error(`개인 참석 여부 등록 실패 :${error}`);

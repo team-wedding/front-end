@@ -1,3 +1,5 @@
+import React from 'react';
+
 type Props = {
   className: string;
   strokeWidth: number;
@@ -23,4 +25,4 @@ const TrashIcon = ({ className, strokeWidth }: Props) => (
   </svg>
 );
 
-export default TrashIcon;
+export default React.memo(TrashIcon);

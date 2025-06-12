@@ -17,7 +17,7 @@ const PhotoTalkGalleryPreview = ({
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   return (
-    <div>
+    <>
       <PhotoTalkGalleryGrid
         images={images}
         onImageClick={(index) => {
@@ -34,7 +34,7 @@ const PhotoTalkGalleryPreview = ({
           closeModal={() => setModalOpen(false)}
         />
       )}
-    </div>
+    </>
   );
 };
 

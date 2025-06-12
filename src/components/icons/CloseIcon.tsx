@@ -1,8 +1,9 @@
 type Props = {
   className: string;
+  strokeWidth?: string;
 };
 
-const CloseIcon = ({ className }: Props) => (
+const CloseIcon = ({ className, strokeWidth }: Props) => (
   <svg
     className={className}
     aria-hidden="true"
@@ -16,7 +17,7 @@ const CloseIcon = ({ className }: Props) => (
       stroke="currentColor"
       strokeLinecap="round"
       strokeLinejoin="round"
-      strokeWidth="1.5"
+      strokeWidth={strokeWidth}
       d="M6 18 17.94 6M18 18 6.06 6"
     />
   </svg>

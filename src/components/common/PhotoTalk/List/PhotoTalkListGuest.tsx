@@ -1,7 +1,6 @@
 import PasswordConfirmModal from '@/components/common/PhotoTalk/Modal/PasswordConfirmModal';
 import PhotoTalkCommonList from '@/components/common/PhotoTalk/List/PhotoTalkCommonList';
 import { PhotoTalk } from '@/types/phototalkType';
-import { useState } from 'react';
 import usePhotoTalkStore from '@/store/usePhotoTalkStore';
 import { usePhototalkAction } from '@/hooks/usePhototalkAction';
 import { ACTION_MODE, USER_MODE } from '@/types/users';
@@ -15,6 +14,9 @@ interface PhotoTalkListGuestProps {
   onOpenEditor: () => void;
   observeRef?: React.RefObject<HTMLDivElement>;
   isFetchingNextPage?: boolean;
+  refetch: () => void;
+  isGalleryOpen: boolean;
+  onToggleGallery: () => void;
 }
 
 const PhotoTalkListGuest = ({
@@ -23,9 +25,11 @@ const PhotoTalkListGuest = ({
   onOpenEditor,
   observeRef,
   isFetchingNextPage,
+  refetch,
+  isGalleryOpen,
+  onToggleGallery,
 }: PhotoTalkListGuestProps) => {
   const { setEditingPhotoTalk } = usePhotoTalkStore();
-  const [isGalleryOpen, setGalleryOpen] = useState(false);
 
   const {
     isModalOpen,
@@ -35,6 +39,8 @@ const PhotoTalkListGuest = ({
     passwordInput,
     setPasswordInput,
     actionMode,
+    errorMessage,
+    setErrorMessage,
   } = usePhototalkAction({
     mode: userMode,
     onEdit: (photoTalk) => {
@@ -44,6 +50,7 @@ const PhotoTalkListGuest = ({
     onDelete: (photoTalk) => {
       console.log(`${userMode}: ${photoTalk.name}님의 포토톡 삭제 완료`);
     },
+    refetch,
   });
 
   return (
@@ -51,7 +58,7 @@ const PhotoTalkListGuest = ({
       <PhotoTalkListHeader
         userMode={userMode}
         isGalleryOpen={isGalleryOpen}
-        onToggleGallery={() => setGalleryOpen(!isGalleryOpen)}
+        onToggleGallery={onToggleGallery}
         onOpenEditor={onOpenEditor}
       />
 
@@ -73,6 +80,8 @@ const PhotoTalkListGuest = ({
         onConfirm={confirmAction}
         passwordInput={passwordInput}
         setPasswordInput={setPasswordInput}
+        errorMessage={errorMessage}
+        setErrorMessage={setErrorMessage}
       />
     </div>
   );

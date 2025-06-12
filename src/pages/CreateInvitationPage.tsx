@@ -29,8 +29,9 @@ import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import ReusableModal from '@/components/common/Modal/ReusableModal';
-import ToastPopup from '@/components/common/ToastPopup';
 import ChevronLeft from '@/components/icons/Chevron_LeftIcon';
+import useToast from '@/hooks/useToast';
+import Toast from '@/components/common/Toast';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 // const AUTO_SAVE_MODAL_DURATION_MS = 3000;
@@ -42,9 +43,6 @@ const CreateInvitationPage = () => {
   const [steps, setSteps] = useState(1);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   const [cancelModal, setCancelModal] = useState(false);
-  const [toast, setToast] = useState(false);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  // const [autoSaveModal, setAutoSaveModal] = useState(false)
   const details = getInvitationAction();
   const { optionalItems } = useAccordionStore();
   const { invitations } = useGetInvitation(parseInt(id!));
@@ -184,9 +182,12 @@ const CreateInvitationPage = () => {
     resetAllStores();
     navigate('/dashboard');
   };
+
+  const { message, showToast } = useToast();
+
   const handleSave = async () => {
-    setToast(true);
     saveInvitationData();
+    showToast('청첩장이 성공적으로 저장되었습니다.');
   };
   return (
     <DndProvider backend={HTML5Backend}>
@@ -241,17 +242,6 @@ const CreateInvitationPage = () => {
           <ResultDisplay />
         </div>
       </div>
-      {/* <SimpleModal
-        isOpen={isModalOpen}
-        message={
-          <>
-            신랑 및 신부의 이름을
-            <br />
-            모두 입력해주세요.
-          </>
-        }
-        onConfirm={() => setIsModalOpen(false)}
-      /> */}
       <ReusableModal
         isOpen={cancelModal}
         title={'입력한 내용이 사라집니다. 계속하시겠어요?'}
@@ -259,13 +249,7 @@ const CreateInvitationPage = () => {
         onConfirm={handleConfirmCancel}
         onCancel={() => setCancelModal(false)}
       ></ReusableModal>
-      {toast && (
-        <ToastPopup
-          setToast={setToast}
-          message={`청첩장이 저장 되었습니다.`}
-          position="bottom"
-        />
-      )}
+      {message && <Toast key={message} message={message} />}
     </DndProvider>
   );
 };

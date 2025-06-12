@@ -10,7 +10,6 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
 import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
 import resetAllStores from '@/store/resetStore';
-// import SimpleModal from '@/components/common/Modal/SimpleModal';
 import ResultDisplay from '@/components/display/ResultDisplay';
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
@@ -30,8 +29,7 @@ import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import ReusableModal from '@/components/common/Modal/ReusableModal';
-// import { validateBrideGroomNames } from '@/utils/validator';
-// import useBrideGroomStore from '@/store/useBrideGroomStore';
+import ChevronLeft from '@/components/icons/Chevron_LeftIcon';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/common/Toast';
 
@@ -44,9 +42,7 @@ const CreateInvitationPage = () => {
   const { id } = useParams();
   const [steps, setSteps] = useState(1);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
-  // const [autoSaveModal, setAutoSaveModal] = useState(false)
   const details = getInvitationAction();
   const { optionalItems } = useAccordionStore();
   const { invitations } = useGetInvitation(parseInt(id!));
@@ -56,7 +52,6 @@ const CreateInvitationPage = () => {
   const { galleryFiles, grid } = useGalleryStore();
   const { invitationtitle, setInvitationTitle } = useInvitationStore();
   const { notices } = useNoticeStore();
-  // const { brideGroom } = useBrideGroomStore();
   const noticeImages = notices.flatMap((value) => {
     if (value.imgFile) {
       return value.imgFile;
@@ -85,15 +80,6 @@ const CreateInvitationPage = () => {
 
   const saveInvitationData = async () => {
     await flushAll();
-    // if (!validateBrideGroomNames(brideGroom)) {
-    //   console.log(
-    //     !validateBrideGroomNames(brideGroom),
-    //     brideGroom[0].name,
-    //     brideGroom[1].name,
-    //   );
-    //   setIsModalOpen(true);
-    //   return;
-    // } else {
     const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
       uploadToS3(
         uploadedImageFile
@@ -135,7 +121,6 @@ const CreateInvitationPage = () => {
       ],
       notices: noticeList,
     });
-    // }
   };
 
   useEffect(() => {
@@ -191,7 +176,6 @@ const CreateInvitationPage = () => {
   };
   const handleCancel = () => {
     resetAllStores();
-    navigate('/dashboard');
     setCancelModal(true);
   };
   const handleConfirmCancel = () => {
@@ -206,82 +190,67 @@ const CreateInvitationPage = () => {
     showToast('청첩장이 성공적으로 저장되었습니다.');
   };
   return (
-    <>
-      <DndProvider backend={HTML5Backend}>
-        <div className="page-container">
-          <div className="create-section relative">
-            <PageLayout
-              title={invitationtitle}
-              leftButton={
-                <HeaderButton
-                  onClick={handleCancel}
-                  className="text-sm text-gray-600 mx-6 hover:text-black active:text-rose-400"
-                >
-                  취소
-                </HeaderButton>
-              }
-              rightButton={
-                <HeaderButton
-                  onClick={handleSave}
-                  className="text-sm text-gray-600 mx-6 hover:text-black active:text-rose-400"
-                >
-                  저장
-                </HeaderButton>
-              }
-              customFooter={
-                <StepNavigation
-                  currentStep={steps}
-                  totalSteps={sliceRanges.length}
-                  onPrev={handlePrev}
-                  onNext={handleNext}
-                />
-              }
-            >
-              <Stepper
-                steps={['기본 정보 입력', '기능 선택', '테마 선택']}
+    <DndProvider backend={HTML5Backend}>
+      <div className="page-container">
+        <div className="create-section relative">
+          <PageLayout
+            title={invitationtitle}
+            leftButton={
+              <HeaderButton
+                onClick={handleCancel}
+                className="text-sm text-gray-600 mx-6 hover:text-black active:text-rose-400"
+              >
+                <ChevronLeft />
+              </HeaderButton>
+            }
+            rightButton={
+              <HeaderButton
+                onClick={handleSave}
+                className="text-sm text-gray-600 mx-6 hover:text-black active:text-rose-400"
+              >
+                저장
+              </HeaderButton>
+            }
+            customFooter={
+              <StepNavigation
                 currentStep={steps}
-                onStepClick={handleStepClick}
+                totalSteps={sliceRanges.length}
+                onPrev={handlePrev}
+                onNext={handleNext}
               />
-              <div className="bg-background/10 min-h-screen font-Pretendard">
-                <Accordion
-                  items={items}
-                  expandedIds={expandedIds}
-                  toggleExpand={toggleExpand}
-                  moveItem={moveItem}
-                />
-              </div>
-            </PageLayout>
-            <div className="absolute bottom-16 right-4">
-              <PreviewButton id={id} update={saveInvitationData} />
+            }
+          >
+            <Stepper
+              steps={['기본 정보 입력', '기능 선택', '테마 선택']}
+              currentStep={steps}
+              onStepClick={handleStepClick}
+            />
+            <div className="bg-background/10 min-h-screen font-Pretendard">
+              <Accordion
+                items={items}
+                expandedIds={expandedIds}
+                toggleExpand={toggleExpand}
+                moveItem={moveItem}
+              />
             </div>
-          </div>
-          <div className="preview-section">
-            <ResultDisplay />
+          </PageLayout>
+          <div className="absolute bottom-16 right-4">
+            <PreviewButton id={id} update={saveInvitationData} />
           </div>
         </div>
-        {/* <SimpleModal
-          isOpen={isModalOpen}
-          message={
-            <>
-              신랑 및 신부의 이름을
-              <br />
-              모두 입력해주세요.
-            </>
-          }
-          onConfirm={() => setIsModalOpen(false)}
-        /> */}
-        <ReusableModal
-          isOpen={cancelModal}
-          title={'작성 중인 내용이 삭제됩니다'}
-          confirmText={
-            '저장하지 않고 나가면 입력한 내용이 모두 삭제돼요. 계속하시겠어요?'
-          }
-          onConfirm={handleConfirmCancel}
-          onCancel={() => setCancelModal(false)}
-        ></ReusableModal>
-      </DndProvider>
+        <div className="preview-section">
+          <ResultDisplay />
+        </div>
+      </div>
+      <ReusableModal
+        isOpen={cancelModal}
+        title={'입력한 내용이 사라집니다. 계속하시겠어요?'}
+        confirmText={'확인'}
+        onConfirm={handleConfirmCancel}
+        onCancel={() => setCancelModal(false)}
+      ></ReusableModal>
       {message && <Toast key={message} message={message} />}
-    </>
+    </DndProvider>
   );
 };
 

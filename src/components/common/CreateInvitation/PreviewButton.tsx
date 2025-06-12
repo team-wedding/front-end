@@ -1,3 +1,4 @@
+import { useUserStore } from '@/store/useUserStore';
 import logo from '@assets/woogyeol/preview_light.png';
 import { useNavigate } from 'react-router';
 
@@ -8,10 +9,11 @@ interface PreviewButtonProps {
 
 const PreviewButton = ({ id, update }: PreviewButtonProps) => {
   const navigate = useNavigate();
+  const { id: userId } = useUserStore();
 
   const handleClick = () => {
     update();
-    navigate(id ? `/preview/${id}` : '/preview');
+    navigate(id ? `/preview/${userId}/${id}` : '/preview');
   };
 
   return (

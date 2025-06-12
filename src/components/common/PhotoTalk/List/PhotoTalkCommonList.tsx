@@ -2,10 +2,10 @@ import PhotoTalkCard from '@/components/common/PhotoTalk/Card/PhotoTalkCard';
 import PhotoTalkGallery from '@/components/common/PhotoTalk/Gallery/PhotoTalkGallery';
 import { PhotoTalk } from '@/types/phototalkType';
 import { UserMode } from '@/types/users';
-import { examplePhototalkCard } from '@/constants/phototalkData';
-// import PhotoTalkEmptyState from '@/components/common/PhotoTalk/EmptyState/PhotoTalkEmptyState';
+// import { examplePhototalkCard } from '@/constants/phototalkData';
 import SkeletonPhotoTalk from '../../Skeleton/SkeletonPhotoTalk';
 import SkeletonGallery from '../../Skeleton/SkeletonGallery';
+import PhotoTalkEmptyState from '@/components/common/PhotoTalk/EmptyState/PhotoTalkEmptyState';
 
 interface PhotoTalkCommonListProps {
   userMode: UserMode;
@@ -28,9 +28,9 @@ const PhotoTalkCommonList = ({
   observeRef,
   isFetchingNextPage,
 }: PhotoTalkCommonListProps) => {
-  const isCardEmpty =
-    !isPending && !isFetchingNextPage && photoTalkList.length === 0;
-  const photoTalks = isCardEmpty ? examplePhototalkCard : photoTalkList;
+  const isEmpty = photoTalkList.length === 0;
+
+  // const photoTalks = isEmpty ? examplePhototalkCard : photoTalkList;
 
   if (isPending) {
     return isGalleryOpen
@@ -42,44 +42,34 @@ const PhotoTalkCommonList = ({
         ));
   }
 
-  // if (isCardEmpty) {
-  //   return (
-  //     <PhotoTalkEmptyState
-  //       userMode={userMode}
-  //       viewType={`${isGalleryOpen ? 'gallery' : 'list'}`}
-  //     />
-  //   );
-  // }
-
   return (
-    <>
+    <div>
       {isGalleryOpen ? (
-        <PhotoTalkGallery userMode={userMode} />
+        <PhotoTalkGallery userMode={userMode} isCardEmpty={isEmpty} />
       ) : (
         <>
-          {photoTalks.map((photoTalk) => {
-            const isExampleCard =
-              isCardEmpty &&
-              examplePhototalkCard.some((ex) => ex.id === photoTalk.id);
-
-            return (
-              <PhotoTalkCard
-                key={photoTalk.id}
-                photoTalk={photoTalk}
-                isExample={isExampleCard}
-                onEdit={onEdit ? () => onEdit(photoTalk) : undefined}
-                onDelete={() => onDelete(photoTalk)}
-                userMode={userMode}
-              />
-            );
-          })}
-
-          <div ref={observeRef} className="">
-            {isFetchingNextPage && <SkeletonPhotoTalk />}
-          </div>
+          {isEmpty ? (
+            <PhotoTalkEmptyState userMode={userMode} viewType="list" />
+          ) : (
+            photoTalkList.map((photoTalk) => {
+              return (
+                <PhotoTalkCard
+                  key={photoTalk.id}
+                  photoTalk={photoTalk}
+                  onEdit={onEdit ? () => onEdit(photoTalk) : undefined}
+                  onDelete={() => onDelete(photoTalk)}
+                  userMode={userMode}
+                />
+              );
+            })
+          )}
         </>
       )}
-    </>
+
+      <section ref={observeRef}>
+        {isFetchingNextPage && <SkeletonPhotoTalk />}
+      </section>
+    </div>
   );
 };
 

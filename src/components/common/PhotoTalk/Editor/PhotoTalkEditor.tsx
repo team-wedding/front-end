@@ -6,15 +6,18 @@ import { useCreatePhototalk, useUpdatePhototalk } from '@/hooks/usePhototalk';
 import { useParams } from 'react-router';
 import { useS3Image } from '@/hooks/useS3Image';
 import TipTapEditor from '@/components/common/Editor/TiptapEditor';
+import { USER_MODE, UserMode } from '@/types/users';
 // import { useUserStore } from '@/store/useUserStore';
 
 interface PhotoTalkEditorProps {
+  userMode: UserMode;
   isEditorOpen: boolean;
   closeEditor: () => void;
-  refetch: () => void;
+  refetch?: () => void;
 }
 
 const PhotoTalkEditor = ({
+  userMode,
   isEditorOpen,
   closeEditor,
   refetch,
@@ -143,6 +146,11 @@ const PhotoTalkEditor = ({
   };
 
   const handleSubmit = async () => {
+    if (userMode === USER_MODE.PREVIEW) {
+      alert('예시 페이지입니다.');
+      return;
+    }
+
     if (!form.name || !form.message || !form.password) {
       alert('모든 필드를 입력해주세요.');
       return;
@@ -171,7 +179,7 @@ const PhotoTalkEditor = ({
         },
         {
           onSuccess: () => {
-            refetch();
+            refetch?.();
             handleCloseEditor();
           },
         },
@@ -186,7 +194,7 @@ const PhotoTalkEditor = ({
         },
         {
           onSuccess: () => {
-            refetch();
+            refetch?.();
             handleCloseEditor();
           },
         },
@@ -245,10 +253,13 @@ const PhotoTalkEditor = ({
                 }}
               />
 
-              <label className="label w-full flex">
+              <label className="label w-full flex items-center gap-2">
                 사진 추가
-                <span className="ml-2 font-extralight text-label-secondary/60 dark:text-label-secondary-dark/60">
-                  사진은 최대 10장까지 추가할 수 있습니다.
+                <span className="font-extralight text-label-secondary/80 dark:text-label-secondary-dark/80 flex-center gap-1">
+                  <span>사진은 최대 10장까지 추가할 수 있습니다.</span>
+                  <span className="text-black font-light dark:text-white">
+                    ( {imageUrls.length} / 10 )
+                  </span>
                 </span>
               </label>
 
@@ -308,7 +319,7 @@ const PhotoTalkEditor = ({
 
               <button
                 onClick={handleSubmit}
-                className={`bg-black text-white hover:bg-rose-200 p-4 rounded-2xl shrink-0 text-xs`}
+                className={`bg-black text-white hover:bg-black/90 p-4 rounded-2xl shrink-0 text-xs`}
               >
                 {editingPhotoTalk ? '편집하기' : '등록하기'}
               </button>

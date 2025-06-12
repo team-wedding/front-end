@@ -38,7 +38,7 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
           <button
             onClick={() => setModal(true)}
             aria-label="삭제하기"
-            className="absolute top-1.5 left-1.5 z-10 w-fit p-1 bg-surface-overlay/60 rounded-full text-icon-card hover:bg-surface-muted/60"
+            className="absolute top-2 left-2 z-10 w-fit bg-surface-overlay/60 rounded-full text-icon-card hover:bg-surface-muted/40"
           >
             <CircleMinusIcon />
           </button>

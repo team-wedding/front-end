@@ -1,4 +1,5 @@
 import { IconProps } from '@/types/icons';
+import React from 'react';
 
 const DownloadIcon = ({ className }: IconProps) => {
   return (
@@ -24,4 +25,4 @@ const DownloadIcon = ({ className }: IconProps) => {
   );
 };
 
-export default DownloadIcon;
+export default React.memo(DownloadIcon);

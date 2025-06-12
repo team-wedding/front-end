@@ -47,9 +47,12 @@ export const useInfinitePhototalkByQuery = <T, ItemType>({
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      setItems((prev) => [...prev, ...extractItems(res)]); // 기존 + 새 데이터 누적
+      const newItems = extractItems(res);
+      setItems((prev) => [...prev, ...newItems]); // 기존 + 새 데이터 누적
       setHasMore(getHasMore(res)); // 더 불러올 수 있는지
       setPage((prev) => prev + 1); // 다음 페이지로 증가
+
+      return newItems.length;
     } catch (error) {
       throw new Error(`포토톡 다음페이지 불러오기 실패 :${error}`);
     } finally {
@@ -76,20 +79,19 @@ export const useInfinitePhototalkByQuery = <T, ItemType>({
     await refetch();
 
     let loading = true;
-    let prevLength = 0;
 
     while (loading) {
-      const currentLength = items.length;
-
-      if (currentLength === prevLength || !hasMore) {
-        loading = false;
+      if (!hasMore) {
         break;
       }
 
-      prevLength = currentLength;
-      await loadMore();
+      const addedLength = await loadMore();
+
+      if (addedLength === 0) {
+        loading = false;
+      }
     }
-  }, [refetch, loadMore, items.length, hasMore]);
+  }, [refetch, loadMore, hasMore]);
 
   // IntersectionObserver가 호출할 함수
   const observerCallback = useCallback(

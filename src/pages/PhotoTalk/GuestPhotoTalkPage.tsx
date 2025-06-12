@@ -5,6 +5,7 @@ import { useInfinitePhototalkByQuery } from '@/hooks/usePhototalk';
 import { getGuestPhototalks } from '@/services/phototalkService';
 import usePhotoTalkStore from '@/store/usePhotoTalkStore';
 import { PhotoTalk, PhotoTalkResponse } from '@/types/phototalkType';
+import { USER_MODE } from '@/types/users';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
@@ -51,7 +52,7 @@ const GuestPhotoTalkPage = () => {
     <PhotoTalkLayout title="포토톡">
       <section
         aria-label="게스트 포토톡 리스트"
-        className="px-3 bg-gradient-to-br from-[#DEE8FF] via-[#EFE1F4] to-[#FFDBE9] rounded-t-[40px] border-t min-h-screen pb-28"
+        className="px-4 bg-gradient-to-br from-[#DEE8FF] via-[#EFE1F4] to-[#FFDBE9] rounded-t-[40px] border-t min-h-screen pb-28 pt-2"
       >
         <PhotoTalkListGuest
           photoTalkList={data || []}
@@ -67,6 +68,7 @@ const GuestPhotoTalkPage = () => {
 
       <section aria-label="포토톡 작성">
         <PhotoTalkEditor
+          userMode={USER_MODE.GUEST}
           isEditorOpen={isEditorOpen}
           closeEditor={() => setEditorOpen(false)}
           refetch={refetch}

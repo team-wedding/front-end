@@ -20,6 +20,7 @@ const AdminPhotoTalkPage = () => {
     extractItems: (res) => res.allCelebrationMsgs,
     getHasMore: (res) => res.currentPage < res.totalPages,
   });
+
   const { setPhotoTalkList } = usePhotoTalkStore();
 
   useEffect(() => {

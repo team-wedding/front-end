@@ -24,7 +24,7 @@ const Tab = ({ data, activeTab, setActiveTab }: TabProps) => {
         ))}
       </div>
 
-      <div className="flex-1 pb-40 px-3 bg-surface-muted dark:bg-surface-muted-dark">
+      <div className="flex-1 pb-40 px-4 bg-surface-muted dark:bg-surface-muted-dark">
         <div className="h-4"></div>
         {data[activeTab].content}
       </div>

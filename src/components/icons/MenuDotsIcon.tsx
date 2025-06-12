@@ -1,3 +1,5 @@
+import React from 'react';
+
 const MenuDotsIcon = () => {
   return (
     <div>
@@ -21,4 +23,4 @@ const MenuDotsIcon = () => {
   );
 };
 
-export default MenuDotsIcon;
+export default React.memo(MenuDotsIcon);

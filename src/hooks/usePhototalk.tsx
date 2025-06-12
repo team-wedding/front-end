@@ -47,9 +47,12 @@ export const useInfinitePhototalkByQuery = <T, ItemType>({
 
       await new Promise((resolve) => setTimeout(resolve, 1000));
 
-      setItems((prev) => [...prev, ...extractItems(res)]); // 기존 + 새 데이터 누적
+      const newItems = extractItems(res);
+      setItems((prev) => [...prev, ...newItems]); // 기존 + 새 데이터 누적
       setHasMore(getHasMore(res)); // 더 불러올 수 있는지
       setPage((prev) => prev + 1); // 다음 페이지로 증가
+
+      return newItems.length;
     } catch (error) {
       throw new Error(`포토톡 다음페이지 불러오기 실패 :${error}`);
     } finally {
@@ -57,11 +60,43 @@ export const useInfinitePhototalkByQuery = <T, ItemType>({
     }
   }, [enabled, hasMore, isFetching, page, queryFn, extractItems, getHasMore]);
 
+  const refetch = useCallback(async () => {
+    setIsFetching(true);
+    try {
+      const res = await queryFn(initialPage);
+      const freshItems = extractItems(res);
+      setItems(freshItems);
+      setPage(initialPage + 1);
+      setHasMore(getHasMore(res));
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setIsFetching(false);
+    }
+  }, [queryFn, extractItems, getHasMore, initialPage]);
+
+  const fetchUntilFull = useCallback(async () => {
+    await refetch();
+
+    let loading = true;
+
+    while (loading) {
+      if (!hasMore) {
+        break;
+      }
+
+      const addedLength = await loadMore();
+
+      if (addedLength === 0) {
+        loading = false;
+      }
+    }
+  }, [refetch, loadMore, hasMore]);
+
   // IntersectionObserver가 호출할 함수
   const observerCallback = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       if (entries[0].isIntersecting) {
-        console.log('감지됨');
         loadMore();
       }
     },
@@ -89,6 +124,8 @@ export const useInfinitePhototalkByQuery = <T, ItemType>({
     isFetchingNextPage,
     hasMore,
     observeRef,
+    refetch,
+    fetchUntilFull,
   };
 };
 

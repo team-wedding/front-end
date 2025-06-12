@@ -21,10 +21,17 @@ export const exampleImages = [example1, example2, example3];
 export const examplePhototalkCard: PhotoTalk[] = [
   {
     id: 0,
-    name: '무도',
+    name: 'example',
     password: '',
     message: '결혼 축하해 오늘은 너의 날이야 💃🕺',
     imageUrl: exampleImages,
+  },
+  {
+    id: 1,
+    name: 'example',
+    password: '',
+    message: '사랑스러운 커플💓 오래오래 행복하게 살아 ~~ 🥰',
+    imageUrl: [],
   },
 ];
 

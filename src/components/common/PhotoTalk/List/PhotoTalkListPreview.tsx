@@ -34,7 +34,7 @@ const PhotoTalkListPreview = ({
   };
 
   return (
-    <div>
+    <>
       <PhotoTalkListHeader
         userMode={userMode}
         isGalleryOpen={isGalleryOpen}
@@ -62,7 +62,7 @@ const PhotoTalkListPreview = ({
         passwordInput={passwordInput}
         setPasswordInput={setPasswordInput}
       />
-    </div>
+    </>
   );
 };
 

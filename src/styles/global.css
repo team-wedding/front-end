@@ -338,7 +338,75 @@
   .sub-title {
     @apply text-xs text-highlight tracking-[.4em] font-Crimson font-light opacity-60;
   }
+
+  /* .custom-dots .slick-dots {
+    @apply flex flex-nowrap overflow-x-auto justify-center gap-1 py-1 rounded-lg bg-black/20;
+  }
+
+  .custom-dots .slick-dots li {
+    @apply m-0 shrink-0;
+  } */
+
+  .custom-dots {
+    @apply bg-black/5  dark:bg-white/5;
+  }
+
+  .custom-dots li button:before {
+    @apply text-gray-500 dark:text-white/80;
+  }
+
+  .custom-dots li.slick-active button:before {
+    @apply text-black dark:text-white;
+  }
 }
 
-@layer utilities {
+.slider-custom .slick-slide > div {
+  width: 100% !important;
+  height: 100% !important;
 }
+
+.slider-custom .slick-list {
+  height: 100% !important;
+  overflow: hidden;
+}
+
+.slider-custom .slick-track {
+  display: flex !important;
+  height: 100% !important;
+}
+
+/* .custom-dots .slick-dots {
+  display: flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  justify-content: center;
+  padding: 0 8px;
+  margin: 4px auto;
+  width: fit-content;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+  width: fit-content;
+  background-color: rgba(0, 0, 0, 0.1);
+} */
+
+.custom-dots {
+  /* width: min-content !important; */
+  display: inline-flex !important;
+  flex-wrap: nowrap !important;
+  overflow-x: auto !important;
+  justify-content: center !important;
+  padding: 0 8px;
+  margin: 8px auto;
+  border-radius: 20px;
+  backdrop-filter: blur(12px);
+}
+
+.custom-dots li {
+  flex-shrink: 0;
+  margin: 0 -4px !important;
+}
+
+/* .custom-dots .slick-dots li {
+  margin: 0 -4px !important;
+  flex-shrink: 0;
+} */

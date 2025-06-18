@@ -339,10 +339,10 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     }
 
     try {
-      const weddingTime =
-        typeof details.weddingTime == 'string'
-          ? JSON.parse(details.weddingTime)
-          : Array.from(details.weddingTime);
+      const weddingTime = details.weddingTime;
+      // typeof details.weddingTime == 'string'
+      //   ? JSON.parse(details.weddingTime)
+      //   : Array.from(details.weddingTime);
       setWeddingTime(weddingTime[0], weddingTime[1]);
     } catch {
       console.log(
@@ -354,23 +354,8 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       if (details.date.length === 0) {
         setWeddingDate(today);
       } else {
-        const [year, month, day] =
-          typeof details.date == 'string'
-            ? JSON.parse(details.date)
-            : Array.from(details.date);
-        if (
-          parseInt(year) < 1000 ||
-          parseInt(month) < 1 ||
-          parseInt(month) > 12 ||
-          parseInt(day) < 1 ||
-          parseInt(day) > 31
-        ) {
-          alert(
-            `잘못된 날짜 값입니다: 날짜:${details.date}  타입:${typeof details.date}  결과:${year}-${month}-${day}`,
-          );
-          setWeddingDate(today);
-        }
-        const parsedDate = new Date(`${year}-${month}-${day}`);
+        const [year, month, day] = details.date;
+        const parsedDate = new Date(year, month - 1, day);
         setWeddingDate(parsedDate);
       }
     } catch (error) {
@@ -403,6 +388,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     setRSVPIncludePopulation(details.attendance);
 
     //갤러리;
+    console.log(details.galleries);
     const galleryData: GalleryDetail[] =
       typeof details.galleries == 'string'
         ? JSON.parse(details.galleries)

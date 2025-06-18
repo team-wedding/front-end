@@ -12,25 +12,30 @@ import {
   matchRoutes,
 } from 'react-router';
 
-Sentry.init({
-  dsn: import.meta.env.VITE_SENTRY_DSN,
-  environment: 'production',
-  sendDefaultPii: true,
-  integrations: [
-    Sentry.reactRouterV7BrowserTracingIntegration({
-      useEffect: useEffect,
-      useLocation,
-      useNavigationType,
-      createRoutesFromChildren,
-      matchRoutes,
-    }),
-    Sentry.browserTracingIntegration(),
-    Sentry.browserProfilingIntegration(),
-  ],
-  tracesSampleRate: 1.0,
-  tracePropagationTargets: [import.meta.env.VITE_CLOUDETYPE_API_URL, /^\/api/],
-  profilesSampleRate: 1.0,
-});
+if (import.meta.env.PROD) {
+  Sentry.init({
+    dsn: import.meta.env.VITE_SENTRY_DSN,
+    environment: 'production',
+    sendDefaultPii: true,
+    integrations: [
+      Sentry.reactRouterV7BrowserTracingIntegration({
+        useEffect: useEffect,
+        useLocation,
+        useNavigationType,
+        createRoutesFromChildren,
+        matchRoutes,
+      }),
+      Sentry.browserTracingIntegration(),
+      Sentry.browserProfilingIntegration(),
+    ],
+    tracesSampleRate: 1.0,
+    tracePropagationTargets: [
+      import.meta.env.VITE_CLOUDETYPE_API_URL,
+      /^\/api/,
+    ],
+    profilesSampleRate: 1.0,
+  });
+}
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

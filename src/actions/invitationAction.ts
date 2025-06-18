@@ -430,15 +430,69 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
         ? JSON.parse(details.maps)[0]
         : Array.from(details.maps)[0];
     transportToggle('canMoveMap', false);
-    setTransportSubFeature('subway', mapData.subwayContent || '');
-    setTransportSubFeature('bus', mapData.busContent || '');
-    setTransportSubFeature('car', mapData.personalCarContent || '');
-    transportToggle('navigationKakao', mapData.kakaoMap || false);
-    transportToggle('navigationNaver', mapData.naverMap || false);
-    transportToggle('navigationTmap', mapData.tMap || false);
-    transportToggle('transportationCar', mapData.personalCar || false);
-    transportToggle('transportationBus', mapData.bus || false);
-    transportToggle('transportationSubway', mapData.subway || false);
+
+    try {
+      setTransportSubFeature('subway', mapData.subwayContent || '');
+    } catch (error) {
+      console.error('subwayContent 처리 중 오류 발생:', error);
+      setTransportSubFeature('subway', '');
+    }
+
+    try {
+      setTransportSubFeature('bus', mapData.busContent || '');
+    } catch (error) {
+      console.error('busContent 처리 중 오류 발생:', error);
+      setTransportSubFeature('bus', '');
+    }
+
+    try {
+      setTransportSubFeature('car', mapData.personalCarContent || '');
+    } catch (error) {
+      console.error('personalCarContent 처리 중 오류 발생:', error);
+      setTransportSubFeature('car', '');
+    }
+
+    try {
+      transportToggle('navigationKakao', mapData.kakaoMap || false);
+    } catch (error) {
+      console.error('kakaoMap 처리 중 오류 발생:', error);
+      transportToggle('navigationKakao', false);
+    }
+
+    try {
+      transportToggle('navigationNaver', mapData.naverMap || false);
+    } catch (error) {
+      console.error('naverMap 처리 중 오류 발생:', error);
+      transportToggle('navigationNaver', false);
+    }
+
+    try {
+      transportToggle('navigationTmap', mapData.tMap || false);
+    } catch (error) {
+      console.error('tMap 처리 중 오류 발생:', error);
+      transportToggle('navigationTmap', false);
+    }
+
+    try {
+      transportToggle('transportationCar', mapData.personalCar || false);
+    } catch (error) {
+      console.error('personalCar 처리 중 오류 발생:', error);
+      transportToggle('transportationCar', false);
+    }
+
+    try {
+      transportToggle('transportationBus', mapData.bus || false);
+    } catch (error) {
+      console.error('bus 처리 중 오류 발생:', error);
+      transportToggle('transportationBus', false);
+    }
+
+    try {
+      transportToggle('transportationSubway', mapData.subway || false);
+    } catch (error) {
+      console.error('subway 처리 중 오류 발생:', error);
+      transportToggle('transportationSubway', false);
+    }
 
     const noticesData =
       typeof details.notices == 'string'

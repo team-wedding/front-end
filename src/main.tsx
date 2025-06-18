@@ -25,11 +25,11 @@ Sentry.init({
       matchRoutes,
     }),
     Sentry.browserTracingIntegration(),
-    Sentry.browserProfilingIntegration(),
+    // Sentry.browserProfilingIntegration(),
   ],
   tracesSampleRate: 1.0,
   tracePropagationTargets: [import.meta.env.VITE_CLOUDETYPE_API_URL, /^\/api/],
-  profilesSampleRate: 1.0,
+  // profilesSampleRate: 1.0,
 });
 
 createRoot(document.getElementById('root')!).render(

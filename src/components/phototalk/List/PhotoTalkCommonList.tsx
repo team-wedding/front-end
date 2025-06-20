@@ -1,11 +1,11 @@
-import PhotoTalkCard from '@/components/common/PhotoTalk/Card/PhotoTalkCard';
-import PhotoTalkGallery from '@/components/common/PhotoTalk/Gallery/PhotoTalkGallery';
+import PhotoTalkCard from '@/components/phototalk/Card/PhotoTalkCard';
+import PhotoTalkGallery from '@/components/phototalk/Gallery/PhotoTalkGallery';
 import { PhotoTalk } from '@/types/phototalkType';
 import { UserMode } from '@/types/users';
 // import { examplePhototalkCard } from '@/constants/phototalkData';
-import SkeletonPhotoTalk from '../../Skeleton/SkeletonPhotoTalk';
-import SkeletonGallery from '../../Skeleton/SkeletonGallery';
-import PhotoTalkEmptyState from '@/components/common/PhotoTalk/EmptyState/PhotoTalkEmptyState';
+import SkeletonPhotoTalk from '../../common/Skeleton/SkeletonPhotoTalk';
+import SkeletonGallery from '../../common/Skeleton/SkeletonGallery';
+import PhotoTalkEmptyState from '@/components/phototalk/EmptyState/PhotoTalkEmptyState';
 
 interface PhotoTalkCommonListProps {
   userMode: UserMode;
@@ -63,12 +63,12 @@ const PhotoTalkCommonList = ({
               );
             })
           )}
+
+          <section ref={observeRef}>
+            {isFetchingNextPage && <SkeletonPhotoTalk />}
+          </section>
         </>
       )}
-
-      <section ref={observeRef}>
-        {isFetchingNextPage && <SkeletonPhotoTalk />}
-      </section>
     </div>
   );
 };

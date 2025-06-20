@@ -1,5 +1,5 @@
-import LogoutModal from '@/components/EditMyPage/LogoutModal';
-import WithdrawModal from '@/components/EditMyPage/WithdrawModal';
+import LogoutModal from '@/components/mypage/EditMyPage/LogoutModal';
+import WithdrawModal from '@/components/mypage/EditMyPage/WithdrawModal';
 import BackIcon from '@/components/icons/BackIcon';
 import ChevronRight from '@/components/icons/Chevron_RightIcon';
 import PageLayout from '@/components/layout/PageLayout';

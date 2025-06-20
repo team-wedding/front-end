@@ -1,10 +1,12 @@
-import PasswordConfirmModal from '@/components/common/PhotoTalk/Modal/PasswordConfirmModal';
-import PhotoTalkCommonList from '@/components/common/PhotoTalk/List/PhotoTalkCommonList';
+import PasswordConfirmModal from '@/components/phototalk/Modal/PasswordConfirmModal';
+import PhotoTalkCommonList from '@/components/phototalk/List/PhotoTalkCommonList';
 import { PhotoTalk } from '@/types/phototalkType';
 import usePhotoTalkStore from '@/store/usePhotoTalkStore';
 import { usePhototalkAction } from '@/hooks/usePhototalkAction';
 import { ACTION_MODE, USER_MODE } from '@/types/users';
-import PhotoTalkListHeader from '@/components/common/PhotoTalk/List/PhotoTalkListHeader';
+import PhotoTalkListHeader from '@/components/phototalk/List/PhotoTalkListHeader';
+import useToast from '@/hooks/useToast';
+import Toast from '@/components/common/Toast';
 
 const userMode = USER_MODE.GUEST;
 
@@ -30,6 +32,7 @@ const PhotoTalkListGuest = ({
   onToggleGallery,
 }: PhotoTalkListGuestProps) => {
   const { setEditingPhotoTalk } = usePhotoTalkStore();
+  const { showToast, message } = useToast();
 
   const {
     isModalOpen,
@@ -48,7 +51,7 @@ const PhotoTalkListGuest = ({
       onOpenEditor();
     },
     onDelete: (photoTalk) => {
-      console.log(`${userMode}: ${photoTalk.name}님의 포토톡 삭제 완료`);
+      showToast(`${photoTalk.name}님의 포토톡이 삭제되었습니다.`);
     },
     refetch,
   });
@@ -83,6 +86,8 @@ const PhotoTalkListGuest = ({
         errorMessage={errorMessage}
         setErrorMessage={setErrorMessage}
       />
+
+      {message && <Toast message={message} />}
     </div>
   );
 };

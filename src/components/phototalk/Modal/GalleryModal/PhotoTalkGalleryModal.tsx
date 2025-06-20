@@ -1,4 +1,4 @@
-import PhotoTalkGalleryModalFooter from '@/components/common/PhotoTalk/Modal/GalleryModal/PhotoTalkGalleryModalFooter';
+import PhotoTalkGalleryModalFooter from '@/components/phototalk/Modal/GalleryModal/PhotoTalkGalleryModalFooter';
 import ChevronLeft from '@/components/icons/Chevron_LeftIcon';
 import ChevronRight from '@/components/icons/Chevron_RightIcon';
 import ImageIcon from '@/components/icons/ImageIcon';
@@ -22,6 +22,14 @@ const PhotoTalkGalleryModal = ({
   currentImageIndex,
   closeModal,
 }: PhotoTalkGalleryModalProps) => {
+  const modalRoot = document.getElementById('modal-root');
+
+  if (!modalRoot) {
+    throw new Error(
+      'Modal root element not found. Make sure <div id="modal-root" /> exists in index.html.',
+    );
+  }
+
   const [currentIndex, setCurrentIndex] = useState(currentImageIndex);
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -121,7 +129,7 @@ const PhotoTalkGalleryModal = ({
         )}
       </div>
     </section>,
-    document.body,
+    modalRoot,
   );
 };
 

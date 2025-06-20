@@ -4,10 +4,10 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { PhotoTalk } from '@/types/phototalkType';
 import { UserMode } from '@/types/users';
-import PhotoTalkAction from '@/components/common/PhotoTalk/Card/PhotoTalkAction';
-import PhotoTalkMessage from '@/components/common/PhotoTalk/Card/PhotoTalkMessage';
+import PhotoTalkAction from '@/components/phototalk/Card/PhotoTalkAction';
+import PhotoTalkMessage from '@/components/phototalk/Card/PhotoTalkMessage';
 import { useDropdown } from '@/hooks/useDropDown';
-import PhotoTalkImage from '@/components/common/PhotoTalk/Card/PhotoTalkImage';
+import PhotoTalkImage from '@/components/phototalk/Card/PhotoTalkImage';
 
 interface PhotoTalkCardProps {
   userMode: UserMode;

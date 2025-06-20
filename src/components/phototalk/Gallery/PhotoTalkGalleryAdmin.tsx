@@ -1,6 +1,6 @@
-import PhotoTalkEmptyState from '@/components/common/PhotoTalk/EmptyState/PhotoTalkEmptyState';
-import PhotoTalkGalleryGrid from '@/components/common/PhotoTalk/Gallery/PhotoTalkGalleryGrid';
-import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/Modal/GalleryModal/PhotoTalkGalleryModal';
+import PhotoTalkEmptyState from '@/components/phototalk/EmptyState/PhotoTalkEmptyState';
+import PhotoTalkGalleryGrid from '@/components/phototalk/Gallery/PhotoTalkGalleryGrid';
+import PhotoTalkGalleryModal from '@/components/phototalk/Modal/GalleryModal/PhotoTalkGalleryModal';
 import DownloadIcon from '@/components/icons/DownloadIcon';
 import { UserMode } from '@/types/users';
 import { downloadSelectedImages } from '@/utils/downloadUtils';

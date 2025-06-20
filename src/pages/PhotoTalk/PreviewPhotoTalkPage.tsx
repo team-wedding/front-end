@@ -1,5 +1,5 @@
-import PhotoTalkEditor from '@/components/common/PhotoTalk/Editor/PhotoTalkEditor';
-import PhotoTalkListPreview from '@/components/common/PhotoTalk/List/PhotoTalkListPreview';
+import PhotoTalkEditor from '@/components/phototalk/Editor/PhotoTalkEditor';
+import PhotoTalkListPreview from '@/components/phototalk/List/PhotoTalkListPreview';
 import PhotoTalkLayout from '@/components/layout/PhotoTalkLayout';
 import { phototalkData } from '@/constants/phototalkData';
 import { USER_MODE } from '@/types/users';

@@ -1,4 +1,4 @@
-import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/Modal/GalleryModal/PhotoTalkGalleryModal';
+import PhotoTalkGalleryModal from '@/components/phototalk/Modal/GalleryModal/PhotoTalkGalleryModal';
 import { UserMode } from '@/types/users';
 import React, { useRef, useState } from 'react';
 import Slider from 'react-slick';
@@ -66,7 +66,6 @@ const PhotoTalkImage = ({ userMode, images }: PhotoTalkImageProps) => {
               alt={`Uploaded ${index}`}
               className="w-full h-[11rem] object-cover rounded-md"
               loading={index === 0 ? 'eager' : 'lazy'}
-              fetchPriority={index === 0 ? 'high' : 'auto'}
               decoding="async"
               onMouseDown={() => (draggingRef.current = false)}
               onMouseMove={markDragging}

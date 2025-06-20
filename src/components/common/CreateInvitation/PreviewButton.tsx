@@ -11,7 +11,8 @@ const PreviewButton = ({ id, update }: PreviewButtonProps) => {
 
   const handleClick = () => {
     update();
-    navigate(id ? `/preview/${id}` : '/preview');
+    // navigate(id ? `/preview/${id}` : '/preview');
+    setPreviewModal(true);
   };
 
   return (

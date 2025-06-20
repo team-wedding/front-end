@@ -34,6 +34,8 @@ import ReusableModal from '@/components/common/Modal/ReusableModal';
 // import useBrideGroomStore from '@/store/useBrideGroomStore';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/common/Toast';
+import PreviewDisplay from '@/components/display/PreviewDisplay';
+import BackIcon from '@/components/icons/BackIcon';
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 // const AUTO_SAVE_MODAL_DURATION_MS = 3000;
@@ -46,6 +48,7 @@ const CreateInvitationPage = () => {
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
   // const [isModalOpen, setIsModalOpen] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
+  const [previewModal, setPreviewModal] = useState(false);
   // const [autoSaveModal, setAutoSaveModal] = useState(false)
   const details = getInvitationAction();
   const { optionalItems } = useAccordionStore();
@@ -205,11 +208,12 @@ const CreateInvitationPage = () => {
     saveInvitationData();
     showToast('청첩장이 성공적으로 저장되었습니다.');
   };
+
   return (
     <>
       <DndProvider backend={HTML5Backend}>
-        <div className="page-container">
-          <div className="create-section relative">
+        <div className="page-container overflow-hidden flex flex-row justify-center">
+          <div className="create-section relative w-full sm:w-1/2">
             <PageLayout
               title={invitationtitle}
               leftButton={
@@ -251,25 +255,32 @@ const CreateInvitationPage = () => {
                 />
               </div>
             </PageLayout>
-            <div className="absolute bottom-16 right-4">
-              <PreviewButton id={id} update={saveInvitationData} />
+            <div className="absolute bottom-16 right-4 sm:hidden">
+              <PreviewButton
+                id={id}
+                update={saveInvitationData}
+                setPreviewModal={setPreviewModal}
+              />
             </div>
           </div>
-          <div className="preview-section">
+          <div className="preview-section sm:h-screen w-1/2 hidden sm:block">
             <ResultDisplay />
           </div>
+          <section
+            className={`sm:hidden absolute top-0 left-0 w-full h-screen overflow-scroll backdrop-blur-lg pt-2 bg-grey-600 z-30 transform ease-in-out duration-700 ${previewModal ? 'translate-x-0`' : 'translate-x-full'}`}
+          >
+            <header className="fixed top-2 left-0 right-0 px-10 z-50 m-auto max-w-[520px] flex-between h-12 bg-transparent ">
+              <button
+                onClick={() => setPreviewModal(false)}
+                aria-label="뒤로가기"
+                className="p-3 text-black "
+              >
+                <BackIcon />
+              </button>
+            </header>
+            <PreviewDisplay />
+          </section>
         </div>
-        {/* <SimpleModal
-          isOpen={isModalOpen}
-          message={
-            <>
-              신랑 및 신부의 이름을
-              <br />
-              모두 입력해주세요.
-            </>
-          }
-          onConfirm={() => setIsModalOpen(false)}
-        /> */}
         <ReusableModal
           isOpen={cancelModal}
           title={'작성 중인 내용이 삭제됩니다'}

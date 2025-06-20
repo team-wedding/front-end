@@ -47,7 +47,7 @@ const PhotoTalkLayout = ({
       <div className="h-12"></div>
 
       <main>
-        <aside className="text-center text-sm font-light leading-loose tracking-tight text-label-secondary/80 dark:text-label-secondary-dark/80 py-8 px-6 break-keep">
+        <aside className="text-center text-sm font-light leading-loose tracking-tight text-label-secondary dark:text-label-secondary-dark py-8 px-6 break-keep">
           {asideText}
         </aside>
 

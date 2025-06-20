@@ -1,6 +1,6 @@
-import PhotoTalkCommonList from '@/components/common/PhotoTalk/List/PhotoTalkCommonList';
-import PhotoTalkListHeader from '@/components/common/PhotoTalk/List/PhotoTalkListHeader';
-import PasswordConfirmModal from '@/components/common/PhotoTalk/Modal/PasswordConfirmModal';
+import PhotoTalkCommonList from '@/components/phototalk/List/PhotoTalkCommonList';
+import PhotoTalkListHeader from '@/components/phototalk/List/PhotoTalkListHeader';
+import PasswordConfirmModal from '@/components/phototalk/Modal/PasswordConfirmModal';
 import { PhotoTalk } from '@/types/phototalkType';
 import { ACTION_MODE, ActionMode, USER_MODE } from '@/types/users';
 import { useState } from 'react';

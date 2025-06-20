@@ -1,9 +1,11 @@
 import ReusableModal from '@/components/common/Modal/ReusableModal';
-import PhotoTalkCommonList from '@/components/common/PhotoTalk/List/PhotoTalkCommonList';
+import PhotoTalkCommonList from '@/components/phototalk/List/PhotoTalkCommonList';
 import { PhotoTalk } from '@/types/phototalkType';
 import { usePhototalkAction } from '@/hooks/usePhototalkAction';
 import { ACTION_MODE, USER_MODE } from '@/types/users';
-import PhotoTalkListHeader from '@/components/common/PhotoTalk/List/PhotoTalkListHeader';
+import PhotoTalkListHeader from '@/components/phototalk/List/PhotoTalkListHeader';
+import useToast from '@/hooks/useToast';
+import Toast from '@/components/common/Toast';
 
 const userMode = USER_MODE.ADMIN;
 
@@ -26,11 +28,12 @@ const PhotoTalkListAdmin = ({
   isGalleryOpen,
   onToggleGallery,
 }: PhotoTalkListAdminProps) => {
+  const { showToast, message } = useToast();
   const { isModalOpen, openModal, closeModal, confirmAction } =
     usePhototalkAction({
       mode: userMode,
       onDelete: (photoTalk) => {
-        console.log(`${userMode}: ${photoTalk.name}님의 포토톡 삭제 완료`);
+        showToast(`${photoTalk.name}님의 포토톡이 삭제되었습니다.`);
       },
       refetch,
     });
@@ -60,6 +63,8 @@ const PhotoTalkListAdmin = ({
         title="정말 삭제하시겠습니까?"
         confirmText="삭제"
       />
+
+      {message && <Toast message={message} />}
     </>
   );
 };

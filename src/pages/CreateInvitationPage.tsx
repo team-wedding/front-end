@@ -88,15 +88,6 @@ const CreateInvitationPage = () => {
 
   const saveInvitationData = async () => {
     await flushAll();
-    // if (!validateBrideGroomNames(brideGroom)) {
-    //   console.log(
-    //     !validateBrideGroomNames(brideGroom),
-    //     brideGroom[0].name,
-    //     brideGroom[1].name,
-    //   );
-    //   setIsModalOpen(true);
-    //   return;
-    // } else {
     const [thumbnail, gallery, ...noticeS3ImageList] = await Promise.all([
       uploadToS3(
         uploadedImageFile
@@ -127,12 +118,7 @@ const CreateInvitationPage = () => {
     });
     await updateMutate({
       ...details,
-      imgUrl:
-        thumbnail.length > 0
-          ? thumbnail[0]
-          : invitations
-            ? invitations.imgUrl
-            : '',
+      imgUrl: thumbnail.length > 0 ? thumbnail[0] : '',
       galleries: [
         { images: gallery, grid, isActive: selectedOptionalFeatures.gallery },
       ],
@@ -257,7 +243,6 @@ const CreateInvitationPage = () => {
             </PageLayout>
             <div className="absolute bottom-16 right-4 sm:hidden">
               <PreviewButton
-                id={id}
                 update={saveInvitationData}
                 setPreviewModal={setPreviewModal}
               />

@@ -1,7 +1,10 @@
 import {
   AccountDetail,
+  CalendarDetail,
   GalleryDetail,
   InvitationDetail,
+  MapDetail,
+  NoticeDetail,
 } from '@/types/invitationType';
 import useBrideGroomStore from '@store/useBrideGroomStore';
 import useGreetingStore from '@store/useGreetingStore';
@@ -78,6 +81,7 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
   ],
   accounts: [
     {
+      order: 4,
       isActive: false,
       accountHolderName: '',
       bankName: '',
@@ -85,6 +89,7 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
       kakaoUrl: '',
     },
     {
+      order: 4,
       isActive: false,
       accountHolderName: '',
       bankName: '',
@@ -92,6 +97,7 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
       kakaoUrl: '',
     },
     {
+      order: 4,
       isActive: false,
       accountHolderName: '',
       bankName: '',
@@ -99,6 +105,7 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
       kakaoUrl: '',
     },
     {
+      order: 4,
       isActive: false,
       accountHolderName: '',
       bankName: '',
@@ -106,6 +113,7 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
       kakaoUrl: '',
     },
     {
+      order: 4,
       isActive: false,
       accountHolderName: '',
       bankName: '',
@@ -113,6 +121,7 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
       kakaoUrl: '',
     },
     {
+      order: 4,
       isActive: false,
       accountHolderName: '',
       bankName: '',
@@ -122,7 +131,7 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
   ],
   contacts: [
     {
-      order: 4,
+      order: 5,
       isActive: false,
       brideContact: '',
       groomContact: '',
@@ -132,10 +141,19 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
       groomMotherContact: '',
     },
   ],
-  notices: [],
+  notices: [
+    {
+      order: 6,
+      isActive: false,
+      noticeId: 0,
+      title: '',
+      content: '',
+      image: '',
+    },
+  ],
   audio: 0,
   imgUrl: '',
-  galleries: [{ isActive: false, images: [], grid: false }],
+  galleries: [{ order: 3, isActive: false, images: [], grid: false }],
 };
 
 export const getInvitationAction = (): Omit<
@@ -167,19 +185,19 @@ export const getInvitationAction = (): Omit<
   const { accounts } = useAccountStore();
   const accountList: AccountDetail[] = accounts.flatMap((item) => [
     {
-      order: findOrder('account'),
-      isActive: selectedOptionalFeatures.account,
       ...item.accountInfo,
-    },
-    {
       order: findOrder('account'),
       isActive: selectedOptionalFeatures.account,
+    },
+    {
       ...item.fatherAccountInfo,
-    },
-    {
       order: findOrder('account'),
       isActive: selectedOptionalFeatures.account,
+    },
+    {
       ...item.motherAccountInfo,
+      order: findOrder('account'),
+      isActive: selectedOptionalFeatures.account,
     },
   ]);
   const { selectedMusic } = useMusicFeatureStore();
@@ -201,21 +219,17 @@ export const getInvitationAction = (): Omit<
       weddingHallName,
       weddingHallDetail,
     ],
-
     greetingTitle: greetingTitle,
     greetingContent: greetingContent,
-
     weddingTime: [weddingTime.hour!, weddingTime.minute!],
     groomFatherName: brideGroom[0].family.father.name,
     groomMotherName: brideGroom[0].family.mother.name,
     brideFatherName: brideGroom[1].family.father.name,
     brideMotherName: brideGroom[1].family.mother.name,
-
     groomFatherAlive: !brideGroom[0].family.father.isDeceased,
     groomMotherAlive: !brideGroom[0].family.mother.isDeceased,
     brideFatherAlive: !brideGroom[1].family.father.isDeceased,
     brideMotherAlive: !brideGroom[1].family.mother.isDeceased,
-
     //FIX : BackGround Color 추가
     backgroundColor: '',
     attendanceTitle: rsvpTitle,
@@ -224,7 +238,6 @@ export const getInvitationAction = (): Omit<
     attendance: rsvpIncludePopulation,
     font: font,
     fontSize: false,
-
     calendars: [
       {
         order: findOrder('calendar')!,
@@ -339,10 +352,10 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     }
 
     try {
-      const weddingTime =
-        typeof details.weddingTime == 'string'
-          ? JSON.parse(details.weddingTime)
-          : Array.from(details.weddingTime);
+      const weddingTime = details.weddingTime;
+      // typeof details.weddingTime == 'string'
+      //   ? JSON.parse(details.weddingTime)
+      //   : Array.from(details.weddingTime);
       setWeddingTime(weddingTime[0], weddingTime[1]);
     } catch {
       console.log(
@@ -354,23 +367,8 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       if (details.date.length === 0) {
         setWeddingDate(today);
       } else {
-        const [year, month, day] =
-          typeof details.date == 'string'
-            ? JSON.parse(details.date)
-            : Array.from(details.date);
-        if (
-          parseInt(year) < 1000 ||
-          parseInt(month) < 1 ||
-          parseInt(month) > 12 ||
-          parseInt(day) < 1 ||
-          parseInt(day) > 31
-        ) {
-          alert(
-            `잘못된 날짜 값입니다: 날짜:${details.date}  타입:${typeof details.date}  결과:${year}-${month}-${day}`,
-          );
-          setWeddingDate(today);
-        }
-        const parsedDate = new Date(`${year}-${month}-${day}`);
+        const [year, month, day] = details.date;
+        const parsedDate = new Date(year, month - 1, day);
         setWeddingDate(parsedDate);
       }
     } catch (error) {
@@ -425,7 +423,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     );
 
     //Trnasportation
-    const mapData =
+    const mapData: MapDetail =
       typeof details.maps == 'string'
         ? JSON.parse(details.maps)[0]
         : Array.from(details.maps)[0];
@@ -494,21 +492,19 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       transportToggle('transportationSubway', false);
     }
 
-    const noticesData =
+    const noticesData: NoticeDetail[] =
       typeof details.notices == 'string'
         ? JSON.parse(details.notices)
         : Array.from(details.notices);
-    const modifiedNotice: Notice[] = noticesData.map(
-      (value: Notice & { id: number }) => {
-        return {
-          noticeId: value.id!,
-          title: value.title!,
-          content: value.content as string,
-          image: value.image as string,
-          imgFile: null,
-        };
-      },
-    );
+    const modifiedNotice: Notice[] = noticesData.map((value) => {
+      return {
+        noticeId: value.id!,
+        title: value.title!,
+        content: value.content as string,
+        image: value.image as string,
+        imgFile: null,
+      };
+    });
     replaceNotice(modifiedNotice);
 
     //계좌
@@ -524,7 +520,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       'fatherAccountInfo',
       'motherAccountInfo',
     ] as const;
-    const accountsData =
+    const accountsData: AccountDetail[] =
       typeof details.accounts == 'string'
         ? JSON.parse(details.accounts)
         : Array.from(details.accounts);
@@ -539,7 +535,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       });
     });
 
-    const calendarsData =
+    const calendarsData: CalendarDetail[] =
       typeof details.calendars == 'string'
         ? JSON.parse(details.calendars)
         : Array.from(details.calendars);
@@ -558,7 +554,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
 
     const features = [
       { key: 'calendar', list: calendarsData },
-      { key: 'location', list: mapData },
+      { key: 'location', list: [mapData] },
       { key: 'gallery', list: galleryData },
       { key: 'account', list: accountsData },
       { key: 'contact', list: contactInfo },

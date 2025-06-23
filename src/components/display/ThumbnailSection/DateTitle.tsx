@@ -3,7 +3,10 @@ import { useWeddingStore } from '@store/useWeddingStore';
 const DateTitle = () => {
   const { formattedDate, weddingDate } = useWeddingStore();
 
-  const currentDate = weddingDate || new Date();
+  const currentDate =
+    weddingDate instanceof Date && !isNaN(weddingDate.getTime())
+      ? weddingDate
+      : new Date();
   const dayOfWeeks = [
     'sunday',
     'monday',

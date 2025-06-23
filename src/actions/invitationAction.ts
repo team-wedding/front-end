@@ -339,10 +339,10 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     }
 
     try {
-      const weddingTime =
-        typeof details.weddingTime == 'string'
-          ? JSON.parse(details.weddingTime)
-          : Array.from(details.weddingTime);
+      const weddingTime = details.weddingTime;
+      // typeof details.weddingTime == 'string'
+      //   ? JSON.parse(details.weddingTime)
+      //   : Array.from(details.weddingTime);
       setWeddingTime(weddingTime[0], weddingTime[1]);
     } catch {
       console.log(
@@ -354,23 +354,8 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       if (details.date.length === 0) {
         setWeddingDate(today);
       } else {
-        const [year, month, day] =
-          typeof details.date == 'string'
-            ? JSON.parse(details.date)
-            : Array.from(details.date);
-        if (
-          parseInt(year) < 1000 ||
-          parseInt(month) < 1 ||
-          parseInt(month) > 12 ||
-          parseInt(day) < 1 ||
-          parseInt(day) > 31
-        ) {
-          alert(
-            `잘못된 날짜 값입니다: 날짜:${details.date}  타입:${typeof details.date}  결과:${year}-${month}-${day}`,
-          );
-          setWeddingDate(today);
-        }
-        const parsedDate = new Date(`${year}-${month}-${day}`);
+        const [year, month, day] = details.date;
+        const parsedDate = new Date(year, month - 1, day);
         setWeddingDate(parsedDate);
       }
     } catch (error) {
@@ -403,6 +388,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     setRSVPIncludePopulation(details.attendance);
 
     //갤러리;
+    console.log(details.galleries);
     const galleryData: GalleryDetail[] =
       typeof details.galleries == 'string'
         ? JSON.parse(details.galleries)
@@ -430,15 +416,69 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
         ? JSON.parse(details.maps)[0]
         : Array.from(details.maps)[0];
     transportToggle('canMoveMap', false);
-    setTransportSubFeature('subway', mapData.subwayContent || '');
-    setTransportSubFeature('bus', mapData.busContent || '');
-    setTransportSubFeature('car', mapData.personalCarContent || '');
-    transportToggle('navigationKakao', mapData.kakaoMap || false);
-    transportToggle('navigationNaver', mapData.naverMap || false);
-    transportToggle('navigationTmap', mapData.tMap || false);
-    transportToggle('transportationCar', mapData.personalCar || false);
-    transportToggle('transportationBus', mapData.bus || false);
-    transportToggle('transportationSubway', mapData.subway || false);
+
+    try {
+      setTransportSubFeature('subway', mapData.subwayContent || '');
+    } catch (error) {
+      console.error('subwayContent 처리 중 오류 발생:', error);
+      setTransportSubFeature('subway', '');
+    }
+
+    try {
+      setTransportSubFeature('bus', mapData.busContent || '');
+    } catch (error) {
+      console.error('busContent 처리 중 오류 발생:', error);
+      setTransportSubFeature('bus', '');
+    }
+
+    try {
+      setTransportSubFeature('car', mapData.personalCarContent || '');
+    } catch (error) {
+      console.error('personalCarContent 처리 중 오류 발생:', error);
+      setTransportSubFeature('car', '');
+    }
+
+    try {
+      transportToggle('navigationKakao', mapData.kakaoMap || false);
+    } catch (error) {
+      console.error('kakaoMap 처리 중 오류 발생:', error);
+      transportToggle('navigationKakao', false);
+    }
+
+    try {
+      transportToggle('navigationNaver', mapData.naverMap || false);
+    } catch (error) {
+      console.error('naverMap 처리 중 오류 발생:', error);
+      transportToggle('navigationNaver', false);
+    }
+
+    try {
+      transportToggle('navigationTmap', mapData.tMap || false);
+    } catch (error) {
+      console.error('tMap 처리 중 오류 발생:', error);
+      transportToggle('navigationTmap', false);
+    }
+
+    try {
+      transportToggle('transportationCar', mapData.personalCar || false);
+    } catch (error) {
+      console.error('personalCar 처리 중 오류 발생:', error);
+      transportToggle('transportationCar', false);
+    }
+
+    try {
+      transportToggle('transportationBus', mapData.bus || false);
+    } catch (error) {
+      console.error('bus 처리 중 오류 발생:', error);
+      transportToggle('transportationBus', false);
+    }
+
+    try {
+      transportToggle('transportationSubway', mapData.subway || false);
+    } catch (error) {
+      console.error('subway 처리 중 오류 발생:', error);
+      transportToggle('transportationSubway', false);
+    }
 
     const noticesData =
       typeof details.notices == 'string'

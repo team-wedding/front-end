@@ -10,7 +10,6 @@ import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
 import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
 import resetAllStores from '@/store/resetStore';
-// import SimpleModal from '@/components/common/Modal/SimpleModal';
 import ResultDisplay from '@/components/display/ResultDisplay';
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
@@ -30,8 +29,7 @@ import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import ReusableModal from '@/components/common/Modal/ReusableModal';
-// import { validateBrideGroomNames } from '@/utils/validator';
-// import useBrideGroomStore from '@/store/useBrideGroomStore';
+import ChevronLeft from '@/components/icons/Chevron_LeftIcon';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/common/Toast';
 import PreviewDisplay from '@/components/display/PreviewDisplay';
@@ -46,10 +44,8 @@ const CreateInvitationPage = () => {
   const { id } = useParams();
   const [steps, setSteps] = useState(1);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
   const [previewModal, setPreviewModal] = useState(false);
-  // const [autoSaveModal, setAutoSaveModal] = useState(false)
   const details = getInvitationAction();
   const { optionalItems } = useAccordionStore();
   const { invitations } = useGetInvitation(parseInt(id!));
@@ -59,7 +55,6 @@ const CreateInvitationPage = () => {
   const { galleryFiles, grid } = useGalleryStore();
   const { invitationtitle, setInvitationTitle } = useInvitationStore();
   const { notices } = useNoticeStore();
-  // const { brideGroom } = useBrideGroomStore();
   const noticeImages = notices.flatMap((value) => {
     if (value.imgFile) {
       return value.imgFile;
@@ -124,7 +119,6 @@ const CreateInvitationPage = () => {
       ],
       notices: noticeList,
     });
-    // }
   };
 
   useEffect(() => {
@@ -180,7 +174,6 @@ const CreateInvitationPage = () => {
   };
   const handleCancel = () => {
     resetAllStores();
-    navigate('/dashboard');
     setCancelModal(true);
   };
   const handleConfirmCancel = () => {
@@ -277,7 +270,7 @@ const CreateInvitationPage = () => {
         ></ReusableModal>
       </DndProvider>
       {message && <Toast key={message} message={message} />}
-    </>
+    </DndProvider>
   );
 };
 

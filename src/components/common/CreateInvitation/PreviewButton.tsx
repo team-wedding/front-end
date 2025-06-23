@@ -1,4 +1,3 @@
-import { useUserStore } from '@/store/useUserStore';
 import logo from '@assets/woogyeol/preview_light.png';
 import { Dispatch, SetStateAction } from 'react';
 

@@ -1,7 +1,7 @@
 import PhotoTalkCard from '@/components/common/PhotoTalk/Card/PhotoTalkCard';
 import PhotoTalkGallery from '@/components/common/PhotoTalk/Gallery/PhotoTalkGallery';
-import { PhotoTalk } from '@/types/phototalkType';
-import { UserMode } from '@/types/users';
+import { PhotoTalk } from '@/types/phototalkTypes';
+import { UserMode } from '@/types/photoTalkUserTypes';
 // import { examplePhototalkCard } from '@/constants/phototalkData';
 import SkeletonPhotoTalk from '../../Skeleton/SkeletonPhotoTalk';
 import SkeletonGallery from '../../Skeleton/SkeletonGallery';

@@ -6,7 +6,8 @@ import { useCreatePhototalk, useUpdatePhototalk } from '@/hooks/usePhototalk';
 import { useParams } from 'react-router';
 import { useS3Image } from '@/hooks/useS3Image';
 import TipTapEditor from '@/components/common/Editor/TiptapEditor';
-import { USER_MODE, UserMode } from '@/types/users';
+import { UserMode } from '@/types/photoTalkUserTypes';
+import { USER_MODE } from '@/constants/photoTalkUserConstants';
 // import { useUserStore } from '@/store/useUserStore';
 
 interface PhotoTalkEditorProps {

@@ -24,7 +24,7 @@ import {
   InvitationDetail,
   NoticeDetail,
   S3UploadRequest,
-} from '@/types/invitationType';
+} from '@/types/invitationTypes';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';

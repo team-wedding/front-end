@@ -2,7 +2,7 @@ import PhotoTalkListAdmin from '@/components/common/PhotoTalk/List/PhotoTalkList
 import { useInfinitePhototalkByQuery } from '@/hooks/usePhototalk';
 import { getPhototalks } from '@/services/phototalkService';
 import usePhotoTalkStore from '@/store/usePhotoTalkStore';
-import { PhotoTalk, PhotoTalkResponse } from '@/types/phototalkType';
+import { PhotoTalk, PhotoTalkResponse } from '@/types/phototalkTypes';
 import { useEffect, useState } from 'react';
 
 const AdminPhotoTalkPage = () => {

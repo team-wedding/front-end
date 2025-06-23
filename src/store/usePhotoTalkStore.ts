@@ -1,4 +1,4 @@
-import { PhotoTalk } from '@/types/phototalkType';
+import { PhotoTalk } from '@/types/phototalkTypes';
 import { create } from 'zustand';
 
 interface PhotoTalkState {

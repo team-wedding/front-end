@@ -1,6 +1,6 @@
 import { deleteS3ImageUrl, getS3ImageUrl } from '@/services/imageService';
 import useImageStore from '@/store/useImageStore';
-import { S3UploadRequest, S3UploadResponse } from '@/types/invitationType';
+import { S3UploadRequest, S3UploadResponse } from '@/types/invitationTypes';
 import { useMutation } from '@tanstack/react-query';
 
 export const useS3Image = () => {

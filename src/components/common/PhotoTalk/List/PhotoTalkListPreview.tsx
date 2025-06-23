@@ -1,8 +1,9 @@
 import PhotoTalkCommonList from '@/components/common/PhotoTalk/List/PhotoTalkCommonList';
 import PhotoTalkListHeader from '@/components/common/PhotoTalk/List/PhotoTalkListHeader';
 import PasswordConfirmModal from '@/components/common/PhotoTalk/Modal/PasswordConfirmModal';
-import { PhotoTalk } from '@/types/phototalkType';
-import { ACTION_MODE, ActionMode, USER_MODE } from '@/types/users';
+import { ACTION_MODE, USER_MODE } from '@/constants/photoTalkUserConstants';
+import { PhotoTalk } from '@/types/phototalkTypes';
+import { ActionMode } from '@/types/photoTalkUserTypes';
 import { useState } from 'react';
 
 const userMode = USER_MODE.PREVIEW;

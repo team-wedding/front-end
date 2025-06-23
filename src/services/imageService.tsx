@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { API } from '../utils/config';
-import { S3UploadRequest, S3UploadResponse } from '@/types/invitationType';
+import { S3UploadRequest, S3UploadResponse } from '@/types/invitationTypes';
 
 export const getS3ImageUrl = async ({
   imageFiles,

@@ -2,7 +2,8 @@ import PhotoTalkGalleryModalFooter from '@/components/common/PhotoTalk/Modal/Gal
 import ChevronLeft from '@/components/icons/Chevron_LeftIcon';
 import ChevronRight from '@/components/icons/Chevron_RightIcon';
 import ImageIcon from '@/components/icons/ImageIcon';
-import { USER_MODE, UserMode } from '@/types/users';
+import { USER_MODE } from '@/constants/photoTalkUserConstants';
+import { UserMode } from '@/types/photoTalkUserTypes';
 import { downloadImage } from '@/utils/downloadUtils';
 import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';

@@ -1,7 +1,7 @@
 import PhotoTalkEmptyState from '@/components/common/PhotoTalk/EmptyState/PhotoTalkEmptyState';
 import PhotoTalkGalleryGrid from '@/components/common/PhotoTalk/Gallery/PhotoTalkGalleryGrid';
 import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/Modal/GalleryModal/PhotoTalkGalleryModal';
-import { UserMode } from '@/types/users';
+import { UserMode } from '@/types/photoTalkUserTypes';
 import { useState } from 'react';
 
 interface PhotoTalkGalleryGuestProps {

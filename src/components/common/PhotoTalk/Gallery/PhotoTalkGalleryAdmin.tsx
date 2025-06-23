@@ -2,7 +2,7 @@ import PhotoTalkEmptyState from '@/components/common/PhotoTalk/EmptyState/PhotoT
 import PhotoTalkGalleryGrid from '@/components/common/PhotoTalk/Gallery/PhotoTalkGalleryGrid';
 import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/Modal/GalleryModal/PhotoTalkGalleryModal';
 import DownloadIcon from '@/components/icons/DownloadIcon';
-import { UserMode } from '@/types/users';
+import { UserMode } from '@/types/photoTalkUserTypes';
 import { downloadSelectedImages } from '@/utils/downloadUtils';
 import { useState } from 'react';
 

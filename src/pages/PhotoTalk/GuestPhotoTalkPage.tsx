@@ -1,11 +1,11 @@
 import PhotoTalkEditor from '@/components/common/PhotoTalk/Editor/PhotoTalkEditor';
 import PhotoTalkListGuest from '@/components/common/PhotoTalk/List/PhotoTalkListGuest';
 import PhotoTalkLayout from '@/components/layout/PhotoTalkLayout';
+import { USER_MODE } from '@/constants/photoTalkUserConstants';
 import { useInfinitePhototalkByQuery } from '@/hooks/usePhototalk';
 import { getGuestPhototalks } from '@/services/phototalkService';
 import usePhotoTalkStore from '@/store/usePhotoTalkStore';
-import { PhotoTalk, PhotoTalkResponse } from '@/types/phototalkType';
-import { USER_MODE } from '@/types/users';
+import { PhotoTalk, PhotoTalkResponse } from '@/types/phototalkTypes';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 

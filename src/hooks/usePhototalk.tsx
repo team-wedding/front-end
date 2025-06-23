@@ -7,7 +7,7 @@ import {
   postPhototalk,
   updatePhototalk,
 } from '@/services/phototalkService';
-import { PhotoTalk } from '@/types/phototalkType';
+import { PhotoTalk } from '@/types/phototalkTypes';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useRef, useState } from 'react';
 

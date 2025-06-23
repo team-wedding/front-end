@@ -1,19 +1,15 @@
-import { useUserStore } from '@/store/useUserStore';
 import logo from '@assets/woogyeol/preview_light.png';
-import { useNavigate } from 'react-router';
+import { Dispatch, SetStateAction } from 'react';
 
 interface PreviewButtonProps {
-  id?: string;
   update: () => void;
+  setPreviewModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const PreviewButton = ({ id, update }: PreviewButtonProps) => {
-  const navigate = useNavigate();
-  const { id: userId } = useUserStore();
-
+const PreviewButton = ({ update, setPreviewModal }: PreviewButtonProps) => {
   const handleClick = () => {
     update();
-    navigate(id ? `/preview/${userId}/${id}` : '/preview');
+    setPreviewModal(true);
   };
 
   return (

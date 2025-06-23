@@ -90,9 +90,9 @@ const ImageUploader = ({
   };
 
   const handleImageDelete = () => {
-    setUploadedImage('');
     setImageFile(null);
     setImageUrl('');
+    setUploadedImage('');
     if (fileInputRef.current) {
       fileInputRef.current.value = '';
     }

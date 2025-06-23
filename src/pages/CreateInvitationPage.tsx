@@ -29,7 +29,6 @@ import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
 import ReusableModal from '@/components/common/Modal/ReusableModal';
-import ChevronLeft from '@/components/icons/Chevron_LeftIcon';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/common/Toast';
 import PreviewDisplay from '@/components/display/PreviewDisplay';
@@ -270,7 +269,7 @@ const CreateInvitationPage = () => {
         ></ReusableModal>
       </DndProvider>
       {message && <Toast key={message} message={message} />}
-    </DndProvider>
+    </>
   );
 };
 

@@ -50,7 +50,7 @@ const CreateInvitationPage = () => {
   const { invitations } = useGetInvitation(parseInt(id!));
   const { items, initializeItems, moveItem } = useAccordionStore();
   const { selectedOptionalFeatures } = useOptionalFeatureStore();
-  const { uploadedImageFile } = useImageStore();
+  const { uploadedImageFile, uploadedImageUrl } = useImageStore();
   const { galleryFiles, grid } = useGalleryStore();
   const { invitationtitle, setInvitationTitle } = useInvitationStore();
   const { notices } = useNoticeStore();
@@ -112,7 +112,7 @@ const CreateInvitationPage = () => {
     });
     await updateMutate({
       ...details,
-      imgUrl: thumbnail.length > 0 ? thumbnail[0] : '',
+      imgUrl: thumbnail.length > 0 ? thumbnail[0] : uploadedImageUrl,
       galleries: [
         { images: gallery, grid, isActive: selectedOptionalFeatures.gallery },
       ],

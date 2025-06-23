@@ -30,13 +30,6 @@ const AccountRow = ({
           selectedBank={accountInfo?.bankName}
           onSelect={(bankName) => onUpdate('bankName', bankName)}
         />
-        {/* <input
-          type="text"
-          placeholder="예금주"
-          value={accountInfo?.accountHolderName}
-          onChange={(e) => onUpdate('accountHolderName', e.target.value)}
-          className="formInput"
-        /> */}
         <DebouncedInput
           type="text"
           ref={accountNameInputRef}
@@ -50,13 +43,6 @@ const AccountRow = ({
       {/*계좌번호*/}
       <div className="flex items-center gap-2">
         <label className="label"></label>
-        {/* <input
-          type="text"
-          placeholder="계좌번호"
-          value={accountInfo?.accountNumber}
-          onChange={(e) => onUpdate('accountNumber', e.target.value)}
-          className="formInput"
-        /> */}
         <DebouncedInput
           type="text"
           ref={accountNumberInputRef}
@@ -70,13 +56,6 @@ const AccountRow = ({
       {/*카카오 송금 QR 링크*/}
       <div className="flex items-center gap-2">
         <label className="label"></label>
-        {/* <input
-          type="text"
-          placeholder="카카오 송금 QR 링크"
-          value={accountInfo?.kakaoUrl}
-          onChange={(e) => onUpdate('kakaoUrl', e.target.value)}
-          className="formInput"
-        /> */}
         <DebouncedInput
           type="text"
           ref={accountKakaoInputRef}

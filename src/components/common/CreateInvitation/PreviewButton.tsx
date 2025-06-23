@@ -1,17 +1,14 @@
 import logo from '@assets/woogyeol/preview_light.png';
-import { useNavigate } from 'react-router';
+import { Dispatch, SetStateAction } from 'react';
 
 interface PreviewButtonProps {
-  id?: string;
   update: () => void;
+  setPreviewModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const PreviewButton = ({ id, update }: PreviewButtonProps) => {
-  const navigate = useNavigate();
-
+const PreviewButton = ({ update, setPreviewModal }: PreviewButtonProps) => {
   const handleClick = () => {
     update();
-    // navigate(id ? `/preview/${id}` : '/preview');
     setPreviewModal(true);
   };
 

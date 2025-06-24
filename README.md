@@ -12,7 +12,7 @@
 
 - [🔗 서비스 링크](https://woogyeol.site/)
 - [📚 노션](https://www.notion.so/19e9673ec79780a3b17bed3825f5fa8c?pvs=21)
-- [🎨 피그마](https://file+.vscode-resource.vscode-cdn.net/Users/isoyeon/Desktop/woo-gyeol/front-end/README.md)
+- [🎨 피그마](https://www.figma.com/design/Amij7OxsmnsATHkYM5PO52/Woo-Gyeol?node-id=3-62788&t=WoMAwjY7bvNK1etC-1)
 
 <br/>
 

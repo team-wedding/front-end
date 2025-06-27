@@ -11,7 +11,9 @@
     "lint:fix": "npx eslint . --fix",
     "format": "npx prettier --write .",
     "postinstall": "npm install rollup @rollup/plugin-node-resolve @rollup/plugin-commonjs",
-    "prepare": "husky"
+    "prepare": "husky",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -92,6 +94,7 @@
     "kakao.maps.d.ts": "^0.1.40",
     "postcss": "^8.4.49",
     "prettier": "^3.4.2",
+    "storybook": "^9.0.12",
     "tailwindcss": "^3.4.16",
     "typescript": "~5.6.2",
     "vite": "^6.0.1",

@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import CloseIcon from '@icons/CloseIcon';
-import { GuestInfo } from '@/types/GuestType';
 import { postAttendance } from '@/services/statsService';
 import { useParams } from 'react-router';
+import { GuestInfo } from '@/types/guestTypes';
 
 type InfoDetail = Omit<GuestInfo, 'userId' | 'invitationId'>;
 

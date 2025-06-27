@@ -5,7 +5,7 @@ import {
   InvitationDetail,
   MapDetail,
   NoticeDetail,
-} from '@/types/invitationType';
+} from '@/types/invitationTypes';
 import useBrideGroomStore from '@store/useBrideGroomStore';
 import useGreetingStore from '@store/useGreetingStore';
 import useThemeStore from '@store/useThemeStore';
@@ -353,9 +353,6 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
 
     try {
       const weddingTime = details.weddingTime;
-      // typeof details.weddingTime == 'string'
-      //   ? JSON.parse(details.weddingTime)
-      //   : Array.from(details.weddingTime);
       setWeddingTime(weddingTime[0], weddingTime[1]);
     } catch {
       console.log(

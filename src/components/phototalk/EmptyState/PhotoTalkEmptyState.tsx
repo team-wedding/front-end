@@ -1,4 +1,4 @@
-import { UserMode } from '@/types/users';
+import { UserMode } from '@/types/photoTalkUserTypes';
 
 const EMPTY_STATE_CONFIG: Record<string, React.ReactNode> = {
   'list-admin': (

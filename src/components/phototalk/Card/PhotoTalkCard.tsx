@@ -2,12 +2,12 @@ import React, { useMemo } from 'react';
 import MenuDotsIcon from '@icons/MenuDotsIcon';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { PhotoTalk } from '@/types/phototalkType';
-import { UserMode } from '@/types/users';
 import PhotoTalkAction from '@/components/phototalk/Card/PhotoTalkAction';
 import PhotoTalkMessage from '@/components/phototalk/Card/PhotoTalkMessage';
 import { useDropdown } from '@/hooks/useDropDown';
 import PhotoTalkImage from '@/components/phototalk/Card/PhotoTalkImage';
+import { UserMode } from '@/types/photoTalkUserTypes';
+import { PhotoTalk } from '@/types/phototalkTypes';
 
 interface PhotoTalkCardProps {
   userMode: UserMode;

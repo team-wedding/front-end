@@ -1,4 +1,5 @@
-import { USER_MODE, UserMode } from '@/types/users';
+import { USER_MODE } from '@/constants/photoTalkUserConstants';
+import { UserMode } from '@/types/photoTalkUserTypes';
 
 interface PhotoTalkListHeaderProps {
   userMode: UserMode;

@@ -1,4 +1,5 @@
-import { ACTION_MODE, ActionMode } from '@/types/users';
+import { ACTION_MODE } from '@/constants/photoTalkUserConstants';
+import { ActionMode } from '@/types/photoTalkUserTypes';
 import CloseIcon from '@icons/CloseIcon';
 
 interface PasswordConfirmModalProps {

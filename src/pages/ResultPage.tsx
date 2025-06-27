@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import ResultDisplay from '../components/display/ResultDisplay';
 import { useUpdateInvitationStore } from '@/actions/invitationAction';
-import { InvitationDetail } from '@/types/invitationType';
+import { InvitationDetail } from '@/types/invitationTypes';
 import { useGetInvitation } from '@/hooks/useInvitation';
 import { useAccordionStore } from '@/store/useAccordionStore';
 import { useParams } from 'react-router';

@@ -5,11 +5,12 @@ import { useCreatePhototalk, useUpdatePhototalk } from '@/hooks/usePhototalk';
 import { useParams } from 'react-router';
 import { useS3Image } from '@/hooks/useS3Image';
 import TipTapEditor from '@/components/common/Editor/TiptapEditor';
-import { USER_MODE, UserMode } from '@/types/users';
 import PhotoTalkImageUpload from '@/components/phototalk/Editor/PhotoTalkImageUpload';
 import Toast from '@/components/common/Toast';
 import useToast from '@/hooks/useToast';
 import { createPortal } from 'react-dom';
+import { UserMode } from '@/types/photoTalkUserTypes';
+import { USER_MODE } from '@/constants/photoTalkUserConstants';
 
 interface PhotoTalkEditorProps {
   userMode: UserMode;

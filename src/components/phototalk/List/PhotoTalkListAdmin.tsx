@@ -1,11 +1,11 @@
 import ReusableModal from '@/components/common/Modal/ReusableModal';
 import PhotoTalkCommonList from '@/components/phototalk/List/PhotoTalkCommonList';
-import { PhotoTalk } from '@/types/phototalkType';
 import { usePhototalkAction } from '@/hooks/usePhototalkAction';
-import { ACTION_MODE, USER_MODE } from '@/types/users';
 import PhotoTalkListHeader from '@/components/phototalk/List/PhotoTalkListHeader';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/common/Toast';
+import { ACTION_MODE, USER_MODE } from '@/constants/photoTalkUserConstants';
+import { PhotoTalk } from '@/types/phototalkTypes';
 
 const userMode = USER_MODE.ADMIN;
 

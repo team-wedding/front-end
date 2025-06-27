@@ -1,11 +1,12 @@
+import { ACTION_MODE, USER_MODE } from '@/constants/photoTalkUserConstants';
 import {
   useDeletePhototalkByAdmin,
   useDeletePhototalkByGuest,
 } from '@/hooks/usePhototalk';
 import { useDeletePhototalkS3Url } from '@/hooks/useS3Image';
 // import { useDeletePhototalkS3Image } from '@/hooks/useS3Image';
-import { PhotoTalk } from '@/types/phototalkType';
-import { ACTION_MODE, ActionMode, USER_MODE, UserMode } from '@/types/users';
+import { PhotoTalk } from '@/types/phototalkTypes';
+import { ActionMode, UserMode } from '@/types/photoTalkUserTypes';
 import { useState } from 'react';
 
 interface usePhototalkActionProps {

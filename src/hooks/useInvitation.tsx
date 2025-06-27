@@ -6,7 +6,7 @@ import {
   postInvitation,
   updateInvitation,
 } from '../services/invitationService';
-import { InvitationDetail } from '../types/invitationType';
+import { InvitationDetail } from '../types/invitationTypes';
 import resetAllStores from '@/store/resetStore';
 import { useNavigate } from 'react-router';
 

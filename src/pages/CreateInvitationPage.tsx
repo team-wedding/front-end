@@ -20,7 +20,7 @@ import {
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
-import { InvitationDetail, NoticeDetail } from '@/types/invitationType';
+import { InvitationDetail, NoticeDetail } from '@/types/invitationTypes';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
@@ -30,7 +30,6 @@ import Toast from '@/components/common/Toast';
 import { S3UploadRequest } from '@/types/s3Type';
 import PreviewDisplay from '@/components/display/PreviewDisplay';
 import BackIcon from '@/components/icons/BackIcon';
-
 
 const sliceRanges = [[0, 3], [3, 13], [13]];
 // const AUTO_SAVE_MODAL_DURATION_MS = 3000;

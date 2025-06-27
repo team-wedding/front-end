@@ -3,7 +3,7 @@ import {
   getStats,
   postAttendance,
 } from '@/services/statsService';
-import { GuestInfo } from '@/types/GuestType';
+import { GuestInfo } from '@/types/guestTypes';
 import { useMutation, useQuery } from '@tanstack/react-query';
 
 export const useGetStats = () => {

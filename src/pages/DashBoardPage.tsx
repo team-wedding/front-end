@@ -1,5 +1,5 @@
 import Card from '@common/Card/Card';
-import { InvitationDetail } from '../types/invitationType';
+import { InvitationDetail } from '../types/invitationTypes';
 import { useEffect, useState } from 'react';
 import { useGetInvitations } from '@/hooks/useInvitation';
 import Navbar from '@common/Navbar/Navbar';

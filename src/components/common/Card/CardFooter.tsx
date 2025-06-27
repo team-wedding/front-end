@@ -18,6 +18,7 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
 
   const { invitations } = useGetInvitation(id);
   const createdAt = invitations?.createdAt?.split('T')[0];
+  const shareUrl = `result/${userId}/${id}`;
 
   const handleBlur = (event: React.FocusEvent<HTMLButtonElement>) => {
     if (parentRef.current && parentRef.current.contains(event.relatedTarget)) {
@@ -32,13 +33,12 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
 
   return (
     <footer
-      className="flex-between h-[60px]
-    px-4 absolute bottom-0 bg-black/60 w-full rounded-b-xl"
+      className="flex-between h-[68px]
+    pl-3 pr-1 absolute bottom-0 bg-black/60 w-full rounded-b-xl"
     >
-      {/* 청첩장 제목 입력값 */}
       <div className="flex flex-col items-start">
         <h2 className="text-base font-medium text-label-overlay">{title}</h2>
-        <span className="text-[10px] font-light text-label-overlay tracking-wide">
+        <span className="text-xs font-light text-label-overlay/80">
           {createdAt}
         </span>
       </div>
@@ -49,7 +49,11 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
         tabIndex={-1}
         onBlur={handleBlur}
         onFocus={handleFocus}
-        className="text-label-overlay"
+        onClick={handleFocus}
+        type="button"
+        aria-haspopup="true"
+        aria-expanded={isFocused}
+        className="text-label-overlay/90 p-2"
       >
         <ShareIcon />
         {isFocused && (
@@ -59,8 +63,8 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
             shareTitle={title}
             shareDesc={'결혼합니다'}
             shareImage={image}
-            shareUrl={`result/${userId}/${id}`}
-            shareHeader={'Woogyeol'}
+            shareUrl={shareUrl}
+            shareHeader={'WOOGYEOL'}
           />
         )}
       </button>

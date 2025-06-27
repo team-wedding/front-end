@@ -1,6 +1,6 @@
 import logo from '@assets/image/wedding1.png';
 import ReusableModal from '@/components/common/Modal/ReusableModal';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useDeleteInvitation } from '@/hooks/useInvitation';
 import { useUserStore } from '@/store/useUserStore';
 import { useNavigate } from 'react-router';
@@ -16,14 +16,15 @@ interface CardProps {
 
 const Card = ({ image, id: invitationId, title }: CardProps) => {
   const navigate = useNavigate();
+  const { id: userId } = useUserStore();
+  const [modal, setModal] = useState(false);
+
+  const previewUrl = `/preview/${userId}/${invitationId}`;
 
   const { mutate: deleteInvitation } = useDeleteInvitation(invitationId);
   const { mutate: deleteS3Invitation } = useDeleteInvitationS3Url(
     invitationId.toString(),
   );
-  const { id: userId } = useUserStore();
-
-  const [modal, setModal] = useState(false);
 
   const handleDelete = async () => {
     await deleteInvitation();
@@ -32,13 +33,13 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center w-full rounded-xl shadow-md hover:shadow-custom">
-      <section className="relative rounded-xl group transition-all duration-300 ease-in-out hover:-translate-y-0.5 active:-translate-y-0.5">
+    <div className="relative flex flex-col items-center justify-cente w-full rounded-xl shadow-md hover:shadow-custom">
+      <section className="relative rounded-xl group transition-all duration-300 ease-in-out active:-translate-y-0.5">
         <header>
           <button
             onClick={() => setModal(true)}
             aria-label="삭제하기"
-            className="absolute top-2 left-2 z-10 w-fit bg-surface-overlay/60 rounded-full text-icon-card hover:bg-surface-muted/40"
+            className="absolute top-2 left-2 z-10 p-[2px] bg-surface-overlay/30 rounded-full text-icon-card/80 hover:bg-surface-muted/20"
           >
             <CircleMinusIcon />
           </button>
@@ -46,8 +47,8 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
 
         <img
           src={image || logo}
-          className="object-cover aspect-[3/4] rounded-xl"
-          onClick={() => navigate(`/preview/${userId}/${invitationId}`)}
+          className="object-cover aspect-[3/4] rounded-xl w-full h-full group-hover:brightness-75 transition-all duration-300 ease-in-out"
+          onClick={() => navigate(previewUrl)}
         />
 
         <CardFooter
@@ -69,4 +70,4 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
   );
 };
 
-export default Card;
+export default React.memo(Card);

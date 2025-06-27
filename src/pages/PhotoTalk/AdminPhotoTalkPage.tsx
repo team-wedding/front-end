@@ -1,4 +1,4 @@
-import PhotoTalkListAdmin from '@/components/common/PhotoTalk/List/PhotoTalkListAdmin';
+import PhotoTalkListAdmin from '@/components/phototalk/List/PhotoTalkListAdmin';
 import { useInfinitePhototalkByQuery } from '@/hooks/usePhototalk';
 import { getPhototalks } from '@/services/phototalkService';
 import usePhotoTalkStore from '@/store/usePhotoTalkStore';

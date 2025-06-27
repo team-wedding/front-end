@@ -6,7 +6,7 @@ import { useUserStore } from '@/store/useUserStore';
 import { useNavigate } from 'react-router';
 import CircleMinusIcon from '@/components/icons/CircleMinusIcon';
 import CardFooter from '@/components/common/Card/CardFooter';
-import { useS3RemoveImage } from '@/hooks/useS3Image';
+import { useDeleteInvitationS3Url } from '@/hooks/useS3Image';
 
 interface CardProps {
   image: string;
@@ -22,7 +22,7 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
   const previewUrl = `/preview/${userId}/${invitationId}`;
 
   const { mutate: deleteInvitation } = useDeleteInvitation(invitationId);
-  const { mutate: deleteS3Invitation } = useS3RemoveImage(
+  const { mutate: deleteS3Invitation } = useDeleteInvitationS3Url(
     invitationId.toString(),
   );
 

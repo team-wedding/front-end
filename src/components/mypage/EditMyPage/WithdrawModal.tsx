@@ -1,4 +1,4 @@
-import ReusableModal from '../common/Modal/ReusableModal';
+import ReusableModal from '../../common/Modal/ReusableModal';
 
 interface WithdrawModalProps {
   isOpen: boolean;

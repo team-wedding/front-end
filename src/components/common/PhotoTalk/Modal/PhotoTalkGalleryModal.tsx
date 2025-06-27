@@ -1,4 +1,4 @@
-import PhotoTalkGalleryModalFooter from '@/components/common/PhotoTalk/Modal/GalleryModal/PhotoTalkGalleryModalFooter';
+import PhotoTalkGalleryModalFooter from '@/components/common/PhotoTalk/Modal/PhotoTalkGalleryModalFooter';
 import ChevronLeft from '@/components/icons/Chevron_LeftIcon';
 import ChevronRight from '@/components/icons/Chevron_RightIcon';
 import ImageIcon from '@/components/icons/ImageIcon';

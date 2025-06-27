@@ -1,4 +1,4 @@
-import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/Modal/GalleryModal/PhotoTalkGalleryModal';
+import PhotoTalkGalleryModal from '@/components/common/PhotoTalk/Modal/PhotoTalkGalleryModal';
 import { UserMode } from '@/types/users';
 import React, { useRef, useState } from 'react';
 import Slider from 'react-slick';

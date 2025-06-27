@@ -353,10 +353,6 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
 
     try {
       const weddingTime = details.weddingTime;
-      // const weddingTime =
-      //   typeof details.weddingTime == 'string'
-      //     ? JSON.parse(details.weddingTime)
-      //     : Array.from(details.weddingTime);
       setWeddingTime(weddingTime[0], weddingTime[1]);
     } catch {
       console.log(
@@ -369,10 +365,6 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
         setWeddingDate(today);
       } else {
         const [year, month, day] = details.date;
-        // const [year, month, day] =
-        //   typeof details.date == 'string'
-        //     ? JSON.parse(details.date)
-        //     : Array.from(details.date);
         const parsedDate = new Date(year, month - 1, day);
         setWeddingDate(parsedDate);
       }

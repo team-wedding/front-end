@@ -1,5 +1,5 @@
-import PhotoTalkEditor from '@/components/common/PhotoTalk/Editor/PhotoTalkEditor';
-import PhotoTalkListGuest from '@/components/common/PhotoTalk/List/PhotoTalkListGuest';
+import PhotoTalkEditor from '@/components/phototalk/Editor/PhotoTalkEditor';
+import PhotoTalkListGuest from '@/components/phototalk/List/PhotoTalkListGuest';
 import PhotoTalkLayout from '@/components/layout/PhotoTalkLayout';
 import { USER_MODE } from '@/constants/photoTalkUserConstants';
 import { useInfinitePhototalkByQuery } from '@/hooks/usePhototalk';
@@ -10,10 +10,9 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 
 const GuestPhotoTalkPage = () => {
+  const { userId } = useParams();
   const [isGalleryOpen, setIsGalleryOpen] = useState(false);
   const [isEditorOpen, setEditorOpen] = useState(false);
-  const { userId } = useParams();
-
   const { setPhotoTalkList } = usePhotoTalkStore();
 
   const {
@@ -28,13 +27,6 @@ const GuestPhotoTalkPage = () => {
     extractItems: (res) => res.allCelebrationMsgs,
     getHasMore: (res) => res.currentPage < res.totalPages,
   });
-
-  // useEffect(() => {
-  //   if (data) {
-  //     console.log('받아온 포토톡 데이터:', data.allCelebrationMsgs);
-  //     setPhotoTalkList(data.allCelebrationMsgs);
-  //   }
-  // }, [data]);
 
   useEffect(() => {
     if (data.length > 0) {
@@ -67,12 +59,13 @@ const GuestPhotoTalkPage = () => {
       </section>
 
       <section aria-label="포토톡 작성">
-        <PhotoTalkEditor
-          userMode={USER_MODE.GUEST}
-          isEditorOpen={isEditorOpen}
-          closeEditor={() => setEditorOpen(false)}
-          refetch={refetch}
-        />
+        {isEditorOpen && (
+          <PhotoTalkEditor
+            userMode={USER_MODE.GUEST}
+            closeEditor={() => setEditorOpen(false)}
+            refetch={refetch}
+          />
+        )}
       </section>
     </PhotoTalkLayout>
   );

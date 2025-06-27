@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { getButtonClasses } from '@/components/ResetPassword/ResetPasswordButton';
+import { getButtonClasses } from '@/components/mypage/ResetPassword/ResetPasswordButton';
 import { useNavigate } from 'react-router';
 import { changePassword } from '@/services/userService';
 import PageLayout from '@/components/layout/PageLayout';

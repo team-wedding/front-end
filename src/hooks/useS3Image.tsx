@@ -1,13 +1,18 @@
-import { deleteS3ImageUrl, getS3ImageUrl } from '@/services/imageService';
+import {
+  deleteInvitationS3Url,
+  deletePhototalkS3Url,
+  uploadAndGetS3Url,
+} from '@/services/imageService';
 import useImageStore from '@/store/useImageStore';
-import { S3UploadRequest, S3UploadResponse } from '@/types/invitationTypes';
+import { S3UploadRequest, S3UploadResponse } from '@/types/s3Type';
 import { useMutation } from '@tanstack/react-query';
 
 export const useS3Image = () => {
   const { setUploadedImageUrl } = useImageStore();
+
   return useMutation<S3UploadResponse, Error, S3UploadRequest>({
     mutationFn: ({ imageFiles, directory }: S3UploadRequest) =>
-      getS3ImageUrl({ imageFiles, directory }),
+      uploadAndGetS3Url({ imageFiles, directory }),
     onSuccess: async (data) => {
       if (data) {
         if (data.imageUrls) {
@@ -22,9 +27,20 @@ export const useS3Image = () => {
   });
 };
 
-export const useS3RemoveImage = (id: string) => {
+export const useDeleteInvitationS3Url = (id: string) => {
   return useMutation({
-    mutationFn: () => deleteS3ImageUrl(id),
+    mutationFn: () => deleteInvitationS3Url(id),
+    onSuccess: async (data) => {
+      if (data) {
+        console.log(data.message);
+      }
+    },
+  });
+};
+
+export const useDeletePhototalkS3Url = () => {
+  return useMutation({
+    mutationFn: (id: number) => deletePhototalkS3Url(id),
     onSuccess: async (data) => {
       if (data) {
         console.log(data.message);

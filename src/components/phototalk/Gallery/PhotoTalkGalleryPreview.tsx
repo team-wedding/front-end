@@ -1,7 +1,7 @@
 import PhotoTalkGalleryGrid from '@/components/phototalk/Gallery/PhotoTalkGalleryGrid';
-import PhotoTalkGalleryModal from '@/components/phototalk/Modal/GalleryModal/PhotoTalkGalleryModal';
+import PhotoTalkGalleryModal from '@/components/phototalk/Modal/PhotoTalkGalleryModal';
 import { phototalkData } from '@/constants/phototalkData';
-import { UserMode } from '@/types/users';
+import { UserMode } from '@/types/photoTalkUserTypes';
 import { useState } from 'react';
 
 interface PhotoTalkGalleryPreviewProps {

@@ -5,7 +5,7 @@ import { useGetInvitation } from '@/hooks/useInvitation';
 import { useAccordionStore } from '@/store/useAccordionStore';
 import { useEffect } from 'react';
 import { useUpdateInvitationStore } from '@/actions/invitationAction';
-import { InvitationDetail } from '@/types/invitationType';
+import { InvitationDetail } from '@/types/invitationTypes';
 import CloseIcon from '@/components/icons/CloseIcon';
 import Logo from '@/components/common/Logo';
 

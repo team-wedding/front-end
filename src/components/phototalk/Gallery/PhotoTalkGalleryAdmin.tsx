@@ -1,10 +1,10 @@
 import PhotoTalkEmptyState from '@/components/phototalk/EmptyState/PhotoTalkEmptyState';
 import PhotoTalkGalleryGrid from '@/components/phototalk/Gallery/PhotoTalkGalleryGrid';
-import PhotoTalkGalleryModal from '@/components/phototalk/Modal/GalleryModal/PhotoTalkGalleryModal';
 import DownloadIcon from '@/components/icons/DownloadIcon';
-import { UserMode } from '@/types/users';
+import { UserMode } from '@/types/photoTalkUserTypes';
 import { downloadSelectedImages } from '@/utils/downloadUtils';
 import { useState } from 'react';
+import PhotoTalkGalleryModal from '@/components/phototalk/Modal/PhotoTalkGalleryModal';
 
 interface PhotoTalkGalleryAdminProps {
   userMode: UserMode;

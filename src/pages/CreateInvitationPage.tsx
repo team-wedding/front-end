@@ -31,7 +31,6 @@ import { S3UploadRequest } from '@/types/s3Type';
 import PreviewDisplay from '@/components/display/PreviewDisplay';
 import BackIcon from '@/components/icons/BackIcon';
 
-
 const sliceRanges = [[0, 3], [3, 13], [13]];
 // const AUTO_SAVE_MODAL_DURATION_MS = 3000;
 // const AUTO_SAVE_INTERVAL_MS = 5000;
@@ -170,7 +169,7 @@ const CreateInvitationPage = () => {
     }
   };
   const handleCancel = () => {
-    resetAllStores();
+    // resetAllStores();
     setCancelModal(true);
   };
   const handleConfirmCancel = () => {
@@ -258,13 +257,17 @@ const CreateInvitationPage = () => {
         </div>
         <ReusableModal
           isOpen={cancelModal}
-          title={'작성 중인 내용이 삭제됩니다'}
-          confirmText={
-            '저장하지 않고 나가면 입력한 내용이 모두 삭제돼요. 계속하시겠어요?'
+          title={
+            <>
+              저장하지 않고 나가면
+              <br />
+              입력한 내용이 삭제될 수 있습니다.
+            </>
           }
+          confirmText="확인"
           onConfirm={handleConfirmCancel}
           onCancel={() => setCancelModal(false)}
-        ></ReusableModal>
+        />
       </DndProvider>
       {message && <Toast key={message} message={message} />}
     </>

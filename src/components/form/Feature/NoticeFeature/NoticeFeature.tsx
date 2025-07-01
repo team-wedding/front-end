@@ -68,9 +68,12 @@ const NoticeFeature = () => {
         content: (
           <div className="m-3 flex flex-col gap-6">
             <div className="flex flex-col gap-3">
-              <label className="label w-full">제목</label>
+              <label htmlFor="noticeTitle" className="label w-full">
+                제목
+              </label>
               <input
                 type="text"
+                id="noticeTitle"
                 placeholder="제목을 입력해주세요"
                 value={notice.title}
                 onChange={(e) =>
@@ -81,8 +84,11 @@ const NoticeFeature = () => {
             </div>
 
             <div className="flex flex-col gap-3">
-              <label className="label w-full">내용</label>
+              <label htmlFor="noticeContent" className="label w-full">
+                내용
+              </label>
               <textarea
+                id="noticeContent"
                 placeholder="내용을 입력해주세요"
                 value={notice.content}
                 onChange={(e) =>
@@ -138,7 +144,7 @@ const NoticeFeature = () => {
       )}
       <ReusableModal
         isOpen={isDeleteModalOpen}
-        title="이 공지를 삭제하시겠습니까?"
+        title="공지를 삭제하시겠습니까?"
         confirmText="확인"
         onConfirm={confirmDelete}
         onCancel={() => setIsDeleteModalOpen(false)}

@@ -31,6 +31,7 @@ const GreetingFeature = () => {
 
         <input
           type="text"
+          id="greetingTitle"
           placeholder="제목"
           value={greetingTitle}
           onChange={(e) => setGreetingTitle(e.target.value)}
@@ -38,6 +39,7 @@ const GreetingFeature = () => {
         />
 
         <textarea
+          id="greetingContent"
           placeholder="인사말"
           value={greetingContent}
           onChange={(e) => setGreetingContent(e.target.value)}

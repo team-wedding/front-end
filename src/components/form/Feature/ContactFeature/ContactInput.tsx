@@ -17,7 +17,9 @@ const ContactInput = () => {
         <div key={index} className="max-w-lg mx-auto p-3 my-6">
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
-              <label className="label">{person.role}</label>
+              <label htmlFor={`${person.role}-contact`} className="label">
+                {person.role}
+              </label>
               {/* <input
                 type="tel"
                 placeholder="010-0000-0000"
@@ -38,11 +40,14 @@ const ContactInput = () => {
                 pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
                 placeholder="010-0000-0000"
                 className="formInput"
+                id={`${person.role}-contact`}
               />
             </div>
 
             <div className="flex items-center gap-2">
-              <label className="label">아버지</label>
+              <label htmlFor={`${person.role}-fatherContact`} className="label">
+                아버지
+              </label>
               {/* <input
                 type="tel"
                 placeholder="010-0000-0000"
@@ -63,11 +68,14 @@ const ContactInput = () => {
                 pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
                 placeholder="010-0000-0000"
                 className="formInput"
+                id={`${person.role}-fatherContact`}
               />
             </div>
 
             <div className="flex items-center gap-2">
-              <label className="label">어머니</label>
+              <label htmlFor={`${person.role}-motherContact`} className="label">
+                어머니
+              </label>
               {/* <input
                 type="tel"
                 placeholder="010-0000-0000"
@@ -88,6 +96,7 @@ const ContactInput = () => {
                 pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
                 placeholder="010-0000-0000"
                 className="formInput"
+                id={`${person.role}-motherContact`}
               />
             </div>
 

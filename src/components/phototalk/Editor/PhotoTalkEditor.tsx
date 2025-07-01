@@ -223,18 +223,24 @@ const PhotoTalkEditor = ({
         </header>
 
         <div className="flex flex-col gap-1 px-3 py-2">
-          <label className="label w-full">이름</label>
+          <label htmlFor="name" className="label w-full">
+            이름
+          </label>
           <input
             type="text"
+            id="name"
             name="name"
             placeholder="이름을 입력해주세요"
             value={form.name}
             onChange={handleChange}
             className="formInput w-full mb-2"
           />
-          <label className="label w-full">비밀번호</label>
+          <label htmlFor="password" className="label w-full">
+            비밀번호
+          </label>
           <input
             type="password"
+            id="password"
             name="password"
             placeholder="비밀번호를 입력해주세요"
             value={form.password}

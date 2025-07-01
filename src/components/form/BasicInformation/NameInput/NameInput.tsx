@@ -23,7 +23,12 @@ const NameInput = () => {
         <div key={index} className="max-w-lg mx-auto px-4 py-2">
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
-              <label className="label flex gap-1">{person.role}</label>
+              <label
+                htmlFor={`${person.role}-name`}
+                className="label flex gap-1"
+              >
+                {person.role}
+              </label>
               <DebouncedInput
                 type="text"
                 ref={nameInputRef}
@@ -33,10 +38,13 @@ const NameInput = () => {
                 }
                 placeholder="성함(OOO)"
                 className="formInput"
+                id={`${person.role}-name`}
               />
             </div>
             <div className="flex items-center gap-2">
-              <label className="label">아버지</label>
+              <label htmlFor={`${person.role}-fatherName`} className="label">
+                아버지
+              </label>
               <DebouncedInput
                 type="text"
                 ref={fatherNameInputRef}
@@ -46,10 +54,12 @@ const NameInput = () => {
                 }
                 placeholder="성함(OOO)"
                 className="formInput"
+                id={`${person.role}-fatherName`}
               />
               <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
+                  id={`${person.role}-fatherDeceased`}
                   checked={person.family.father.isDeceased}
                   onChange={(e) =>
                     updateFamily(
@@ -60,12 +70,19 @@ const NameInput = () => {
                     )
                   }
                   className="w-5 h-5 rounded border-gray-400 checked:bg-button focus:ring-button focus:border-button focus:outline-none focus:ring-0"
-                ></input>
-                <span className="text-sm">故</span>
+                />
+                <label
+                  htmlFor={`${person.role}-fatherDeceased`}
+                  className="text-sm"
+                >
+                  故
+                </label>
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <label className="label">어머니</label>
+              <label htmlFor={`${person.role}-motherName`} className="label">
+                어머니
+              </label>
               <DebouncedInput
                 type="text"
                 ref={motherNameInputRef}
@@ -75,10 +92,12 @@ const NameInput = () => {
                 }
                 placeholder="성함(OOO)"
                 className="formInput"
+                id={`${person.role}-motherName`}
               />
               <div className="flex items-center gap-2">
                 <input
                   type="checkbox"
+                  id={`${person.role}-motherDeceased`}
                   checked={person.family.mother.isDeceased}
                   onChange={(e) =>
                     updateFamily(
@@ -90,7 +109,12 @@ const NameInput = () => {
                   }
                   className="w-5 h-5 rounded border-gray-400 checked:bg-button focus:ring-button focus:border-button focus:outline-none focus:ring-0"
                 />
-                <span className="text-sm">故</span>
+                <label
+                  htmlFor={`${person.role}-motherDeceased`}
+                  className="text-sm"
+                >
+                  故
+                </label>
               </div>
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { PhotoTalk } from '@/types/phototalkType';
+import { PhotoTalk } from '@/types/phototalkTypes';
 import phototalk1 from '@/assets/phototalk//preview/phototalk1.jpg';
 import phototalk2 from '@/assets/phototalk/preview/phototalk2.jpg';
 import phototalk3 from '@/assets/phototalk/preview/phototalk3.jpg';

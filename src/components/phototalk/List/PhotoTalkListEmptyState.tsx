@@ -1,5 +1,6 @@
 import EditIcon from '@/components/icons/EditIcon';
-import { USER_MODE, UserMode } from '@/types/users';
+import { USER_MODE } from '@/constants/photoTalkUserConstants';
+import { UserMode } from '@/types/photoTalkUserTypes';
 
 interface PhotoTalkEmptyStateProps {
   userMode: UserMode;

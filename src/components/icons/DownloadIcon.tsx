@@ -1,4 +1,4 @@
-import { IconProps } from '@/types/icons';
+import { IconProps } from '@/types/iconTypes';
 import React from 'react';
 
 const DownloadIcon = ({ className }: IconProps) => {

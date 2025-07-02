@@ -31,7 +31,6 @@ import { S3UploadRequest } from '@/types/s3Type';
 import PreviewDisplay from '@/components/display/PreviewDisplay';
 import BackIcon from '@/components/icons/BackIcon';
 
-
 const sliceRanges = [[0, 3], [3, 13], [13]];
 // const AUTO_SAVE_MODAL_DURATION_MS = 3000;
 // const AUTO_SAVE_INTERVAL_MS = 5000;

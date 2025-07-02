@@ -30,3 +30,6 @@ dist-ssr
 
 *storybook.log
 storybook-static
+
+#Playwright test Results
+test-results 

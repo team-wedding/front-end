@@ -49,12 +49,13 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
         </div>
 
         <div className="p-1 text-center text-base text-label dark:text-label-dark">
-          <p>청첩장 제목을 정해주세요</p>
+          <label htmlFor="invitationTitle">청첩장 제목을 정해주세요</label>
         </div>
 
         <div className="flex w-full justify-center gap-2 my-4">
           <input
             type="text"
+            id="invitationTitle"
             placeholder="ex. 청첩장1, 친구용, 혼주용"
             className="bg-surface dark:bg-surface-dark text-center text-label dark:text-label-dark w-[60%] focus:outline-none focus:ring-0 focus:border-secondary dark:focus:border-secondary-dark border-0 border-b border-border dark:border-border-dark text-xs placeholder:text-label-secondary/60 dark:placeholder:text-label-secondary-dark/60 ml-4"
             value={titleInput}

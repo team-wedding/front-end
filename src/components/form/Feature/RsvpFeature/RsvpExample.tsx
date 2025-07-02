@@ -21,9 +21,12 @@ const RsvpExample = () => {
       <hr />
       <div className="flex flex-col gap-5 my-10">
         <div className="flex flex-col gap-2">
-          <label className="label w-full">제목</label>
+          <label htmlFor="rsvpTitle" className="label w-full">
+            제목
+          </label>
           <DebouncedInput
             type="text"
+            id="rsvpTitle"
             ref={rsvpDesciptionInputRef}
             onDebouncedChange={(value: string) => setRSVPTitle(value)}
             value={rsvpTitle}
@@ -32,7 +35,9 @@ const RsvpExample = () => {
           />
         </div>
         <div className="flex flex-col gap-2">
-          <label className="label w-full">내용</label>
+          <label htmlFor="rsvpContent" className="label w-full">
+            내용
+          </label>
           <textarea
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
               setRSVPDescription(e.currentTarget.value);

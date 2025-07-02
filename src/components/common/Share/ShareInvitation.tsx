@@ -1,6 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-// import { toast, ToastContainer } from 'react-toastify';
 import LinkIcon from '@icons/LinkIcon';
 import Toast from '@/components/common/Toast';
 import useToast from '@/hooks/useToast';

@@ -169,7 +169,7 @@ const CreateInvitationPage = () => {
     }
   };
   const handleCancel = () => {
-    resetAllStores();
+    // resetAllStores();
     setCancelModal(true);
   };
   const handleConfirmCancel = () => {
@@ -257,13 +257,17 @@ const CreateInvitationPage = () => {
         </div>
         <ReusableModal
           isOpen={cancelModal}
-          title={'작성 중인 내용이 삭제됩니다'}
-          confirmText={
-            '저장하지 않고 나가면 입력한 내용이 모두 삭제돼요. 계속하시겠어요?'
+          title={
+            <>
+              저장하지 않고 나가면
+              <br />
+              입력한 내용이 삭제될 수 있습니다.
+            </>
           }
+          confirmText="확인"
           onConfirm={handleConfirmCancel}
           onCancel={() => setCancelModal(false)}
-        ></ReusableModal>
+        />
       </DndProvider>
       {message && <Toast key={message} message={message} />}
     </>

@@ -1,6 +1,4 @@
 import React, { useRef, useState } from 'react';
-// import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import Toast from '@/components/common/Toast';
 import useToast from '@/hooks/useToast';
 
@@ -102,7 +100,6 @@ const ImageUploader = ({
 
   return (
     <div className="flex items-center justify-center max-w-lg mx-auto">
-      {/* <ToastContainer position="top-center" autoClose={3000} hideProgressBar /> */}
       {!uploadedImage ? (
         <label
           htmlFor={`dropzone-file-${randomId}`}

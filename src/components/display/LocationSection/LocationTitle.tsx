@@ -1,8 +1,6 @@
 import useAddressStore from '@store/useAddressStore';
 import CopyToClipboard from 'react-copy-to-clipboard';
 import FileCopyIcon from '@icons/FileCopyIcon';
-// import { toast, ToastContainer } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 import SectionTitle from '@/components/common/SectionTitle';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/common/Toast';

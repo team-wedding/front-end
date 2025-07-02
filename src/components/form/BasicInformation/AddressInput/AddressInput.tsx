@@ -51,9 +51,12 @@ const AddressInput: React.FC = () => {
         </div>
         {/* 예식장명 */}
         <div className="flex items-center">
-          <label className="label">예식장명</label>
+          <label htmlFor="weddingHallName" className="label">
+            예식장명
+          </label>
           <input
             type="text"
+            id="weddingHallName"
             value={weddingHallName}
             placeholder="예식장 이름"
             className="formInput"
@@ -63,9 +66,12 @@ const AddressInput: React.FC = () => {
         </div>
         {/* 층과 홀 */}
         <div className="flex items-center">
-          <label className="label">층과 홀</label>
+          <label htmlFor="weddingHallDetail" className="label">
+            층과 홀
+          </label>
           <input
             type="text"
+            id="weddingHallDetail"
             value={weddingHallDetail}
             placeholder="층과 웨딩홀 이름"
             className="formInput"

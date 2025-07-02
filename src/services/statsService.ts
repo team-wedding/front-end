@@ -1,4 +1,4 @@
-import { GuestInfo } from '@/types/GuestType';
+import { GuestInfo } from '@/types/guestTypes';
 import { API, axiosInstance } from '@/utils/config';
 
 // 전체 참석 여부 조회 - 하객 분류

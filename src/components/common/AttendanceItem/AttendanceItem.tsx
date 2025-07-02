@@ -1,4 +1,4 @@
-import { GuestInfo } from '@/types/GuestType';
+import { GuestInfo } from '@/types/guestTypes';
 
 interface AttendanceProps {
   guestInfo: GuestInfo;

@@ -1,4 +1,4 @@
-import Toggle from '@common/Toggle/OnOff';
+import Toggle from '../Toggle/Toggle';
 import { useToggleFeatureStore } from '@store/OptionalFeature/useToggleFeatureStore.';
 import { AccordionItemData } from '@constants/accordionData';
 

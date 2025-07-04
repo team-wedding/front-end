@@ -15,7 +15,7 @@ test('회원가입 후 /dashboard 진입', async ({ page }) => {
   // 4. 회원정보 입력
   await page.getByRole('textbox', { name: '이름' }).fill('테스트유저');
   // 이메일은 매번 다르게 생성 (중복 방지)
-  const email = `testuser+${Date.now()}@example.com`;
+  const email = `testuser6@example.com`;
   await page.getByRole('textbox', { name: '이메일' }).fill(email);
   await page
     .getByRole('textbox', { name: '비밀번호', exact: true })
@@ -39,6 +39,8 @@ test('회원가입 후 /dashboard 진입', async ({ page }) => {
 
   // 8. "로그인" 버튼 클릭
   await page.getByRole('button', { name: '로그인' }).click();
+
   await page.waitForTimeout(1000); // 네트워크/애니메이션 대기
   await expect(page).toHaveURL(/.*dashboard/);
+  await page.context().storageState({ path: 'auth.json' });
 });

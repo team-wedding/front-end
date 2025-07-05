@@ -22,14 +22,11 @@ const AccountRow = ({
   const accountNameInputRef = useRef<DebouncedInputHandle>(null);
   const accountKakaoInputRef = useRef<DebouncedInputHandle>(null);
   return (
-    <div className="flex flex-col gap-2 px-2 my-10">
-      {/*은행 선택 드롭다운 / 예금주 입력 */}
-      <div className="flex items-center gap-2">
-        <label className="label">{label}</label>
-        <BankSelector
-          selectedBank={accountInfo?.bankName}
-          onSelect={(bankName) => onUpdate('bankName', bankName)}
-        />
+    <>
+      <label className="label">{label}</label>
+
+      <div className="flex">
+        <label className="label"></label>
         <DebouncedInput
           type="text"
           ref={accountNameInputRef}
@@ -38,34 +35,32 @@ const AccountRow = ({
           placeholder="예금주"
           className="formInput"
         />
-      </div>
-
-      {/*계좌번호*/}
-      <div className="flex items-center gap-2">
-        <label className="label"></label>
-        <DebouncedInput
-          type="text"
-          ref={accountNumberInputRef}
-          value={accountInfo?.accountHolderName}
-          onDebouncedChange={(value) => onUpdate('accountNumber', value)}
-          placeholder="계좌번호"
-          className="formInput"
+        <BankSelector
+          selectedBank={accountInfo?.bankName}
+          onSelect={(bankName) => onUpdate('bankName', bankName)}
         />
       </div>
 
-      {/*카카오 송금 QR 링크*/}
-      <div className="flex items-center gap-2">
-        <label className="label"></label>
-        <DebouncedInput
-          type="text"
-          ref={accountKakaoInputRef}
-          value={accountInfo?.accountHolderName}
-          onDebouncedChange={(value) => onUpdate('kakaoUrl', value)}
-          placeholder="카카오 송금 QR 링크"
-          className="formInput"
-        />
-      </div>
-    </div>
+      <label className="label"></label>
+      <DebouncedInput
+        type="text"
+        ref={accountNumberInputRef}
+        value={accountInfo?.accountHolderName}
+        onDebouncedChange={(value) => onUpdate('accountNumber', value)}
+        placeholder="계좌번호"
+        className="formInput"
+      />
+
+      <label className="label"></label>
+      <DebouncedInput
+        type="text"
+        ref={accountKakaoInputRef}
+        value={accountInfo?.accountHolderName}
+        onDebouncedChange={(value) => onUpdate('kakaoUrl', value)}
+        placeholder="카카오 송금 QR 링크"
+        className="formInput"
+      />
+    </>
   );
 };
 

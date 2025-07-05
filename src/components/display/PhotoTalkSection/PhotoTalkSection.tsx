@@ -6,7 +6,9 @@ const PhotoTalkSection = () => {
   const { userId, invitationId } = useParams();
   const location = useLocation();
 
-  const isPreview = location.pathname.includes('/preview');
+  const isPreview =
+    location.pathname.includes('/edit') ||
+    location.pathname.includes('/create');
 
   const handleClick = () => {
     return isPreview

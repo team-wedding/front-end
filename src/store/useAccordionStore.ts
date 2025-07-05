@@ -12,31 +12,41 @@ interface AccordionState {
   allItems: AccordionItemData[];
   optionalItems: OptionalOrder[];
   initializeItems: (start: number, end: number) => void;
+  updateCompletionByFeature: (feature: string, isCompleted: boolean) => void;
   setOrderItems: () => void;
   moveItem: (dragIndex: number, hoverIndex: number) => void;
   getSections: () => React.ReactNode[];
+  reset: () => void;
 }
 
 export const useAccordionStore = create<AccordionState>((set, get) => ({
   items: [],
   allItems: accordionData,
-  //
   optionalItems: accordionData.slice(7, 13).map((item) => ({
     order: item.id - 1,
     feature: item.feature,
     id: item.id,
   })),
-  //
   initializeItems: (start, end) => {
     set((state) => ({
       items: state.allItems.slice(start, end),
     }));
   },
+  updateCompletionByFeature: (feature: string, isCompleted: boolean) => {
+    const updatedItems = get().items.map((item) =>
+      item.feature === feature ? { ...item, isCompleted } : item,
+    );
+
+    set(() => ({
+      items: [...updatedItems],
+      allItems: get().allItems.map((item) =>
+        item.feature === feature ? { ...item, isCompleted } : item,
+      ),
+    }));
+  },
   setOrderItems: () =>
     set((state) => {
       let allItems = [...state.allItems];
-
-      // optionalItems를 order 순으로 정렬
       const sortedOptionalItems = [...state.optionalItems].sort(
         (a, b) => a.order - b.order,
       );
@@ -49,12 +59,12 @@ export const useAccordionStore = create<AccordionState>((set, get) => ({
         },
         {},
       );
-
       const optionalItemIds = sortedOptionalItems.map((item) => item.id);
 
       // optionalItems 범위 내의 원소들 재정렬
       let reorderedItems = [...allItems];
-      let optionalStartIndex = 7; // optionalItems 시작 인덱스
+      let optionalStartIndex = 7;
+
       optionalItemIds.forEach((id, index) => {
         const currentIndex = idToIndexMap[id];
         if (currentIndex !== optionalStartIndex + index) {
@@ -126,4 +136,15 @@ export const useAccordionStore = create<AccordionState>((set, get) => ({
       .filter(Boolean)
       .map((section) => section!.section);
   },
+  reset: () =>
+    set(() => ({
+      items: [],
+      allItems: accordionData.map((item) => ({ ...item, isCompleted: false })),
+      optionalItems: accordionData.slice(7, 13).map((item) => ({
+        order: item.id - 1,
+        feature: item.feature,
+        id: item.id,
+      })),
+      isInitialized: false,
+    })),
 }));

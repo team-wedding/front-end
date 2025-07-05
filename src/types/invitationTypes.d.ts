@@ -2,16 +2,15 @@ export interface InvitationDetail {
   id?: number;
   createdAt?: string;
   // updatedAt?: string;
-
   title: string;
   groomName: string;
   brideName: string;
-  date: number[];
+  date: [number | null, number | null, number | null];
+  weddingTime: [number | null, number | null];
   location: string[];
   imgUrl: string;
   greetingTitle: string;
   greetingContent: string;
-  weddingTime: number[];
 
   groomFatherName: string;
   groomMotherName: string;
@@ -36,7 +35,7 @@ export interface InvitationDetail {
   accounts: AccountDetail[];
   contacts: ContactDetail[];
   notices: NoticeDetail[];
-  audio: number | nulll;
+  audio: number | null;
 }
 
 interface CalendarDetail {

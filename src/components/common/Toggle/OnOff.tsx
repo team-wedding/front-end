@@ -10,8 +10,11 @@ const OnOff = ({ state, setState }: Props) => {
   return (
     <div>
       <button
-        onClick={onoffHandler}
-        className={`border px-2 py-[3px] rounded-xl text-gray-400 text-[10px] transition-all duration-100 ${state ? 'bg-button bg-opacity-80 text-white border-transparent shadow-sm' : 'bg-neutral-100  border-neutral-200'}`}
+        onClick={(e) => {
+          e.stopPropagation();
+          onoffHandler();
+        }}
+        className={`px-4 py-2 text-xs ${state ? 'glass-button-selected' : 'glass-button text-slate-500'}`}
       >
         {state ? 'ON' : 'OFF'}
       </button>

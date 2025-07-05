@@ -23,11 +23,12 @@ const PreviewPhotoTalkPage = () => {
       </section>
 
       <section aria-label="포토톡 메시지 작성하기">
-        <PhotoTalkEditor
-          userMode={USER_MODE.PREVIEW}
-          isEditorOpen={isEditorOpen}
-          closeEditor={() => setEditorOpen(false)}
-        />
+        {isEditorOpen && (
+          <PhotoTalkEditor
+            userMode={USER_MODE.GUEST}
+            closeEditor={() => setEditorOpen(false)}
+          />
+        )}
       </section>
     </PhotoTalkLayout>
   );

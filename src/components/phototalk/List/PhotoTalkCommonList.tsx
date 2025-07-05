@@ -1,11 +1,11 @@
 import PhotoTalkCard from '@/components/phototalk/Card/PhotoTalkCard';
 import PhotoTalkGallery from '@/components/phototalk/Gallery/PhotoTalkGallery';
-import { PhotoTalk } from '@/types/phototalkType';
-import { UserMode } from '@/types/users';
 // import { examplePhototalkCard } from '@/constants/phototalkData';
 import SkeletonPhotoTalk from '../../common/Skeleton/SkeletonPhotoTalk';
 import SkeletonGallery from '../../common/Skeleton/SkeletonGallery';
 import PhotoTalkEmptyState from '@/components/phototalk/EmptyState/PhotoTalkEmptyState';
+import { UserMode } from '@/types/photoTalkUserTypes';
+import { PhotoTalk } from '@/types/phototalkTypes';
 
 interface PhotoTalkCommonListProps {
   userMode: UserMode;

@@ -1,6 +1,3 @@
-export type ActionMode = 'edit' | 'delete';
-export type UserMode = 'admin' | 'guest' | 'preview';
-
 export const ACTION_MODE = {
   EDIT: 'edit',
   DELETE: 'delete',

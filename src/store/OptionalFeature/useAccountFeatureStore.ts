@@ -1,4 +1,4 @@
-import { AccountDetail } from '@/types/invitationType';
+import { AccountDetail } from '@/types/invitationTypes';
 import { create } from 'zustand';
 
 // type AccountInfo = {

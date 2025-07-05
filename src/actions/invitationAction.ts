@@ -5,7 +5,7 @@ import {
   InvitationDetail,
   MapDetail,
   NoticeDetail,
-} from '@/types/invitationType';
+} from '@/types/invitationTypes';
 import useBrideGroomStore from '@store/useBrideGroomStore';
 import useGreetingStore from '@store/useGreetingStore';
 import useThemeStore from '@store/useThemeStore';

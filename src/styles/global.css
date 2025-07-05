@@ -270,9 +270,9 @@
   }
 
   .splash-btn {
-    @apply bg-gradient-to-r from-[#141414] to-[#141414] p-5 w-full rounded-3xl text-white text-sm tracking-wide transition-all duration-200 ease-in-out active:from-[#CEDFFF] active:to-[#F8D4E2] active:shadow-sm active:text-black;
+    @apply bg-gradient-to-r from-[#141414]/95 to-[#141414]/95 p-5 w-full rounded-3xl text-white text-sm tracking-wide transition-all duration-200 ease-in-out active:from-[#CEDFFF] active:to-[#F8D4E2] active:shadow-sm active:text-black;
 
-    @apply dark:from-[#ffffff] dark:to-[#ffffff] dark:text-black dark:active:from-[#687BAF] dark:active:to-[#AC6083] dark:active:text-white;
+    @apply dark:from-[#ffffff]/95 dark:to-[#ffffff]/95 dark:text-black dark:active:from-[#687BAF] dark:active:to-[#AC6083] dark:active:text-white;
   }
 
   .splash-input {

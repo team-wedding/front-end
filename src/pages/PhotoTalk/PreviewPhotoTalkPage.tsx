@@ -2,7 +2,7 @@ import PhotoTalkEditor from '@/components/phototalk/Editor/PhotoTalkEditor';
 import PhotoTalkListPreview from '@/components/phototalk/List/PhotoTalkListPreview';
 import PhotoTalkLayout from '@/components/layout/PhotoTalkLayout';
 import { phototalkData } from '@/constants/phototalkData';
-import { USER_MODE } from '@/types/users';
+import { USER_MODE } from '@/constants/photoTalkUserConstants';
 import { useState } from 'react';
 
 const PreviewPhotoTalkPage = () => {

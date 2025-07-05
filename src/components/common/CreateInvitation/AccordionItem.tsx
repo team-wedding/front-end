@@ -1,6 +1,6 @@
-import Toggle from '@common/Toggle/OnOff';
-import { useToggleFeatureStore } from '@store/OptionalFeature/useToggleFeatureStore.';
+import { contentMap } from '@/constants/accordionContentMap';
 import { AccordionItemData } from '@constants/accordionData';
+import { Check, ChevronRight } from 'lucide-react';
 
 interface AccordionItemProps {
   item: AccordionItemData;
@@ -15,45 +15,54 @@ export const AccordionItem = ({
 }: AccordionItemProps) => {
   const isExpanded = expandedIds.includes(item.id);
 
-  // 토글 기능 상태
-  const { isFeatureActive, handleToggle } = useToggleFeatureStore(item.feature);
-
   return (
-    <>
+    <div className="glass-card overflow-hidden">
       <div
-        className={`accordion-item  ${isExpanded ? 'max-h-160' : 'max-h-12'} `}
+        className={`w-full px-4 py-5 cursor-pointer ${!item.isRequired && 'pl-11'}`}
+        onClick={() => toggleExpand(item.id)}
+        role="button"
+        aria-expanded={isExpanded}
+        aria-controls={`accordion-content-${item.id}`}
       >
-        {/* 제목 및 토글 버튼 */}
-        <div
-          className="flex rounded-2xl justify-between max-h-12 items-center p-6 cursor-pointer"
-          onClick={() => toggleExpand(item.id)}
-          role="button"
-          aria-expanded={expandedIds.includes(item.id)} // 확장 상태 명시
-          aria-controls={`accordion-content-${item.id}`}
-        >
-          <div className="font-semibold">{item.title}</div>
-          <div className="flex items-center gap-4">
-            {item.hasToggle && (
-              <Toggle state={isFeatureActive} setState={handleToggle} />
+        <div className="flex items-center justify-between">
+          <div className="flex items-center space-x-3">
+            {item.isRequired && (
+              <div
+                className={`w-6 h-6 rounded-full flex items-center justify-center ${
+                  item.isCompleted
+                    ? 'bg-gradient-to-br from-[#ff90ba] to-[#a7c7ff] backdrop-blur-sm shadow-sm'
+                    : 'bg-slate-900/10 backdrop-blur-sm'
+                }`}
+              >
+                {item.isCompleted ? (
+                  <Check className="w-4 h-4 text-white" />
+                ) : (
+                  <div className="w-2 h-2 bg-slate-900/15 rounded-full" />
+                )}
+              </div>
             )}
-            <i
-              className={`bx bx-chevron-down text-xl transition-all duration-300 ${
-                expandedIds.includes(item.id) ? 'rotate-180' : ''
-              }`}
-            ></i>
+            <div>
+              <h3 className="font-medium text-slate-800 text-sm">
+                {item.title}
+              </h3>
+            </div>
           </div>
-        </div>
 
-        {/* 콘텐츠 */}
-        <div
-          id={`accordion-content-${item.id}`} // 제목이랑 연결
-          className={`px-5 pb-5 overflow-hidden transition-all duration-300 ease-in-out ${
-            expandedIds.includes(item.id) ? 'opacity-100' : 'opacity-0'
-          }`}
-        >
-          <div>{item.content}</div>
+          <ChevronRight
+            className={`w-4 h-4 text-slate-400 transition-transform ${
+              expandedIds.includes(item.id) ? 'rotate-90' : ''
+            }`}
+          />
         </div>
       </div>
-    </>
+
+      {isExpanded && (
+        <div id={`accordion-content-${item.id}`} className="pt-2">
+          <div className="bg-white/20 backdrop-blur-xl rounded-b-xl py-6 px-6">
+            {contentMap[item.feature]}
+          </div>
+        </div>
+      )}
+    </div>
   );
 };

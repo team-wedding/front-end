@@ -1,50 +1,52 @@
 import { create } from 'zustand';
 
 type WeddingStore = {
-  weddingDate: Date | null;
+  weddingDate: Date | undefined;
   weddingTime: {
     hour: number | null;
     minute: number | null;
   };
   formattedDate: {
-    year: number;
-    month: number;
-    day: number;
+    year: number | null;
+    month: number | null;
+    day: number | null;
   };
-  setWeddingDate: (date: Date | null) => void;
-  setWeddingTime: (hour: number, minute: number) => void;
+  setWeddingDate: (date: Date | undefined) => void;
+  setWeddingTime: (hour: number | null, minute: number | null) => void;
   reset: () => void;
 };
 
 // 초기 상태 정의
 const initialState = {
-  weddingDate: new Date(), // 초기값
+  weddingDate: undefined,
   weddingTime: {
-    hour: 12,
-    minute: 0,
-  }, // 초기값
-
+    hour: null,
+    minute: null,
+  },
   formattedDate: {
-    year: new Date().getFullYear(),
-    month: new Date().getMonth() + 1,
-    day: new Date().getDate(),
+    year: null,
+    month: null,
+    day: null,
   },
 };
 
 export const useWeddingStore = create<WeddingStore>((set) => ({
   ...initialState,
-  setWeddingDate: (date) =>
+  setWeddingDate: (date: Date | undefined) => {
     set({
       weddingDate: date,
-      formattedDate: {
-        year: date!.getFullYear(),
-        month: date!.getMonth() + 1,
-        day: date!.getDate(),
-      },
-    }),
+      formattedDate: date
+        ? {
+            year: date.getFullYear(),
+            month: date.getMonth() + 1,
+            day: date.getDate(),
+          }
+        : { year: null, month: null, day: null },
+    });
+  },
   setWeddingTime: (hour, minute) =>
     set({
       weddingTime: { hour, minute },
     }),
-  reset: () => set(initialState), // Reset 메서드 구현
+  reset: () => set({ ...initialState }),
 }));

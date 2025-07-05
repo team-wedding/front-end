@@ -1,5 +1,5 @@
 export const calculateDday = (
-  targetDate: Date | null,
+  targetDate: Date | undefined,
   targetTime: { hour: number | null; minute: number | null },
 ): {
   days: number;

@@ -19,12 +19,9 @@ const GreetingModal = ({
   if (!isOpen) return null;
 
   return (
-    <div
-      className="page-container fixed inset-0 z-50 bg-black bg-opacity-50 pt-20 min-h-screen"
-      onClick={onClose}
-    >
-      <div className="create-section p-10">
-        <div className="bg-white rounded-lg shadow-md h-3/4">
+    <div className="fixed inset-0 z-50 bg-black/50" onClick={onClose}>
+      <div className="p-10">
+        <div className="bg-white rounded-lg shadow-md">
           <div className="flex flex-col h-full">
             <div className="flex items-center justify-between p-4 border-b rounded-t">
               <div

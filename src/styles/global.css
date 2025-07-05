@@ -188,7 +188,7 @@
 
 @layer components {
   .layout {
-    @apply flex flex-col m-auto bg-surface dark:bg-surface-dark overflow-auto;
+    @apply flex flex-col m-auto min-h-screen bg-surface dark:bg-surface-dark;
     max-width: var(--max-content-width, 520px);
   }
 
@@ -215,7 +215,7 @@
   }
 
   .layout-content {
-    @apply bg-surface dark:bg-surface-dark w-full overflow-auto;
+    @apply bg-surface dark:bg-surface-dark w-full;
     margin-top: var(--header-height);
     margin-bottom: var(--footer-height);
     height: calc(100vh - var(--header-height) - var(--footer-height));
@@ -225,21 +225,15 @@
     height: calc(100vh - var(--header-height) - var(--footer-height));
   }
 
-  .stepper-layout {
-    @apply fixed w-full bg-white z-10 flex-center text-xs px-12 py-2;
-    @apply md:max-w-md;
-    max-width: var(--max-content-width, 520px);
-  }
-
   .preview-layout {
-    @apply column-center max-w-md bg-white text-result tracking-wide rounded-3xl shadow-xl mx-auto relative z-20 font-Pretendard;
+    @apply column-center bg-white text-result tracking-wide rounded-3xl shadow-xl mx-auto w-full font-Pretendard;
     /* @apply md:rounded-t-3xl md:mt-12; */
     /* @apply md:my-12 lg:max-w-md; */
     transition: all 0.3s ease;
   }
 
   .result-layout {
-    @apply column-center max-w-md bg-white text-result tracking-wide shadow-custom mx-auto relative z-20 font-Pretendard mb-40 rounded-b-3xl;
+    @apply column-center max-w-md w-full bg-white text-result tracking-wide shadow-custom mx-auto relative z-20 font-Pretendard mb-40 rounded-b-3xl;
     @apply md:rounded-t-3xl md:mt-10;
     transition: all 0.3s ease;
   }
@@ -249,7 +243,7 @@
   }
 
   .create-section {
-    @apply h-full w-full max-w-[520px] overflow-auto z-20 bg-[#F0E9EC];
+    @apply h-full w-full max-w-[520px] z-20 bg-[#F2F2F7] dark:bg-[#1C1C1E] text-label dark:text-label-dark;
     /* @apply lg:fixed lg:right-1/3; */
     /* @apply md:fixed md:left-10; */
     /* max-width: var(--max-content-width, 448px); */
@@ -257,7 +251,7 @@
   }
 
   .preview-section {
-    @apply overflow-auto bg-black bg-opacity-50;
+    @apply bg-black bg-opacity-50;
     /* @apply lg:flex lg:w-[33%] lg:justify-center; */
     /* @apply md:flex md:w-[30%] md:justify-center; */
     /* transition: all 0.3s ease; */
@@ -275,23 +269,11 @@
     @apply text-neutral-500 bg-button bg-opacity-15 shadow-md font-medium border-transparent;
   }
 
-  .label {
-    @apply block text-[11px] font-medium w-[22%] text-label dark:text-label-dark;
-  }
-
-  /* .splash-btn {
-    @apply py-3 text-sm bg-primary rounded-lg text-white shadow-sm transition duration-100 ease-out hover:ease-in;
-  } */
-
   .splash-btn {
     @apply bg-gradient-to-r from-[#141414] to-[#141414] p-5 w-full rounded-3xl text-white text-sm tracking-wide transition-all duration-200 ease-in-out active:from-[#CEDFFF] active:to-[#F8D4E2] active:shadow-sm active:text-black;
 
     @apply dark:from-[#ffffff] dark:to-[#ffffff] dark:text-black dark:active:from-[#687BAF] dark:active:to-[#AC6083] dark:active:text-white;
   }
-
-  /* .splash-input {
-    @apply px-5 py-3 rounded-lg text-sm border border-gray-300 focus-visible:ring-1 focus:ring-primary focus:border-none placeholder:text-gray-400;
-  } */
 
   .splash-input {
     @apply bg-[#F2F2F7] h-14 w-full rounded-xl border-none px-8 text-sm focus-visible:ring-1 focus:ring-[#C6C6C8] focus:border-none placeholder:text-[#3C3C43] placeholder:opacity-30;
@@ -303,12 +285,16 @@
     @apply bg-gradient-to-r from-[#CEDFFF] to-[#F8D4E2];
   }
 
+  .label {
+    @apply block text-xs font-medium text-slate-500 mb-2;
+  }
+
   .formInput {
-    @apply border-border dark:border-border-dark bg-surface dark:bg-surface-dark text-label dark:text-label-dark text-[11px] rounded-xl focus-visible:ring-0 focus:ring-primary flex-1 min-w-0 placeholder:text-placeholder/30 dark:placeholder:text-placeholder-dark/30 focus:placeholder-transparent py-2 focus:bg-surface dark:focus:bg-surface-dark;
+    @apply w-full text-base text-slate-900 bg-transparent border-none outline-none placeholder:text-gray-400/60 focus:ring-0;
   }
 
   .accordion-item {
-    @apply bg-white rounded-2xl overflow-hidden transition-all duration-100 text-neutral-700 shadow-sm text-[11px];
+    @apply bg-white rounded-lg overflow-hidden transition-all duration-100 text-neutral-700 shadow-sm text-[12px];
   }
 
   .flex-center {
@@ -339,14 +325,6 @@
     @apply text-xs text-highlight tracking-[.4em] font-Crimson font-light opacity-60;
   }
 
-  /* .custom-dots .slick-dots {
-    @apply flex flex-nowrap overflow-x-auto justify-center gap-1 py-1 rounded-lg bg-black/20;
-  }
-
-  .custom-dots .slick-dots li {
-    @apply m-0 shrink-0;
-  } */
-
   .custom-dots {
     @apply bg-black/5  dark:bg-white/5;
   }
@@ -357,6 +335,84 @@
 
   .custom-dots li.slick-active button:before {
     @apply text-black dark:text-white;
+  }
+
+  .fixed-preview-panel-fullscreen {
+    position: fixed;
+    top: 3rem; /* 네비게이션 바 높이 (48px) */
+    right: 50%;
+    transform: translateX(calc(50% - 2rem));
+    /* 중앙 정렬 후 오른쪽으로 이동 */
+    /* width: calc((100vw - 64rem) / 2 + 28rem);  */
+    /* 그리드 4/7 비율 계산 */
+    max-width: 28rem;
+    height: calc(100vh - 3rem); /* 네비게이션 바 제외한 전체 높이 */
+    z-index: 30;
+    padding: 1rem;
+  }
+
+  .glass-nav {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-stepper {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-active {
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  }
+
+  .glass-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+  }
+
+  .glass-card:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
+  }
+
+  .glass-modal {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-radius: 16px;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  }
+
+  .glass-preview-card {
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 28px;
+    box-shadow:
+      0 8px 32px rgba(0, 0, 0, 0.08),
+      inset 0 1px 0 rgba(255, 255, 255, 0.6);
   }
 }
 
@@ -375,22 +431,7 @@
   height: 100% !important;
 }
 
-/* .custom-dots .slick-dots {
-  display: flex !important;
-  flex-wrap: nowrap !important;
-  overflow-x: auto !important;
-  justify-content: center;
-  padding: 0 8px;
-  margin: 4px auto;
-  width: fit-content;
-  border-radius: 20px;
-  backdrop-filter: blur(12px);
-  width: fit-content;
-  background-color: rgba(0, 0, 0, 0.1);
-} */
-
 .custom-dots {
-  /* width: min-content !important; */
   display: inline-flex !important;
   flex-wrap: nowrap !important;
   overflow-x: auto !important;
@@ -406,7 +447,271 @@
   margin: 0 -4px !important;
 }
 
-/* .custom-dots .slick-dots li {
-  margin: 0 -4px !important;
-  flex-shrink: 0;
-} */
+@supports (-webkit-touch-callout: none) {
+  .glass-nav,
+  .glass-stepper,
+  .glass-card,
+  .glass-modal,
+  .glass-preview-card {
+    -webkit-backdrop-filter: blur(20px);
+  }
+}
+
+* {
+  -webkit-overflow-scrolling: touch;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* Remove input styling on iOS */
+input[type='text'],
+input[type='tel'],
+input[type='date'],
+input[type='time'] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+/* iOS button styling */
+button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Animation for glass elements */
+@keyframes glass-shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.glass-card:hover::before {
+  left: 100%;
+}
+
+/* Enhanced glass depth effect */
+.glass-card,
+.glass-stepper,
+.glass-modal,
+.glass-preview-card {
+  transform-style: preserve-3d;
+}
+
+/* Glass frosting effect */
+.glass-card:hover,
+.glass-stepper:hover,
+.glass-modal:hover {
+  backdrop-filter: blur(45px);
+  -webkit-backdrop-filter: blur(45px);
+}
+
+/* 하드웨어 가속 최적화 */
+.glass-card,
+.glass-button-primary {
+  transform: translateZ(0);
+}
+
+.glass-checkbox-container {
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.glass-checkbox-container:hover {
+  background: rgba(255, 255, 255, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+}
+
+.glass-checkbox:checked {
+  background: linear-gradient(
+    135deg,
+    rgba(0, 0, 0, 0.6) 0%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+.glass-checkbox:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.glass-checkbox:focus {
+  outline: none;
+  box-shadow: 0 0 0 0px rgba(59, 130, 246, 0.2);
+}
+
+.glass-checkbox {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  appearance: none;
+  -webkit-appearance: none;
+  position: relative;
+}
+
+.glass-button {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.glass-button:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(248, 113, 113, 0.15) 0%,
+    rgba(139, 92, 246, 0.15) 100%
+  );
+  color: #1f2937;
+}
+
+.glass-button-selected {
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(
+    135deg,
+    rgba(248, 113, 113, 0.15) 0%,
+    rgba(139, 92, 246, 0.15) 100%
+  );
+  color: #1f2937;
+}
+
+.wedding-datepicker-caption-label {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #374151;
+  background: linear-gradient(135deg, #f43f5e 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.wedding-datepicker-months {
+  display: flex;
+  justify-content: center;
+}
+
+.wedding-datepicker-month {
+  margin: 0;
+}
+
+.wedding-datepicker-caption {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+.wedding-datepicker-day {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 16px;
+  font-size: 0.875rem;
+  text-align: center;
+  font-weight: 500;
+  color: #374151;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.wedding-datepicker-day:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(248, 113, 113, 0.15) 0%,
+    rgba(139, 92, 246, 0.15) 100%
+  );
+  transform: translateY(-1px) scale(0.95);
+  color: #1f2937;
+}
+
+.wedding-datepicker-day-selected {
+  background: linear-gradient(135deg, #f43f5e 0%, #8b5cf6 100%) !important;
+  opacity: 0.8;
+  color: white !important;
+  /* border-color: rgba(244, 63, 94, 0.5) !important; */
+  /* box-shadow:
+    0 4px 16px rgba(244, 63, 94, 0.4),
+    0 8px 24px rgba(139, 92, 246, 0.2) !important; */
+  transform: scale(0.9);
+  font-weight: 600;
+}
+
+.wedding-timepicker {
+  font-size: 0.875rem;
+  text-align: center;
+  font-weight: 500;
+  color: #374151;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.wedding-timepicker:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(248, 113, 113, 0.15) 0%,
+    rgba(139, 92, 246, 0.15) 100%
+  );
+  border-color: rgba(248, 113, 113, 0.3);
+  transform: translateY(-1px) scale(0.98);
+  /* box-shadow: 0 4px 12px rgba(248, 113, 113, 0.2); */
+  color: #1f2937;
+}

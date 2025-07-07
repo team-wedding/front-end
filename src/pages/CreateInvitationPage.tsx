@@ -20,7 +20,7 @@ import {
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
-import { InvitationDetail, NoticeDetail } from '@/types/invitationType';
+import { InvitationDetail, NoticeDetail } from '@/types/invitationTypes';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';

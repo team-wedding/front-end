@@ -55,8 +55,9 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
         <div className="flex w-full justify-center gap-2 my-4">
           <input
             type="text"
+            name="invitation-title"
             placeholder="ex. 청첩장1, 친구용, 혼주용"
-            className="bg-surface dark:bg-surface-dark text-center text-label dark:text-label-dark w-[60%] focus:outline-none focus:ring-0 focus:border-secondary dark:focus:border-secondary-dark border-0 border-b border-border dark:border-border-dark text-xs placeholder:text-label-secondary/60 dark:placeholder:text-label-secondary-dark/60 ml-4"
+            className="bg-surface dark:bg-surface-dark text-start text-label dark:text-label-dark w-[60%] focus:outline-none focus:ring-0 focus:border-secondary dark:focus:border-secondary-dark border-0 border-b border-border dark:border-border-dark text-xs placeholder:text-label-secondary/60 dark:placeholder:text-label-secondary-dark/60 ml-4"
             value={titleInput}
             autoFocus
             onChange={handleTitleChange}
@@ -67,6 +68,7 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
           </div>
           <button
             onClick={handleConfirm}
+            data-testid="title-submit"
             disabled={titleInput.length === 0}
             className={`rounded-full w-8 h-8 flex justify-center items-center ${
               titleInput.length === 0

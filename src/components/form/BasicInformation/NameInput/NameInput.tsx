@@ -23,7 +23,9 @@ const NameInput = () => {
         <div key={index} className="max-w-lg mx-auto px-4 py-2">
           <div className="flex flex-col gap-3">
             <div className="flex items-center gap-2">
-              <label className="label flex gap-1">{person.role}</label>
+              <label className="label flex gap-1 dark:text-black">
+                {person.role}
+              </label>
               <DebouncedInput
                 type="text"
                 ref={nameInputRef}
@@ -36,7 +38,7 @@ const NameInput = () => {
               />
             </div>
             <div className="flex items-center gap-2">
-              <label className="label">아버지</label>
+              <label className="label dark:text-black">아버지</label>
               <DebouncedInput
                 type="text"
                 ref={fatherNameInputRef}
@@ -65,7 +67,7 @@ const NameInput = () => {
               </div>
             </div>
             <div className="flex items-center gap-2">
-              <label className="label">어머니</label>
+              <label className="label dark:text-black">어머니</label>
               <DebouncedInput
                 type="text"
                 ref={motherNameInputRef}

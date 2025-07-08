@@ -1,7 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useRef, useState } from 'react';
 import { QRCodeCanvas } from 'qrcode.react';
-// import { toast, ToastContainer } from 'react-toastify';
-import LinkIcon from '@icons/LinkIcon';
+// import LinkIcon from '@icons/LinkIcon';
 import Toast from '@/components/common/Toast';
 import useToast from '@/hooks/useToast';
 
@@ -34,13 +33,6 @@ export default function ShareInvitation({
   const canvas = useRef<HTMLCanvasElement | null>(null);
   const aRef = useRef(null);
   const [pngUrl, setPngUrl] = useState('');
-
-  // let mock_Title = 'title is here';
-  // let mock_Desc = 'description is here';
-  // let mock_Image =
-  //   ' https://images.pexels.com/photos/29554688/pexels-photo-29554688/free-photo-of-romantic-wedding-couple-in-urban-tel-aviv-setting.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500';
-  // let mock_Url = 'result';
-  // let mock_Header = 'ㅇㅇㅇ 💌 ㅇㅇㅇ';
 
   useEffect(() => {
     if (window && window.Kakao) {
@@ -85,21 +77,21 @@ export default function ShareInvitation({
   return (
     <>
       <div
-        className={`${isFocused ? 'max-h-40' : 'max-h-0 invisible'} absolute flex flex-col bottom-9 right-6 items-center bg-black/80 px-1 rounded-xl text-[9px] text-white/90 transition-all duration-500 ease-in-out backdrop-blur-3xl`}
+        className={`${isFocused ? 'max-h-60' : 'max-h-0 invisible'} absolute flex flex-col bottom-12 right-6 items-center bg-black/80 p-2 rounded-xl text-xs font-medium text-white/80 transition-all duration-500 ease-in-out backdrop-blur-3xl`}
         onBlur={() => setIsFocused(false)}
       >
         <button
           onClick={handleCopy}
           className="px-3 py-3 flex flex-row items-center"
         >
-          <LinkIcon />
+          {/* <LinkIcon /> */}
           URL 복사하기
         </button>
-        <hr className=" w-full" />
+        <hr className="w-full" />
         <button onClick={handleKakaoShare} className="px-3 py-3">
           카카오로 공유하기
         </button>
-        <hr className=" w-full" />
+        <hr className="w-full" />
         <QRCodeCanvas
           ref={canvas}
           className="hidden"
@@ -110,6 +102,7 @@ export default function ShareInvitation({
           QR 코드 저장
         </a>
       </div>
+
       {message && <Toast key={message} message={message} />}
     </>
   );

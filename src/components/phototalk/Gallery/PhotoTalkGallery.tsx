@@ -2,8 +2,9 @@ import PhotoTalkGalleryAdmin from '@/components/phototalk/Gallery/PhotoTalkGalle
 import PhotoTalkGalleryGuest from '@/components/phototalk/Gallery/PhotoTalkGalleryGuest';
 import PhotoTalkGalleryPreview from '@/components/phototalk/Gallery/PhotoTalkGalleryPreview';
 import { exampleImages } from '@/constants/phototalkData';
+import { USER_MODE } from '@/constants/photoTalkUserConstants';
 import usePhotoTalkStore from '@/store/usePhotoTalkStore';
-import { USER_MODE, UserMode } from '@/types/users';
+import { UserMode } from '@/types/photoTalkUserTypes';
 
 interface PhotoTalkGalleryProps {
   userMode: UserMode;

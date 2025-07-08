@@ -43,7 +43,7 @@ const Navbar = () => {
           <button
             key={item.label}
             onClick={() => handleClick(item.path)}
-            className={`w-14 column-center gap-[2px] text-[8px] font-semibold ${isActive(item.path) ? 'text-label-overlay' : 'text-label-overlay-muted/30'}`}
+            className={`w-14 column-center gap-[2px] text-[10px] font-semibold ${isActive(item.path) ? 'text-label-overlay' : 'text-label-overlay-muted/30'}`}
           >
             <item.Icon />
             {item.label}

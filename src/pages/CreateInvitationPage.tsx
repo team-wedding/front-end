@@ -1,16 +1,12 @@
 import { useEffect, useState } from 'react';
-import PageLayout from '@layout/PageLayout';
-import HeaderButton from '@common/Header/HeaderButton';
 import { useNavigate, useParams } from 'react-router';
 import { Accordion } from '@common/CreateInvitation/Accordion';
 import { Stepper } from '@common/CreateInvitation/Stepper';
-import { StepNavigation } from '@common/CreateInvitation/StepNavigation';
 import { DndProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { useAccordionStore } from '@store/useAccordionStore';
 import { useGetInvitation, useUpdateInvitation } from '@hooks/useInvitation';
 import resetAllStores from '@/store/resetStore';
-import ResultDisplay from '@/components/display/ResultDisplay';
 import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
 import {
@@ -24,46 +20,56 @@ import { InvitationDetail, NoticeDetail } from '@/types/invitationTypes';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
-import ReusableModal from '@/components/common/Modal/ReusableModal';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/common/Toast';
 import { S3UploadRequest } from '@/types/s3Type';
 import PreviewDisplay from '@/components/display/PreviewDisplay';
-import BackIcon from '@/components/icons/BackIcon';
+import { ChevronLeft, X } from 'lucide-react';
+import BasicInformationButton from '@/components/common/CreateInvitation/BasicInformationButton';
+// import { StepNavigation } from '@common/CreateInvitation/StepNavigation';
 
-const sliceRanges = [[0, 3], [3, 13], [13]];
+const STEP_RANGES = [[0, 3], [3, 13], [13]];
+const STEP_ITEM = ['기본 정보', '기능 선택', '테마 선택'];
 // const AUTO_SAVE_MODAL_DURATION_MS = 3000;
 // const AUTO_SAVE_INTERVAL_MS = 5000;
 
 const CreateInvitationPage = () => {
   const navigate = useNavigate();
   const { id } = useParams();
-  const [steps, setSteps] = useState(1);
+
+  const [currentStep, setCurrentStep] = useState(0);
   const [expandedIds, setExpandedIds] = useState<number[]>([]);
+  const [basicInfo, setBasicInfo] = useState(false);
   const [cancelModal, setCancelModal] = useState(false);
   const [previewModal, setPreviewModal] = useState(false);
+  const { message, showToast } = useToast();
+
   const details = getInvitationAction();
-  const { optionalItems } = useAccordionStore();
   const { invitations } = useGetInvitation(parseInt(id!));
-  const { items, initializeItems, moveItem } = useAccordionStore();
+  const { mutateAsync: updateMutate } = useUpdateInvitation(parseInt(id!));
+  const { mutateAsync: s3Mutate } = useS3Image();
+
+  const { invitationtitle, setInvitationTitle } = useInvitationStore();
+  const items = useAccordionStore((s) => s.items);
+  const initializeItems = useAccordionStore((s) => s.initializeItems);
+  const moveItem = useAccordionStore((s) => s.moveItem);
+  const optionalItems = useAccordionStore((s) => s.optionalItems);
+
   const { selectedOptionalFeatures } = useOptionalFeatureStore();
   const { uploadedImageFile, uploadedImageUrl } = useImageStore();
   const { galleryFiles, grid } = useGalleryStore();
-  const { invitationtitle, setInvitationTitle } = useInvitationStore();
   const { notices } = useNoticeStore();
+
+  const flushAll = useDebouncedInputStore((s) => s.flushAll);
+
   const noticeImages = notices.flatMap((value) => {
     if (value.imgFile) {
       return value.imgFile;
     } else return null;
   });
 
-  const { mutateAsync: updateMutate } = useUpdateInvitation(parseInt(id!));
-  const { mutateAsync: s3Mutate } = useS3Image();
-
-  const flushAll = useDebouncedInputStore((s) => s.flushAll);
-
   const findOrder = (feature: string) => {
-    if (!feature) return undefined; // feature가 없으면 undefined 반환
+    if (!feature) return undefined;
     const result = optionalItems.find((value) => value.feature === feature);
     return result?.order;
   };
@@ -128,9 +134,9 @@ const CreateInvitationPage = () => {
   }, [invitations]);
 
   useEffect(() => {
-    const [start, end] = sliceRanges[steps - 1];
+    const [start, end] = STEP_RANGES[currentStep];
     initializeItems(start, end);
-  }, [steps, initializeItems]);
+  }, [currentStep, initializeItems]);
 
   // useEffect(() => {
   //   const intervalId = setInterval(async () => {
@@ -148,80 +154,110 @@ const CreateInvitationPage = () => {
   //   };
   // }, [updateMutate]);
 
+  // const handleNextStep = () => {
+  //   if (currentStep < STEP_RANGES.length) {
+  //     handleStepClick(currentStep + 1);
+  //   }
+  // };
+  // const handlePrevStep = () => {
+  //   if (currentStep > 0) {
+  //     handleStepClick(currentStep - 1);
+  //   }
+  // };
+
   const toggleExpand = (id: number) => {
     setExpandedIds((prev) =>
       prev.includes(id) ? prev.filter((item) => item !== id) : [...prev, id],
     );
   };
+
   const handleStepClick = (step: number) => {
-    if (step > 0 && step <= sliceRanges.length) {
-      setSteps(step);
+    if (step >= 0 && step < STEP_RANGES.length) {
+      setCurrentStep(step);
     }
   };
-  const handleNext = () => {
-    if (steps < sliceRanges.length) {
-      handleStepClick(steps + 1);
-    }
-  };
-  const handlePrev = () => {
-    if (steps > 1) {
-      handleStepClick(steps - 1);
-    }
-  };
+
   const handleCancel = () => {
-    // resetAllStores();
     setCancelModal(true);
   };
+
   const handleConfirmCancel = () => {
     resetAllStores();
+    useAccordionStore.getState().reset();
     navigate('/dashboard');
   };
 
-  const { message, showToast } = useToast();
-
   const handleSave = async () => {
     saveInvitationData();
-    showToast('청첩장이 성공적으로 저장되었습니다.');
+    showToast('저장되었습니다');
   };
 
   return (
     <>
       <DndProvider backend={HTML5Backend}>
-        <div className="page-container overflow-hidden flex flex-row justify-center">
-          <div className="create-section relative w-full sm:w-1/2">
-            <PageLayout
-              title={invitationtitle}
-              leftButton={
-                <HeaderButton
-                  onClick={handleCancel}
-                  className="text-sm text-gray-600 mx-6 hover:text-black active:text-rose-400"
-                >
-                  취소
-                </HeaderButton>
-              }
-              rightButton={
-                <HeaderButton
-                  onClick={handleSave}
-                  className="text-sm text-gray-600 mx-6 hover:text-black active:text-rose-400"
-                >
-                  저장
-                </HeaderButton>
-              }
-              customFooter={
-                <StepNavigation
-                  currentStep={steps}
-                  totalSteps={sliceRanges.length}
-                  onPrev={handlePrev}
-                  onNext={handleNext}
+        <main
+          className="min-h-screen relative bg-white dark:bg-[#1C1C1E] text-label dark:text-label-dark"
+          style={{
+            background: 'linear-gradient(135deg, #CEDFFF 0%, #f8e2ea 100%)',
+          }}
+        >
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/30 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute top-40 right-16 w-96 h-96 bg-pink-200/25 rounded-full blur-3xl animate-pulse delay-1000"></div>
+            <div className="absolute bottom-32 left-20 w-80 h-80 bg-purple-200/20 rounded-full blur-3xl animate-pulse delay-2000"></div>
+            <div className="absolute bottom-20 right-10 w-64 h-64 bg-indigo-200/25 rounded-full blur-3xl animate-pulse delay-500"></div>
+          </div>
+
+          <header className="glass-nav sticky top-0 z-30">
+            <div className="md:max-w-4xl max-w-md mx-auto px-4">
+              <div className="flex items-center justify-between h-12">
+                <div className="flex items-center space-x-4 md:space-x-4">
+                  <button
+                    onClick={handleCancel}
+                    className="flex items-center p-0 h-auto text-slate-800 rounded-md hover:bg-white/30 transition-colors"
+                  >
+                    <X className="size-4 mr-2" strokeWidth="2" />
+                    취소
+                  </button>
+                  <div className="h-4 w-px bg-slate-400"></div>
+                  <h1 className="text-lg rounded-sm font-medium text-gray-900 ">
+                    {invitationtitle}
+                  </h1>
+                </div>
+
+                <div className="flex items-center space-x-4">
+                  <PreviewButton
+                    update={saveInvitationData}
+                    setPreviewModal={setPreviewModal}
+                  />
+
+                  <button
+                    onClick={handleSave}
+                    className="flex items-center text-base rounded-md text-slate-800 p-0 h-auto hover:bg-white/30  transition-colors"
+                  >
+                    저장
+                  </button>
+                </div>
+              </div>
+            </div>
+          </header>
+
+          <section className="md:max-w-4xl md:mx-auto py-4 px-2 md:px-4 md:py-6 transition-all duration-300">
+            <div className="grid grid-cols-1 md:grid-cols-7 gap-4 transition-all duration-300">
+              <div className="md:col-span-3 md:my-2">
+                <Stepper
+                  stepItem={STEP_ITEM}
+                  currentStep={currentStep}
+                  onStepClick={handleStepClick}
                 />
-              }
-            >
-              <Stepper
-                steps={['기본 정보 입력', '기능 선택', '테마 선택']}
-                currentStep={steps}
-                onStepClick={handleStepClick}
-              />
-              <div className="bg-background/10 min-h-screen font-Pretendard">
+
+                {currentStep === 0 && (
+                  <BasicInformationButton
+                    basicInfo={basicInfo}
+                    setBasicInfo={setBasicInfo}
+                  />
+                )}
+
                 <Accordion
                   items={items}
                   expandedIds={expandedIds}
@@ -229,27 +265,66 @@ const CreateInvitationPage = () => {
                   moveItem={moveItem}
                 />
               </div>
-            </PageLayout>
-            <div className="absolute bottom-16 right-4 sm:hidden">
-              <PreviewButton
-                update={saveInvitationData}
-                setPreviewModal={setPreviewModal}
-              />
+
+              <article className="hidden md:col-span-4 md:block">
+                <div className="glass-preview-card h-[calc(100vh-6rem)] overflow-y-auto sticky z-30 top-[4.5rem] p-4 scrollbar-hide">
+                  <PreviewDisplay />
+                </div>
+              </article>
             </div>
-          </div>
-          <div className="preview-section sm:h-screen w-1/2 hidden sm:block">
-            <ResultDisplay />
-          </div>
-          <section
-            className={`sm:hidden absolute top-0 left-0 w-full h-screen overflow-scroll backdrop-blur-lg pt-2 bg-grey-600 z-30 transform ease-in-out duration-700 ${previewModal ? 'translate-x-0`' : 'translate-x-full'}`}
+          </section>
+        </main>
+
+        <section
+          className={`fixed top-0 left-0 max-w-4xl w-full mx-auto h-screen overflow-scroll md:hidden backdrop-blur-xl z-50 transform ease-in-out duration-700  ${previewModal ? 'translate-x-0' : 'translate-x-full'}`}
+        >
+          {/* <header className="sticky top-0 left-0 right-0 z-50 m-auto "> */}
+          <button
+            onClick={() => setPreviewModal(false)}
+            aria-label="뒤로가기"
+            className="text-black sticky top-0 left-0 right-0 z-50 p-3"
           >
-            <header className="fixed top-2 left-0 right-0 px-10 z-50 m-auto max-w-[520px] flex-between h-12 bg-transparent ">
+            <ChevronLeft className="w-8" />
+          </button>
+          {/* </header> */}
+
+          <div className="max-w-lg mx-auto px-6">
+            <PreviewDisplay />
+          </div>
+        </section>
+
+        {/* 
+        <StepNavigation
+          currentStep={currentStep}
+          totalSteps={STEP_RANGES.length}
+          onPrev={handlePrevStep}
+          onNext={handleNextStep}
+        /> */}
+
+        {cancelModal && (
+          <div className="fixed inset-0 z-50 flex items-end justify-center h-screen bg-black/20 backdrop-blur-sm">
+            <div className="w-full max-w-md mx-4 mb-4 space-y-2">
+              <div className="glass-modal overflow-hidden">
+                <div className="p-4 text-center border-b border-white/30">
+                  <h3 className="font-medium text-slate-800">
+                    작성을 취소하시겠습니까?
+                  </h3>
+                  <p className="text-sm text-slate-600 mt-1">
+                    저장하지 않은 내용은 삭제됩니다.
+                  </p>
+                </div>
+                <button
+                  onClick={handleConfirmCancel}
+                  className="w-full py-3 text-red-500 font-medium hover:bg-white/20"
+                >
+                  나가기
+                </button>
+              </div>
               <button
-                onClick={() => setPreviewModal(false)}
-                aria-label="뒤로가기"
-                className="p-3 text-black "
+                onClick={() => setCancelModal(false)}
+                className="glass-modal w-full py-3 text-slate-800 font-semibold"
               >
-                <BackIcon />
+                계속 작성하기
               </button>
             </header>
             <PreviewDisplay />
@@ -268,7 +343,9 @@ const CreateInvitationPage = () => {
           onConfirm={handleConfirmCancel}
           onCancel={() => setCancelModal(false)}
         />
+        )}
       </DndProvider>
+
       {message && <Toast key={message} message={message} />}
     </>
   );

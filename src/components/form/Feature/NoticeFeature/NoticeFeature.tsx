@@ -123,10 +123,8 @@ const NoticeFeature = () => {
   );
 
   return (
-    <div className="mx-4 my-6 text-xs">
+    <>
       <InformationItem messages={['공지는 최대 5개까지 입력할 수 있습니다.']} />
-
-      <hr />
 
       <Notice
         items={accordionItems}
@@ -149,7 +147,7 @@ const NoticeFeature = () => {
         onConfirm={confirmDelete}
         onCancel={() => setIsDeleteModalOpen(false)}
       />
-    </div>
+    </>
   );
 };
 

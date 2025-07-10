@@ -1,52 +1,36 @@
-import React from 'react';
-
 interface StepperProps {
-  steps: string[];
+  stepItem: string[];
   currentStep: number;
   onStepClick: (step: number) => void;
 }
 
-export const Stepper = ({ steps, currentStep, onStepClick }: StepperProps) => {
+export const Stepper = ({
+  stepItem,
+  currentStep,
+  onStepClick,
+}: StepperProps) => {
   return (
-    <div className="stepper-layout">
-      {steps.map((step, index) => {
-        const isActive = index + 1 === currentStep;
-        const isCompleted = index + 1 < currentStep;
-        return (
-          <React.Fragment key={index}>
-            {/* Step Indicator */}
+    <div className="max-w-md mx-auto mb-8">
+      <div className="glass-stepper p-1 flex-center">
+        {stepItem.map((step, index) => {
+          const isActive = index === currentStep;
+
+          return (
             <button
-              className="flex items-center rounded-xl px-2 py-2 hover:bg-gray-300 hover:bg-opacity-20 transition-all ease-in-out duration-100"
-              onClick={() => onStepClick(index + 1)}
+              key={index}
+              onClick={() => onStepClick(index)}
+              className={`flex-1 py-3 px-3 text-sm font-medium rounded-lg transition-all duration-300 ${
+                isActive
+                  ? 'glass-active text-slate-800 shadow-lg'
+                  : 'text-slate-600 hover:text-slate-900/40 hover:bg-white/10'
+              }
+                  `}
             >
-              <div
-                className={`w-3 h-3 flex items-center justify-center rounded-full text-[8px] font-bold border ${
-                  isActive
-                    ? 'text-primary border-primary'
-                    : isCompleted
-                      ? 'bg-gray-100 text-gray-400'
-                      : 'bg-white text-gray-300'
-                }`}
-              >
-                {index + 1}
-              </div>
-              <div
-                className={`ml-1 ${
-                  isActive
-                    ? 'text-primary font-medium'
-                    : 'text-gray-300 font-light'
-                }`}
-              >
-                {step}
-              </div>
+              <span>{step}</span>
             </button>
-            {/* Divider */}
-            {index < steps.length - 1 && (
-              <div className="flex-grow h-px bg-gray-300 mx-1"></div>
-            )}
-          </React.Fragment>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };

@@ -1,3 +1,4 @@
+import { ChevronRight } from 'lucide-react';
 import React, { useState } from 'react';
 
 interface BankOption {
@@ -44,25 +45,26 @@ const BankSelector: React.FC<{
   };
 
   return (
-    <div className="w-24 relative">
+    <div className="w-44 relative">
       <div
         onClick={toggleDropDown}
-        className="flex justify-between items-center px-2 py-3 border border-gray-300 rounded-xl bg-gray-50 cursor-pointer text-[11px] hover:bg-gray-100 gap-1"
+        className="flex justify-between items-center px-4 py-3 glass-button cursor-pointer text-sm text-slate-600"
       >
         {selectedBank || '은행 선택'}
-        <i
-          className={`bx bx-chevron-down text-xs transition-transform duration-300 ${
-            isOpen ? 'rotate-180' : ''
+
+        <ChevronRight
+          className={`w-4 h-4 text-slate-600 transition-transform ${
+            isOpen ? 'rotate-90' : ''
           }`}
-        ></i>
+        />
       </div>
       {isOpen && (
-        <ul className="absolute z-[5] w-28 mt-2 bg-white border border-gray-300 rounded-xl max-h-36 overflow-y-auto">
+        <ul className="absolute z-[5] w-full mt-2 bg-white rounded-xl max-h-48 px-2 overflow-y-auto">
           {banks.map((bank) => (
             <li
               key={bank.id}
               onClick={() => handleSelect(bank)}
-              className="cursor-pointer text-xs m-2 hover:text-gray-300"
+              className="cursor-pointer text-sm text-slate-600 m-2"
             >
               {bank.name}
             </li>

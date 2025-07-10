@@ -7,6 +7,7 @@ type DebouncedInputProps = {
   type: string;
   onDebouncedChange: (value: string) => void;
   pattern?: string;
+  onChange?: (value: string) => void;
   delay?: number;
   placeholder?: string;
   className?: string;
@@ -22,6 +23,7 @@ const DebouncedInput = forwardRef<DebouncedInputHandle, DebouncedInputProps>(
       value,
       onDebouncedChange,
       type,
+      onChange,
       delay = 3000,
       pattern,
       placeholder = '',
@@ -42,6 +44,7 @@ const DebouncedInput = forwardRef<DebouncedInputHandle, DebouncedInputProps>(
       const val = e.target.value;
       valueRef.current = val;
       debouncedChange(val);
+      onChange?.(val);
     };
 
     const handleBlur = () => {

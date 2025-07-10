@@ -1,12 +1,10 @@
 import React, { useRef, useState } from 'react';
-// import { toast, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Toast from '@/components/common/Toast';
 import useToast from '@/hooks/useToast';
+import { Plus } from 'lucide-react';
 
 interface ImageUploaderProps {
-  // uploadedImageUrl: string;
-  // setUploadedImageUrl: (image: string) => void;
   ImageUrl: string;
   ImageFile: File | null;
   setImageUrl: (url: string) => void;
@@ -28,6 +26,7 @@ const ImageUploader = ({
   const fileInputRef = useRef<HTMLInputElement | null>(null);
   const [uploadedImage, setUploadedImage] = useState<string>(ImageUrl);
   const [isDragging, setIsDragging] = useState(false);
+  const { message, duration, showToast } = useToast();
 
   const validateImageSize = (file: File): Promise<boolean> => {
     return new Promise((resolve) => {
@@ -39,8 +38,6 @@ const ImageUploader = ({
       };
     });
   };
-
-  const { message, duration, showToast } = useToast();
 
   const handleImageUpload = async (file: File) => {
     const isValid = await validateImageSize(file);
@@ -101,49 +98,33 @@ const ImageUploader = ({
   let randomId = Math.random();
 
   return (
-    <div className="flex items-center justify-center max-w-lg mx-auto">
-      {/* <ToastContainer position="top-center" autoClose={3000} hideProgressBar /> */}
+    <div className="flex-center w-full mx-auto">
       {!uploadedImage ? (
         <label
           htmlFor={`dropzone-file-${randomId}`}
-          className={`flex flex-col items-center justify-center w-80 h-40 border-2 ${
+          className={`flex-center w-full h-44 cursor-pointer  glass-button ${
             isDragging
               ? 'border-rose-300 bg-rose-50'
               : 'border-gray-100 bg-gray-50'
-          }  rounded-xl cursor-pointer hover:bg-gray-100`}
+          }  `}
           onDragOver={handleDragOver}
           onDragLeave={handleDragLeave}
           onDrop={handleDrop}
         >
-          <div className="flex flex-col items-center justify-center text-center py-5 text-[10px] text-gray-400 gap-1">
-            <svg
-              className="w-6 h-6 text-gray-700 dark:text-white my-2"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              fill="none"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="1.5"
-                d="M5 12h14m-7 7V5"
-              />
-            </svg>
-
-            <p>이미지를 선택하거나 드래그해서 추가해주세요</p>
-            <p>
-              {acceptedFormats
-                .join(', ')
-                .replace(/image\//g, '')
-                .toUpperCase()}{' '}
-              파일 (MAX. {maxWidth}x{maxHeight}px)
-            </p>
-            <p></p>
+          <div className="column-center space-y-3">
+            <Plus className="text-slate-500" strokeWidth={1.6} />
+            <div className="space-y-1 text-xs text-slate-400 text-center">
+              <p>이미지를 선택하거나 드래그해서 추가해주세요</p>
+              <p>
+                {acceptedFormats
+                  .join(', ')
+                  .replace(/image\//g, '')
+                  .toUpperCase()}{' '}
+                파일 (MAX. {maxWidth}x{maxHeight}px)
+              </p>
+            </div>
           </div>
+
           <input
             id={`dropzone-file-${randomId}`}
             type="file"
@@ -153,15 +134,16 @@ const ImageUploader = ({
           />
         </label>
       ) : (
-        <div className="flex flex-col items-center">
+        <div className="space-y-4 column-center">
           <img
             src={uploadedImage}
             alt="Uploaded"
-            className="h-auto max-w-full border-2 rounded-xl"
+            className="max-h-96 w-full rounded-xl"
           />
+
           <button
             onClick={handleImageDelete}
-            className="mt-4 px-3 py-2 text-[12px] bg-button bg-opacity-80 text-white rounded-xl hover:bg-rose-200"
+            className="px-4 py-2 glass-button text-slate-900"
           >
             삭제
           </button>

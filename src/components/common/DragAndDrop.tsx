@@ -40,8 +40,6 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
     accept: 'accordion-item',
     hover: (draggedItem: { index: number }) => {
       if (draggedItem.index !== index) {
-        // console.log('Dragging from:', draggedItem.index, 'to:', index);
-
         moveItem(draggedItem.index, index);
         draggedItem.index = index;
       }
@@ -55,9 +53,9 @@ const DragAndDrop: React.FC<DragAndDropProps> = ({
       ref={ref}
       className={className}
       style={{
-        opacity: isDragging ? 0.5 : 1,
-        backgroundColor: isDragging ? 'gray' : 'white',
-        transition: 'all ease-in-out 0.2s',
+        backgroundColor: isDragging ? 'rgba(255, 255, 255, 0.5)' : '',
+        transition: 'all ease-in-out 0.3s',
+        borderRadius: '16px',
       }}
     >
       {children}

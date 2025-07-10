@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { calculateDday } from '@utils/dateUtils';
 
 type CountDownProps = {
-  targetDate: Date | null;
+  targetDate: Date | undefined;
   targetTime: { hour: number | null; minute: number | null };
 };
 

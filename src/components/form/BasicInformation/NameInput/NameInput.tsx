@@ -28,7 +28,7 @@ const NameInput = () => {
       {brideGroom.map((person, index) => (
         <div key={index}>
           <div className="py-3 border-b border-gray-200">
-            <label className="label">{person.role} *</label>
+            <label htmlFor={`${person.role}-name`} className="label">{person.role} *</label>
             <DebouncedInput
               type="text"
               ref={nameInputRef}
@@ -43,7 +43,7 @@ const NameInput = () => {
           </div>
 
           <div className="py-3 border-b border-gray-200">
-            <label className="label">아버지</label>
+            <label htmlFor={`${person.role}-fatherName`} className="label">아버지</label>
             <div className="flex items-center gap-3">
               <DebouncedInput
                 type="text"
@@ -54,10 +54,12 @@ const NameInput = () => {
                 }
                 placeholder="성함을 입력해주세요"
                 className="formInput"
+                id={`${person.role}-fatherName`}
               />
-              <label className="flex items-center gap-2 glass-checkbox-container">
+              <label htmlFor={`${person.role}-fatherDeceased`} className="flex items-center gap-2 glass-checkbox-container">
                 <input
                   type="checkbox"
+                  id={`${person.role}-fatherDeceased`}
                   checked={person.family.father.isDeceased}
                   onChange={(e) =>
                     updateFamily(
@@ -77,7 +79,7 @@ const NameInput = () => {
           </div>
 
           <div className="py-3">
-            <label className="label">어머니</label>
+            <label  htmlFor={`${person.role}-motherName`} className="label">어머니</label>
             <div className="flex items-center gap-3">
               <DebouncedInput
                 type="text"
@@ -88,10 +90,13 @@ const NameInput = () => {
                 }
                 placeholder="성함을 입력해주세요"
                 className="formInput"
+                id={`${person.role}-motherName`}
               />
-              <label className="flex items-center gap-2 glass-checkbox-container">
+              <label 
+                  htmlFor={`${person.role}-motherDeceased`} className="flex items-center gap-2 glass-checkbox-container">
                 <input
                   type="checkbox"
+                  id={`${person.role}-motherDeceased`}
                   checked={person.family.mother.isDeceased}
                   onChange={(e) =>
                     updateFamily(
@@ -103,7 +108,8 @@ const NameInput = () => {
                   }
                   className="glass-checkbox"
                 />
-                <span className="text-sm text-slate-600 cursor-pointer select-none">
+                <span 
+                  className="text-sm text-slate-600 cursor-pointer select-none">
                   故
                 </span>
               </label>

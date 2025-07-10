@@ -16,7 +16,7 @@ const ContactInput = () => {
       {contacts.map((person, index) => (
         <div key={index}>
           <div className="py-3 border-b border-gray-200">
-            <label className="label">{person.role}</label>
+            <label htmlFor={`${person.role}-contact`} className="label">{person.role}</label>
             <DebouncedInput
               type="tel"
               ref={contactNumberInputRef}
@@ -31,7 +31,7 @@ const ContactInput = () => {
           </div>
 
           <div className="py-3 border-b border-gray-200">
-            <label className="label">아버지</label>
+            <label htmlFor={`${person.role}-fatherContact`} className="label">아버지</label>
             <DebouncedInput
               type="tel"
               ref={contactfatherNumberInputRef}
@@ -46,7 +46,7 @@ const ContactInput = () => {
           </div>
 
           <div className="py-3">
-            <label className="label">어머니</label>
+            <label htmlFor={`${person.role}-motherContact`} className="label">어머니</label>
             <DebouncedInput
               type="tel"
               ref={contactMotherNumberInputRef}

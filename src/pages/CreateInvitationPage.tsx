@@ -326,8 +326,23 @@ const CreateInvitationPage = () => {
               >
                 계속 작성하기
               </button>
-            </div>
-          </div>
+            </header>
+            <PreviewDisplay />
+          </section>
+        </div>
+        <ReusableModal
+          isOpen={cancelModal}
+          title={
+            <>
+              저장하지 않고 나가면
+              <br />
+              입력한 내용이 삭제될 수 있습니다.
+            </>
+          }
+          confirmText="확인"
+          onConfirm={handleConfirmCancel}
+          onCancel={() => setCancelModal(false)}
+        />
         )}
       </DndProvider>
 

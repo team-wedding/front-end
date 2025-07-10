@@ -23,12 +23,13 @@ const AccountRow = ({
   const accountKakaoInputRef = useRef<DebouncedInputHandle>(null);
   return (
     <>
-      <label className="label">{label}</label>
+      <label  htmlFor={`${label}-accountHolderName`} className="label">{label}</label>
 
       <div className="flex">
         <label className="label"></label>
         <DebouncedInput
           type="text"
+          id={`${label}-accountHolderName`}
           ref={accountNameInputRef}
           value={accountInfo?.accountHolderName}
           onDebouncedChange={(value) => onUpdate('accountHolderName', value)}

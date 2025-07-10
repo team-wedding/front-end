@@ -11,6 +11,7 @@ type DebouncedInputProps = {
   delay?: number;
   placeholder?: string;
   className?: string;
+  id?: string;
 };
 
 export type DebouncedInputHandle = {
@@ -28,6 +29,7 @@ const DebouncedInput = forwardRef<DebouncedInputHandle, DebouncedInputProps>(
       pattern,
       placeholder = '',
       className = '',
+      id,
     },
     ref,
   ) => {
@@ -70,6 +72,7 @@ const DebouncedInput = forwardRef<DebouncedInputHandle, DebouncedInputProps>(
         placeholder={placeholder}
         className={className}
         onBlur={handleBlur}
+        id={id}
       />
     );
   },

@@ -27,11 +27,11 @@ const RsvpExample = () => {
           '제출된 답변은 마이페이지에서 확인할 수 있습니다.',
         ]}
       />
-      <>
         <div className="py-3">
-          <label className="label w-full">제목</label>
+          <label htmlFor="rsvpTitle" className="label w-full">제목</label>
           <DebouncedInput
             type="text"
+            id="rsvpTitle"
             ref={rsvpDesciptionInputRef}
             onDebouncedChange={(value: string) => setRSVPTitle(value)}
             value={rsvpTitle}
@@ -40,7 +40,7 @@ const RsvpExample = () => {
           />
         </div>
         <div className="py-3">
-          <label className="label w-full">내용</label>
+          <label htmlFor="rsvpContent" className="label w-full">내용</label>
           <textarea
             onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
               setRSVPDescription(e.currentTarget.value);

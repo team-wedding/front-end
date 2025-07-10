@@ -85,7 +85,7 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
         </header>
 
         <div className="py-20 space-y-6 text-label dark:text-label-dark">
-          <p className="text-xl text-center">청첩장 제목을 만들어 주세요</p>
+          <label htmlFor="invitationTitle" className="text-xl text-center">청첩장 제목을 만들어 주세요</label>
 
           <div className="flex-center">
             <div className="relative w-[80%] m-auto">

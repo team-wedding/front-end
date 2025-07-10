@@ -35,11 +35,12 @@ const GreetingFeature = () => {
         >
           샘플 문구 보기
         </button>
-
+        
         <div className="py-3">
           <label className="label">제목</label>
           <input
             type="text"
+            id="greetingTitle"
             placeholder="제목을 입력해주세요"
             value={greetingTitle}
             onChange={(e) => setGreetingTitle(e.target.value)}
@@ -50,6 +51,7 @@ const GreetingFeature = () => {
         <div className="py-3">
           <label className="label">인사말</label>
           <textarea
+            id="greetingContent"
             placeholder="인사말을 입력해주세요"
             value={greetingContent}
             onChange={(e) => setGreetingContent(e.target.value)}

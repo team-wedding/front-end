@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import 'react-toastify/dist/ReactToastify.css';
 import Toast from '@/components/common/Toast';
 import useToast from '@/hooks/useToast';
 import { Plus } from 'lucide-react';

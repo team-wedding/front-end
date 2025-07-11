@@ -1,9 +1,10 @@
 import React from 'react';
 import DragAndDrop from '../DragAndDrop';
-import DragIndicatorRoundedIcon from '@mui/icons-material/DragIndicatorRounded';
 import { AccordionItemData } from '@constants/accordionData';
 import { useToggleFeatureStore } from '@store/OptionalFeature/useToggleFeatureStore.';
 import Toggle from '@/components/common/Toggle/Toggle';
+import { ChevronRight, GripVertical } from 'lucide-react';
+import { contentMap } from '@/constants/accordionContentMap';
 
 export interface DraggableAccordionItemProps {
   item: AccordionItemData;
@@ -20,60 +21,55 @@ export const DraggableAccordionItem = ({
   toggleExpand,
   moveItem,
 }: DraggableAccordionItemProps) => {
+  const { isFeatureActive, handleToggle } = useToggleFeatureStore(item.feature);
   const dragHandleRef = React.useRef<HTMLDivElement>(null);
   const isExpanded = expandedIds.includes(item.id);
 
-  // 선택 기능의 토글 상태
-  const { isFeatureActive, handleToggle } = useToggleFeatureStore(item.feature);
-
   return (
-    <div
-      className={`accordion-item ${isExpanded ? 'max-h-160 ' : 'max-h-12'} `}
-    >
+    <div className="glass-card">
       <DragAndDrop
         index={index}
         moveItem={moveItem}
         dragHandleRef={dragHandleRef}
       >
         <div
-          className="flex rounded-2xl justify-between max-h-12 items-center p-6 cursor-pointer"
+          className={`px-4 py-4 rounded-xl cursor-pointer`}
           onClick={() => toggleExpand(item.id)}
           role="button"
-          aria-expanded={isExpanded} // 확장 상태 명시
+          aria-expanded={isExpanded}
           aria-controls={`accordion-content-${item.id}`}
         >
-          <div className="flex-center gap-2">
-            <div className="cursor-grab" ref={dragHandleRef}>
-              <DragIndicatorRoundedIcon
-                fontSize="small"
-                className="text-gray-300 active:text-gray-500"
+          <div className="flex items-center justify-between">
+            <div className="flex-center space-x-2">
+              <div className="cursor-grab" ref={dragHandleRef}>
+                <GripVertical className="text-slate-900/20 w-5 mx-1  active:text-slate-500" />
+              </div>
+              <div className="font-medium text-slate-800 text-sm">
+                {item.title}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-4">
+              {item.hasToggle && (
+                <Toggle state={isFeatureActive} setState={handleToggle} />
+              )}
+              <ChevronRight
+                className={`w-4 h-4 text-slate-400 transition-transform ${
+                  expandedIds.includes(item.id) ? 'rotate-90' : ''
+                }`}
               />
             </div>
-            <div className="font-semibold">{item.title}</div>
-          </div>
-
-          <div className="flex items-center gap-4">
-            {item.hasToggle && (
-              <Toggle state={isFeatureActive} setState={handleToggle} />
-            )}
-            <i
-              className={`bx bx-chevron-down text-xl transition-all duration-300 ${
-                expandedIds.includes(item.id) ? 'rotate-180' : ''
-              }`}
-            ></i>
           </div>
         </div>
-      </DragAndDrop>
 
-      {/* 콘텐츠 */}
-      <div
-        id={`accordion-content-${item.id}`} // 제목이랑 연결
-        className={`px-5 pb-5 overflow-hidden transition-all duration-300 ease-in-out ${
-          expandedIds.includes(item.id) ? 'opacity-100' : 'opacity-0'
-        }`}
-      >
-        <div>{item.content}</div>
-      </div>
+        {isExpanded && (
+          <div id={`accordion-content-${item.id}`} className="pt-2">
+            <div className="bg-white/20 backdrop-blur-xl rounded-b-xl px-6 py-6">
+              {contentMap[item.feature]}
+            </div>
+          </div>
+        )}
+      </DragAndDrop>
     </div>
   );
 };

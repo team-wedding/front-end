@@ -5,22 +5,37 @@ const WeddingInformation = () => {
   const { formattedDate, weddingDate, weddingTime } = useWeddingStore();
   const { weddingHallName, weddingHallDetail } = useAddressStore();
 
-  const currentDate = weddingDate || new Date();
+  const currentDate =
+    weddingDate instanceof Date && !isNaN(weddingDate.getTime())
+      ? weddingDate
+      : new Date();
+
   const dayOfWeeks = ['일', '월', '화', '수', '목', '금', '토'];
   const dayOfWeek = dayOfWeeks[currentDate.getDay()];
 
-  const date = `${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일 ${dayOfWeek}요일, ${weddingTime.hour}시 ${weddingTime.minute! < 9 ? '0' : ''}${weddingTime.minute!}분 `;
+  const year = formattedDate.year ?? currentDate.getFullYear();
+  const month = formattedDate.month ?? currentDate.getMonth() + 1;
+  const day = formattedDate.day ?? currentDate.getDate();
+
+  const hour = weddingTime.hour ?? 12;
+  const minute = weddingTime.minute ?? 0;
+
+  const formattedMinute =
+    minute === 0 || minute === null
+      ? ''
+      : `${minute.toString().padStart(2, '0')}분`;
+
+  const date = `${year}년 ${month}월 ${day}일 ${dayOfWeek}요일 ${hour}시${formattedMinute ? ' ' + formattedMinute : ''}`;
 
   const hallName = weddingHallName || '우리결혼하장';
   const hallDetail = weddingHallDetail || '2층 사랑홀';
 
   return (
-    <div className="column-center gap-4 tracking-normal">
-      <div>{date}</div>
-      <div className="flex text-sm opacity-50 gap-1">
-        <div>{hallName}</div>
-        <div>{hallDetail}</div>
-      </div>
+    <div className="column-center gap-4 w-full">
+      {date}
+      <span className="text-sm text-gray-500">
+        {hallName} {hallDetail}
+      </span>
     </div>
   );
 };

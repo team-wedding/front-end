@@ -27,19 +27,18 @@ import useNoticeStore, {
 import fonts from '@/constants/fonts';
 
 const defaultCoord = { lat: 37.5086, lng: 127.0397 };
-
-const today = new Date();
+// const today = new Date();
 
 export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
   createdAt: '',
   groomName: '',
   brideName: '',
-  date: [today.getFullYear(), today.getMonth() + 1, today.getDate()],
+  date: [null, null, null],
+  weddingTime: [null, null],
   //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
   location: ['', '', '', '', '', ''],
   greetingTitle: '',
   greetingContent: '',
-  weddingTime: [0, 0],
   groomFatherName: '',
   groomMotherName: '',
   brideFatherName: '',
@@ -151,7 +150,7 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
       image: '',
     },
   ],
-  audio: 0,
+  audio: null,
   imgUrl: '',
   galleries: [{ order: 3, isActive: false, images: [], grid: false }],
 };
@@ -209,7 +208,12 @@ export const getInvitationAction = (): Omit<
   return {
     groomName: brideGroom[0].name,
     brideName: brideGroom[1].name,
-    date: [formattedDate.year, formattedDate.month, formattedDate.day],
+    date: [
+      formattedDate?.year ?? null,
+      formattedDate?.month ?? null,
+      formattedDate?.day ?? null,
+    ],
+    weddingTime: [weddingTime.hour ?? null, weddingTime.minute ?? null],
     //[주소, 우편번호,지분주소, 좌표, 홀이름, 홀상세주소]
     location: [
       address,
@@ -221,7 +225,6 @@ export const getInvitationAction = (): Omit<
     ],
     greetingTitle: greetingTitle,
     greetingContent: greetingContent,
-    weddingTime: [weddingTime.hour!, weddingTime.minute!],
     groomFatherName: brideGroom[0].family.father.name,
     groomMotherName: brideGroom[0].family.mother.name,
     brideFatherName: brideGroom[1].family.father.name,
@@ -351,25 +354,45 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       );
     }
 
+    // 웨딩 일시
     try {
-      const weddingTime = details.weddingTime;
-      setWeddingTime(weddingTime[0], weddingTime[1]);
+      const weddingDateRaw =
+        typeof details.date === 'string'
+          ? JSON.parse(details.date)
+          : details.date;
+
+      const [year, month, day] = Array.isArray(weddingDateRaw)
+        ? weddingDateRaw
+        : [null, null, null];
+
+      if (year !== null && month !== null && day !== null) {
+        const parsedDate = new Date(year, month - 1, day);
+        setWeddingDate(parsedDate);
+      } else {
+        setWeddingDate(undefined);
+      }
+    } catch (error) {
+      throw new Error(`에러 발생: 날짜 불러오는데 에러 발생 :${error}`);
+    }
+    try {
+      const weddingTimeRaw =
+        typeof details.weddingTime === 'string'
+          ? JSON.parse(details.weddingTime)
+          : details.weddingTime;
+
+      const [hour, minute] = Array.isArray(weddingTimeRaw)
+        ? weddingTimeRaw
+        : [null, null];
+
+      if (hour !== null && minute !== null) {
+        setWeddingTime(hour, minute);
+      } else {
+        setWeddingTime(null, null);
+      }
     } catch {
       console.log(
         `잘못된 시간 값입니다: 날짜:${details.weddingTime}  타입:${typeof details.weddingTime}  결과:${details.weddingTime[0]} ${details.weddingTime[1]}`,
       );
-    }
-
-    try {
-      if (details.date.length === 0) {
-        setWeddingDate(today);
-      } else {
-        const [year, month, day] = details.date;
-        const parsedDate = new Date(year, month - 1, day);
-        setWeddingDate(parsedDate);
-      }
-    } catch (error) {
-      throw new Error(`에러 발생: 날짜 불러오는데 에러 발생 :${error}`);
     }
 
     //청첩장 제목/내용
@@ -562,7 +585,10 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
         Array.isArray(list) && list.length > 0 && list[0].isActive;
       toggleOptionalFeature(key, isActive);
     });
-    selectMusic(details.audio);
+
+    if (details.audio !== null) {
+      selectMusic(details.audio);
+    }
     musicToggle('music', !!details.audio); //수정 필요
   }
 };

@@ -1,44 +1,54 @@
 import DebouncedInput, {
   DebouncedInputHandle,
 } from '@/components/common/DebounceInput/DebounceInput';
+import { useCompletionTracker } from '@/hooks/useCompletionTracker';
 import useBrideGroomStore from '@store/useBrideGroomStore';
 import { useRef } from 'react';
 
 const NameInput = () => {
+  const nameInputRef = useRef<DebouncedInputHandle>(null);
+  const motherNameInputRef = useRef<DebouncedInputHandle>(null);
+  const fatherNameInputRef = useRef<DebouncedInputHandle>(null);
+
   const brideGroom = useBrideGroomStore((state) => state.brideGroom);
   const updateBrideGroom = useBrideGroomStore(
     (state) => state.updateBrideGroom,
   );
   const updateFamily = useBrideGroomStore((state) => state.updateFamily);
+  const namesFilled = brideGroom.every((person) => person.name.trim());
 
-  const nameInputRef = useRef<DebouncedInputHandle>(null);
-
-  const motherNameInputRef = useRef<DebouncedInputHandle>(null);
-
-  const fatherNameInputRef = useRef<DebouncedInputHandle>(null);
+  useCompletionTracker({
+    feature: 'nameInput',
+    isCompleted: namesFilled,
+    deps: [brideGroom],
+  });
 
   return (
-    <div>
+    <>
       {brideGroom.map((person, index) => (
-        <div key={index} className="max-w-lg mx-auto px-4 py-2">
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2">
-              <label className="label flex gap-1 dark:text-black">
-                {person.role}
-              </label>
-              <DebouncedInput
-                type="text"
-                ref={nameInputRef}
-                value={person.name}
-                onDebouncedChange={(value) =>
-                  updateBrideGroom(index, 'name', value)
-                }
-                placeholder="성함(OOO)"
-                className="formInput"
-              />
-            </div>
-            <div className="flex items-center gap-2">
-              <label className="label dark:text-black">아버지</label>
+        <div key={index}>
+          <div className="py-3 border-b border-gray-200">
+            <label htmlFor={`${person.role}-name`} className="label">
+              {person.role} *
+            </label>
+            <DebouncedInput
+              type="text"
+              ref={nameInputRef}
+              value={person.name}
+              onDebouncedChange={(value) =>
+                updateBrideGroom(index, 'name', value)
+              }
+              onChange={(value) => updateBrideGroom(index, 'name', value)}
+              placeholder="성함을 입력해주세요"
+              className="formInput"
+            />
+          </div>
+
+          <div className="py-3 border-b border-gray-200">
+            <label htmlFor={`${person.role}-fatherName`} className="label">
+              아버지
+            </label>
+            <div className="flex items-center gap-3">
               <DebouncedInput
                 type="text"
                 ref={fatherNameInputRef}
@@ -46,12 +56,17 @@ const NameInput = () => {
                 onDebouncedChange={(value) =>
                   updateFamily(index, 'father', 'name', value)
                 }
-                placeholder="성함(OOO)"
+                placeholder="성함을 입력해주세요"
                 className="formInput"
+                id={`${person.role}-fatherName`}
               />
-              <div className="flex items-center gap-2">
+              <label
+                htmlFor={`${person.role}-fatherDeceased`}
+                className="flex items-center gap-2 glass-checkbox-container"
+              >
                 <input
                   type="checkbox"
+                  id={`${person.role}-fatherDeceased`}
                   checked={person.family.father.isDeceased}
                   onChange={(e) =>
                     updateFamily(
@@ -61,13 +76,20 @@ const NameInput = () => {
                       e.target.checked,
                     )
                   }
-                  className="w-5 h-5 rounded border-gray-400 checked:bg-button focus:ring-button focus:border-button focus:outline-none focus:ring-0"
-                ></input>
-                <span className="text-sm">故</span>
-              </div>
+                  className="glass-checkbox"
+                />
+                <span className="text-sm text-slate-600 cursor-pointer select-none">
+                  故
+                </span>
+              </label>
             </div>
-            <div className="flex items-center gap-2">
-              <label className="label dark:text-black">어머니</label>
+          </div>
+
+          <div className="py-3">
+            <label htmlFor={`${person.role}-motherName`} className="label">
+              어머니
+            </label>
+            <div className="flex items-center gap-3">
               <DebouncedInput
                 type="text"
                 ref={motherNameInputRef}
@@ -75,12 +97,17 @@ const NameInput = () => {
                 onDebouncedChange={(value) =>
                   updateFamily(index, 'mother', 'name', value)
                 }
-                placeholder="성함(OOO)"
+                placeholder="성함을 입력해주세요"
                 className="formInput"
+                id={`${person.role}-motherName`}
               />
-              <div className="flex items-center gap-2">
+              <label
+                htmlFor={`${person.role}-motherDeceased`}
+                className="flex items-center gap-2 glass-checkbox-container"
+              >
                 <input
                   type="checkbox"
+                  id={`${person.role}-motherDeceased`}
                   checked={person.family.mother.isDeceased}
                   onChange={(e) =>
                     updateFamily(
@@ -90,15 +117,23 @@ const NameInput = () => {
                       e.target.checked,
                     )
                   }
-                  className="w-5 h-5 rounded border-gray-400 checked:bg-button focus:ring-button focus:border-button focus:outline-none focus:ring-0"
+                  className="glass-checkbox"
                 />
-                <span className="text-sm">故</span>
-              </div>
+                <span className="text-sm text-slate-600 cursor-pointer select-none">
+                  故
+                </span>
+              </label>
             </div>
           </div>
+
+          {index < brideGroom.length - 1 && (
+            <div className="px-6 py-3">
+              <div className="h-px bg-gray-200"></div>
+            </div>
+          )}
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

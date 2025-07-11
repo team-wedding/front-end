@@ -49,6 +49,13 @@ const Map = () => {
     }
   }, [map, subFeatures.canMoveMap, zoomControl]);
 
+  useEffect(() => {
+    if (map) {
+      const relayout = () => map.relayout();
+      relayout();
+    }
+  }, [map]);
+
   return (
     <KakaoMap
       id="map"
@@ -57,14 +64,18 @@ const Map = () => {
         lng: coords.lng,
       }}
       style={{
-        width: '100%',
+        // maxWidth: '480px',
+        width: '400px',
         height: '300px',
+      }}
+      onCreate={(map) => {
+        setMap(map);
+        map.relayout();
       }}
       level={4}
       minLevel={8}
       zoomable={subFeatures.canMoveMap}
       draggable={subFeatures.canMoveMap}
-      onCreate={(map) => setMap(map)}
     >
       <MapMarker position={{ lat: coords.lat, lng: coords.lng }}></MapMarker>
     </KakaoMap>

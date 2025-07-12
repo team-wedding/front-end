@@ -27,32 +27,36 @@ const RsvpExample = () => {
           '제출된 답변은 마이페이지에서 확인할 수 있습니다.',
         ]}
       />
-        <div className="py-3">
-          <label htmlFor="rsvpTitle" className="label w-full">제목</label>
-          <DebouncedInput
-            type="text"
-            id="rsvpTitle"
-            ref={rsvpDesciptionInputRef}
-            onDebouncedChange={(value: string) => setRSVPTitle(value)}
-            value={rsvpTitle}
-            placeholder="제목을 입력해주세요"
-            className="formInput w-full"
-          />
-        </div>
-        <div className="py-3">
-          <label htmlFor="rsvpContent" className="label w-full">내용</label>
-          <textarea
-            onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
-              setRSVPDescription(e.currentTarget.value);
-            }}
-            name="rsvpDescription"
-            value={rsvpDescription}
-            rows={4}
-            className="formInput w-full"
-            placeholder="내용을 입력해주세요"
-          />
+      <div className="py-3">
+        <label htmlFor="rsvpTitle" className="label w-full">
+          제목
+        </label>
+        <DebouncedInput
+          type="text"
+          id="rsvpTitle"
+          ref={rsvpDesciptionInputRef}
+          onDebouncedChange={(value: string) => setRSVPTitle(value)}
+          value={rsvpTitle}
+          placeholder="제목을 입력해주세요"
+          className="formInput w-full"
+        />
+      </div>
+      <div className="py-3">
+        <label htmlFor="rsvpContent" className="label w-full">
+          내용
+        </label>
+        <textarea
+          onChange={(e: React.ChangeEvent<HTMLTextAreaElement>) => {
+            setRSVPDescription(e.currentTarget.value);
+          }}
+          name="rsvpDescription"
+          value={rsvpDescription}
+          rows={4}
+          className="formInput w-full"
+          placeholder="내용을 입력해주세요"
+        />
 
-          {/*
+        {/*
           TODO: FIX THIS INTO TEXT AREA
           <DebouncedInput
             type='text'
@@ -64,8 +68,8 @@ const RsvpExample = () => {
             className="formInput w-full"
             placeholder="내용을 입력해주세요"
           /> */}
-        </div>
-      </>
+      </div>
+    </>
   );
 };
 

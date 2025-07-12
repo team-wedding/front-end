@@ -57,7 +57,9 @@ const AddressInput = () => {
       </div>
 
       <div className="py-3">
-        <label htmlFor="weddingHallName" className="label">예식장명 *</label>
+        <label htmlFor="weddingHallName" className="label">
+          예식장명 *
+        </label>
         <input
           type="text"
           value={weddingHallName}
@@ -69,7 +71,9 @@ const AddressInput = () => {
       </div>
 
       <div className="py-3">
-        <label  htmlFor="weddingHallDetail" className="label">층과 홀</label>
+        <label htmlFor="weddingHallDetail" className="label">
+          층과 홀
+        </label>
         <input
           type="text"
           value={weddingHallDetail}

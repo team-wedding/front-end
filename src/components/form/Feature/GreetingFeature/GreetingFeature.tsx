@@ -35,7 +35,7 @@ const GreetingFeature = () => {
         >
           샘플 문구 보기
         </button>
-        
+
         <div className="py-3">
           <label className="label">제목</label>
           <input

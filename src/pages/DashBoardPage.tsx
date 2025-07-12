@@ -55,6 +55,7 @@ const DashBoardPage = () => {
                   <Card
                     key={card.id}
                     image={card.imgUrl}
+                    data-testid="invitation-card"
                     id={card.id as number}
                     title={card.title}
                   />

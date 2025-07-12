@@ -85,14 +85,17 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
         </header>
 
         <div className="py-20 space-y-6 text-label dark:text-label-dark">
-          <label htmlFor="invitationTitle" className="text-xl text-center">청첩장 제목을 만들어 주세요</label>
+          <label htmlFor="invitationTitle" className="text-xl text-center">
+            청첩장 제목을 만들어 주세요
+          </label>
 
           <div className="flex-center">
             <div className="relative w-[80%] m-auto">
               <input
                 type="text"
+                name="invitation-title"
                 placeholder="청첩장1, 친구용, 혼주용"
-                className={`w-full bg-transparent text-center tracking-wider text-label border-0 border-b-2 dark:text-label-dark focus:outline-none focus:ring-0 focus:border-black dark:focus:border-white dark:border-border-dark text-md placeholder:text-label-secondary/30 placeholder:text-center dark:placeholder:text-label-secondary-dark/30 ${
+                className={`w-full bg-transparent text-start tracking-wider text-label border-0 border-b-2 dark:text-label-dark focus:outline-none focus:ring-0 focus:border-black dark:focus:border-white dark:border-border-dark text-md placeholder:text-label-secondary/30 placeholder:text-center dark:placeholder:text-label-secondary-dark/30 ${
                   isFocused ? 'border-gray-800' : 'border-gray-300'
                 }`}
                 value={titleInput}
@@ -129,6 +132,7 @@ const InputTitleModal = ({ onClose }: ModalProps) => {
 
             <button
               onClick={handleConfirm}
+              data-testid="title-submit"
               disabled={titleInput.length === 0}
               className={`absolute right-10 rounded-full p-1 ${
                 titleInput.length === 0

@@ -7,7 +7,7 @@ import {
   postPhototalk,
   updatePhototalk,
 } from '@/services/phototalkService';
-import { PhotoTalk } from '@/types/phototalkType';
+import { PhotoTalk } from '@/types/phototalkTypes';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
@@ -45,7 +45,7 @@ export const useInfinitePhototalkByQuery = <T, ItemType>({
     try {
       const res = await queryFn(page); // 페이지 api 호출
 
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      await new Promise((resolve) => setTimeout(resolve, 500));
 
       const newItems = extractItems(res);
       setItems((prev) => [...prev, ...newItems]); // 기존 + 새 데이터 누적
@@ -183,9 +183,12 @@ export const useUpdatePhototalk = () => {
     }: {
       id: number;
       photoTalkData: PhotoTalk;
-    }) => updatePhototalk(id, { ...photoTalkData }),
+    }) => updatePhototalk(id, photoTalkData),
     onSuccess: (_, { id }) => {
       queryClient.invalidateQueries({ queryKey: ['phototalks', id] });
+    },
+    onError: (error) => {
+      console.error('포토톡 수정 실패:', error);
     },
   });
 };

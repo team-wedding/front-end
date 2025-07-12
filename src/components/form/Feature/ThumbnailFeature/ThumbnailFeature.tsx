@@ -1,5 +1,6 @@
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
 import ImageUploader from '@/components/common/ImageUploader';
+import { useCompletionTracker } from '@/hooks/useCompletionTracker';
 import useImageStore from '@/store/useImageStore';
 
 const ThumbnailFeature = () => {
@@ -10,11 +11,19 @@ const ThumbnailFeature = () => {
     setUploadedImageUrl,
   } = useImageStore();
 
+  const imageFilled = uploadedImageUrl.length > 0;
+
+  useCompletionTracker({
+    feature: 'thumbnail',
+    isCompleted: imageFilled,
+    deps: [],
+  });
+
   return (
-    <div className="mx-4 my-6">
+    <>
       <InformationItem messages={['썸네일에 나타나는 사진입니다.']} />
-      <hr />
-      <div className="my-10">
+
+      <div className="py-6">
         <ImageUploader
           ImageUrl={uploadedImageUrl}
           ImageFile={uploadedImageFile}
@@ -22,7 +31,7 @@ const ThumbnailFeature = () => {
           setImageFile={setUploadedImageFile}
         />
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import logo from '@assets/woogyeol/preview_light.png';
+import logo from '@assets/woogyeol/logo_light.png';
 import { Dispatch, SetStateAction } from 'react';
 
 interface PreviewButtonProps {
@@ -14,18 +14,12 @@ const PreviewButton = ({ update, setPreviewModal }: PreviewButtonProps) => {
 
   return (
     <button
-      className="column-center rounded-full"
+      className="flex-center text-base rounded-md p-0 h-auto text-slate-800 hover:bg-white/30 md:hidden transition-colors"
       aria-label="미리보기 버튼"
       onClick={handleClick}
     >
-      <img
-        src={logo}
-        alt="로고"
-        className={`h-14 rounded-full shadow-xl backdrop-blur-lg hover:opacity-70`}
-      />
-      <span className="animate-pulse rounded-md backdrop-blur-lg px-2 py-1 font-light text-xs">
-        {'미리보기'}
-      </span>
+      <img src={logo} alt="로고" className={`w-4 mr-2`} />
+      <span>미리보기</span>
     </button>
   );
 };

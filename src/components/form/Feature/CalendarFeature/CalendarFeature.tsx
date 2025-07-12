@@ -5,17 +5,15 @@ const CalendarFeature = () => {
   const { subCalendarFeatures, toggleSubFeature } = useCalendarFeatureStore();
 
   return (
-    <div className="text-xs mx-4">
+    <>
       <InformationItem
         messages={['예식 날짜를 나타내고 싶은 기능을 선택해주세요.']}
       />
 
-      <hr />
-
       {/* 서브 기능 - 캘린더, 카운트다운, 디데이 */}
-      <div className="flex-center gap-2 text-gray-400 text-[10px] my-6">
+      <div className="flex-center gap-2 text-slate-500 text-sm py-6">
         <button
-          className={`select-btn ${subCalendarFeatures.calendar ? 'active-btn' : ''}`}
+          className={`px-4 py-3 ${subCalendarFeatures.calendar ? 'glass-button-selected' : 'glass-button'}`}
           onClick={() =>
             toggleSubFeature('calendar', !subCalendarFeatures.calendar)
           }
@@ -23,7 +21,7 @@ const CalendarFeature = () => {
           캘린더
         </button>
         <button
-          className={`select-btn ${subCalendarFeatures.countdown ? 'active-btn' : ''}`}
+          className={`px-4 py-3 ${subCalendarFeatures.countdown ? 'glass-button-selected' : 'glass-button'}`}
           onClick={() =>
             toggleSubFeature('countdown', !subCalendarFeatures.countdown)
           }
@@ -31,13 +29,13 @@ const CalendarFeature = () => {
           카운트다운
         </button>
         <button
-          className={`select-btn ${subCalendarFeatures.dday ? 'active-btn' : ''}`}
+          className={`px-4 py-3 ${subCalendarFeatures.dday ? 'glass-button-selected' : 'glass-button'}`}
           onClick={() => toggleSubFeature('dday', !subCalendarFeatures.dday)}
         >
           디데이
         </button>
       </div>
-    </div>
+    </>
   );
 };
 

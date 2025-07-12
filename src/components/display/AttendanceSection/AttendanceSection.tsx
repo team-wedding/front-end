@@ -17,7 +17,16 @@ export default function AttendanceSection() {
   const { brideGroom } = useBrideGroomStore();
   const [toastMessage, setToastMessage] = useState('');
 
-  const dateText = `날짜: ${formattedDate.year}년 ${formattedDate.month}월 ${formattedDate.day}일  ${weddingTime.hour}시 ${weddingTime.minute === 0 ? '' : weddingTime.minute + '분'}  `;
+  const today = new Date();
+
+  const year = formattedDate.year ?? today.getFullYear();
+  const month = formattedDate.month ?? today.getMonth() + 1;
+  const day = formattedDate.day ?? today.getDate();
+  const hour = weddingTime.hour ?? '12';
+  const minute = weddingTime.minute ?? '30';
+
+  const dateText = `날짜: ${year}년 ${month}월 ${day}일 ${hour}시 ${minute}분`;
+
   const { rsvpTitle, rsvpDescription } = useRSVPStore();
   const defaultScript: {
     title: string;

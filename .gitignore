@@ -27,3 +27,10 @@ dist-ssr
 
 # Sentry Config File
 .env.sentry-build-plugin
+
+*storybook.log
+storybook-static
+
+#Playwright test Results
+test-results 
+test-value

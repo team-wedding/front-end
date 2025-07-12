@@ -1,10 +1,12 @@
+import { ACTION_MODE, USER_MODE } from '@/constants/photoTalkUserConstants';
 import {
   useDeletePhototalkByAdmin,
   useDeletePhototalkByGuest,
 } from '@/hooks/usePhototalk';
+import { useDeletePhototalkS3Url } from '@/hooks/useS3Image';
 // import { useDeletePhototalkS3Image } from '@/hooks/useS3Image';
-import { PhotoTalk } from '@/types/phototalkType';
-import { ACTION_MODE, ActionMode, USER_MODE, UserMode } from '@/types/users';
+import { PhotoTalk } from '@/types/phototalkTypes';
+import { ActionMode, UserMode } from '@/types/photoTalkUserTypes';
 import { useState } from 'react';
 
 interface usePhototalkActionProps {
@@ -30,7 +32,7 @@ export const usePhototalkAction = ({
 
   const { mutate: deleteByAdmin } = useDeletePhototalkByAdmin();
   const { mutate: deleteByGuest } = useDeletePhototalkByGuest();
-  // const { mutate: deleteS3Image } = useDeletePhototalkS3Image();
+  const { mutate: deleteS3Image } = useDeletePhototalkS3Url();
 
   const openModal = (photoTalk: PhotoTalk, action: ActionMode) => {
     setSelectedPhotoTalk(photoTalk);
@@ -63,8 +65,10 @@ export const usePhototalkAction = ({
       if (actionMode === ACTION_MODE.DELETE) {
         deleteByAdmin(selectedPhotoTalk.id!, {
           onSuccess: () => {
-            // deleteS3Image(selectedPhotoTalk.id!);
             onDelete?.(selectedPhotoTalk);
+            if (selectedPhotoTalk.imageUrl.length > 0) {
+              deleteS3Image(selectedPhotoTalk.id!);
+            }
             refetch?.();
             closeModal();
           },
@@ -95,11 +99,10 @@ export const usePhototalkAction = ({
           },
           {
             onSuccess: () => {
-              // deleteS3Image(selectedPhotoTalk.id!);
               onDelete?.(selectedPhotoTalk);
+              deleteS3Image(selectedPhotoTalk.id!);
               refetch?.();
               closeModal();
-              alert(`${selectedPhotoTalk.name}님의 포토톡이 삭제되었습니다`);
             },
           },
         );

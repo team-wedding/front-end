@@ -3,7 +3,7 @@
 // import PageLayout from '@layout/PageLayout';
 import RsvpItem from '@common/RsvpItem/RsvpItem';
 import { useGetAttendances, useGetStats } from '@/hooks/useStats';
-import { GuestInfo } from '@/types/GuestType';
+import { GuestInfo } from '@/types/guestTypes';
 import { downloadRsvpExcel } from '@/utils/excelDownloader';
 import statsIcon from '@assets/statsIcon.svg';
 import listIcon from '@assets/listIcon.svg';

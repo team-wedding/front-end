@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useLocationFeatureStore } from '../../../../store/OptionalFeature/useLocationFeatureStore';
 import OnOff from '@common/Toggle/OnOff';
-// import TextEditor from '../../../common/TextEditor';
 import { transportationData } from '../../../../constants/transportationData';
 import TipTapEditor from '@/components/common/Editor/TiptapEditor';
 
@@ -20,28 +19,25 @@ const TransportationItem = () => {
   };
 
   return (
-    <div className="flex flex-col gap-2 my-6 mx-2 transition-all duration-200">
+    <div className="space-y-2 py-3 transition-all duration-200">
       {transportationData.map(({ key, inputKey, title }) => (
         <div
           key={key}
-          className={`border py-2 px-6 rounded-2xl hover:ring-1 hover:ring-black ${openAccordion === key && 'bg-neutral-100 bg-opacity-30 ring-1 ring-black shadow-md'}`}
+          className={`py-3 px-6 rounded-3xl ${openAccordion === key ? 'glass-button-selected' : 'glass-button'}`}
         >
           <div
             className="flex items-center justify-between"
             onClick={() => toggleAccordion(key)}
           >
-            <div>{title}</div>
+            <div className="text-slate-700 text-base">{title}</div>
             <OnOff
               state={subFeatures[key]}
               setState={(enabled: boolean) => toggleSubFeature(key, enabled)}
             />
           </div>
+
           {openAccordion === key && (
-            <div className="my-6">
-              {/* <TextEditor
-                value={transportationInputs[inputKey]}
-                setValue={(value) => updateTransportationInput(inputKey, value)}
-              /> */}
+            <div className="my-4">
               <TipTapEditor
                 content={transportationInputs[inputKey] || ''}
                 onChange={(value) => {

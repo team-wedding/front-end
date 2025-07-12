@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router';
 import { useState } from 'react';
-import ResetPasswordForm from '@/components/ResetPassword/ResetPasswordForm';
-import TemporaryPassword from '@/components/ResetPassword/TemporaryPasswordModal';
+import ResetPasswordForm from '@/components/mypage/ResetPassword/ResetPasswordForm';
+import TemporaryPassword from '@/components/mypage/ResetPassword/TemporaryPasswordModal';
 import PageLayout from '@/components/layout/PageLayout';
 import BackIcon from '@/components/icons/BackIcon';
 

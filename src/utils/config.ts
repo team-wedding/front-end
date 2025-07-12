@@ -98,4 +98,5 @@ export const API = {
   },
   S3Images: (directory: string) => `${BASE_URL}/s3/?directory=${directory}`,
   S3InvitationRemoval: (id: string) => `${BASE_URL}/s3/invitations/${id}`,
+  S3PhotoTalkRemoval: (id: string) => `${BASE_URL}/s3/celebrationMsgs/${id}`,
 };

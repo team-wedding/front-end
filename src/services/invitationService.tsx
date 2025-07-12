@@ -1,4 +1,4 @@
-import { InvitationDetail } from '../types/invitationType';
+import { InvitationDetail } from '../types/invitationTypes';
 import { axiosInstance, API } from '../utils/config';
 
 //청첩장 리스트 조회

@@ -2,7 +2,7 @@ import {
   CreatePhotoTalk,
   PhotoTalk,
   PhotoTalkResponse,
-} from '@/types/phototalkType';
+} from '@/types/phototalkTypes';
 import { API, axiosInstance } from '@/utils/config';
 
 // 포토톡 전체 조회

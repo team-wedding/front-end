@@ -1,8 +1,8 @@
-import PhotoTalkEditor from '@/components/common/PhotoTalk/Editor/PhotoTalkEditor';
-import PhotoTalkListPreview from '@/components/common/PhotoTalk/List/PhotoTalkListPreview';
+import PhotoTalkEditor from '@/components/phototalk/Editor/PhotoTalkEditor';
+import PhotoTalkListPreview from '@/components/phototalk/List/PhotoTalkListPreview';
 import PhotoTalkLayout from '@/components/layout/PhotoTalkLayout';
 import { phototalkData } from '@/constants/phototalkData';
-import { USER_MODE } from '@/types/users';
+import { USER_MODE } from '@/constants/photoTalkUserConstants';
 import { useState } from 'react';
 
 const PreviewPhotoTalkPage = () => {
@@ -23,11 +23,12 @@ const PreviewPhotoTalkPage = () => {
       </section>
 
       <section aria-label="포토톡 메시지 작성하기">
-        <PhotoTalkEditor
-          userMode={USER_MODE.PREVIEW}
-          isEditorOpen={isEditorOpen}
-          closeEditor={() => setEditorOpen(false)}
-        />
+        {isEditorOpen && (
+          <PhotoTalkEditor
+            userMode={USER_MODE.GUEST}
+            closeEditor={() => setEditorOpen(false)}
+          />
+        )}
       </section>
     </PhotoTalkLayout>
   );

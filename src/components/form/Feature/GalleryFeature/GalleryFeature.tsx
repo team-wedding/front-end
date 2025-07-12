@@ -1,10 +1,8 @@
 import { useRef, useState } from 'react';
 import CloseIcon from '@icons/CloseIcon';
-import GridIcon from '@assets/GridIcon.svg';
-import ChevronRight from '@icons/Chevron_RightIcon';
-import ChevronLeft from '@icons/Chevron_LeftIcon';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
+import { GalleryHorizontal, LayoutGrid } from 'lucide-react';
 
 export default function GalleryFeature() {
   const fileRef = useRef<HTMLInputElement>(null);
@@ -20,6 +18,8 @@ export default function GalleryFeature() {
   let maxWidth = 5000;
   let maxHeight = 5000;
   let acceptedFormats = ['image/svg', 'image/png', 'image/jpg'];
+
+  const hasImages = galleryImages && galleryImages.length !== 0;
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (galleryImages) {
@@ -100,7 +100,7 @@ export default function GalleryFeature() {
   };
 
   return (
-    <div className="text-xs mx-4 my-6">
+    <>
       <InformationItem
         messages={[
           '사진은 최대 9장까지 추가 가능합니다.',
@@ -108,119 +108,111 @@ export default function GalleryFeature() {
         ]}
       />
 
-      <hr />
-
-      <div className="flex flex-col gap-5 my-10">
-        <label
-          className={`${galleryImages && galleryImages.length !== 0 ? `grid grid-cols-2 justify-items-center gap-x-5 gap-y-2 px-3 py-1 lg:px-1 lg:py-2 lg:grid-cols-3` : `flex flex-col`} w-full h-fit border-2 border-gray-100   rounded-lg cursor-pointer items-center overflow-y-scroll`}
-          htmlFor="dropzone"
-          onDrop={handleDrop}
-          onDragOver={handleDrag}
-          onDragLeave={handleLeave}
-          onDragEnter={handleDragEnter}
-          onClick={(e) => e.preventDefault()}
-        >
-          {galleryImages && galleryImages.length !== 0 ? (
-            galleryImages.map((value, index) => {
-              return (
-                <div
-                  className={`relative w-28 h-40 lg:w-24 lg:h-32 rounded-md flex items-center justify-center cursor-pointer ${hoveredIndex == index ? 'shadow-2xl' : 'shadow-none '}`}
-                  key={index}
-                  onDragStart={() => handleSortDragStart(index)}
-                  onDragOver={(e) => handleSortDragOver(index, e)}
-                  onDrop={() => handleSortDrop(index)}
-                  onDragEnd={handleSortDragEnd}
-                >
+      <div className="py-3 space-y-8 w-full">
+        <div className="column-center w-full mx-auto">
+          <label
+            // className={`flex-center w-full h-44 glass-button overflow-y-scroll ${hasImages && `grid grid-cols-2 justify-items-center gap-1`} `}
+            className={`w-full min-h-44 p-2 rounded transition-all ${
+              hasImages
+                ? 'grid grid-cols-2 gap-1 auto-rows-fr'
+                : 'flex flex-col justify-center items-center glass-button'
+            }`}
+            htmlFor="dropzone"
+            onDrop={handleDrop}
+            onDragOver={handleDrag}
+            onDragLeave={handleLeave}
+            onDragEnter={handleDragEnter}
+            onClick={(e) => e.preventDefault()}
+          >
+            {hasImages ? (
+              galleryImages.map((value, index) => {
+                return (
                   <div
-                    className="absolute size-4 top-2 right-2 rounded-full bg-gray-400/60 group hover:bg-black"
-                    onClick={() => handleDelete(index)}
+                    className={`w-full relative overflow-hidden aspect-[3/4]  ${hoveredIndex == index ? 'shadow-2xl' : 'shadow-none '}`}
+                    key={index}
+                    onDragStart={() => handleSortDragStart(index)}
+                    onDragOver={(e) => handleSortDragOver(index, e)}
+                    onDrop={() => handleSortDrop(index)}
+                    onDragEnd={handleSortDragEnd}
                   >
-                    <CloseIcon className="size-4 text-white " />
+                    <button
+                      className="absolute p-1 top-1 right-1 rounded-full bg-slate-900/20 group hover:bg-black"
+                      onClick={() => handleDelete(index)}
+                    >
+                      <CloseIcon className="size-5 text-white " />
+                    </button>
+                    <img
+                      src={value}
+                      alt=""
+                      className="object-center rounded size-full"
+                    />
                   </div>
-                  <img
-                    src={value}
-                    alt=""
-                    className="object-center  rounded-md size-full border border-gray-300"
-                  />
+                );
+              })
+            ) : (
+              <div className="column-center space-y-3">
+                {/* <Plus className="text-slate-500" strokeWidth={1.6} /> */}
+                <div className="space-y-1 text-xs text-slate-400 text-center">
+                  <p>이미지를 선택하거나 드래그해서 추가해주세요</p>
+                  <p>
+                    {acceptedFormats
+                      .join(', ')
+                      .replace(/image\//g, '')
+                      .toUpperCase()}{' '}
+                    파일 (MAX. {maxWidth}x{maxHeight}px)
+                  </p>
                 </div>
-              );
-            })
-          ) : (
-            <div className="flex flex-col items-center justify-center text-center py-5 text-[10px] w-full text-gray-400 gap-1 bg-gray-50">
-              <svg
-                className="w-6 h-6 text-gray-700 dark:text-white my-2"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                fill="none"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="1.5"
-                  d="M5 12h14m-7 7V5"
-                />
-              </svg>
+              </div>
+            )}
+          </label>
 
-              <p>이미지를 선택하거나 드래그해서 추가해주세요</p>
-              <p>
-                {acceptedFormats
-                  .join(', ')
-                  .replace(/image\//g, '')
-                  .toUpperCase()}{' '}
-                파일 (MAX. {maxWidth}x{maxHeight}px)
-              </p>
-            </div>
-          )}
-        </label>
-
-        <input
-          id="dropzone"
-          ref={fileRef}
-          type="file"
-          onChange={handleInput}
-          multiple
-          accept="image/*"
-          className="hidden cursor-none"
-        />
-        <label
-          htmlFor="dropzone"
-          className="p-3 bg-button bg-opacity-80 text-white font-semibold rounded-xl cursor-pointer text-center hover:bg-opacity-50"
-        >
-          사진 추가하기
-        </label>
+          {/* {hasImages && ( */}
+          <div className="py-3">
+            <label
+              htmlFor="dropzone"
+              className="py-2 px-4 bg-slate-900/30 shadow-md text-white rounded-xl cursor-pointer"
+            >
+              사진 추가하기
+            </label>
+            <input
+              id="dropzone"
+              ref={fileRef}
+              type="file"
+              onChange={handleInput}
+              multiple
+              accept="image/*"
+              className="hidden cursor-none"
+            />
+          </div>
+        </div>
       </div>
 
-      <hr />
+      <div className="px-6 py-3">
+        <div className="h-px bg-gray-200"></div>
+      </div>
 
-      <div className="flex flex-col justify-between gap-5 my-10">
-        <div>디자인</div>
-        <div className="flex items-center justify-between gap-4">
+      <div className="flex flex-col justify-between">
+        <label className="label">디자인</label>
+
+        <div className="flex items-center justify-between gap-4 w-full py-3">
           <button
             onClick={() => setGrid(true)}
-            className={`flex-1 px-2 py-6 rounded-lg flex flex-col items-center justify-between  border gap-2 ${grid && 'ring-1 ring-gray-600 shadow-md'}`}
+            className={`column-center gap-3 py-6 w-full ${grid ? 'glass-button-selected' : 'glass-button'}`}
           >
-            <img src={GridIcon} alt="" className="size-8" />
-            <div>그리드</div>
+            <LayoutGrid className="size-8 text-slate-500" />
+            <label className="label">그리드</label>
           </button>
           <button
             onClick={() => setGrid(false)}
-            className={`flex-1 px-2 py-6 rounded-lg flex flex-col items-center justify-between border  ${!grid && 'ring-1 ring-gray-600 shadow-md'}`}
+            className={`column-center gap-3 py-6 w-full ${!grid ? 'glass-button-selected' : 'glass-button'}`}
           >
             <div className="flex flex-col items-center gap-3">
-              <div className="flex items-center">
-                <ChevronLeft className="text-gray-300 size-4" />
-                <div className="size-8 bg-gray-300 rounded-md" />
-                <ChevronRight className="text-gray-300 size-4" />
-              </div>
-              <div>슬라이드</div>
+              <GalleryHorizontal className="size-8 text-slate-500" />
+              <label className="label">슬라이드</label>
             </div>
           </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }

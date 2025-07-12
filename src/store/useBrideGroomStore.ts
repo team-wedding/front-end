@@ -1,5 +1,4 @@
 import { create } from 'zustand';
-// import _ from 'lodash';
 
 type Person = {
   name: string;
@@ -31,10 +30,9 @@ type StoreState = {
     field: keyof Person,
     value: string | boolean,
   ) => void;
-  reset: () => void; // Reset 메서드 추가
+  reset: () => void;
 };
 
-// 초기 상태 정의
 const initialBrideGroom: BrideGroomInformation[] = [
   {
     role: '신랑',

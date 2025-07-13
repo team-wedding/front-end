@@ -1,4 +1,3 @@
-// import { toast } from 'react-toastify';
 import kakaoPay from '@assets/kakao_pay_icon.png';
 import useToast from '@/hooks/useToast';
 import Toast from '@/components/common/Toast';
@@ -62,7 +61,6 @@ export default function AccountNumberItem({
           </button>
         )}
       </div>
-      {/* <ToastContainer /> */}
       {message && <Toast key={message} message={message} />}
     </div>
   );

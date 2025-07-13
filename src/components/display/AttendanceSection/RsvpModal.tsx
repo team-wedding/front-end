@@ -1,8 +1,8 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import CloseIcon from '@icons/CloseIcon';
-import { GuestInfo } from '@/types/GuestType';
 import { postAttendance } from '@/services/statsService';
 import { useParams } from 'react-router';
+import { GuestInfo } from '@/types/guestTypes';
 
 type InfoDetail = Omit<GuestInfo, 'userId' | 'invitationId'>;
 
@@ -119,32 +119,35 @@ const RsvpModal = ({ setModal, showToast }: ModalProp) => {
           </div>
           <div className="my-6 column-center gap-5">
             <div className="flex flex-row w-full justify-between items-center">
-              성함
+              <label htmlFor="name">성함</label>
               <input
                 className="w-48 h-10 bg-gray-50 rounded-md splash-input"
                 type="text"
                 onChange={handleChange}
                 name="name"
+                id="name"
               />
             </div>
             <div className="flex flex-row w-full justify-between items-center">
-              연락처
+              <label htmlFor="contact">연락처</label>
               <input
                 className="w-48 h-10 bg-gray-50 rounded-md splash-input"
                 type="text"
                 onChange={handleChange}
                 name="contact"
+                id="contact"
                 placeholder="숫자만 입력"
               />
             </div>
             <div className="flex flex-row w-full justify-between items-center">
-              참석인원
+              <label htmlFor="companions">참석인원</label>
               <input
                 className=" w-48 h-10 bg-gray-50 rounded-md splash-input"
                 type="number"
                 onChange={handleChange}
                 placeholder="본인 제외 총 참석인원"
                 name="companions"
+                id="companions"
               />
             </div>
             <div className="flex flex-row w-full justify-between items-center gap-5">

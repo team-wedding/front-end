@@ -2,6 +2,7 @@ import { useState } from 'react';
 import GreetingModal from './GreetingModal';
 import useGreetingStore from '../../../../store/useGreetingStore';
 import InformationItem from '@/components/common/CreateInvitation/InformationItem';
+import { useCompletionTracker } from '@/hooks/useCompletionTracker';
 
 const GreetingFeature = () => {
   const {
@@ -12,45 +13,56 @@ const GreetingFeature = () => {
   } = useGreetingStore();
   const [isModalOpen, setModalOpen] = useState(false);
 
+  const isFilled = greetingTitle.length > 0 && greetingContent.length > 0;
+
+  useCompletionTracker({
+    feature: 'greeting',
+    isCompleted: isFilled,
+    deps: [greetingTitle, greetingContent],
+  });
+
   return (
-    <div className="mx-4 my-6">
+    <>
       <InformationItem messages={['샘플 문구를 참고해보세요.']} />
 
-      <hr />
-
-      <div className="flex flex-col gap-3 my-6">
+      <div className="py-3">
         <button
           data-modal-target="select-modal"
           data-modal-toggle="select-modal"
-          className="text-xs text-primary hover:text-pink-600 underline underline-offset-2 text-left"
+          className="py-3 text-xs text-primary underline underline-offset-2 text-left"
           type="button"
           onClick={() => setModalOpen(true)}
         >
           샘플 문구 보기
         </button>
 
-        <input
-          type="text"
-          placeholder="제목"
-          value={greetingTitle}
-          onChange={(e) => setGreetingTitle(e.target.value)}
-          className="formInput"
-        />
+        <div className="py-3">
+          <label className="label">제목</label>
+          <input
+            type="text"
+            id="greetingTitle"
+            placeholder="제목을 입력해주세요"
+            value={greetingTitle}
+            onChange={(e) => setGreetingTitle(e.target.value)}
+            className="formInput"
+          />
+        </div>
 
-        <textarea
-          placeholder="인사말"
-          value={greetingContent}
-          onChange={(e) => setGreetingContent(e.target.value)}
-          rows={8}
-          className="formInput"
-        />
-
-        <GreetingModal
-          isOpen={isModalOpen}
-          onClose={() => setModalOpen(false)}
-        />
+        <div className="py-3">
+          <label className="label">인사말</label>
+          <textarea
+            id="greetingContent"
+            placeholder="인사말을 입력해주세요"
+            value={greetingContent}
+            onChange={(e) => setGreetingContent(e.target.value)}
+            rows={8}
+            className="formInput"
+          />
+        </div>
       </div>
-    </div>
+
+      <GreetingModal isOpen={isModalOpen} onClose={() => setModalOpen(false)} />
+    </>
   );
 };
 

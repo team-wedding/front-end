@@ -1,4 +1,4 @@
-import { GuestInfo } from '@/types/GuestType';
+import { GuestInfo } from '@/types/guestTypes';
 import XLSX from 'xlsx-js-style';
 
 const headerStyle = {

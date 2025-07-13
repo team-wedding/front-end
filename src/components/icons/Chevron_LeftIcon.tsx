@@ -1,5 +1,5 @@
 import React from 'react';
-import { IconProps } from '../../types/icons';
+import { IconProps } from '../../types/iconTypes';
 
 const ChevronLeft = ({ className }: IconProps) => (
   <svg

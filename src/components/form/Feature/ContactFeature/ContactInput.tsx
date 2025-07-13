@@ -12,90 +12,68 @@ const ContactInput = () => {
   const contactfatherNumberInputRef = useRef<DebouncedInputHandle>(null);
 
   return (
-    <div>
+    <>
       {contacts.map((person, index) => (
-        <div key={index} className="max-w-lg mx-auto p-3 my-6">
-          <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-2">
-              <label className="label">{person.role}</label>
-              {/* <input
-                type="tel"
-                placeholder="010-0000-0000"
-                value={person.contact}
-                onChange={(e) =>
-                  updateContact(index, 'contact', e.target.value)
-                }
-                pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-                className="formInput"
-              /> */}
-              <DebouncedInput
-                type="tel"
-                ref={contactNumberInputRef}
-                value={person.contact}
-                onDebouncedChange={(value) =>
-                  updateContact(index, 'contact', value)
-                }
-                pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-                placeholder="010-0000-0000"
-                className="formInput"
-              />
-            </div>
-
-            <div className="flex items-center gap-2">
-              <label className="label">아버지</label>
-              {/* <input
-                type="tel"
-                placeholder="010-0000-0000"
-                value={person.fatherContact}
-                onChange={(e) =>
-                  updateContact(index, 'fatherContact', e.target.value)
-                }
-                pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-                className="formInput"
-              /> */}
-              <DebouncedInput
-                type="tel"
-                ref={contactfatherNumberInputRef}
-                value={person.fatherContact}
-                onDebouncedChange={(value) =>
-                  updateContact(index, 'fatherContact', value)
-                }
-                pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-                placeholder="010-0000-0000"
-                className="formInput"
-              />
-            </div>
-
-            <div className="flex items-center gap-2">
-              <label className="label">어머니</label>
-              {/* <input
-                type="tel"
-                placeholder="010-0000-0000"
-                value={person.motherContact}
-                onChange={(e) =>
-                  updateContact(index, 'motherContact', e.target.value)
-                }
-                pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-                className="formInput"
-              /> */}
-              <DebouncedInput
-                type="tel"
-                ref={contactMotherNumberInputRef}
-                value={person.motherContact}
-                onDebouncedChange={(value) =>
-                  updateContact(index, 'motherContact', value)
-                }
-                pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
-                placeholder="010-0000-0000"
-                className="formInput"
-              />
-            </div>
-
-            <hr className="mt-8" />
+        <div key={index}>
+          <div className="py-3 border-b border-gray-200">
+            <label htmlFor={`${person.role}-contact`} className="label">
+              {person.role}
+            </label>
+            <DebouncedInput
+              type="tel"
+              ref={contactNumberInputRef}
+              value={person.contact}
+              onDebouncedChange={(value) =>
+                updateContact(index, 'contact', value)
+              }
+              pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+              placeholder="010-0000-0000"
+              className="formInput"
+            />
           </div>
+
+          <div className="py-3 border-b border-gray-200">
+            <label htmlFor={`${person.role}-fatherContact`} className="label">
+              아버지
+            </label>
+            <DebouncedInput
+              type="tel"
+              ref={contactfatherNumberInputRef}
+              value={person.fatherContact}
+              onDebouncedChange={(value) =>
+                updateContact(index, 'fatherContact', value)
+              }
+              pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+              placeholder="010-0000-0000"
+              className="formInput"
+            />
+          </div>
+
+          <div className="py-3">
+            <label htmlFor={`${person.role}-motherContact`} className="label">
+              어머니
+            </label>
+            <DebouncedInput
+              type="tel"
+              ref={contactMotherNumberInputRef}
+              value={person.motherContact}
+              onDebouncedChange={(value) =>
+                updateContact(index, 'motherContact', value)
+              }
+              pattern="[0-9]{3}-[0-9]{4}-[0-9]{4}"
+              placeholder="010-0000-0000"
+              className="formInput"
+            />
+          </div>
+
+          {index < contacts.length - 1 && (
+            <div className="px-6 py-3">
+              <div className="h-px bg-gray-200"></div>
+            </div>
+          )}
         </div>
       ))}
-    </div>
+    </>
   );
 };
 

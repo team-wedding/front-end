@@ -590,5 +590,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       selectMusic(details.audio);
     }
     musicToggle('music', !!details.audio); //수정 필요
+  } else {
+    throw new Error('수정중 청첩장 불러오는 에러 발생');
   }
 };

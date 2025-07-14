@@ -44,8 +44,9 @@ const CreateInvitationPage = () => {
   const [previewModal, setPreviewModal] = useState(false);
   const { message, showToast } = useToast();
 
-  const details = getInvitationAction();
   const { invitations } = useGetInvitation(parseInt(id!));
+  const details = getInvitationAction();
+
   const { mutateAsync: updateMutate } = useUpdateInvitation(parseInt(id!));
   const { mutateAsync: s3Mutate } = useS3Image();
 
@@ -130,40 +131,15 @@ const CreateInvitationPage = () => {
   }, [invitations?.title]);
 
   useEffect(() => {
-    useUpdateInvitationStore(invitations as InvitationDetail);
+    if (invitations) {
+      useUpdateInvitationStore(invitations as InvitationDetail);
+    } else return;
   }, [invitations]);
 
   useEffect(() => {
     const [start, end] = STEP_RANGES[currentStep];
     initializeItems(start, end);
   }, [currentStep, initializeItems]);
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(async () => {
-  //     await flushAll()
-  //     setAutoSaveModal(true);
-  //     await saveInvitationData()
-  //     // useUpdateInvitationStore(invitations as InvitationDetail);
-  //     setTimeout(() => {
-  //       setAutoSaveModal(false);
-  //       setIsModalOpen(false)
-  //     }, AUTO_SAVE_MODAL_DURATION_MS); // 모달 인터벌
-  //   }, AUTO_SAVE_INTERVAL_MS); // 임시저장 인터벌
-  //   return () => {
-  //     clearInterval(intervalId); // 컴포넌트 unmount 시 cleanup
-  //   };
-  // }, [updateMutate]);
-
-  // const handleNextStep = () => {
-  //   if (currentStep < STEP_RANGES.length) {
-  //     handleStepClick(currentStep + 1);
-  //   }
-  // };
-  // const handlePrevStep = () => {
-  //   if (currentStep > 0) {
-  //     handleStepClick(currentStep - 1);
-  //   }
-  // };
 
   const toggleExpand = (id: number) => {
     setExpandedIds((prev) =>
@@ -187,7 +163,8 @@ const CreateInvitationPage = () => {
     navigate('/dashboard');
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     saveInvitationData();
     showToast('저장되었습니다');
   };

@@ -80,7 +80,9 @@ export const API = {
   LOGOUT: () => `${BASE_URL}/users/logout`,
   REFRESH: () => `${BASE_URL}/users/refresh`,
   ACCOUNT: () => `${BASE_URL}/users/account`,
-  INVITATIONS: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
+  INVITATION: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
+  INVITATION_CREDENTIAL: (id?: string) =>
+    `${BASE_URL}/invitations/${id ? id : ''}/crendential`,
   ATTENDANCE: (page?: number, size?: number) =>
     `${BASE_URL}/attendances${page ? `/?page=${page}` : ''}${size ? `&size=${size}` : ''}`,
   CHANGEPASSWORD: () => `${BASE_URL}/users/account/password`,

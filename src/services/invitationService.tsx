@@ -3,25 +3,38 @@ import { axiosInstance, API } from '../utils/config';
 
 //청첩장 리스트 조회
 export const getInvitations = async () => {
-  const { data } = await axiosInstance.get(API.INVITATIONS());
+  const { data } = await axiosInstance.get(API.INVITATION_CREDENTIAL());
   return data;
 };
 
 //청첩장 단일 조회
 export const getInvitation = async (id: number) => {
-  const { data } = await axiosInstance.get(API.INVITATIONS(id.toString()));
+  const { data } = await axiosInstance.get(API.INVITATION(id.toString()));
+  return data;
+};
+
+//청첩장 단일 조회
+export const getInvitationCredential = async (id: number) => {
+  const { data } = await axiosInstance.get(
+    API.INVITATION_CREDENTIAL(id.toString()),
+  );
   return data;
 };
 
 //청첩장 생성
 export const postInvitation = async (details: Omit<InvitationDetail, 'id'>) => {
-  const { data } = await axiosInstance.post(API.INVITATIONS(), details);
+  const { data } = await axiosInstance.post(
+    API.INVITATION_CREDENTIAL(),
+    details,
+  );
   return data;
 };
 
 //청첩장 삭제
 export const deleteInvitation = async (id: number) => {
-  const { data } = await axiosInstance.delete(API.INVITATIONS(id.toString()));
+  const { data } = await axiosInstance.delete(
+    API.INVITATION_CREDENTIAL(id.toString()),
+  );
   return data;
 };
 
@@ -34,7 +47,7 @@ export const updateInvitation = async ({
   details: Omit<InvitationDetail, 'title'>;
 }) => {
   const { data } = await axiosInstance.put(
-    API.INVITATIONS(id.toString()),
+    API.INVITATION_CREDENTIAL(id.toString()),
     details,
   );
   return data;

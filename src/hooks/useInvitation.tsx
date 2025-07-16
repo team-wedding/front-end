@@ -2,19 +2,23 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   deleteInvitation,
   getInvitation,
+  getInvitationCredential,
   getInvitations,
   postInvitation,
   updateInvitation,
 } from '../services/invitationService';
 import { InvitationDetail } from '../types/invitationTypes';
 import resetAllStores from '@/store/resetStore';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 export const useGetInvitation = (id: number) => {
   const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const isResultPage = pathname.startsWith('/result');
   let { data, isError, error } = useQuery<InvitationDetail>({
     queryKey: ['invitations', id],
-    queryFn: () => getInvitation(id),
+    queryFn: () =>
+      isResultPage ? getInvitation(id) : getInvitationCredential(id),
   });
   if (isError) {
     navigate('/login', { replace: true });

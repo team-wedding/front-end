@@ -29,8 +29,10 @@ import fonts from '@/constants/fonts';
 const defaultCoord = { lat: 37.5086, lng: 127.0397 };
 // const today = new Date();
 
-export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
-  createdAt: '',
+export const defaultInvitationValues: Omit<
+  InvitationDetail,
+  'title' | 'createdAt'
+> = {
   groomName: '',
   brideName: '',
   date: [null, null, null],
@@ -157,7 +159,7 @@ export const defaultInvitationValues: Omit<InvitationDetail, 'title'> = {
 
 export const getInvitationAction = (): Omit<
   InvitationDetail,
-  'imgUrl' | 'galleries' | 'notices' | 'title'
+  'imgUrl' | 'galleries' | 'notices' | 'title' | 'createdAt'
 > => {
   //웨딩 정보
   const {
@@ -312,7 +314,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
   const { toggleSubFeature: calendarToggle } =
     useCalendarFeatureStore.getState();
 
-  if (details) {
+  try {
     updateBrideGroom(0, 'name', details.groomName);
     updateBrideGroom(1, 'name', details.brideName);
     updateFamily(1, 'father', 'name', details.brideFatherName);
@@ -590,7 +592,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       selectMusic(details.audio);
     }
     musicToggle('music', !!details.audio); //수정 필요
-  } else {
-    throw new Error('수정중 청첩장 불러오는 에러 발생');
+  } catch (err) {
+    throw new Error(`수정중 청첩장 불러오는 에러 발생 : ${err}`);
   }
 };

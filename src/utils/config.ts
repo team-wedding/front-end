@@ -82,7 +82,7 @@ export const API = {
   ACCOUNT: () => `${BASE_URL}/users/account`,
   INVITATION: (id?: string) => `${BASE_URL}/invitations/${id ? id : ''}`,
   INVITATION_CREDENTIAL: (id?: string) =>
-    `${BASE_URL}/invitations/${id ? id : ''}/crendential`,
+    `${BASE_URL}/invitations/${id ? `${id}/` : ''}credential`,
   ATTENDANCE: (page?: number, size?: number) =>
     `${BASE_URL}/attendances${page ? `/?page=${page}` : ''}${size ? `&size=${size}` : ''}`,
   CHANGEPASSWORD: () => `${BASE_URL}/users/account/password`,

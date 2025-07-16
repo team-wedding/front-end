@@ -22,7 +22,9 @@ export const getInvitationCredential = async (id: number) => {
 };
 
 //청첩장 생성
-export const postInvitation = async (details: Omit<InvitationDetail, 'id'>) => {
+export const postInvitation = async (
+  details: Omit<InvitationDetail, 'id' | 'createdAt'>,
+) => {
   const { data } = await axiosInstance.post(API.INVITATION(), details);
   return data;
 };
@@ -39,7 +41,7 @@ export const updateInvitation = async ({
   details,
 }: {
   id: number;
-  details: Omit<InvitationDetail, 'title'>;
+  details: Omit<InvitationDetail, 'title' | 'createdAt'>;
 }) => {
   const { data } = await axiosInstance.put(
     API.INVITATION(id.toString()),

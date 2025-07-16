@@ -39,7 +39,7 @@ export const usePostInvitation = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (details: InvitationDetail) => {
+    mutationFn: (details: Omit<InvitationDetail, 'createdAt'>) => {
       return postInvitation(details);
     },
     onSuccess: (data) => {
@@ -58,7 +58,7 @@ export const useUpdateInvitation = (id: number) => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
   return useMutation({
-    mutationFn: (details: Omit<InvitationDetail, 'title'>) =>
+    mutationFn: (details: Omit<InvitationDetail, 'title' | 'createdAt'>) =>
       updateInvitation({ id, details }),
     onSuccess: () => {
       navigate(`/dashboard`);

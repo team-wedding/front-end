@@ -11,12 +11,12 @@ import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
 import {
   getInvitationAction,
-  useUpdateInvitationStore,
+  updateInvitationStore,
 } from '@/actions/invitationAction';
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
-import { InvitationDetail, NoticeDetail } from '@/types/invitationTypes';
+import { NoticeDetail } from '@/types/invitationTypes';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
@@ -117,7 +117,12 @@ const CreateInvitationPage = () => {
       ...details,
       imgUrl: thumbnail.length > 0 ? thumbnail[0] : uploadedImageUrl,
       galleries: [
-        { images: gallery, grid, isActive: selectedOptionalFeatures.gallery },
+        {
+          images: gallery,
+          grid,
+          isActive: selectedOptionalFeatures.gallery,
+          order: findOrder('gallery'),
+        },
       ],
       notices: noticeList,
     });
@@ -130,40 +135,15 @@ const CreateInvitationPage = () => {
   }, [invitations?.title]);
 
   useEffect(() => {
-    useUpdateInvitationStore(invitations as InvitationDetail);
+    if (invitations) {
+      updateInvitationStore(invitations);
+    }
   }, [invitations]);
 
   useEffect(() => {
     const [start, end] = STEP_RANGES[currentStep];
     initializeItems(start, end);
   }, [currentStep, initializeItems]);
-
-  // useEffect(() => {
-  //   const intervalId = setInterval(async () => {
-  //     await flushAll()
-  //     setAutoSaveModal(true);
-  //     await saveInvitationData()
-  //     // useUpdateInvitationStore(invitations as InvitationDetail);
-  //     setTimeout(() => {
-  //       setAutoSaveModal(false);
-  //       setIsModalOpen(false)
-  //     }, AUTO_SAVE_MODAL_DURATION_MS); // 모달 인터벌
-  //   }, AUTO_SAVE_INTERVAL_MS); // 임시저장 인터벌
-  //   return () => {
-  //     clearInterval(intervalId); // 컴포넌트 unmount 시 cleanup
-  //   };
-  // }, [updateMutate]);
-
-  // const handleNextStep = () => {
-  //   if (currentStep < STEP_RANGES.length) {
-  //     handleStepClick(currentStep + 1);
-  //   }
-  // };
-  // const handlePrevStep = () => {
-  //   if (currentStep > 0) {
-  //     handleStepClick(currentStep - 1);
-  //   }
-  // };
 
   const toggleExpand = (id: number) => {
     setExpandedIds((prev) =>

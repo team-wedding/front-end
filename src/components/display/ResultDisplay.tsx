@@ -4,17 +4,18 @@ import { useAccordionStore } from '@store/useAccordionStore';
 const ResultDisplay = () => {
   const { getSections } = useAccordionStore();
   const { font } = useThemeStore();
+  const sections = getSections();
 
   return (
     <div className={`result-layout ${font}`}>
-      {getSections().map((section, index) => {
+      {sections.map((section, index) => {
         if (index == 2 || index == 3) {
           return;
         }
         return <div key={index}>{section}</div>;
       })}
-      {getSections()[2]}
-      {getSections()[3]}
+      {sections[2]}
+      {sections[3]}
     </div>
   );
 };

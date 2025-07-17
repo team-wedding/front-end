@@ -582,16 +582,20 @@ export const updateInvitationStore = (details: InvitationDetail) => {
       { key: 'notice', list: noticesData },
     ];
 
-    setOptionalItems(
-      useAccordionStore.getState().optionalItems.map((item) => {
+    const newOptionalItems = useAccordionStore
+      .getState()
+      .optionalItems.map((item) => {
         const feature = features.find((f) => f.key === item.feature);
+        //feature.list[0].order는 details Props 에서 받아온 값
         if (feature && Array.isArray(feature.list) && feature.list.length > 0) {
+          //해당 props의 순서를 받아와서
           const order = feature.list[0].order;
+          //반환
           return order !== undefined ? { ...item, order } : item;
         }
         return item;
-      }),
-    );
+      });
+    setOptionalItems(newOptionalItems);
     setOrderItems();
     // isActive 동기화
     features.forEach(({ key, list }) => {

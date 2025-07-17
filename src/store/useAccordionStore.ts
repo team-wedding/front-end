@@ -45,46 +45,45 @@ export const useAccordionStore = create<AccordionState>((set, get) => ({
       ),
     }));
   },
-  setOrderItems: () =>
-    set((state) => {
-      let allItems = [...state.allItems];
-      const sortedOptionalItems = [...state.optionalItems].sort(
-        (a, b) => a.order - b.order,
-      );
+  setOrderItems: () => {
+    const { allItems, optionalItems, items } = get();
+    const sortedOptionalItems = [...optionalItems].sort(
+      (a, b) => a.order - b.order,
+    );
+    // 1. optionalItems에 해당하는 id만 따로 저장
+    const optionalStartIndex = 7;
+    const optionalItemIds = sortedOptionalItems.map((item) => item.id);
 
-      // optionalItems의 id 순서에 맞춰 allItems 재정렬
-      const idToIndexMap = allItems.reduce<Record<number, number>>(
-        (map, item, index) => {
-          map[item.id] = index;
-          return map;
-        },
-        {},
-      );
-      const optionalItemIds = sortedOptionalItems.map((item) => item.id);
+    // optionalItems의 id 순서에 맞춰 allItems 재정렬
+    const idToItemMap = allItems.reduce<Record<number, AccordionItemData>>(
+      (map, item) => {
+        map[item.id] = item;
+        return map;
+      },
+      {},
+    );
+    // const optionalItemIds = sortedOptionalItems.map((item) => item.id);
 
-      // optionalItems 범위 내의 원소들 재정렬
-      let reorderedItems = [...allItems];
-      let optionalStartIndex = 7;
+    // optionalItems 범위 내의 원소들 재정렬
+    const reorderedItems = [...allItems];
+    //let optionalStartIndex = 7;
 
-      optionalItemIds.forEach((id, index) => {
-        const currentIndex = idToIndexMap[id];
-        if (currentIndex !== optionalStartIndex + index) {
-          const [movedItem] = reorderedItems.splice(currentIndex, 1);
-          reorderedItems.splice(optionalStartIndex + index, 0, movedItem);
-        }
-      });
+    // optional 영역을 새로 채움
+    for (let i = 0; i < optionalItemIds.length; i++) {
+      const index = optionalStartIndex + i;
+      reorderedItems[index] = idToItemMap[optionalItemIds[i]];
+    }
 
-      // 기존 items 범위 유지
-      const startIdx = state.allItems.indexOf(state.items[0]);
-      const endIdx =
-        state.allItems.indexOf(state.items[state.items.length - 1]) + 1;
+    // 기존 items 범위 유지
+    const startIdx = allItems.indexOf(items[0]);
+    const endIdx = allItems.indexOf(items[items.length - 1]) + 1;
 
-      return {
-        allItems: reorderedItems,
-        items: reorderedItems.slice(startIdx, endIdx),
-        optionalItems: sortedOptionalItems,
-      };
-    }),
+    set({
+      allItems: reorderedItems,
+      items: reorderedItems.slice(startIdx, endIdx),
+      optionalItems: sortedOptionalItems,
+    });
+  },
   moveItem: (dragIndex, hoverIndex) =>
     set((state) => {
       const allItems = [...state.allItems];
@@ -111,7 +110,7 @@ export const useAccordionStore = create<AccordionState>((set, get) => ({
       allItems.splice(actualHoverIndex, 0, movedItem);
 
       // ✅ optionalItems 업데이트 (7~13번 인덱스 범위 내에서만)
-      const updatedOptionalItems = allItems.slice(7, 14).map((item, index) => ({
+      const updatedOptionalItems = allItems.slice(7, 13).map((item, index) => ({
         order: index + 1,
         feature: item.feature,
         id: item.id,

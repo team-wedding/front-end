@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import ResultDisplay from '../components/display/ResultDisplay';
 import { updateInvitationStore } from '@/actions/invitationAction';
 import { useGetInvitation } from '@/hooks/useInvitation';
-import { useAccordionStore } from '@/store/useAccordionStore';
 import { useParams } from 'react-router';
 import logo from '@/assets/woogyeol/logo_light.png';
 import InvitationLoader from '@/components/common/InvitationLoader/InvitaionLoader';
@@ -12,11 +11,7 @@ const ResultPage = () => {
   const { invitations, isFetching, isLoading } = useGetInvitation(
     parseInt(invitationId!),
   );
-  const { setOrderItems } = useAccordionStore();
 
-  useEffect(() => {
-    setOrderItems();
-  }, []);
   useEffect(() => {
     if (invitations) {
       updateInvitationStore(invitations);

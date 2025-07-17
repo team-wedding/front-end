@@ -12,9 +12,10 @@ interface CardProps {
   image: string;
   id: number;
   title: string;
+  createdAt: string;
 }
 
-const Card = ({ image, id: invitationId, title }: CardProps) => {
+const Card = ({ image, id: invitationId, title, createdAt }: CardProps) => {
   const navigate = useNavigate();
   const { id: userId } = useUserStore();
   const [modal, setModal] = useState(false);
@@ -55,6 +56,7 @@ const Card = ({ image, id: invitationId, title }: CardProps) => {
           id={invitationId}
           image={image}
           title={title}
+          createdAt={createdAt}
           setModal={setModal}
         />
       </section>

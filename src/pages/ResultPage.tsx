@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import ResultDisplay from '../components/display/ResultDisplay';
 import { useUpdateInvitationStore } from '@/actions/invitationAction';
-import { InvitationDetail } from '@/types/invitationTypes';
 import { useGetInvitation } from '@/hooks/useInvitation';
 import { useAccordionStore } from '@/store/useAccordionStore';
 import { useParams } from 'react-router';
@@ -13,9 +12,11 @@ const ResultPage = () => {
   const { setOrderItems } = useAccordionStore();
 
   useEffect(() => {
-    setOrderItems();
+    if (invitations) {
+      setOrderItems();
+      useUpdateInvitationStore(invitations);
+    }
   }, []);
-  useUpdateInvitationStore(invitations as InvitationDetail);
 
   return (
     <div className="bg-[#F2F2F7] w-full min-h-screen column-center relative">

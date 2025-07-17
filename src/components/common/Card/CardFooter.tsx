@@ -2,22 +2,20 @@ import ShareIcon from '@icons/ShareIcon';
 import { Dispatch, SetStateAction, useRef, useState } from 'react';
 import ShareInvitation from '../Share/ShareInvitation';
 import { useUserStore } from '@/store/useUserStore';
-import { useGetInvitation } from '@/hooks/useInvitation';
 
 interface CardFooterProps {
   title: string;
   image: string;
   id: number;
+  createdAt: string;
   setModal: Dispatch<SetStateAction<boolean>>;
 }
 
-const CardFooter = ({ title, image, id }: CardFooterProps) => {
+const CardFooter = ({ title, image, id, createdAt }: CardFooterProps) => {
   const [isFocused, setIsFocused] = useState(false);
   const parentRef = useRef<HTMLButtonElement>(null);
   const { id: userId } = useUserStore();
 
-  const { invitations } = useGetInvitation(id);
-  const createdAt = invitations?.createdAt?.split('T')[0];
   const shareUrl = `result/${userId}/${id}`;
 
   const handleBlur = (event: React.FocusEvent<HTMLButtonElement>) => {
@@ -39,7 +37,7 @@ const CardFooter = ({ title, image, id }: CardFooterProps) => {
       <div className="flex flex-col items-start">
         <h2 className="text-base font-medium text-label-overlay">{title}</h2>
         <span className="text-xs font-light text-label-overlay/80">
-          {createdAt}
+          {createdAt.split('T')[0]}
         </span>
       </div>
 

@@ -15,6 +15,7 @@ interface AccordionState {
   updateCompletionByFeature: (feature: string, isCompleted: boolean) => void;
   setOrderItems: () => void;
   moveItem: (dragIndex: number, hoverIndex: number) => void;
+  setOptionalItems: (items: OptionalOrder[]) => void;
   getSections: () => React.ReactNode[];
   reset: () => void;
 }
@@ -87,8 +88,7 @@ export const useAccordionStore = create<AccordionState>((set, get) => ({
   moveItem: (dragIndex, hoverIndex) =>
     set((state) => {
       const allItems = [...state.allItems];
-      const optionalItems = [...state.optionalItems];
-      console.log(optionalItems);
+      // const optionalItems = [...state.optionalItems];
 
       // 매핑 객체 생성: id -> index
       const itemIndexMap = allItems.reduce<Record<number, number>>(
@@ -126,9 +126,9 @@ export const useAccordionStore = create<AccordionState>((set, get) => ({
         optionalItems: updatedOptionalItems,
       };
     }),
+  setOptionalItems: (items) => set({ optionalItems: items }),
   getSections: () => {
     const { allItems } = get();
-
     return allItems
       .map((item) =>
         sectionData.find((section) => section.feature === item.feature),

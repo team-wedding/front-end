@@ -168,7 +168,7 @@ export const getInvitationAction = (): Omit<
     weddingHallDetail,
     coords,
   } = useAddressStore();
-  const { optionalItems } = useAccordionStore();
+  const { optionalItems } = useAccordionStore.getState();
   const findOrder = (feature: string) => {
     if (!feature) return undefined; // feature가 없으면 undefined 반환
     const result = optionalItems.find((value) => value.feature === feature);
@@ -283,7 +283,7 @@ export const getInvitationAction = (): Omit<
   };
 };
 
-export const useUpdateInvitationStore = (details: InvitationDetail) => {
+export const updateInvitationStore = (details: InvitationDetail) => {
   const {
     setAddress,
     setJibunAddress,
@@ -311,6 +311,7 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
     useRSVPStore.getState();
   const { toggleSubFeature: calendarToggle } =
     useCalendarFeatureStore.getState();
+  const { setOrderItems, setOptionalItems } = useAccordionStore.getState();
 
   if (details) {
     updateBrideGroom(0, 'name', details.groomName);
@@ -580,6 +581,19 @@ export const useUpdateInvitationStore = (details: InvitationDetail) => {
       { key: 'contact', list: contactInfo },
       { key: 'notice', list: noticesData },
     ];
+
+    setOptionalItems(
+      useAccordionStore.getState().optionalItems.map((item) => {
+        const feature = features.find((f) => f.key === item.feature);
+        if (feature && Array.isArray(feature.list) && feature.list.length > 0) {
+          const order = feature.list[0].order;
+          return order !== undefined ? { ...item, order } : item;
+        }
+        return item;
+      }),
+    );
+    setOrderItems();
+    // isActive 동기화
     features.forEach(({ key, list }) => {
       const isActive =
         Array.isArray(list) && list.length > 0 && list[0].isActive;

@@ -23,6 +23,7 @@ import GuestPhotoTalkPage from '@/pages/PhotoTalk/GuestPhotoTalkPage';
 import { useUserStore } from './store/useUserStore';
 import useAuthStore from './store/useAuthStore';
 import { useEffect } from 'react';
+import BasicInformationPage from './pages/BasicInformationPage';
 
 function App() {
   const queryClient = new QueryClient();
@@ -77,6 +78,10 @@ function App() {
           <Route
             path={'/mypage/edit/password'}
             element={<ChangePasswordPage />}
+          />
+          <Route
+            path={'/mypage/edit/basic-information'}
+            element={<BasicInformationPage />}
           />
           <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
           <Route path="/oauth/callback/naver" element={<NaverRedirect />} />

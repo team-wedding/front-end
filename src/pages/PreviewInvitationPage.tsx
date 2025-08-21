@@ -2,25 +2,25 @@ import BackIcon from '@icons/BackIcon';
 import { useNavigate, useParams } from 'react-router';
 import PreviewDisplay from '@/components/display/PreviewDisplay';
 import { useGetInvitation } from '@/hooks/useInvitation';
-import { useAccordionStore } from '@/store/useAccordionStore';
 import { useEffect } from 'react';
-import { useUpdateInvitationStore } from '@/actions/invitationAction';
-import { InvitationDetail } from '@/types/invitationTypes';
+import { updateInvitationStore } from '@/actions/invitationAction';
 import CloseIcon from '@/components/icons/CloseIcon';
 import Logo from '@/components/common/Logo';
+import InvitationLoader from '@/components/common/InvitationLoader/InvitaionLoader';
 
 const PreviewInvitationPage = () => {
   const navigate = useNavigate();
 
   const { invitationId } = useParams();
-  const { invitations } = useGetInvitation(parseInt(invitationId!));
-  const { setOrderItems } = useAccordionStore();
+  const { invitations, isLoading, isFetching } = useGetInvitation(
+    parseInt(invitationId!),
+  );
 
   useEffect(() => {
-    setOrderItems();
-  }, []);
-
-  useUpdateInvitationStore(invitations as InvitationDetail);
+    if (invitations) {
+      updateInvitationStore(invitations);
+    }
+  }, [invitations]);
 
   const handleBack = () => {
     navigate(-1);
@@ -73,7 +73,7 @@ const PreviewInvitationPage = () => {
       </p>
 
       <main className="pb-40 relative">
-        <PreviewDisplay />
+        {isLoading || isFetching ? <InvitationLoader /> : <PreviewDisplay />}
         <footer className="absolute bottom-10 right-0 left-0 flex-center gap-1">
           <Logo className="w-4" />
           <span className="text-xs text-label-secondary/60 dark:text-label-secondary-dark/60">

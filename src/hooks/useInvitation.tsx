@@ -11,14 +11,14 @@ import resetAllStores from '@/store/resetStore';
 import { useNavigate } from 'react-router';
 
 export const useGetInvitation = (id: number) => {
-  let { data, isError } = useQuery<InvitationDetail>({
+  let { data, isError, isLoading, isFetching } = useQuery<InvitationDetail>({
     queryKey: ['invitations', id],
     queryFn: () => getInvitation(id),
   });
   if (isError) {
     throw new Error(`청첩장 불러오기 실패`);
   }
-  return { invitations: data, error: isError };
+  return { invitations: data, error: isError, isLoading, isFetching };
 };
 
 export const useGetInvitations = () => {
@@ -49,11 +49,14 @@ export const usePostInvitation = () => {
 
 export const useUpdateInvitation = (id: number) => {
   const queryClient = useQueryClient();
+  // const navigate = useNavigate();
   return useMutation({
     mutationFn: (details: Omit<InvitationDetail, 'title'>) =>
       updateInvitation({ id, details }),
     onSuccess: () => {
+      resetAllStores();
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
+      // navigate(`/dashboard`);
     },
     onError: (error) => {
       throw new Error(`청첩장 수정 실패:${error}`);

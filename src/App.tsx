@@ -20,74 +20,65 @@ import PreviewPhotoTalkPage from '@/pages/PhotoTalk/PreviewPhotoTalkPage';
 import PreviewInvitationPage from '@/pages/PreviewInvitationPage';
 import ResultPage from '@/pages/ResultPage';
 import GuestPhotoTalkPage from '@/pages/PhotoTalk/GuestPhotoTalkPage';
-import { useUserStore } from './store/useUserStore';
-import useAuthStore from './store/useAuthStore';
-import { useEffect } from 'react';
+import Authorized from '@/components/common/Authorized/Authorized';
 import BasicInformationPage from './pages/BasicInformationPage';
 
 function App() {
   const queryClient = new QueryClient();
 
-  const fetchUserInfo = useUserStore((state) => state.fetchUserInfo);
-  const token = useAuthStore((state) => state.accessToken);
-
-  useEffect(() => {
-    if (token) {
-      fetchUserInfo();
-    }
-  }, [token]);
-
   return (
     <DarkModeProvider>
       <QueryClientProvider client={queryClient}>
-        <ScrollToTop />
-        <Routes>
-          {/* <Route path="/" element={<Navigate to="/" replace />} /> */}
-          <Route path={'/'} element={<StartPage />} />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path={'/reset-password'} element={<ResetPasswordPage />} />
-          <Route path={'/signup'} element={<SignUpPage />} />
+        <Authorized>
+          <ScrollToTop />
+          <Routes>
+            {/* <Route path="/" element={<Navigate to="/" replace />} /> */}
+            <Route path={'/'} element={<StartPage />} />
+            <Route path="/login" element={<LoginPage />} />
+            <Route path={'/reset-password'} element={<ResetPasswordPage />} />
+            <Route path={'/signup'} element={<SignUpPage />} />
 
-          {/* 청첩장 만들기 */}
-          <Route path={'/dashboard'} element={<DashBoardPage />} />
-          <Route path={'/create/:id'} element={<CreateInvitationPage />} />
-          <Route path={'/edit/:id'} element={<CreateInvitationPage />} />
-          <Route
-            path={'/preview/:userId?/:invitationId?'}
-            element={<PreviewInvitationPage />}
-          />
-          <Route
-            path={'/preview/phototalk'}
-            element={<PreviewPhotoTalkPage />}
-          />
+            {/* 청첩장 만들기 */}
+            <Route path={'/dashboard'} element={<DashBoardPage />} />
+            <Route path={'/create/:id'} element={<CreateInvitationPage />} />
+            <Route path={'/edit/:id'} element={<CreateInvitationPage />} />
+            <Route
+              path={'/preview/:userId?/:invitationId?'}
+              element={<PreviewInvitationPage />}
+            />
+            <Route
+              path={'/preview/phototalk'}
+              element={<PreviewPhotoTalkPage />}
+            />
 
-          {/* 청첩장 완성본 */}
-          <Route
-            path={'/result/:userId/:invitationId'}
-            element={<ResultPage />}
-          />
-          <Route
-            path={'/phototalk/:userId/:invitationId'}
-            element={<GuestPhotoTalkPage />}
-          />
+            {/* 청첩장 완성본 */}
+            <Route
+              path={'/result/:userId/:invitationId'}
+              element={<ResultPage />}
+            />
+            <Route
+              path={'/phototalk/:userId/:invitationId'}
+              element={<GuestPhotoTalkPage />}
+            />
 
-          {/* 마이페이지 */}
-          <Route path={'/mypage/rsvp'} element={<MyPage />} />
-          <Route path={'/mypage/phototalk'} element={<MyPage />} />
-          <Route path={'/mypage/edit'} element={<EditProfilePage />} />
-          <Route
-            path={'/mypage/edit/password'}
-            element={<ChangePasswordPage />}
-          />
-          <Route
-            path={'/mypage/edit/basic-information'}
-            element={<BasicInformationPage />}
-          />
-          <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
-          <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
-          <Route path={'*'} element={<NotFound404 />} />
-        </Routes>
-        <ReactQueryDevtools initialIsOpen={false} />
+            {/* 마이페이지 */}
+            <Route path={'/mypage/rsvp'} element={<MyPage />} />
+            <Route path={'/mypage/phototalk'} element={<MyPage />} />
+            <Route path={'/mypage/edit'} element={<EditProfilePage />} />
+            <Route
+              path={'/mypage/edit/password'}
+              element={<ChangePasswordPage />}
+            />
+            <Route
+              path={'/mypage/edit/basic-information'}
+              element={<BasicInformationPage />}
+            />
+            <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
+            <Route path="/oauth/callback/naver" element={<NaverRedirect />} />
+            <Route path={'*'} element={<NotFound404 />} />
+          </Routes>
+          <ReactQueryDevtools initialIsOpen={false} />
+        </Authorized>
       </QueryClientProvider>
     </DarkModeProvider>
   );

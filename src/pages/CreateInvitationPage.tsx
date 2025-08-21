@@ -44,8 +44,9 @@ const CreateInvitationPage = () => {
   const [previewModal, setPreviewModal] = useState(false);
   const { message, showToast } = useToast();
 
-  const details = getInvitationAction();
   const { invitations } = useGetInvitation(parseInt(id!));
+  const details = getInvitationAction();
+
   const { mutateAsync: updateMutate } = useUpdateInvitation(parseInt(id!));
   const { mutateAsync: s3Mutate } = useS3Image();
 
@@ -167,7 +168,8 @@ const CreateInvitationPage = () => {
     navigate('/dashboard');
   };
 
-  const handleSave = async () => {
+  const handleSave = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
     saveInvitationData();
     showToast('저장되었습니다');
   };

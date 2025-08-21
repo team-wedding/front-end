@@ -2,20 +2,27 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import {
   deleteInvitation,
   getInvitation,
+  getInvitationCredential,
   getInvitations,
   postInvitation,
   updateInvitation,
 } from '../services/invitationService';
 import { InvitationDetail } from '../types/invitationTypes';
 import resetAllStores from '@/store/resetStore';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 export const useGetInvitation = (id: number) => {
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
+  const isResultPage = pathname.startsWith('/result');
   let { data, isError, isLoading, isFetching } = useQuery<InvitationDetail>({
     queryKey: ['invitations', id],
-    queryFn: () => getInvitation(id),
+    queryFn: () =>
+      isResultPage ? getInvitation(id) : getInvitationCredential(id),
   });
   if (isError) {
+    navigate('/login', { replace: true });
+    console.error('청첩장 불러오기 실패:', isError);
     throw new Error(`청첩장 불러오기 실패`);
   }
   return { invitations: data, error: isError, isLoading, isFetching };
@@ -32,7 +39,7 @@ export const usePostInvitation = () => {
   const navigate = useNavigate();
   const queryClient = useQueryClient();
   return useMutation({
-    mutationFn: (details: InvitationDetail) => {
+    mutationFn: (details: Omit<InvitationDetail, 'createdAt'>) => {
       return postInvitation(details);
     },
     onSuccess: (data) => {
@@ -49,11 +56,12 @@ export const usePostInvitation = () => {
 
 export const useUpdateInvitation = (id: number) => {
   const queryClient = useQueryClient();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   return useMutation({
-    mutationFn: (details: Omit<InvitationDetail, 'title'>) =>
+    mutationFn: (details: Omit<InvitationDetail, 'title' | 'createdAt'>) =>
       updateInvitation({ id, details }),
     onSuccess: () => {
+      navigate(`/dashboard`);
       resetAllStores();
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
       // navigate(`/dashboard`);

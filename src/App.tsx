@@ -21,6 +21,7 @@ import PreviewInvitationPage from '@/pages/PreviewInvitationPage';
 import ResultPage from '@/pages/ResultPage';
 import GuestPhotoTalkPage from '@/pages/PhotoTalk/GuestPhotoTalkPage';
 import Authorized from '@/components/common/Authorized/Authorized';
+import BasicInformationPage from './pages/BasicInformationPage';
 
 function App() {
   const queryClient = new QueryClient();
@@ -67,6 +68,10 @@ function App() {
             <Route
               path={'/mypage/edit/password'}
               element={<ChangePasswordPage />}
+            />
+            <Route
+              path={'/mypage/edit/basic-information'}
+              element={<BasicInformationPage />}
             />
             <Route path="/oauth/callback/kakao" element={<KakaoRedirect />} />
             <Route path="/oauth/callback/naver" element={<NaverRedirect />} />

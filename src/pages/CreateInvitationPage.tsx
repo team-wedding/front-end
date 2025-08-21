@@ -11,12 +11,12 @@ import useImageStore from '@/store/useImageStore';
 import { useS3Image } from '@/hooks/useS3Image';
 import {
   getInvitationAction,
-  useUpdateInvitationStore,
+  updateInvitationStore,
 } from '@/actions/invitationAction';
 import useGalleryStore from '@/store/OptionalFeature/useGalleryFeatureStore';
 import { useOptionalFeatureStore } from '@/store/OptionalFeature/useOptionalFeatureStore';
 import useNoticeStore from '@/store/OptionalFeature/useNoticeFeatureStore';
-import { InvitationDetail, NoticeDetail } from '@/types/invitationTypes';
+import { NoticeDetail } from '@/types/invitationTypes';
 import PreviewButton from '@/components/common/CreateInvitation/PreviewButton';
 import { useDebouncedInputStore } from '@/store/useDebouncedInputStore';
 import { useInvitationStore } from '@/store/useInvitaionStore';
@@ -118,7 +118,12 @@ const CreateInvitationPage = () => {
       ...details,
       imgUrl: thumbnail.length > 0 ? thumbnail[0] : uploadedImageUrl,
       galleries: [
-        { images: gallery, grid, isActive: selectedOptionalFeatures.gallery },
+        {
+          images: gallery,
+          grid,
+          isActive: selectedOptionalFeatures.gallery,
+          order: findOrder('gallery'),
+        },
       ],
       notices: noticeList,
     });
@@ -132,8 +137,8 @@ const CreateInvitationPage = () => {
 
   useEffect(() => {
     if (invitations) {
-      useUpdateInvitationStore(invitations as InvitationDetail);
-    } else return;
+      updateInvitationStore(invitations);
+    }
   }, [invitations]);
 
   useEffect(() => {

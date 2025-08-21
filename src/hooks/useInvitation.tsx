@@ -15,17 +15,17 @@ export const useGetInvitation = (id: number) => {
   const navigate = useNavigate();
   const { pathname } = useLocation();
   const isResultPage = pathname.startsWith('/result');
-  let { data, isError, error } = useQuery<InvitationDetail>({
+  let { data, isError, isLoading, isFetching } = useQuery<InvitationDetail>({
     queryKey: ['invitations', id],
     queryFn: () =>
       isResultPage ? getInvitation(id) : getInvitationCredential(id),
   });
   if (isError) {
     navigate('/login', { replace: true });
-    console.error('청첩장 불러오기 실패:', error);
+    console.error('청첩장 불러오기 실패:', isError);
     throw new Error(`청첩장 불러오기 실패`);
   }
-  return { invitations: data, error: isError };
+  return { invitations: data, error: isError, isLoading, isFetching };
 };
 
 export const useGetInvitations = () => {
@@ -62,7 +62,9 @@ export const useUpdateInvitation = (id: number) => {
       updateInvitation({ id, details }),
     onSuccess: () => {
       navigate(`/dashboard`);
+      resetAllStores();
       queryClient.invalidateQueries({ queryKey: ['invitations'] });
+      // navigate(`/dashboard`);
     },
     onError: (error) => {
       throw new Error(`청첩장 수정 실패:${error}`);
